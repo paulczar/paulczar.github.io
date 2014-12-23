@@ -69,6 +69,26 @@
                             
                                 <article class="post">
 <header>
+<h2><a href="http://tech.paulcz.net/2014/12/multi-process-docker-images-done-right/">Multi Process Docker Images Done Right </a> </h2>
+<div class="post-meta">Mon, Dec 22, 2014 - Read in 6 Min </div>
+</header>
+<div class="summary">
+    <p>Almost since <a href="http://docker.com">Docker</a> was first introduced to the world there has been a fairly strong push to keeping containers to be single process.   This makes a lot of sense and definitely plays into the <a href="http://12factor.net">12 Factor</a> way of thinking where all application output should be pushed to <code>stdout</code> and docker itself with tools like <a href="https://github.com/progrium/logspout">logspout</a> now has fairly strong tooling to deal with those logs.</p>
+
+<p>Sometimes however it just makes sense to run more than one process in a container,  a perfect example would be running <a href="https://github.com/kelseyhightower/confd">confd</a> as well as your application in order to modify the application&rsquo;s config file based on changes in service discovery systems like <a href="https://github.com/coreos/etcd">etcd</a>.   The <a href="https://docs.docker.com/articles/ambassador_pattern_linking/">ambassador</a> container way of working can achieve similar things, but I&rsquo;m not sure that running two containers with a process each to run your application is any better than running one container with two processes.</p>
+
+</div>
+<footer>
+<a href='http://tech.paulcz.net/2014/12/multi-process-docker-images-done-right/'><nobr>Read more →</nobr></a>
+</footer>
+</article>
+
+
+                            
+                        
+                            
+                                <article class="post">
+<header>
 <h2><a href="http://tech.paulcz.net/2014/12/breadops-continous-delivery-of-fresh-baked-bread/">BreadOps - Continuous Delivery of Fresh Baked Bread </a> </h2>
 <div class="post-meta">Wed, Dec 3, 2014 - Read in 7 Min </div>
 </header>
@@ -81,6 +101,8 @@
 </article>
 
 
+                            
+                        
                             
                         
                             
@@ -222,60 +244,6 @@
 </div>
 <footer>
 <a href='http://tech.paulcz.net/2012/12/creating-a-github-pages-blog-with-octopress/'><nobr>Read more →</nobr></a>
-</footer>
-</article>
-
-
-                            
-                        
-                            
-                                <article class="post">
-<header>
-<h2><a href="http://tech.paulcz.net/2012/12/running-kvm-and-openvswitch-on-ubuntu-12-dot-10/">Running KVM and Openvswitch on Ubuntu 12.10 </a> </h2>
-<div class="post-meta">Thu, Dec 13, 2012 - Read in 4 Min </div>
-</header>
-<div class="summary">
-    <p>I&rsquo;ve got an aging VMWare ESXi 4.0 server that needs to be replaced with something a little more modern and flexing.   Obviously at home I don&rsquo;t need all the cool features that licensed VMWare comes with,  but I do want more than just the basic free version.</p>
-
-<p>After a few weeks of installing and testing alternatives  ( I&rsquo;d really love to run openstack,  but it&rsquo;s just not worth it at home for a single box ) I&rsquo;ve settled on Ubuntu 12.10 server running KVM and Openvswitch.</p>
-
-<p>After installing Ubuntu 12.10 I did the following to get KVM up and running&hellip;   I cribbed this mostly from <a href="http://blog.allanglesit.com/2012/10/linux-kvm-ubuntu-12-10-with-openvswitch/">blog.allanglesit.com</a>.</p>
-
-</div>
-<footer>
-<a href='http://tech.paulcz.net/2012/12/running-kvm-and-openvswitch-on-ubuntu-12-dot-10/'><nobr>Read more →</nobr></a>
-</footer>
-</article>
-
-
-                            
-                        
-                            
-                                <article class="post">
-<header>
-<h2><a href="http://tech.paulcz.net/2012/12/moving-vms-from-vmware-to-kvm/">Moving VMs from VMWare to KVM </a> </h2>
-<div class="post-meta">Sun, Dec 9, 2012 - Read in 2 Min </div>
-</header>
-<div class="summary">
-    <p>I&rsquo;m migrating from my old VMWare ESXi box to a new machine running Ubuntu 12.10 and KVM.    Not wanting to rebuild all of my VMs I set about trying to work out the best way to migrate the VMs.</p>
-
-<p><strong>Steps to make Windows migrate without Bluescreen</strong></p>
-
-<p>If you migrate a windows box it&rsquo;ll bluescreen due to the shock of so much hardware changing.   The following .reg hack will prevent this from happening by opening up access to a bunch of random system drivers.   Copy and run the .reg file in your VM before doing any further steps.</p>
-
-<p><a href="https://gist.github.com/4247499">c:\temp\vmdriverhack.reg</a></p>
-
-<p><strong>Move your VM to shared storage</strong></p>
-
-<p>I mounted an nfs partition to vmware from my freenas box and migrated the data across using the vmware datastore tools.   If you don&rsquo;t have a NAS you could export a directory from your KVM server to achieve the same goal.</p>
-
-<p>To move VMs in ESXi we click on the ESXi server, pick the Configuration tab,  click on &lsquo;Storage&rsquo; and then right-click on the datastore and select &lsquo;Browse Datastore&rsquo;.   Select the VM folder you wish to move and click the move icon.</p>
-
-<p>{% img <a href="https://lh6.googleusercontent.com/-R5x6JyT5x14/UMUkr4qNr4I/AAAAAAAAAHY/CYhOlizOLb8/s640/VMWare-move-1.png">https://lh6.googleusercontent.com/-R5x6JyT5x14/UMUkr4qNr4I/AAAAAAAAAHY/CYhOlizOLb8/s640/VMWare-move-1.png</a> %}</p>
-
-</div>
-<footer>
-<a href='http://tech.paulcz.net/2012/12/moving-vms-from-vmware-to-kvm/'><nobr>Read more →</nobr></a>
 </footer>
 </article>
 
