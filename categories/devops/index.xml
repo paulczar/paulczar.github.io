@@ -17,6 +17,8 @@
       <guid>http://tech.paulcz.net/2014/12/multi-process-docker-images-done-right/</guid>
       <description>
 
+&lt;h2 id=&#34;toc_0&#34;&gt;For some values of &amp;lsquo;right&amp;rsquo;&lt;/h2&gt;
+
 &lt;p&gt;Almost since &lt;a href=&#34;http://docker.com&#34;&gt;Docker&lt;/a&gt; was first introduced to the world there has been a fairly strong push to keeping containers to be single process.   This makes a lot of sense and definitely plays into the &lt;a href=&#34;http://12factor.net&#34;&gt;12 Factor&lt;/a&gt; way of thinking where all application output should be pushed to &lt;code&gt;stdout&lt;/code&gt; and docker itself with tools like &lt;a href=&#34;https://github.com/progrium/logspout&#34;&gt;logspout&lt;/a&gt; now has fairly strong tooling to deal with those logs.&lt;/p&gt;
 
 &lt;p&gt;Sometimes however it just makes sense to run more than one process in a container,  a perfect example would be running &lt;a href=&#34;https://github.com/kelseyhightower/confd&#34;&gt;confd&lt;/a&gt; as well as your application in order to modify the application&amp;rsquo;s config file based on changes in service discovery systems like &lt;a href=&#34;https://github.com/coreos/etcd&#34;&gt;etcd&lt;/a&gt;.   The &lt;a href=&#34;https://docs.docker.com/articles/ambassador_pattern_linking/&#34;&gt;ambassador&lt;/a&gt; container way of working can achieve similar things, but I&amp;rsquo;m not sure that running two containers with a process each to run your application is any better than running one container with two processes.&lt;/p&gt;
@@ -31,7 +33,7 @@
 
 &lt;p&gt;I haven&amp;rsquo;t really messed around with the first option, maybe it could work out, but you&amp;rsquo;d lose the logs from the second process as it would need to output via the first process&amp;rsquo; &lt;code&gt;stdout&lt;/code&gt;.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_0&#34;&gt;The Bash Script&lt;/h2&gt;
+&lt;h2 id=&#34;toc_1&#34;&gt;The Bash Script&lt;/h2&gt;
 
 &lt;p&gt;Up until recently the way I have been running multiple processes is via the &lt;code&gt;bash&lt;/code&gt; script method, but it feels really clumsy and fragile and while it works I&amp;rsquo;ve never been particularly fond of it.&lt;/p&gt;
 
@@ -51,7 +53,7 @@ done
 
 &lt;p&gt;As you can see I&amp;rsquo;ve started two processes &lt;code&gt;elasticsearch&lt;/code&gt; and &lt;code&gt;confd&lt;/code&gt; both backgrounded and then I finish with a loop which publishes data to etcd every 5 seconds until the &lt;code&gt;elasticsearch&lt;/code&gt; process quits listening on its published tcp port.  This works, but it leaves me feeling a bit icky.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_1&#34;&gt;Process Supervisor&lt;/h2&gt;
+&lt;h2 id=&#34;toc_2&#34;&gt;Process Supervisor&lt;/h2&gt;
 
 &lt;p&gt;I have used various supervisors in containers before but never really liked the experience as I could never get all the logs out to &lt;code&gt;stdout&lt;/code&gt; and using the standard docker logging mechanisms so I&amp;rsquo;ve always gone back to the &lt;code&gt;bash&lt;/code&gt; script method.  Recently while working on the ELK project mentioned above I decided to give using a process supervisor another chance.&lt;/p&gt;
 

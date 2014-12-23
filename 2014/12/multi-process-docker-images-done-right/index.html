@@ -68,6 +68,8 @@
           <span class="post-date">Mon, Dec 22, 2014</span>
           
 
+<h2 id="toc_0">For some values of &lsquo;right&rsquo;</h2>
+
 <p>Almost since <a href="http://docker.com">Docker</a> was first introduced to the world there has been a fairly strong push to keeping containers to be single process.   This makes a lot of sense and definitely plays into the <a href="http://12factor.net">12 Factor</a> way of thinking where all application output should be pushed to <code>stdout</code> and docker itself with tools like <a href="https://github.com/progrium/logspout">logspout</a> now has fairly strong tooling to deal with those logs.</p>
 
 <p>Sometimes however it just makes sense to run more than one process in a container,  a perfect example would be running <a href="https://github.com/kelseyhightower/confd">confd</a> as well as your application in order to modify the application&rsquo;s config file based on changes in service discovery systems like <a href="https://github.com/coreos/etcd">etcd</a>.   The <a href="https://docs.docker.com/articles/ambassador_pattern_linking/">ambassador</a> container way of working can achieve similar things, but I&rsquo;m not sure that running two containers with a process each to run your application is any better than running one container with two processes.</p>
@@ -82,7 +84,7 @@
 
 <p>I haven&rsquo;t really messed around with the first option, maybe it could work out, but you&rsquo;d lose the logs from the second process as it would need to output via the first process&rsquo; <code>stdout</code>.</p>
 
-<h2 id="toc_0">The Bash Script</h2>
+<h2 id="toc_1">The Bash Script</h2>
 
 <p>Up until recently the way I have been running multiple processes is via the <code>bash</code> script method, but it feels really clumsy and fragile and while it works I&rsquo;ve never been particularly fond of it.</p>
 
@@ -102,7 +104,7 @@ done
 
 <p>As you can see I&rsquo;ve started two processes <code>elasticsearch</code> and <code>confd</code> both backgrounded and then I finish with a loop which publishes data to etcd every 5 seconds until the <code>elasticsearch</code> process quits listening on its published tcp port.  This works, but it leaves me feeling a bit icky.</p>
 
-<h2 id="toc_1">Process Supervisor</h2>
+<h2 id="toc_2">Process Supervisor</h2>
 
 <p>I have used various supervisors in containers before but never really liked the experience as I could never get all the logs out to <code>stdout</code> and using the standard docker logging mechanisms so I&rsquo;ve always gone back to the <code>bash</code> script method.  Recently while working on the ELK project mentioned above I decided to give using a process supervisor another chance.</p>
 
