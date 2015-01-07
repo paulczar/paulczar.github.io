@@ -1,0 +1,367 @@
+  <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title> The Twelve-Fakter App &middot; Paul Czarkowski </title>
+    
+    <link rel="stylesheet" type="text/css" href="http://localhost:1313/css/uno.min.css" />
+    <link rel="stylesheet" type="text/css" href="http://localhost:1313/css/lightGallery.css" />
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Paul Czarkowski" />
+    
+    <script src="http://localhost:1313/js/jquery.min.js"></script>
+    <script src="http://localhost:1313/js/main.min.js">
+    </script>
+</head>
+
+  <body>
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-bars btn-mobile-menu__icon"></i>
+        <i class="fa fa-times btn-mobile-close__icon hidden"></i>
+    </span>
+<header class="panel-cover panel-cover--collapsed" >
+    <div class="panel-main">
+        <div class="panel-main__inner panel-inverted">
+            <div class="panel-main__content"> 
+                <h1 class="panel-cover__title panel-title">
+                    <a href="http://localhost:1313" title="link to homepage for Paul Czarkowski">Paul Czarkowski</a>
+                </h1>
+                <hr class="panel-cover__divider" />
+                <p class="panel-cover__description">  Random musings mostly about tech  </p>
+                <hr class="panel-cover__divider panel-cover__divider--secondary" />
+                <div class="navigation-wrapper">
+                    <nav class="cover-navigation cover-navigation--primary">
+                        <ul class="navigation">
+                            <li class="navigation__item"><a href="/#blog" title="link to Paul Czarkowski blog" class="blog-button">Blog</a> </li>
+                            </br>  </ul>
+                    </nav> <nav class="cover-navigation navigation--social">
+    <ul class="navigation"> 
+        
+        <li class="navigation__item">
+            <a href="http://twitter.com/pczarkowski" title="@pczarkowski on Twitter"> <i class='fa fa-tt'></i> <span class="label">Twitter</span> </a>
+        </li>   
+        
+        <li class="navigation__item">
+            <a href="https://github.com/paulczar" title="paulczar on github"> <i class='fa fa-github'></i> <span class="label">Github</span> </a>
+        </li>  </br>   
+        
+        <li class="navigation__item">
+            <a href="mailto:username.taken&#43;tech@gmail.com" title="Email username.taken&#43;tech@gmail.com"> <i class='fa fa-envelope-o'></i> <span class="label">Email</span> </a>
+        </li>  </ul>
+</nav>
+ </div>
+            </div>
+        </div>
+        <div class="panel-cover--overlay"></div>
+    </div>
+</header>
+
+    <div class="content-wrapper">
+      <div class="content-wrapper__inner">
+        <div class="post">
+          <h1>The Twelve-Fakter App</h1>
+          <span class="post-date">Sat, Jan 3, 2015</span>
+          
+
+<p>Last year&rsquo;s calendar has been flipped for the last time and we&rsquo;ve welcomed in a new year and unless you&rsquo;ve been living under a rock (in which case I envy you) you&rsquo;ve heard a fair bit about The <a href="http://12factor.net">Twelve-Factor App</a>. A wonderful stateless application that is completely disposable and can run anywhere from your own physical servers to <a href="http://cloudfoundry.org">Cloud Foundry</a> or <a href="http://heroku.com">Heroku</a>.</p>
+
+<p>Chances are you&rsquo;re stuck writing and running an application that is decidely not 12Factor, nor will it ever be.  In a perfect world you&rsquo;d scrap it and rewrite it as a dozen microservices that are loosely coupled but run and work indepently of eachother. The reality however is you could never get the okay to do that.</p>
+
+<p>Fortunately with the rise of <a href="http://docker.com">Docker</a> and its ecosystem it has become easier to not only write 12Factor apps, but also to fake it by producing a Docker container that acts like a 12Factor app, but contains something that is decidedly not.  I call this the 12Fakter app.</p>
+
+<p>I&rsquo;ve been playing with this concept for a while, but over Christmas I spent a bunch of time trying to figure out the best ways to fake out the 12 Factors and feel that I&rsquo;ve come up with something that works pretty well and in the process created a Vagrant based development sandbox called <a href="http://github.com/paulczar/factorish">Factorish</a> which I used to create <a href="http://github.com/paulczar/12fakter-wordpress">12fakter-wordpress</a> and <a href="https://github.com/paulczar/docker-elk_confd">elk_confd</a>.</p>
+
+<h2 id="toc_0">Fakter I. Codebase</h2>
+
+<p><strong>One codebase tracked in revision control, many deploys</strong></p>
+
+<p>The goal here is to have both your app and deployment tooling in the same codebase which is stored in source control.  This means adding a <code>Dockerfile</code>, and <code>Vagrantfile</code> and other pieces of tooling into your codebase.  If however you have a monolithic codebase that contains more than just your app you can create a seperate codebase ( use git! ) containing this tooling and have that tooling collect the application from its existing codebase.</p>
+
+<p>You should be able to merge <a href="http://github.com/paulczar/factorish">Factorish</a> into your existing code,  or fork it and use the <code>Dockerfile</code> in it to pull the actual application code in as part of the build process.</p>
+
+<h2 id="toc_1">Fakter II. Dependencies</h2>
+
+<p><strong>Explicitly declare and isolate dependencies</strong></p>
+
+<p>This is a really easy win with Docker,  The very nature of Docker both Explicitly declares your dependencies in the form of the <code>Dockerfile</code> and Isolates them in the form of the built Docker image.</p>
+
+<h3 id="toc_2">Declaration</h3>
+
+<pre><code># Dockerfile: factorish/example
+FROM python:2
+MAINTAINER Paul Czarkowski &quot;paul@paulcz.net&quot;
+RUN \
+  apt-get update &amp;&amp; apt-get install -yq
+  supervisor \
+...
+...
+ADD . /app
+WORKDIR /app
+RUN \
+  useradd -d /app -c 'application' -s '/bin/false' app &amp;&amp; \
+  chmod +x /app/bin/* &amp;&amp; \
+  pip install -r /app/example/requirements.txt
+CMD [&quot;/app/bin/boot&quot;]
+EXPOSE 8080
+</code></pre>
+
+<h3 id="toc_3">Isolation</h3>
+
+<pre><code>$ docker build -t factorish/example example
+Sending build context to Docker daemon 20.99 kB
+Sending build context to Docker daemon
+Step 0 : FROM python:2
+ ---&gt; 96e13ecb4dba
+...
+...
+Step 8 : EXPOSE 8080
+ ---&gt; Running in 8dc9a04eaf78
+ ---&gt; 374cb835239c
+Removing intermediate container 8dc9a04eaf78
+Successfully built 374cb835239c
+</code></pre>
+
+<h2 id="toc_4">Fakter III. Configuration</h2>
+
+<p><strong>Store config in the environment</strong></p>
+
+<p>Another easy win with Docker.   You can pass in environment variables in the <code>Dockerfile</code> as we as when running the docker container with <code>docker run -d -e TEXT=bacon factorish/example</code>.</p>
+
+<p>Chances are your app reads from a config file rather than environment variables. There are two relatively simple ways to overcome this.</p>
+
+<h3 id="toc_5">sed</h3>
+
+<p>Have your startup script edit your config file and replace values in it with the values of the environment variables using <code>sed</code>:</p>
+
+<h4 id="toc_6">/app/bin/boot</h4>
+
+<pre><code>#!/bin/bash
+`sed -i &quot;s/xxxTEXTxxx/${TEXT}&quot; /app/example/example.conf`
+python /app/example/app.py
+</code></pre>
+
+<h3 id="toc_7">confd</h3>
+
+<p><a href="https://github.com/kelseyhightower/confd">confd</a> is a tool written specifically for templating config files from data sources such as environment variables.  This is a much better option as it also opens up the ability to use service discovery tooling like <a href="https://coreos.com/using-coreos/etcd/">etcd</a> (also supported in Factorish) rather than environment variables.</p>
+
+<h4 id="toc_8">/app/conf.d/example.conf.toml</h4>
+
+<pre><code>[template]
+src   = &quot;example.conf&quot;
+dest  = &quot;/app/example/example.conf&quot;
+keys = [&quot;/services/example&quot;]
+</code></pre>
+
+<h4 id="toc_9">/app/templates/example.conf</h4>
+
+<pre><code>[example]
+text: {{ getv &quot;/services/example/text&quot; }}
+
+</code></pre>
+
+<h4 id="toc_10">/app/bin/boot</h4>
+
+<pre><code>#!/bin/bash
+confd -onetime
+python /app/example/app.py
+</code></pre>
+
+<h2 id="toc_11">Fakter IV. Backing Services</h2>
+
+<p><em>Treat backing services as attached resources</em></p>
+
+<p>Anything that is needed to store persistent data should be treated as an external dependency to your application.  As far as your app is concerned there should be no difference between a local MySQL server or Amazon&rsquo;s RDS.</p>
+
+<p>This is easier for some backing services than others.  For example if your app requires a MySQL database its relatively straight forward.  Whereas a local filesystem for storing images is harder, but can be solved:</p>
+
+<ul>
+<li>Docker: volume mounts, data containers</li>
+<li>Remote Storage: netapp, nfs, fuse-s3fs</li>
+<li>Clustered FS: drdb, gluster</li>
+<li>Ghetto: rsync + concerned</li>
+</ul>
+
+<h3 id="toc_12">Example</h3>
+
+<p>A fictional <code>PHP</code> based blog about bacon requires a database and a filestore:</p>
+
+<h4 id="toc_13">/app/templates/config.php</h4>
+
+<pre><code>define('DB_NAME', '{{ getv &quot;db/name&quot; }}');
+define('DB_USER', '{{ getv &quot;db/user&quot; }}');
+define('DB_PASSWORD', '{{ getv &quot;db/pass&quot; }}');
+define('DB_HOST', '{{ getv &quot;db/host&quot; }}');
+</code></pre>
+
+<h4 id="toc_14">Docker Run command</h4>
+
+<pre><code>$ docker run -d -e DB_NAME=bacon -e DB_USER=bacon \
+  -e DB_PASSWORD=bacon $DB_HOST=my.database.com \
+  -v /mnt/nfs/bacon:/app/bacon factorish/bacon-blog
+</code></pre>
+
+<h2 id="toc_15">Fakter V. Build, release, run</h2>
+
+<p><strong>Strictly separate build and run stages</strong></p>
+
+<h3 id="toc_16">Build</h3>
+
+<p>Converts a code repo into an executable bundle. Sound familiar?  Yup, we&rsquo;ve already solved this with our <code>Dockerfile</code>.</p>
+
+<h3 id="toc_17">Release</h3>
+
+<p>Takes the build and combines it with the current configuration. In a purely docker based system this can be split between the <strong>Build</strong> (versioning and defaults) and <strong>Run</strong> (current config) stages. However systems like Heroku and Deis have a seperate step for this.</p>
+
+<h3 id="toc_18">Run</h3>
+
+<p>Runs the application by launching a set of the app&rsquo;s processes against a selected release.  In a docker based system this is simply the <code>docker run</code> command which can be called via a deploy script, or a init script (systemd/runit) or a scheduler like <a href="https://coreos.com/using-coreos/clustering/">fleet</a> or <a href="http://mesos.apache.org/">mesos</a>.</p>
+
+<h2 id="toc_19">Fakter VI. Processes</h2>
+
+<p><strong>Execute the app as one or more stateless processes</strong></p>
+
+<p>Your application inside the docker container should behave like a standard linux process running in the foreground and be stateless and share-nothing.  Being inside a docker container means that this is hidden and therefore we can fairly easily fake this but you do need to think about process management and logging which are discussed later.</p>
+
+<h2 id="toc_20">Fakter VII. Port binding</h2>
+
+<p><strong>Export services via port binding</strong></p>
+
+<p>Your application should appear to be completely self contained and not require runtime injection of a webserver.  Thankfully this is pretty easy to fake in a docker container as any extra processes are isolated in the container and effectively invisible to the outside.</p>
+
+<p>Docker itself takes care of the port binding by use of the <code>-p</code> option on the command line.</p>
+
+<h2 id="toc_21">Fakter VIII. Concurrency</h2>
+
+<p><strong>Scale out via the process model</strong></p>
+
+<p>We should be able to scale up or down simply by creating or destroying docker containers containing the application.  Any upstream load balancers as an external dependency would need to be notified of the container starting ( usually a fairly easy API call) and stopping.  But these are external dependencies and should be solved outside of your application itself.</p>
+
+<p>Inside te container your application should not daemonize or write pid files (if unavoidable, not too difficult to script around) and use tooling like <code>upstart</code> or <code>supervisord</code> to manage the processes.</p>
+
+<h2 id="toc_22">Fakter IX. Disposability</h2>
+
+<p><strong>Maximize robustness with fast startup and graceful shutdown</strong></p>
+
+<p>Docker helps a lot with this.   We want to ensure that we&rsquo;re optimized for fast yet reliable startup as well as graceful shutdown.  Your app should be able to be shut down gracefully when <code>docker kill</code> is called and just as importantly there should be minimal if any external effect if the application crashes or stops ungracefully.</p>
+
+<h2 id="toc_23">Fakter X. Dev/prod parity</h2>
+
+<p><strong>Keep development, staging, and production as similar as possible</strong></p>
+
+<p>By following the previous fackters we&rsquo;ve done most of the work to make this possible.  We use Vagrant in development to deploy your app (and any backing services) using the appropriate provisioning methodology ( the same ones we&rsquo;d use for production).</p>
+
+<p>By wrapping the application in a docker container it is portable across just about any system that is capable of running docker.</p>
+
+<p>By provisioning with the same tooling to both dev and prod (and any other envs),  any deployment of development (should happen frequently) is also a test of most of the tooling used to deploy to production.</p>
+
+<h2 id="toc_24">Fakter XI. Logs</h2>
+
+<p><strong>Treat logs as event streams</strong></p>
+
+<p>Your application ( even inside the container ) should always log to stdout. By writing to stdout of your process we can utilize the docker logging subsystem which when combined with tooling like <a href="https://registry.hub.docker.com/u/progrium/logspout/">logspout</a> makes it very easy to push all logs to a central system.</p>
+
+<p>If your app <em>has</em> to write to a logfile you should be able to configure that log file to be <code>/dev/stdout</code> which should cause it to write to stdout of the process. If your app only writes to syslog then configure it to write to a remote syslog. Basically do whatever you can to ensure you don&rsquo;t log to the local filesystem.</p>
+
+<h3 id="toc_25">Example</h3>
+
+<p>This example shows running <code>Supervisord</code> as your primary process in the docker container and <code>nginx</code> writing logs to stdout which in turn are written to the containers <code>stdout</code>:</p>
+
+<h4 id="toc_26">/etc/supervisor/conf.d/nginx</h4>
+
+<pre><code>[supervisord]
+logfile=/dev/null
+pidfile=/var/run/supervisord.pid
+nodaemon=true
+
+[program:nginx]
+command=/usr/sbin/nginx
+redirect_stderr=true
+stdout_logfile=/dev/stdout
+stdout_logfile_maxbytes=0
+auto_start=true
+autorestart=true
+user=root
+</code></pre>
+
+<h4 id="toc_27">/etc/nginx/sites-enabled/app</h4>
+
+<pre><code>worker_processes 1;
+daemon off;
+error_log /dev/stdout;
+http {
+  access_log /dev/stdout;
+  server {
+    listen            *:8080;
+    root              /app/bacon-blog;
+    index             index.php;
+  }
+}
+</code></pre>
+
+<h2 id="toc_28">Fakter XII. Admin processes</h2>
+
+<p><strong>Run admin/management tasks as one-off processes</strong></p>
+
+<p>This one is pretty easy.  Tasks such as database migrates should be run in one off throw-away containers.</p>
+
+<pre><code>$ docker run -t -e DB_SERVER=user@pass:db.server.com myapp:1.3.2 rake db:migrate
+</code></pre>
+
+<h2 id="toc_29">Conclusion</h2>
+
+<p>Most of the fakters above are relatively straight forward to utilize and can be built upon slowly, no need to perfect things before working on them.  They can also be utilized with any existing provisioning / config management tooling that you already have.</p>
+
+<p>If you&rsquo;re already using <a href="http://chef.io">chef</a> for deploying your application you can use the <a href="https://supermarket.chef.io/cookbooks/docker">docker cookbook</a> to start running docker containers instead and write out confd templates rather than the final config file which confd will then use to do the final configuration of your app from the environment variables you pass through to the <code>docker_run</code> resource in the cookbook.</p>
+
+<p>Making your application act like a 12Factor app may not be enough to run it on a purely hosted PAAS like Heroku, but chances are you&rsquo;ll be able to run it on a Docker based PAAS like Deis.  You can go full stack with Mesos or CoreOS+Fleet+ETCD or you can stick to Ubuntu servers running docker.</p>
+
+<p>The flexibility that the 12fakter application gives you means that you can move to a more modern infrastructure at your own pace when it makes sense without having to abandon or completely rewrite your existing applications.</p>
+
+<p>Please check out <a href="http://github.com/paulczar/factorish">Factorish</a> and some of the example 12fakter apps like <a href="http://github.com/paulczar/12fakter-wordpress">12fakter-wordpress</a> and <a href="https://github.com/paulczar/docker-elk_confd">elk_confd</a>. to see how easy it can be to start making your applications act like 12Factor apps.</p>
+
+        </div>
+        <section class="post-comments">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+     
+     
+     if (window.location.hostname == "localhost")
+             return;
+
+	         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		     var disqus_shortname = '';
+		         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</section>
+
+
+      </div>
+    </div>
+  <script>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+  <footer class="footer"></footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-35638296-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</html>

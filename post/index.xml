@@ -7,7 +7,329 @@
     <language>en-us</language>
     
     
-    <updated>Mon, 22 Dec 2014 21:31:03 CST</updated>
+    <updated>Tue, 06 Jan 2015 13:29:27 CST</updated>
+    
+    <item>
+      <title>Factorish and The Twelve-Fakter App</title>
+      <link>http://tech.paulcz.net/2015/01/factorish_and_the_12_fakter_app/</link>
+      <pubDate>Tue, 06 Jan 2015 13:29:27 CST</pubDate>
+      
+      <guid>http://tech.paulcz.net/2015/01/factorish_and_the_12_fakter_app/</guid>
+      <description>
+
+&lt;p&gt;Unless you&amp;rsquo;ve been living under a rock (in which case I envy you) you&amp;rsquo;ve heard a fair bit about The &lt;a href=&#34;http://12factor.net&#34;&gt;Twelve-Factor App&lt;/a&gt;. A wonderful stateless application that is completely disposable and can run anywhere from your own physical servers to &lt;a href=&#34;http://deis.io&#34;&gt;Deis&lt;/a&gt;, &lt;a href=&#34;http://cloudfoundry.org&#34;&gt;Cloud Foundry&lt;/a&gt; or &lt;a href=&#34;http://heroku.com&#34;&gt;Heroku&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Chances are you&amp;rsquo;re stuck writing and running an application that is decidely not 12Factor, nor will it ever be.  In a perfect world you&amp;rsquo;d scrap it and rewrite it as a dozen microservices that are loosely coupled but run and work indepently of eachother. The reality however is you could never get the okay to do that.&lt;/p&gt;
+
+&lt;p&gt;Fortunately with the rise of &lt;a href=&#34;http://docker.com&#34;&gt;Docker&lt;/a&gt; and its ecosystem it has become easier to not only write 12Factor apps, but also to fake it by producing a Docker container that acts like a 12Factor app, but contains something that is decidedly not.  I call this the 12Fakter app.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve been playing with this concept for a while, but over Christmas I spent a bunch of time trying to figure out the best ways to fake out the 12 Factors and feel that I&amp;rsquo;ve come up with something that works pretty well and in the process created a Vagrant based development sandbox called &lt;a href=&#34;http://github.com/paulczar/factorish&#34;&gt;Factorish&lt;/a&gt; which I used to create &lt;a href=&#34;http://github.com/paulczar/12fakter-wordpress&#34;&gt;12fakter-wordpress&lt;/a&gt; and &lt;a href=&#34;https://github.com/paulczar/docker-elk_confd&#34;&gt;elk_confd&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;Fakter I. Codebase&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;One codebase tracked in revision control, many deploys&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The goal here is to have both your app and deployment tooling in the same codebase which is stored in source control.  This means adding a &lt;code&gt;Dockerfile&lt;/code&gt;, and &lt;code&gt;Vagrantfile&lt;/code&gt; and other pieces of tooling into your codebase.  If however you have a monolithic codebase that contains more than just your app you can create a seperate codebase ( use git! ) containing this tooling and have that tooling collect the application from its existing codebase.&lt;/p&gt;
+
+&lt;p&gt;You should be able to achieve this by either merging &lt;a href=&#34;http://github.com/paulczar/factorish&#34;&gt;Factorish&lt;/a&gt; into your existing git repo,  or fork it and use the &lt;code&gt;Dockerfile&lt;/code&gt; in it to pull the actual application code in as part of the build process.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;Fakter II. Dependencies&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Explicitly declare and isolate dependencies&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This is a really easy win with Docker,  The very nature of Docker both Explicitly declares your dependencies in the form of the &lt;code&gt;Dockerfile&lt;/code&gt; and Isolates them in the form of the built Docker image.&lt;/p&gt;
+
+&lt;h3 id=&#34;toc_2&#34;&gt;Declaration&lt;/h3&gt;
+
+&lt;h4 id=&#34;toc_3&#34;&gt;/app/example/Dockerfile&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;FROM python:2
+
+# Base deps layer
+RUN \
+  apt-get update &amp;amp;&amp;amp; apt-get install -yq \
+  make \
+  ca-certificates \
+  net-tools \
+  sudo \
+  wget \
+  vim \
+  strace \
+  lsof \
+  netcat \
+  lsb-release \
+  locales \
+  socat \
+  supervisor \
+  --no-install-recommends &amp;amp;&amp;amp; \
+  locale-gen en_US.UTF-8
+
+# etcdctl and confd layer
+RUN \
+  curl -sSL -o /usr/local/bin/etcdctl https://s3-us-west-2.amazonaws.com/opdemand/etcdctl-v0.4.6 \
+  &amp;amp;&amp;amp; chmod +x /usr/local/bin/etcdctl \
+  &amp;amp;&amp;amp; curl -sSL -o /usr/local/bin/confd https://github.com/kelseyhightower/confd/releases/download/v0.7.1/confd-0.7.1-linux-amd64 \
+  &amp;amp;&amp;amp; chmod +x /usr/local/bin/confd
+
+ADD . /app
+WORKDIR /app
+
+# app layer
+RUN \
+  useradd -d /app -c &#39;application&#39; -s &#39;/bin/false&#39; app &amp;amp;&amp;amp; \
+  chmod +x /app/bin/* &amp;amp;&amp;amp; \
+  pip install -r /app/example/requirements.txt
+
+# Define default command.
+CMD [&amp;quot;/app/bin/boot&amp;quot;]
+
+# Expose ports.
+EXPOSE 8080
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You might notice I have sets of commands joined together with &lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt; in my &lt;code&gt;Dockerfile&lt;/code&gt;, I do this to control the docker layers more to try and end up with fewer more meaningful layers.&lt;/p&gt;
+
+&lt;h3 id=&#34;toc_4&#34;&gt;Isolation&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker build -t factorish/example example
+Sending build context to Docker daemon 20.99 kB
+Sending build context to Docker daemon
+Step 0 : FROM python:2
+ ---&amp;gt; 96e13ecb4dba
+...
+...
+Step 8 : EXPOSE 8080
+ ---&amp;gt; Running in 8dc9a04eaf78
+ ---&amp;gt; 374cb835239c
+Removing intermediate container 8dc9a04eaf78
+Successfully built 374cb835239c
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;toc_5&#34;&gt;Fakter III. Configuration&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Store config in the environment&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Another easy win with Docker.   You can pass in environment variables in the &lt;code&gt;Dockerfile&lt;/code&gt; as we as when running the docker container using the &lt;code&gt;-e&lt;/code&gt; option like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d -e TEXT=bacon factorish/example
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;However chances are your app reads from a config file rather than environment variables. There are [at least] two fairly simple ways to achieve this.&lt;/p&gt;
+
+&lt;h3 id=&#34;toc_6&#34;&gt;sed inline replacement&lt;/h3&gt;
+
+&lt;p&gt;use a startup script to edit your config file and replace values in it with the values of the environment variables using &lt;code&gt;sed&lt;/code&gt; before runnin your app:&lt;/p&gt;
+
+&lt;h4 id=&#34;toc_7&#34;&gt;/app/bin/boot&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/bin/bash
+sed -i &amp;quot;s/xxxTEXTxxx/${TEXT}&amp;quot; /app/example/example.conf
+python /app/example/app.py
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;toc_8&#34;&gt;confd templating&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/kelseyhightower/confd&#34;&gt;confd&lt;/a&gt; is a tool written specifically for templating config files from data sources such as environment variables.  This is a much better option as it also opens up the ability to use service discovery tooling like &lt;a href=&#34;https://coreos.com/using-coreos/etcd/&#34;&gt;etcd&lt;/a&gt; (also supported in Factorish) rather than environment variables.&lt;/p&gt;
+
+&lt;h4 id=&#34;toc_9&#34;&gt;/app/conf.d/example.conf.toml&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;[template]
+src   = &amp;quot;example.conf&amp;quot;
+dest  = &amp;quot;/app/example/example.conf&amp;quot;
+keys = [&amp;quot;/services/example&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;toc_10&#34;&gt;/app/templates/example.conf&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;[example]
+text: {{ getv &amp;quot;/services/example/text&amp;quot; }}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;The &lt;code&gt;{{ }}&lt;/code&gt; syntax above is the golang/confd macros used to perform tasks like fetching variables from etcd or environment.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;toc_11&#34;&gt;/app/bin/boot&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/bin/bash
+confd -onetime
+python /app/example/app.py
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;toc_12&#34;&gt;Fakter IV. Backing Services&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;Treat backing services as attached resources&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Anything that is needed to store persistent data should be treated as an external dependency to your application.  As far as your app is concerned there should be no difference between a local MySQL server or Amazon&amp;rsquo;s RDS.&lt;/p&gt;
+
+&lt;p&gt;This is easier for some backing services than others.  For example if your app requires a MySQL database its relatively straight forward.  Whereas a local filesystem for storing images is harder, but can be solved:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Docker: volume mounts, data containers&lt;/li&gt;
+&lt;li&gt;Remote Storage: netapp, nfs, fuse-s3fs&lt;/li&gt;
+&lt;li&gt;Clustered FS: drdb, gluster&lt;/li&gt;
+&lt;li&gt;Ghetto: rsync + concerned&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The docker volume mounts actually work really well in a vagrant based development environment because you can pass your code all the way into the container from your workstation,  however there are definitely some security considerations to think about if you want to do volume mounts in production.&lt;/p&gt;
+
+&lt;h3 id=&#34;toc_13&#34;&gt;Example&lt;/h3&gt;
+
+&lt;p&gt;A fictional &lt;strong&gt;PHP&lt;/strong&gt; based blog about bacon requires a database and a filestore:&lt;/p&gt;
+
+&lt;h4 id=&#34;toc_14&#34;&gt;/app/templates/config.php&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;define(&#39;DB_NAME&#39;, &#39;{{ getv &amp;quot;/db/name&amp;quot; }}&#39;);
+define(&#39;DB_USER&#39;, &#39;{{ getv &amp;quot;/db/user&amp;quot; }}&#39;);
+define(&#39;DB_PASSWORD&#39;, &#39;{{ getv &amp;quot;/db/pass&amp;quot; }}&#39;);
+define(&#39;DB_HOST&#39;, &#39;{{ getv &amp;quot;/db/host&amp;quot; }}&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;toc_15&#34;&gt;Docker Run command&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d -e DB_NAME=bacon -e DB_USER=bacon \
+  -e DB_PASSWORD=bacon $DB_HOST=my.database.com \
+  -v /mnt/nfs/bacon:/app/bacon factorish/bacon-blog
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;confd will use the environment variables passed in via the &lt;code&gt;docker run&lt;/code&gt; command to fill out the variables called in the &lt;code&gt;{{ }}&lt;/code&gt; macros.  Note that confd transforms the environment variables so that the environment variable &lt;code&gt;DB_USER&lt;/code&gt; will be read by &lt;code&gt;{{ getv &amp;quot;/db/user&amp;quot; }}&lt;/code&gt;.  This is done to normalize the macro across the various data source options.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_16&#34;&gt;Fakter V. Build, Release, Run&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Strictly separate build and run stages&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;toc_17&#34;&gt;Build&lt;/h3&gt;
+
+&lt;p&gt;Converts a code repo into an executable bundle. Sound familiar?  Yup, we&amp;rsquo;ve already solved this with our &lt;code&gt;Dockerfile&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;toc_18&#34;&gt;Release&lt;/h3&gt;
+
+&lt;p&gt;Takes the build and combines it with the current configuration. In a purely docker based system this can be split between the &lt;strong&gt;Build&lt;/strong&gt; (versioning and defaults) and &lt;strong&gt;Run&lt;/strong&gt; (current config) stages. However systems like Heroku and Deis have a seperate step for this which they handle internally.&lt;/p&gt;
+
+&lt;h3 id=&#34;toc_19&#34;&gt;Run&lt;/h3&gt;
+
+&lt;p&gt;Runs the application by launching a set of the app&amp;rsquo;s processes against a selected release.  In a docker based system this is simply the &lt;code&gt;$ docker run&lt;/code&gt; command which can be called via a deploy script, or a init script (systemd/runit) or a scheduler like &lt;a href=&#34;https://coreos.com/using-coreos/clustering/&#34;&gt;fleet&lt;/a&gt; or &lt;a href=&#34;http://mesos.apache.org/&#34;&gt;mesos&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_20&#34;&gt;Fakter VI. Processes&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Execute the app as one or more stateless processes&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Your application inside the docker container should behave like a standard linux process running in the foreground and be stateless and share-nothing.  Being inside a docker container means that this is hidden and therefore we can fairly easily fake this but you do need to think about process management and logging which are discussed later and is further explored &lt;a href=&#34;http://tech.paulcz.net/2014/12/multi-process-docker-images-done-right/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_21&#34;&gt;Fakter VII. Port binding&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Export services via port binding&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Your application should appear to be completely self contained and not require runtime injection of a webserver.  Thankfully this is pretty easy to fake in a docker container as any extra processes are isolated in the container and effectively invisible to the outside.&lt;/p&gt;
+
+&lt;p&gt;It is still preferable to use a native language based web library such as jetty (java) or flask (python) but for languages like PHP using apache or nginx is ok.&lt;/p&gt;
+
+&lt;p&gt;Docker itself takes care of the port binding by use of the &lt;code&gt;-p&lt;/code&gt; option on the command line.  It&amp;rsquo;s useful to register the port and host IP to somewhere ( etcd ) to allow for loadbalancers and other services to easily locate your application.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_22&#34;&gt;Fakter VIII. Concurrency&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Scale out via the process model&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;We should be able to scale up or down simply by creating or destroying docker containers containing the application.  Any upstream load balancers as an external dependency would need to be notified of the container starting ( usually a fairly easy API call) and stopping.  But these are external dependencies and should be solved outside of your application itself.&lt;/p&gt;
+
+&lt;p&gt;Inside the container your application should not daemonize or write pid files (if unavoidable, not too difficult to script around) and use tooling like &lt;code&gt;upstart&lt;/code&gt; or &lt;code&gt;supervisord&lt;/code&gt; if there is more than one process that needs to be run.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_23&#34;&gt;Fakter IX. Disposability&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Maximize robustness with fast startup and graceful shutdown&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Docker helps a lot with this.   We want to ensure that we&amp;rsquo;re optimized for fast yet reliable startup as well as graceful shutdown.  Your app should be able to be shut down gracefully when &lt;code&gt;docker kill&lt;/code&gt; is called and just as importantly there should be minimal if any external effect if the application crashes or stops ungracefully.&lt;/p&gt;
+
+&lt;p&gt;The container itself should kill itself if the app inside it stops working right.  If your app is running behind a &lt;a href=&#34;http://tech.paulcz.net/2014/12/multi-process-docker-images-done-right/&#34;&gt;supervisor&lt;/a&gt; this can be a achieved with a really lightweight healthcheck script like this.&lt;/p&gt;
+
+&lt;h4 id=&#34;toc_24&#34;&gt;/app/bin/healhthcheck&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/bin/bash
+while [[ ! -z $(netstat -lnt | awk &amp;quot;\$6 == \&amp;quot;LISTEN\&amp;quot; &amp;amp;&amp;amp; \$4 ~ \&amp;quot;.$PORT\&amp;quot; &amp;amp;&amp;amp; \$1 ~ \&amp;quot;tcp.?\&amp;quot;&amp;quot;) ]] ; do
+  [[ -n $ETCD_HOST ]] &amp;amp;&amp;amp; etcdctl set /service/web/hosts/$HOST $PORT --ttl 10 &amp;gt;/dev/null
+  sleep 5
+done
+kill `cat /var/run/supervisord.pid`
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You&amp;rsquo;ll note that I&amp;rsquo;m also publishing host and port values to etcd if &lt;code&gt;$ETCD_HOST&lt;/code&gt; is set.  This can then be used to notify loadbalancers and the like when services start or stop.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_25&#34;&gt;Fakter X. Dev/prod parity&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Keep development, staging, and production as similar as possible&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;By following the previous fackters we&amp;rsquo;ve done most of the work to make this possible.  We use Vagrant in development to deploy your app (and any backing services) using the appropriate provisioning methodology ( the same ones we&amp;rsquo;d use for production).&lt;/p&gt;
+
+&lt;p&gt;By wrapping the application in a docker container it is portable across just about any system that is capable of running docker.&lt;/p&gt;
+
+&lt;p&gt;By provisioning with the same tooling to both dev and prod (and any other envs),  any deployment of development (should happen frequently) is also a test of most of the tooling used to deploy to production.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_26&#34;&gt;Fakter XI. Logs&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Treat logs as event streams&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Your application ( even inside the container ) should always log to stdout. By writing to stdout of your process we can utilize the docker logging subsystem which when combined with tooling like &lt;a href=&#34;https://registry.hub.docker.com/u/progrium/logspout/&#34;&gt;logspout&lt;/a&gt; makes it very easy to push all logs to a central system.&lt;/p&gt;
+
+&lt;p&gt;If your app &lt;em&gt;has&lt;/em&gt; to write to a logfile you should be able to configure that log file to be &lt;code&gt;/dev/stdout&lt;/code&gt; which should cause it to write to stdout of the process. If your app only writes to syslog then configure it to write to a remote syslog. Basically do whatever you can to ensure you don&amp;rsquo;t log to the local filesystem.&lt;/p&gt;
+
+&lt;h3 id=&#34;toc_27&#34;&gt;Example&lt;/h3&gt;
+
+&lt;p&gt;This example shows running &lt;code&gt;Supervisord&lt;/code&gt; as your primary process in the docker container and &lt;code&gt;nginx&lt;/code&gt; writing logs to stdout which in turn are written to the containers &lt;code&gt;stdout&lt;/code&gt;.  A more thorough writeup on using &lt;a href=&#34;http://tech.paulcz.net/2014/12/multi-process-docker-images-done-right/&#34;&gt;supervisor&lt;/a&gt; inside docker containers can be found &lt;a href=&#34;http://tech.paulcz.net/2014/12/multi-process-docker-images-done-right/&#34;&gt;here&lt;/a&gt;:&lt;/p&gt;
+
+&lt;h4 id=&#34;toc_28&#34;&gt;/etc/supervisor/conf.d/nginx&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;[supervisord]
+logfile=/dev/null
+pidfile=/var/run/supervisord.pid
+nodaemon=true
+
+[program:nginx]
+command=/usr/sbin/nginx
+redirect_stderr=true
+stdout_logfile=/dev/stdout
+stdout_logfile_maxbytes=0
+auto_start=true
+autorestart=true
+user=root
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;toc_29&#34;&gt;/etc/nginx/sites-enabled/app&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;worker_processes 1;
+daemon off;
+error_log /dev/stdout;
+http {
+  access_log /dev/stdout;
+  server {
+    listen            *:8080;
+    root              /app/bacon-blog;
+    index             index.php;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For a more detailed post on using logspout to produce consumable logs check out &lt;a href=&#34;https://twitter.com/behemphi&#34;&gt;@behemphi&lt;/a&gt;&amp;rsquo;s blog post - &lt;a href=&#34;http://stackengine.com/docker-logs-aggregating-ease/&#34;&gt;Docker Logs – Aggregating with Ease&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_30&#34;&gt;Fakter XII. Admin processes&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Run admin/management tasks as one-off processes&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This one is pretty easy.  Tasks such as database migrates should be run in one off throw-away containers.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -t -e DB_SERVER=user@pass:db.server.com myapp:1.3.2 rake db:migrate
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;toc_31&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Most of the fakters above are relatively straight forward to utilize and can be built upon slowly, no need to perfect things before working on them.  They can also be utilized with any existing provisioning / config management tooling that you already have.&lt;/p&gt;
+
+&lt;p&gt;If you&amp;rsquo;re already using &lt;a href=&#34;http://chef.io&#34;&gt;chef&lt;/a&gt; for deploying your application you can use the &lt;a href=&#34;https://supermarket.chef.io/cookbooks/docker&#34;&gt;docker cookbook&lt;/a&gt; to start running docker containers instead and write out confd templates rather than the final config file which confd will then use to do the final configuration of your app from the environment variables you pass through to the &lt;code&gt;docker_run&lt;/code&gt; resource in the cookbook.&lt;/p&gt;
+
+&lt;p&gt;Making your application act like a 12Factor app may not be enough to run it on a purely hosted PAAS like Heroku, but chances are you&amp;rsquo;ll be able to run it on a Docker based PAAS like Deis.  You can go full stack with Mesos or CoreOS+Fleet+ETCD or you can stick to Ubuntu servers running docker.&lt;/p&gt;
+
+&lt;p&gt;The flexibility that the 12fakter application gives you means that you can move to a more modern infrastructure at your own pace when it makes sense without having to abandon or completely rewrite your existing applications.&lt;/p&gt;
+
+&lt;p&gt;Please check out &lt;a href=&#34;http://github.com/paulczar/factorish&#34;&gt;Factorish&lt;/a&gt; and some of the example 12fakter apps like &lt;a href=&#34;http://github.com/paulczar/12fakter-wordpress&#34;&gt;12fakter-wordpress&lt;/a&gt; and &lt;a href=&#34;https://github.com/paulczar/docker-elk_confd&#34;&gt;elk_confd&lt;/a&gt;. to see how easy it can be to start making your applications act like 12Factor apps.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Multi Process Docker Images Done Right</title>
