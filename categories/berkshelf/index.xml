@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-      <title>Berkshelf on Paul Czarkowski </title>
-      <generator uri="https://hugo.spf13.com">Hugo</generator>
-    <link>http://tech.paulcz.net/categories/berkshelf/index.xml/</link>
+    <title>Berkshelf on Paul Czarkowski</title>
+    <link>http://tech.paulcz.net/categories/berkshelf/</link>
+    <description>Recent content in Berkshelf on Paul Czarkowski</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    
-    
-    <updated>Sat, 07 Sep 2013 00:00:00 UTC</updated>
+    <lastBuildDate>Sat, 07 Sep 2013 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://tech.paulcz.net/categories/berkshelf/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Creating immutable servers with chef and docker.io</title>
       <link>http://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io/</link>
-      <pubDate>Sat, 07 Sep 2013 00:00:00 UTC</pubDate>
+      <pubDate>Sat, 07 Sep 2013 00:00:00 +0000</pubDate>
       
       <guid>http://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io/</guid>
       <description>
@@ -21,11 +21,11 @@
 
 &lt;p&gt;The first thing you&amp;rsquo;ll need to do is build a container with chef-client and berkshelf installed.   You can grab the one I&amp;rsquo;ve built by running &lt;code&gt;docker pull paulczar/chef-solo&lt;/code&gt; or build one youself from a &lt;code&gt;Dockerfile&lt;/code&gt; that looks a little something like the following&amp;hellip;&lt;/p&gt;
 
-&lt;h3 id=&#34;toc_0&#34;&gt;Creating a docker.io container with chef and berkshelf&lt;/h3&gt;
+&lt;h3 id=&#34;creating-a-docker-io-container-with-chef-and-berkshelf:8e5e7d2d9bff571e6328148c619ee8a0&#34;&gt;Creating a docker.io container with chef and berkshelf&lt;/h3&gt;
 
 &lt;p&gt;``` ruby Dockerfile&lt;/p&gt;
 
-&lt;h1 id=&#34;toc_1&#34;&gt;DOCKER-VERSION 0.5.3&lt;/h1&gt;
+&lt;h1 id=&#34;docker-version-0-5-3:8e5e7d2d9bff571e6328148c619ee8a0&#34;&gt;DOCKER-VERSION 0.5.3&lt;/h1&gt;
 
 &lt;p&gt;FROM ubuntu:12.10
 MAINTAINER Paul Czarkowski &amp;ldquo;paul@paulcz.net&amp;rdquo;&lt;/p&gt;
@@ -83,13 +83,13 @@ cookbook &#39;nginx&#39; , github: &#39;opscode-cookbooks/nginx&#39;
 
 &lt;p&gt;&lt;em&gt;You can see some of the cookbooks are being pulled from the opscode repository,  whereas others are being pulled directly from github.&lt;/em&gt;&lt;/p&gt;
 
-&lt;h4 id=&#34;toc_2&#34;&gt;Dockerfile&lt;/h4&gt;
+&lt;h4 id=&#34;dockerfile:8e5e7d2d9bff571e6328148c619ee8a0&#34;&gt;Dockerfile&lt;/h4&gt;
 
 &lt;p&gt;All that&amp;rsquo;s left now is to create a Dockerfile that will bring it all together.&lt;/p&gt;
 
 &lt;p&gt;``` ruby Dockerfile&lt;/p&gt;
 
-&lt;h1 id=&#34;toc_3&#34;&gt;DOCKER-VERSION 0.5.3&lt;/h1&gt;
+&lt;h1 id=&#34;docker-version-0-5-3-1:8e5e7d2d9bff571e6328148c619ee8a0&#34;&gt;DOCKER-VERSION 0.5.3&lt;/h1&gt;
 
 &lt;p&gt;FROM paulczar/chef-client
 MAINTAINER Paul Czarkowski &amp;ldquo;paul@paulcz.net&amp;rdquo;&lt;/p&gt;

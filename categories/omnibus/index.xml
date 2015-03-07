@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-      <title>Omnibus on Paul Czarkowski </title>
-      <generator uri="https://hugo.spf13.com">Hugo</generator>
-    <link>http://tech.paulcz.net/categories/omnibus/index.xml/</link>
+    <title>Omnibus on Paul Czarkowski</title>
+    <link>http://tech.paulcz.net/categories/omnibus/</link>
+    <description>Recent content in Omnibus on Paul Czarkowski</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    
-    
-    <updated>Mon, 06 May 2013 00:00:00 UTC</updated>
+    <lastBuildDate>Mon, 06 May 2013 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://tech.paulcz.net/categories/omnibus/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Logstash &#43; Opscode Omnibus</title>
       <link>http://tech.paulcz.net/2013/05/logstash-plus-opscode-omnibus/</link>
-      <pubDate>Mon, 06 May 2013 00:00:00 UTC</pubDate>
+      <pubDate>Mon, 06 May 2013 00:00:00 +0000</pubDate>
       
       <guid>http://tech.paulcz.net/2013/05/logstash-plus-opscode-omnibus/</guid>
       <description>&lt;p&gt;At &lt;a href=&#34;http://devopsdays.org/events/2013-austin/&#34;&gt;DevOps Days Austin&lt;/a&gt; &lt;a href=&#34;http://twitter.com/mattray&#34;&gt;@mattray&lt;/a&gt; did an Openspace session on &lt;a href=&#34;https://github.com/opscode/omnibus-ruby&#34;&gt;Omnibus&lt;/a&gt; which is a toolset based around the concept of installing an app and all of it&amp;rsquo;s prerequisites from source into a directory and then building a package ( either .deb or .rpm ) of that using &lt;a href=&#34;https://github.com/jordansissel/fpm&#34;&gt;fpm&lt;/a&gt;.&lt;/p&gt;

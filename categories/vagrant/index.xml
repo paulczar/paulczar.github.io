@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-      <title>Vagrant on Paul Czarkowski </title>
-      <generator uri="https://hugo.spf13.com">Hugo</generator>
-    <link>http://tech.paulcz.net/categories/vagrant/index.xml/</link>
+    <title>Vagrant on Paul Czarkowski</title>
+    <link>http://tech.paulcz.net/categories/vagrant/</link>
+    <description>Recent content in Vagrant on Paul Czarkowski</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    
-    
-    <updated>Sun, 07 Apr 2013 00:00:00 UTC</updated>
+    <lastBuildDate>Sun, 07 Apr 2013 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://tech.paulcz.net/categories/vagrant/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Vagrant&#43;Puppet&#43;FPM=Amazeballs</title>
       <link>http://tech.paulcz.net/2013/04/vagrant-plus-puppet-plus-fpm-equals-amazeballs/</link>
-      <pubDate>Sun, 07 Apr 2013 00:00:00 UTC</pubDate>
+      <pubDate>Sun, 07 Apr 2013 00:00:00 +0000</pubDate>
       
       <guid>http://tech.paulcz.net/2013/04/vagrant-plus-puppet-plus-fpm-equals-amazeballs/</guid>
       <description>&lt;p&gt;Lately I&amp;rsquo;ve been doing a lot of prototyping with &lt;a href=&#34;http://www.vagrantup.com/&#34;&gt;Vagrant&lt;/a&gt;, specifically for a couple of distinct activities:-&lt;/p&gt;

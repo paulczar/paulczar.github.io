@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-      <title>Github on Paul Czarkowski </title>
-      <generator uri="https://hugo.spf13.com">Hugo</generator>
-    <link>http://tech.paulcz.net/categories/github/index.xml/</link>
+    <title>Github on Paul Czarkowski</title>
+    <link>http://tech.paulcz.net/categories/github/</link>
+    <description>Recent content in Github on Paul Czarkowski</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    
-    
-    <updated>Sat, 15 Dec 2012 00:00:00 UTC</updated>
+    <lastBuildDate>Sat, 15 Dec 2012 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://tech.paulcz.net/categories/github/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Creating a Github Pages Blog With Octopress</title>
       <link>http://tech.paulcz.net/2012/12/creating-a-github-pages-blog-with-octopress/</link>
-      <pubDate>Sat, 15 Dec 2012 00:00:00 UTC</pubDate>
+      <pubDate>Sat, 15 Dec 2012 00:00:00 +0000</pubDate>
       
       <guid>http://tech.paulcz.net/2012/12/creating-a-github-pages-blog-with-octopress/</guid>
       <description>
@@ -31,7 +31,7 @@
 
 &lt;p&gt;Most of these steps are taken directly from the &lt;a href=&#34;http://octopress.org/docs/&#34;&gt;Octopress Documentation&lt;/a&gt;,   I&amp;rsquo;m just condensing them into a single document to suit the exact scenario being described in this post.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_0&#34;&gt;Before You Begin&lt;/h2&gt;
+&lt;h2 id=&#34;before-you-begin:221c62aff29cee9dbd022d15fc79996d&#34;&gt;Before You Begin&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;Install Git&lt;/li&gt;
@@ -45,7 +45,7 @@
 sudo gem install bundler
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;toc_1&#34;&gt;Initial Setup&lt;/h2&gt;
+&lt;h2 id=&#34;initial-setup:221c62aff29cee9dbd022d15fc79996d&#34;&gt;Initial Setup&lt;/h2&gt;
 
 &lt;p&gt;Clone the octopress repository and set it up&lt;/p&gt;
 
@@ -65,7 +65,7 @@ rake install
 
 &lt;p&gt;edit &lt;code&gt;_config.yml&lt;/code&gt; and fill in your blog name and other details.   There&amp;rsquo;s also some configs for twitter/G+/etc plugins that are worth configuring.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_2&#34;&gt;Write some blog content&lt;/h2&gt;
+&lt;h2 id=&#34;write-some-blog-content:221c62aff29cee9dbd022d15fc79996d&#34;&gt;Write some blog content&lt;/h2&gt;
 
 &lt;p&gt;&lt;em&gt;Great time to read &lt;a href=&#34;http://octopress.org/docs/blogging&#34;&gt;Blogging Basics&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 
@@ -99,7 +99,7 @@ git commit -m &#39;Added About page and first post!&#39;
 git push origin source
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;toc_3&#34;&gt;Want to edit your blog from another machine,  or edit an existing octopress blog?&lt;/h2&gt;
+&lt;h2 id=&#34;want-to-edit-your-blog-from-another-machine-or-edit-an-existing-octopress-blog:221c62aff29cee9dbd022d15fc79996d&#34;&gt;Want to edit your blog from another machine,  or edit an existing octopress blog?&lt;/h2&gt;
 
 &lt;p&gt;This is pretty simple ( assuming you have the prerequisites already install ).&lt;/p&gt;
 

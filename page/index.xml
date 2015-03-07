@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-      <title>Pages on Paul Czarkowski </title>
-      <generator uri="https://hugo.spf13.com">Hugo</generator>
-    <link>http://tech.paulcz.net/page/index.xml/</link>
+    <title>Pages on Paul Czarkowski</title>
+    <link>http://tech.paulcz.net/page/</link>
+    <description>Recent content in Pages on Paul Czarkowski</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    
-    
-    <updated>Sun, 30 Nov 2014 09:04:08 CST</updated>
+    <lastBuildDate>Sun, 30 Nov 2014 09:04:08 -0600</lastBuildDate>
+    <atom:link href="http://tech.paulcz.net/page/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>about</title>
       <link>http://tech.paulcz.net/page/about/</link>
-      <pubDate>Sun, 30 Nov 2014 09:04:08 CST</pubDate>
+      <pubDate>Sun, 30 Nov 2014 09:04:08 -0600</pubDate>
       
       <guid>http://tech.paulcz.net/page/about/</guid>
       <description>&lt;p&gt;Hi.  My name is Paul.  I like stuff.&lt;/p&gt;

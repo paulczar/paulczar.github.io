@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-      <title>Ubuntu on Paul Czarkowski </title>
-      <generator uri="https://hugo.spf13.com">Hugo</generator>
-    <link>http://tech.paulcz.net/categories/ubuntu/index.xml/</link>
+    <title>Ubuntu on Paul Czarkowski</title>
+    <link>http://tech.paulcz.net/categories/ubuntu/</link>
+    <description>Recent content in Ubuntu on Paul Czarkowski</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    
-    
-    <updated>Thu, 13 Dec 2012 00:00:00 UTC</updated>
+    <lastBuildDate>Thu, 13 Dec 2012 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://tech.paulcz.net/categories/ubuntu/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Running KVM and Openvswitch on Ubuntu 12.10</title>
       <link>http://tech.paulcz.net/2012/12/running-kvm-and-openvswitch-on-ubuntu-12-dot-10/</link>
-      <pubDate>Thu, 13 Dec 2012 00:00:00 UTC</pubDate>
+      <pubDate>Thu, 13 Dec 2012 00:00:00 +0000</pubDate>
       
       <guid>http://tech.paulcz.net/2012/12/running-kvm-and-openvswitch-on-ubuntu-12-dot-10/</guid>
       <description>
@@ -63,21 +63,21 @@ service openvswitch-controller restart
 
 &lt;p&gt;{% codeblock /etc/network/interfaces %}&lt;/p&gt;
 
-&lt;h1 id=&#34;toc_0&#34;&gt;The loopback network interface&lt;/h1&gt;
+&lt;h1 id=&#34;the-loopback-network-interface:888f7903415a760a26ea5348c53a988c&#34;&gt;The loopback network interface&lt;/h1&gt;
 
 &lt;p&gt;auto lo
 iface lo inet loopback&lt;/p&gt;
 
-&lt;h1 id=&#34;toc_1&#34;&gt;The primary network interface - bridge!&lt;/h1&gt;
+&lt;h1 id=&#34;the-primary-network-interface-bridge:888f7903415a760a26ea5348c53a988c&#34;&gt;The primary network interface - bridge!&lt;/h1&gt;
 
 &lt;p&gt;auto eth0
 iface eth0 inet manual
 up ifconfig $IFACE 0.0.0.0 up
 down ifconfig $IFACE down&lt;/p&gt;
 
-&lt;h1 id=&#34;toc_2&#34;&gt;The host OS network interface&lt;/h1&gt;
+&lt;h1 id=&#34;the-host-os-network-interface:888f7903415a760a26ea5348c53a988c&#34;&gt;The host OS network interface&lt;/h1&gt;
 
-&lt;h1 id=&#34;toc_3&#34;&gt;DNS settings here,  12.10 resets resolv.conf on reboot.&lt;/h1&gt;
+&lt;h1 id=&#34;dns-settings-here-12-10-resets-resolv-conf-on-reboot:888f7903415a760a26ea5348c53a988c&#34;&gt;DNS settings here,  12.10 resets resolv.conf on reboot.&lt;/h1&gt;
 
 &lt;p&gt;auto ovsbr0p1
 iface ovsbr0p1 inet static
