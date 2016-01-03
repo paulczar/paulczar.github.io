@@ -1,0 +1,375 @@
+  <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title> Securing Docker with TLS certificates &middot; Paul Czarkowski </title>
+    
+    <link rel="stylesheet" type="text/css" href="http://tech.paulcz.net//css/uno.min.css" />
+    <link rel="stylesheet" type="text/css" href="http://tech.paulcz.net//css/lightGallery.css" />
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Paul Czarkowski" />
+    
+    <script src="http://tech.paulcz.net//js/jquery.min.js"></script>
+    <script src="http://tech.paulcz.net//js/main.min.js">
+    </script>
+</head>
+
+  <body>
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-bars btn-mobile-menu__icon"></i>
+        <i class="fa fa-times btn-mobile-close__icon hidden"></i>
+    </span>
+<header class="panel-cover panel-cover--collapsed" >
+    <div class="panel-main">
+        <div class="panel-main__inner panel-inverted">
+            <div class="panel-main__content"> 
+                <h1 class="panel-cover__title panel-title">
+                    <a href="http://tech.paulcz.net/" title="link to homepage for Paul Czarkowski">Paul Czarkowski</a>
+                </h1>
+                <hr class="panel-cover__divider" />
+                <p class="panel-cover__description">  Random musings mostly about tech  </p>
+                <hr class="panel-cover__divider panel-cover__divider--secondary" />
+                <div class="navigation-wrapper">
+                    <nav class="cover-navigation cover-navigation--primary">
+                        <ul class="navigation">
+                            <li class="navigation__item"><a href="/#blog" title="link to Paul Czarkowski blog" class="blog-button">Blog</a> </li>
+                            </br>  </ul>
+                    </nav> <nav class="cover-navigation navigation--social">
+    <ul class="navigation"> 
+        
+        <li class="navigation__item">
+            <a href="http://twitter.com/pczarkowski" title="@pczarkowski on Twitter"> <i class='fa fa-tt'></i> <span class="label">Twitter</span> </a>
+        </li>   
+        
+        <li class="navigation__item">
+            <a href="https://github.com/paulczar" title="paulczar on github"> <i class='fa fa-github'></i> <span class="label">Github</span> </a>
+        </li>  </br>   
+        
+        <li class="navigation__item">
+            <a href="mailto:username.taken&#43;tech@gmail.com" title="Email username.taken&#43;tech@gmail.com"> <i class='fa fa-envelope-o'></i> <span class="label">Email</span> </a>
+        </li>  </ul>
+</nav>
+ </div>
+            </div>
+        </div>
+        <div class="panel-cover--overlay"></div>
+    </div>
+</header>
+
+    <div class="content-wrapper">
+      <div class="content-wrapper__inner">
+        <div class="post">
+          <h1>Securing Docker with TLS certificates</h1>
+          <span class="post-date">Sun, Jan 3, 2016</span>
+          
+
+<p>By default Docker (and by extension Docker Swarm) has no authentication or authorization on its API, relying instead on the filesystem security of its unix socket <code>/var/run/docker.sock</code> which by default is only accessible by the root user.</p>
+
+<p>This is fine for the basic use case of the default behavior of only accessing the Docker API on the local machine via the socket as the root user. However if you wish to use the Docker API over TCP then you&rsquo;ll want to secure it so that you don&rsquo;t give out root access to anyone that happens to poke you on the TCP port.</p>
+
+<p>Docker supports using TLS certificates (both on the server and the client) to provide proof of identity. When set up correctly it will only allow clients/servers with a certificate signed by a specific CA to talk to eachother. While not providing fine grained access permissions it does at least allow us to listen on a TCP socket and restrict access with a bonus of also providing encryption.</p>
+
+<p>Here I will detail what is required to secure Docker (and in turn Docker Swarm) running on a <a href="http://coreos.com/">CoreOS</a> server. I will assume you already have a <a href="http://coreos.com/">CoreOS</a> server running as described in my Docker Swarm <a href="http://tech.paulcz.net/2016/01/running-ha-docker-swarm/">post</a>.</p>
+
+<p>If you are only interested in securing Docker itself and not Docker Swarm then this should apply to any server with Docker installed that uses systemd.  Even on systems without systemd it should provide enough details to secure Docker.</p>
+
+<h2 id="creating-certificates:ee7ba636086981df3b8f20678b008bf1">Creating Certificates</h2>
+
+<p>I will offer two methods to create the certificates, the first by using <code>openssl</code> to create a CA and then sign a key/cert pair, the second by using the <a href="https://hub.docker.com/r/paulczar/omgwtfssl/">paulczar/omgwtfssl</a> Docker Image which automates the certificate creation process.</p>
+
+<p>Either way you&rsquo;ll want to start off by creating directories for both the server and client certificate sets:</p>
+
+<pre><code>$ sudo mkdir -p /etc/docker/ssl
+$ mkdir -p ~/.docker
+</code></pre>
+
+<p><em>For this example we&rsquo;re creating the keys and certificates on the server itself, ideally you would do this on your laptop or via configuration management and never store the CA key on a public server.</em></p>
+
+<h3 id="openssl:ee7ba636086981df3b8f20678b008bf1">OpenSSL</h3>
+
+<p>First run <code>openssl</code> to create and sign a CA key and certificate and copy the CA certificate into <code>/etc/docker/ssl</code>:</p>
+
+<pre><code>$ openssl genrsa -out ~/.docker/ca-key.pem 2048
+.+++
+..........................................................................................................+++
+e is 65537 (0x10001)
+
+$ openssl req -x509 -new -nodes -key ~/.docker/ca-key.pem \
+    -days 10000 -out ~/.docker/ca.pem -subj '/CN=docker-CA'
+
+$ ls ~/.docker/
+ca-key.pem  ca.pem
+
+$ sudo cp ~/.docker/ca.pem /etc/docker/ssl
+</code></pre>
+
+<p>Next we&rsquo;ll need an openssl configuration file for the Docker client <code>~/.docker/openssl.cnf</code>:</p>
+
+<pre><code>[req]
+req_extensions = v3_req
+distinguished_name = req_distinguished_name
+[req_distinguished_name]
+[ v3_req ]
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth, clientAuth
+</code></pre>
+
+<p>Followed by a configuration file for the Docker server <code>/etc/docker/ssl/openssl.cnf</code>.  Add any DNS or IPs that you might use to access the Docker Server with, this is critical as the Golang SSL libraries are very strict:</p>
+
+<pre><code>[req]
+req_extensions = v3_req
+distinguished_name = req_distinguished_name
+[req_distinguished_name]
+[ v3_req ]
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth, clientAuth
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = docker.local
+IP.1 = 172.17.8.101
+IP.2 = 127.0.0.1
+</code></pre>
+
+<p>Next create and sign a certificate for the client:</p>
+
+<pre><code>$ openssl genrsa -out ~/.docker/key.pem 2048
+....................................+++
+.............+++
+e is 65537 (0x10001)
+
+$ openssl req -new -key ~/.docker/key.pem -out ~/.docker/cert.csr \
+    -subj '/CN=docker-client' -config ~/.docker/openssl.cnf
+
+$ openssl x509 -req -in ~/.docker/cert.csr -CA ~/.docker/ca.pem \
+    -CAkey ~/.docker/ca-key.pem -CAcreateserial \
+    -out ~/.docker/cert.pem -days 365 -extensions v3_req \
+    -extfile ~/.docker/openssl.cnf
+Signature ok
+subject=/CN=docker-client
+Getting CA Private Key
+</code></pre>
+
+<p>Then do the same for the server:</p>
+
+<pre><code>$ sudo openssl genrsa -out /etc/docker/ssl/key.pem 2048
+................................................................................+++
+....................................+++
+e is 65537 (0x10001)
+
+$ sudo openssl req -new -key /etc/docker/ssl/key.pem \
+    -out /etc/docker/ssl/cert.csr \
+    -subj '/CN=docker-server' -config /etc/docker/ssl/openssl.cnf
+
+$ sudo openssl x509 -req -in /etc/docker/ssl/cert.csr -CA ~/.docker/ca.pem \
+    -CAkey ~/.docker/ca-key.pem -CAcreateserial \
+    -out /etc/docker/ssl/cert.pem -days 365 -extensions v3_req \
+    -extfile /etc/docker/ssl/openssl.cnf
+Signature ok
+subject=/CN=docker-client
+Getting CA Private Key
+</code></pre>
+
+<h3 id="omgwtfssl:ee7ba636086981df3b8f20678b008bf1">OMGWTFSSL</h3>
+
+<p>If you want to skip manually creating the certificates you can use the <a href="https://hub.docker.com/r/paulczar/omgwtfssl/">paulczar/omgwtfssl</a> image which is a small (&lt; 10mb) Docker image built specifically for creating certificates for situations like this.</p>
+
+<p>First we&rsquo;ll create our client certs and use a docker volume binding to put the CA and certs into <code>~/.docker</code>:</p>
+
+<pre><code>$ docker run --rm -v $(pwd)/.docker:/certs \
+    paulczar/omgwtfssl
+----------------------------
+| OMGWTFSSL Cert Generator |
+----------------------------
+
+--&gt; Certificate Authority
+====&gt; Using existing CA Key ca-key.pem
+====&gt; Using existing CA Certificate ca.pem
+====&gt; Generating new config file openssl.cnf
+====&gt; Generating new SSL KEY key.pem
+Generating RSA private key, 2048 bit long modulus
+.............+++
+..........+++
+e is 65537 (0x10001)
+====&gt; Generating new SSL CSR key.csr
+====&gt; Generating new SSL CERT cert.pem
+Signature ok
+subject=/CN=example.com
+Getting CA Private Key
+</code></pre>
+
+<p>Next we&rsquo;ll take ownership of them back from root (because of the docker volume binding) and then create the server certificates using the same CA using a second volume binding to <code>/etc/docker/ssl</code>:</p>
+
+<p><em>Since this is a server certificate we need to pass the IP and DNS that the server may respond to via the -e command line arguments.</em></p>
+
+<pre><code>$ sudo cp ~/.docker/ca.pem /etc/docker/ssl/ca.pem
+$ chown -R $USER ~/.docker
+$ docker run --rm -v /etc/docker/ssl:/server \
+    -v $(pwd)/.docker:/certs \
+    -e SSL_IP=127.0.0.1,172.17.8.101 \
+    -e SSL_DNS=docker.local -e SSL_KEY=/server/key.pem \
+    -e SSL_CERT=/server/cert.pem paulczar/omgwtfssl
+----------------------------
+| OMGWTFSSL Cert Generator |
+----------------------------
+
+--&gt; Certificate Authority
+====&gt; Using existing CA Key ca-key.pem
+====&gt; Using existing CA Certificate ca.pem
+====&gt; Generating new config file openssl.cnf
+====&gt; Generating new SSL KEY /server/key.pem
+Generating RSA private key, 2048 bit long modulus
+.................................+++
+..................+++
+e is 65537 (0x10001)
+====&gt; Generating new SSL CSR key.csr
+====&gt; Generating new SSL CERT /server/cert.pem
+Signature ok
+subject=/CN=example.com
+Getting CA Private Key
+</code></pre>
+
+<h2 id="using-the-tls-certificates-with-docker:ee7ba636086981df3b8f20678b008bf1">Using the TLS certificates with Docker</h2>
+
+<p>Now we have our TLS certificates created and in the correct locations you need to tell Docker to use the TLS certificate and also verify the client.  You do this by creating a drop in systemd unit to modify the existing Docker systemd unit.</p>
+
+<p>Create the file <code>custom.conf</code> in <code>/etc/systemd/system/docker.service.d/</code>:</p>
+
+<p><em>If you want to restrict local users from using the docker unix socket remove the second -H command line option, if you already have a custom drop in unit you can add the -H and &ndash;tls* arguments to it.</em></p>
+
+<pre><code>[Service]
+Environment=&quot;DOCKER_OPTS=-H=0.0.0.0:2376 -H unix:///var/run/docker.sock --tlsverify --tlscacert=/etc/docker/ssl/ca.pem --tlscert=/etc/docker/ssl/cert.pem --tlskey=/etc/docker/ssl/key.pem&quot;
+</code></pre>
+
+<p>Reload systemd and the Docker service:</p>
+
+<pre><code>$ sudo systemctl daemon-reload
+$ sudo systemctl restart docker
+</code></pre>
+
+<p>Now when you try to access Docker via the TCP port you should get a TLS error:</p>
+
+<pre><code>$ docker -H tcp://127.0.0.1:2376 info
+Get http://127.0.0.1:2376/v1.21/containers/json: malformed HTTP response &quot;\x15\x03\x01\x00\x02\x02&quot;.
+* Are you trying to connect to a TLS-enabled daemon without TLS?
+</code></pre>
+
+<p>This is because the Docker client does not know to use TLS to communicate with the server.  We can set some environment variables to enable TLS for the client and use the client key we created:</p>
+
+<pre><code>$ export DOCKER_HOST=tcp://127.0.0.1:2376
+$ export DOCKER_TLS_VERIFY=1
+$ export DOCKER_CERT_PATH=~/.docker
+$ docker info
+docker info
+Containers: 0
+Images: 0
+Server Version: 1.9.1
+Storage Driver: overlay
+ Backing Filesystem: extfs
+Execution Driver: native-0.2
+Logging Driver: json-file
+Kernel Version: 4.3.3-coreos
+Operating System: CoreOS 899.1.0
+CPUs: 1
+Total Memory: 997.4 MiB
+Name: core-01
+ID: RGVQ:VDUC:Z5LU:IE7I:J6UJ:TFBJ:SSCO:EWG2:QKAW:5FY6:EIAV:MROK
+</code></pre>
+
+<h2 id="using-the-tls-certificates-with-docker-swarm:ee7ba636086981df3b8f20678b008bf1">Using the TLS certificates with Docker Swarm</h2>
+
+<p>To secure Docker Swarm using these TLS certificates you will need to create TLS certificate/key pairs for each server using the same CA.</p>
+
+<p>to add some arguments to the <code>docker run</code> command that you start Swarm Manager with the following:</p>
+
+<pre><code>$ docker run -d --name swarm-manager \
+    -v /etc/docker/ssl:/etc/docker/ssl \
+    --net=host swarm:latest manage \
+    --tlsverify \
+    --tlscacert=/etc/docker/ssl/ca.pem \
+    --tlscert=/etc/docker/ssl/cert.pem \
+    --tlskey=/etc/docker/ssl/key.pem \
+    etcd://127.0.0.1:2379
+</code></pre>
+
+<p>Which you can then access using the docker client:</p>
+
+<pre><code>$ export DOCKER_HOST=tcp://127.0.0.1:2375
+$ export DOCKER_TLS_VERIFY=1
+$ export DOCKER_CERT_PATH=~/.docker
+
+$ docker info
+Containers: 6
+Images: 5
+Role: primary
+Strategy: spread
+Filters: health, port, dependency, affinity, constraint
+Nodes: 3
+ core-01: 172.17.8.101:2376
+  └ Status: Healthy
+  └ Containers: 2
+  └ Reserved CPUs: 0 / 1
+  └ Reserved Memory: 0 B / 1.023 GiB
+  └ Labels: executiondriver=native-0.2, kernelversion=4.3.3-coreos, operatingsystem=CoreOS 899.1.0, storagedriver=overlay
+ core-02: 172.17.8.102:2376
+  └ Status: Healthy
+  └ Containers: 2
+  └ Reserved CPUs: 0 / 1
+  └ Reserved Memory: 0 B / 1.023 GiB
+  └ Labels: executiondriver=native-0.2, kernelversion=4.3.3-coreos, operatingsystem=CoreOS 899.1.0, storagedriver=overlay
+ core-03: 172.17.8.103:2376
+  └ Status: Healthy
+  └ Containers: 2
+  └ Reserved CPUs: 0 / 1
+  └ Reserved Memory: 0 B / 1.023 GiB
+  └ Labels: executiondriver=native-0.2, kernelversion=4.3.3-coreos, operatingsystem=CoreOS 899.1.0, storagedriver=overlay
+CPUs: 3
+Total Memory: 3.068 GiB
+Name: core-01
+</code></pre>
+
+        </div>
+        <section class="post-comments">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+     
+     
+     if (window.location.hostname == "localhost")
+             return;
+
+	         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		     var disqus_shortname = '';
+		         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</section>
+
+
+      </div>
+    </div>
+  </body>
+  <footer class="footer"></footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-35638296-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</html>

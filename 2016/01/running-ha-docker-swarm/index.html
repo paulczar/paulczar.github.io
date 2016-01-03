@@ -269,7 +269,9 @@ Connecting to web (10.0.0.2:80)
 
 <p>If you&rsquo;ve been following along you have successfully deployed a Highly Available Docker Swarm cluster.  From here you could use a load balancer to load balance the Swarm Manager port (2375) or even use Round Robin DNS.</p>
 
-<p>You may have notice there is no authentication or authorization on this and anybody with a Docker binary and TCP access to your hosts could spin up docker containers. This is fairly easily fixed by using Docker&rsquo;s TLS cert based authorization, I&rsquo;ll cover setting that up in a future blog post.</p>
+<p>You may have notice there is no authentication or authorization on this and anybody with a Docker binary and TCP access to your hosts could spin up docker containers. This is fairly easily fixed by using Docker&rsquo;s TLS cert based authorization.</p>
+
+<p>To read how to secure both Docker and Docker Swarm with TLS read the followup post <a href="http://tech.paulcz.net/2016/01/secure-docker-with-tls/">Secure Docker with TLS</a>.</p>
 
         </div>
         <section class="post-comments">
