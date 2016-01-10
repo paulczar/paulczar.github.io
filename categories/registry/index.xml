@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Registry on Paul Czarkowski</title>
+    <link>http://tech.paulcz.net/categories/registry/</link>
+    <description>Recent content in Registry on Paul Czarkowski</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 10 Jan 2016 05:22:22 -0600</lastBuildDate>
+    <atom:link href="http://tech.paulcz.net/categories/registry/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Deploying a Simple and Secure Docker Registry</title>
+      <link>http://tech.paulcz.net/2016/01/deploying-a-secure-docker-registry/</link>
+      <pubDate>Sun, 10 Jan 2016 05:22:22 -0600</pubDate>
+      
+      <guid>http://tech.paulcz.net/2016/01/deploying-a-secure-docker-registry/</guid>
+      <description>
+
+&lt;p&gt;There comes a time in everybody&amp;rsquo;s life where they realize they have to run their own &lt;a href=&#34;https://www.docker.com/docker-registry&#34;&gt;Docker Registry&lt;/a&gt;. Unfortunately there&amp;rsquo;s not a lot of good information on how to run one. &lt;a href=&#34;http://docker.com&#34;&gt;Docker&lt;/a&gt;&amp;rsquo;s documentation is pretty good, but is verbose and across a lot of different pages which means having half a dozen tabs open and searching for the right information.&lt;/p&gt;
+
+&lt;p&gt;While it&amp;rsquo;s pretty common to run the &lt;a href=&#34;https://www.docker.com/docker-registry&#34;&gt;Docker Registry&lt;/a&gt; itself with little to no security settings and fronting it with NGINX or Apache to provide this security I wanted to show how it can be done with just the &lt;a href=&#34;http://docker.com&#34;&gt;Docker&lt;/a&gt; Registry. If you need to do really clever stuff like authenticate against LDAP then you&amp;rsquo;ll want to go down the reverse proxy road.&lt;/p&gt;
+
+&lt;p&gt;This example will demonstrate using just the &lt;a href=&#34;https://www.docker.com/docker-registry&#34;&gt;Docker Registry&lt;/a&gt; itself with both TLS certificate backed encryption and Certificate based endpoint authorization.&lt;/p&gt;
+
+&lt;p&gt;For simplicity it will assume a single registry running on the local filesystem and will avoid using OS specific init (systemd/upstart/etc) systems by focusing just on the docker commands themselves.  This should work on any system capable of running &lt;a href=&#34;http://docker.com&#34;&gt;Docker&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;preparation:6cef620af73a5d9314be6797578405bb&#34;&gt;Preparation&lt;/h2&gt;
+
+&lt;p&gt;Boot a server that has &lt;a href=&#34;http://docker.com&#34;&gt;Docker&lt;/a&gt; installed. For an OS with &lt;a href=&#34;http://docker.com&#34;&gt;Docker&lt;/a&gt; already installed I recommend &lt;a href=&#34;http://coreos.com/&#34;&gt;CoreOS&lt;/a&gt;. However you could just as easily boot Ubuntu or CentOS and run &lt;code&gt;curl -sSL get.docker.com | sudo bash&lt;/code&gt; if you&amp;rsquo;re into that sort of thing.&lt;/p&gt;
+
+&lt;p&gt;SSH into the server and ensure &lt;a href=&#34;http://docker.com&#34;&gt;Docker&lt;/a&gt; is working:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ssh core@xx.xx.xx.xx
+$ docker info
+Containers: 0
+Images: 0
+Server Version: 1.9.1
+Storage Driver: overlay
+ Backing Filesystem: extfs
+Execution Driver: native-0.2
+Logging Driver: json-file
+Kernel Version: 4.3.3-coreos
+Operating System: CoreOS 899.1.0
+CPUs: 1
+Total Memory: 997.4 MiB
+Name: core-01
+ID: C5XV:CZ3H:EAO4:ATJ3:ARSO:UOGD:XH3X:UKLZ:V3FO:2LRF:6E3X:CV5K
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;create-certificates:6cef620af73a5d9314be6797578405bb&#34;&gt;Create Certificates&lt;/h2&gt;
+
+&lt;p&gt;To keep this as simple as possible I will demonstrate using the &lt;a href=&#34;https://github.com/paulczar/omgwtfssl&#34;&gt;paulczar/omgwtfssl&lt;/a&gt; image to create certificates. If you would rather create them manually via the &lt;code&gt;openssl&lt;/code&gt; cli see my blog post on &lt;a href=&#34;http://tech.paulcz.net/2016/01/secure-docker-with-tls/&#34;&gt;Securing Docker with TLS&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;We need to create a place on the filesystem to store the data for the registry as well as certificates and config data:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo mkdir -p /opt/registry/{data,ssl,config}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now we can create the certificates, add any IPs and DNS that you might address your registry with including that of any loadbalancer or floating IP that you might have:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run --rm \
+  -v /opt/registry/ssl:/certs \
+  -e SSL_IP=172.17.8.101 \
+  -e SSL_DNS=registry.local \
+  paulczar/omgwtfssl
+----------------------------
+| OMGWTFSSL Cert Generator |
+----------------------------
+
+--&amp;gt; Certificate Authority
+====&amp;gt; Generating new CA key ca-key.pem
+Generating RSA private key, 2048 bit long modulus
+................+++
+.................................+++
+e is 65537 (0x10001)
+====&amp;gt; Generating new CA Certificate ca.pem
+====&amp;gt; Generating new config file openssl.cnf
+====&amp;gt; Generating new SSL KEY key.pem
+Generating RSA private key, 2048 bit long modulus
+..........................................................+++
+.............................................+++
+e is 65537 (0x10001)
+====&amp;gt; Generating new SSL CSR key.csr
+====&amp;gt; Generating new SSL CERT cert.pem
+Signature ok
+subject=/CN=example.com
+Getting CA Private Key
+
+core@core-01 ~ $ ls /opt/registry/ssl/
+ca-key.pem  ca.pem  ca.srl  cert.pem  key.csr  key.pem  openssl.cnf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Our next step is to create a config file &lt;code&gt;/opt/registry/config/registry.env&lt;/code&gt; which will contain a list of Environment Variables that will be passed into the container:&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;For this example I&amp;rsquo;m using the same CA certificate for clients as I did for the server, in reality it should probably be a different CA.&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# location of registry data
+REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY=/opt/registry/data
+
+# location of TLK key/cert
+REGISTRY_HTTP_TLS_KEY=/opt/registry/ssl/key.pem
+REGISTRY_HTTP_TLS_CERTIFICATE=/opt/registry/ssl/cert.pem
+
+# location of CA of trusted clients
+REGISTRY_HTTP_TLS_CLIENTCAS_0=/opt/registry/ssl/ca.pem
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;All that is left to do now is start the registry container, bind mount in the &lt;code&gt;/opt/registry&lt;/code&gt; directory, pass in the config file, and expose port &lt;code&gt;443&lt;/code&gt; to the internal registry port:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d --name registry \
+  -v /opt/registry:/opt/registry \
+  -p 443:5000 --restart always \
+  --env-file /opt/registry/config/registry.env \
+  registry:2
+Unable to find image &#39;registry:2&#39; locally
+2: Pulling from library/registry
+Digest: sha256:a842b52833778977f7b4466b90cc829e0f9aae725aebe3e32a5a6c407acd2a03
+Status: Downloaded newer image for registry:2
+d0106555b2d0aa30691c75c50b279e6a8bd485aa4ba2f203773e971988253169  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can check that we can access it from the server itself by tagging and pushing the &lt;code&gt;alpine&lt;/code&gt; image to it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker pull alpine
+Using default tag: latest
+latest: Pulling from library/alpine
+Digest: sha256:78a756d480bcbc35db6dcc05b08228a39b32c2b2c7e02336a2dcaa196547a41d
+Status: Downloaded newer image for alpine:latest
+$ docker tag alpine 127.0.0.1/alpine
+$ docker push 127.0.0.1/alpine
+The push refers to a repository [127.0.0.1/alpine] (len: 1)
+74e49af2062e: Pushed 
+latest: digest: sha256:a96155be113bb2b4b82ebbc11cf1b511726c5b41617a70e0772f8180afc72fa5 size: 1369
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To check the security settings worked we&amp;rsquo;ll try to access the docker registry from a remote host:&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Anywhere you see &lt;code&gt;172.17.8.101&lt;/code&gt; you will want to replace it with the IP or hostname of your docker registry.&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker pull 172.17.8.101/alpine
+Using default tag: latest
+Error response from daemon: unable to ping registry endpoint https://172.17.8.101/v0/
+v2 ping attempt failed with error: Get https://172.17.8.101/v2/: x509: certificate signed by unknown authority
+ v1 ping attempt failed with error: Get https://172.17.8.101/v1/_ping: x509: certificate signed by unknown authority
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;On the server we can see this failure in the docker logs:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker logs registry
+2016/01/10 16:18:47 http: TLS handshake error from 172.17.8.1:44096: remote error: bad certificate
+2016/01/10 16:18:47 http: TLS handshake error from 172.17.8.1:44098: remote error: bad certificate
+2016/01/10 16:18:47 http: TLS handshake error from 172.17.8.1:44099: remote error: bad certificate
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There are two things causing this failure. The first is that the remote server does not trust the client because it cannot provide the trusted CA certificate as specified in &lt;code&gt;REGISTRY_HTTP_TLS_CLIENTCAS_0&lt;/code&gt;. The second reason for failure is that the client doesn&amp;rsquo;t trust the &lt;code&gt;CA&lt;/code&gt; of the server.&lt;/p&gt;
+
+&lt;p&gt;If we didn&amp;rsquo;t have &lt;code&gt;REGISTRY_HTTP_TLS_CLIENTCAS_0&lt;/code&gt; set we could simply add &lt;code&gt;--insecure-registry 172.17.8.101&lt;/code&gt; to &lt;code&gt;DOCKER_OPTS&lt;/code&gt; in &lt;code&gt;/etc/default/docker&lt;/code&gt;, however since we do have this set we&amp;rsquo;ll want to take the &lt;code&gt;CA.pem&lt;/code&gt; and save it as &lt;code&gt;/etc/docker/certs.d/172.17.8.101/ca.crt&lt;/code&gt; on the remote machine that you want to trust the registry server.&lt;/p&gt;
+
+&lt;p&gt;I do this with the following commands, you may need to do it differently based on how your server is set up for access:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo mkdir -p /etc/docker/certs.d/172.17.8.101
+$ sudo scp core@172.17.8.101:/opt/docker/registry/ca.pem \
+    /etc/docker/certs.d/172.17.8.101/ca.crt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now we have established trust in both directions we can try to access the docker registry again:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker pull 172.17.8.101/alpine
+Using default tag: latest
+latest: Pulling from alpine
+
+340b2f9a2643: Already exists 
+Digest: sha256:a96155be113bb2b4b82ebbc11cf1b511726c5b41617a70e0772f8180afc72fa5
+Status: Downloaded newer image for 172.17.8.101/alpine:latest
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Success!   We know have a &lt;a href=&#34;https://www.docker.com/docker-registry&#34;&gt;Docker Registry&lt;/a&gt; that is secured both with Encryption and an authorization based on each client having a specific CA certificate.  This setup is ideal for providing secure access to a private registry for remote servers.&lt;/p&gt;
+
+&lt;p&gt;If you want to do this in a more automated fashion you can look at the various configuration management communities such as &lt;a href=&#34;https://supermarket.chef.io/cookbooks/docker_registry&#34;&gt;chef&lt;/a&gt; for examples.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

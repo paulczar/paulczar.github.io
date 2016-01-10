@@ -1,0 +1,270 @@
+  <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title> Deploying a Simple and Secure Docker Registry &middot; Paul Czarkowski </title>
+    
+    <link rel="stylesheet" type="text/css" href="http://tech.paulcz.net//css/uno.min.css" />
+    <link rel="stylesheet" type="text/css" href="http://tech.paulcz.net//css/lightGallery.css" />
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Paul Czarkowski" />
+    
+    <script src="http://tech.paulcz.net//js/jquery.min.js"></script>
+    <script src="http://tech.paulcz.net//js/main.min.js">
+    </script>
+</head>
+
+  <body>
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-bars btn-mobile-menu__icon"></i>
+        <i class="fa fa-times btn-mobile-close__icon hidden"></i>
+    </span>
+<header class="panel-cover panel-cover--collapsed" >
+    <div class="panel-main">
+        <div class="panel-main__inner panel-inverted">
+            <div class="panel-main__content"> 
+                <h1 class="panel-cover__title panel-title">
+                    <a href="http://tech.paulcz.net/" title="link to homepage for Paul Czarkowski">Paul Czarkowski</a>
+                </h1>
+                <hr class="panel-cover__divider" />
+                <p class="panel-cover__description">  Random musings mostly about tech  </p>
+                <hr class="panel-cover__divider panel-cover__divider--secondary" />
+                <div class="navigation-wrapper">
+                    <nav class="cover-navigation cover-navigation--primary">
+                        <ul class="navigation">
+                            <li class="navigation__item"><a href="/#blog" title="link to Paul Czarkowski blog" class="blog-button">Blog</a> </li>
+                            </br>  </ul>
+                    </nav> <nav class="cover-navigation navigation--social">
+    <ul class="navigation"> 
+        
+        <li class="navigation__item">
+            <a href="http://twitter.com/pczarkowski" title="@pczarkowski on Twitter"> <i class='fa fa-tt'></i> <span class="label">Twitter</span> </a>
+        </li>   
+        
+        <li class="navigation__item">
+            <a href="https://github.com/paulczar" title="paulczar on github"> <i class='fa fa-github'></i> <span class="label">Github</span> </a>
+        </li>  </br>   
+        
+        <li class="navigation__item">
+            <a href="mailto:username.taken&#43;tech@gmail.com" title="Email username.taken&#43;tech@gmail.com"> <i class='fa fa-envelope-o'></i> <span class="label">Email</span> </a>
+        </li>  </ul>
+</nav>
+ </div>
+            </div>
+        </div>
+        <div class="panel-cover--overlay"></div>
+    </div>
+</header>
+
+    <div class="content-wrapper">
+      <div class="content-wrapper__inner">
+        <div class="post">
+          <h1>Deploying a Simple and Secure Docker Registry</h1>
+          <span class="post-date">Sun, Jan 10, 2016</span>
+          
+
+<p>There comes a time in everybody&rsquo;s life where they realize they have to run their own <a href="https://www.docker.com/docker-registry">Docker Registry</a>. Unfortunately there&rsquo;s not a lot of good information on how to run one. <a href="http://docker.com">Docker</a>&rsquo;s documentation is pretty good, but is verbose and across a lot of different pages which means having half a dozen tabs open and searching for the right information.</p>
+
+<p>While it&rsquo;s pretty common to run the <a href="https://www.docker.com/docker-registry">Docker Registry</a> itself with little to no security settings and fronting it with NGINX or Apache to provide this security I wanted to show how it can be done with just the <a href="http://docker.com">Docker</a> Registry. If you need to do really clever stuff like authenticate against LDAP then you&rsquo;ll want to go down the reverse proxy road.</p>
+
+<p>This example will demonstrate using just the <a href="https://www.docker.com/docker-registry">Docker Registry</a> itself with both TLS certificate backed encryption and Certificate based endpoint authorization.</p>
+
+<p>For simplicity it will assume a single registry running on the local filesystem and will avoid using OS specific init (systemd/upstart/etc) systems by focusing just on the docker commands themselves.  This should work on any system capable of running <a href="http://docker.com">Docker</a>.</p>
+
+<h2 id="preparation:6cef620af73a5d9314be6797578405bb">Preparation</h2>
+
+<p>Boot a server that has <a href="http://docker.com">Docker</a> installed. For an OS with <a href="http://docker.com">Docker</a> already installed I recommend <a href="http://coreos.com/">CoreOS</a>. However you could just as easily boot Ubuntu or CentOS and run <code>curl -sSL get.docker.com | sudo bash</code> if you&rsquo;re into that sort of thing.</p>
+
+<p>SSH into the server and ensure <a href="http://docker.com">Docker</a> is working:</p>
+
+<pre><code>$ ssh core@xx.xx.xx.xx
+$ docker info
+Containers: 0
+Images: 0
+Server Version: 1.9.1
+Storage Driver: overlay
+ Backing Filesystem: extfs
+Execution Driver: native-0.2
+Logging Driver: json-file
+Kernel Version: 4.3.3-coreos
+Operating System: CoreOS 899.1.0
+CPUs: 1
+Total Memory: 997.4 MiB
+Name: core-01
+ID: C5XV:CZ3H:EAO4:ATJ3:ARSO:UOGD:XH3X:UKLZ:V3FO:2LRF:6E3X:CV5K
+</code></pre>
+
+<h2 id="create-certificates:6cef620af73a5d9314be6797578405bb">Create Certificates</h2>
+
+<p>To keep this as simple as possible I will demonstrate using the <a href="https://github.com/paulczar/omgwtfssl">paulczar/omgwtfssl</a> image to create certificates. If you would rather create them manually via the <code>openssl</code> cli see my blog post on <a href="http://tech.paulcz.net/2016/01/secure-docker-with-tls/">Securing Docker with TLS</a>.</p>
+
+<p>We need to create a place on the filesystem to store the data for the registry as well as certificates and config data:</p>
+
+<pre><code>$ sudo mkdir -p /opt/registry/{data,ssl,config}
+</code></pre>
+
+<p>Now we can create the certificates, add any IPs and DNS that you might address your registry with including that of any loadbalancer or floating IP that you might have:</p>
+
+<pre><code>$ docker run --rm \
+  -v /opt/registry/ssl:/certs \
+  -e SSL_IP=172.17.8.101 \
+  -e SSL_DNS=registry.local \
+  paulczar/omgwtfssl
+----------------------------
+| OMGWTFSSL Cert Generator |
+----------------------------
+
+--&gt; Certificate Authority
+====&gt; Generating new CA key ca-key.pem
+Generating RSA private key, 2048 bit long modulus
+................+++
+.................................+++
+e is 65537 (0x10001)
+====&gt; Generating new CA Certificate ca.pem
+====&gt; Generating new config file openssl.cnf
+====&gt; Generating new SSL KEY key.pem
+Generating RSA private key, 2048 bit long modulus
+..........................................................+++
+.............................................+++
+e is 65537 (0x10001)
+====&gt; Generating new SSL CSR key.csr
+====&gt; Generating new SSL CERT cert.pem
+Signature ok
+subject=/CN=example.com
+Getting CA Private Key
+
+core@core-01 ~ $ ls /opt/registry/ssl/
+ca-key.pem  ca.pem  ca.srl  cert.pem  key.csr  key.pem  openssl.cnf
+</code></pre>
+
+<p>Our next step is to create a config file <code>/opt/registry/config/registry.env</code> which will contain a list of Environment Variables that will be passed into the container:</p>
+
+<p><em>For this example I&rsquo;m using the same CA certificate for clients as I did for the server, in reality it should probably be a different CA.</em></p>
+
+<pre><code># location of registry data
+REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY=/opt/registry/data
+
+# location of TLK key/cert
+REGISTRY_HTTP_TLS_KEY=/opt/registry/ssl/key.pem
+REGISTRY_HTTP_TLS_CERTIFICATE=/opt/registry/ssl/cert.pem
+
+# location of CA of trusted clients
+REGISTRY_HTTP_TLS_CLIENTCAS_0=/opt/registry/ssl/ca.pem
+</code></pre>
+
+<p>All that is left to do now is start the registry container, bind mount in the <code>/opt/registry</code> directory, pass in the config file, and expose port <code>443</code> to the internal registry port:</p>
+
+<pre><code>$ docker run -d --name registry \
+  -v /opt/registry:/opt/registry \
+  -p 443:5000 --restart always \
+  --env-file /opt/registry/config/registry.env \
+  registry:2
+Unable to find image 'registry:2' locally
+2: Pulling from library/registry
+Digest: sha256:a842b52833778977f7b4466b90cc829e0f9aae725aebe3e32a5a6c407acd2a03
+Status: Downloaded newer image for registry:2
+d0106555b2d0aa30691c75c50b279e6a8bd485aa4ba2f203773e971988253169  
+</code></pre>
+
+<p>We can check that we can access it from the server itself by tagging and pushing the <code>alpine</code> image to it:</p>
+
+<pre><code>$ docker pull alpine
+Using default tag: latest
+latest: Pulling from library/alpine
+Digest: sha256:78a756d480bcbc35db6dcc05b08228a39b32c2b2c7e02336a2dcaa196547a41d
+Status: Downloaded newer image for alpine:latest
+$ docker tag alpine 127.0.0.1/alpine
+$ docker push 127.0.0.1/alpine
+The push refers to a repository [127.0.0.1/alpine] (len: 1)
+74e49af2062e: Pushed 
+latest: digest: sha256:a96155be113bb2b4b82ebbc11cf1b511726c5b41617a70e0772f8180afc72fa5 size: 1369
+</code></pre>
+
+<p>To check the security settings worked we&rsquo;ll try to access the docker registry from a remote host:</p>
+
+<p><em>Anywhere you see <code>172.17.8.101</code> you will want to replace it with the IP or hostname of your docker registry.</em></p>
+
+<pre><code>docker pull 172.17.8.101/alpine
+Using default tag: latest
+Error response from daemon: unable to ping registry endpoint https://172.17.8.101/v0/
+v2 ping attempt failed with error: Get https://172.17.8.101/v2/: x509: certificate signed by unknown authority
+ v1 ping attempt failed with error: Get https://172.17.8.101/v1/_ping: x509: certificate signed by unknown authority
+</code></pre>
+
+<p>On the server we can see this failure in the docker logs:</p>
+
+<pre><code>$ docker logs registry
+2016/01/10 16:18:47 http: TLS handshake error from 172.17.8.1:44096: remote error: bad certificate
+2016/01/10 16:18:47 http: TLS handshake error from 172.17.8.1:44098: remote error: bad certificate
+2016/01/10 16:18:47 http: TLS handshake error from 172.17.8.1:44099: remote error: bad certificate
+</code></pre>
+
+<p>There are two things causing this failure. The first is that the remote server does not trust the client because it cannot provide the trusted CA certificate as specified in <code>REGISTRY_HTTP_TLS_CLIENTCAS_0</code>. The second reason for failure is that the client doesn&rsquo;t trust the <code>CA</code> of the server.</p>
+
+<p>If we didn&rsquo;t have <code>REGISTRY_HTTP_TLS_CLIENTCAS_0</code> set we could simply add <code>--insecure-registry 172.17.8.101</code> to <code>DOCKER_OPTS</code> in <code>/etc/default/docker</code>, however since we do have this set we&rsquo;ll want to take the <code>CA.pem</code> and save it as <code>/etc/docker/certs.d/172.17.8.101/ca.crt</code> on the remote machine that you want to trust the registry server.</p>
+
+<p>I do this with the following commands, you may need to do it differently based on how your server is set up for access:</p>
+
+<pre><code>$ sudo mkdir -p /etc/docker/certs.d/172.17.8.101
+$ sudo scp core@172.17.8.101:/opt/docker/registry/ca.pem \
+    /etc/docker/certs.d/172.17.8.101/ca.crt
+</code></pre>
+
+<p>Now we have established trust in both directions we can try to access the docker registry again:</p>
+
+<pre><code>$ docker pull 172.17.8.101/alpine
+Using default tag: latest
+latest: Pulling from alpine
+
+340b2f9a2643: Already exists 
+Digest: sha256:a96155be113bb2b4b82ebbc11cf1b511726c5b41617a70e0772f8180afc72fa5
+Status: Downloaded newer image for 172.17.8.101/alpine:latest
+</code></pre>
+
+<p>Success!   We know have a <a href="https://www.docker.com/docker-registry">Docker Registry</a> that is secured both with Encryption and an authorization based on each client having a specific CA certificate.  This setup is ideal for providing secure access to a private registry for remote servers.</p>
+
+<p>If you want to do this in a more automated fashion you can look at the various configuration management communities such as <a href="https://supermarket.chef.io/cookbooks/docker_registry">chef</a> for examples.</p>
+
+        </div>
+        <section class="post-comments">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+     
+     
+     if (window.location.hostname == "localhost")
+             return;
+
+	         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		     var disqus_shortname = '';
+		         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</section>
+
+
+      </div>
+    </div>
+  </body>
+  <footer class="footer"></footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-35638296-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</html>
