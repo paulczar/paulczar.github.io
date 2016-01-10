@@ -6,8 +6,171 @@
     <description>Recent content in Docker on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 10 Jan 2016 05:22:22 -0600</lastBuildDate>
+    <lastBuildDate>Sun, 10 Jan 2016 10:22:22 -0600</lastBuildDate>
     <atom:link href="http://tech.paulcz.net/categories/docker/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Flexible Private Docker Registry Infrastructure</title>
+      <link>http://tech.paulcz.net/2016/01/flexible-docker-registry-infrastructure/</link>
+      <pubDate>Sun, 10 Jan 2016 10:22:22 -0600</pubDate>
+      
+      <guid>http://tech.paulcz.net/2016/01/flexible-docker-registry-infrastructure/</guid>
+      <description>
+
+&lt;p&gt;Previously I showed how to run a &lt;a href=&#34;http://tech.paulcz.net/2016/01/deploying-a-secure-docker-registry/&#34;&gt;basic secure Docker Registry&lt;/a&gt;.  I am now going to expand on this to show you something that you might use in production as part of your CI/CD infrastructure.&lt;/p&gt;
+
+&lt;p&gt;The beauty of running Docker is that you &lt;em&gt;can&lt;/em&gt; push an image from a developer&amp;rsquo;s laptop all the way into production which helps ensure that what you see in development and your various test/qa/stage environments are exactly the same as what you run in production.&lt;/p&gt;
+
+&lt;p&gt;So they tell you anyway. The reality is that you don&amp;rsquo;t ever want to push an image built on a developer&amp;rsquo;s machine into production as you can&amp;rsquo;t be sure what is in it.  Instead you want to have a trusted build server build images from a &lt;code&gt;Dockerfile&lt;/code&gt; in your git repository and have it promoted through your environments from there.&lt;/p&gt;
+
+&lt;p&gt;To ensure the integrity of your images you&amp;rsquo;ll want to run a Docker Registry that can be reached by all of your servers (and potentially people), but can only be written to by your build server (and/or an administrative user).&lt;/p&gt;
+
+&lt;p&gt;You could run your &lt;a href=&#34;https://www.docker.com/docker-registry&#34;&gt;Docker Registry&lt;/a&gt; behind a &lt;a href=&#34;https://docs.docker.com/registry/recipes/&#34;&gt;complicated reverse proxy&lt;/a&gt; and create rules about who can GET/POST/etc through to the &lt;a href=&#34;https://www.docker.com/docker-registry&#34;&gt;Docker Registry&lt;/a&gt; however we can use the magic of &amp;ldquo;&lt;a href=&#34;https://github.com/panicsteve/cloud-to-butt&#34;&gt;The Cloud&lt;/a&gt;&amp;rdquo; to reduce the complexity and thus the need for a reverse proxy.&lt;/p&gt;
+
+&lt;p&gt;You will want to use either the &lt;a href=&#34;https://wiki.openstack.org/wiki/Swift&#34;&gt;Openstack Swift&lt;/a&gt; or the &lt;a href=&#34;https://aws.amazon.com/s3/&#34;&gt;Amazon S3&lt;/a&gt; object storage driver for the &lt;a href=&#34;https://www.docker.com/docker-registry&#34;&gt;Docker Registry&lt;/a&gt;. I will demonstrate using Swift, but using S3 should be very similar.&lt;/p&gt;
+
+&lt;p&gt;You will of course want to also build all of these servers with Configuration Management including the commands to actually run the &lt;a href=&#34;https://www.docker.com/docker-registry&#34;&gt;Docker Registry&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;build-server-s:aceca7a5aff8ee4a89a691ff67eb065d&#34;&gt;Build Server(s)&lt;/h2&gt;
+
+&lt;p&gt;For your build server(s) you&amp;rsquo;ll want to be running an OS with Docker installed on it. I use the &lt;a href=&#34;https://hub.docker.com/_/jenkins/&#34;&gt;Jenkins&lt;/a&gt; Docker image on &lt;a href=&#34;http://coreos.com/&#34;&gt;CoreOS&lt;/a&gt; for both my Jenkins Master and Slaves, however this is just personal preference.&lt;/p&gt;
+
+&lt;p&gt;On each server you want to run a &lt;a href=&#34;https://www.docker.com/docker-registry&#34;&gt;Docker Registry&lt;/a&gt; with your Swift credentials passed through to it. Since we&amp;rsquo;re only accessing this via &lt;code&gt;127.0.0.1&lt;/code&gt; we do not need to secure it with TLS or authentication.&lt;/p&gt;
+
+&lt;p&gt;Run the following on each build server to run the Registry backed by Swift, replacing the OpenStack credentials with your own:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;build01$ docker run -d \
+              -p 127.0.0.1:5000:5000 \
+              --name registry \
+              --restart always \
+              -e REGISTRY_STORAGE=swift \
+              -e REGISTRY_STORAGE_SWIFT_USERNAME=${OS_USERNAME} \
+              -e REGISTRY_STORAGE_SWIFT_PASSWORD=${OS_PASSWORD} \
+              -e REGISTRY_STORAGE_SWIFT_TENANT=${OS_TENANT} \
+              -e REGISTRY_STORAGE_SWIFT_AUTHURL=${OS_AUTH_URL} \
+              -e REGISTRY_STORAGE_SWIFT_CONTAINER=docker-registry \
+              registry:2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Push an image to make sure it worked:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;build01$ docker pull alpine
+Using default tag: latest
+latest: Pulling from library/alpine
+Digest: sha256:78a756d480bcbc35db6dcc05b08228a39b32c2b2c7e02336a2dcaa196547a41d
+Status: Downloaded newer image for alpine:latest
+$ docker tag alpine 127.0.0.1:5000/alpine
+$ docker push 127.0.0.1:5000/alpine
+The push refers to a repository [127.0.0.1:5000/alpine] (len: 1)
+74e49af2062e: Pushed 
+latest: digest: sha256:a96155be113bb2b4b82ebbc11cf1b511726c5b41617a70e0772f8180afc72fa5 size: 1369
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you have more that one build server try to pull the image from one of the others, since we&amp;rsquo;re backing the &lt;a href=&#34;https://www.docker.com/docker-registry&#34;&gt;Docker Registry&lt;/a&gt; with an object store they should retrieve it just fine:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;build02$ docker pull 127.0.0.1:5000/alpine
+Using default tag: latest
+latest: Pulling from alpine
+
+340b2f9a2643: Already exists 
+Digest: sha256:a96155be113bb2b4b82ebbc11cf1b511726c5b41617a70e0772f8180afc72fa5
+Status: Downloaded newer image for 127.0.0.1:5000/alpine:latest
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;regular-server-s:aceca7a5aff8ee4a89a691ff67eb065d&#34;&gt;Regular Server(s)&lt;/h2&gt;
+
+&lt;p&gt;We have a couple of options here.  You can run a &lt;a href=&#34;https://www.docker.com/docker-registry&#34;&gt;Docker Registry&lt;/a&gt; on each server listening only on localhost, or you can run one or more of them on their own servers that will listen on an IP and be secured with TLS.&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;ll cover the former use case, for the latter use case you can adapt the instructions found &lt;a href=&#34;http://tech.paulcz.net/2016/01/deploying-a-secure-docker-registry/&#34;&gt;at my previous blog post&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The important step in either case is to start the Registry as read-only so that regular servers cannot alter the contents of the Registry.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://www.docker.com/docker-registry&#34;&gt;Docker Registry&lt;/a&gt; is fairly light-weight when the files are in external storage and thus will use a neglible amount of your system resources and provides the advantages and security of running the registry on localhost and not needed to set &lt;code&gt;--insecure-registry&lt;/code&gt; settings or worrying about TLS certs for the docker daemon.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d \
+      -p 127.0.0.1:5000:5000 \
+      --name registry \
+      --restart always \
+      -e REGISTRY_STORAGE_MAINTENANCE_READONLY=&#39;enabled: true&#39; \
+      -e REGISTRY_STORAGE=swift \
+      -e REGISTRY_STORAGE_SWIFT_USERNAME=${OS_USERNAME} \
+      -e REGISTRY_STORAGE_SWIFT_PASSWORD=${OS_PASSWORD} \
+      -e REGISTRY_STORAGE_SWIFT_TENANT=${OS_TENANT} \
+      -e REGISTRY_STORAGE_SWIFT_AUTHURL=${OS_AUTH_URL} \
+      -e REGISTRY_STORAGE_SWIFT_CONTAINER=docker-registry \
+      registry:2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;With &lt;code&gt;REGISTRY_STORAGE_MAINTENANCE_READONLY=&#39;enabled: true&lt;/code&gt; set, when we try to push to the registry it should fail:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker push 127.0.0.1:5000/alpine
+The push refers to a repository [127.0.0.1:5000/alpine] (len: 1)
+f4fddc471ec2: Preparing 
+Error parsing HTTP response: invalid character &#39;M&#39; looking for beginning of value: &amp;quot;Method not allowed\n&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;user-access-to-registry:aceca7a5aff8ee4a89a691ff67eb065d&#34;&gt;User Access to Registry:&lt;/h2&gt;
+
+&lt;p&gt;If you want to provide access to regular users and don&amp;rsquo;t mind maintaining the password files locally you can adapt my &lt;a href=&#34;http://tech.paulcz.net/2016/01/deploying-a-secure-docker-registry/&#34;&gt;basic secure Docker Registry&lt;/a&gt; blog post to use the object storage backend.&lt;/p&gt;
+
+&lt;p&gt;Assuming you&amp;rsquo;ve followed the instructions provided to create the TLS certificates you can run two &lt;a href=&#34;https://www.docker.com/docker-registry&#34;&gt;Docker Registry&lt;/a&gt;s each pointing at a different &lt;code&gt;htpasswd&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;p&gt;These can run on the same server, or on seperate servers.  They can also be run on multiple servers that are load balanced via an external load balancer or via round-robin-dns for high availability.&lt;/p&gt;
+
+&lt;h3 id=&#34;read-only-users:aceca7a5aff8ee4a89a691ff67eb065d&#34;&gt;Read only Users&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d \
+      -p 443:5000 \
+      --name registry \
+      --restart always \
+      -v /opt/registry \
+      -e REGISTRY_STORAGE_MAINTENANCE_READONLY=&#39;enabled: true&#39; \
+      -e REGISTRY_STORAGE=swift \
+      -e REGISTRY_STORAGE_SWIFT_USERNAME=${OS_USERNAME} \
+      -e REGISTRY_STORAGE_SWIFT_PASSWORD=${OS_PASSWORD} \
+      -e REGISTRY_STORAGE_SWIFT_TENANT=${OS_TENANT} \
+      -e REGISTRY_STORAGE_SWIFT_AUTHURL=${OS_AUTH_URL} \
+      -e REGISTRY_STORAGE_SWIFT_CONTAINER=docker-registry \
+      -e REGISTRY_AUTH=htpasswd \
+      -e &amp;quot;REGISTRY_AUTH_HTPASSWD_REALM=Admin Registry Realm&amp;quot; \
+      -e REGISTRY_AUTH_HTPASSWD_PATH=/opt/registry/auth/admin.htpasswd \
+      -e REGISTRY_HTTP_SECRET=qerldsljckjqr \
+      -e REGISTRY_HTTP_TLS_CERTIFICATE=/opt/registry/ssl/cert.pem \
+      -e REGISTRY_HTTP_TLS_KEY=/opt/registry/ssl/key.pem \
+      registry:2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;admin-read-write:aceca7a5aff8ee4a89a691ff67eb065d&#34;&gt;Admin Read/Write&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d \
+      -p 444:5000 \
+      --name registry \
+      --restart always \
+      -v /opt/registry \
+      -e REGISTRY_STORAGE=swift \
+      -e REGISTRY_STORAGE_SWIFT_USERNAME=${OS_USERNAME} \
+      -e REGISTRY_STORAGE_SWIFT_PASSWORD=${OS_PASSWORD} \
+      -e REGISTRY_STORAGE_SWIFT_TENANT=${OS_TENANT} \      
+      -e REGISTRY_STORAGE_SWIFT_AUTHURL=${OS_AUTH_URL} \
+      -e REGISTRY_STORAGE_SWIFT_CONTAINER=docker-registry \
+      -e REGISTRY_AUTH=htpasswd \
+      -e &amp;quot;REGISTRY_AUTH_HTPASSWD_REALM=Read Only Registry Realm&amp;quot; \
+      -e REGISTRY_AUTH_HTPASSWD_PATH=/opt/registry/auth/users.htpasswd \
+      -e REGISTRY_HTTP_SECRET=hlyrehbrvgszd \
+      -e REGISTRY_HTTP_TLS_CERTIFICATE=/opt/registry/ssl/cert.pem \
+      -e REGISTRY_HTTP_TLS_KEY=/opt/registry/ssl/key.pem \
+      registry:2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Before pushing or pull images to these registries you&amp;rsquo;ll need to log in using &lt;code&gt;docker login myregistrydomain.com:443&lt;/code&gt; or &lt;code&gt;docker login myregistrydomain.com:444&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;By using external storage for the Registry we have increased our ability to run a resiliant Docker Registry with no single points of failure. All of the servers access the registry itself via localhost which means they have almost no reliance on external systems (except for a very robust object storage platform) and no need for complicated authentication systems.&lt;/p&gt;
+
+&lt;p&gt;We also provide access to both Admin (read/write) and Regular (read-only) users via &lt;code&gt;htpasswd&lt;/code&gt; files and &lt;code&gt;TLS&lt;/code&gt; certificates/encryption which can be managed by Configuration Management.&lt;/p&gt;
+
+&lt;p&gt;It goes without saying that you should further lock down all of these services with network based access restrictions in the form of Firewall/IPTables/Security-Groups so that only certain trusted networks can access any of the public endpoints we have created.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Deploying a Simple and Secure Docker Registry</title>
