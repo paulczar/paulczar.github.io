@@ -1,72 +1,80 @@
-  <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="map[]" />
+    <meta name="description" content="Random musings mostly about tech">
+    <link rel="shortcut icon" type="image/x-icon" href="http://tech.paulcz.netimg/favicon.ico">
+    <title>Flexible Private Docker Registry Infrastructure</title>
+    <meta name="generator" content="Hugo 0.17" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="http://tech.paulcz.netcss/main.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
     
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <title> Flexible Private Docker Registry Infrastructure &middot; Paul Czarkowski </title>
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
     
-    <link rel="stylesheet" type="text/css" href="http://tech.paulcz.net//css/uno.min.css" />
-    <link rel="stylesheet" type="text/css" href="http://tech.paulcz.net//css/lightGallery.css" />
-    
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
-    <link rel="shortcut icon" href="/favicon.ico">
-    
-    <link href="" rel="alternate" type="application/rss+xml" title="Paul Czarkowski" />
-    
-    <script src="http://tech.paulcz.net//js/jquery.min.js"></script>
-    <script src="http://tech.paulcz.net//js/main.min.js">
-    </script>
-</head>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-35638296-2', 'auto');
+ga('send', 'pageview');
+</script>
+
+  </head>
 
   <body>
-    <span class="mobile btn-mobile-menu">
-        <i class="fa fa-bars btn-mobile-menu__icon"></i>
-        <i class="fa fa-times btn-mobile-close__icon hidden"></i>
-    </span>
-<header class="panel-cover panel-cover--collapsed" >
-    <div class="panel-main">
-        <div class="panel-main__inner panel-inverted">
-            <div class="panel-main__content"> 
-                <h1 class="panel-cover__title panel-title">
-                    <a href="http://tech.paulcz.net/" title="link to homepage for Paul Czarkowski">Paul Czarkowski</a>
-                </h1>
-                <hr class="panel-cover__divider" />
-                <p class="panel-cover__description">  Random musings mostly about tech  </p>
-                <hr class="panel-cover__divider panel-cover__divider--secondary" />
-                <div class="navigation-wrapper">
-                    <nav class="cover-navigation cover-navigation--primary">
-                        <ul class="navigation">
-                            <li class="navigation__item"><a href="/#blog" title="link to Paul Czarkowski blog" class="blog-button">Blog</a> </li>
-                            </br>  </ul>
-                    </nav> <nav class="cover-navigation navigation--social">
-    <ul class="navigation"> 
-        
-        <li class="navigation__item">
-            <a href="http://twitter.com/pczarkowski" title="@pczarkowski on Twitter"> <i class='fa fa-tt'></i> <span class="label">Twitter</span> </a>
-        </li>   
-        
-        <li class="navigation__item">
-            <a href="https://github.com/paulczar" title="paulczar on github"> <i class='fa fa-github'></i> <span class="label">Github</span> </a>
-        </li>  </br>   
-        
-        <li class="navigation__item">
-            <a href="mailto:username.taken&#43;tech@gmail.com" title="Email username.taken&#43;tech@gmail.com"> <i class='fa fa-envelope-o'></i> <span class="label">Email</span> </a>
-        </li>  </ul>
-</nav>
- </div>
-            </div>
-        </div>
-        <div class="panel-cover--overlay"></div>
-    </div>
-</header>
+    <div id="wrap">
 
-    <div class="content-wrapper">
-      <div class="content-wrapper__inner">
-        <div class="post">
-          <h1>Flexible Private Docker Registry Infrastructure</h1>
-          <span class="post-date">Sun, Jan 10, 2016</span>
-          
+      
+      <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="http://tech.paulcz.net"><i class="fa fa-home"></i></a>
+    </div>
+    <div id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+        <li><a href="/page/about">ABOUT</a></li>
+        
+        <li><a href="/blog/">BLOG</a></li>
+        
+        <li><a href="/page/speaker">TALK</a></li>
+        
+      
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      
+      <div class="container">
+        <div class="blog-post">
+          <h3>
+            <strong><a href="http://tech.paulcz.net/2016/01/flexible-docker-registry-infrastructure/">Flexible Private Docker Registry Infrastructure</a></strong>
+          </h3>
+        </div>
+        <div class="blog-title">
+          <h4>
+          January 10, 2016
+            &nbsp;&nbsp;
+            
+          </h4>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="blogpost">
+              
 
 <p>Previously I showed how to run a <a href="http://tech.paulcz.net/2016/01/deploying-a-secure-docker-registry/">basic secure Docker Registry</a>.  I am now going to expand on this to show you something that you might use in production as part of your CI/CD infrastructure.</p>
 
@@ -82,7 +90,7 @@
 
 <p>You will of course want to also build all of these servers with Configuration Management including the commands to actually run the <a href="https://www.docker.com/docker-registry">Docker Registry</a>.</p>
 
-<h2 id="build-server-s:aceca7a5aff8ee4a89a691ff67eb065d">Build Server(s)</h2>
+<h2 id="build-server-s">Build Server(s)</h2>
 
 <p>For your build server(s) you&rsquo;ll want to be running an OS with Docker installed on it. I use the <a href="https://hub.docker.com/_/jenkins/">Jenkins</a> Docker image on <a href="http://coreos.com/">CoreOS</a> for both my Jenkins Master and Slaves, however this is just personal preference.</p>
 
@@ -128,7 +136,7 @@ Digest: sha256:a96155be113bb2b4b82ebbc11cf1b511726c5b41617a70e0772f8180afc72fa5
 Status: Downloaded newer image for 127.0.0.1:5000/alpine:latest
 </code></pre>
 
-<h2 id="regular-server-s:aceca7a5aff8ee4a89a691ff67eb065d">Regular Server(s)</h2>
+<h2 id="regular-server-s">Regular Server(s)</h2>
 
 <p>We have a couple of options here.  You can run a <a href="https://www.docker.com/docker-registry">Docker Registry</a> on each server listening only on localhost, or you can run one or more of them on their own servers that will listen on an IP and be secured with TLS.</p>
 
@@ -160,7 +168,7 @@ f4fddc471ec2: Preparing
 Error parsing HTTP response: invalid character 'M' looking for beginning of value: &quot;Method not allowed\n&quot;
 </code></pre>
 
-<h2 id="user-access-to-registry:aceca7a5aff8ee4a89a691ff67eb065d">User Access to Registry:</h2>
+<h2 id="user-access-to-registry">User Access to Registry:</h2>
 
 <p>If you want to provide access to regular users and don&rsquo;t mind maintaining the password files locally you can adapt my <a href="http://tech.paulcz.net/2016/01/deploying-a-secure-docker-registry/">basic secure Docker Registry</a> blog post to use the object storage backend.</p>
 
@@ -168,7 +176,7 @@ Error parsing HTTP response: invalid character 'M' looking for beginning of valu
 
 <p>These can run on the same server, or on seperate servers.  They can also be run on multiple servers that are load balanced via an external load balancer or via round-robin-dns for high availability.</p>
 
-<h3 id="read-only-users:aceca7a5aff8ee4a89a691ff67eb065d">Read only Users</h3>
+<h3 id="read-only-users">Read only Users</h3>
 
 <pre><code>$ docker run -d \
       -p 443:5000 \
@@ -191,7 +199,7 @@ Error parsing HTTP response: invalid character 'M' looking for beginning of valu
       registry:2
 </code></pre>
 
-<h3 id="admin-read-write:aceca7a5aff8ee4a89a691ff67eb065d">Admin Read/Write</h3>
+<h3 id="admin-read-write">Admin Read/Write</h3>
 
 <pre><code>$ docker run -d \
       -p 444:5000 \
@@ -221,41 +229,59 @@ Error parsing HTTP response: invalid character 'M' looking for beginning of valu
 
 <p>It goes without saying that you should further lock down all of these services with network based access restrictions in the form of Firewall/IPTables/Security-Groups so that only certain trusted networks can access any of the public endpoints we have created.</p>
 
+              <hr>
+              <div class="related-posts">
+                <h5>Related Posts</h5>
+                
+              </div>
+            </div>
+          </div>
+          <hr>
+        <div class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+
+    (function() {
+      
+      
+      if (window.location.hostname == "localhost")
+        return;
+
+      var disqus_shortname = 'tech-paulcz';
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
         </div>
-        <section class="post-comments">
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-
-(function() {
-     
-     
-     if (window.location.hostname == "localhost")
-             return;
-
-	         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-		     var disqus_shortname = '';
-		         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-			     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-			     })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-</section>
-
-
+      
       </div>
     </div>
+
+    
+    <footer>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+      <a href="http://www.github.com/sumaxime/hugo-sustain/">sustain</a> with ♥</p>
+    </div>
+  </div>
+</footer>
+<div class="footer"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="http://tech.paulcz.netjs/docs.min.js"></script>
+<script src="http://tech.paulcz.netjs/main.js"></script>
+
+<script src="http://tech.paulcz.netjs/ie10-viewport-bug-workaround.js"></script>
+
+
+
   </body>
-  <footer class="footer"></footer>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-35638296-2', 'auto');
-  ga('send', 'pageview');
-
-</script>
 </html>

@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Chef on Paul Czarkowski</title>
-    <link>http://tech.paulcz.net/categories/chef/</link>
-    <description>Recent content in Chef on Paul Czarkowski</description>
+    <title>Paul Czarkowski</title>
+    <link>http://tech.paulcz.net/categories/chef/index.xml</link>
+    <description>Recent content on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 13 May 2014 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://tech.paulcz.net/categories/chef/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>EZBake - A new way to converge docker containers with chef</title>
-      <link>http://tech.paulcz.net/2014/05/ezbake-a-new-way-to-converge-docker-containers-with-chef/</link>
+      <link>http://tech.paulcz.net/blog/ezbake-a-new-way-to-converge-docker-containers-with-chef/</link>
       <pubDate>Tue, 13 May 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://tech.paulcz.net/2014/05/ezbake-a-new-way-to-converge-docker-containers-with-chef/</guid>
+      <guid>http://tech.paulcz.net/blog/ezbake-a-new-way-to-converge-docker-containers-with-chef/</guid>
       <description>&lt;p&gt;&lt;code&gt;EZ Bake&lt;/code&gt; came from an idea I had while watching the &lt;a href=&#34;https://twitter.com/hangops&#34;&gt;HangOps&lt;/a&gt; &lt;a href=&#34;https://www.youtube.com/watch?v=clLFKIeSADo&amp;amp;feature=youtu.be&#34;&gt;episode 2014-04-11&lt;/a&gt; in which they were talking about &lt;code&gt;Docker&lt;/code&gt; and Config Management being complementary rather than adversary.&lt;/p&gt;
 
 &lt;p&gt;I have expermented with using &lt;code&gt;Chef&lt;/code&gt; and &lt;code&gt;Docker&lt;/code&gt; together in the &lt;a href=&#34;http://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io.html&#34;&gt;past&lt;/a&gt; but wanted to tackle the problem from a slightly different angle.  I&amp;rsquo;ve recently been working on some PAAS stuff, both &lt;a href=&#34;http://deis.io&#34;&gt;Deis&lt;/a&gt; and &lt;a href=&#34;http://solum.io&#34;&gt;Solum&lt;/a&gt; these both utilize the tooling from &lt;a href=&#34;https://github.com/flynn/flynn&#34;&gt;Flynn&lt;/a&gt; which builds heroku style &lt;code&gt;buildpacks&lt;/code&gt; in &lt;code&gt;Docker&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;EZ Bake takes chef recipes designed for &lt;code&gt;chef-solo&lt;/code&gt; ( but could easily be extended to do the same for &lt;code&gt;chef-zero&lt;/code&gt;, or &lt;code&gt;chef-client&lt;/code&gt; with a server) in a tarball via &lt;code&gt;stdin&lt;/code&gt; and converges a docker node using that recipe.&lt;/p&gt;
 
@@ -61,27 +62,26 @@ Java HotSpot(TM) 64-Bit Server VM (build 24.51-b03, mixed mode)
 
 &lt;p&gt;This could easily be built into a CI pipeline.   a git webhook could call jenkins which would clone the repo and then use a command like  &lt;code&gt;git archive master | docker run -i -a stdin paulczar/ezbake&lt;/code&gt; to converge a container from it.&lt;/p&gt;
 
-&lt;p&gt;It could also very easily be used in &lt;code&gt;Deis&lt;/code&gt; or &lt;code&gt;Solum&lt;/code&gt; as an alternative to a Heroku buildpack.&lt;/p&gt;
-</description>
+&lt;p&gt;It could also very easily be used in &lt;code&gt;Deis&lt;/code&gt; or &lt;code&gt;Solum&lt;/code&gt; as an alternative to a Heroku buildpack.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Creating immutable servers with chef and docker.io</title>
-      <link>http://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io/</link>
+      <link>http://tech.paulcz.net/blog/creating-immutable-servers-with-chef-and-docker-dot-io/</link>
       <pubDate>Sat, 07 Sep 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io/</guid>
-      <description>
-
-&lt;p&gt;Building applications in a &lt;a href=&#34;http://docker.io&#34;&gt;docker.io&lt;/a&gt; Dockerfile is relatively simple,  but sometimes you want to just install the application exactly as you would normally via already built chef cookbooks.   Turns out this is actually pretty simple.&lt;/p&gt;
+      <guid>http://tech.paulcz.net/blog/creating-immutable-servers-with-chef-and-docker-dot-io/</guid>
+      <description>&lt;p&gt;Building applications in a &lt;a href=&#34;http://docker.io&#34;&gt;docker.io&lt;/a&gt; Dockerfile is relatively simple,  but sometimes you want to just install the application exactly as you would normally via already built chef cookbooks.   Turns out this is actually pretty simple.&lt;/p&gt;
 
 &lt;p&gt;The first thing you&amp;rsquo;ll need to do is build a container with chef-client and berkshelf installed.   You can grab the one I&amp;rsquo;ve built by running &lt;code&gt;docker pull paulczar/chef-solo&lt;/code&gt; or build one youself from a &lt;code&gt;Dockerfile&lt;/code&gt; that looks a little something like the following&amp;hellip;&lt;/p&gt;
 
-&lt;h3 id=&#34;creating-a-docker-io-container-with-chef-and-berkshelf:8e5e7d2d9bff571e6328148c619ee8a0&#34;&gt;Creating a docker.io container with chef and berkshelf&lt;/h3&gt;
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;creating-a-docker-io-container-with-chef-and-berkshelf&#34;&gt;Creating a docker.io container with chef and berkshelf&lt;/h3&gt;
 
 &lt;p&gt;``` ruby Dockerfile&lt;/p&gt;
 
-&lt;h1 id=&#34;docker-version-0-5-3:8e5e7d2d9bff571e6328148c619ee8a0&#34;&gt;DOCKER-VERSION 0.5.3&lt;/h1&gt;
+&lt;h1 id=&#34;docker-version-0-5-3&#34;&gt;DOCKER-VERSION 0.5.3&lt;/h1&gt;
 
 &lt;p&gt;FROM ubuntu:12.10
 MAINTAINER Paul Czarkowski &amp;ldquo;paul@paulcz.net&amp;rdquo;&lt;/p&gt;
@@ -139,13 +139,13 @@ cookbook &#39;nginx&#39; , github: &#39;opscode-cookbooks/nginx&#39;
 
 &lt;p&gt;&lt;em&gt;You can see some of the cookbooks are being pulled from the opscode repository,  whereas others are being pulled directly from github.&lt;/em&gt;&lt;/p&gt;
 
-&lt;h4 id=&#34;dockerfile:8e5e7d2d9bff571e6328148c619ee8a0&#34;&gt;Dockerfile&lt;/h4&gt;
+&lt;h4 id=&#34;dockerfile&#34;&gt;Dockerfile&lt;/h4&gt;
 
 &lt;p&gt;All that&amp;rsquo;s left now is to create a Dockerfile that will bring it all together.&lt;/p&gt;
 
 &lt;p&gt;``` ruby Dockerfile&lt;/p&gt;
 
-&lt;h1 id=&#34;docker-version-0-5-3-1:8e5e7d2d9bff571e6328148c619ee8a0&#34;&gt;DOCKER-VERSION 0.5.3&lt;/h1&gt;
+&lt;h1 id=&#34;docker-version-0-5-3-1&#34;&gt;DOCKER-VERSION 0.5.3&lt;/h1&gt;
 
 &lt;p&gt;FROM paulczar/chef-client
 MAINTAINER Paul Czarkowski &amp;ldquo;paul@paulcz.net&amp;rdquo;&lt;/p&gt;
@@ -163,8 +163,7 @@ RUN echo &amp;ldquo;daemon off;&amp;rdquo; &amp;gt;&amp;gt; /etc/nginx/nginx.con
 
 &lt;p&gt;It will add the local files ( &lt;code&gt;solo.rb&lt;/code&gt;, &lt;code&gt;solo.json&lt;/code&gt;, &lt;code&gt;Berksfile&lt;/code&gt; ) to /chef in the server and then call berkshelf to download the cookbooks and chef-solo to install your application.   Finally it will give &lt;code&gt;nginx&lt;/code&gt; a directive to run in the foreground so that we don&amp;rsquo;t have to do any sneaky prcess control to get it to work with the way &lt;code&gt;docker.io&lt;/code&gt; runs processes.&lt;/p&gt;
 
-&lt;p&gt;To run the resultant &lt;code&gt;docker.io&lt;/code&gt; container you simply need to run &lt;code&gt;$ docker run -d -p 80 demo/kibana3&lt;/code&gt;&lt;/p&gt;
-</description>
+&lt;p&gt;To run the resultant &lt;code&gt;docker.io&lt;/code&gt; container you simply need to run &lt;code&gt;$ docker run -d -p 80 demo/kibana3&lt;/code&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

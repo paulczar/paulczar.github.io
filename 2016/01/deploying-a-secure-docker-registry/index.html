@@ -1,72 +1,80 @@
-  <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="map[]" />
+    <meta name="description" content="Random musings mostly about tech">
+    <link rel="shortcut icon" type="image/x-icon" href="http://tech.paulcz.netimg/favicon.ico">
+    <title>Deploying a Simple and Secure Docker Registry</title>
+    <meta name="generator" content="Hugo 0.17" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="http://tech.paulcz.netcss/main.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
     
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <title> Deploying a Simple and Secure Docker Registry &middot; Paul Czarkowski </title>
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
     
-    <link rel="stylesheet" type="text/css" href="http://tech.paulcz.net//css/uno.min.css" />
-    <link rel="stylesheet" type="text/css" href="http://tech.paulcz.net//css/lightGallery.css" />
-    
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
-    <link rel="shortcut icon" href="/favicon.ico">
-    
-    <link href="" rel="alternate" type="application/rss+xml" title="Paul Czarkowski" />
-    
-    <script src="http://tech.paulcz.net//js/jquery.min.js"></script>
-    <script src="http://tech.paulcz.net//js/main.min.js">
-    </script>
-</head>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-35638296-2', 'auto');
+ga('send', 'pageview');
+</script>
+
+  </head>
 
   <body>
-    <span class="mobile btn-mobile-menu">
-        <i class="fa fa-bars btn-mobile-menu__icon"></i>
-        <i class="fa fa-times btn-mobile-close__icon hidden"></i>
-    </span>
-<header class="panel-cover panel-cover--collapsed" >
-    <div class="panel-main">
-        <div class="panel-main__inner panel-inverted">
-            <div class="panel-main__content"> 
-                <h1 class="panel-cover__title panel-title">
-                    <a href="http://tech.paulcz.net/" title="link to homepage for Paul Czarkowski">Paul Czarkowski</a>
-                </h1>
-                <hr class="panel-cover__divider" />
-                <p class="panel-cover__description">  Random musings mostly about tech  </p>
-                <hr class="panel-cover__divider panel-cover__divider--secondary" />
-                <div class="navigation-wrapper">
-                    <nav class="cover-navigation cover-navigation--primary">
-                        <ul class="navigation">
-                            <li class="navigation__item"><a href="/#blog" title="link to Paul Czarkowski blog" class="blog-button">Blog</a> </li>
-                            </br>  </ul>
-                    </nav> <nav class="cover-navigation navigation--social">
-    <ul class="navigation"> 
-        
-        <li class="navigation__item">
-            <a href="http://twitter.com/pczarkowski" title="@pczarkowski on Twitter"> <i class='fa fa-tt'></i> <span class="label">Twitter</span> </a>
-        </li>   
-        
-        <li class="navigation__item">
-            <a href="https://github.com/paulczar" title="paulczar on github"> <i class='fa fa-github'></i> <span class="label">Github</span> </a>
-        </li>  </br>   
-        
-        <li class="navigation__item">
-            <a href="mailto:username.taken&#43;tech@gmail.com" title="Email username.taken&#43;tech@gmail.com"> <i class='fa fa-envelope-o'></i> <span class="label">Email</span> </a>
-        </li>  </ul>
-</nav>
- </div>
-            </div>
-        </div>
-        <div class="panel-cover--overlay"></div>
-    </div>
-</header>
+    <div id="wrap">
 
-    <div class="content-wrapper">
-      <div class="content-wrapper__inner">
-        <div class="post">
-          <h1>Deploying a Simple and Secure Docker Registry</h1>
-          <span class="post-date">Sun, Jan 10, 2016</span>
-          
+      
+      <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="http://tech.paulcz.net"><i class="fa fa-home"></i></a>
+    </div>
+    <div id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+        <li><a href="/page/about">ABOUT</a></li>
+        
+        <li><a href="/blog/">BLOG</a></li>
+        
+        <li><a href="/page/speaker">TALK</a></li>
+        
+      
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      
+      <div class="container">
+        <div class="blog-post">
+          <h3>
+            <strong><a href="http://tech.paulcz.net/2016/01/deploying-a-secure-docker-registry/">Deploying a Simple and Secure Docker Registry</a></strong>
+          </h3>
+        </div>
+        <div class="blog-title">
+          <h4>
+          January 10, 2016
+            &nbsp;&nbsp;
+            
+          </h4>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="blogpost">
+              
 
 <p>There comes a time in everybody&rsquo;s life where they realize they have to run their own <a href="https://www.docker.com/docker-registry">Docker Registry</a>. Unfortunately there&rsquo;s not a lot of good information on how to run one. <a href="http://docker.com">Docker</a>&rsquo;s documentation is pretty good, but is verbose and across a lot of different pages which means having half a dozen tabs open and searching for the right information.</p>
 
@@ -76,7 +84,7 @@
 
 <p>For simplicity it will assume a single registry running on the local filesystem and will avoid using OS specific init (systemd/upstart/etc) systems by focusing just on the docker commands themselves.  This should work on any system capable of running <a href="http://docker.com">Docker</a>.</p>
 
-<h2 id="preparation:6cef620af73a5d9314be6797578405bb">Preparation</h2>
+<h2 id="preparation">Preparation</h2>
 
 <p>Boot a server that has <a href="http://docker.com">Docker</a> installed. For an OS with <a href="http://docker.com">Docker</a> already installed I recommend <a href="http://coreos.com/">CoreOS</a>. However you could just as easily boot Ubuntu or CentOS and run <code>curl -sSL get.docker.com | sudo bash</code> if you&rsquo;re into that sort of thing.</p>
 
@@ -99,7 +107,7 @@ Name: core-01
 ID: C5XV:CZ3H:EAO4:ATJ3:ARSO:UOGD:XH3X:UKLZ:V3FO:2LRF:6E3X:CV5K
 </code></pre>
 
-<h2 id="create-certificates:6cef620af73a5d9314be6797578405bb">Create Certificates</h2>
+<h2 id="create-certificates">Create Certificates</h2>
 
 <p>To keep this as simple as possible I will demonstrate using the <a href="https://github.com/paulczar/omgwtfssl">paulczar/omgwtfssl</a> image to create certificates. If you would rather create them manually via the <code>openssl</code> cli see my blog post on <a href="http://tech.paulcz.net/2016/01/secure-docker-with-tls/">Securing Docker with TLS</a>.</p>
 
@@ -230,41 +238,59 @@ Status: Downloaded newer image for 172.17.8.101/alpine:latest
 
 <p>If you want to do this in a more automated fashion you can look at the various configuration management communities such as <a href="https://supermarket.chef.io/cookbooks/docker_registry">chef</a> for examples.</p>
 
+              <hr>
+              <div class="related-posts">
+                <h5>Related Posts</h5>
+                
+              </div>
+            </div>
+          </div>
+          <hr>
+        <div class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+
+    (function() {
+      
+      
+      if (window.location.hostname == "localhost")
+        return;
+
+      var disqus_shortname = 'tech-paulcz';
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
         </div>
-        <section class="post-comments">
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-
-(function() {
-     
-     
-     if (window.location.hostname == "localhost")
-             return;
-
-	         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-		     var disqus_shortname = '';
-		         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-			     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-			     })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-</section>
-
-
+      
       </div>
     </div>
+
+    
+    <footer>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+      <a href="http://www.github.com/sumaxime/hugo-sustain/">sustain</a> with ♥</p>
+    </div>
+  </div>
+</footer>
+<div class="footer"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="http://tech.paulcz.netjs/docs.min.js"></script>
+<script src="http://tech.paulcz.netjs/main.js"></script>
+
+<script src="http://tech.paulcz.netjs/ie10-viewport-bug-workaround.js"></script>
+
+
+
   </body>
-  <footer class="footer"></footer>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-35638296-2', 'auto');
-  ga('send', 'pageview');
-
-</script>
 </html>

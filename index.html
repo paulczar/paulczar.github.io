@@ -1,344 +1,113 @@
-    <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="map[]" />
+    <meta name="description" content="Random musings mostly about tech">
+    <link rel="shortcut icon" type="image/x-icon" href="http://tech.paulcz.netimg/favicon.ico">
+    <title>Paul Czarkowski</title>
+    <meta name="generator" content="Hugo 0.17" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="http://tech.paulcz.netcss/main.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
     
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <title> Paul Czarkowski &middot; Paul Czarkowski </title>
-    
-    <link rel="stylesheet" type="text/css" href="http://tech.paulcz.net//css/uno.min.css" />
-    <link rel="stylesheet" type="text/css" href="http://tech.paulcz.net//css/lightGallery.css" />
-    
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
-    <link rel="shortcut icon" href="/favicon.ico">
-    
-    <link href="http://tech.paulcz.net/index.xml" rel="alternate" type="application/rss+xml" title="Paul Czarkowski" />
-    
-    <script src="http://tech.paulcz.net//js/jquery.min.js"></script>
-    <script src="http://tech.paulcz.net//js/main.min.js">
-    </script>
-</head>
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
 
-    <body>
-        <span class="mobile btn-mobile-menu">
-        <i class="fa fa-bars btn-mobile-menu__icon"></i>
-        <i class="fa fa-times btn-mobile-close__icon hidden"></i>
-    </span>
-<header class=" panel-cover " >
-    <div class="panel-main">
-        <div class="panel-main__inner panel-inverted">
-            <div class="panel-main__content"> 
-                <h1 class="panel-cover__title panel-title">
-                    <a href="http://tech.paulcz.net/" title="link to homepage for Paul Czarkowski">Paul Czarkowski</a>
-                </h1>
-                <hr class="panel-cover__divider" />
-                <p class="panel-cover__description">  Random musings mostly about tech  </p>
-                <hr class="panel-cover__divider panel-cover__divider--secondary" />
-                <div class="navigation-wrapper">
-                    <nav class="cover-navigation cover-navigation--primary">
-                        <ul class="navigation">
-                            <li class="navigation__item"><a href="/#blog" title="link to Paul Czarkowski blog" class="blog-button">Blog</a> </li>
-                            </br>  </ul>
-                    </nav> <nav class="cover-navigation navigation--social">
-    <ul class="navigation"> 
-        
-        <li class="navigation__item">
-            <a href="http://twitter.com/pczarkowski" title="@pczarkowski on Twitter"> <i class='fa fa-tt'></i> <span class="label">Twitter</span> </a>
-        </li>   
-        
-        <li class="navigation__item">
-            <a href="https://github.com/paulczar" title="paulczar on github"> <i class='fa fa-github'></i> <span class="label">Github</span> </a>
-        </li>  </br>   
-        
-        <li class="navigation__item">
-            <a href="mailto:username.taken&#43;tech@gmail.com" title="Email username.taken&#43;tech@gmail.com"> <i class='fa fa-envelope-o'></i> <span class="label">Email</span> </a>
-        </li>  </ul>
-</nav>
- </div>
-            </div>
-        </div>
-        <div class="panel-cover--overlay"></div>
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-35638296-2', 'auto');
+ga('send', 'pageview');
+</script>
+
+  </head>
+
+  <body>
+    <div id="wrap">
+      <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="http://tech.paulcz.net"><i class="fa fa-home"></i></a>
     </div>
-</header>
+    <div id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+        <li><a href="/page/about">ABOUT</a></li>
+        
+        <li><a href="/blog/">BLOG</a></li>
+        
+        <li><a href="/page/speaker">TALK</a></li>
+        
+      
+      </ul>
+    </div>
+  </div>
+</nav>
 
-        <div class="content-wrapper">
-            <div class="content-wrapper__inner">
-                <section id="main">
-                    <div>
-                        
-                            
-                                <article class="post">
-<header>
-<h2><a href="http://tech.paulcz.net/2016/01/flexible-docker-registry-infrastructure/">Flexible Private Docker Registry Infrastructure </a> </h2>
-<div class="post-meta">Sun, Jan 10, 2016 - Read in 6 Min </div>
-</header>
-<div class="summary">
-    Previously I showed how to run a basic secure Docker Registry. I am now going to expand on this to show you something that you might use in production as part of your CI/CD infrastructure. The beauty of running Docker is that you can push an image from a developer&rsquo;s laptop all the way into production which helps ensure that what you see in development and your various test/qa/stage environments are exactly the same as what you run in production.
+      <section id="about">
+        <div class="container">
+        <div class="social">
+	<h4>
+    
+	  <a href="http://github.com/paulczar"><i class="fa fa-github"></i></a>
+    
+
+    
+	  <a href="mailto:username.taken&#43;tech@gmail.com"><i class="fa fa-envelope"></i></a>
+    
+
+    
+	  <a href="http://twitter.com/pczarkowski"><i class="fa fa-twitter"></i></a>
+    
+
+    
+	  <a href="http://linkedin.com/in/pczarkowski"><i class="fa fa-linkedin"></i></a>
+    
+
+    
+	</h4>
 </div>
-<footer>
-<a href='http://tech.paulcz.net/2016/01/flexible-docker-registry-infrastructure/'><nobr>Read more →</nobr></a>
-</footer>
-</article>
-<footer class="footer"></footer>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-35638296-2', 'auto');
-  ga('send', 'pageview');
-
-</script>
-
-                            
-                        
-                            
-                                <article class="post">
-<header>
-<h2><a href="http://tech.paulcz.net/2016/01/deploying-a-secure-docker-registry/">Deploying a Simple and Secure Docker Registry </a> </h2>
-<div class="post-meta">Sun, Jan 10, 2016 - Read in 5 Min </div>
-</header>
-<div class="summary">
-    There comes a time in everybody&rsquo;s life where they realize they have to run their own Docker Registry. Unfortunately there&rsquo;s not a lot of good information on how to run one. Docker&rsquo;s documentation is pretty good, but is verbose and across a lot of different pages which means having half a dozen tabs open and searching for the right information. While it&rsquo;s pretty common to run the Docker Registry itself with little to no security settings and fronting it with NGINX or Apache to provide this security I wanted to show how it can be done with just the Docker Registry.
-</div>
-<footer>
-<a href='http://tech.paulcz.net/2016/01/deploying-a-secure-docker-registry/'><nobr>Read more →</nobr></a>
-</footer>
-</article>
-<footer class="footer"></footer>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-35638296-2', 'auto');
-  ga('send', 'pageview');
-
-</script>
-
-                            
-                        
-                            
-                                <article class="post">
-<header>
-<h2><a href="http://tech.paulcz.net/2016/01/secure-docker-with-tls/">Securing Docker with TLS certificates </a> </h2>
-<div class="post-meta">Sun, Jan 3, 2016 - Read in 7 Min </div>
-</header>
-<div class="summary">
-    By default Docker (and by extension Docker Swarm) has no authentication or authorization on its API, relying instead on the filesystem security of its unix socket /var/run/docker.sock which by default is only accessible by the root user. This is fine for the basic use case of the default behavior of only accessing the Docker API on the local machine via the socket as the root user. However if you wish to use the Docker API over TCP then you&rsquo;ll want to secure it so that you don&rsquo;t give out root access to anyone that happens to poke you on the TCP port.
-</div>
-<footer>
-<a href='http://tech.paulcz.net/2016/01/secure-docker-with-tls/'><nobr>Read more →</nobr></a>
-</footer>
-</article>
-<footer class="footer"></footer>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-35638296-2', 'auto');
-  ga('send', 'pageview');
-
-</script>
-
-                            
-                        
-                            
-                                <article class="post">
-<header>
-<h2><a href="http://tech.paulcz.net/2016/01/running-ha-docker-swarm/">Deploying a HA Docker Swarm Cluster </a> </h2>
-<div class="post-meta">Sat, Jan 2, 2016 - Read in 6 Min </div>
-</header>
-<div class="summary">
-    Given Docker&rsquo;s propensity for creating easy to use tools it shouldn&rsquo;t come as a surprise that Docker Swarm is one of the easier to understand and run of the &ldquo;Docker Clustering&rdquo; options currently out there. I recently built some Terraform configs for deploying a Highly Available Docker Swarm cluster on Openstack and learned a fair bit about Swarm in the process. This guide is meant to be a platform agnostic howto on installing and running a Highly Available Docker Swarm to show you the ideas and concepts that may not be as easy to understand from just reading some config management code.
-</div>
-<footer>
-<a href='http://tech.paulcz.net/2016/01/running-ha-docker-swarm/'><nobr>Read more →</nobr></a>
-</footer>
-</article>
-<footer class="footer"></footer>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-35638296-2', 'auto');
-  ga('send', 'pageview');
-
-</script>
-
-                            
-                        
-                            
-                                <article class="post">
-<header>
-<h2><a href="http://tech.paulcz.net/2016/01/openstacks-and-ecosystems/">Openstacks and Ecosystems </a> </h2>
-<div class="post-meta">Sat, Jan 2, 2016 - Read in 2 Min </div>
-</header>
-<div class="summary">
-    I have recently had a number of lengthy discussions on the Twitter about Interop, Users, and Ecosystems. Specifically about our need to focus on the OpenStack ecosystem to extend the OpenStack IaaS user experience to something a bit more platform[ish]. I wrote a post for SysAdvent this year on developing applications on top of OpenStack using a collection of OpenSource tools to create a PaaS and CI/CD pipelines. I think it turned out quite well and really helped reinforce my beliefs on the subject.
-</div>
-<footer>
-<a href='http://tech.paulcz.net/2016/01/openstacks-and-ecosystems/'><nobr>Read more →</nobr></a>
-</footer>
-</article>
-<footer class="footer"></footer>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-35638296-2', 'auto');
-  ga('send', 'pageview');
-
-</script>
-
-                            
-                        
-                            
-                                <article class="post">
-<header>
-<h2><a href="http://tech.paulcz.net/2015/03/optimizing-your-dockerfiles/">Optimizing your Dockerfiles </a> </h2>
-<div class="post-meta">Sat, Mar 7, 2015 - Read in 7 Min </div>
-</header>
-<div class="summary">
-    Docker images are &ldquo;supposed&rdquo; to be small and fast. However unless you&rsquo;re precompiling GO binaries and dropping them in the busybox image they can get quite large and complicated. Without a well constructed Dockerfile to improve build cache hits your docker builds can become unnecessarily slow. Dockerfile&rsquo;s are regularly [and incorrectly] treated like bash scripts and therefore are often written out as a series of commands which you would curl | sudo bash from a website to install.
-</div>
-<footer>
-<a href='http://tech.paulcz.net/2015/03/optimizing-your-dockerfiles/'><nobr>Read more →</nobr></a>
-</footer>
-</article>
-<footer class="footer"></footer>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-35638296-2', 'auto');
-  ga('send', 'pageview');
-
-</script>
-
-                            
-                        
-                            
-                                <article class="post">
-<header>
-<h2><a href="http://tech.paulcz.net/2015/01/factorish_and_the_12_fakter_app/">Factorish and The Twelve-Fakter App </a> </h2>
-<div class="post-meta">Tue, Jan 6, 2015 - Read in 11 Min </div>
-</header>
-<div class="summary">
-    <p>Unless you&rsquo;ve been living under a rock (in which case I envy you) you&rsquo;ve heard a fair bit about The <a href="http://12factor.net">Twelve-Factor App</a>. A wonderful stateless application that is completely disposable and can run anywhere from your own physical servers to <a href="http://deis.io">Deis</a>, <a href="http://cloudfoundry.org">Cloud Foundry</a> or <a href="http://heroku.com">Heroku</a>.</p>
-
-<p>Chances are you&rsquo;re stuck writing and running an application that is decidely not 12Factor, nor will it ever be.  In a perfect world you&rsquo;d scrap it and rewrite it as a dozen microservices that are loosely coupled but run and work indepently of eachother. The reality however is you could never get the okay to do that.</p>
-
-</div>
-<footer>
-<a href='http://tech.paulcz.net/2015/01/factorish_and_the_12_fakter_app/'><nobr>Read more →</nobr></a>
-</footer>
-</article>
-<footer class="footer"></footer>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-35638296-2', 'auto');
-  ga('send', 'pageview');
-
-</script>
-
-                            
-                        
-                            
-                                <article class="post">
-<header>
-<h2><a href="http://tech.paulcz.net/2014/12/multi-process-docker-images-done-right/">Multi Process Docker Images Done Right </a> </h2>
-<div class="post-meta">Mon, Dec 22, 2014 - Read in 6 Min </div>
-</header>
-<div class="summary">
-    <h2 id="for-some-values-of-right:1c79ecc8ccdca915b8029a73add2dd3b">For some values of &lsquo;right&rsquo;</h2>
-
-<p>Almost since <a href="http://docker.com">Docker</a> was first introduced to the world there has been a fairly strong push to keeping containers to be single process.   This makes a lot of sense and definitely plays into the <a href="http://12factor.net">12 Factor</a> way of thinking where all application output should be pushed to <code>stdout</code> and docker itself with tools like <a href="https://github.com/progrium/logspout">logspout</a> now has fairly strong tooling to deal with those logs.</p>
-
-<p>Sometimes however it just makes sense to run more than one process in a container,  a perfect example would be running <a href="https://github.com/kelseyhightower/confd">confd</a> as well as your application in order to modify the application&rsquo;s config file based on changes in service discovery systems like <a href="https://github.com/coreos/etcd">etcd</a>.   The <a href="https://docs.docker.com/articles/ambassador_pattern_linking/">ambassador</a> container way of working can achieve similar things, but I&rsquo;m not sure that running two containers with a process each to run your application is any better than running one container with two processes.</p>
-
-</div>
-<footer>
-<a href='http://tech.paulcz.net/2014/12/multi-process-docker-images-done-right/'><nobr>Read more →</nobr></a>
-</footer>
-</article>
-<footer class="footer"></footer>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-35638296-2', 'auto');
-  ga('send', 'pageview');
-
-</script>
-
-                            
-                        
-                            
-                                <article class="post">
-<header>
-<h2><a href="http://tech.paulcz.net/2014/12/breadops-continous-delivery-of-fresh-baked-bread/">BreadOps - Continuous Delivery of Fresh Baked Bread </a> </h2>
-<div class="post-meta">Wed, Dec 3, 2014 - Read in 7 Min </div>
-</header>
-<div class="summary">
-    &ldquo;See how this sparkly devop princess bakes bread every day with almost no effort at all with this one weird trick&rdquo; Store bought bread is shit. Even the &ldquo;artisanal&rdquo; bread at most supermarkets is little better than cake baked in a bread shaped mold ( seriously check next time you&rsquo;re at a supermarket ). You might be lucky and have a really good bread baker near you, but like butchers and other important crafts they have all but disappeared.
-</div>
-<footer>
-<a href='http://tech.paulcz.net/2014/12/breadops-continous-delivery-of-fresh-baked-bread/'><nobr>Read more →</nobr></a>
-</footer>
-</article>
-<footer class="footer"></footer>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-35638296-2', 'auto');
-  ga('send', 'pageview');
-
-</script>
-
-                            
-                        
-                            
-                        
-                    </div>
-                    </br>
-                    <h4>
-                        <a href="/post/">Archive</a>
-                    </h4>
-                </section>
-            </div>
+        <div class="avatar">
+          <img class="img-circle" src="http://tech.paulcz.netimg/profile.jpg" alt="Responsive image">
         </div>
-        <footer class="footer"></footer>
+        <h3><strong>Paul Czarkowski</strong></h3>
+        <h3>is an systems engineer</h3>
+        <h3>not a haiku poet.</h3>
+        <br><br>
+        </div>
+      </section>
+    </div>
+    <footer>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+      <a href="http://www.github.com/sumaxime/hugo-sustain/">sustain</a> with ♥</p>
+    </div>
+  </div>
+</footer>
+<div class="footer"></div>
 
-        <footer class="footer"></footer>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-35638296-2', 'auto');
-  ga('send', 'pageview');
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
-</script>
-    </body>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="http://tech.paulcz.netjs/docs.min.js"></script>
+<script src="http://tech.paulcz.netjs/main.js"></script>
+
+<script src="http://tech.paulcz.netjs/ie10-viewport-bug-workaround.js"></script>
+
+
+  </body>
 </html>

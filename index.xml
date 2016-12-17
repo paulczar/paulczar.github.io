@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Paul Czarkowski</title>
-    <link>http://tech.paulcz.net/</link>
+    <link>http://tech.paulcz.net/index.xml</link>
     <description>Recent content on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -31,7 +31,7 @@
 
 &lt;p&gt;You will of course want to also build all of these servers with Configuration Management including the commands to actually run the &lt;a href=&#34;https://www.docker.com/docker-registry&#34;&gt;Docker Registry&lt;/a&gt;.&lt;/p&gt;
 
-&lt;h2 id=&#34;build-server-s:aceca7a5aff8ee4a89a691ff67eb065d&#34;&gt;Build Server(s)&lt;/h2&gt;
+&lt;h2 id=&#34;build-server-s&#34;&gt;Build Server(s)&lt;/h2&gt;
 
 &lt;p&gt;For your build server(s) you&amp;rsquo;ll want to be running an OS with Docker installed on it. I use the &lt;a href=&#34;https://hub.docker.com/_/jenkins/&#34;&gt;Jenkins&lt;/a&gt; Docker image on &lt;a href=&#34;http://coreos.com/&#34;&gt;CoreOS&lt;/a&gt; for both my Jenkins Master and Slaves, however this is just personal preference.&lt;/p&gt;
 
@@ -77,7 +77,7 @@ Digest: sha256:a96155be113bb2b4b82ebbc11cf1b511726c5b41617a70e0772f8180afc72fa5
 Status: Downloaded newer image for 127.0.0.1:5000/alpine:latest
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;regular-server-s:aceca7a5aff8ee4a89a691ff67eb065d&#34;&gt;Regular Server(s)&lt;/h2&gt;
+&lt;h2 id=&#34;regular-server-s&#34;&gt;Regular Server(s)&lt;/h2&gt;
 
 &lt;p&gt;We have a couple of options here.  You can run a &lt;a href=&#34;https://www.docker.com/docker-registry&#34;&gt;Docker Registry&lt;/a&gt; on each server listening only on localhost, or you can run one or more of them on their own servers that will listen on an IP and be secured with TLS.&lt;/p&gt;
 
@@ -109,7 +109,7 @@ f4fddc471ec2: Preparing
 Error parsing HTTP response: invalid character &#39;M&#39; looking for beginning of value: &amp;quot;Method not allowed\n&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;user-access-to-registry:aceca7a5aff8ee4a89a691ff67eb065d&#34;&gt;User Access to Registry:&lt;/h2&gt;
+&lt;h2 id=&#34;user-access-to-registry&#34;&gt;User Access to Registry:&lt;/h2&gt;
 
 &lt;p&gt;If you want to provide access to regular users and don&amp;rsquo;t mind maintaining the password files locally you can adapt my &lt;a href=&#34;http://tech.paulcz.net/2016/01/deploying-a-secure-docker-registry/&#34;&gt;basic secure Docker Registry&lt;/a&gt; blog post to use the object storage backend.&lt;/p&gt;
 
@@ -117,7 +117,7 @@ Error parsing HTTP response: invalid character &#39;M&#39; looking for beginning
 
 &lt;p&gt;These can run on the same server, or on seperate servers.  They can also be run on multiple servers that are load balanced via an external load balancer or via round-robin-dns for high availability.&lt;/p&gt;
 
-&lt;h3 id=&#34;read-only-users:aceca7a5aff8ee4a89a691ff67eb065d&#34;&gt;Read only Users&lt;/h3&gt;
+&lt;h3 id=&#34;read-only-users&#34;&gt;Read only Users&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code&gt;$ docker run -d \
       -p 443:5000 \
@@ -140,7 +140,7 @@ Error parsing HTTP response: invalid character &#39;M&#39; looking for beginning
       registry:2
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;admin-read-write:aceca7a5aff8ee4a89a691ff67eb065d&#34;&gt;Admin Read/Write&lt;/h3&gt;
+&lt;h3 id=&#34;admin-read-write&#34;&gt;Admin Read/Write&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code&gt;$ docker run -d \
       -p 444:5000 \
@@ -188,7 +188,7 @@ Error parsing HTTP response: invalid character &#39;M&#39; looking for beginning
 
 &lt;p&gt;For simplicity it will assume a single registry running on the local filesystem and will avoid using OS specific init (systemd/upstart/etc) systems by focusing just on the docker commands themselves.  This should work on any system capable of running &lt;a href=&#34;http://docker.com&#34;&gt;Docker&lt;/a&gt;.&lt;/p&gt;
 
-&lt;h2 id=&#34;preparation:6cef620af73a5d9314be6797578405bb&#34;&gt;Preparation&lt;/h2&gt;
+&lt;h2 id=&#34;preparation&#34;&gt;Preparation&lt;/h2&gt;
 
 &lt;p&gt;Boot a server that has &lt;a href=&#34;http://docker.com&#34;&gt;Docker&lt;/a&gt; installed. For an OS with &lt;a href=&#34;http://docker.com&#34;&gt;Docker&lt;/a&gt; already installed I recommend &lt;a href=&#34;http://coreos.com/&#34;&gt;CoreOS&lt;/a&gt;. However you could just as easily boot Ubuntu or CentOS and run &lt;code&gt;curl -sSL get.docker.com | sudo bash&lt;/code&gt; if you&amp;rsquo;re into that sort of thing.&lt;/p&gt;
 
@@ -211,7 +211,7 @@ Name: core-01
 ID: C5XV:CZ3H:EAO4:ATJ3:ARSO:UOGD:XH3X:UKLZ:V3FO:2LRF:6E3X:CV5K
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;create-certificates:6cef620af73a5d9314be6797578405bb&#34;&gt;Create Certificates&lt;/h2&gt;
+&lt;h2 id=&#34;create-certificates&#34;&gt;Create Certificates&lt;/h2&gt;
 
 &lt;p&gt;To keep this as simple as possible I will demonstrate using the &lt;a href=&#34;https://github.com/paulczar/omgwtfssl&#34;&gt;paulczar/omgwtfssl&lt;/a&gt; image to create certificates. If you would rather create them manually via the &lt;code&gt;openssl&lt;/code&gt; cli see my blog post on &lt;a href=&#34;http://tech.paulcz.net/2016/01/secure-docker-with-tls/&#34;&gt;Securing Docker with TLS&lt;/a&gt;.&lt;/p&gt;
 
@@ -362,7 +362,7 @@ Status: Downloaded newer image for 172.17.8.101/alpine:latest
 
 &lt;p&gt;If you are only interested in securing Docker itself and not Docker Swarm then this should apply to any server with Docker installed that uses systemd.  Even on systems without systemd it should provide enough details to secure Docker.&lt;/p&gt;
 
-&lt;h2 id=&#34;creating-certificates:ee7ba636086981df3b8f20678b008bf1&#34;&gt;Creating Certificates&lt;/h2&gt;
+&lt;h2 id=&#34;creating-certificates&#34;&gt;Creating Certificates&lt;/h2&gt;
 
 &lt;p&gt;I will offer two methods to create the certificates, the first by using &lt;code&gt;openssl&lt;/code&gt; to create a CA and then sign a key/cert pair, the second by using the &lt;a href=&#34;https://hub.docker.com/r/paulczar/omgwtfssl/&#34;&gt;paulczar/omgwtfssl&lt;/a&gt; Docker Image which automates the certificate creation process.&lt;/p&gt;
 
@@ -374,7 +374,7 @@ $ mkdir -p ~/.docker
 
 &lt;p&gt;&lt;em&gt;For this example we&amp;rsquo;re creating the keys and certificates on the server itself, ideally you would do this on your laptop or via configuration management and never store the CA key on a public server.&lt;/em&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;openssl:ee7ba636086981df3b8f20678b008bf1&#34;&gt;OpenSSL&lt;/h3&gt;
+&lt;h3 id=&#34;openssl&#34;&gt;OpenSSL&lt;/h3&gt;
 
 &lt;p&gt;First run &lt;code&gt;openssl&lt;/code&gt; to create and sign a CA key and certificate and copy the CA certificate into &lt;code&gt;/etc/docker/ssl&lt;/code&gt;:&lt;/p&gt;
 
@@ -461,7 +461,7 @@ subject=/CN=docker-client
 Getting CA Private Key
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;omgwtfssl:ee7ba636086981df3b8f20678b008bf1&#34;&gt;OMGWTFSSL&lt;/h3&gt;
+&lt;h3 id=&#34;omgwtfssl&#34;&gt;OMGWTFSSL&lt;/h3&gt;
 
 &lt;p&gt;If you want to skip manually creating the certificates you can use the &lt;a href=&#34;https://hub.docker.com/r/paulczar/omgwtfssl/&#34;&gt;paulczar/omgwtfssl&lt;/a&gt; image which is a small (&amp;lt; 10mb) Docker image built specifically for creating certificates for situations like this.&lt;/p&gt;
 
@@ -520,7 +520,7 @@ subject=/CN=example.com
 Getting CA Private Key
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;using-the-tls-certificates-with-docker:ee7ba636086981df3b8f20678b008bf1&#34;&gt;Using the TLS certificates with Docker&lt;/h2&gt;
+&lt;h2 id=&#34;using-the-tls-certificates-with-docker&#34;&gt;Using the TLS certificates with Docker&lt;/h2&gt;
 
 &lt;p&gt;Now we have our TLS certificates created and in the correct locations you need to tell Docker to use the TLS certificate and also verify the client.  You do this by creating a drop in systemd unit to modify the existing Docker systemd unit.&lt;/p&gt;
 
@@ -567,7 +567,7 @@ Name: core-01
 ID: RGVQ:VDUC:Z5LU:IE7I:J6UJ:TFBJ:SSCO:EWG2:QKAW:5FY6:EIAV:MROK
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;using-the-tls-certificates-with-docker-swarm:ee7ba636086981df3b8f20678b008bf1&#34;&gt;Using the TLS certificates with Docker Swarm&lt;/h2&gt;
+&lt;h2 id=&#34;using-the-tls-certificates-with-docker-swarm&#34;&gt;Using the TLS certificates with Docker Swarm&lt;/h2&gt;
 
 &lt;p&gt;To secure Docker Swarm using these TLS certificates you will need to create TLS certificate/key pairs for each server using the same CA.&lt;/p&gt;
 
@@ -633,7 +633,7 @@ Name: core-01
 
 &lt;p&gt;This guide is meant to be a platform agnostic howto on installing and running a Highly Available Docker Swarm to show you the ideas and concepts that may not be as easy to understand from just reading some config management code.&lt;/p&gt;
 
-&lt;h2 id=&#34;coreos:f092910207480b0f11ab4bcafecee8ad&#34;&gt;CoreOS&lt;/h2&gt;
+&lt;h2 id=&#34;coreos&#34;&gt;CoreOS&lt;/h2&gt;
 
 &lt;p&gt;The reason for using &lt;a href=&#34;http://coreos.com&#34;&gt;CoreOS&lt;/a&gt; here is that to make Swarm run in High Availability mode as well as being able to support docker networking between hosts we need to use service discovery.  We can choose to use &lt;code&gt;etcd&lt;/code&gt;, &lt;code&gt;consul&lt;/code&gt;, or &lt;code&gt;zookeeper&lt;/code&gt; here, CoreOS comes with &lt;code&gt;etcd&lt;/code&gt; thus makes it an excellent choice for running Docker Swarm.&lt;/p&gt;
 
@@ -699,7 +699,7 @@ $ etcdctl member list
 ebcc652087dfe6e8: name=de426249d3b34e23a5706d99b4900665 peerURLs=http://172.17.8.102:2380 clientURLs=http://172.17.8.102:2379
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;docker-swarm:f092910207480b0f11ab4bcafecee8ad&#34;&gt;Docker Swarm&lt;/h2&gt;
+&lt;h2 id=&#34;docker-swarm&#34;&gt;Docker Swarm&lt;/h2&gt;
 
 &lt;p&gt;Now that we have several CoreOS servers with a working etcd cluster we can move on to setting up Docker Swarm.&lt;/p&gt;
 
@@ -862,10 +862,10 @@ Connecting to web (10.0.0.2:80)
     
     <item>
       <title>Optimizing your Dockerfiles</title>
-      <link>http://tech.paulcz.net/2015/03/optimizing-your-dockerfiles/</link>
+      <link>http://tech.paulcz.net/blog/Optimizing%20your%20Dockerfiles/</link>
       <pubDate>Sat, 07 Mar 2015 13:25:29 -0600</pubDate>
       
-      <guid>http://tech.paulcz.net/2015/03/optimizing-your-dockerfiles/</guid>
+      <guid>http://tech.paulcz.net/blog/Optimizing%20your%20Dockerfiles/</guid>
       <description>
 
 &lt;p&gt;Docker images are &amp;ldquo;supposed&amp;rdquo; to be small and fast. However unless you&amp;rsquo;re precompiling GO binaries and dropping them in the &lt;code&gt;busybox&lt;/code&gt; image they can get quite large and complicated. Without a well constructed &lt;code&gt;Dockerfile&lt;/code&gt; to improve build cache hits your docker builds can become unnecessarily slow.&lt;/p&gt;
@@ -874,7 +874,7 @@ Connecting to web (10.0.0.2:80)
 
 &lt;!--more --&gt;
 
-&lt;h2 id=&#34;order-matters:6226be07e9066526e21065089ae006e9&#34;&gt;Order Matters&lt;/h2&gt;
+&lt;h2 id=&#34;order-matters&#34;&gt;Order Matters&lt;/h2&gt;
 
 &lt;p&gt;When you&amp;rsquo;re building a new &lt;code&gt;Dockerfile&lt;/code&gt; for an application there can be a lot of trial and error in determining what packages are needed and what commands need to run. Optimizing your &lt;code&gt;Dockerfile&lt;/code&gt; ensures that the build cache will hit more often and each build between changes will be faster.&lt;/p&gt;
 
@@ -884,11 +884,11 @@ Connecting to web (10.0.0.2:80)
 
 &lt;p&gt;Finally any &lt;code&gt;ADD&lt;/code&gt; ( or other commands that invalidate cache ) commands should go as far down the bottom as possible as this is where you&amp;rsquo;re likely to make lots of changes that will invalidate the cache of subsequent commands.&lt;/p&gt;
 
-&lt;h2 id=&#34;choose-your-base-image-wisely:6226be07e9066526e21065089ae006e9&#34;&gt;Choose your base image wisely&lt;/h2&gt;
+&lt;h2 id=&#34;choose-your-base-image-wisely&#34;&gt;Choose your base image wisely&lt;/h2&gt;
 
 &lt;p&gt;There&amp;rsquo;s a lot of base images to choose from from the bare OS images like &lt;code&gt;ubuntu:trusty&lt;/code&gt; to application specific ones for &lt;code&gt;python:2&lt;/code&gt; or &lt;code&gt;java:7&lt;/code&gt;.  Common sense might tell you to use &lt;code&gt;ruby:2&lt;/code&gt; to run an ruby based app and &lt;code&gt;python:3&lt;/code&gt; to run a python app.  However now you have two base images with little in common that you need to download and build.  Instead if you use &lt;code&gt;ubuntu:trusty&lt;/code&gt; for both then you only need to download the base image once.&lt;/p&gt;
 
-&lt;h2 id=&#34;use-layers-to-your-advantage:6226be07e9066526e21065089ae006e9&#34;&gt;Use Layers to your advantage&lt;/h2&gt;
+&lt;h2 id=&#34;use-layers-to-your-advantage&#34;&gt;Use Layers to your advantage&lt;/h2&gt;
 
 &lt;p&gt;Each command in a &lt;code&gt;Dockerfile&lt;/code&gt; is an extra layer. You can very quickly end up with an image that&amp;rsquo;s 30+ layers.  This is not necessarily a problem, but by joining &lt;code&gt;RUN&lt;/code&gt; commands together, and using a single &lt;code&gt;EXPOSE&lt;/code&gt; line to list all of your open ports you can reduce the number of layers.&lt;/p&gt;
 
@@ -896,15 +896,15 @@ Connecting to web (10.0.0.2:80)
 
 &lt;p&gt;For each layer that you can share across multiple images you can save a ton of disk space.&lt;/p&gt;
 
-&lt;h2 id=&#34;volume-contaimers:6226be07e9066526e21065089ae006e9&#34;&gt;Volume contaimers&lt;/h2&gt;
+&lt;h2 id=&#34;volume-contaimers&#34;&gt;Volume contaimers&lt;/h2&gt;
 
 &lt;p&gt;If you use Volume containers,  don&amp;rsquo;t bother trying to save space by using a small image,  Use the image of the application you&amp;rsquo;ll be serving data to.  If you do that and &lt;code&gt;docker commit&lt;/code&gt; the data volume you not only have your data commited to the container, but the actual application as well which is very useful for debugging.&lt;/p&gt;
 
-&lt;h2 id=&#34;cheat:6226be07e9066526e21065089ae006e9&#34;&gt;Cheat&lt;/h2&gt;
+&lt;h2 id=&#34;cheat&#34;&gt;Cheat&lt;/h2&gt;
 
 &lt;p&gt;If you&amp;rsquo;ve built an image and discover when you run it that there&amp;rsquo;s a package missing add it to the bottom of your &lt;code&gt;Dockerfile&lt;/code&gt; rather than in the &lt;code&gt;RUN apt-get&lt;/code&gt; command at the top.  This means you can rebuild the image faster.  Once your image is correct and working you can reorganize your &lt;code&gt;Dockerfile&lt;/code&gt; to clean such changes up before commiting it to source control.&lt;/p&gt;
 
-&lt;h2 id=&#34;example:6226be07e9066526e21065089ae006e9&#34;&gt;Example&lt;/h2&gt;
+&lt;h2 id=&#34;example&#34;&gt;Example&lt;/h2&gt;
 
 &lt;p&gt;A &lt;code&gt;Dockerfile&lt;/code&gt; for installing graphite would look something like this if it was written like a &lt;code&gt;bash&lt;/code&gt; script:&lt;/p&gt;
 
@@ -1050,17 +1050,17 @@ RUN mkdir -p /app/wsgi \
   &amp;amp;&amp;amp; mv /app/apache-graphite.conf /etc/apache2/sites-enabled/apache-graphite.conf
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;1-common-header-packages:6226be07e9066526e21065089ae006e9&#34;&gt;1 - Common Header / Packages&lt;/h3&gt;
+&lt;h3 id=&#34;1-common-header-packages&#34;&gt;1 - Common Header / Packages&lt;/h3&gt;
 
 &lt;p&gt;This is our most shareable layer.  All the images running on the same host should start with this.  You can see I&amp;rsquo;ve added a few things like &lt;code&gt;curl&lt;/code&gt; and &lt;code&gt;git&lt;/code&gt; which while they&amp;rsquo;re not necessarily needed they&amp;rsquo;re useful for debugging and because they&amp;rsquo;re in such a shareable layer,  they don&amp;rsquo;t take up much room.&lt;/p&gt;
 
-&lt;h3 id=&#34;2-python-3-apache:6226be07e9066526e21065089ae006e9&#34;&gt;2 - Python, 3 - Apache&lt;/h3&gt;
+&lt;h3 id=&#34;2-python-3-apache&#34;&gt;2 - Python, 3 - Apache&lt;/h3&gt;
 
 &lt;p&gt;Here we get to our language specifications.   I&amp;rsquo;ve included the Python and Apache sections here because it&amp;rsquo;s not super clear which should go first.&lt;/p&gt;
 
 &lt;p&gt;If we put python first,  then any other image that uses Apache can get a few free python packages,  If we put Apache first then we could have a Ruby app that also includes that layer and get Apache for free ( hell you can just give it python for free anyways ).&lt;/p&gt;
 
-&lt;h3 id=&#34;4-apache-envs:6226be07e9066526e21065089ae006e9&#34;&gt;4 - Apache Envs&lt;/h3&gt;
+&lt;h3 id=&#34;4-apache-envs&#34;&gt;4 - Apache Envs&lt;/h3&gt;
 
 &lt;p&gt;I&amp;rsquo;m calling these out seperately for a few reasons.&lt;/p&gt;
 
@@ -1070,25 +1070,25 @@ RUN mkdir -p /app/wsgi \
 
 &lt;p&gt;Secondly, to mention that I really wish Docker provided a way to specify multiple ENVS on the same line so that I can reduce the number of layers I end up with.&lt;/p&gt;
 
-&lt;h3 id=&#34;5-graphite-and-deps:6226be07e9066526e21065089ae006e9&#34;&gt;5 - Graphite and Deps&lt;/h3&gt;
+&lt;h3 id=&#34;5-graphite-and-deps&#34;&gt;5 - Graphite and Deps&lt;/h3&gt;
 
 &lt;p&gt;This contains some Graphite specific &lt;code&gt;apt&lt;/code&gt; and &lt;code&gt;pip&lt;/code&gt; packages.  You could join them into a single command by joining them with &lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt; but I kept them seperate so that if &lt;code&gt;pip&lt;/code&gt; package requirements change it won&amp;rsquo;t need to also reget the &lt;code&gt;apt&lt;/code&gt; packages.&lt;/p&gt;
 
-&lt;h3 id=&#34;6-other:6226be07e9066526e21065089ae006e9&#34;&gt;6 - Other&lt;/h3&gt;
+&lt;h3 id=&#34;6-other&#34;&gt;6 - Other&lt;/h3&gt;
 
 &lt;p&gt;This contains a bunch of cheap commands like &lt;code&gt;ADD&lt;/code&gt; and &lt;code&gt;VOLUME&lt;/code&gt; they&amp;rsquo;re probably less likely to change than the previous package installs, but are also cheaper to run, so its less important if their cache is invalidated.&lt;/p&gt;
 
 &lt;p&gt;Keep them towards the bottom though as you don&amp;rsquo;t want any changes to them to invalidate the cache for a more costly command.&lt;/p&gt;
 
-&lt;h3 id=&#34;7-first-add:6226be07e9066526e21065089ae006e9&#34;&gt;7 - First ADD&lt;/h3&gt;
+&lt;h3 id=&#34;7-first-add&#34;&gt;7 - First ADD&lt;/h3&gt;
 
 &lt;p&gt;You should wait until the last possible moment to use the &lt;code&gt;ADD&lt;/code&gt; command as any commands after it are never cached.&lt;/p&gt;
 
-&lt;h3 id=&#34;8-final-setup:6226be07e9066526e21065089ae006e9&#34;&gt;8 - Final setup&lt;/h3&gt;
+&lt;h3 id=&#34;8-final-setup&#34;&gt;8 - Final setup&lt;/h3&gt;
 
 &lt;p&gt;I have grouped these final commands into a single layer and they&amp;rsquo;re after the &lt;code&gt;ADD&lt;/code&gt; commands as they manipulate files that come from the &lt;code&gt;ADD&lt;/code&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;fin:6226be07e9066526e21065089ae006e9&#34;&gt;FIN.&lt;/h2&gt;
+&lt;h2 id=&#34;fin&#34;&gt;FIN.&lt;/h2&gt;
 
 &lt;p&gt;Hopefully this has given you some insight into how to build a better &lt;code&gt;Dockerfile&lt;/code&gt;.  These are all things I have learned from experience in building my own Docker images and while they may not apply to all situations ( or may be flat out wrong ) they defintely seem to improve my development experience.&lt;/p&gt;
 </description>
@@ -1096,21 +1096,21 @@ RUN mkdir -p /app/wsgi \
     
     <item>
       <title>Factorish and The Twelve-Fakter App</title>
-      <link>http://tech.paulcz.net/2015/01/factorish_and_the_12_fakter_app/</link>
+      <link>http://tech.paulcz.net/blog/factorish_and_the_12_fakter_app/</link>
       <pubDate>Tue, 06 Jan 2015 13:29:27 -0600</pubDate>
       
-      <guid>http://tech.paulcz.net/2015/01/factorish_and_the_12_fakter_app/</guid>
-      <description>
-
-&lt;p&gt;Unless you&amp;rsquo;ve been living under a rock (in which case I envy you) you&amp;rsquo;ve heard a fair bit about The &lt;a href=&#34;http://12factor.net&#34;&gt;Twelve-Factor App&lt;/a&gt;. A wonderful stateless application that is completely disposable and can run anywhere from your own physical servers to &lt;a href=&#34;http://deis.io&#34;&gt;Deis&lt;/a&gt;, &lt;a href=&#34;http://cloudfoundry.org&#34;&gt;Cloud Foundry&lt;/a&gt; or &lt;a href=&#34;http://heroku.com&#34;&gt;Heroku&lt;/a&gt;.&lt;/p&gt;
+      <guid>http://tech.paulcz.net/blog/factorish_and_the_12_fakter_app/</guid>
+      <description>&lt;p&gt;Unless you&amp;rsquo;ve been living under a rock (in which case I envy you) you&amp;rsquo;ve heard a fair bit about The &lt;a href=&#34;http://12factor.net&#34;&gt;Twelve-Factor App&lt;/a&gt;. A wonderful stateless application that is completely disposable and can run anywhere from your own physical servers to &lt;a href=&#34;http://deis.io&#34;&gt;Deis&lt;/a&gt;, &lt;a href=&#34;http://cloudfoundry.org&#34;&gt;Cloud Foundry&lt;/a&gt; or &lt;a href=&#34;http://heroku.com&#34;&gt;Heroku&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Chances are you&amp;rsquo;re stuck writing and running an application that is decidely not 12Factor, nor will it ever be.  In a perfect world you&amp;rsquo;d scrap it and rewrite it as a dozen microservices that are loosely coupled but run and work indepently of eachother. The reality however is you could never get the okay to do that.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;Fortunately with the rise of &lt;a href=&#34;http://docker.com&#34;&gt;Docker&lt;/a&gt; and its ecosystem it has become easier to not only write 12Factor apps, but also to fake it by producing a Docker container that acts like a 12Factor app, but contains something that is decidedly not.  I call this the 12Fakter app.&lt;/p&gt;
 
 &lt;p&gt;I&amp;rsquo;ve been playing with this concept for a while, but over Christmas I spent a bunch of time trying to figure out the best ways to fake out the 12 Factors and feel that I&amp;rsquo;ve come up with something that works pretty well and in the process created a Vagrant based development sandbox called &lt;a href=&#34;http://github.com/paulczar/factorish&#34;&gt;Factorish&lt;/a&gt; which I used to create &lt;a href=&#34;http://github.com/paulczar/12fakter-wordpress&#34;&gt;12fakter-wordpress&lt;/a&gt; and &lt;a href=&#34;https://github.com/paulczar/docker-elk_confd&#34;&gt;elk_confd&lt;/a&gt;.&lt;/p&gt;
 
-&lt;h2 id=&#34;fakter-i-codebase:c0fb869c851342d199f99065fef4d125&#34;&gt;Fakter I. Codebase&lt;/h2&gt;
+&lt;h2 id=&#34;fakter-i-codebase&#34;&gt;Fakter I. Codebase&lt;/h2&gt;
 
 &lt;p&gt;&lt;strong&gt;One codebase tracked in revision control, many deploys&lt;/strong&gt;&lt;/p&gt;
 
@@ -1118,15 +1118,15 @@ RUN mkdir -p /app/wsgi \
 
 &lt;p&gt;You should be able to achieve this by either merging &lt;a href=&#34;http://github.com/paulczar/factorish&#34;&gt;Factorish&lt;/a&gt; into your existing git repo,  or fork it and use the &lt;code&gt;Dockerfile&lt;/code&gt; in it to pull the actual application code in as part of the build process.&lt;/p&gt;
 
-&lt;h2 id=&#34;fakter-ii-dependencies:c0fb869c851342d199f99065fef4d125&#34;&gt;Fakter II. Dependencies&lt;/h2&gt;
+&lt;h2 id=&#34;fakter-ii-dependencies&#34;&gt;Fakter II. Dependencies&lt;/h2&gt;
 
 &lt;p&gt;&lt;strong&gt;Explicitly declare and isolate dependencies&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;This is a really easy win with Docker,  The very nature of Docker both Explicitly declares your dependencies in the form of the &lt;code&gt;Dockerfile&lt;/code&gt; and Isolates them in the form of the built Docker image.&lt;/p&gt;
 
-&lt;h3 id=&#34;declaration:c0fb869c851342d199f99065fef4d125&#34;&gt;Declaration&lt;/h3&gt;
+&lt;h3 id=&#34;declaration&#34;&gt;Declaration&lt;/h3&gt;
 
-&lt;h4 id=&#34;app-example-dockerfile:c0fb869c851342d199f99065fef4d125&#34;&gt;/app/example/Dockerfile&lt;/h4&gt;
+&lt;h4 id=&#34;app-example-dockerfile&#34;&gt;/app/example/Dockerfile&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code&gt;FROM python:2
 
@@ -1174,7 +1174,7 @@ EXPOSE 8080
 
 &lt;p&gt;You might notice I have sets of commands joined together with &lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt; in my &lt;code&gt;Dockerfile&lt;/code&gt;, I do this to control the docker layers more to try and end up with fewer more meaningful layers.&lt;/p&gt;
 
-&lt;h3 id=&#34;isolation:c0fb869c851342d199f99065fef4d125&#34;&gt;Isolation&lt;/h3&gt;
+&lt;h3 id=&#34;isolation&#34;&gt;Isolation&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code&gt;$ docker build -t factorish/example example
 Sending build context to Docker daemon 20.99 kB
@@ -1190,7 +1190,7 @@ Removing intermediate container 8dc9a04eaf78
 Successfully built 374cb835239c
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;fakter-iii-configuration:c0fb869c851342d199f99065fef4d125&#34;&gt;Fakter III. Configuration&lt;/h2&gt;
+&lt;h2 id=&#34;fakter-iii-configuration&#34;&gt;Fakter III. Configuration&lt;/h2&gt;
 
 &lt;p&gt;&lt;strong&gt;Store config in the environment&lt;/strong&gt;&lt;/p&gt;
 
@@ -1201,22 +1201,22 @@ Successfully built 374cb835239c
 
 &lt;p&gt;However chances are your app reads from a config file rather than environment variables. There are [at least] two fairly simple ways to achieve this.&lt;/p&gt;
 
-&lt;h3 id=&#34;sed-inline-replacement:c0fb869c851342d199f99065fef4d125&#34;&gt;sed inline replacement&lt;/h3&gt;
+&lt;h3 id=&#34;sed-inline-replacement&#34;&gt;sed inline replacement&lt;/h3&gt;
 
 &lt;p&gt;use a startup script to edit your config file and replace values in it with the values of the environment variables using &lt;code&gt;sed&lt;/code&gt; before runnin your app:&lt;/p&gt;
 
-&lt;h4 id=&#34;app-bin-boot:c0fb869c851342d199f99065fef4d125&#34;&gt;/app/bin/boot&lt;/h4&gt;
+&lt;h4 id=&#34;app-bin-boot&#34;&gt;/app/bin/boot&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code&gt;#!/bin/bash
 sed -i &amp;quot;s/xxxTEXTxxx/${TEXT}&amp;quot; /app/example/example.conf
 python /app/example/app.py
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;confd-templating:c0fb869c851342d199f99065fef4d125&#34;&gt;confd templating&lt;/h3&gt;
+&lt;h3 id=&#34;confd-templating&#34;&gt;confd templating&lt;/h3&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/kelseyhightower/confd&#34;&gt;confd&lt;/a&gt; is a tool written specifically for templating config files from data sources such as environment variables.  This is a much better option as it also opens up the ability to use service discovery tooling like &lt;a href=&#34;https://coreos.com/using-coreos/etcd/&#34;&gt;etcd&lt;/a&gt; (also supported in Factorish) rather than environment variables.&lt;/p&gt;
 
-&lt;h4 id=&#34;app-conf-d-example-conf-toml:c0fb869c851342d199f99065fef4d125&#34;&gt;/app/conf.d/example.conf.toml&lt;/h4&gt;
+&lt;h4 id=&#34;app-conf-d-example-conf-toml&#34;&gt;/app/conf.d/example.conf.toml&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code&gt;[template]
 src   = &amp;quot;example.conf&amp;quot;
@@ -1224,7 +1224,7 @@ dest  = &amp;quot;/app/example/example.conf&amp;quot;
 keys = [&amp;quot;/services/example&amp;quot;]
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;app-templates-example-conf:c0fb869c851342d199f99065fef4d125&#34;&gt;/app/templates/example.conf&lt;/h4&gt;
+&lt;h4 id=&#34;app-templates-example-conf&#34;&gt;/app/templates/example.conf&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code&gt;[example]
 text: {{ getv &amp;quot;/services/example/text&amp;quot; }}
@@ -1232,14 +1232,14 @@ text: {{ getv &amp;quot;/services/example/text&amp;quot; }}
 
 &lt;p&gt;&lt;em&gt;The &lt;code&gt;{{ }}&lt;/code&gt; syntax above is the golang/confd macros used to perform tasks like fetching variables from etcd or environment.&lt;/em&gt;&lt;/p&gt;
 
-&lt;h4 id=&#34;app-bin-boot-1:c0fb869c851342d199f99065fef4d125&#34;&gt;/app/bin/boot&lt;/h4&gt;
+&lt;h4 id=&#34;app-bin-boot-1&#34;&gt;/app/bin/boot&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code&gt;#!/bin/bash
 confd -onetime
 python /app/example/app.py
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;fakter-iv-backing-services:c0fb869c851342d199f99065fef4d125&#34;&gt;Fakter IV. Backing Services&lt;/h2&gt;
+&lt;h2 id=&#34;fakter-iv-backing-services&#34;&gt;Fakter IV. Backing Services&lt;/h2&gt;
 
 &lt;p&gt;&lt;em&gt;Treat backing services as attached resources&lt;/em&gt;&lt;/p&gt;
 
@@ -1256,11 +1256,11 @@ python /app/example/app.py
 
 &lt;p&gt;The docker volume mounts actually work really well in a vagrant based development environment because you can pass your code all the way into the container from your workstation,  however there are definitely some security considerations to think about if you want to do volume mounts in production.&lt;/p&gt;
 
-&lt;h3 id=&#34;example:c0fb869c851342d199f99065fef4d125&#34;&gt;Example&lt;/h3&gt;
+&lt;h3 id=&#34;example&#34;&gt;Example&lt;/h3&gt;
 
 &lt;p&gt;A fictional &lt;strong&gt;PHP&lt;/strong&gt; based blog about bacon requires a database and a filestore:&lt;/p&gt;
 
-&lt;h4 id=&#34;app-templates-config-php:c0fb869c851342d199f99065fef4d125&#34;&gt;/app/templates/config.php&lt;/h4&gt;
+&lt;h4 id=&#34;app-templates-config-php&#34;&gt;/app/templates/config.php&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code&gt;define(&#39;DB_NAME&#39;, &#39;{{ getv &amp;quot;/db/name&amp;quot; }}&#39;);
 define(&#39;DB_USER&#39;, &#39;{{ getv &amp;quot;/db/user&amp;quot; }}&#39;);
@@ -1268,7 +1268,7 @@ define(&#39;DB_PASSWORD&#39;, &#39;{{ getv &amp;quot;/db/pass&amp;quot; }}&#39;)
 define(&#39;DB_HOST&#39;, &#39;{{ getv &amp;quot;/db/host&amp;quot; }}&#39;);
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;docker-run-command:c0fb869c851342d199f99065fef4d125&#34;&gt;Docker Run command&lt;/h4&gt;
+&lt;h4 id=&#34;docker-run-command&#34;&gt;Docker Run command&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code&gt;$ docker run -d -e DB_NAME=bacon -e DB_USER=bacon \
   -e DB_PASSWORD=bacon $DB_HOST=my.database.com \
@@ -1277,29 +1277,29 @@ define(&#39;DB_HOST&#39;, &#39;{{ getv &amp;quot;/db/host&amp;quot; }}&#39;);
 
 &lt;p&gt;confd will use the environment variables passed in via the &lt;code&gt;docker run&lt;/code&gt; command to fill out the variables called in the &lt;code&gt;{{ }}&lt;/code&gt; macros.  Note that confd transforms the environment variables so that the environment variable &lt;code&gt;DB_USER&lt;/code&gt; will be read by &lt;code&gt;{{ getv &amp;quot;/db/user&amp;quot; }}&lt;/code&gt;.  This is done to normalize the macro across the various data source options.&lt;/p&gt;
 
-&lt;h2 id=&#34;fakter-v-build-release-run:c0fb869c851342d199f99065fef4d125&#34;&gt;Fakter V. Build, Release, Run&lt;/h2&gt;
+&lt;h2 id=&#34;fakter-v-build-release-run&#34;&gt;Fakter V. Build, Release, Run&lt;/h2&gt;
 
 &lt;p&gt;&lt;strong&gt;Strictly separate build and run stages&lt;/strong&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;build:c0fb869c851342d199f99065fef4d125&#34;&gt;Build&lt;/h3&gt;
+&lt;h3 id=&#34;build&#34;&gt;Build&lt;/h3&gt;
 
 &lt;p&gt;Converts a code repo into an executable bundle. Sound familiar?  Yup, we&amp;rsquo;ve already solved this with our &lt;code&gt;Dockerfile&lt;/code&gt;.&lt;/p&gt;
 
-&lt;h3 id=&#34;release:c0fb869c851342d199f99065fef4d125&#34;&gt;Release&lt;/h3&gt;
+&lt;h3 id=&#34;release&#34;&gt;Release&lt;/h3&gt;
 
 &lt;p&gt;Takes the build and combines it with the current configuration. In a purely docker based system this can be split between the &lt;strong&gt;Build&lt;/strong&gt; (versioning and defaults) and &lt;strong&gt;Run&lt;/strong&gt; (current config) stages. However systems like Heroku and Deis have a seperate step for this which they handle internally.&lt;/p&gt;
 
-&lt;h3 id=&#34;run:c0fb869c851342d199f99065fef4d125&#34;&gt;Run&lt;/h3&gt;
+&lt;h3 id=&#34;run&#34;&gt;Run&lt;/h3&gt;
 
 &lt;p&gt;Runs the application by launching a set of the app&amp;rsquo;s processes against a selected release.  In a docker based system this is simply the &lt;code&gt;$ docker run&lt;/code&gt; command which can be called via a deploy script, or a init script (systemd/runit) or a scheduler like &lt;a href=&#34;https://coreos.com/using-coreos/clustering/&#34;&gt;fleet&lt;/a&gt; or &lt;a href=&#34;http://mesos.apache.org/&#34;&gt;mesos&lt;/a&gt;.&lt;/p&gt;
 
-&lt;h2 id=&#34;fakter-vi-processes:c0fb869c851342d199f99065fef4d125&#34;&gt;Fakter VI. Processes&lt;/h2&gt;
+&lt;h2 id=&#34;fakter-vi-processes&#34;&gt;Fakter VI. Processes&lt;/h2&gt;
 
 &lt;p&gt;&lt;strong&gt;Execute the app as one or more stateless processes&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;Your application inside the docker container should behave like a standard linux process running in the foreground and be stateless and share-nothing.  Being inside a docker container means that this is hidden and therefore we can fairly easily fake this but you do need to think about process management and logging which are discussed later and is further explored &lt;a href=&#34;http://tech.paulcz.net/2014/12/multi-process-docker-images-done-right/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
-&lt;h2 id=&#34;fakter-vii-port-binding:c0fb869c851342d199f99065fef4d125&#34;&gt;Fakter VII. Port binding&lt;/h2&gt;
+&lt;h2 id=&#34;fakter-vii-port-binding&#34;&gt;Fakter VII. Port binding&lt;/h2&gt;
 
 &lt;p&gt;&lt;strong&gt;Export services via port binding&lt;/strong&gt;&lt;/p&gt;
 
@@ -1309,7 +1309,7 @@ define(&#39;DB_HOST&#39;, &#39;{{ getv &amp;quot;/db/host&amp;quot; }}&#39;);
 
 &lt;p&gt;Docker itself takes care of the port binding by use of the &lt;code&gt;-p&lt;/code&gt; option on the command line.  It&amp;rsquo;s useful to register the port and host IP to somewhere ( etcd ) to allow for loadbalancers and other services to easily locate your application.&lt;/p&gt;
 
-&lt;h2 id=&#34;fakter-viii-concurrency:c0fb869c851342d199f99065fef4d125&#34;&gt;Fakter VIII. Concurrency&lt;/h2&gt;
+&lt;h2 id=&#34;fakter-viii-concurrency&#34;&gt;Fakter VIII. Concurrency&lt;/h2&gt;
 
 &lt;p&gt;&lt;strong&gt;Scale out via the process model&lt;/strong&gt;&lt;/p&gt;
 
@@ -1317,7 +1317,7 @@ define(&#39;DB_HOST&#39;, &#39;{{ getv &amp;quot;/db/host&amp;quot; }}&#39;);
 
 &lt;p&gt;Inside the container your application should not daemonize or write pid files (if unavoidable, not too difficult to script around) and use tooling like &lt;code&gt;upstart&lt;/code&gt; or &lt;code&gt;supervisord&lt;/code&gt; if there is more than one process that needs to be run.&lt;/p&gt;
 
-&lt;h2 id=&#34;fakter-ix-disposability:c0fb869c851342d199f99065fef4d125&#34;&gt;Fakter IX. Disposability&lt;/h2&gt;
+&lt;h2 id=&#34;fakter-ix-disposability&#34;&gt;Fakter IX. Disposability&lt;/h2&gt;
 
 &lt;p&gt;&lt;strong&gt;Maximize robustness with fast startup and graceful shutdown&lt;/strong&gt;&lt;/p&gt;
 
@@ -1325,7 +1325,7 @@ define(&#39;DB_HOST&#39;, &#39;{{ getv &amp;quot;/db/host&amp;quot; }}&#39;);
 
 &lt;p&gt;The container itself should kill itself if the app inside it stops working right.  If your app is running behind a &lt;a href=&#34;http://tech.paulcz.net/2014/12/multi-process-docker-images-done-right/&#34;&gt;supervisor&lt;/a&gt; this can be a achieved with a really lightweight healthcheck script like this.&lt;/p&gt;
 
-&lt;h4 id=&#34;app-bin-healhthcheck:c0fb869c851342d199f99065fef4d125&#34;&gt;/app/bin/healhthcheck&lt;/h4&gt;
+&lt;h4 id=&#34;app-bin-healhthcheck&#34;&gt;/app/bin/healhthcheck&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code&gt;#!/bin/bash
 while [[ ! -z $(netstat -lnt | awk &amp;quot;\$6 == \&amp;quot;LISTEN\&amp;quot; &amp;amp;&amp;amp; \$4 ~ \&amp;quot;.$PORT\&amp;quot; &amp;amp;&amp;amp; \$1 ~ \&amp;quot;tcp.?\&amp;quot;&amp;quot;) ]] ; do
@@ -1337,7 +1337,7 @@ kill `cat /var/run/supervisord.pid`
 
 &lt;p&gt;You&amp;rsquo;ll note that I&amp;rsquo;m also publishing host and port values to etcd if &lt;code&gt;$ETCD_HOST&lt;/code&gt; is set.  This can then be used to notify loadbalancers and the like when services start or stop.&lt;/p&gt;
 
-&lt;h2 id=&#34;fakter-x-dev-prod-parity:c0fb869c851342d199f99065fef4d125&#34;&gt;Fakter X. Dev/prod parity&lt;/h2&gt;
+&lt;h2 id=&#34;fakter-x-dev-prod-parity&#34;&gt;Fakter X. Dev/prod parity&lt;/h2&gt;
 
 &lt;p&gt;&lt;strong&gt;Keep development, staging, and production as similar as possible&lt;/strong&gt;&lt;/p&gt;
 
@@ -1347,7 +1347,7 @@ kill `cat /var/run/supervisord.pid`
 
 &lt;p&gt;By provisioning with the same tooling to both dev and prod (and any other envs),  any deployment of development (should happen frequently) is also a test of most of the tooling used to deploy to production.&lt;/p&gt;
 
-&lt;h2 id=&#34;fakter-xi-logs:c0fb869c851342d199f99065fef4d125&#34;&gt;Fakter XI. Logs&lt;/h2&gt;
+&lt;h2 id=&#34;fakter-xi-logs&#34;&gt;Fakter XI. Logs&lt;/h2&gt;
 
 &lt;p&gt;&lt;strong&gt;Treat logs as event streams&lt;/strong&gt;&lt;/p&gt;
 
@@ -1355,11 +1355,11 @@ kill `cat /var/run/supervisord.pid`
 
 &lt;p&gt;If your app &lt;em&gt;has&lt;/em&gt; to write to a logfile you should be able to configure that log file to be &lt;code&gt;/dev/stdout&lt;/code&gt; which should cause it to write to stdout of the process. If your app only writes to syslog then configure it to write to a remote syslog. Basically do whatever you can to ensure you don&amp;rsquo;t log to the local filesystem.&lt;/p&gt;
 
-&lt;h3 id=&#34;example-1:c0fb869c851342d199f99065fef4d125&#34;&gt;Example&lt;/h3&gt;
+&lt;h3 id=&#34;example-1&#34;&gt;Example&lt;/h3&gt;
 
 &lt;p&gt;This example shows running &lt;code&gt;Supervisord&lt;/code&gt; as your primary process in the docker container and &lt;code&gt;nginx&lt;/code&gt; writing logs to stdout which in turn are written to the containers &lt;code&gt;stdout&lt;/code&gt;.  A more thorough writeup on using &lt;a href=&#34;http://tech.paulcz.net/2014/12/multi-process-docker-images-done-right/&#34;&gt;supervisor&lt;/a&gt; inside docker containers can be found &lt;a href=&#34;http://tech.paulcz.net/2014/12/multi-process-docker-images-done-right/&#34;&gt;here&lt;/a&gt;:&lt;/p&gt;
 
-&lt;h4 id=&#34;etc-supervisor-conf-d-nginx:c0fb869c851342d199f99065fef4d125&#34;&gt;/etc/supervisor/conf.d/nginx&lt;/h4&gt;
+&lt;h4 id=&#34;etc-supervisor-conf-d-nginx&#34;&gt;/etc/supervisor/conf.d/nginx&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code&gt;[supervisord]
 logfile=/dev/null
@@ -1376,7 +1376,7 @@ autorestart=true
 user=root
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;etc-nginx-sites-enabled-app:c0fb869c851342d199f99065fef4d125&#34;&gt;/etc/nginx/sites-enabled/app&lt;/h4&gt;
+&lt;h4 id=&#34;etc-nginx-sites-enabled-app&#34;&gt;/etc/nginx/sites-enabled/app&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code&gt;worker_processes 1;
 daemon off;
@@ -1393,7 +1393,7 @@ http {
 
 &lt;p&gt;For a more detailed post on using logspout to produce consumable logs check out &lt;a href=&#34;https://twitter.com/behemphi&#34;&gt;@behemphi&lt;/a&gt;&amp;rsquo;s blog post - &lt;a href=&#34;http://stackengine.com/docker-logs-aggregating-ease/&#34;&gt;Docker Logs – Aggregating with Ease&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;fakter-xii-admin-processes:c0fb869c851342d199f99065fef4d125&#34;&gt;Fakter XII. Admin processes&lt;/h2&gt;
+&lt;h2 id=&#34;fakter-xii-admin-processes&#34;&gt;Fakter XII. Admin processes&lt;/h2&gt;
 
 &lt;p&gt;&lt;strong&gt;Run admin/management tasks as one-off processes&lt;/strong&gt;&lt;/p&gt;
 
@@ -1402,7 +1402,7 @@ http {
 &lt;pre&gt;&lt;code&gt;$ docker run -t -e DB_SERVER=user@pass:db.server.com myapp:1.3.2 rake db:migrate
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;conclusion:c0fb869c851342d199f99065fef4d125&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 
 &lt;p&gt;Most of the fakters above are relatively straight forward to utilize and can be built upon slowly, no need to perfect things before working on them.  They can also be utilized with any existing provisioning / config management tooling that you already have.&lt;/p&gt;
 
@@ -1412,23 +1412,22 @@ http {
 
 &lt;p&gt;The flexibility that the 12fakter application gives you means that you can move to a more modern infrastructure at your own pace when it makes sense without having to abandon or completely rewrite your existing applications.&lt;/p&gt;
 
-&lt;p&gt;Please check out &lt;a href=&#34;http://github.com/paulczar/factorish&#34;&gt;Factorish&lt;/a&gt; and some of the example 12fakter apps like &lt;a href=&#34;http://github.com/paulczar/12fakter-wordpress&#34;&gt;12fakter-wordpress&lt;/a&gt; and &lt;a href=&#34;https://github.com/paulczar/docker-elk_confd&#34;&gt;elk_confd&lt;/a&gt;. to see how easy it can be to start making your applications act like 12Factor apps.&lt;/p&gt;
-</description>
+&lt;p&gt;Please check out &lt;a href=&#34;http://github.com/paulczar/factorish&#34;&gt;Factorish&lt;/a&gt; and some of the example 12fakter apps like &lt;a href=&#34;http://github.com/paulczar/12fakter-wordpress&#34;&gt;12fakter-wordpress&lt;/a&gt; and &lt;a href=&#34;https://github.com/paulczar/docker-elk_confd&#34;&gt;elk_confd&lt;/a&gt;. to see how easy it can be to start making your applications act like 12Factor apps.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Multi Process Docker Images Done Right</title>
-      <link>http://tech.paulcz.net/2014/12/multi-process-docker-images-done-right/</link>
+      <link>http://tech.paulcz.net/blog/multi-process-docker-images-done-right/</link>
       <pubDate>Mon, 22 Dec 2014 21:31:03 -0600</pubDate>
       
-      <guid>http://tech.paulcz.net/2014/12/multi-process-docker-images-done-right/</guid>
-      <description>
-
-&lt;h2 id=&#34;for-some-values-of-right:1c79ecc8ccdca915b8029a73add2dd3b&#34;&gt;For some values of &amp;lsquo;right&amp;rsquo;&lt;/h2&gt;
+      <guid>http://tech.paulcz.net/blog/multi-process-docker-images-done-right/</guid>
+      <description>&lt;h2 id=&#34;for-some-values-of-right&#34;&gt;For some values of &amp;lsquo;right&amp;rsquo;&lt;/h2&gt;
 
 &lt;p&gt;Almost since &lt;a href=&#34;http://docker.com&#34;&gt;Docker&lt;/a&gt; was first introduced to the world there has been a fairly strong push to keeping containers to be single process.   This makes a lot of sense and definitely plays into the &lt;a href=&#34;http://12factor.net&#34;&gt;12 Factor&lt;/a&gt; way of thinking where all application output should be pushed to &lt;code&gt;stdout&lt;/code&gt; and docker itself with tools like &lt;a href=&#34;https://github.com/progrium/logspout&#34;&gt;logspout&lt;/a&gt; now has fairly strong tooling to deal with those logs.&lt;/p&gt;
 
 &lt;p&gt;Sometimes however it just makes sense to run more than one process in a container,  a perfect example would be running &lt;a href=&#34;https://github.com/kelseyhightower/confd&#34;&gt;confd&lt;/a&gt; as well as your application in order to modify the application&amp;rsquo;s config file based on changes in service discovery systems like &lt;a href=&#34;https://github.com/coreos/etcd&#34;&gt;etcd&lt;/a&gt;.   The &lt;a href=&#34;https://docs.docker.com/articles/ambassador_pattern_linking/&#34;&gt;ambassador&lt;/a&gt; container way of working can achieve similar things, but I&amp;rsquo;m not sure that running two containers with a process each to run your application is any better than running one container with two processes.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;If you&amp;rsquo;re going run multiple processes you have a few options to do it.&lt;/p&gt;
 
@@ -1440,7 +1439,7 @@ http {
 
 &lt;p&gt;I haven&amp;rsquo;t really messed around with the first option, maybe it could work out, but you&amp;rsquo;d lose the logs from the second process as it would need to output via the first process&amp;rsquo; &lt;code&gt;stdout&lt;/code&gt;.&lt;/p&gt;
 
-&lt;h2 id=&#34;the-bash-script:1c79ecc8ccdca915b8029a73add2dd3b&#34;&gt;The Bash Script&lt;/h2&gt;
+&lt;h2 id=&#34;the-bash-script&#34;&gt;The Bash Script&lt;/h2&gt;
 
 &lt;p&gt;Up until recently the way I have been running multiple processes is via the &lt;code&gt;bash&lt;/code&gt; script method, but it feels really clumsy and fragile and while it works I&amp;rsquo;ve never been particularly fond of it.&lt;/p&gt;
 
@@ -1460,7 +1459,7 @@ done
 
 &lt;p&gt;As you can see I&amp;rsquo;ve started two processes &lt;code&gt;elasticsearch&lt;/code&gt; and &lt;code&gt;confd&lt;/code&gt; both backgrounded and then I finish with a loop which publishes data to etcd every 5 seconds until the &lt;code&gt;elasticsearch&lt;/code&gt; process quits listening on its published tcp port.  This works, but it leaves me feeling a bit icky.&lt;/p&gt;
 
-&lt;h2 id=&#34;process-supervisor:1c79ecc8ccdca915b8029a73add2dd3b&#34;&gt;Process Supervisor&lt;/h2&gt;
+&lt;h2 id=&#34;process-supervisor&#34;&gt;Process Supervisor&lt;/h2&gt;
 
 &lt;p&gt;I have used various supervisors in containers before but never really liked the experience as I could never get all the logs out to &lt;code&gt;stdout&lt;/code&gt; and using the standard docker logging mechanisms so I&amp;rsquo;ve always gone back to the &lt;code&gt;bash&lt;/code&gt; script method.  Recently while working on the ELK project mentioned above I decided to give using a process supervisor another chance.&lt;/p&gt;
 
@@ -1534,20 +1533,18 @@ Starting elasticsearch
 2014-12-23 04:46:05,161 INFO success: confd entered RUNNING state, process has stayed up for &amp;gt; than 1 seconds (startsecs)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;One last thing that I should mention.  the &lt;code&gt;publish_etcd&lt;/code&gt; talk in the supervisor config is running a script that contains the &lt;code&gt;while&lt;/code&gt; loop to make sure that &lt;code&gt;elasticsearch&lt;/code&gt; is listening on the approriate port, If that loop is broken it means that&lt;code&gt;elasticsearch&lt;/code&gt; is not responding and it sends a kill signal to &lt;code&gt;supervisor&lt;/code&gt; which then causes the container to shoot itself in the head because the rest of the  processes running are useless without &lt;code&gt;elasticsearch&lt;/code&gt; running.&lt;/p&gt;
-</description>
+&lt;p&gt;One last thing that I should mention.  the &lt;code&gt;publish_etcd&lt;/code&gt; talk in the supervisor config is running a script that contains the &lt;code&gt;while&lt;/code&gt; loop to make sure that &lt;code&gt;elasticsearch&lt;/code&gt; is listening on the approriate port, If that loop is broken it means that&lt;code&gt;elasticsearch&lt;/code&gt; is not responding and it sends a kill signal to &lt;code&gt;supervisor&lt;/code&gt; which then causes the container to shoot itself in the head because the rest of the  processes running are useless without &lt;code&gt;elasticsearch&lt;/code&gt; running.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>BreadOps - Continuous Delivery of Fresh Baked Bread</title>
-      <link>http://tech.paulcz.net/2014/12/breadops-continous-delivery-of-fresh-baked-bread/</link>
+      <link>http://tech.paulcz.net/blog/breadops-continous-delivery-of-fresh-baked-bread/</link>
       <pubDate>Wed, 03 Dec 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://tech.paulcz.net/2014/12/breadops-continous-delivery-of-fresh-baked-bread/</guid>
+      <guid>http://tech.paulcz.net/blog/breadops-continous-delivery-of-fresh-baked-bread/</guid>
       <description>
 
 &lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/-rMMuR_Itcmk/VH9eSsVZ18I/AAAAAAAAOc8/bJBp9UaoMI0/s1024/20141203_124907.jpg&#34; alt=&#34;the best way to eat fresh bread&#34; /&gt;
-
 &amp;ldquo;See how this sparkly devop princess bakes bread every day with almost no effort at all with this one weird trick&amp;rdquo;&lt;/p&gt;
 
 &lt;p&gt;Store bought bread is shit.  Even the  &amp;ldquo;artisanal&amp;rdquo; bread at most supermarkets is little better than cake baked in a bread shaped mold ( seriously check next time you&amp;rsquo;re at a supermarket ).  You might be lucky and have a really good bread baker near you,  but like butchers and other important crafts they have all but disappeared.  My solution to this was to start baking bread myself.  I did a ton of research, started my own sourdough starter ( 5 years and going strong! ) and started baking bread regularly.&lt;/p&gt;
@@ -1558,7 +1555,7 @@ Starting elasticsearch
 
 &lt;p&gt;For a while it was tough going making bread all the time,  starters and doughs are fickle beasts and required constant care and feeding ( literally, you have to feed a sourdough starter at least twice a day ).   After almost giving up several times I started to apply what I now know as &lt;em&gt;devops techniques&lt;/em&gt;. Over time I worked to constantly improve my processes specifically optimizing for my time.  I can even apply CAMS across it:&lt;/p&gt;
 
-&lt;h2 id=&#34;culture:5777482caf0981cefc6ea3a7ef676968&#34;&gt;Culture&lt;/h2&gt;
+&lt;h2 id=&#34;culture&#34;&gt;Culture&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Lactobacillus &amp;hellip; HAHAHAHA Bakers joke!&lt;/li&gt;
@@ -1567,7 +1564,7 @@ Starting elasticsearch
 &lt;li&gt;Healthy Fresh bread for you and your family&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;automation:5777482caf0981cefc6ea3a7ef676968&#34;&gt;Automation&lt;/h2&gt;
+&lt;h2 id=&#34;automation&#34;&gt;Automation&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Slow ferment reduces requirement to knead to almost zero.&lt;/li&gt;
@@ -1575,7 +1572,7 @@ Starting elasticsearch
 &lt;li&gt;Usable for 5-7 days from the fridge.  &lt;strong&gt;Multiple loaves from the one batch.&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;measurement:5777482caf0981cefc6ea3a7ef676968&#34;&gt;Measurement&lt;/h2&gt;
+&lt;h2 id=&#34;measurement&#34;&gt;Measurement&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;How much active time did I spend on it ?&lt;br /&gt;&lt;/li&gt;
@@ -1584,7 +1581,7 @@ Starting elasticsearch
 &lt;li&gt;Is it better or worse than the previous iteration ?&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;sharing:5777482caf0981cefc6ea3a7ef676968&#34;&gt;Sharing&lt;/h2&gt;
+&lt;h2 id=&#34;sharing&#34;&gt;Sharing&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;A &lt;em&gt;lot&lt;/em&gt; of people have received loaves of bread from me during experimentation.&lt;/li&gt;
@@ -1594,12 +1591,11 @@ Starting elasticsearch
 
 &lt;p&gt;The final technique that I came up with is not exactly unique and is similar to a number of several hundred page thirty dollar books aimed at making baking bread more accessible to the home cook, where it differs is that this is just a short blog post and is free as in beer and speech.  It&amp;rsquo;s fairly descriptive and may seem like a lot of work, but I tend to average a little over 5 minutes of active time per loaf of bread which is a negligible amount of time.&lt;/p&gt;
 
-&lt;h2 id=&#34;ingredients-and-tools:5777482caf0981cefc6ea3a7ef676968&#34;&gt;Ingredients and Tools&lt;/h2&gt;
+&lt;h2 id=&#34;ingredients-and-tools&#34;&gt;Ingredients and Tools&lt;/h2&gt;
 
 &lt;p&gt;I worked hard to ensure that you don&amp;rsquo;t need to use any specialized tools.   No need for a standmixer or other expensive tools.  There are only two things (listed first) that you might not have in your kitchen, and they&amp;rsquo;re both so versatile that you &lt;em&gt;should&lt;/em&gt; have them.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://lh4.googleusercontent.com/v_kKOKFKupOdtI2_44MImjl5L8GYzq7QYMs1BxRyGgc=w1229-h692-no&#34; alt=&#34;things what you need to make bread&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lh4.googleusercontent.com/v_kKOKFKupOdtI2_44MImjl5L8GYzq7QYMs1BxRyGgc=w1229-h692-no&#34; alt=&#34;things what you need to make bread&#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Kitchen Scale[1]
@@ -1654,60 +1650,51 @@ Starting elasticsearch
 
 &lt;p&gt;[2] you could get away with using a baking tray, but a baking stone or a cast iron skillet will give you the best results.&lt;/p&gt;
 
-&lt;h2 id=&#34;the-starter:5777482caf0981cefc6ea3a7ef676968&#34;&gt;The Starter&lt;/h2&gt;
+&lt;h2 id=&#34;the-starter&#34;&gt;The Starter&lt;/h2&gt;
 
 &lt;p&gt;I use a &lt;a href=&#34;http://www.sourdoughhome.com/index.php?content=startermyway2&#34;&gt;sourdough starter&lt;/a&gt;, and I would recommend that you do the same &amp;hellip; But unless you already have a starter or have a friend who will give you some ( I&amp;rsquo;d be happy to give you some of mine ) You&amp;rsquo;ll probably want to use regular yeast which is what I&amp;rsquo;ll describe below.  If you have a sourdough starter then skip this step.&lt;/p&gt;
 
 &lt;p&gt;Mix 50g Flour, 50g Water, 3g yeast until it forms a paste and then cover with plastic wrap:
-&lt;img src=&#34;https://lh3.googleusercontent.com/-IKFdhJcTr7c/VHtUZeGewaI/AAAAAAAAObE/NQpFh4jQiCs/w1228-h691-no/20141124_123134.jpg&#34; alt=&#34;Starter&#34; /&gt;
-&lt;/p&gt;
+&lt;img src=&#34;https://lh3.googleusercontent.com/-IKFdhJcTr7c/VHtUZeGewaI/AAAAAAAAObE/NQpFh4jQiCs/w1228-h691-no/20141124_123134.jpg&#34; alt=&#34;Starter&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;After 4-6 hours it should be all bubby and smell yeasty and ready for The Mix:
-&lt;img src=&#34;https://lh6.googleusercontent.com/-_ap54clqH38/VH9em5xPMRI/AAAAAAAAOdk/syJCBF_2AJA/s640/20141201_085112.jpg&#34; alt=&#34;fermented starter&#34; /&gt;
-&lt;/p&gt;
+&lt;img src=&#34;https://lh6.googleusercontent.com/-_ap54clqH38/VH9em5xPMRI/AAAAAAAAOdk/syJCBF_2AJA/s640/20141201_085112.jpg&#34; alt=&#34;fermented starter&#34; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;the-mix:5777482caf0981cefc6ea3a7ef676968&#34;&gt;The Mix&lt;/h2&gt;
+&lt;h2 id=&#34;the-mix&#34;&gt;The Mix&lt;/h2&gt;
 
 &lt;p&gt;Add the Starter and 375g of water to the large bowl and mix with a fork until it looks like milk:&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;Metric protip: a gram of water is the same as a milliliter of water&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://lh4.googleusercontent.com/-0Se5tsoJoH4/VHtUWeoTVdI/AAAAAAAAOa0/57hyMA0sBPk/w1228-h691-no/20141124_140942.jpg&#34; alt=&#34;don&#39;t drink it silly!&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lh4.googleusercontent.com/-0Se5tsoJoH4/VHtUWeoTVdI/AAAAAAAAOa0/57hyMA0sBPk/w1228-h691-no/20141124_140942.jpg&#34; alt=&#34;don&#39;t drink it silly!&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Add 500g of flour and 15g salt.  Mix it until fully incorporated ( we&amp;rsquo;re not kneading here, just making sure there is no dry flour left ):
-&lt;img src=&#34;https://lh5.googleusercontent.com/-FGpOS40YpWM/VH9elHUFGCI/AAAAAAAAOdc/tKkrmoXplWw/s640/20141201_085637.jpg&#34; alt=&#34;mixed&#34; /&gt;
-&lt;/p&gt;
+&lt;img src=&#34;https://lh5.googleusercontent.com/-FGpOS40YpWM/VH9elHUFGCI/AAAAAAAAOdc/tKkrmoXplWw/s640/20141201_085637.jpg&#34; alt=&#34;mixed&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;These quantities form a ratio that can be used to make batches as big or as small as your want.  I usually double it which gives me a decent sized loaf every two days.&lt;/em&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;the-warm-ferment:5777482caf0981cefc6ea3a7ef676968&#34;&gt;The Warm Ferment&lt;/h2&gt;
+&lt;h2 id=&#34;the-warm-ferment&#34;&gt;The Warm Ferment&lt;/h2&gt;
 
 &lt;p&gt;Cover the bowl and leave it at room temperature for 4 to 8 hours.  The timing doesn&amp;rsquo;t have to be precise,  you&amp;rsquo;re just looking for sings of the yeast to start fermenting the flour and creating air bubbles.  Cover and refrigerate for at least 24 hours, up to 5 days:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/-DRtoK892ZEI/VH-U6UZeLFI/AAAAAAAAOd8/pmbYgIUPmJU/s640/20141105_101952.jpg&#34; alt=&#34;fermentation activated&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/-DRtoK892ZEI/VH-U6UZeLFI/AAAAAAAAOd8/pmbYgIUPmJU/s640/20141105_101952.jpg&#34; alt=&#34;fermentation activated&#34; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;the-shaping:5777482caf0981cefc6ea3a7ef676968&#34;&gt;The Shaping&lt;/h2&gt;
+&lt;h2 id=&#34;the-shaping&#34;&gt;The Shaping&lt;/h2&gt;
 
 &lt;p&gt;&lt;em&gt;Whenever you are working with the dough, it is important to try to lose as little air as possible.  Do not punch it down.&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://lh6.googleusercontent.com/-bXb_SAwYxSY/VHtUTmXk2SI/AAAAAAAAOak/ME5g9N5mkpM/w1228-h691-no/20141129_143244.jpg&#34; alt=&#34;ready for shaping&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lh6.googleusercontent.com/-bXb_SAwYxSY/VHtUTmXk2SI/AAAAAAAAOak/ME5g9N5mkpM/w1228-h691-no/20141129_143244.jpg&#34; alt=&#34;ready for shaping&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Lightly flour the bench and turn out your dough.   Cut off a piece to use and put the rest back in the bowl and back into the fridge:
-&lt;img src=&#34;https://lh6.googleusercontent.com/-B3N3OIQFnsA/VHtUSAIq2OI/AAAAAAAAOac/GsZeRXf4yjk/w1228-h691-no/20141129_143342.jpg&#34; alt=&#34;fresh from the cold ferment&#34; /&gt;
-&lt;/p&gt;
+&lt;img src=&#34;https://lh6.googleusercontent.com/-B3N3OIQFnsA/VHtUSAIq2OI/AAAAAAAAOac/GsZeRXf4yjk/w1228-h691-no/20141129_143342.jpg&#34; alt=&#34;fresh from the cold ferment&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;Protip: You can use the final piece of dough as the starter for the next batch and skip a step.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;Gently stretch the piece dough out into a squaring shape and then fold each edge into the middle:
-&lt;img src=&#34;https://lh3.googleusercontent.com/-jU4S-UI5kvw/VHtUQoyLJYI/AAAAAAAAOaU/VyQFf1qb06Y/w1228-h691-no/20141129_143427.jpg&#34; alt=&#34;folding&#34; /&gt;
-&lt;/p&gt;
+&lt;img src=&#34;https://lh3.googleusercontent.com/-jU4S-UI5kvw/VHtUQoyLJYI/AAAAAAAAOaU/VyQFf1qb06Y/w1228-h691-no/20141129_143427.jpg&#34; alt=&#34;folding&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Turn the dough over and shape it into a ball:
-&lt;img src=&#34;https://lh3.googleusercontent.com/-wHWpKg-1IVM/VHtUPA1T5QI/AAAAAAAAOaM/ANaEWZyDuJ0/w1228-h691-no/20141129_143521.jpg&#34; alt=&#34;dough balls&#34; /&gt;
-&lt;/p&gt;
+&lt;img src=&#34;https://lh3.googleusercontent.com/-wHWpKg-1IVM/VHtUPA1T5QI/AAAAAAAAOaM/ANaEWZyDuJ0/w1228-h691-no/20141129_143521.jpg&#34; alt=&#34;dough balls&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Watch this &lt;a href=&#34;https://www.youtube.com/watch?feature=player_detailpage&amp;amp;v=4VdVrib2PQo#t=20&#34;&gt;video&lt;/a&gt; (not mine) for the technique used to shape the dough into balls.
 &lt;div class=&#34;embed video-player&#34;&gt;
@@ -1717,39 +1704,34 @@ Starting elasticsearch
 &lt;/p&gt;
 
 &lt;p&gt;Oil your shaping bowl and flip your ball over so that the top of the dough is facing down in the bowl and cover it:
-&lt;img src=&#34;https://lh5.googleusercontent.com/-xbzq6cwYJis/VHtUNHuDbiI/AAAAAAAAOaE/8EdixPbGN1k/w1228-h691-no/20141129_144021.jpg&#34; alt=&#34;final shaping&#34; /&gt;
-&lt;/p&gt;
+&lt;img src=&#34;https://lh5.googleusercontent.com/-xbzq6cwYJis/VHtUNHuDbiI/AAAAAAAAOaE/8EdixPbGN1k/w1228-h691-no/20141129_144021.jpg&#34; alt=&#34;final shaping&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;You can easily make Ciabatta ( just fold it over itself in one direction and crimp the edges ), or Baguettes ( harder to explain, but youtube has plenty of guides ), or any other style of bread that you prefer.   Even works great for pizza bases!&lt;/p&gt;
 
-&lt;h2 id=&#34;the-final-ferment:5777482caf0981cefc6ea3a7ef676968&#34;&gt;The Final Ferment&lt;/h2&gt;
+&lt;h2 id=&#34;the-final-ferment&#34;&gt;The Final Ferment&lt;/h2&gt;
 
 &lt;p&gt;Let the dough warm back up to room temperature and the yeasts to wake up and get active again.   This will probably take about two hours.  Crank the oven on to 450F after about an hour.  This gives the oven a good solid hour to get up to temperature and stabilize.&lt;/p&gt;
 
-&lt;h2 id=&#34;the-bake:5777482caf0981cefc6ea3a7ef676968&#34;&gt;The Bake&lt;/h2&gt;
+&lt;h2 id=&#34;the-bake&#34;&gt;The Bake&lt;/h2&gt;
 
 &lt;p&gt;Turn the oven up to 500F, open the door, and slide the rack with the pizza stone out so that you can get to it without burning yourself.   upend the bowl onto the stone and run a knife quickly over the top to create a shallow cut:
-&lt;img src=&#34;https://lh3.googleusercontent.com/-Pzk8zAWIWt0/VHtULim3WvI/AAAAAAAAOZ8/NTrxiDnOXmk/w1228-h691-no/20141129_155656.jpg&#34; alt=&#34;ready for baking&#34; /&gt;
-&lt;/p&gt;
+&lt;img src=&#34;https://lh3.googleusercontent.com/-Pzk8zAWIWt0/VHtULim3WvI/AAAAAAAAOZ8/NTrxiDnOXmk/w1228-h691-no/20141129_155656.jpg&#34; alt=&#34;ready for baking&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Bake for 5 minutes, then turn the oven back down to 450F and bake for another 20 minutes:
-&lt;img src=&#34;https://lh4.googleusercontent.com/-hX_Gpo4YIOE/VHtTrWwzT8I/AAAAAAAAOZ0/EY1snf5ymew/w1228-h691-no/20141129_180734.jpg&#34; alt=&#34;baked&#34; /&gt;
-&lt;/p&gt;
+&lt;img src=&#34;https://lh4.googleusercontent.com/-hX_Gpo4YIOE/VHtTrWwzT8I/AAAAAAAAOZ0/EY1snf5ymew/w1228-h691-no/20141129_180734.jpg&#34; alt=&#34;baked&#34; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;the-cooldown:5777482caf0981cefc6ea3a7ef676968&#34;&gt;The Cooldown&lt;/h2&gt;
+&lt;h2 id=&#34;the-cooldown&#34;&gt;The Cooldown&lt;/h2&gt;
 
 &lt;p&gt;Avoid the tempation to cut into the bread while its still hot.  Bread continues to cook as it cools down and its important to not allow steam and heat to escape.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://lh4.googleusercontent.com/-8v2AonhRmTE/VH9eUSh3hxI/AAAAAAAAOdE/kx4in89KNTk/s640/20141202_184332.jpg&#34; alt=&#34;some other styles&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lh4.googleusercontent.com/-8v2AonhRmTE/VH9eUSh3hxI/AAAAAAAAOdE/kx4in89KNTk/s640/20141202_184332.jpg&#34; alt=&#34;some other styles&#34; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;the-eatening:5777482caf0981cefc6ea3a7ef676968&#34;&gt;The Eatening&lt;/h2&gt;
+&lt;h2 id=&#34;the-eatening&#34;&gt;The Eatening&lt;/h2&gt;
 
 &lt;p&gt;Fresh bread is best enjoyed simply with some high quality extra virgin olive oil and balsamic vinegar:
-&lt;img src=&#34;https://lh3.googleusercontent.com/-_AuYSwAc_8A/VHtTnddC1CI/AAAAAAAAOZc/9cgRejB_s4g/w1228-h691-no/20141129_181010.jpg&#34; alt=&#34;ready to eat&#34; /&gt;
-&lt;/p&gt;
+&lt;img src=&#34;https://lh3.googleusercontent.com/-_AuYSwAc_8A/VHtTnddC1CI/AAAAAAAAOZc/9cgRejB_s4g/w1228-h691-no/20141129_181010.jpg&#34; alt=&#34;ready to eat&#34; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;tips-and-tricks:5777482caf0981cefc6ea3a7ef676968&#34;&gt;Tips and Tricks&lt;/h2&gt;
+&lt;h2 id=&#34;tips-and-tricks&#34;&gt;Tips and Tricks&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Make your starter from Ikea&amp;rsquo;s &lt;a href=&#34;http://www.ikea.com/us/en/catalog/products/00229031/&#34;&gt;BRÖDMIX FLERKORN&lt;/a&gt; which contains all sorts of interesting grains as well as Yeast and &amp;ldquo;Sourdough Powder&amp;rdquo; whatever that is.&lt;/li&gt;
@@ -1762,24 +1744,113 @@ Starting elasticsearch
     </item>
     
     <item>
-      <title>about</title>
+      <title>About Me</title>
       <link>http://tech.paulcz.net/page/about/</link>
       <pubDate>Sun, 30 Nov 2014 09:04:08 -0600</pubDate>
       
       <guid>http://tech.paulcz.net/page/about/</guid>
-      <description>&lt;p&gt;Hi.  My name is Paul.  I like stuff.&lt;/p&gt;
+      <description>&lt;p&gt;Paul is an Infrastructure Engineer who has been doing IT and Operations for longer than he cares to admit and has worked across many industries, retail, game development, managed hosting, and more.  He has worked in both very large and very small organizations.&lt;/p&gt;
+
+&lt;p&gt;As an avid Technologist he can be found tinkering with emergent technologies (hello running docker in production in 2014) and optimizing and codifying the operations of large legacy applications.&lt;/p&gt;
+
+&lt;p&gt;Paul is an active member of the Austin Technology scene and is often found at the &lt;a href=&#34;https://www.meetup.com/austin-devops/&#34;&gt;Austin DevOps&lt;/a&gt;, &lt;a href=&#34;https://www.meetup.com/CloudAustin/&#34;&gt;Cloud Austin&lt;/a&gt;, &lt;a href=&#34;https://www.meetup.com/Docker-Austin/&#34;&gt;Docker Austin&lt;/a&gt;, and &lt;a href=&#34;https://www.meetup.com/OpenStack-Austin/&#34;&gt;OpenStack Austin&lt;/a&gt; both as a attendee and as a &lt;a href=&#34;http://tech.paulcz.net/page/speaker&#34;&gt;speaker&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Paul also helps organize local community conferences such as &lt;a href=&#34;https://www.devopsdays.org/events/2016-austin/welcome/&#34;&gt;DevOps Days Austin&lt;/a&gt; and &lt;a href=&#34;http://www.containerdaysaustin.com&#34;&gt;Container Days Austin&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Technology isn&amp;rsquo;t his only interest though.  Paul has a love of cooking and can often be found baking sourdough bread and cooking Texas style barbecue in his custom offset pit and competing ( and winning ) in food competitions both locally and interstate.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Paul Talks about stuff</title>
+      <link>http://tech.paulcz.net/page/speaker/</link>
+      <pubDate>Sun, 30 Nov 2014 09:04:08 -0600</pubDate>
+      
+      <guid>http://tech.paulcz.net/page/speaker/</guid>
+      <description>
+
+&lt;p&gt;An incomplete list of events that I&amp;rsquo;ve spoken at&lt;/p&gt;
+
+&lt;h1 id=&#34;2016&#34;&gt;2016&lt;/h1&gt;
+
+&lt;h2 id=&#34;all-day-devops&#34;&gt;All Day DevOps&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Serverfull computing - &lt;a href=&#34;https://youtu.be/MOrWDvpZTdY?t=4874&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;openstack-summit-barcelona&#34;&gt;OpenStack Summit Barcelona&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;InterOp Panel - &lt;a href=&#34;https://www.openstack.org/videos/barcelona-2016/interop-you-keep-using-that-word-i-do-not-think-it-means-what-you-think-it-means&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;OpenStack Compliance the DevOps way - &lt;a href=&#34;https://www.openstack.org/videos/barcelona-2016/openstack-compliance-the-devops-way&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;openstack-day-seattle&#34;&gt;OpenStack Day Seattle&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;99 OpenStack clouds on the wall - &lt;a href=&#34;https://www.youtube.com/watch?v=erjUIO0kKI8&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;openstack-summit-austin&#34;&gt;OpenStack Summit Austin&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A PaaS for Continuous Delivery - &lt;a href=&#34;https://www.openstack.org/videos/austin-2016/a-paas-for-continuous-delivery-of-cloud-native-apps-minus-kubernetes-and-mesos&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;2015&#34;&gt;2015&lt;/h1&gt;
+
+&lt;h2 id=&#34;openstack-summit-tokyo&#34;&gt;OpenStack Summit Tokyo&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Chef vs Ansible vs Puppet vs Salt - &lt;a href=&#34;https://www.openstack.org/videos/tokio-2015/chef-vs-puppet-vs-ansible-vs-salt-whats-best-for-deploying-and-managing-openstack&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;devops-days-austin&#34;&gt;DevOps Days Austin&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Scout-A-Park a story of pragmatic dockerization - &lt;a href=&#34;https://vimeo.com/album/3437844/video/129894208&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;openstack-day-seattle-1&#34;&gt;OpenStack Day Seattle&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Just enough OpenStack for Docker - &lt;a href=&#34;https://www.youtube.com/watch?v=mYYa84WQowQ&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;openstack-summit-vancouver&#34;&gt;OpenStack Summit Vancouver&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Docker Docker Docker Openstack - &lt;a href=&#34;https://www.openstack.org/videos/vancouver-2015/docker-docker-docker-openstack&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;docker-austin-meetup&#34;&gt;Docker Austin meetup&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Factorish - &lt;a href=&#34;https://www.youtube.com/watch?v=uqKPgc8jMkI&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;2014&#34;&gt;2014&lt;/h1&gt;
+
+&lt;h2 id=&#34;dockercon14&#34;&gt;DockerCon14&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Automated Chef cookbook testing with Drone.io and GitHub - &lt;a href=&#34;https://www.youtube.com/watch?v=9_H41VFfKcM&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     
     <item>
       <title>EZBake - A new way to converge docker containers with chef</title>
-      <link>http://tech.paulcz.net/2014/05/ezbake-a-new-way-to-converge-docker-containers-with-chef/</link>
+      <link>http://tech.paulcz.net/blog/ezbake-a-new-way-to-converge-docker-containers-with-chef/</link>
       <pubDate>Tue, 13 May 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://tech.paulcz.net/2014/05/ezbake-a-new-way-to-converge-docker-containers-with-chef/</guid>
+      <guid>http://tech.paulcz.net/blog/ezbake-a-new-way-to-converge-docker-containers-with-chef/</guid>
       <description>&lt;p&gt;&lt;code&gt;EZ Bake&lt;/code&gt; came from an idea I had while watching the &lt;a href=&#34;https://twitter.com/hangops&#34;&gt;HangOps&lt;/a&gt; &lt;a href=&#34;https://www.youtube.com/watch?v=clLFKIeSADo&amp;amp;feature=youtu.be&#34;&gt;episode 2014-04-11&lt;/a&gt; in which they were talking about &lt;code&gt;Docker&lt;/code&gt; and Config Management being complementary rather than adversary.&lt;/p&gt;
 
 &lt;p&gt;I have expermented with using &lt;code&gt;Chef&lt;/code&gt; and &lt;code&gt;Docker&lt;/code&gt; together in the &lt;a href=&#34;http://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io.html&#34;&gt;past&lt;/a&gt; but wanted to tackle the problem from a slightly different angle.  I&amp;rsquo;ve recently been working on some PAAS stuff, both &lt;a href=&#34;http://deis.io&#34;&gt;Deis&lt;/a&gt; and &lt;a href=&#34;http://solum.io&#34;&gt;Solum&lt;/a&gt; these both utilize the tooling from &lt;a href=&#34;https://github.com/flynn/flynn&#34;&gt;Flynn&lt;/a&gt; which builds heroku style &lt;code&gt;buildpacks&lt;/code&gt; in &lt;code&gt;Docker&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;EZ Bake takes chef recipes designed for &lt;code&gt;chef-solo&lt;/code&gt; ( but could easily be extended to do the same for &lt;code&gt;chef-zero&lt;/code&gt;, or &lt;code&gt;chef-client&lt;/code&gt; with a server) in a tarball via &lt;code&gt;stdin&lt;/code&gt; and converges a docker node using that recipe.&lt;/p&gt;
 
@@ -1823,30 +1894,28 @@ Java HotSpot(TM) 64-Bit Server VM (build 24.51-b03, mixed mode)
 
 &lt;p&gt;This could easily be built into a CI pipeline.   a git webhook could call jenkins which would clone the repo and then use a command like  &lt;code&gt;git archive master | docker run -i -a stdin paulczar/ezbake&lt;/code&gt; to converge a container from it.&lt;/p&gt;
 
-&lt;p&gt;It could also very easily be used in &lt;code&gt;Deis&lt;/code&gt; or &lt;code&gt;Solum&lt;/code&gt; as an alternative to a Heroku buildpack.&lt;/p&gt;
-</description>
+&lt;p&gt;It could also very easily be used in &lt;code&gt;Deis&lt;/code&gt; or &lt;code&gt;Solum&lt;/code&gt; as an alternative to a Heroku buildpack.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Running DEIS.IO on Rackspace Cloud</title>
-      <link>http://tech.paulcz.net/2014/02/running-deis-io-on-rackspace-cloud/</link>
+      <link>http://tech.paulcz.net/blog/running-deis-io-on-rackspace-cloud/</link>
       <pubDate>Sun, 23 Feb 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://tech.paulcz.net/2014/02/running-deis-io-on-rackspace-cloud/</guid>
-      <description>
+      <guid>http://tech.paulcz.net/blog/running-deis-io-on-rackspace-cloud/</guid>
+      <description>&lt;p&gt;I recently did a presentation at the Cloud Austin meetup titled &lt;a href=&#34;http://tech.paulcz.net/presentation-cloud-austin-deis/#/&#34;&gt;Docking with Unicorns&lt;/a&gt; about new PAAS on the block &lt;a href=&#34;http://deis.io&#34;&gt;DEIS&lt;/a&gt;.   Building out DEIS is quite easy,  make more easy by some tight integration they have with Rackspace Cloud.    If you&amp;rsquo;re interested in what deis is go through my slides linked above, and the documentation on their website.    If you want to build out an environment to kick the tires a bit,  then click &amp;lsquo;Read on&amp;rsquo; below and follow me down the rabbit hole.&lt;/p&gt;
 
-&lt;p&gt;I recently did a presentation at the Cloud Austin meetup titled &lt;a href=&#34;http://tech.paulcz.net/presentation-cloud-austin-deis/#/&#34;&gt;Docking with Unicorns&lt;/a&gt; about new PAAS on the block &lt;a href=&#34;http://deis.io&#34;&gt;DEIS&lt;/a&gt;.   Building out DEIS is quite easy,  make more easy by some tight integration they have with Rackspace Cloud.    If you&amp;rsquo;re interested in what deis is go through my slides linked above, and the documentation on their website.    If you want to build out an environment to kick the tires a bit,  then click &amp;lsquo;Read on&amp;rsquo; below and follow me down the rabbit hole.&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;chef-setup:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Chef setup&lt;/h2&gt;
+&lt;h2 id=&#34;chef-setup&#34;&gt;Chef setup&lt;/h2&gt;
 
 &lt;p&gt;Chef offers a free hosted service for up to five servers.  That&amp;rsquo;s plenty for this exercise so go to the &lt;a href=&#34;https://www.getchef.com/account&#34;&gt;registration page&lt;/a&gt; and create yourself a user.  At some point it will prompt you to generate and save a key, do that and download it.&lt;/p&gt;
 
 &lt;p&gt;Once you have signed up you can download a knife config file and generate a validation key from the &lt;a href=&#34;https://manage.opscode.com/organizations&#34;&gt;Organizations&lt;/a&gt; page.  We can save those down and then move them to a local working directory.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://lh5.googleusercontent.com/-3R-Z-bRi_s0/UwpipiLhhWI/AAAAAAAAN0Q/W6q_Rb7NFy8/w1240-h663-no/opscode-org-page.png&#34; alt=&#34;chef org setup&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lh5.googleusercontent.com/-3R-Z-bRi_s0/UwpipiLhhWI/AAAAAAAAN0Q/W6q_Rb7NFy8/w1240-h663-no/opscode-org-page.png&#34; alt=&#34;chef org setup&#34; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;prepare-working-environment:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Prepare Working Environment&lt;/h3&gt;
+&lt;h3 id=&#34;prepare-working-environment&#34;&gt;Prepare Working Environment&lt;/h3&gt;
 
 &lt;p&gt;Create a &lt;code&gt;~/paas&lt;/code&gt; working directory and configure your local chef tools like this ( change the Download location to match the files you downloaded above ) :&lt;/p&gt;
 
@@ -1858,7 +1927,7 @@ $ mv ~/Downloads/&amp;lt;username&amp;gt;-validator.pem .chef/
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;clone-the-deis-repository:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Clone the Deis Repository&lt;/h3&gt;
+&lt;h3 id=&#34;clone-the-deis-repository&#34;&gt;Clone the Deis Repository&lt;/h3&gt;
 
 &lt;p&gt;Clone the deis project into your paas working directory:&lt;/p&gt;
 
@@ -1873,7 +1942,7 @@ Checking connectivity... done
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;install-pre-reqs:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Install Pre-reqs&lt;/h3&gt;
+&lt;h3 id=&#34;install-pre-reqs&#34;&gt;Install Pre-reqs&lt;/h3&gt;
 
 &lt;p&gt;Assuming you have a working &lt;code&gt;Ruby 1.9.3+&lt;/code&gt; and the &lt;code&gt;bundler&lt;/code&gt; gem installed you should be able to use the &lt;code&gt;Gemfile&lt;/code&gt; from the deis project to ensure you have all the necessary tools:&lt;/p&gt;
 
@@ -1894,7 +1963,7 @@ Use `bundle show [gemname]` to see where a bundled gem is installed.
 
 &lt;p&gt;&lt;em&gt;I had some errors installing the eventmachine gem and had to follow &lt;a href=&#34;https://github.com/gitlabhq/gitlabhq/issues/1051#issuecomment-9176547&#34;&gt;this fix&lt;/a&gt; to get bundle install to work&lt;/em&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;test-chef-connectivity:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Test Chef Connectivity&lt;/h3&gt;
+&lt;h3 id=&#34;test-chef-connectivity&#34;&gt;Test Chef Connectivity&lt;/h3&gt;
 
 &lt;p&gt;To make sure we configured chef correctly and installed knife as part of the bundle we can run a quick knife command:&lt;/p&gt;
 
@@ -1902,11 +1971,11 @@ Use `bundle show [gemname]` to see where a bundled gem is installed.
 &amp;lt;USERNAME&amp;gt;-validator
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;create-an-environment-for-deis:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Create an Environment for Deis&lt;/h3&gt;
+&lt;h3 id=&#34;create-an-environment-for-deis&#34;&gt;Create an Environment for Deis&lt;/h3&gt;
 
 &lt;p&gt;Deis is currently hardcoded to use the &lt;code&gt;_default&lt;/code&gt; chef environment.    There is a current &lt;a href=&#34;https://github.com/opdemand/deis/issues/523&#34;&gt;issue&lt;/a&gt; on their github to resolve this.   Once that is done I&amp;rsquo;ll update these instructions to create a &lt;code&gt;deis&lt;/code&gt; environment.&lt;/p&gt;
 
-&lt;h3 id=&#34;upload-the-deis-cookbooks:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Upload the Deis Cookbooks&lt;/h3&gt;
+&lt;h3 id=&#34;upload-the-deis-cookbooks&#34;&gt;Upload the Deis Cookbooks&lt;/h3&gt;
 
 &lt;p&gt;If that went well we can upload our cookbooks:&lt;/p&gt;
 
@@ -1927,7 +1996,7 @@ Using git (2.7.0)
 ...
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;create-deis-databags:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Create Deis Databags&lt;/h3&gt;
+&lt;h3 id=&#34;create-deis-databags&#34;&gt;Create Deis Databags&lt;/h3&gt;
 
 &lt;p&gt;Deis uses some databags to help manage application state.  We can create them like this:&lt;/p&gt;
 
@@ -1937,13 +2006,13 @@ $ bundle exec knife data bag create deis-apps
 Created data_bag[deis-apps]
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;prepare-infrastructure:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Prepare Infrastructure&lt;/h2&gt;
+&lt;h2 id=&#34;prepare-infrastructure&#34;&gt;Prepare Infrastructure&lt;/h2&gt;
 
 &lt;p&gt;I&amp;rsquo;m using Rackspace cloud servers for this as I have the (&lt;a href=&#34;http://developer.rackspace.com/blog/developer-love-welcome-to-the-rackspace-cloud-developer-discount.html)[Rackspace&#34;&gt;http://developer.rackspace.com/blog/developer-love-welcome-to-the-rackspace-cloud-developer-discount.html)[Rackspace&lt;/a&gt; Developer Discount] which is enough discount to host this for free.&lt;/p&gt;
 
 &lt;p&gt;Since Deis will want your rackspace credentials to configure worker nodes I recomment creating a user under (&lt;a href=&#34;https://mycloud.rackspace.com/account#users/create)[User&#34;&gt;https://mycloud.rackspace.com/account#users/create)[User&lt;/a&gt; Management] in your account to use for this.&lt;/p&gt;
 
-&lt;h3 id=&#34;create-a-cloud-load-balancer:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Create a Cloud Load Balancer&lt;/h3&gt;
+&lt;h3 id=&#34;create-a-cloud-load-balancer&#34;&gt;Create a Cloud Load Balancer&lt;/h3&gt;
 
 &lt;p&gt;Log into mycloud.rackspace.com and click on the (&lt;a href=&#34;https://mycloud.rackspace.com/load_balancers)[Load&#34;&gt;https://mycloud.rackspace.com/load_balancers)[Load&lt;/a&gt; Balancers] button.  Select the Dallas Region (DFW) and hit &lt;code&gt;Create Load Balancer&lt;/code&gt;.&lt;/p&gt;
 
@@ -1951,17 +2020,15 @@ Created data_bag[deis-apps]
 &lt;li&gt;Set the Name to &lt;code&gt;deis&lt;/code&gt; and check the region is set to &lt;code&gt;Dallas (DFW)&lt;/code&gt; and hit &lt;code&gt;Create Load Balancer&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://lh4.googleusercontent.com/-E4cZvoKWlYU/Uwpiqr9xOKI/AAAAAAAAN0o/P3vGqPC8A98/w793-h592-no/rackspace-create-lb.png&#34; alt=&#34;creating load balancer&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lh4.googleusercontent.com/-E4cZvoKWlYU/Uwpiqr9xOKI/AAAAAAAAN0o/P3vGqPC8A98/w793-h592-no/rackspace-create-lb.png&#34; alt=&#34;creating load balancer&#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Take note of the public IP of the Load Balancer, we&amp;rsquo;ll need it later.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://lh4.googleusercontent.com/-ORvf6nzEduU/Uwpiqk5eP0I/AAAAAAAAN0k/WZ-NaJn3eJg/w770-h567-no/rackspace-lb.png&#34; alt=&#34;load balancer created&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lh4.googleusercontent.com/-ORvf6nzEduU/Uwpiqk5eP0I/AAAAAAAAN0k/WZ-NaJn3eJg/w770-h567-no/rackspace-lb.png&#34; alt=&#34;load balancer created&#34; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;wildcard-dns:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Wildcard DNS&lt;/h3&gt;
+&lt;h3 id=&#34;wildcard-dns&#34;&gt;Wildcard DNS&lt;/h3&gt;
 
 &lt;p&gt;Deis&amp;rsquo; proxy layer requires you to set up Wildcard DNS to point to your proxy layer.  There are many ways to achieve this here are two options:&lt;/p&gt;
 
@@ -1971,7 +2038,7 @@ Created data_bag[deis-apps]
 &lt;li&gt;&lt;p&gt;The (&lt;a href=&#34;http://xip.io)[xip.io&#34;&gt;http://xip.io)[xip.io&lt;/a&gt;] domain does wildcard DNS based on your IP.  We can use this with our Cloud Load Balancer to load balance our applications.   My Load Balancer has a public IP of &lt;code&gt;50.56.167.26&lt;/code&gt; therefore my wildcard domain will be &lt;code&gt;50.56.167.26.xip.io&lt;/code&gt;.   Remember this.&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3 id=&#34;configure-knife-for-rackspace:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Configure Knife for Rackspace&lt;/h3&gt;
+&lt;h3 id=&#34;configure-knife-for-rackspace&#34;&gt;Configure Knife for Rackspace&lt;/h3&gt;
 
 &lt;p&gt;The bundle install above already installed the rackspace knife plugin so we just need to add some details to &lt;code&gt;.chef/knife.rb&lt;/code&gt;.&lt;/p&gt;
 
@@ -1983,7 +2050,7 @@ knife[:rackspace_region]       = :dfw
 EOF
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;install-rackspace-nova-client:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Install Rackspace Nova Client&lt;/h3&gt;
+&lt;h3 id=&#34;install-rackspace-nova-client&#34;&gt;Install Rackspace Nova Client&lt;/h3&gt;
 
 &lt;p&gt;We also need the Nova client:&lt;/p&gt;
 
@@ -2001,7 +2068,7 @@ EOF
 $ source ~/paas/.chef/openrc
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;test-rackspace-connectivity:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Test Rackspace Connectivity&lt;/h3&gt;
+&lt;h3 id=&#34;test-rackspace-connectivity&#34;&gt;Test Rackspace Connectivity&lt;/h3&gt;
 
 &lt;p&gt;Make sure you can connect to Rackspace with Knife:&lt;/p&gt;
 
@@ -2017,11 +2084,11 @@ Instance ID  Name  Public IP  Private IP  Flavor  Image  State
 +--------------------------------------+-----------------+--------+------------+-------------+----------------------------------------------------------------------------------------+
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;build-base-images-for-controller-and-nodes:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Build base images for Controller and Nodes.&lt;/h2&gt;
+&lt;h2 id=&#34;build-base-images-for-controller-and-nodes&#34;&gt;Build base images for Controller and Nodes.&lt;/h2&gt;
 
 &lt;p&gt;This isn&amp;rsquo;t strictly necessary,  but will help build your nodes quicker on subsequent builds.&lt;/p&gt;
 
-&lt;h3 id=&#34;launce-a-new-instance:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Launce a new instance:&lt;/h3&gt;
+&lt;h3 id=&#34;launce-a-new-instance&#34;&gt;Launce a new instance:&lt;/h3&gt;
 
 &lt;p&gt;If we create a base image and pre-install some software we&amp;rsquo;ll get a faster booting system for auto-provisioning:&lt;/p&gt;
 
@@ -2045,7 +2112,7 @@ Password: **************
 
 &lt;p&gt;Take note of the &lt;code&gt;Instance ID&lt;/code&gt;, &lt;code&gt;Public IP Address&lt;/code&gt; and &lt;code&gt;Password&lt;/code&gt;.  We&amp;rsquo;ll need them later.&lt;/p&gt;
 
-&lt;h3 id=&#34;add-users-keys-to-instance:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Add users / keys to instance&lt;/h3&gt;
+&lt;h3 id=&#34;add-users-keys-to-instance&#34;&gt;Add users / keys to instance&lt;/h3&gt;
 
 &lt;p&gt;We&amp;rsquo;re going to add our ssh key as well as a local &lt;code&gt;deis-ops&lt;/code&gt; user to the image to make it easier to manage and troubleshoot later:&lt;/p&gt;
 
@@ -2090,7 +2157,7 @@ root@deis$ exit
 deis$ exit
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;finish-preparing-node-image:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Finish preparing node image&lt;/h3&gt;
+&lt;h3 id=&#34;finish-preparing-node-image&#34;&gt;Finish preparing node image&lt;/h3&gt;
 
 &lt;p&gt;Next we&amp;rsquo;re going to update the kernel and prepare the base node image.&lt;/p&gt;
 
@@ -2100,7 +2167,7 @@ $ ssh deis-ops@$DEIS_IP &#39;sudo ~/prepare-node-image.sh&#39;
 $ ssh deis-ops@$DEIS_IP &#39;sudo apt-get install -yq linux-image-generic-lts-raring linux-headers-generic-lts-raring&#39;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;create-an-image-from-this-server:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Create an image from this server&lt;/h3&gt;
+&lt;h3 id=&#34;create-an-image-from-this-server&#34;&gt;Create an image from this server&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code&gt;$ nova image-create deis-base-image deis-node-image
 &lt;/code&gt;&lt;/pre&gt;
@@ -2114,7 +2181,7 @@ $ ssh deis-ops@$DEIS_IP &#39;sudo apt-get install -yq linux-image-generic-lts-ra
 
 &lt;p&gt;Once the image is active we can move onto the next steps.&lt;/p&gt;
 
-&lt;h3 id=&#34;prepare-controller-image:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Prepare controller image&lt;/h3&gt;
+&lt;h3 id=&#34;prepare-controller-image&#34;&gt;Prepare controller image&lt;/h3&gt;
 
 &lt;p&gt;Next we want to prepare the VM for the controller image:&lt;/p&gt;
 
@@ -2122,7 +2189,7 @@ $ ssh deis-ops@$DEIS_IP &#39;sudo apt-get install -yq linux-image-generic-lts-ra
 $ ssh deis-ops@$DEIS_IP &#39;sudo apt-get install -yq linux-image-generic-lts-raring linux-headers-generic-lts-raring&#39;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;create-an-image-from-this-server-1:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Create an image from this server&lt;/h3&gt;
+&lt;h3 id=&#34;create-an-image-from-this-server-1&#34;&gt;Create an image from this server&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code&gt;$ nova image-create deis-base-image deis-base-image
 &lt;/code&gt;&lt;/pre&gt;
@@ -2134,7 +2201,7 @@ $ ssh deis-ops@$DEIS_IP &#39;sudo apt-get install -yq linux-image-generic-lts-ra
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;delete-the-instance:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Delete the instance&lt;/h3&gt;
+&lt;h3 id=&#34;delete-the-instance&#34;&gt;Delete the instance&lt;/h3&gt;
 
 &lt;p&gt;No need to keep the instance around and keep paying for it once you have the image:&lt;/p&gt;
 
@@ -2143,9 +2210,9 @@ $ ssh deis-ops@$DEIS_IP &#39;sudo apt-get install -yq linux-image-generic-lts-ra
 $ bundle exec knife rackspace server delete 42899699-68e7-4785-9f49-e0050f86249a --purge
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;create-the-deis-controller-server:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Create the Deis Controller server&lt;/h2&gt;
+&lt;h2 id=&#34;create-the-deis-controller-server&#34;&gt;Create the Deis Controller server&lt;/h2&gt;
 
-&lt;h3 id=&#34;launch-the-server:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Launch the Server&lt;/h3&gt;
+&lt;h3 id=&#34;launch-the-server&#34;&gt;Launch the Server&lt;/h3&gt;
 
 &lt;p&gt;Launch the server from the image you created earlier:&lt;/p&gt;
 
@@ -2176,14 +2243,13 @@ add an entry to your hosts file ( or do both! I did ):&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;$ sudo sh -c &amp;quot;echo &#39;&amp;lt;IP_OF_SERVER&amp;gt; deis&#39; &amp;gt;&amp;gt; /etc/hosts&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;modify-chef-admin-group:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Modify Chef Admin Group&lt;/h3&gt;
+&lt;h3 id=&#34;modify-chef-admin-group&#34;&gt;Modify Chef Admin Group&lt;/h3&gt;
 
 &lt;p&gt;On the Chef management website click (&lt;a href=&#34;https://manage.opscode.com/groups/admins/edit)[Groups&#34;&gt;https://manage.opscode.com/groups/admins/edit)[Groups&lt;/a&gt;] and add the &lt;code&gt;deis-controller&lt;/code&gt; client and your validator client to the &lt;code&gt;admins&lt;/code&gt; group.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://lh5.googleusercontent.com/-oSqB1Tdnn4c/UwpioPAXpJI/AAAAAAAANz4/xa8BdmRuTzQ/w579-h580-no/chef-admins.png&#34; alt=&#34;chef admins group&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lh5.googleusercontent.com/-oSqB1Tdnn4c/UwpioPAXpJI/AAAAAAAANz4/xa8BdmRuTzQ/w579-h580-no/chef-admins.png&#34; alt=&#34;chef admins group&#34; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;converge-the-deis-controller-server:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Converge the Deis Controller Server&lt;/h3&gt;
+&lt;h3 id=&#34;converge-the-deis-controller-server&#34;&gt;Converge the Deis Controller Server&lt;/h3&gt;
 
 &lt;p&gt;Edit the &lt;code&gt;deis-controller&lt;/code&gt; node via this command:&lt;/p&gt;
 
@@ -2221,16 +2287,16 @@ add an entry to your hosts file ( or do both! I did ):&lt;/p&gt;
 $
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;testing-deis:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Testing Deis&lt;/h2&gt;
+&lt;h2 id=&#34;testing-deis&#34;&gt;Testing Deis&lt;/h2&gt;
 
-&lt;h3 id=&#34;install-the-deis-client-with-pip:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Install the Deis Client with pip&lt;/h3&gt;
+&lt;h3 id=&#34;install-the-deis-client-with-pip&#34;&gt;Install the Deis Client with pip&lt;/h3&gt;
 
 &lt;p&gt;The Deis client is written in python and can be installed by &lt;code&gt;pip&lt;/code&gt;:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ sudo pip install deis  
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;register-admin-user:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Register Admin User&lt;/h3&gt;
+&lt;h3 id=&#34;register-admin-user&#34;&gt;Register Admin User&lt;/h3&gt;
 
 &lt;p&gt;First user to register becomes the Admin:&lt;/p&gt;
 
@@ -2251,7 +2317,7 @@ Uploading SSH_KEY to Deis...done
 
 &lt;p&gt;check the web server is serving content by browsing to (&lt;a href=&#34;http://deis)[http://deis&#34;&gt;http://deis)[http://deis&lt;/a&gt;] and entering your admin credentials.&lt;/p&gt;
 
-&lt;h3 id=&#34;teach-deis-your-provider-credentials:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Teach Deis your provider credentials&lt;/h3&gt;
+&lt;h3 id=&#34;teach-deis-your-provider-credentials&#34;&gt;Teach Deis your provider credentials&lt;/h3&gt;
 
 &lt;p&gt;Deis will automatically provision worker nodes if you teach it your credentials.&lt;/p&gt;
 
@@ -2268,9 +2334,9 @@ No DigitalOcean credentials discovered.
 No Vagrant VMs discovered.
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;deploy-formations-layers:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Deploy Formations &amp;amp; Layers&lt;/h2&gt;
+&lt;h2 id=&#34;deploy-formations-layers&#34;&gt;Deploy Formations &amp;amp; Layers&lt;/h2&gt;
 
-&lt;h3 id=&#34;formation:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Formation&lt;/h3&gt;
+&lt;h3 id=&#34;formation&#34;&gt;Formation&lt;/h3&gt;
 
 &lt;p&gt;Formations are collections of infrastructure for serving applications.   We&amp;rsquo;ll call our first Formation &lt;code&gt;dev&lt;/code&gt; for development.&lt;/p&gt;
 
@@ -2281,7 +2347,7 @@ Creating formation... done, created dev
 See `deis help layers:create` to begin building your formation
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;layers:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Layers&lt;/h3&gt;
+&lt;h3 id=&#34;layers&#34;&gt;Layers&lt;/h3&gt;
 
 &lt;p&gt;Layers are a heterogenerous collection of nodes that perform one of two function:&lt;/p&gt;
 
@@ -2312,7 +2378,7 @@ Creating nodes layer... done in 2s
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;build-nodes:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Build Nodes&lt;/h3&gt;
+&lt;h3 id=&#34;build-nodes&#34;&gt;Build Nodes&lt;/h3&gt;
 
 &lt;p&gt;Next we tell deis to spin up two Cloud Servers which will become members of the &lt;code&gt;nodes&lt;/code&gt; layer.&lt;/p&gt;
 
@@ -2324,12 +2390,11 @@ Use `deis create --formation=dev` to create an application
 
 &lt;p&gt;This can sometimes take longer than the &lt;code&gt;deis&lt;/code&gt; cli timeout.   Don&amp;rsquo;t fear,  just wait a bit longer, this could be a great time to explore the &lt;code&gt;deis&lt;/code&gt; cli by running &lt;code&gt;deis help&lt;/code&gt;.&lt;/p&gt;
 
-&lt;h2 id=&#34;update-cloud-load-balancer:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Update Cloud Load Balancer&lt;/h2&gt;
+&lt;h2 id=&#34;update-cloud-load-balancer&#34;&gt;Update Cloud Load Balancer&lt;/h2&gt;
 
 &lt;p&gt;Add these two nodes to the (&lt;a href=&#34;https://mycloud.rackspace.com/load_balancers)[Cloud&#34;&gt;https://mycloud.rackspace.com/load_balancers)[Cloud&lt;/a&gt; Load Balancer] we created earlier.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://lh6.googleusercontent.com/-yaJfxoyDk4M/UwpioEndiOI/AAAAAAAANz0/aXannmisdbE/w903-h407-no/cloud-servers-list.png&#34; alt=&#34;cloud server list&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lh6.googleusercontent.com/-yaJfxoyDk4M/UwpioEndiOI/AAAAAAAANz0/aXannmisdbE/w903-h407-no/cloud-servers-list.png&#34; alt=&#34;cloud server list&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;This is simple to do through the GUI:&lt;/p&gt;
 
@@ -2338,14 +2403,13 @@ Use `deis create --formation=dev` to create an application
 &lt;li&gt;Check the box beside the two &lt;code&gt;dev-nodes&lt;/code&gt; servers and click &lt;code&gt;Add Selected Servers&lt;/code&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://lh6.googleusercontent.com/-zm6sB7l7YVk/Uwpin4BNJPI/AAAAAAAANzw/b-_J2ieyIuE/w773-h476-no/cloud-lb-nodes.png&#34; alt=&#34;cloud lb servers&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lh6.googleusercontent.com/-zm6sB7l7YVk/Uwpin4BNJPI/AAAAAAAANzw/b-_J2ieyIuE/w773-h476-no/cloud-lb-nodes.png&#34; alt=&#34;cloud lb servers&#34; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;deploy-an-application:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Deploy an Application&lt;/h2&gt;
+&lt;h2 id=&#34;deploy-an-application&#34;&gt;Deploy an Application&lt;/h2&gt;
 
 &lt;p&gt;So great, you have a PaaS, but what do you do now?  Deploy some apps of course!&lt;/p&gt;
 
-&lt;h3 id=&#34;nodejs-example-app:59de91c1dc1797a6214d8b570db9750b&#34;&gt;NodeJS Example App&lt;/h3&gt;
+&lt;h3 id=&#34;nodejs-example-app&#34;&gt;NodeJS Example App&lt;/h3&gt;
 
 &lt;p&gt;Download the NodeJS example application so like:&lt;/p&gt;
 
@@ -2355,7 +2419,7 @@ $ git clone https://github.com/opdemand/example-nodejs-express.git
 $ cd example-nodejs-express
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;create-an-application-in-deis:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Create an Application in Deis&lt;/h3&gt;
+&lt;h3 id=&#34;create-an-application-in-deis&#34;&gt;Create an Application in Deis&lt;/h3&gt;
 
 &lt;p&gt;Use the Deis command line tool to create a new application:&lt;/p&gt;
 
@@ -2364,7 +2428,7 @@ Creating application... done, created exotic-sandwich
 Git remote deis added
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;push-your-application-to-deis:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Push your Application to Deis&lt;/h3&gt;
+&lt;h3 id=&#34;push-your-application-to-deis&#34;&gt;Push your Application to Deis&lt;/h3&gt;
 
 &lt;p&gt;This will push, deploy and Launch the app.  The first one will take some time as deis has to download some docker images,  subsequent apps will be much faster:&lt;/p&gt;
 
@@ -2417,16 +2481,15 @@ To ssh://git@deis:2222/exotic-sandwich.git
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;did-it-work:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Did it work ?&lt;/h2&gt;
+&lt;h2 id=&#34;did-it-work&#34;&gt;Did it work ?&lt;/h2&gt;
 
 &lt;p&gt;Open your web browser to the URL in the output of the previous command.  In my case this was &lt;code&gt;http://exotic-sandwich.50.56.167.26.xip.io&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;If everything worked the text in the browser window should read &lt;code&gt;Powered by Deis&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://lh6.googleusercontent.com/-cxuysxM_oM8/UwpipfiKFMI/AAAAAAAAN0U/M7T9dC6xJ-E/w446-h171-no/deis-app-1.png&#34; alt=&#34;deis app&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lh6.googleusercontent.com/-cxuysxM_oM8/UwpipfiKFMI/AAAAAAAAN0U/M7T9dC6xJ-E/w446-h171-no/deis-app-1.png&#34; alt=&#34;deis app&#34; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;configure-and-scale-your-application:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Configure and Scale your application&lt;/h2&gt;
+&lt;h2 id=&#34;configure-and-scale-your-application&#34;&gt;Configure and Scale your application&lt;/h2&gt;
 
 &lt;p&gt;We can set config parameters for our apps by running &lt;code&gt;deis config&lt;/code&gt;.   The example app we&amp;rsquo;re using has a config paramater &amp;lsquo;POWERED_BY&amp;rsquo; so we can set that by running:&lt;/p&gt;
 
@@ -2435,8 +2498,7 @@ To ssh://git@deis:2222/exotic-sandwich.git
 POWERED_BY: DEIS and Rackspace
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://lh6.googleusercontent.com/-J5AcNytZLOQ/UwpipEdpeBI/AAAAAAAAN0E/WXWC08rxsBU/w507-h157-no/deis-app-2.png&#34; alt=&#34;deis app2&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lh6.googleusercontent.com/-J5AcNytZLOQ/UwpipEdpeBI/AAAAAAAAN0E/WXWC08rxsBU/w507-h157-no/deis-app-2.png&#34; alt=&#34;deis app2&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Expecting visitors?  Let&amp;rsquo;s scale your app to 5 nodes:&lt;/p&gt;
 
@@ -2502,9 +2564,9 @@ Feb 23 20:29:12 dev-nodes exotic-sandwich[web.4]: Server listening on port 10004
 
 &lt;p&gt;You could run all of this on a single server without a load balancer,  which means it would be just $57.60/month, which with the &lt;a href=&#34;http://developer.rackspace.com/devtrial/&#34;&gt;Rackspace Developer Discount&lt;/a&gt; would reduce down to just $7.60/month.&lt;/p&gt;
 
-&lt;h1 id=&#34;epilogue:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Epilogue&lt;/h1&gt;
+&lt;h1 id=&#34;epilogue&#34;&gt;Epilogue&lt;/h1&gt;
 
-&lt;h2 id=&#34;cleanup:59de91c1dc1797a6214d8b570db9750b&#34;&gt;Cleanup&lt;/h2&gt;
+&lt;h2 id=&#34;cleanup&#34;&gt;Cleanup&lt;/h2&gt;
 
 &lt;p&gt;Destroy your app:&lt;/p&gt;
 
@@ -2560,21 +2622,20 @@ $ bundle exec knife node delete dev-nodes-2
 $ nova image-delete deis-node-image
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Finally delete your Cloud Load Balancer from the &lt;a href=&#34;https://mycloud.rackspace.com/load_balancers&#34;&gt;Rackspace UI&lt;/a&gt;&lt;/p&gt;
-</description>
+&lt;p&gt;Finally delete your Cloud Load Balancer from the &lt;a href=&#34;https://mycloud.rackspace.com/load_balancers&#34;&gt;Rackspace UI&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Managing docker services with this one easy trick</title>
-      <link>http://tech.paulcz.net/2013/10/managing-docker-services-with-this-one-easy-trick/</link>
+      <link>http://tech.paulcz.net/blog/managing-docker-services-with-this-one-easy-trick/</link>
       <pubDate>Sun, 20 Oct 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://tech.paulcz.net/2013/10/managing-docker-services-with-this-one-easy-trick/</guid>
-      <description>
-
-&lt;p&gt;I have been having a lot of internal debate about the idea of running more than one service in a docker container.   A Docker container is built to run a single process in the foreground and to live for only as long as that process is running.  This is great in a utopian world where servers are immutable and sysadmins drink tiki drinks on the beach,  however it doesn&amp;rsquo;t always translate well to the real world.&lt;/p&gt;
+      <guid>http://tech.paulcz.net/blog/managing-docker-services-with-this-one-easy-trick/</guid>
+      <description>&lt;p&gt;I have been having a lot of internal debate about the idea of running more than one service in a docker container.   A Docker container is built to run a single process in the foreground and to live for only as long as that process is running.  This is great in a utopian world where servers are immutable and sysadmins drink tiki drinks on the beach,  however it doesn&amp;rsquo;t always translate well to the real world.&lt;/p&gt;
 
 &lt;p&gt;Examples where you might want to be able to run multiple servers span from the simple use case of running &lt;code&gt;sshd&lt;/code&gt; as well as your application to running a web app such as &lt;code&gt;wordpress&lt;/code&gt; where you might want both &lt;code&gt;apache&lt;/code&gt; and &lt;code&gt;mysql&lt;/code&gt; running in the same container.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;Wrapping your applications in a supervisor daemon such as &lt;code&gt;runit&lt;/code&gt; seems like a perfect fit for this.  All you need to do is install &lt;code&gt;runit&lt;/code&gt; as part of your &lt;code&gt;dockerfile&lt;/code&gt; and then create appropriate service directories for the apps you want to run in the container.    I was doing some testing of this when I realized a quirk of &lt;code&gt;runit&lt;/code&gt; which I could exploit for evil.&lt;/p&gt;
 
@@ -2582,16 +2643,16 @@ $ nova image-delete deis-node-image
 
 &lt;p&gt;Below you will find examples of running three services (logstash,elasticsearch,kibana) that make up the &lt;code&gt;logstash&lt;/code&gt; suite.&lt;/p&gt;
 
-&lt;h2 id=&#34;start-by-cloning-the-demo-git-repository-and-run-demo-sh:dab52676160fc987cea1712f60e5a17c&#34;&gt;Start by cloning the demo git repository and run demo.sh&lt;/h2&gt;
+&lt;h2 id=&#34;start-by-cloning-the-demo-git-repository-and-run-demo-sh&#34;&gt;Start by cloning the demo git repository and run demo.sh&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code&gt;$ git clone https://github.com/paulczar/docker-runit-demo.git
 $ cd docker-runit-demo
 $ ./demo.sh
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;demo-sh-script:dab52676160fc987cea1712f60e5a17c&#34;&gt;demo.sh script&lt;/h3&gt;
+&lt;h3 id=&#34;demo-sh-script&#34;&gt;demo.sh script&lt;/h3&gt;
 
-&lt;h4 id=&#34;step-1-build-the-container:dab52676160fc987cea1712f60e5a17c&#34;&gt;Step 1:  Build the container&lt;/h4&gt;
+&lt;h4 id=&#34;step-1-build-the-container&#34;&gt;Step 1:  Build the container&lt;/h4&gt;
 
 &lt;p&gt;The script uses the below &lt;code&gt;Dockerfile&lt;/code&gt; to build the base container that we&amp;rsquo;ll be running.&lt;/p&gt;
 
@@ -2612,11 +2673,11 @@ CMD [&amp;quot;/usr/sbin/runsvdir-start&amp;quot;]
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;step-2-install-the-applications:dab52676160fc987cea1712f60e5a17c&#34;&gt;Step 2: Install the applications&lt;/h4&gt;
+&lt;h4 id=&#34;step-2-install-the-applications&#34;&gt;Step 2: Install the applications&lt;/h4&gt;
 
 &lt;p&gt;This will take a few minutes the first time as it needs to download &lt;code&gt;logstash&lt;/code&gt;, &lt;code&gt;kibana&lt;/code&gt;, and &lt;code&gt;elasticsearch&lt;/code&gt; and stage them in a local &lt;code&gt;./opt&lt;/code&gt;directory.&lt;/p&gt;
 
-&lt;h4 id=&#34;step-3-start-the-docker-container:dab52676160fc987cea1712f60e5a17c&#34;&gt;Step 3: Start the Docker container&lt;/h4&gt;
+&lt;h4 id=&#34;step-3-start-the-docker-container&#34;&gt;Step 3: Start the Docker container&lt;/h4&gt;
 
 &lt;p&gt;Starts the &lt;code&gt;Docker&lt;/code&gt; container with the following command:&lt;/p&gt;
 
@@ -2672,7 +2733,7 @@ $ rm service/logstash
 $ rm service/kibana
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;bonus-round-logs:dab52676160fc987cea1712f60e5a17c&#34;&gt;Bonus Round: Logs!&lt;/h2&gt;
+&lt;h2 id=&#34;bonus-round-logs&#34;&gt;Bonus Round: Logs!&lt;/h2&gt;
 
 &lt;p&gt;The beautify of doing this is that we&amp;rsquo;re actually logging the application output to a mounted volume.   This means we now have access to their logs from the host machine.&lt;/p&gt;
 
@@ -2681,34 +2742,33 @@ $ tail opt/elasticsearch-0.90.5/logs/current
 $ tail opt/kibana/logs/access.log
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;cleanup:dab52676160fc987cea1712f60e5a17c&#34;&gt;Cleanup&lt;/h2&gt;
+&lt;h2 id=&#34;cleanup&#34;&gt;Cleanup&lt;/h2&gt;
 
 &lt;p&gt;Unfortunately any files created inside the docker instance are owned by root ( an artifact of docker daemon running as root ).   If you&amp;rsquo;re in The following script will clean out any such files after you&amp;rsquo;ve stopped the docker container.&lt;/p&gt;
 
 &lt;p&gt;It will delete any files/dirs inside your current directory that are owned by root.  Obviously it can be very dangerous to run &amp;hellip; so be careful where you run it from!&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ sudo find . -uid 0   -exec rm -rfv {} \;
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     
     <item>
       <title>Creating immutable servers with chef and docker.io</title>
-      <link>http://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io/</link>
+      <link>http://tech.paulcz.net/blog/creating-immutable-servers-with-chef-and-docker-dot-io/</link>
       <pubDate>Sat, 07 Sep 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io/</guid>
-      <description>
-
-&lt;p&gt;Building applications in a &lt;a href=&#34;http://docker.io&#34;&gt;docker.io&lt;/a&gt; Dockerfile is relatively simple,  but sometimes you want to just install the application exactly as you would normally via already built chef cookbooks.   Turns out this is actually pretty simple.&lt;/p&gt;
+      <guid>http://tech.paulcz.net/blog/creating-immutable-servers-with-chef-and-docker-dot-io/</guid>
+      <description>&lt;p&gt;Building applications in a &lt;a href=&#34;http://docker.io&#34;&gt;docker.io&lt;/a&gt; Dockerfile is relatively simple,  but sometimes you want to just install the application exactly as you would normally via already built chef cookbooks.   Turns out this is actually pretty simple.&lt;/p&gt;
 
 &lt;p&gt;The first thing you&amp;rsquo;ll need to do is build a container with chef-client and berkshelf installed.   You can grab the one I&amp;rsquo;ve built by running &lt;code&gt;docker pull paulczar/chef-solo&lt;/code&gt; or build one youself from a &lt;code&gt;Dockerfile&lt;/code&gt; that looks a little something like the following&amp;hellip;&lt;/p&gt;
 
-&lt;h3 id=&#34;creating-a-docker-io-container-with-chef-and-berkshelf:8e5e7d2d9bff571e6328148c619ee8a0&#34;&gt;Creating a docker.io container with chef and berkshelf&lt;/h3&gt;
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;creating-a-docker-io-container-with-chef-and-berkshelf&#34;&gt;Creating a docker.io container with chef and berkshelf&lt;/h3&gt;
 
 &lt;p&gt;``` ruby Dockerfile&lt;/p&gt;
 
-&lt;h1 id=&#34;docker-version-0-5-3:8e5e7d2d9bff571e6328148c619ee8a0&#34;&gt;DOCKER-VERSION 0.5.3&lt;/h1&gt;
+&lt;h1 id=&#34;docker-version-0-5-3&#34;&gt;DOCKER-VERSION 0.5.3&lt;/h1&gt;
 
 &lt;p&gt;FROM ubuntu:12.10
 MAINTAINER Paul Czarkowski &amp;ldquo;paul@paulcz.net&amp;rdquo;&lt;/p&gt;
@@ -2766,13 +2826,13 @@ cookbook &#39;nginx&#39; , github: &#39;opscode-cookbooks/nginx&#39;
 
 &lt;p&gt;&lt;em&gt;You can see some of the cookbooks are being pulled from the opscode repository,  whereas others are being pulled directly from github.&lt;/em&gt;&lt;/p&gt;
 
-&lt;h4 id=&#34;dockerfile:8e5e7d2d9bff571e6328148c619ee8a0&#34;&gt;Dockerfile&lt;/h4&gt;
+&lt;h4 id=&#34;dockerfile&#34;&gt;Dockerfile&lt;/h4&gt;
 
 &lt;p&gt;All that&amp;rsquo;s left now is to create a Dockerfile that will bring it all together.&lt;/p&gt;
 
 &lt;p&gt;``` ruby Dockerfile&lt;/p&gt;
 
-&lt;h1 id=&#34;docker-version-0-5-3-1:8e5e7d2d9bff571e6328148c619ee8a0&#34;&gt;DOCKER-VERSION 0.5.3&lt;/h1&gt;
+&lt;h1 id=&#34;docker-version-0-5-3-1&#34;&gt;DOCKER-VERSION 0.5.3&lt;/h1&gt;
 
 &lt;p&gt;FROM paulczar/chef-client
 MAINTAINER Paul Czarkowski &amp;ldquo;paul@paulcz.net&amp;rdquo;&lt;/p&gt;
@@ -2790,32 +2850,7 @@ RUN echo &amp;ldquo;daemon off;&amp;rdquo; &amp;gt;&amp;gt; /etc/nginx/nginx.con
 
 &lt;p&gt;It will add the local files ( &lt;code&gt;solo.rb&lt;/code&gt;, &lt;code&gt;solo.json&lt;/code&gt;, &lt;code&gt;Berksfile&lt;/code&gt; ) to /chef in the server and then call berkshelf to download the cookbooks and chef-solo to install your application.   Finally it will give &lt;code&gt;nginx&lt;/code&gt; a directive to run in the foreground so that we don&amp;rsquo;t have to do any sneaky prcess control to get it to work with the way &lt;code&gt;docker.io&lt;/code&gt; runs processes.&lt;/p&gt;
 
-&lt;p&gt;To run the resultant &lt;code&gt;docker.io&lt;/code&gt; container you simply need to run &lt;code&gt;$ docker run -d -p 80 demo/kibana3&lt;/code&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Logstash &#43; Opscode Omnibus</title>
-      <link>http://tech.paulcz.net/2013/05/logstash-plus-opscode-omnibus/</link>
-      <pubDate>Mon, 06 May 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://tech.paulcz.net/2013/05/logstash-plus-opscode-omnibus/</guid>
-      <description>&lt;p&gt;At &lt;a href=&#34;http://devopsdays.org/events/2013-austin/&#34;&gt;DevOps Days Austin&lt;/a&gt; &lt;a href=&#34;http://twitter.com/mattray&#34;&gt;@mattray&lt;/a&gt; did an Openspace session on &lt;a href=&#34;https://github.com/opscode/omnibus-ruby&#34;&gt;Omnibus&lt;/a&gt; which is a toolset based around the concept of installing an app and all of it&amp;rsquo;s prerequisites from source into a directory and then building a package ( either .deb or .rpm ) of that using &lt;a href=&#34;https://github.com/jordansissel/fpm&#34;&gt;fpm&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Having battled many times with OS Packages trying to get newer versions of Ruby, or Redis or other software installed and having to hunt down some random package repo or manually build from source this seems like an excellent idea.&lt;/p&gt;
-
-&lt;p&gt;To learn the basics I decided to build an &lt;a href=&#34;https://github.com/paulczar/omnibus-fpm&#34;&gt;omnibus package for fpm&lt;/a&gt; which helped me work out the kinks and learn the basics.&lt;/p&gt;
-
-&lt;p&gt;From there I moved onto something a little more ambitious&amp;hellip; &lt;a href=&#34;http://logstash.net/&#34;&gt;logstash&lt;/a&gt;, which is an awesome opensource project for log aggregation and searching.&lt;/p&gt;
-
-&lt;p&gt;Using Omnibus I took the Logstash .jar file and bundled in Redis, Kibana, Kibana3(+NodeJS), RabbitMQ, Elasticsearch along with all of their depedencies into a big fat package which installs to /opt/logstash and includes init scripts and default configs for each.&lt;/p&gt;
-
-&lt;p&gt;The Logstash Omnibus project can be found &lt;a href=&#34;https://github.com/paulczar/omnibus-logstash&#34;&gt;here&lt;/a&gt;.  I also uploaded the resultant packages for &lt;a href=&#34;https://s3-us-west-2.amazonaws.com/paulcz-packages/logstash-omnibus-1.1.10_amd64.deb&#34;&gt;Ubuntu 12.04&lt;/a&gt; and &lt;a href=&#34;https://s3-us-west-2.amazonaws.com/paulcz-packages/logstash-omnibus-1.1.10.el6.x86_64.rpm&#34;&gt;RHEL 6&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;This gives us a really powerful platform to deploy logstash and all of its prequisites in a completely repeatable manner and not have to worry about the existing versions of Ruby, Java, etc.    It also gives a super simple testing platform where a new user to logstash can install logstash with a single &lt;code&gt;dpkg&lt;/code&gt; or &lt;code&gt;rpm&lt;/code&gt; command and immediately be able to push logs to it via syslog or redis.&lt;/p&gt;
-
-&lt;p&gt;Read more about using and building the &lt;a href=&#34;https://github.com/paulczar/omnibus-logstash/blob/master/README.md&#34;&gt;Logstash Omnibus package here&lt;/a&gt;&lt;/p&gt;
-</description>
+&lt;p&gt;To run the resultant &lt;code&gt;docker.io&lt;/code&gt; container you simply need to run &lt;code&gt;$ docker run -d -p 80 demo/kibana3&lt;/code&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

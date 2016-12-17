@@ -1,21 +1,108 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Pages on Paul Czarkowski</title>
-    <link>http://tech.paulcz.net/page/</link>
-    <description>Recent content in Pages on Paul Czarkowski</description>
+    <title>Page-rsses on Paul Czarkowski</title>
+    <link>http://tech.paulcz.net/page/index.xml</link>
+    <description>Recent content in Page-rsses on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 30 Nov 2014 09:04:08 -0600</lastBuildDate>
     <atom:link href="http://tech.paulcz.net/page/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>about</title>
+      <title>About Me</title>
       <link>http://tech.paulcz.net/page/about/</link>
       <pubDate>Sun, 30 Nov 2014 09:04:08 -0600</pubDate>
       
       <guid>http://tech.paulcz.net/page/about/</guid>
-      <description>&lt;p&gt;Hi.  My name is Paul.  I like stuff.&lt;/p&gt;
+      <description>&lt;p&gt;Paul is an Infrastructure Engineer who has been doing IT and Operations for longer than he cares to admit and has worked across many industries, retail, game development, managed hosting, and more.  He has worked in both very large and very small organizations.&lt;/p&gt;
+
+&lt;p&gt;As an avid Technologist he can be found tinkering with emergent technologies (hello running docker in production in 2014) and optimizing and codifying the operations of large legacy applications.&lt;/p&gt;
+
+&lt;p&gt;Paul is an active member of the Austin Technology scene and is often found at the &lt;a href=&#34;https://www.meetup.com/austin-devops/&#34;&gt;Austin DevOps&lt;/a&gt;, &lt;a href=&#34;https://www.meetup.com/CloudAustin/&#34;&gt;Cloud Austin&lt;/a&gt;, &lt;a href=&#34;https://www.meetup.com/Docker-Austin/&#34;&gt;Docker Austin&lt;/a&gt;, and &lt;a href=&#34;https://www.meetup.com/OpenStack-Austin/&#34;&gt;OpenStack Austin&lt;/a&gt; both as a attendee and as a &lt;a href=&#34;http://tech.paulcz.net/page/speaker&#34;&gt;speaker&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Paul also helps organize local community conferences such as &lt;a href=&#34;https://www.devopsdays.org/events/2016-austin/welcome/&#34;&gt;DevOps Days Austin&lt;/a&gt; and &lt;a href=&#34;http://www.containerdaysaustin.com&#34;&gt;Container Days Austin&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Technology isn&amp;rsquo;t his only interest though.  Paul has a love of cooking and can often be found baking sourdough bread and cooking Texas style barbecue in his custom offset pit and competing ( and winning ) in food competitions both locally and interstate.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Paul Talks about stuff</title>
+      <link>http://tech.paulcz.net/page/speaker/</link>
+      <pubDate>Sun, 30 Nov 2014 09:04:08 -0600</pubDate>
+      
+      <guid>http://tech.paulcz.net/page/speaker/</guid>
+      <description>
+
+&lt;p&gt;An incomplete list of events that I&amp;rsquo;ve spoken at&lt;/p&gt;
+
+&lt;h1 id=&#34;2016&#34;&gt;2016&lt;/h1&gt;
+
+&lt;h2 id=&#34;all-day-devops&#34;&gt;All Day DevOps&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Serverfull computing - &lt;a href=&#34;https://youtu.be/MOrWDvpZTdY?t=4874&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;openstack-summit-barcelona&#34;&gt;OpenStack Summit Barcelona&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;InterOp Panel - &lt;a href=&#34;https://www.openstack.org/videos/barcelona-2016/interop-you-keep-using-that-word-i-do-not-think-it-means-what-you-think-it-means&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;OpenStack Compliance the DevOps way - &lt;a href=&#34;https://www.openstack.org/videos/barcelona-2016/openstack-compliance-the-devops-way&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;openstack-day-seattle&#34;&gt;OpenStack Day Seattle&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;99 OpenStack clouds on the wall - &lt;a href=&#34;https://www.youtube.com/watch?v=erjUIO0kKI8&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;openstack-summit-austin&#34;&gt;OpenStack Summit Austin&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A PaaS for Continuous Delivery - &lt;a href=&#34;https://www.openstack.org/videos/austin-2016/a-paas-for-continuous-delivery-of-cloud-native-apps-minus-kubernetes-and-mesos&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;2015&#34;&gt;2015&lt;/h1&gt;
+
+&lt;h2 id=&#34;openstack-summit-tokyo&#34;&gt;OpenStack Summit Tokyo&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Chef vs Ansible vs Puppet vs Salt - &lt;a href=&#34;https://www.openstack.org/videos/tokio-2015/chef-vs-puppet-vs-ansible-vs-salt-whats-best-for-deploying-and-managing-openstack&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;devops-days-austin&#34;&gt;DevOps Days Austin&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Scout-A-Park a story of pragmatic dockerization - &lt;a href=&#34;https://vimeo.com/album/3437844/video/129894208&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;openstack-day-seattle-1&#34;&gt;OpenStack Day Seattle&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Just enough OpenStack for Docker - &lt;a href=&#34;https://www.youtube.com/watch?v=mYYa84WQowQ&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;openstack-summit-vancouver&#34;&gt;OpenStack Summit Vancouver&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Docker Docker Docker Openstack - &lt;a href=&#34;https://www.openstack.org/videos/vancouver-2015/docker-docker-docker-openstack&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;docker-austin-meetup&#34;&gt;Docker Austin meetup&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Factorish - &lt;a href=&#34;https://www.youtube.com/watch?v=uqKPgc8jMkI&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;2014&#34;&gt;2014&lt;/h1&gt;
+
+&lt;h2 id=&#34;dockercon14&#34;&gt;DockerCon14&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Automated Chef cookbook testing with Drone.io and GitHub - &lt;a href=&#34;https://www.youtube.com/watch?v=9_H41VFfKcM&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     

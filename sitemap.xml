@@ -4,7 +4,6 @@
   <url>
     <loc>http://tech.paulcz.net/</loc>
     <lastmod>2016-01-10T10:22:22-06:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -33,22 +32,22 @@
   </url>
   
   <url>
-    <loc>http://tech.paulcz.net/2015/03/optimizing-your-dockerfiles/</loc>
+    <loc>http://tech.paulcz.net/blog/Optimizing%20your%20Dockerfiles/</loc>
     <lastmod>2015-03-07T13:25:29-06:00</lastmod>
   </url>
   
   <url>
-    <loc>http://tech.paulcz.net/2015/01/factorish_and_the_12_fakter_app/</loc>
+    <loc>http://tech.paulcz.net/blog/factorish_and_the_12_fakter_app/</loc>
     <lastmod>2015-01-06T13:29:27-06:00</lastmod>
   </url>
   
   <url>
-    <loc>http://tech.paulcz.net/2014/12/multi-process-docker-images-done-right/</loc>
+    <loc>http://tech.paulcz.net/blog/multi-process-docker-images-done-right/</loc>
     <lastmod>2014-12-22T21:31:03-06:00</lastmod>
   </url>
   
   <url>
-    <loc>http://tech.paulcz.net/2014/12/breadops-continous-delivery-of-fresh-baked-bread/</loc>
+    <loc>http://tech.paulcz.net/blog/breadops-continous-delivery-of-fresh-baked-bread/</loc>
     <lastmod>2014-12-03T00:00:00+00:00</lastmod>
   </url>
   
@@ -58,52 +57,57 @@
   </url>
   
   <url>
-    <loc>http://tech.paulcz.net/2014/05/ezbake-a-new-way-to-converge-docker-containers-with-chef/</loc>
+    <loc>http://tech.paulcz.net/page/speaker/</loc>
+    <lastmod>2014-11-30T09:04:08-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/blog/ezbake-a-new-way-to-converge-docker-containers-with-chef/</loc>
     <lastmod>2014-05-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://tech.paulcz.net/2014/02/running-deis-io-on-rackspace-cloud/</loc>
+    <loc>http://tech.paulcz.net/blog/running-deis-io-on-rackspace-cloud/</loc>
     <lastmod>2014-02-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://tech.paulcz.net/2013/10/managing-docker-services-with-this-one-easy-trick/</loc>
+    <loc>http://tech.paulcz.net/blog/managing-docker-services-with-this-one-easy-trick/</loc>
     <lastmod>2013-10-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io/</loc>
+    <loc>http://tech.paulcz.net/blog/creating-immutable-servers-with-chef-and-docker-dot-io/</loc>
     <lastmod>2013-09-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://tech.paulcz.net/2013/05/logstash-plus-opscode-omnibus/</loc>
+    <loc>http://tech.paulcz.net/blog/logstash-plus-opscode-omnibus/</loc>
     <lastmod>2013-05-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://tech.paulcz.net/2013/04/vagrant-plus-puppet-plus-fpm-equals-amazeballs/</loc>
+    <loc>http://tech.paulcz.net/blog/vagrant-plus-puppet-plus-fpm-equals-amazeballs/</loc>
     <lastmod>2013-04-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://tech.paulcz.net/2012/12/creating-a-github-pages-blog-with-octopress/</loc>
+    <loc>http://tech.paulcz.net/blog/creating-a-github-pages-blog-with-octopress/</loc>
     <lastmod>2012-12-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://tech.paulcz.net/2012/12/running-kvm-and-openvswitch-on-ubuntu-12-dot-10/</loc>
+    <loc>http://tech.paulcz.net/blog/running-kvm-and-openvswitch-on-ubuntu-12-dot-10/</loc>
     <lastmod>2012-12-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://tech.paulcz.net/2012/12/moving-vms-from-vmware-to-kvm/</loc>
+    <loc>http://tech.paulcz.net/blog/moving-vms-from-vmware-to-kvm/</loc>
     <lastmod>2012-12-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://tech.paulcz.net/2012/10/moving-from-a-self-hosted-wordpress-blog-to-blogger/</loc>
+    <loc>http://tech.paulcz.net/blog/moving-from-a-self-hosted-wordpress-blog-to-blogger/</loc>
     <lastmod>2012-10-21T00:00:00+00:00</lastmod>
   </url>
   

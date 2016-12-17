@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Kvm on Paul Czarkowski</title>
-    <link>http://tech.paulcz.net/categories/kvm/</link>
-    <description>Recent content in Kvm on Paul Czarkowski</description>
+    <title>Paul Czarkowski</title>
+    <link>http://tech.paulcz.net/categories/kvm/index.xml</link>
+    <description>Recent content on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 13 Dec 2012 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://tech.paulcz.net/categories/kvm/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Running KVM and Openvswitch on Ubuntu 12.10</title>
-      <link>http://tech.paulcz.net/2012/12/running-kvm-and-openvswitch-on-ubuntu-12-dot-10/</link>
+      <link>http://tech.paulcz.net/blog/running-kvm-and-openvswitch-on-ubuntu-12-dot-10/</link>
       <pubDate>Thu, 13 Dec 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://tech.paulcz.net/2012/12/running-kvm-and-openvswitch-on-ubuntu-12-dot-10/</guid>
-      <description>
-
-&lt;p&gt;I&amp;rsquo;ve got an aging VMWare ESXi 4.0 server that needs to be replaced with something a little more modern and flexing.   Obviously at home I don&amp;rsquo;t need all the cool features that licensed VMWare comes with,  but I do want more than just the basic free version.&lt;/p&gt;
+      <guid>http://tech.paulcz.net/blog/running-kvm-and-openvswitch-on-ubuntu-12-dot-10/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve got an aging VMWare ESXi 4.0 server that needs to be replaced with something a little more modern and flexing.   Obviously at home I don&amp;rsquo;t need all the cool features that licensed VMWare comes with,  but I do want more than just the basic free version.&lt;/p&gt;
 
 &lt;p&gt;After a few weeks of installing and testing alternatives  ( I&amp;rsquo;d really love to run openstack,  but it&amp;rsquo;s just not worth it at home for a single box ) I&amp;rsquo;ve settled on Ubuntu 12.10 server running KVM and Openvswitch.&lt;/p&gt;
 
 &lt;p&gt;After installing Ubuntu 12.10 I did the following to get KVM up and running&amp;hellip;   I cribbed this mostly from &lt;a href=&#34;http://blog.allanglesit.com/2012/10/linux-kvm-ubuntu-12-10-with-openvswitch/&#34;&gt;blog.allanglesit.com&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Install updates and Pre-requisites&lt;/strong&gt;&lt;/p&gt;
 
@@ -37,9 +36,9 @@ apt-get upgrade
 &lt;p&gt;Now we can go ahead and install the necessary packages:&lt;/p&gt;
 
 &lt;p&gt;{% codeblock lang:bash %}
-apt-get -y install aptitude apt-show-versions ntp ntpdate vim kvm \
- libvirt-bin vlan virtinst virt-manager virt-viewer openssh-server \
- iperf pv openvswitch-controller openvswitch-brcompat \
+apt-get -y install aptitude apt-show-versions ntp ntpdate vim kvm &lt;br /&gt;
+ libvirt-bin vlan virtinst virt-manager virt-viewer openssh-server &lt;br /&gt;
+ iperf pv openvswitch-controller openvswitch-brcompat &lt;br /&gt;
  openvswitch-switch nfs-common
 {% endcodeblock %}&lt;/p&gt;
 
@@ -63,21 +62,21 @@ service openvswitch-controller restart
 
 &lt;p&gt;{% codeblock /etc/network/interfaces %}&lt;/p&gt;
 
-&lt;h1 id=&#34;the-loopback-network-interface:888f7903415a760a26ea5348c53a988c&#34;&gt;The loopback network interface&lt;/h1&gt;
+&lt;h1 id=&#34;the-loopback-network-interface&#34;&gt;The loopback network interface&lt;/h1&gt;
 
 &lt;p&gt;auto lo
 iface lo inet loopback&lt;/p&gt;
 
-&lt;h1 id=&#34;the-primary-network-interface-bridge:888f7903415a760a26ea5348c53a988c&#34;&gt;The primary network interface - bridge!&lt;/h1&gt;
+&lt;h1 id=&#34;the-primary-network-interface-bridge&#34;&gt;The primary network interface - bridge!&lt;/h1&gt;
 
 &lt;p&gt;auto eth0
 iface eth0 inet manual
 up ifconfig $IFACE 0.0.0.0 up
 down ifconfig $IFACE down&lt;/p&gt;
 
-&lt;h1 id=&#34;the-host-os-network-interface:888f7903415a760a26ea5348c53a988c&#34;&gt;The host OS network interface&lt;/h1&gt;
+&lt;h1 id=&#34;the-host-os-network-interface&#34;&gt;The host OS network interface&lt;/h1&gt;
 
-&lt;h1 id=&#34;dns-settings-here-12-10-resets-resolv-conf-on-reboot:888f7903415a760a26ea5348c53a988c&#34;&gt;DNS settings here,  12.10 resets resolv.conf on reboot.&lt;/h1&gt;
+&lt;h1 id=&#34;dns-settings-here-12-10-resets-resolv-conf-on-reboot&#34;&gt;DNS settings here,  12.10 resets resolv.conf on reboot.&lt;/h1&gt;
 
 &lt;p&gt;auto ovsbr0p1
 iface ovsbr0p1 inet static
@@ -147,9 +146,9 @@ mount -a
 
 &lt;p&gt;{% codeblock lang:bash %}
 lvcreate -L 8G -n VM-UbuntuTest data-disk
-virt-install &amp;ndash;name UbuntuTest &amp;ndash;hvm &amp;ndash;noautoconsole &amp;ndash;ram 1024 \
-&amp;ndash;disk path=/dev/data-disk/VM-UbuntuTest &amp;ndash;nonetworks &amp;ndash;vnc \
-&amp;ndash;os-type=linux &amp;ndash;os-variant=ubuntuquantal \
+virt-install &amp;ndash;name UbuntuTest &amp;ndash;hvm &amp;ndash;noautoconsole &amp;ndash;ram 1024 &lt;br /&gt;
+&amp;ndash;disk path=/dev/data-disk/VM-UbuntuTest &amp;ndash;nonetworks &amp;ndash;vnc &lt;br /&gt;
+&amp;ndash;os-type=linux &amp;ndash;os-variant=ubuntuquantal &lt;br /&gt;
 &amp;ndash;cdrom /data-disk/ISO/ubuntu-12.10-server-amd64.iso
 {% endcodeblock %}&lt;/p&gt;
 
@@ -167,16 +166,15 @@ virsh edit UbuntuTest
 &lt;/interface&gt;
 {% endcodeblock %}&lt;/p&gt;
 
-&lt;p&gt;The VM will need to be reset to pick up the network change,  however that will cause it to drop the ISO mount.  We can either continue through with the OS install without networking or reset the VM and then re-attach the ISO as a CD.    I connected to it from my desktop using the VirtualMachineManager GUI to do that but you could use virsh commands if you want to stick to CLI.&lt;/p&gt;
-</description>
+&lt;p&gt;The VM will need to be reset to pick up the network change,  however that will cause it to drop the ISO mount.  We can either continue through with the OS install without networking or reset the VM and then re-attach the ISO as a CD.    I connected to it from my desktop using the VirtualMachineManager GUI to do that but you could use virsh commands if you want to stick to CLI.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Moving VMs from VMWare to KVM</title>
-      <link>http://tech.paulcz.net/2012/12/moving-vms-from-vmware-to-kvm/</link>
+      <link>http://tech.paulcz.net/blog/moving-vms-from-vmware-to-kvm/</link>
       <pubDate>Sun, 09 Dec 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://tech.paulcz.net/2012/12/moving-vms-from-vmware-to-kvm/</guid>
+      <guid>http://tech.paulcz.net/blog/moving-vms-from-vmware-to-kvm/</guid>
       <description>&lt;p&gt;I&amp;rsquo;m migrating from my old VMWare ESXi box to a new machine running Ubuntu 12.10 and KVM.    Not wanting to rebuild all of my VMs I set about trying to work out the best way to migrate the VMs.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Steps to make Windows migrate without Bluescreen&lt;/strong&gt;&lt;/p&gt;
@@ -192,6 +190,8 @@ virsh edit UbuntuTest
 &lt;p&gt;To move VMs in ESXi we click on the ESXi server, pick the Configuration tab,  click on &amp;lsquo;Storage&amp;rsquo; and then right-click on the datastore and select &amp;lsquo;Browse Datastore&amp;rsquo;.   Select the VM folder you wish to move and click the move icon.&lt;/p&gt;
 
 &lt;p&gt;{% img &lt;a href=&#34;https://lh6.googleusercontent.com/-R5x6JyT5x14/UMUkr4qNr4I/AAAAAAAAAHY/CYhOlizOLb8/s640/VMWare-move-1.png&#34;&gt;https://lh6.googleusercontent.com/-R5x6JyT5x14/UMUkr4qNr4I/AAAAAAAAAHY/CYhOlizOLb8/s640/VMWare-move-1.png&lt;/a&gt; %}&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Convert your VM to qcow2 format&lt;/strong&gt;&lt;/p&gt;
 
@@ -216,8 +216,7 @@ kvm-img convert -O qcow2 /mnt/freenas/vms/WindowsGuest/WindowsGuest.vmdk \
 
 &lt;p&gt;Once created the VM should start up fine.   If the VM is running Windows you&amp;rsquo;ll probably need to re-activate it as the hardware change will make it think you&amp;rsquo;ve pirated it.&lt;/p&gt;
 
-&lt;p&gt;{% img &lt;a href=&#34;https://lh5.googleusercontent.com/-iJuM6CXhWVo/UMUlnT4qjHI/AAAAAAAAAH4/mahRyoBn4ZM/s800/vmware-5.png&#34;&gt;https://lh5.googleusercontent.com/-iJuM6CXhWVo/UMUlnT4qjHI/AAAAAAAAAH4/mahRyoBn4ZM/s800/vmware-5.png&lt;/a&gt; %}&lt;/p&gt;
-</description>
+&lt;p&gt;{% img &lt;a href=&#34;https://lh5.googleusercontent.com/-iJuM6CXhWVo/UMUlnT4qjHI/AAAAAAAAAH4/mahRyoBn4ZM/s800/vmware-5.png&#34;&gt;https://lh5.googleusercontent.com/-iJuM6CXhWVo/UMUlnT4qjHI/AAAAAAAAAH4/mahRyoBn4ZM/s800/vmware-5.png&lt;/a&gt; %}&lt;/p&gt;</description>
     </item>
     
   </channel>

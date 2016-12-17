@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Fpm on Paul Czarkowski</title>
-    <link>http://tech.paulcz.net/categories/fpm/</link>
-    <description>Recent content in Fpm on Paul Czarkowski</description>
+    <title>Paul Czarkowski</title>
+    <link>http://tech.paulcz.net/categories/fpm/index.xml</link>
+    <description>Recent content on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 07 Apr 2013 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://tech.paulcz.net/categories/fpm/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Vagrant&#43;Puppet&#43;FPM=Amazeballs</title>
-      <link>http://tech.paulcz.net/2013/04/vagrant-plus-puppet-plus-fpm-equals-amazeballs/</link>
+      <link>http://tech.paulcz.net/blog/vagrant-plus-puppet-plus-fpm-equals-amazeballs/</link>
       <pubDate>Sun, 07 Apr 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://tech.paulcz.net/2013/04/vagrant-plus-puppet-plus-fpm-equals-amazeballs/</guid>
+      <guid>http://tech.paulcz.net/blog/vagrant-plus-puppet-plus-fpm-equals-amazeballs/</guid>
       <description>&lt;p&gt;Lately I&amp;rsquo;ve been doing a lot of prototyping with &lt;a href=&#34;http://www.vagrantup.com/&#34;&gt;Vagrant&lt;/a&gt;, specifically for a couple of distinct activities:-&lt;/p&gt;
 
 &lt;ul&gt;
@@ -23,6 +22,8 @@
 &lt;/ul&gt;
 
 &lt;p&gt;I realized I was spending a bunch of time flipping back and forth between Vagrant environments and I had no quick way to utilize RPMs built with FPM inside my puppet modules.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;An idea was born.   I forked off the &lt;a href=&#34;https://github.com/paulczar/puppet-sandbox&#34;&gt;puppet sandbox&lt;/a&gt; project and added a Yum repo module &lt;code&gt;repository&lt;/code&gt; to the standalone puppet provisioner that vagrant uses when it first brings up a box.   It adds a Yum repo on the puppet server called &lt;code&gt;sandbox&lt;/code&gt; and adds a repo file to the client boxes pointing to the repo.   Now I can simply push an RPM to &lt;code&gt;packages/rpm&lt;/code&gt; and run &lt;code&gt;vagrant provision puppet&lt;/code&gt; which reruns puppet and rebuilds the yum repo.&lt;/p&gt;
 
@@ -60,8 +61,7 @@ PONG
   }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Of course Debian/Ubuntu doesn&amp;rsquo;t use Yum/RPM for package management.    I&amp;rsquo;d love to accept a pull request from somebody who wants to extend it to also support a local APT repository.   I left breadcrumbs in the &lt;code&gt;repository&lt;/code&gt; module for some appropriate classes to be spliced in&amp;hellip;&lt;/p&gt;
-</description>
+&lt;p&gt;Of course Debian/Ubuntu doesn&amp;rsquo;t use Yum/RPM for package management.    I&amp;rsquo;d love to accept a pull request from somebody who wants to extend it to also support a local APT repository.   I left breadcrumbs in the &lt;code&gt;repository&lt;/code&gt; module for some appropriate classes to be spliced in&amp;hellip;&lt;/p&gt;</description>
     </item>
     
   </channel>

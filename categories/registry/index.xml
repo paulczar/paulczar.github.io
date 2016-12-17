@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Registry on Paul Czarkowski</title>
-    <link>http://tech.paulcz.net/categories/registry/</link>
-    <description>Recent content in Registry on Paul Czarkowski</description>
+    <title>Paul Czarkowski</title>
+    <link>http://tech.paulcz.net/categories/registry/index.xml</link>
+    <description>Recent content on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 10 Jan 2016 10:22:22 -0600</lastBuildDate>
     <atom:link href="http://tech.paulcz.net/categories/registry/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -31,7 +30,7 @@
 
 &lt;p&gt;You will of course want to also build all of these servers with Configuration Management including the commands to actually run the &lt;a href=&#34;https://www.docker.com/docker-registry&#34;&gt;Docker Registry&lt;/a&gt;.&lt;/p&gt;
 
-&lt;h2 id=&#34;build-server-s:aceca7a5aff8ee4a89a691ff67eb065d&#34;&gt;Build Server(s)&lt;/h2&gt;
+&lt;h2 id=&#34;build-server-s&#34;&gt;Build Server(s)&lt;/h2&gt;
 
 &lt;p&gt;For your build server(s) you&amp;rsquo;ll want to be running an OS with Docker installed on it. I use the &lt;a href=&#34;https://hub.docker.com/_/jenkins/&#34;&gt;Jenkins&lt;/a&gt; Docker image on &lt;a href=&#34;http://coreos.com/&#34;&gt;CoreOS&lt;/a&gt; for both my Jenkins Master and Slaves, however this is just personal preference.&lt;/p&gt;
 
@@ -77,7 +76,7 @@ Digest: sha256:a96155be113bb2b4b82ebbc11cf1b511726c5b41617a70e0772f8180afc72fa5
 Status: Downloaded newer image for 127.0.0.1:5000/alpine:latest
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;regular-server-s:aceca7a5aff8ee4a89a691ff67eb065d&#34;&gt;Regular Server(s)&lt;/h2&gt;
+&lt;h2 id=&#34;regular-server-s&#34;&gt;Regular Server(s)&lt;/h2&gt;
 
 &lt;p&gt;We have a couple of options here.  You can run a &lt;a href=&#34;https://www.docker.com/docker-registry&#34;&gt;Docker Registry&lt;/a&gt; on each server listening only on localhost, or you can run one or more of them on their own servers that will listen on an IP and be secured with TLS.&lt;/p&gt;
 
@@ -109,7 +108,7 @@ f4fddc471ec2: Preparing
 Error parsing HTTP response: invalid character &#39;M&#39; looking for beginning of value: &amp;quot;Method not allowed\n&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;user-access-to-registry:aceca7a5aff8ee4a89a691ff67eb065d&#34;&gt;User Access to Registry:&lt;/h2&gt;
+&lt;h2 id=&#34;user-access-to-registry&#34;&gt;User Access to Registry:&lt;/h2&gt;
 
 &lt;p&gt;If you want to provide access to regular users and don&amp;rsquo;t mind maintaining the password files locally you can adapt my &lt;a href=&#34;http://tech.paulcz.net/2016/01/deploying-a-secure-docker-registry/&#34;&gt;basic secure Docker Registry&lt;/a&gt; blog post to use the object storage backend.&lt;/p&gt;
 
@@ -117,7 +116,7 @@ Error parsing HTTP response: invalid character &#39;M&#39; looking for beginning
 
 &lt;p&gt;These can run on the same server, or on seperate servers.  They can also be run on multiple servers that are load balanced via an external load balancer or via round-robin-dns for high availability.&lt;/p&gt;
 
-&lt;h3 id=&#34;read-only-users:aceca7a5aff8ee4a89a691ff67eb065d&#34;&gt;Read only Users&lt;/h3&gt;
+&lt;h3 id=&#34;read-only-users&#34;&gt;Read only Users&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code&gt;$ docker run -d \
       -p 443:5000 \
@@ -140,7 +139,7 @@ Error parsing HTTP response: invalid character &#39;M&#39; looking for beginning
       registry:2
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;admin-read-write:aceca7a5aff8ee4a89a691ff67eb065d&#34;&gt;Admin Read/Write&lt;/h3&gt;
+&lt;h3 id=&#34;admin-read-write&#34;&gt;Admin Read/Write&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code&gt;$ docker run -d \
       -p 444:5000 \
@@ -188,7 +187,7 @@ Error parsing HTTP response: invalid character &#39;M&#39; looking for beginning
 
 &lt;p&gt;For simplicity it will assume a single registry running on the local filesystem and will avoid using OS specific init (systemd/upstart/etc) systems by focusing just on the docker commands themselves.  This should work on any system capable of running &lt;a href=&#34;http://docker.com&#34;&gt;Docker&lt;/a&gt;.&lt;/p&gt;
 
-&lt;h2 id=&#34;preparation:6cef620af73a5d9314be6797578405bb&#34;&gt;Preparation&lt;/h2&gt;
+&lt;h2 id=&#34;preparation&#34;&gt;Preparation&lt;/h2&gt;
 
 &lt;p&gt;Boot a server that has &lt;a href=&#34;http://docker.com&#34;&gt;Docker&lt;/a&gt; installed. For an OS with &lt;a href=&#34;http://docker.com&#34;&gt;Docker&lt;/a&gt; already installed I recommend &lt;a href=&#34;http://coreos.com/&#34;&gt;CoreOS&lt;/a&gt;. However you could just as easily boot Ubuntu or CentOS and run &lt;code&gt;curl -sSL get.docker.com | sudo bash&lt;/code&gt; if you&amp;rsquo;re into that sort of thing.&lt;/p&gt;
 
@@ -211,7 +210,7 @@ Name: core-01
 ID: C5XV:CZ3H:EAO4:ATJ3:ARSO:UOGD:XH3X:UKLZ:V3FO:2LRF:6E3X:CV5K
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;create-certificates:6cef620af73a5d9314be6797578405bb&#34;&gt;Create Certificates&lt;/h2&gt;
+&lt;h2 id=&#34;create-certificates&#34;&gt;Create Certificates&lt;/h2&gt;
 
 &lt;p&gt;To keep this as simple as possible I will demonstrate using the &lt;a href=&#34;https://github.com/paulczar/omgwtfssl&#34;&gt;paulczar/omgwtfssl&lt;/a&gt; image to create certificates. If you would rather create them manually via the &lt;code&gt;openssl&lt;/code&gt; cli see my blog post on &lt;a href=&#34;http://tech.paulcz.net/2016/01/secure-docker-with-tls/&#34;&gt;Securing Docker with TLS&lt;/a&gt;.&lt;/p&gt;
 

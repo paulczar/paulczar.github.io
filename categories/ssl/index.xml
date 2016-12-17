@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ssl on Paul Czarkowski</title>
-    <link>http://tech.paulcz.net/categories/ssl/</link>
-    <description>Recent content in Ssl on Paul Czarkowski</description>
+    <title>Paul Czarkowski</title>
+    <link>http://tech.paulcz.net/categories/ssl/index.xml</link>
+    <description>Recent content on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 03 Jan 2016 14:44:30 -0600</lastBuildDate>
     <atom:link href="http://tech.paulcz.net/categories/ssl/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -27,7 +26,7 @@
 
 &lt;p&gt;If you are only interested in securing Docker itself and not Docker Swarm then this should apply to any server with Docker installed that uses systemd.  Even on systems without systemd it should provide enough details to secure Docker.&lt;/p&gt;
 
-&lt;h2 id=&#34;creating-certificates:ee7ba636086981df3b8f20678b008bf1&#34;&gt;Creating Certificates&lt;/h2&gt;
+&lt;h2 id=&#34;creating-certificates&#34;&gt;Creating Certificates&lt;/h2&gt;
 
 &lt;p&gt;I will offer two methods to create the certificates, the first by using &lt;code&gt;openssl&lt;/code&gt; to create a CA and then sign a key/cert pair, the second by using the &lt;a href=&#34;https://hub.docker.com/r/paulczar/omgwtfssl/&#34;&gt;paulczar/omgwtfssl&lt;/a&gt; Docker Image which automates the certificate creation process.&lt;/p&gt;
 
@@ -39,7 +38,7 @@ $ mkdir -p ~/.docker
 
 &lt;p&gt;&lt;em&gt;For this example we&amp;rsquo;re creating the keys and certificates on the server itself, ideally you would do this on your laptop or via configuration management and never store the CA key on a public server.&lt;/em&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;openssl:ee7ba636086981df3b8f20678b008bf1&#34;&gt;OpenSSL&lt;/h3&gt;
+&lt;h3 id=&#34;openssl&#34;&gt;OpenSSL&lt;/h3&gt;
 
 &lt;p&gt;First run &lt;code&gt;openssl&lt;/code&gt; to create and sign a CA key and certificate and copy the CA certificate into &lt;code&gt;/etc/docker/ssl&lt;/code&gt;:&lt;/p&gt;
 
@@ -126,7 +125,7 @@ subject=/CN=docker-client
 Getting CA Private Key
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;omgwtfssl:ee7ba636086981df3b8f20678b008bf1&#34;&gt;OMGWTFSSL&lt;/h3&gt;
+&lt;h3 id=&#34;omgwtfssl&#34;&gt;OMGWTFSSL&lt;/h3&gt;
 
 &lt;p&gt;If you want to skip manually creating the certificates you can use the &lt;a href=&#34;https://hub.docker.com/r/paulczar/omgwtfssl/&#34;&gt;paulczar/omgwtfssl&lt;/a&gt; image which is a small (&amp;lt; 10mb) Docker image built specifically for creating certificates for situations like this.&lt;/p&gt;
 
@@ -185,7 +184,7 @@ subject=/CN=example.com
 Getting CA Private Key
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;using-the-tls-certificates-with-docker:ee7ba636086981df3b8f20678b008bf1&#34;&gt;Using the TLS certificates with Docker&lt;/h2&gt;
+&lt;h2 id=&#34;using-the-tls-certificates-with-docker&#34;&gt;Using the TLS certificates with Docker&lt;/h2&gt;
 
 &lt;p&gt;Now we have our TLS certificates created and in the correct locations you need to tell Docker to use the TLS certificate and also verify the client.  You do this by creating a drop in systemd unit to modify the existing Docker systemd unit.&lt;/p&gt;
 
@@ -232,7 +231,7 @@ Name: core-01
 ID: RGVQ:VDUC:Z5LU:IE7I:J6UJ:TFBJ:SSCO:EWG2:QKAW:5FY6:EIAV:MROK
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;using-the-tls-certificates-with-docker-swarm:ee7ba636086981df3b8f20678b008bf1&#34;&gt;Using the TLS certificates with Docker Swarm&lt;/h2&gt;
+&lt;h2 id=&#34;using-the-tls-certificates-with-docker-swarm&#34;&gt;Using the TLS certificates with Docker Swarm&lt;/h2&gt;
 
 &lt;p&gt;To secure Docker Swarm using these TLS certificates you will need to create TLS certificate/key pairs for each server using the same CA.&lt;/p&gt;
 

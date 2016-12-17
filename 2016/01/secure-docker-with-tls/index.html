@@ -1,72 +1,80 @@
-  <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="map[]" />
+    <meta name="description" content="Random musings mostly about tech">
+    <link rel="shortcut icon" type="image/x-icon" href="http://tech.paulcz.netimg/favicon.ico">
+    <title>Securing Docker with TLS certificates</title>
+    <meta name="generator" content="Hugo 0.17" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="http://tech.paulcz.netcss/main.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
     
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <title> Securing Docker with TLS certificates &middot; Paul Czarkowski </title>
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
     
-    <link rel="stylesheet" type="text/css" href="http://tech.paulcz.net//css/uno.min.css" />
-    <link rel="stylesheet" type="text/css" href="http://tech.paulcz.net//css/lightGallery.css" />
-    
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
-    <link rel="shortcut icon" href="/favicon.ico">
-    
-    <link href="" rel="alternate" type="application/rss+xml" title="Paul Czarkowski" />
-    
-    <script src="http://tech.paulcz.net//js/jquery.min.js"></script>
-    <script src="http://tech.paulcz.net//js/main.min.js">
-    </script>
-</head>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-35638296-2', 'auto');
+ga('send', 'pageview');
+</script>
+
+  </head>
 
   <body>
-    <span class="mobile btn-mobile-menu">
-        <i class="fa fa-bars btn-mobile-menu__icon"></i>
-        <i class="fa fa-times btn-mobile-close__icon hidden"></i>
-    </span>
-<header class="panel-cover panel-cover--collapsed" >
-    <div class="panel-main">
-        <div class="panel-main__inner panel-inverted">
-            <div class="panel-main__content"> 
-                <h1 class="panel-cover__title panel-title">
-                    <a href="http://tech.paulcz.net/" title="link to homepage for Paul Czarkowski">Paul Czarkowski</a>
-                </h1>
-                <hr class="panel-cover__divider" />
-                <p class="panel-cover__description">  Random musings mostly about tech  </p>
-                <hr class="panel-cover__divider panel-cover__divider--secondary" />
-                <div class="navigation-wrapper">
-                    <nav class="cover-navigation cover-navigation--primary">
-                        <ul class="navigation">
-                            <li class="navigation__item"><a href="/#blog" title="link to Paul Czarkowski blog" class="blog-button">Blog</a> </li>
-                            </br>  </ul>
-                    </nav> <nav class="cover-navigation navigation--social">
-    <ul class="navigation"> 
-        
-        <li class="navigation__item">
-            <a href="http://twitter.com/pczarkowski" title="@pczarkowski on Twitter"> <i class='fa fa-tt'></i> <span class="label">Twitter</span> </a>
-        </li>   
-        
-        <li class="navigation__item">
-            <a href="https://github.com/paulczar" title="paulczar on github"> <i class='fa fa-github'></i> <span class="label">Github</span> </a>
-        </li>  </br>   
-        
-        <li class="navigation__item">
-            <a href="mailto:username.taken&#43;tech@gmail.com" title="Email username.taken&#43;tech@gmail.com"> <i class='fa fa-envelope-o'></i> <span class="label">Email</span> </a>
-        </li>  </ul>
-</nav>
- </div>
-            </div>
-        </div>
-        <div class="panel-cover--overlay"></div>
-    </div>
-</header>
+    <div id="wrap">
 
-    <div class="content-wrapper">
-      <div class="content-wrapper__inner">
-        <div class="post">
-          <h1>Securing Docker with TLS certificates</h1>
-          <span class="post-date">Sun, Jan 3, 2016</span>
-          
+      
+      <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="http://tech.paulcz.net"><i class="fa fa-home"></i></a>
+    </div>
+    <div id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+        <li><a href="/page/about">ABOUT</a></li>
+        
+        <li><a href="/blog/">BLOG</a></li>
+        
+        <li><a href="/page/speaker">TALK</a></li>
+        
+      
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      
+      <div class="container">
+        <div class="blog-post">
+          <h3>
+            <strong><a href="http://tech.paulcz.net/2016/01/secure-docker-with-tls/">Securing Docker with TLS certificates</a></strong>
+          </h3>
+        </div>
+        <div class="blog-title">
+          <h4>
+          January 3, 2016
+            &nbsp;&nbsp;
+            
+          </h4>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="blogpost">
+              
 
 <p>By default Docker (and by extension Docker Swarm) has no authentication or authorization on its API, relying instead on the filesystem security of its unix socket <code>/var/run/docker.sock</code> which by default is only accessible by the root user.</p>
 
@@ -78,7 +86,7 @@
 
 <p>If you are only interested in securing Docker itself and not Docker Swarm then this should apply to any server with Docker installed that uses systemd.  Even on systems without systemd it should provide enough details to secure Docker.</p>
 
-<h2 id="creating-certificates:ee7ba636086981df3b8f20678b008bf1">Creating Certificates</h2>
+<h2 id="creating-certificates">Creating Certificates</h2>
 
 <p>I will offer two methods to create the certificates, the first by using <code>openssl</code> to create a CA and then sign a key/cert pair, the second by using the <a href="https://hub.docker.com/r/paulczar/omgwtfssl/">paulczar/omgwtfssl</a> Docker Image which automates the certificate creation process.</p>
 
@@ -90,7 +98,7 @@ $ mkdir -p ~/.docker
 
 <p><em>For this example we&rsquo;re creating the keys and certificates on the server itself, ideally you would do this on your laptop or via configuration management and never store the CA key on a public server.</em></p>
 
-<h3 id="openssl:ee7ba636086981df3b8f20678b008bf1">OpenSSL</h3>
+<h3 id="openssl">OpenSSL</h3>
 
 <p>First run <code>openssl</code> to create and sign a CA key and certificate and copy the CA certificate into <code>/etc/docker/ssl</code>:</p>
 
@@ -177,7 +185,7 @@ subject=/CN=docker-client
 Getting CA Private Key
 </code></pre>
 
-<h3 id="omgwtfssl:ee7ba636086981df3b8f20678b008bf1">OMGWTFSSL</h3>
+<h3 id="omgwtfssl">OMGWTFSSL</h3>
 
 <p>If you want to skip manually creating the certificates you can use the <a href="https://hub.docker.com/r/paulczar/omgwtfssl/">paulczar/omgwtfssl</a> image which is a small (&lt; 10mb) Docker image built specifically for creating certificates for situations like this.</p>
 
@@ -236,7 +244,7 @@ subject=/CN=example.com
 Getting CA Private Key
 </code></pre>
 
-<h2 id="using-the-tls-certificates-with-docker:ee7ba636086981df3b8f20678b008bf1">Using the TLS certificates with Docker</h2>
+<h2 id="using-the-tls-certificates-with-docker">Using the TLS certificates with Docker</h2>
 
 <p>Now we have our TLS certificates created and in the correct locations you need to tell Docker to use the TLS certificate and also verify the client.  You do this by creating a drop in systemd unit to modify the existing Docker systemd unit.</p>
 
@@ -283,7 +291,7 @@ Name: core-01
 ID: RGVQ:VDUC:Z5LU:IE7I:J6UJ:TFBJ:SSCO:EWG2:QKAW:5FY6:EIAV:MROK
 </code></pre>
 
-<h2 id="using-the-tls-certificates-with-docker-swarm:ee7ba636086981df3b8f20678b008bf1">Using the TLS certificates with Docker Swarm</h2>
+<h2 id="using-the-tls-certificates-with-docker-swarm">Using the TLS certificates with Docker Swarm</h2>
 
 <p>To secure Docker Swarm using these TLS certificates you will need to create TLS certificate/key pairs for each server using the same CA.</p>
 
@@ -335,41 +343,59 @@ Total Memory: 3.068 GiB
 Name: core-01
 </code></pre>
 
+              <hr>
+              <div class="related-posts">
+                <h5>Related Posts</h5>
+                
+              </div>
+            </div>
+          </div>
+          <hr>
+        <div class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+
+    (function() {
+      
+      
+      if (window.location.hostname == "localhost")
+        return;
+
+      var disqus_shortname = 'tech-paulcz';
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
         </div>
-        <section class="post-comments">
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-
-(function() {
-     
-     
-     if (window.location.hostname == "localhost")
-             return;
-
-	         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-		     var disqus_shortname = '';
-		         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-			     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-			     })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-</section>
-
-
+      
       </div>
     </div>
+
+    
+    <footer>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+      <a href="http://www.github.com/sumaxime/hugo-sustain/">sustain</a> with ♥</p>
+    </div>
+  </div>
+</footer>
+<div class="footer"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="http://tech.paulcz.netjs/docs.min.js"></script>
+<script src="http://tech.paulcz.netjs/main.js"></script>
+
+<script src="http://tech.paulcz.netjs/ie10-viewport-bug-workaround.js"></script>
+
+
+
   </body>
-  <footer class="footer"></footer>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-35638296-2', 'auto');
-  ga('send', 'pageview');
-
-</script>
 </html>

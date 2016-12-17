@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Openstack on Paul Czarkowski</title>
-    <link>http://tech.paulcz.net/categories/openstack/</link>
-    <description>Recent content in Openstack on Paul Czarkowski</description>
+    <title>Paul Czarkowski</title>
+    <link>http://tech.paulcz.net/categories/openstack/index.xml</link>
+    <description>Recent content on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 02 Jan 2016 13:00:42 -0600</lastBuildDate>
     <atom:link href="http://tech.paulcz.net/categories/openstack/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
