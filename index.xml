@@ -33,7 +33,7 @@
 
 &lt;p&gt;I am an experienced hands-on Architect / DevOps Engineer with a long history in Operations and Infrastructure Automation.  I have a broad depth of experience across most IT and Operations related areas with strong experience in using and evangelizing DevOps tools and methodologies.&lt;/p&gt;
 
-&lt;p&gt;My current role at IBM has me focused on helping to rebuild the IBM developer advocacy programs and content creation processes.  Previous to that I led the conversion of our OpenStack Automation platform (&lt;a href=&#34;https://github.com/blueboxgroup/ursula&#34;&gt;ursula&lt;/a&gt;) from just Ubuntu to also supporting Redhat Enterprise Linux.  I also architected and built (and later led a small agile team) the Blue Box Cloud SRE Operations Platform (which we recently open-sourced as &lt;a href=&#34;https://github.com/IBM/cuttle&#34;&gt;cuttle&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;My current role at IBM has me focused on helping to rebuild the IBM developer advocacy programs and content creation processes.  Previous to that I led the conversion of our OpenStack Automation platform (&lt;a href=&#34;https://github.com/blueboxgroup/ursula&#34;&gt;ursula&lt;/a&gt;) from just Ubuntu to also supporting Redhat Enterprise Linux.  I also architected and built the Blue Box Cloud SRE Operations Platform (which we recently open-sourced as &lt;a href=&#34;https://github.com/IBM/cuttle&#34;&gt;cuttle&lt;/a&gt;) and built a team to maintain it.&lt;/p&gt;
 
 &lt;p&gt;Previous to IBM/Blue Box I was at Rackspace where I worked on a team building a product with Docker on top of Openstack, and before that I worked at EA where I helped build and design the infrastructure for SimCity ( on AWS ) and SWTOR ( own data centers, approx 6,000 servers, 2M+ subscribers at launch ).&lt;/p&gt;
 
@@ -52,7 +52,7 @@
 
 &lt;li&gt;&lt;p&gt;As a joke I wrote a 100 lines of code IPVS load balancer called &lt;a href=&#34;https://github.com/paulczar/lolbalancer&#34;&gt;lolbalancer&lt;/a&gt;, but have actually found it to be useful on occasion for demonstrations.&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;Over Christmas 2014 I built out &lt;a href=&#34;https://github.com/factorish/factorish&#34;&gt;Factorish&lt;/a&gt; as a concept to show managing the life-cycle and configuration of applications in Docker using service discovery, and built several example apps such as &lt;a href=&#34;https://github.com/paulczar/docker-percona_galera&#34;&gt;Percona with Galera Replication&lt;/a&gt; and the &lt;a href=&#34;https://github.com/factorish/factorish-elk&#34;&gt;ELK stack&lt;/a&gt;.  Concepts with have found their way into tools such as &lt;a href=&#34;https://github.com/joyent/containerpilot&#34;&gt;Container Pilot&lt;/a&gt; and &lt;a href=&#34;https://habitat.sh&#34;&gt;Habitat.sh&lt;/a&gt;.  I also used it as a basis for a &lt;a href=&#34;http://tech.paulcz.net/blog/factorish_and_the_12_fakter_app/&#34;&gt;blog post&lt;/a&gt; and a series of talks I gave on Dockerizing apps that really shouldn’t be Dockerized.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Over Christmas 2014 I built out &lt;a href=&#34;https://github.com/factorish/factorish&#34;&gt;Factorish&lt;/a&gt; as a concept to show managing the life-cycle and configuration of applications in Docker using service discovery, and built several example apps such as &lt;a href=&#34;https://github.com/paulczar/docker-percona_galera&#34;&gt;Percona with Galera Replication&lt;/a&gt; and the &lt;a href=&#34;https://github.com/factorish/factorish-elk&#34;&gt;ELK stack&lt;/a&gt;.  Some of these concepts have found their way into tools such as &lt;a href=&#34;https://github.com/joyent/containerpilot&#34;&gt;Container Pilot&lt;/a&gt; and &lt;a href=&#34;https://habitat.sh&#34;&gt;Habitat.sh&lt;/a&gt;.  I also used it as a basis for a &lt;a href=&#34;http://tech.paulcz.net/blog/factorish_and_the_12_fakter_app/&#34;&gt;blog post&lt;/a&gt; and a series of talks I gave on Dockerizing apps that really shouldn’t be Dockerized.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&#34;professional-accomplishments&#34;&gt;Professional Accomplishments&lt;/h2&gt;
@@ -64,7 +64,7 @@
 
 &lt;li&gt;&lt;p&gt;Recognized the need for a unified SRE Operations Platform to support growth and built SiteController (&lt;a href=&#34;https://github.com/IBM/cuttle&#34;&gt;cuttle&lt;/a&gt;) and architected and built it, later forming and leading a team to maintain and develop it further.&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;Successfully led the effort to make Blue Box OpenStack installable in customer data centers with no Internet access utilizing SiteController and overhauling large parts or Ursula.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Successfully led the effort to make Blue Box OpenStack installable in customer data centers with no Internet access utilizing SiteController and overhauling large parts of Ursula.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&#34;rackspace&#34;&gt;Rackspace&lt;/h3&gt;
