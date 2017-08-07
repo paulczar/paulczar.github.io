@@ -77,6 +77,16 @@
 &lt;li&gt;&lt;p&gt;Maintained Community Chef Cookbooks for Elasticsearch, Logstash, and Kibana.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;h3 id=&#34;electronic-arts&#34;&gt;Electronic Arts&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Planned and Executed migration of live game services for multiple games from their existing expensive datacenters to spare capacity from the cheaper BioWare datacenters.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Built and deployed dozens of websites for game code redemptions and blogs into Amazon using Rightscale.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Helped build and scale Sim City Online servers in Amazon using Rightscale, implemented monitoring and logging systems to help debug and discover load and performance issues during launch instability.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h3 id=&#34;bioware-star-wars-the-old-republic-swtor&#34;&gt;BioWare – Star Wars The Old Republic (SWTOR)&lt;/h3&gt;
 
 &lt;ul&gt;
