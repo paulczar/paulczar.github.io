@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Page-rsses on Paul Czarkowski</title>
-    <link>http://tech.paulcz.net/page/index.xml</link>
-    <description>Recent content in Page-rsses on Paul Czarkowski</description>
+    <title>Pages on Paul Czarkowski</title>
+    <link>http://tech.paulcz.net/page/</link>
+    <description>Recent content in Pages on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 25 Jun 2017 09:04:08 -0600</lastBuildDate>
-    <atom:link href="http://tech.paulcz.net/page/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://tech.paulcz.net/page/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Resume for Paul Czarkowski</title>
@@ -15,130 +17,13 @@
       <pubDate>Sun, 25 Jun 2017 09:04:08 -0600</pubDate>
       
       <guid>http://tech.paulcz.net/page/resume/</guid>
-      <description>
-
-&lt;h1 id=&#34;paul-czarkowski&#34;&gt;Paul Czarkowski&lt;/h1&gt;
-
-&lt;p&gt;&lt;strong&gt;Technical Lead, IBM Cloud Developer Labs&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;mailto:username.taken@gmail.com&#34;&gt;username.taken@gmail.com&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://tech.paulcz.net/&#34;&gt;http://tech.paulcz.net&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/paulczar&#34;&gt;https://github.com/paulczar&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Work Permits : US, Australian, UK/Europe.&lt;/p&gt;
-
-&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
-
-&lt;p&gt;I am an experienced hands-on Architect / DevOps Engineer with a long history in Operations and Infrastructure Automation.  I have a broad depth of experience across most IT and Operations related areas with strong experience in using and evangelizing DevOps tools and methodologies.&lt;/p&gt;
-
-&lt;p&gt;My current role at IBM has me focused on helping to rebuild the IBM developer advocacy programs and content creation processes.  Previous to that I led the conversion of our OpenStack Automation platform (&lt;a href=&#34;https://github.com/blueboxgroup/ursula&#34;&gt;ursula&lt;/a&gt;) from just Ubuntu to also supporting Redhat Enterprise Linux.  I also architected and built the Blue Box Cloud SRE Operations Platform (which we recently open-sourced as &lt;a href=&#34;https://github.com/IBM/cuttle&#34;&gt;cuttle&lt;/a&gt;) and built a team to maintain it.&lt;/p&gt;
-
-&lt;p&gt;Previous to IBM/Blue Box I was at Rackspace where I worked on a team building a product with Docker on top of Openstack, and before that I worked at EA where I helped build and design the infrastructure for SimCity ( on AWS ) and SWTOR ( own data centers, approx 6,000 servers, 2M+ subscribers at launch ).&lt;/p&gt;
-
-&lt;h2 id=&#34;speaking-engagements&#34;&gt;Speaking Engagements&lt;/h2&gt;
-
-&lt;p&gt;see &lt;a href=&#34;http://tech.paulcz.net/page/speaker/&#34;&gt;http://tech.paulcz.net/page/speaker/&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;open-source-and-passion-projects&#34;&gt;Open Source and Passion Projects&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;In an effort to learn more about Kubernetes I got involved in the Kargo/Kubespray community and made a significant amount of contributions to help improve the quality of the Ansible being written and the composability of the Roles. Surprisingly a year on I&amp;rsquo;m still in the top &lt;a href=&#34;https://github.com/kubernetes-incubator/kubespray/graphs/contributors&#34;&gt;5 contributors&lt;/a&gt; (based on lines of code, which is obviously the most important metric AMIRITE)&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Built out a Chef Inspec Repository for &lt;a href=&#34;https://github.com/inspec-stigs/inspec-stig-rhel6&#34;&gt;RedHat 6 STIG auditing&lt;/a&gt; and formed a small community around using &lt;a href=&#34;https://github.com/inspec-stigs&#34;&gt;Inspec for STIG auditing&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;I got tired of fighting openssl commands to create SSL/TLS for development so I built a Docker Image called &lt;a href=&#34;https://github.com/paulczar/omgwtfssl&#34;&gt;omgwtfssl&lt;/a&gt; that takes a few environment variables and spits out a CA/key/cert combo.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;As a joke I wrote a 100 lines of code IPVS load balancer called &lt;a href=&#34;https://github.com/paulczar/lolbalancer&#34;&gt;lolbalancer&lt;/a&gt;, but have actually found it to be useful on occasion for demonstrations.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Over Christmas 2014 I built out &lt;a href=&#34;https://github.com/factorish/factorish&#34;&gt;Factorish&lt;/a&gt; as a concept to show managing the life-cycle and configuration of applications in Docker using service discovery, and built several example apps such as &lt;a href=&#34;https://github.com/paulczar/docker-percona_galera&#34;&gt;Percona with Galera Replication&lt;/a&gt; and the &lt;a href=&#34;https://github.com/factorish/factorish-elk&#34;&gt;ELK stack&lt;/a&gt;.  Some of these concepts have found their way into tools such as &lt;a href=&#34;https://github.com/joyent/containerpilot&#34;&gt;Container Pilot&lt;/a&gt; and &lt;a href=&#34;https://habitat.sh&#34;&gt;Habitat.sh&lt;/a&gt;.  I also used it as a basis for a &lt;a href=&#34;http://tech.paulcz.net/blog/factorish_and_the_12_fakter_app/&#34;&gt;blog post&lt;/a&gt; and a series of talks I gave on Dockerizing apps that really shouldn’t be Dockerized.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;professional-accomplishments&#34;&gt;Professional Accomplishments&lt;/h2&gt;
-
-&lt;h3 id=&#34;ibm-blue-box&#34;&gt;IBM / Blue Box&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Led the effort to port the Blue Box OpenStack automation tool (&lt;a href=&#34;https://github.com/blueboxgroup/ursula&#34;&gt;ursula&lt;/a&gt;) to support RedHat Enterprise Linux as well as Ubuntu (&lt;a href=&#34;https://www.ibm.com/blogs/bluemix/2017/04/ibm-bluemix-private-cloud-red-hat/&#34;&gt;see&lt;/a&gt;), with full STIG compliance and Chef Inspec for auditing.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Recognized the need for a unified SRE Operations Platform to support growth and built SiteController (&lt;a href=&#34;https://github.com/IBM/cuttle&#34;&gt;cuttle&lt;/a&gt;) and architected and built it, later forming and leading a team to maintain and develop it further.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Successfully led the effort to make Blue Box OpenStack installable in customer data centers with no Internet access utilizing SiteController and overhauling large parts of Ursula.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;rackspace&#34;&gt;Rackspace&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Built the initial Build/Push/Run workflow for the [now mostly defunct] OpenStack PaaS project (Solum) utilizing Docker and the Cedarish style workflow demonstrated by Dokku and DEIS.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Worked on the OpenStack nova-docker driver, and was the first [that I know of] person to successfully run &lt;a href=&#34;https://github.com/paulczar/dockenstack&#34;&gt;OpenStack in Docker&lt;/a&gt; containers.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Maintained Community Chef Cookbooks for Elasticsearch, Logstash, and Kibana.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;electronic-arts&#34;&gt;Electronic Arts&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Planned and Executed migration of live game services for multiple games from their existing expensive datacenters to spare capacity from the cheaper BioWare datacenters.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Built and deployed dozens of websites for game code redemptions and blogs into Amazon using Rightscale.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Helped build and scale Sim City Online servers in Amazon using Rightscale, implemented monitoring and logging systems to help debug and discover load and performance issues during launch instability.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;bioware-star-wars-the-old-republic-swtor&#34;&gt;BioWare – Star Wars The Old Republic (SWTOR)&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Supported the studio during development.   Lead the Online Operations team through purchasing and deploying over 6,000 servers in four data centers to run the online environment. Ensured a successful and glitch free  launch of SWTOR on the 20th December 2011.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Built a large cluster of Xen Hypervisors to provide virtual game servers for development and wrote scripts for deploying game databases from SAN snapshots ( reducing storage requirements from 36Tb to less than 1Tb ).&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Successfully deployed a proof of concept private cloud with CloudStack to further increase our Virtualization abilities and create a self-service portal for our developers.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;employment-history&#34;&gt;Employment History&lt;/h2&gt;
-
-&lt;h3 id=&#34;bluebox-an-ibm-company-nov-2014-to-current&#34;&gt;BlueBox an IBM Company – Nov 2014 to Current&lt;/h3&gt;
-
-&lt;p&gt;&lt;em&gt;Austin, Texas&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Technical Lead, IBM Cloud Developer Labs,&lt;/p&gt;
-
-&lt;p&gt;Architect / Senior DevOps Engineer,&lt;/p&gt;
-
-&lt;p&gt;Technical lead of Site Controller team.&lt;/p&gt;
-
-&lt;h3 id=&#34;rackspace-nov-2013-to-nov-2014&#34;&gt;Rackspace – Nov 2013 to Nov 2014&lt;/h3&gt;
-
-&lt;p&gt;&lt;em&gt;Austin, Texas&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Senior Operations Engineer&lt;/p&gt;
-
-&lt;h3 id=&#34;ea-bioware-april-2008-to-nov-2013&#34;&gt;EA / BioWare – April 2008 to Nov 2013&lt;/h3&gt;
-
-&lt;p&gt;&lt;em&gt;Austin, Texas&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Manager, Systems Engineering &lt;em&gt;( March 2012 to current )&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Lead Systems Engineer  &lt;em&gt;( 2010  to March 2012 )&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Senior Systems Engineer  ( 2008 to 2010 )&lt;/p&gt;
-
-&lt;h3 id=&#34;older&#34;&gt;Older&lt;/h3&gt;
-
-&lt;p&gt;2004 - 2008 : IT Manager, Pandemic Studios.
-2001 - 2004 : NOC Manager iTEL Community Telco
-2000 – 2001 : Systems Administrator / Web Application Developer BMC Networks
-1999 – 2000 : Systems Administrator, Global Info-Links
-1998 – 1999 : Computer Technician, Altech Computers
-1998             : Computer Technician, Harvey Norman
-1997 - 1998  : OzNetCom&lt;/p&gt;
-
-&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
-
-&lt;p&gt;Available on request.&lt;/p&gt;
-</description>
+      <description>Paul Czarkowski Technical Lead, IBM Cloud Developer Labs
+username.taken@gmail.com
+http://tech.paulcz.net
+https://github.com/paulczar
+Work Permits : US, Australian, UK/Europe.
+Overview I am an experienced hands-on Architect / DevOps Engineer with a long history in Operations and Infrastructure Automation. I have a broad depth of experience across most IT and Operations related areas with strong experience in using and evangelizing DevOps tools and methodologies.
+My current role at IBM has me focused on helping to rebuild the IBM developer advocacy programs and content creation processes.</description>
     </item>
     
     <item>
@@ -147,16 +32,8 @@
       <pubDate>Fri, 16 Dec 2016 09:04:08 -0600</pubDate>
       
       <guid>http://tech.paulcz.net/page/about/</guid>
-      <description>&lt;p&gt;Paul is an Infrastructure Engineer who has been doing IT and Operations for longer than he cares to admit and has worked across many industries, retail, game development, managed hosting, and more.  He has worked in both very large and very small organizations.&lt;/p&gt;
-
-&lt;p&gt;As an avid Technologist he can be found tinkering with emergent technologies (hello running docker in production in 2014) and optimizing and codifying the operations of large legacy applications.&lt;/p&gt;
-
-&lt;p&gt;Paul is an active member of the Austin Technology scene and is often found at the &lt;a href=&#34;https://www.meetup.com/austin-devops/&#34;&gt;Austin DevOps&lt;/a&gt;, &lt;a href=&#34;https://www.meetup.com/CloudAustin/&#34;&gt;Cloud Austin&lt;/a&gt;, &lt;a href=&#34;https://www.meetup.com/Docker-Austin/&#34;&gt;Docker Austin&lt;/a&gt;, and &lt;a href=&#34;https://www.meetup.com/OpenStack-Austin/&#34;&gt;OpenStack Austin&lt;/a&gt; both as a attendee and as a &lt;a href=&#34;http://tech.paulcz.net/page/speaker&#34;&gt;speaker&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Paul also helps organize local community conferences such as &lt;a href=&#34;https://www.devopsdays.org/events/2016-austin/welcome/&#34;&gt;DevOps Days Austin&lt;/a&gt; and &lt;a href=&#34;http://www.containerdaysaustin.com&#34;&gt;Container Days Austin&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Technology isn&amp;rsquo;t his only interest though.  Paul has a love of cooking and can often be found baking sourdough bread and cooking Texas style barbecue in his custom offset pit and competing ( and winning ) in food competitions both locally and interstate.&lt;/p&gt;
-</description>
+      <description>Paul is an Infrastructure Engineer who has been doing IT and Operations for longer than he cares to admit and has worked across many industries, retail, game development, managed hosting, and more. He has worked in both very large and very small organizations.
+As an avid Technologist he can be found tinkering with emergent technologies (hello running docker in production in 2014) and optimizing and codifying the operations of large legacy applications.</description>
     </item>
     
     <item>
@@ -165,77 +42,8 @@
       <pubDate>Fri, 16 Dec 2016 09:04:08 -0600</pubDate>
       
       <guid>http://tech.paulcz.net/page/speaker/</guid>
-      <description>
-
-&lt;p&gt;An incomplete list of events that I&amp;rsquo;ve spoken at&lt;/p&gt;
-
-&lt;h1 id=&#34;2016&#34;&gt;2016&lt;/h1&gt;
-
-&lt;h2 id=&#34;all-day-devops&#34;&gt;All Day DevOps&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Serverfull computing - &lt;a href=&#34;https://youtu.be/MOrWDvpZTdY?t=4874&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;openstack-summit-barcelona&#34;&gt;OpenStack Summit Barcelona&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;InterOp Panel - &lt;a href=&#34;https://www.openstack.org/videos/barcelona-2016/interop-you-keep-using-that-word-i-do-not-think-it-means-what-you-think-it-means&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;OpenStack Compliance the DevOps way - &lt;a href=&#34;https://www.openstack.org/videos/barcelona-2016/openstack-compliance-the-devops-way&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;openstack-day-seattle&#34;&gt;OpenStack Day Seattle&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;99 OpenStack clouds on the wall - &lt;a href=&#34;https://www.youtube.com/watch?v=erjUIO0kKI8&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;openstack-summit-austin&#34;&gt;OpenStack Summit Austin&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;A PaaS for Continuous Delivery - &lt;a href=&#34;https://www.openstack.org/videos/austin-2016/a-paas-for-continuous-delivery-of-cloud-native-apps-minus-kubernetes-and-mesos&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;2015&#34;&gt;2015&lt;/h1&gt;
-
-&lt;h2 id=&#34;openstack-summit-tokyo&#34;&gt;OpenStack Summit Tokyo&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Chef vs Ansible vs Puppet vs Salt - &lt;a href=&#34;https://www.openstack.org/videos/tokio-2015/chef-vs-puppet-vs-ansible-vs-salt-whats-best-for-deploying-and-managing-openstack&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;devops-days-austin&#34;&gt;DevOps Days Austin&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Scout-A-Park a story of pragmatic dockerization - &lt;a href=&#34;https://vimeo.com/album/3437844/video/129894208&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;openstack-day-seattle-1&#34;&gt;OpenStack Day Seattle&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Just enough OpenStack for Docker - &lt;a href=&#34;https://www.youtube.com/watch?v=mYYa84WQowQ&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;openstack-summit-vancouver&#34;&gt;OpenStack Summit Vancouver&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Docker Docker Docker Openstack - &lt;a href=&#34;https://www.openstack.org/videos/vancouver-2015/docker-docker-docker-openstack&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;docker-austin-meetup&#34;&gt;Docker Austin meetup&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Factorish - &lt;a href=&#34;https://www.youtube.com/watch?v=uqKPgc8jMkI&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;2014&#34;&gt;2014&lt;/h1&gt;
-
-&lt;h2 id=&#34;dockercon14&#34;&gt;DockerCon14&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Automated Chef cookbook testing with Drone.io and GitHub - &lt;a href=&#34;https://www.youtube.com/watch?v=9_H41VFfKcM&#34;&gt;Video&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>An incomplete list of events that I&amp;rsquo;ve spoken at
+2017 Sensu Summit  Sensu @ Bluebox - Video | Slides  2016 All Day DevOps  Serverfull computing - Video  OpenStack Summit Barcelona  InterOp Panel - Video OpenStack Compliance the DevOps way - Video  OpenStack Day Seattle  99 OpenStack clouds on the wall - Video  OpenStack Summit Austin  A PaaS for Continuous Delivery - Video  2015 OpenStack Summit Tokyo  Chef vs Ansible vs Puppet vs Salt - Video  DevOps Days Austin  Scout-A-Park a story of pragmatic dockerization - Video  OpenStack Day Seattle  Just enough OpenStack for Docker - Video  OpenStack Summit Vancouver  Docker Docker Docker Openstack - Video  Docker Austin meetup  Factorish - Video  2014 DockerCon14  Automated Chef cookbook testing with Drone.</description>
     </item>
     
   </channel>

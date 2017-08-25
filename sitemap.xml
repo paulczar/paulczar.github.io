@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://tech.paulcz.net/</loc>
-    <lastmod>2017-06-25T09:04:08-06:00</lastmod>
+    <loc>http://tech.paulcz.net/2017/08/deploy-deis-with-kubicorn/</loc>
+    <lastmod>2017-08-13T16:14:53-05:00</lastmod>
   </url>
   
   <url>
@@ -47,7 +48,7 @@
   </url>
   
   <url>
-    <loc>http://tech.paulcz.net/blog/Optimizing%20your%20Dockerfiles/</loc>
+    <loc>http://tech.paulcz.net/blog/optimizing-your-dockerfiles/</loc>
     <lastmod>2015-03-07T13:25:29-06:00</lastmod>
   </url>
   
@@ -114,6 +115,257 @@
   <url>
     <loc>http://tech.paulcz.net/blog/moving-from-a-self-hosted-wordpress-blog-to-blogger/</loc>
     <lastmod>2012-10-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/berkshelf/</loc>
+    <lastmod>2013-09-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/blog/</loc>
+    <lastmod>2012-12-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/blogger/</loc>
+    <lastmod>2012-10-21T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/blog/</loc>
+    <lastmod>2015-03-07T13:25:29-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/bread/</loc>
+    <lastmod>2014-12-03T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/</loc>
+    <lastmod>2013-09-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/chef/</loc>
+    <lastmod>2014-05-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/cloud/</loc>
+    <lastmod>2014-02-23T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/deis/</loc>
+    <lastmod>2014-02-23T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/devops/</loc>
+    <lastmod>2014-12-22T21:31:03-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/docker/</loc>
+    <lastmod>2016-01-10T10:22:22-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/food/</loc>
+    <lastmod>2014-12-03T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/fpm/</loc>
+    <lastmod>2013-04-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/github/</loc>
+    <lastmod>2012-12-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/kvm/</loc>
+    <lastmod>2012-12-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/logstash/</loc>
+    <lastmod>2013-05-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/octopress/</loc>
+    <lastmod>2012-12-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/omnibus/</loc>
+    <lastmod>2013-05-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/openstack/</loc>
+    <lastmod>2016-01-02T13:00:42-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/openvswitch/</loc>
+    <lastmod>2012-12-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/opscode/</loc>
+    <lastmod>2013-05-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/paas/</loc>
+    <lastmod>2014-02-23T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/packaging/</loc>
+    <lastmod>2013-04-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/page/</loc>
+    <lastmod>2017-06-25T09:04:08-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/</loc>
+    <lastmod>2017-08-13T16:14:53-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/perl/</loc>
+    <lastmod>2012-10-21T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/post/</loc>
+    <lastmod>2017-08-13T16:14:53-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/puppet/</loc>
+    <lastmod>2013-04-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/rackspace/</loc>
+    <lastmod>2014-02-23T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/registry/</loc>
+    <lastmod>2016-01-10T10:22:22-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/runit/</loc>
+    <lastmod>2013-10-20T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/script/</loc>
+    <lastmod>2012-10-21T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/security/</loc>
+    <lastmod>2016-01-03T14:44:30-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/ssl/</loc>
+    <lastmod>2016-01-03T14:44:30-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/swarm/</loc>
+    <lastmod>2016-01-03T14:44:30-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/tls/</loc>
+    <lastmod>2016-01-03T14:44:30-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/ubuntu/</loc>
+    <lastmod>2012-12-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/vagrant/</loc>
+    <lastmod>2013-04-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/virtualization/</loc>
+    <lastmod>2012-12-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/vmware/</loc>
+    <lastmod>2012-12-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/wordpress/</loc>
+    <lastmod>2012-10-21T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
 </urlset>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="map[]" />
+    <meta name="description" content="Random musings mostly about tech">
+    <link rel="shortcut icon" type="image/x-icon" href="http://tech.paulcz.net/img/favicon.ico">
+    <title>Optimizing your Dockerfiles</title>
+    <meta name="generator" content="Hugo 0.26" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="http://tech.paulcz.net/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-35638296-2', 'auto');
+ga('send', 'pageview');
+</script>
+
+  </head>
+
+  <body>
+    <div id="wrap">
+
+      
+      <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="http://tech.paulcz.net/"><i class="fa fa-home"></i></a>
+    </div>
+    <div id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+        <li><a href="/page/about">ABOUT</a></li>
+        
+        <li><a href="/blog/">BLOG</a></li>
+        
+        <li><a href="/page/resume">RESUME</a></li>
+        
+        <li><a href="/page/speaker">TALK</a></li>
+        
+      
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      
+      <div class="container">
+        <div class="blog-post">
+          <h3>
+            <strong><a href="http://tech.paulcz.net/blog/optimizing-your-dockerfiles/">Optimizing your Dockerfiles</a></strong>
+          </h3>
+        </div>
+        <div class="blog-title">
+          <h4>
+          March 7, 2015
+            &nbsp;&nbsp;
+            
+          </h4>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="blogpost">
+              
+
+<p>Docker images are &ldquo;supposed&rdquo; to be small and fast. However unless you&rsquo;re precompiling GO binaries and dropping them in the <code>busybox</code> image they can get quite large and complicated. Without a well constructed <code>Dockerfile</code> to improve build cache hits your docker builds can become unnecessarily slow.</p>
+
+<p><code>Dockerfile</code>&rsquo;s are regularly [and incorrectly] treated like <code>bash</code> scripts and therefore are often written out as a series of commands which you would <code>curl | sudo bash</code> from a website to install.  This usually makes for an inefficient and slow <code>Dockerfile</code></p>
+
+<!--more -->
+
+<h2 id="order-matters">Order Matters</h2>
+
+<p>When you&rsquo;re building a new <code>Dockerfile</code> for an application there can be a lot of trial and error in determining what packages are needed and what commands need to run. Optimizing your <code>Dockerfile</code> ensures that the build cache will hit more often and each build between changes will be faster.</p>
+
+<p>The general rule of thumb is to sort your commands by frequency of change, the time it takes to run the command and how sharable it is with other images.</p>
+
+<p>This means that commands like <code>WORKDIR</code>, <code>CMD</code>, <code>ENV</code> should go towards the bottom while a <code>RUN apt-get -y update</code> should go towards the top as it takes longer to run and can be shared with all of your images.</p>
+
+<p>Finally any <code>ADD</code> ( or other commands that invalidate cache ) commands should go as far down the bottom as possible as this is where you&rsquo;re likely to make lots of changes that will invalidate the cache of subsequent commands.</p>
+
+<h2 id="choose-your-base-image-wisely">Choose your base image wisely</h2>
+
+<p>There&rsquo;s a lot of base images to choose from from the bare OS images like <code>ubuntu:trusty</code> to application specific ones for <code>python:2</code> or <code>java:7</code>.  Common sense might tell you to use <code>ruby:2</code> to run an ruby based app and <code>python:3</code> to run a python app.  However now you have two base images with little in common that you need to download and build.  Instead if you use <code>ubuntu:trusty</code> for both then you only need to download the base image once.</p>
+
+<h2 id="use-layers-to-your-advantage">Use Layers to your advantage</h2>
+
+<p>Each command in a <code>Dockerfile</code> is an extra layer. You can very quickly end up with an image that&rsquo;s 30+ layers.  This is not necessarily a problem, but by joining <code>RUN</code> commands together, and using a single <code>EXPOSE</code> line to list all of your open ports you can reduce the number of layers.</p>
+
+<p>By grouping <code>RUN</code> commands together intelligently you can share more layers between containers.  Of course if you have a common set of packages across multiple containers then you should look at creating a seperate base image containing these that all of your images are built from.</p>
+
+<p>For each layer that you can share across multiple images you can save a ton of disk space.</p>
+
+<h2 id="volume-contaimers">Volume contaimers</h2>
+
+<p>If you use Volume containers,  don&rsquo;t bother trying to save space by using a small image,  Use the image of the application you&rsquo;ll be serving data to.  If you do that and <code>docker commit</code> the data volume you not only have your data commited to the container, but the actual application as well which is very useful for debugging.</p>
+
+<h2 id="cheat">Cheat</h2>
+
+<p>If you&rsquo;ve built an image and discover when you run it that there&rsquo;s a package missing add it to the bottom of your <code>Dockerfile</code> rather than in the <code>RUN apt-get</code> command at the top.  This means you can rebuild the image faster.  Once your image is correct and working you can reorganize your <code>Dockerfile</code> to clean such changes up before commiting it to source control.</p>
+
+<h2 id="example">Example</h2>
+
+<p>A <code>Dockerfile</code> for installing graphite would look something like this if it was written like a <code>bash</code> script:</p>
+
+<pre><code>FROM ubuntu:trusty
+MAINTAINER Paul Czarkowski &quot;paul@paulcz.net&quot;
+
+RUN apt-get -yq update
+
+# Apache
+RUN \
+  apt-get -yqq install \
+    apache2 \
+    apache2-utils \
+    libapache2-mod-python \
+    python-dev \
+    python-pip \
+    python-cairo \
+    python-pysqlite2 \
+    python-mysqldb \
+    python-jinja2
+    sqlite3 \
+    curl \ 
+    wget \
+    git \
+    software-properties-common
+
+RUN \
+  curl -sSL https://bootstrap.pypa.io/get-pip.py | python &amp;&amp; \
+    pip install whisper \
+    carbon \
+    graphite-web \
+    'Twisted&lt;12.0' \
+    'django&lt;1.6' \
+    django-tagging
+
+# Add start scripts etc
+ADD . /app
+
+RUN mkdir -p /app/wsgi
+RUN useradd -d /app -c 'application' -s '/bin/false' graphite
+RUN chmod +x /app/bin/*
+RUN chown -R graphite:graphite /app
+RUN chown -R graphite:graphite /opt/graphite
+RUN rm -f /etc/apache2/sites-enabled/*
+
+ADD ./apache-graphite.conf /etc/apache2/sites-enabled/apache-graphite.conf
+
+# Expose ports.
+EXPOSE 80 
+EXPOSE 2003 
+EXPOSE 2004 
+EXPOSE 7002
+
+ENV APACHE_CONFDIR /etc/apache2
+ENV APACHE_ENVVARS $APACHE_CONFDIR/envvars
+ENV APACHE_RUN_USER www-data
+ENV APACHE_RUN_GROUP www-data
+ENV APACHE_RUN_DIR /var/run/apache2
+ENV APACHE_PID_FILE $APACHE_RUN_DIR/apache2.pid
+ENV APACHE_LOCK_DIR /var/lock/apache2
+ENV APACHE_LOG_DIR /var/log/apache2
+
+WORKDIR /app
+
+# Define default command.
+CMD [&quot;/app/bin/start_graphite&quot;]
+
+</code></pre>
+
+<p>However an optmized version of this same Dockerfile based on what was discussed earlier would look like the following:</p>
+
+<pre><code># 1 - Common Header / Packages
+FROM ubuntu:trusty
+MAINTAINER Paul Czarkowski &quot;paul@paulcz.net&quot;
+
+RUN apt-get -yq update \
+  &amp;&amp; apt-get -yqq install \
+    wget \
+    curl \
+    git \
+    software-properties-common
+
+# 2 - Python
+RUN \
+  apt-get -yqq install \
+    python-dev \
+    python-pip \
+    python-pysqlite2 \
+    python-mysqldb
+
+# 3 - Apache
+RUN \
+  apt-get -yqq install \
+    apache2 \
+    apache2-utils
+
+# 4 - Apache ENVs
+ENV APACHE_CONFDIR /etc/apache2
+ENV APACHE_ENVVARS $APACHE_CONFDIR/envvars
+ENV APACHE_RUN_USER www-data
+ENV APACHE_RUN_GROUP www-data
+ENV APACHE_RUN_DIR /var/run/apache2
+ENV APACHE_PID_FILE $APACHE_RUN_DIR/apache2.pid
+ENV APACHE_LOCK_DIR /var/lock/apache2
+ENV APACHE_LOG_DIR /var/log/apache2
+
+# 5 - Graphite and Deps
+RUN \
+  apt-get -yqq install \
+    libapache2-mod-python \
+    python-cairo \
+    python-jinja2 \
+    sqlite3
+
+RUN \
+    pip install whisper \
+    carbon \
+    graphite-web \
+    'Twisted&lt;12.0' \
+    'django&lt;1.6' \
+    django-tagging
+
+# 6 - Other
+EXPOSE 80 2003 2004 7002
+
+WORKDIR /app
+
+VOLUME /opt/graphite/data
+
+# Define default command.
+CMD [&quot;/app/bin/start_graphite&quot;]
+
+# 7 - First use of ADD
+ADD . /app
+
+# 8 - Final setup
+RUN mkdir -p /app/wsgi \
+  &amp;&amp; useradd -d /app -c 'application' -s '/bin/false' graphite \
+  &amp;&amp; chmod +x /app/bin/* \
+  &amp;&amp; chown -R graphite:graphite /app \
+  &amp;&amp; chown -R graphite:graphite /opt/graphite \
+  &amp;&amp; rm -f /etc/apache2/sites-enabled/* \
+  &amp;&amp; mv /app/apache-graphite.conf /etc/apache2/sites-enabled/apache-graphite.conf
+</code></pre>
+
+<h3 id="1-common-header-packages">1 - Common Header / Packages</h3>
+
+<p>This is our most shareable layer.  All the images running on the same host should start with this.  You can see I&rsquo;ve added a few things like <code>curl</code> and <code>git</code> which while they&rsquo;re not necessarily needed they&rsquo;re useful for debugging and because they&rsquo;re in such a shareable layer,  they don&rsquo;t take up much room.</p>
+
+<h3 id="2-python-3-apache">2 - Python, 3 - Apache</h3>
+
+<p>Here we get to our language specifications.   I&rsquo;ve included the Python and Apache sections here because it&rsquo;s not super clear which should go first.</p>
+
+<p>If we put python first,  then any other image that uses Apache can get a few free python packages,  If we put Apache first then we could have a Ruby app that also includes that layer and get Apache for free ( hell you can just give it python for free anyways ).</p>
+
+<h3 id="4-apache-envs">4 - Apache Envs</h3>
+
+<p>I&rsquo;m calling these out seperately for a few reasons.</p>
+
+<p>Firstly, they should come either directly directly after the Apache section so that it&rsquo;s easier to make them common ( and cached ) between multiple images.   You might not think it matters since calls like <code>ENV</code> are so cheap, but I have seen random <code>ENV</code> calls take 10 seconds or so.  If you have a lot, then its good to keep them cached, but you also don&rsquo;t want a changed <code>ENV</code> to invalidated the cache of installing Apache.</p>
+
+<p>They&rsquo;re a pretty good example of something you might want to start with at the bottom of your container and move them up higher once you&rsquo;re unlikely to change them again.</p>
+
+<p>Secondly, to mention that I really wish Docker provided a way to specify multiple ENVS on the same line so that I can reduce the number of layers I end up with.</p>
+
+<h3 id="5-graphite-and-deps">5 - Graphite and Deps</h3>
+
+<p>This contains some Graphite specific <code>apt</code> and <code>pip</code> packages.  You could join them into a single command by joining them with <code>&amp;&amp;</code> but I kept them seperate so that if <code>pip</code> package requirements change it won&rsquo;t need to also reget the <code>apt</code> packages.</p>
+
+<h3 id="6-other">6 - Other</h3>
+
+<p>This contains a bunch of cheap commands like <code>ADD</code> and <code>VOLUME</code> they&rsquo;re probably less likely to change than the previous package installs, but are also cheaper to run, so its less important if their cache is invalidated.</p>
+
+<p>Keep them towards the bottom though as you don&rsquo;t want any changes to them to invalidate the cache for a more costly command.</p>
+
+<h3 id="7-first-add">7 - First ADD</h3>
+
+<p>You should wait until the last possible moment to use the <code>ADD</code> command as any commands after it are never cached.</p>
+
+<h3 id="8-final-setup">8 - Final setup</h3>
+
+<p>I have grouped these final commands into a single layer and they&rsquo;re after the <code>ADD</code> commands as they manipulate files that come from the <code>ADD</code></p>
+
+<h2 id="fin">FIN.</h2>
+
+<p>Hopefully this has given you some insight into how to build a better <code>Dockerfile</code>.  These are all things I have learned from experience in building my own Docker images and while they may not apply to all situations ( or may be flat out wrong ) they defintely seem to improve my development experience.</p>
+
+              <hr>
+              <div class="related-posts">
+                <h5>Related Posts</h5>
+                
+              </div>
+            </div>
+          </div>
+          <hr>
+        <div class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+
+    (function() {
+      
+      
+      if (window.location.hostname == "localhost")
+        return;
+
+      var disqus_shortname = 'tech-paulcz';
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+        </div>
+      
+      </div>
+    </div>
+
+    
+    <footer>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+      <a href="http://www.github.com/sumaxime/hugo-sustain/">sustain</a> with ♥</p>
+    </div>
+  </div>
+</footer>
+<div class="footer"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="http://tech.paulcz.net/js/docs.min.js"></script>
+<script src="http://tech.paulcz.net/js/main.js"></script>
+
+<script src="http://tech.paulcz.net/js/ie10-viewport-bug-workaround.js"></script>
+
+
+
+  </body>
+</html>

@@ -7,7 +7,7 @@
     <meta name="author" content="map[]" />
     <meta name="description" content="Random musings mostly about tech">
     <link rel="shortcut icon" type="image/x-icon" href="http://tech.paulcz.net/img/favicon.ico">
-    <title>Creating immutable servers with chef and docker.io</title>
+    <title>deploy deis with kubicorn</title>
     <meta name="generator" content="Hugo 0.26" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="http://tech.paulcz.net/css/main.css" />
@@ -63,12 +63,12 @@ ga('send', 'pageview');
       <div class="container">
         <div class="blog-post">
           <h3>
-            <strong><a href="http://tech.paulcz.net/blog/creating-immutable-servers-with-chef-and-docker-dot-io/">Creating immutable servers with chef and docker.io</a></strong>
+            <strong><a href="http://tech.paulcz.net/2017/08/deploy-deis-with-kubicorn/">deploy deis with kubicorn</a></strong>
           </h3>
         </div>
         <div class="blog-title">
           <h4>
-          September 7, 2013
+          August 13, 2017
             &nbsp;&nbsp;
             
           </h4>
@@ -76,99 +76,74 @@ ga('send', 'pageview');
         <div class="panel panel-default">
           <div class="panel-body">
             <div class="blogpost">
-              <p>Building applications in a <a href="http://docker.io">docker.io</a> Dockerfile is relatively simple,  but sometimes you want to just install the application exactly as you would normally via already built chef cookbooks.   Turns out this is actually pretty simple.</p>
+              
 
-<p>The first thing you&rsquo;ll need to do is build a container with chef-client and berkshelf installed.   You can grab the one I&rsquo;ve built by running <code>docker pull paulczar/chef-solo</code> or build one youself from a <code>Dockerfile</code> that looks a little something like the following&hellip;</p>
+<p>blurb about kubicorn here.</p>
 
-<p></p>
+<h2 id="prerequisites">Prerequisites</h2>
 
-<h3 id="creating-a-docker-io-container-with-chef-and-berkshelf">Creating a docker.io container with chef and berkshelf</h3>
+<p>You will need a working golang environment&hellip;</p>
 
-<p>``` ruby Dockerfile</p>
+<p>you will need <code>AWS_ACCESS_KEY_ID</code> and <code>AWS_SECRET_ACCESS_KEY</code> set</p>
 
-<h1 id="docker-version-0-5-3">DOCKER-VERSION 0.5.3</h1>
+<h2 id="deploy-kubernetes-to-amazon-using-kubicorn">Deploy Kubernetes to Amazon using Kubicorn</h2>
 
-<p>FROM ubuntu:12.10
-MAINTAINER Paul Czarkowski &ldquo;paul@paulcz.net&rdquo;</p>
+<p>Run the following:</p>
 
-<p>RUN apt-get -y update
-RUN apt-get -y install curl build-essential libxml2-dev libxslt-dev git
-RUN curl -L <a href="https://www.opscode.com/chef/install.sh">https://www.opscode.com/chef/install.sh</a> | bash
-RUN echo &ldquo;gem: &ndash;no-ri &ndash;no-rdoc&rdquo; &gt; ~/.gemrc
-RUN /opt/chef/embedded/bin/gem install berkshelf</p>
-
-<pre><code>
-_you'll notice I'm using the embedded chef ruby to install the berkshelf gem,  this is a handy shortcut to avoid messing around with random ruby versions from your distributions packaging._
-
-run `$ docker build -t paulczar/chef-solo .` to build a usable docker container from the above `Dockerfile`.
-
-### Using chef-solo and berkshelf to build an application in a docker.io container ###
-
-My [example application](https://github.com/paulczar/docker-chef-solo) will install `Kibana3` to your docker container.   I'll step through how it works below.
-
-#### Chef-Solo ####
-
-To run `chef-solo` successfully we require two files.   `solo.rb` to set up file locations, and `solo.json' to set up the json / run list required for your application.
-
-``` ruby chef.rb
-root = File.absolute_path(File.dirname(__FILE__))
-
-file_cache_path root
-cookbook_path root + '/cookbooks'
+<pre><code>$ go get github.com/kris-nova/kubicorn
+$ kubicorn create --name k8s-deis --profile aws
+2017-08-13T16:20:10-05:00 [✔]  Selected [fs] state store
+2017-08-13T16:20:10-05:00 [✿]  The state [./_state/k8s-deis/cluster.yaml] has been created. You can edit the file, then run `kubicorn apply -n k8s-deis`
+$ kubicorn apply -n k8s-deis
+2017-08-13T16:21:56-05:00 [✔]  Selected [fs] state store
+2017-08-13T16:21:56-05:00 [✔]  Loaded cluster: k8s-deis
+2017-08-13T16:21:56-05:00 [✔]  Init Cluster
+SSH Key Passphrase [none]:
+2017-08-13T16:22:04-05:00 [✔]  Query existing resources
+...
+...
+2017-08-13T17:07:53-05:00 [✿]  Wrote kubeconfig to [/home/pczarkowski/.kube/config]
+2017-08-13T17:07:53-05:00 [✿]  The [k8s-deis] cluster has applied successfully!
+2017-08-13T17:07:53-05:00 [✿]  You can now `kubectl get nodes`
+2017-08-13T17:07:53-05:00 [✿]  You can SSH into your cluster ssh -i ~/.ssh/id_rsa ubuntu@34.213.176.190
 </code></pre>
 
-<p>``` json chef.json
-{
-  &ldquo;kibana&rdquo;: {
-    &ldquo;webserver_listen&rdquo;: &ldquo;0.0.0.0&rdquo;
-  },
-  &ldquo;run_list&rdquo;: [
-    &ldquo;recipe[kibana::default]&rdquo;
-  ]
-}</p>
+<p>You can test that it deployed your kubernetes cluster correctly by running:</p>
 
-<pre><code>
-#### Berkshelf ####
-
-To run `berkshelf` we need to build a Berksfile which contains a list of all the chef cookbooks required for the applocation.   Berkshelf will download these cookbooks to a local directory which will be usable by chef-solo.
-
-``` ruby Berksfile
-site :opscode
-
-cookbook 'build-essential'
-cookbook 'apache2'
-cookbook 'git'
-cookbook 'kibana', github: 'lusis/chef-kibana'
-cookbook 'nginx' , github: 'opscode-cookbooks/nginx'
+<pre><code>$ kubectl get nodes
+NAME              STATUS    AGE       VERSION
+ip-10-0-0-59      Ready     13m       v1.7.3
+ip-10-0-100-100   Ready     13m       v1.7.3
 </code></pre>
 
-<p><em>You can see some of the cookbooks are being pulled from the opscode repository,  whereas others are being pulled directly from github.</em></p>
+<blockquote>
+<p>it may take a few minutes for the status of the nodes to go from <code>NotReady</code>
+  to <code>Ready</code>.</p>
+</blockquote>
 
-<h4 id="dockerfile">Dockerfile</h4>
+<h2 id="deploy-helm-to-your-new-kubernetes-cluster">Deploy Helm to your new kubernetes cluster</h2>
 
-<p>All that&rsquo;s left now is to create a Dockerfile that will bring it all together.</p>
+<p>Install the helm client locally, see instructions <a href="https://docs.helm.sh/using_helm/#quickstart-guide">here</a>.</p>
 
-<p>``` ruby Dockerfile</p>
+<p>On Linux:</p>
 
-<h1 id="docker-version-0-5-3-1">DOCKER-VERSION 0.5.3</h1>
+<pre><code>$ wget https://storage.googleapis.com/kubernetes-helm/helm-v2.5.1-linux-amd64.tar.gz
+$ tar xzvf helm-v2.5.1-linux-amd64.tar.gz
+$ sudo cp linux-amd64/helm /usr/local/bin/
+</code></pre>
 
-<p>FROM paulczar/chef-client
-MAINTAINER Paul Czarkowski &ldquo;paul@paulcz.net&rdquo;</p>
+<p>Deploy Tiller to your Kubernetes cluster:</p>
 
-<p>RUN apt-get -y update
-ADD . /chef
-RUN cd /chef &amp;&amp; /opt/chef/embedded/bin/berks install &ndash;path /chef/cookbooks
-RUN chef-solo -c /chef/solo.rb -j /chef/solo.json
-RUN echo &ldquo;daemon off;&rdquo; &gt;&gt; /etc/nginx/nginx.conf</p>
+<pre><code>$ kubectl create sa tiller-deploy -n kube-system
+$ kubectl create clusterrolebinding helm --clusterrole=cluster-admin --serviceaccount=kube-system:tiller-deploy
+$ helm init --service-account=tiller-deploy
+</code></pre>
 
-<p>CMD [&ldquo;nginx&rdquo;]
-```</p>
+<h2 id="deploy-deis-using-helm">Deploy DEIS using helm</h2>
 
-<p>Run <code>$ docker build -t demo/kibana3 .</code> to build your application.</p>
+<p>```
+$  helm repo add deis <a href="https://charts.deis.com/workflow">https://charts.deis.com/workflow</a></p>
 
-<p>It will add the local files ( <code>solo.rb</code>, <code>solo.json</code>, <code>Berksfile</code> ) to /chef in the server and then call berkshelf to download the cookbooks and chef-solo to install your application.   Finally it will give <code>nginx</code> a directive to run in the foreground so that we don&rsquo;t have to do any sneaky prcess control to get it to work with the way <code>docker.io</code> runs processes.</p>
-
-<p>To run the resultant <code>docker.io</code> container you simply need to run <code>$ docker run -d -p 80 demo/kibana3</code></p>
               <hr>
               <div class="related-posts">
                 <h5>Related Posts</h5>
