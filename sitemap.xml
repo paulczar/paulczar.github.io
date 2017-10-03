@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://tech.paulcz.net/blog/habitat-supervisors-in-kubernetes/</loc>
+    <lastmod>2017-10-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://tech.paulcz.net/blog/getting-started-with-helm/</loc>
     <lastmod>2017-10-03T00:00:00+00:00</lastmod>
   </url>
@@ -137,7 +142,7 @@
   
   <url>
     <loc>http://tech.paulcz.net/blog/</loc>
-    <lastmod>2017-10-03T00:00:00+00:00</lastmod>
+    <lastmod>2017-10-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -202,6 +207,12 @@
   </url>
   
   <url>
+    <loc>http://tech.paulcz.net/categories/habitat/</loc>
+    <lastmod>2017-10-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://tech.paulcz.net/categories/helm/</loc>
     <lastmod>2017-10-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -209,13 +220,13 @@
   
   <url>
     <loc>http://tech.paulcz.net/categories/k8s/</loc>
-    <lastmod>2017-10-03T00:00:00+00:00</lastmod>
+    <lastmod>2017-10-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://tech.paulcz.net/categories/kubernetes/</loc>
-    <lastmod>2017-10-03T00:00:00+00:00</lastmod>
+    <lastmod>2017-10-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -281,7 +292,7 @@
   
   <url>
     <loc>http://tech.paulcz.net/</loc>
-    <lastmod>2017-10-03T00:00:00+00:00</lastmod>
+    <lastmod>2017-10-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

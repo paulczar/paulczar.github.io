@@ -120,6 +120,15 @@
     </item>
     
     <item>
+      <title>Habitat</title>
+      <link>http://tech.paulcz.net/categories/habitat/</link>
+      <pubDate>Fri, 06 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tech.paulcz.net/categories/habitat/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Helm</title>
       <link>http://tech.paulcz.net/categories/helm/</link>
       <pubDate>Tue, 03 Oct 2017 00:00:00 +0000</pubDate>
@@ -131,7 +140,7 @@
     <item>
       <title>K8s</title>
       <link>http://tech.paulcz.net/categories/k8s/</link>
-      <pubDate>Tue, 03 Oct 2017 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 06 Oct 2017 00:00:00 +0000</pubDate>
       
       <guid>http://tech.paulcz.net/categories/k8s/</guid>
       <description></description>
@@ -140,7 +149,7 @@
     <item>
       <title>Kubernetes</title>
       <link>http://tech.paulcz.net/categories/kubernetes/</link>
-      <pubDate>Tue, 03 Oct 2017 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 06 Oct 2017 00:00:00 +0000</pubDate>
       
       <guid>http://tech.paulcz.net/categories/kubernetes/</guid>
       <description></description>
