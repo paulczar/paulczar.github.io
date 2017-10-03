@@ -13,40 +13,40 @@
     
     <item>
       <title>Flexible Private Docker Registry Infrastructure</title>
-      <link>http://tech.paulcz.net/2016/01/flexible-docker-registry-infrastructure/</link>
+      <link>http://tech.paulcz.net/blog/flexible-docker-registry-infrastructure/</link>
       <pubDate>Sun, 10 Jan 2016 10:22:22 -0600</pubDate>
       
-      <guid>http://tech.paulcz.net/2016/01/flexible-docker-registry-infrastructure/</guid>
+      <guid>http://tech.paulcz.net/blog/flexible-docker-registry-infrastructure/</guid>
       <description>Previously I showed how to run a basic secure Docker Registry. I am now going to expand on this to show you something that you might use in production as part of your CI/CD infrastructure.
 The beauty of running Docker is that you can push an image from a developer&amp;rsquo;s laptop all the way into production which helps ensure that what you see in development and your various test/qa/stage environments are exactly the same as what you run in production.</description>
     </item>
     
     <item>
       <title>Deploying a Simple and Secure Docker Registry</title>
-      <link>http://tech.paulcz.net/2016/01/deploying-a-secure-docker-registry/</link>
+      <link>http://tech.paulcz.net/blog/deploying-a-secure-docker-registry/</link>
       <pubDate>Sun, 10 Jan 2016 05:22:22 -0600</pubDate>
       
-      <guid>http://tech.paulcz.net/2016/01/deploying-a-secure-docker-registry/</guid>
+      <guid>http://tech.paulcz.net/blog/deploying-a-secure-docker-registry/</guid>
       <description>There comes a time in everybody&amp;rsquo;s life where they realize they have to run their own Docker Registry. Unfortunately there&amp;rsquo;s not a lot of good information on how to run one. Docker&amp;rsquo;s documentation is pretty good, but is verbose and across a lot of different pages which means having half a dozen tabs open and searching for the right information.
 While it&amp;rsquo;s pretty common to run the Docker Registry itself with little to no security settings and fronting it with NGINX or Apache to provide this security I wanted to show how it can be done with just the Docker Registry.</description>
     </item>
     
     <item>
       <title>Securing Docker with TLS certificates</title>
-      <link>http://tech.paulcz.net/2016/01/secure-docker-with-tls/</link>
+      <link>http://tech.paulcz.net/blog/secure-docker-with-tls/</link>
       <pubDate>Sun, 03 Jan 2016 14:44:30 -0600</pubDate>
       
-      <guid>http://tech.paulcz.net/2016/01/secure-docker-with-tls/</guid>
+      <guid>http://tech.paulcz.net/blog/secure-docker-with-tls/</guid>
       <description>By default Docker (and by extension Docker Swarm) has no authentication or authorization on its API, relying instead on the filesystem security of its unix socket /var/run/docker.sock which by default is only accessible by the root user.
 This is fine for the basic use case of the default behavior of only accessing the Docker API on the local machine via the socket as the root user. However if you wish to use the Docker API over TCP then you&amp;rsquo;ll want to secure it so that you don&amp;rsquo;t give out root access to anyone that happens to poke you on the TCP port.</description>
     </item>
     
     <item>
       <title>Deploying a HA Docker Swarm Cluster</title>
-      <link>http://tech.paulcz.net/2016/01/running-ha-docker-swarm/</link>
+      <link>http://tech.paulcz.net/blog/running-ha-docker-swarm/</link>
       <pubDate>Sat, 02 Jan 2016 14:44:30 -0600</pubDate>
       
-      <guid>http://tech.paulcz.net/2016/01/running-ha-docker-swarm/</guid>
+      <guid>http://tech.paulcz.net/blog/running-ha-docker-swarm/</guid>
       <description>Given Docker&amp;rsquo;s propensity for creating easy to use tools it shouldn&amp;rsquo;t come as a surprise that Docker Swarm is one of the easier to understand and run of the &amp;ldquo;Docker Clustering&amp;rdquo; options currently out there. I recently built some Terraform configs for deploying a Highly Available Docker Swarm cluster on Openstack and learned a fair bit about Swarm in the process.
 This guide is meant to be a platform agnostic howto on installing and running a Highly Available Docker Swarm to show you the ideas and concepts that may not be as easy to understand from just reading some config management code.</description>
     </item>

@@ -120,6 +120,33 @@
     </item>
     
     <item>
+      <title>Helm</title>
+      <link>http://tech.paulcz.net/categories/helm/</link>
+      <pubDate>Tue, 03 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tech.paulcz.net/categories/helm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>K8s</title>
+      <link>http://tech.paulcz.net/categories/k8s/</link>
+      <pubDate>Tue, 03 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tech.paulcz.net/categories/k8s/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kubernetes</title>
+      <link>http://tech.paulcz.net/categories/kubernetes/</link>
+      <pubDate>Tue, 03 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tech.paulcz.net/categories/kubernetes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Kvm</title>
       <link>http://tech.paulcz.net/categories/kvm/</link>
       <pubDate>Thu, 13 Dec 2012 00:00:00 +0000</pubDate>

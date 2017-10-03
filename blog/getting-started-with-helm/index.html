@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="map[]" />
+    <meta name="description" content="Random musings mostly about tech">
+    <link rel="shortcut icon" type="image/x-icon" href="http://tech.paulcz.net/img/favicon.ico">
+    <title>Writing Your First Helm Chart</title>
+    <meta name="generator" content="Hugo 0.26" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="http://tech.paulcz.net/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-35638296-2', 'auto');
+ga('send', 'pageview');
+</script>
+
+  </head>
+
+  <body>
+    <div id="wrap">
+
+      
+      <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="http://tech.paulcz.net/"><i class="fa fa-home"></i></a>
+    </div>
+    <div id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+        <li><a href="/page/about">ABOUT</a></li>
+        
+        <li><a href="/blog/">BLOG</a></li>
+        
+        <li><a href="/page/resume">RESUME</a></li>
+        
+        <li><a href="/page/speaker">TALK</a></li>
+        
+      
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      
+      <div class="container">
+        <div class="blog-post">
+          <h3>
+            <strong><a href="http://tech.paulcz.net/blog/getting-started-with-helm/">Writing Your First Helm Chart</a></strong>
+          </h3>
+        </div>
+        <div class="blog-title">
+          <h4>
+          October 3, 2017
+            &nbsp;&nbsp;
+            
+          </h4>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="blogpost">
+              
+
+<p>I recently found myself writing <a href="https://github.com/IBM/activator-lagom-java-chirper/blob/master/docs/README.md">instructions</a> on how to deploy an
+application to several Kubernetes platform and ended up writing a different Kubernetes manifests for each
+platform. 95% of the content was the same with just a few different directives
+based on how the particular platform handles ingress, or if we needed a Registry secret or a TLS certificate.</p>
+
+<p>Kubernetes manifests are very declarative and don&rsquo;t offer any way to put conditionals or variables that could be set in them. This
+is both a good and a bad thing. Enter <a href="https://docs.helm.sh/">Helm</a> a Package Manager for Kubernetes. Helm allows you to package up
+your Kubernetes application as a package that can be deployed easily to Kubernetes, One of its features (and the one that interested me)
+the ability to template out your Kubernetes manifests.</p>
+
+<p>If you already have a Kubernetes manifest its very easy to turn it into a Helm Chart that you can then
+iterate over and improve as you need to add more flexibility to it. In fact your first iteration of a
+Helm chart can be as simple as moving your manifests into a new directory and adding a few lines
+to a Chart.yaml file.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>You&rsquo;ll need the following installed to follow along with this tutorial:</p>
+
+<ul>
+<li><a href="https://kubernetes.io/docs/tasks/tools/install-minikube/">Minikube</a></li>
+<li><a href="https://github.com/kubernetes/helm/blob/master/docs/install.md">Helm</a></li>
+<li><a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">kubectl</a></li>
+</ul>
+
+<h2 id="prepare-environment">Prepare Environment</h2>
+
+<p>Bring up a test Kubernetes environment using Minikube:</p>
+
+<pre><code class="language-bash">$ minikube start
+Starting local Kubernetes v1.7.5 cluster...
+Starting VM...
+Getting VM IP address...
+Moving files into cluster...
+Setting up certs...
+Connecting to cluster...
+Setting up kubeconfig...
+Starting cluster components...
+Kubectl is now configured to use the cluster.
+</code></pre>
+
+<p>Wait a minute or so and install Helm&rsquo;s tiller service to Kubernetes:</p>
+
+<pre><code class="language-bash">$ $HELM_HOME has been configured at /home/pczarkowski/.helm.
+
+Tiller (the Helm server-side component) has been installed into your Kubernetes Cluster.
+Happy Helming!
+</code></pre>
+
+<p>Create a path to work in:</p>
+
+<pre><code class="language-bash">$ mkdir -p ~/development/my-first-helm-chart
+$ cd ~/development/my-first-helm-chart
+</code></pre>
+
+<p><em>If it fails out you may need to wait a few more minutes for minikube to become
+accessible.</em></p>
+
+<h2 id="create-example-kubernetes-manifest">Create Example Kubernetes Manifest.</h2>
+
+<p>Writing a Helm Chart is easier when you&rsquo;re starting with an existing set of
+Kubernetes manifests. One of the easiest ways to get a basic working manifest
+is to ask Kubernetes to
+<a href="https://blog.heptio.com/using-kubectl-to-jumpstart-a-yaml-file-heptioprotip-6f5b8a63a3ea">run something and then fetch the manifest</a>.</p>
+
+<pre><code class="language-bash">$ mkdir manifests
+$ kubectl run example --image=nginx:1.13.5-alpine \
+    -o yaml &gt; manifests/deployment.yaml
+$ kubectl expose deployment example --port=80 --type=NodePort \
+    -o yaml &gt; manifests/service.yaml
+$ minikube service example --url       
+http://192.168.99.100:30254
+</code></pre>
+
+<p>All going well you should be able to hit the provided URL and get the &ldquo;Welcome to nginx!&rdquo;
+page. You&rsquo;ll see you now have two Kubernetes manifests saved. We can use these
+to bootstrap our helm charts:</p>
+
+<pre><code class="language-bash">$ tree manifests
+manifests
+├── deployment.yaml
+└── service.yaml
+0 directories, 2 files
+</code></pre>
+
+<p>Before we move on we should clean up our environment.  We can use the newly
+created manifests to help:</p>
+
+<pre><code class="language-bash">$ kubectl delete -f manifests
+deployment &quot;example&quot; deleted
+service &quot;example&quot; deleted
+</code></pre>
+
+<h2 id="create-and-deploy-a-basic-helm-chart">Create and Deploy a Basic Helm Chart</h2>
+
+<p>Helm has some tooling to create the scaffolding needed to start developing a
+new Helm Chart. We&rsquo;ll create it with a placeholder name of <code>helm</code>:</p>
+
+<pre><code class="language-bash">$ helm create helm
+Creating helm
+tree helm
+helm
+├── charts
+├── Chart.yaml
+├── templates
+│   ├── deployment.yaml
+│   ├── _helpers.tpl
+│   ├── ingress.yaml
+│   ├── NOTES.txt
+│   └── service.yaml
+└── values.yaml
+2 directories, 7 files
+</code></pre>
+
+<p>Helm will have created a number of files and directories.</p>
+
+<ul>
+<li><code>Chart.yaml</code> - the metadata for your Helm Chart.</li>
+<li><code>values.yaml</code> - values that can be used as variables in your templates.</li>
+<li><code>templates/*.yaml</code> - Example Kubernetes manifests.</li>
+<li><code>_helpers.tpl</code> - helper functions that can be used inside the templates.</li>
+<li><code>templates/NOTES.txt</code> - templated notes that are displayed on Chart install.</li>
+</ul>
+
+<p>Edit <code>Chart.yaml</code> so that it looks like this:</p>
+
+<pre><code class="language-yaml">apiVersion: v1
+description: My First Helm Chart - NGINX Example
+name: my-first-helm-chart
+version: 0.1.0
+</code></pre>
+
+<p>Copy our example Kubernetes manifests over the provided templates and remove the
+currently unused <code>ingress.yaml</code> and <code>NOTES.txt</code>.</p>
+
+<pre><code class="language-bash">$ cp manifests/* helm/templates/
+$ rm helm/templates/ingress.yaml
+$ rm helm/templates/NOTES.txt
+</code></pre>
+
+<p>Next we should be able to install our helm chart which will deploy our application
+to Kubernetes:</p>
+
+<pre><code class="language-bash">$ helm install -n my-first-helm-chart helm
+NAME:   my-first-helm-chart
+LAST DEPLOYED: Tue Oct  3 10:20:57 2017
+NAMESPACE: default
+STATUS: DEPLOYED
+
+RESOURCES:
+==&gt; v1/Service
+NAME     CLUSTER-IP  EXTERNAL-IP  PORT(S)       AGE
+example  10.0.0.210  &lt;nodes&gt;      80:30254/TCP  0s
+
+==&gt; v1beta1/Deployment
+NAME     DESIRED  CURRENT  UP-TO-DATE  AVAILABLE  AGE
+example  1        1        1           0          0s
+
+</code></pre>
+
+<p><em>Like before we can use <code>minikube</code> to get the URL:</em></p>
+
+<pre><code class="language-bash">$ minikube service example --url    
+http://192.168.99.100:30254
+</code></pre>
+
+<p>Again accessing that URL via your we browser should get you the default NGINX welcome page.</p>
+
+<p>Congratulations!  You&rsquo;ve just created and deployed your first Helm chart. However we&rsquo;re
+not quite done yet. use Helm to delete your deployment and then lets move on to customizing
+the Helm Chart with variables and values:</p>
+
+<pre><code class="language-bash">$ helm del --purge my-first-helm-chart
+release &quot;my-first-helm-chart&quot; deleted
+</code></pre>
+
+<h2 id="add-variables-to-your-helm-chart">Add variables to your Helm Chart</h2>
+
+<p>Check out <code>helm/values.yaml</code> and you&rsquo;ll see there&rsquo;s a lot of variables already
+defined by the example that helm provided when you created the helm chart. You&rsquo;ll
+notice that it is has values for <code>nginx</code> in there. This is because Helm also uses
+nginx as their example. We can re-use some of the values provided but we should clean
+it up a bit.</p>
+
+<p>Edit <code>helm/values.yaml</code> to look like this:</p>
+
+<pre><code class="language-yaml">replicaCount: 1
+image:
+  repository: nginx
+  tag: 1.13.5-alpine
+  pullPolicy: IfNotPresent
+  pullSecret:
+service:
+  type: NodePort
+</code></pre>
+
+<p>We can access any of these values in our templates using the golang templating
+engine. For example accessing <code>replicaCount</code> would be written as <code>{{ .Values.replicaCount }}</code>.
+Helm also provides information about the Chart and Release which we&rsquo;ll also utilize.</p>
+
+<p>Update your <code>helm/templates/deployment.yaml</code> to utilize our values:</p>
+
+<pre><code class="language-yaml">apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: 2017-10-03T15:03:17Z
+  generation: 1
+  labels:
+    run: &quot;{{ .Release.Name }}&quot;
+    chart: &quot;{{ .Chart.Name }}-{{ .Chart.Version }}&quot;
+    release: &quot;{{ .Release.Name }}&quot;
+    heritage: &quot;{{ .Release.Service }}&quot;     
+  name: &quot;{{ .Release.Name }}&quot;
+  namespace: default
+  resourceVersion: &quot;3030&quot;
+  selfLink: /apis/extensions/v1beta1/namespaces/default/deployments/example
+  uid: fd03ac95-a84b-11e7-a417-0800277e13b3
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      run: &quot;{{ .Release.Name }}&quot;
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: &quot;{{ .Release.Name }}&quot;
+    spec:
+      {{- if .Values.image.pullSecret }}    
+            imagePullSecrets:
+              - name: &quot;{{ .Values.image.pullSecret }}&quot;
+      {{- end }}          
+      containers:
+      - image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        name: example
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status: {}
+</code></pre>
+
+<p><em>Note the use of the <code>if</code> statement around <code>image.pullSecret</code> being set. This
+sort of conditional becomes very important when making your Helm Chart portable across
+different Kubernetes platforms.</em></p>
+
+<p>Next edit your <code>helm/templates/service.yaml</code> to look like:</p>
+
+<pre><code class="language-yaml">apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: 2017-10-03T15:03:30Z
+  labels:
+    run: &quot;{{ .Release.Name }}&quot;
+    chart: &quot;{{ .Chart.Name }}-{{ .Chart.Version }}&quot;
+    release: &quot;{{ .Release.Name }}&quot;
+    heritage: &quot;{{ .Release.Service }}&quot;  
+  name: &quot;{{ .Release.Name }}&quot;
+  namespace: default
+  resourceVersion: &quot;3066&quot;
+  selfLink: /api/v1/namespaces/default/services/example
+  uid: 044d2b7e-a84c-11e7-a417-0800277e13b3
+spec:
+  clusterIP:
+  externalTrafficPolicy: Cluster
+  ports:
+  - nodePort: 30254
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    run: &quot;{{ .Release.Name }}&quot;
+  sessionAffinity: None
+  type: &quot;{{ .Values.service.type }}&quot;
+status:
+  loadBalancer: {}
+</code></pre>
+
+<p>Once your files are written out you should be able to install the Helm Chart:</p>
+
+<pre><code class="language-bash">$ helm install -n second helm
+NAME:   second
+LAST DEPLOYED: Tue Oct  3 10:59:41 2017
+NAMESPACE: default
+STATUS: DEPLOYED
+
+RESOURCES:
+==&gt; v1/Service
+NAME    CLUSTER-IP  EXTERNAL-IP  PORT(S)       AGE
+second  10.0.0.160  &lt;nodes&gt;      80:30254/TCP  1s
+
+==&gt; v1beta1/Deployment
+NAME    DESIRED  CURRENT  UP-TO-DATE  AVAILABLE  AGE
+second  1        1        1           0          1s
+</code></pre>
+
+<p>Next use minikube to get the URL of the service, but since we templated the
+service name to match the release you&rsquo;ll want to use this new name:</p>
+
+<pre><code class="language-bash">$ minikube service second --url
+http://192.168.99.100:30254
+</code></pre>
+
+<p>Now lets try something fun. Change the image we&rsquo;re using by upgrading the helm release
+and overriding some values on the command line:</p>
+
+<pre><code>$ helm upgrade --set image.repository=httpd --set image.tag=2.2.34-alpine second helm
+Release &quot;second&quot; has been upgraded. Happy Helming!
+LAST DEPLOYED: Tue Oct  3 11:09:30 2017
+NAMESPACE: default
+STATUS: DEPLOYED
+
+RESOURCES:
+==&gt; v1/Service
+NAME    CLUSTER-IP  EXTERNAL-IP  PORT(S)       AGE
+second  10.0.0.160  &lt;nodes&gt;      80:30254/TCP  9m
+
+==&gt; v1beta1/Deployment
+NAME    DESIRED  CURRENT  UP-TO-DATE  AVAILABLE  AGE
+second  1        1        1           0          9m
+</code></pre>
+
+<p>Then go to our minikube provided URL and you&rsquo;ll see a different message <code>It works!</code>.</p>
+
+<h2 id="clean-up">Clean up</h2>
+
+<p>use <code>minikube delete</code> to clean up your environment:</p>
+
+<pre><code>minikube delete
+Deleting local Kubernetes cluster...
+Machine deleted.
+</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Helm is a very powerful way to package up your Kubernetes manifests to make them
+extensible and portable. While it is quite complicated its fairly easy to get started
+with it and if you&rsquo;re like me you&rsquo;ll find yourself replacing the Kubernetes manifests
+in your code repos with Helm Charts.</p>
+
+<p>There&rsquo;s a lot more you can do with Helm, we&rsquo;ve just scratched the surface. Enjoy
+using and learning more about them!</p>
+
+              <hr>
+              <div class="related-posts">
+                <h5>Related Posts</h5>
+                
+              </div>
+            </div>
+          </div>
+          <hr>
+        <div class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+
+    (function() {
+      
+      
+      if (window.location.hostname == "localhost")
+        return;
+
+      var disqus_shortname = 'tech-paulcz';
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+        </div>
+      
+      </div>
+    </div>
+
+    
+    <footer>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+      <a href="http://www.github.com/sumaxime/hugo-sustain/">sustain</a> with ♥</p>
+    </div>
+  </div>
+</footer>
+<div class="footer"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="http://tech.paulcz.net/js/docs.min.js"></script>
+<script src="http://tech.paulcz.net/js/main.js"></script>
+
+<script src="http://tech.paulcz.net/js/ie10-viewport-bug-workaround.js"></script>
+
+
+
+  </body>
+</html>

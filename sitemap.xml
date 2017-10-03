@@ -3,8 +3,8 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://tech.paulcz.net/2017/08/deploy-deis-with-kubicorn/</loc>
-    <lastmod>2017-08-13T16:14:53-05:00</lastmod>
+    <loc>http://tech.paulcz.net/blog/getting-started-with-helm/</loc>
+    <lastmod>2017-10-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -23,27 +23,27 @@
   </url>
   
   <url>
-    <loc>http://tech.paulcz.net/2016/01/flexible-docker-registry-infrastructure/</loc>
+    <loc>http://tech.paulcz.net/blog/flexible-docker-registry-infrastructure/</loc>
     <lastmod>2016-01-10T10:22:22-06:00</lastmod>
   </url>
   
   <url>
-    <loc>http://tech.paulcz.net/2016/01/deploying-a-secure-docker-registry/</loc>
+    <loc>http://tech.paulcz.net/blog/deploying-a-secure-docker-registry/</loc>
     <lastmod>2016-01-10T05:22:22-06:00</lastmod>
   </url>
   
   <url>
-    <loc>http://tech.paulcz.net/2016/01/secure-docker-with-tls/</loc>
+    <loc>http://tech.paulcz.net/blog/secure-docker-with-tls/</loc>
     <lastmod>2016-01-03T14:44:30-06:00</lastmod>
   </url>
   
   <url>
-    <loc>http://tech.paulcz.net/2016/01/running-ha-docker-swarm/</loc>
+    <loc>http://tech.paulcz.net/blog/running-ha-docker-swarm/</loc>
     <lastmod>2016-01-02T14:44:30-06:00</lastmod>
   </url>
   
   <url>
-    <loc>http://tech.paulcz.net/2016/01/openstacks-and-ecosystems/</loc>
+    <loc>http://tech.paulcz.net/blog/openstacks-and-ecosystems/</loc>
     <lastmod>2016-01-02T13:00:42-06:00</lastmod>
   </url>
   
@@ -137,7 +137,7 @@
   
   <url>
     <loc>http://tech.paulcz.net/blog/</loc>
-    <lastmod>2015-03-07T13:25:29-06:00</lastmod>
+    <lastmod>2017-10-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -198,6 +198,24 @@
   <url>
     <loc>http://tech.paulcz.net/categories/github/</loc>
     <lastmod>2012-12-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/helm/</loc>
+    <lastmod>2017-10-03T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/k8s/</loc>
+    <lastmod>2017-10-03T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/categories/kubernetes/</loc>
+    <lastmod>2017-10-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -263,19 +281,13 @@
   
   <url>
     <loc>http://tech.paulcz.net/</loc>
-    <lastmod>2017-08-13T16:14:53-05:00</lastmod>
+    <lastmod>2017-10-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://tech.paulcz.net/categories/perl/</loc>
     <lastmod>2012-10-21T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://tech.paulcz.net/post/</loc>
-    <lastmod>2017-08-13T16:14:53-05:00</lastmod>
     <priority>0</priority>
   </url>
   
