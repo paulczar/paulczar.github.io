@@ -21,5 +21,15 @@
 This is fine for the basic use case of the default behavior of only accessing the Docker API on the local machine via the socket as the root user. However if you wish to use the Docker API over TCP then you&amp;rsquo;ll want to secure it so that you don&amp;rsquo;t give out root access to anyone that happens to poke you on the TCP port.</description>
     </item>
     
+    <item>
+      <title>Securing Docker with TLS certificates</title>
+      <link>http://tech.paulcz.net/2016/01/secure-docker-with-tls/</link>
+      <pubDate>Sun, 03 Jan 2016 14:44:30 -0600</pubDate>
+      
+      <guid>http://tech.paulcz.net/2016/01/secure-docker-with-tls/</guid>
+      <description>By default Docker (and by extension Docker Swarm) has no authentication or authorization on its API, relying instead on the filesystem security of its unix socket /var/run/docker.sock which by default is only accessible by the root user.
+This is fine for the basic use case of the default behavior of only accessing the Docker API on the local machine via the socket as the root user. However if you wish to use the Docker API over TCP then you&amp;rsquo;ll want to secure it so that you don&amp;rsquo;t give out root access to anyone that happens to poke you on the TCP port.</description>
+    </item>
+    
   </channel>
 </rss>

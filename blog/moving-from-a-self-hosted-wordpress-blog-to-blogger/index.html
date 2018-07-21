@@ -8,7 +8,7 @@
     <meta name="description" content="Random musings mostly about tech">
     <link rel="shortcut icon" type="image/x-icon" href="http://tech.paulcz.net/img/favicon.ico">
     <title>Moving from a self hosted Wordpress blog to Blogger</title>
-    <meta name="generator" content="Hugo 0.26" />
+    <meta name="generator" content="Hugo 0.44" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="http://tech.paulcz.net/css/main.css" />
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
@@ -21,13 +21,16 @@
 
     
 <script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-35638296-2', 'auto');
-ga('send', 'pageview');
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-35638296-2', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
   </head>
@@ -106,20 +109,18 @@ ga('send', 'pageview');
 
 <p>now create a perl script called <code>urls.pl</code> &hellip;    notice the URL ( with \ escaped characters ) .. you&rsquo;ll need to modify this to match your new blogger url.</p>
 
-<p>``` perl urls.pl
-#!/usr/bin/perl
-open (TXT,&rdquo;&lt; default.xhtml&rdquo;);
-while (<TXT>) {
+<pre><code class="language-perl">#!/usr/bin/perl
+open (TXT,&quot;&lt; default.xhtml&quot;);
+while (&lt;TXT&gt;) {
  chomp;
- /(http:\/\/food.paulcz.net\/\d\d\d\d.*?html)/;
- print $1 . &ldquo;\n&rdquo;;
-}</p>
+ /(http:\/\/food\.paulcz\.net\/\d\d\d\d.*?html)/;
+ print $1 . &quot;\n&quot;;
+}
+</code></pre>
 
-<pre><code>
-Then run the following:
+<p>Then run the following:</p>
 
-``` bash Terminal
-perl urls.pl | uniq &gt; blogger_urls.txt'
+<pre><code class="language-bash">perl urls.pl | uniq &gt; blogger_urls.txt'
 grep &quot;&lt;link&gt;&quot; wordpress_export.xml | sed &quot;s/&lt;link&gt;//&quot; | sed &quot;s/&lt;\/link&gt;//&quot; \
  | perl -e 'print reverse &lt;&gt;' &gt; wordpress_posts.txt
 cp blogger_export.xml blogger_munge.xml
@@ -132,34 +133,32 @@ vim -O wordpress_posts.txt blogger_urls.txt
 
 <p>Create the following perl script named <code>create_sed.pl</code></p>
 
-<p>``` perl create_sed.pl
-#!/usr/bin/perl
+<pre><code class="language-perl">#!/usr/bin/perl
 my @combined;
-open(TXT, &ldquo;&lt; wordpress_posts.txt&rdquo;);
-my @wordpress = <TXT>;
+open(TXT, &quot;&lt; wordpress_posts.txt&quot;);
+my @wordpress = &lt;TXT&gt;;
 close TXT;
-open(TXT, &ldquo;&lt; blogger_urls&rdquo;);
-my @blogger = <TXT>;
+open(TXT, &quot;&lt; blogger_urls&quot;);
+my @blogger = &lt;TXT&gt;;
 chomp(@wordpress);
 chomp(@blogger);
 $size = $#blogger;
 for ( $count=0;$count&lt;=$size;$count++ ) {
- $string = $wordpress[$count] . &ldquo;|&rdquo; . $blogger[$count];
+ $string = $wordpress[$count] . &quot;|&quot; . $blogger[$count];
  push(@combined, $string);
-}</p>
+}
 
-<p>foreach ( @combined ) {
- s/\//\\//g;
- s/./\./g;
- s/|/\//;
- print &ldquo;sed -i \&rsquo;s/$_/g\&rsquo; blogger-munge.xml\n&rdquo;;
-}</p>
+foreach ( @combined ) {
+ s/\//\\\//g;
+ s/\./\\./g;
+ s/\|/\//;
+ print &quot;sed -i \'s/$_/g\' blogger-munge.xml\n&quot;;
+}
+</code></pre>
 
-<pre><code>
-Now run `create_sed.pl`, and the resultant `munge.sh` script.
+<p>Now run <code>create_sed.pl</code>, and the resultant <code>munge.sh</code> script.</p>
 
-``` bash Terminal
-perl create_sed.pl  &gt; munge.sh
+<pre><code class="language-bash">perl create_sed.pl  &gt; munge.sh
 sh munge.sh
 </code></pre>
 
@@ -177,47 +176,44 @@ sh munge.sh
 
 <p>save the following perl snippet as <code>rewrite.pl</code>.  remember to rewrite any strings specific to my domains to match your own:</p>
 
-<p>``` perl rewrite.pl
-#!/usr/bin/perl
+<pre><code class="language-perl">#!/usr/bin/perl
 my @combined;
 my @wordpress;
-open(TXT, &ldquo;&lt; wordpress_posts.txt&rdquo;);
-while (<TXT>) {
+open(TXT, &quot;&lt; wordpress_posts.txt&quot;);
+while (&lt;TXT&gt;) {
  chomp;
  s/\/$//;  # remove trailing /
- my @temp = split &ldquo;/&rdquo;;
+ my @temp = split &quot;/&quot;;
  $last = pop @temp;
  push(@wordpress, $last);
 }
 close TXT;
-open(TXT, &ldquo;&lt; blogger<em>urls&rdquo;);
-my @blogger = <TXT>;
+open(TXT, &quot;&lt; blogger_urls&quot;);
+my @blogger = &lt;TXT&gt;;
 chomp(@blogger);
 $size = $#blogger;
 for ( $count=0;$count&lt;=$size;$count++ ) {
- $string = $wordpress[$count] . &ldquo;|&rdquo; . $blogger[$count];
+ $string = $wordpress[$count] . &quot;|&quot; . $blogger[$count];
  push(@combined, $string);
 }
-print &ldquo;rewriteEngine on\n&rdquo;;
+print &quot;rewriteEngine on\n&quot;;
 foreach ( @combined ) {
- s/|/ /;
+ s/\|/ /;
  s/^http:\/\/*.?\///;
- print &ldquo;rewriteRule $</em> [R=permanent,L]\n&rdquo;;
+ print &quot;rewriteRule $_ [R=permanent,L]\n&quot;;
 }
-print &ldquo;rewriteRule ^.*\$ <a href="http://food.paulcz.net">http://food.paulcz.net</a> [R=permanent,L]\n&rdquo;;</p>
+print &quot;rewriteRule ^.*\$ http://food.paulcz.net [R=permanent,L]\n&quot;; 
+</code></pre>
 
-<pre><code>
-Run the script and output to a file.   The contents of this file can be added to a .htaccess file and will immediately start redirecting your traffic to the correct post on your new blog.   Any hits that don't match a mapped blog post will get redirected to the main page of your blog.
+<p>Run the script and output to a file.   The contents of this file can be added to a .htaccess file and will immediately start redirecting your traffic to the correct post on your new blog.   Any hits that don&rsquo;t match a mapped blog post will get redirected to the main page of your blog.</p>
 
-``` bash Terminal
-perl rewrite.pl &gt; rewrite.txt 
+<pre><code class="language-bash">perl rewrite.pl &gt; rewrite.txt 
 </code></pre>
 
 <p>Inspect the file and if it looks correct you can append it to your <code>.htaccess</code> file.   If you have other redirect rules already in your <code>.htaccess</code> file you&rsquo;ll need to remove them or comment them out.</p>
 
-<p><code>bash Terminal
-cat rewrite.txt &gt;&gt; /var/www/html/.htaccess
-</code></p>
+<pre><code class="language-bash">cat rewrite.txt &gt;&gt; /var/www/html/.htaccess
+</code></pre>
 
 <p>There&rsquo;s no need to restart apache for a changed .htaccess file,  so you can immediately test that the redirects are working &hellip;</p>
 

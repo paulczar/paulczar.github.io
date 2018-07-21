@@ -24,5 +24,18 @@
 &lt;p&gt;&lt;/p&gt;</description>
     </item>
     
+    <item>
+      <title>Moving from a self hosted Wordpress blog to Blogger</title>
+      <link>http://tech.paulcz.net/2012/10/moving-from-a-self-hosted-wordpress-blog-to-blogger/</link>
+      <pubDate>Sun, 21 Oct 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://tech.paulcz.net/2012/10/moving-from-a-self-hosted-wordpress-blog-to-blogger/</guid>
+      <description>&lt;p&gt;I have a self hosted &lt;a href=&#34;http://xesla.ro&#34;&gt;wordpress food blog&lt;/a&gt; hosted on an old silly domain that I&amp;rsquo;ve wanted to move away from for a while.   I also want to stop paying hosting fees some time soon.   Since I&amp;rsquo;m already looking at moving a lot of my day-to-day activities to the &amp;lsquo;cloud&amp;rsquo;  it made sense to pick a blogging platform that ties into a major cloud hub.   Google&amp;rsquo;s Blogger was the obvious choice as I&amp;rsquo;m already using the Google Apps platform for my new domain &lt;code&gt;paulcz.net&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Creating a blog on blogger is dead simple.   I went ahead and created two: &lt;a href=&#34;http://food.paulcz.net&#34;&gt;food.paulcz.net&lt;/a&gt; for the new food blog and &lt;a href=&#34;http://tech.paulcz.net&#34;&gt;tech.paulcz.net&lt;/a&gt; to start journalling random tech things.     Transfering the blog content itself  is quite simple,  however, doing it in a way as to preserve links between posts, from other sites, and teaching the search engines how to find your new site requires a little more trickery.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
   </channel>
 </rss>

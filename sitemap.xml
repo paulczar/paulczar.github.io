@@ -8,7 +8,17 @@
   </url>
   
   <url>
+    <loc>http://tech.paulcz.net/2017/10/habitat-supervisors-in-kubernetes/</loc>
+    <lastmod>2017-10-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://tech.paulcz.net/blog/getting-started-with-helm/</loc>
+    <lastmod>2017-10-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/2017/10/getting-started-with-helm/</loc>
     <lastmod>2017-10-03T00:00:00+00:00</lastmod>
   </url>
   
@@ -33,7 +43,17 @@
   </url>
   
   <url>
+    <loc>http://tech.paulcz.net/2016/01/flexible-docker-registry-infrastructure/</loc>
+    <lastmod>2016-01-10T10:22:22-06:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://tech.paulcz.net/blog/deploying-a-secure-docker-registry/</loc>
+    <lastmod>2016-01-10T05:22:22-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/2016/01/deploying-a-secure-docker-registry/</loc>
     <lastmod>2016-01-10T05:22:22-06:00</lastmod>
   </url>
   
@@ -43,7 +63,17 @@
   </url>
   
   <url>
+    <loc>http://tech.paulcz.net/2016/01/secure-docker-with-tls/</loc>
+    <lastmod>2016-01-03T14:44:30-06:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://tech.paulcz.net/blog/running-ha-docker-swarm/</loc>
+    <lastmod>2016-01-02T14:44:30-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/2016/01/running-ha-docker-swarm/</loc>
     <lastmod>2016-01-02T14:44:30-06:00</lastmod>
   </url>
   
@@ -53,7 +83,17 @@
   </url>
   
   <url>
+    <loc>http://tech.paulcz.net/2016/01/openstacks-and-ecosystems/</loc>
+    <lastmod>2016-01-02T13:00:42-06:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://tech.paulcz.net/blog/optimizing-your-dockerfiles/</loc>
+    <lastmod>2015-03-07T13:25:29-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/2015/03/optimizing-your-dockerfiles/</loc>
     <lastmod>2015-03-07T13:25:29-06:00</lastmod>
   </url>
   
@@ -63,7 +103,17 @@
   </url>
   
   <url>
+    <loc>http://tech.paulcz.net/2015/01/factorish_and_the_12_fakter_app/</loc>
+    <lastmod>2015-01-06T13:29:27-06:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://tech.paulcz.net/blog/multi-process-docker-images-done-right/</loc>
+    <lastmod>2014-12-22T21:31:03-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/2014/12/multi-process-docker-images-done-right/</loc>
     <lastmod>2014-12-22T21:31:03-06:00</lastmod>
   </url>
   
@@ -73,7 +123,17 @@
   </url>
   
   <url>
+    <loc>http://tech.paulcz.net/2014/12/breadops-continous-delivery-of-fresh-baked-bread/</loc>
+    <lastmod>2014-12-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://tech.paulcz.net/blog/ezbake-a-new-way-to-converge-docker-containers-with-chef/</loc>
+    <lastmod>2014-05-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/2014/05/ezbake-a-new-way-to-converge-docker-containers-with-chef/</loc>
     <lastmod>2014-05-13T00:00:00+00:00</lastmod>
   </url>
   
@@ -83,7 +143,17 @@
   </url>
   
   <url>
+    <loc>http://tech.paulcz.net/2014/02/running-deis-io-on-rackspace-cloud/</loc>
+    <lastmod>2014-02-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://tech.paulcz.net/blog/managing-docker-services-with-this-one-easy-trick/</loc>
+    <lastmod>2013-10-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/2013/10/managing-docker-services-with-this-one-easy-trick/</loc>
     <lastmod>2013-10-20T00:00:00+00:00</lastmod>
   </url>
   
@@ -93,7 +163,17 @@
   </url>
   
   <url>
+    <loc>http://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io/</loc>
+    <lastmod>2013-09-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://tech.paulcz.net/blog/logstash-plus-opscode-omnibus/</loc>
+    <lastmod>2013-05-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/2013/05/logstash-plus-opscode-omnibus/</loc>
     <lastmod>2013-05-06T00:00:00+00:00</lastmod>
   </url>
   
@@ -103,7 +183,17 @@
   </url>
   
   <url>
+    <loc>http://tech.paulcz.net/2013/04/vagrant-plus-puppet-plus-fpm-equals-amazeballs/</loc>
+    <lastmod>2013-04-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://tech.paulcz.net/blog/creating-a-github-pages-blog-with-octopress/</loc>
+    <lastmod>2012-12-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/2012/12/creating-a-github-pages-blog-with-octopress/</loc>
     <lastmod>2012-12-15T00:00:00+00:00</lastmod>
   </url>
   
@@ -113,12 +203,27 @@
   </url>
   
   <url>
+    <loc>http://tech.paulcz.net/2012/12/running-kvm-and-openvswitch-on-ubuntu-12-dot-10/</loc>
+    <lastmod>2012-12-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://tech.paulcz.net/blog/moving-vms-from-vmware-to-kvm/</loc>
     <lastmod>2012-12-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
+    <loc>http://tech.paulcz.net/2012/12/moving-vms-from-vmware-to-kvm/</loc>
+    <lastmod>2012-12-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://tech.paulcz.net/blog/moving-from-a-self-hosted-wordpress-blog-to-blogger/</loc>
+    <lastmod>2012-10-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/2012/10/moving-from-a-self-hosted-wordpress-blog-to-blogger/</loc>
     <lastmod>2012-10-21T00:00:00+00:00</lastmod>
   </url>
   
@@ -299,6 +404,12 @@
   <url>
     <loc>http://tech.paulcz.net/categories/perl/</loc>
     <lastmod>2012-10-21T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tech.paulcz.net/post/</loc>
+    <lastmod>2017-10-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

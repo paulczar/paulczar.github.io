@@ -22,11 +22,31 @@ This is fine for the basic use case of the default behavior of only accessing th
     </item>
     
     <item>
+      <title>Securing Docker with TLS certificates</title>
+      <link>http://tech.paulcz.net/2016/01/secure-docker-with-tls/</link>
+      <pubDate>Sun, 03 Jan 2016 14:44:30 -0600</pubDate>
+      
+      <guid>http://tech.paulcz.net/2016/01/secure-docker-with-tls/</guid>
+      <description>By default Docker (and by extension Docker Swarm) has no authentication or authorization on its API, relying instead on the filesystem security of its unix socket /var/run/docker.sock which by default is only accessible by the root user.
+This is fine for the basic use case of the default behavior of only accessing the Docker API on the local machine via the socket as the root user. However if you wish to use the Docker API over TCP then you&amp;rsquo;ll want to secure it so that you don&amp;rsquo;t give out root access to anyone that happens to poke you on the TCP port.</description>
+    </item>
+    
+    <item>
       <title>Deploying a HA Docker Swarm Cluster</title>
       <link>http://tech.paulcz.net/blog/running-ha-docker-swarm/</link>
       <pubDate>Sat, 02 Jan 2016 14:44:30 -0600</pubDate>
       
       <guid>http://tech.paulcz.net/blog/running-ha-docker-swarm/</guid>
+      <description>Given Docker&amp;rsquo;s propensity for creating easy to use tools it shouldn&amp;rsquo;t come as a surprise that Docker Swarm is one of the easier to understand and run of the &amp;ldquo;Docker Clustering&amp;rdquo; options currently out there. I recently built some Terraform configs for deploying a Highly Available Docker Swarm cluster on Openstack and learned a fair bit about Swarm in the process.
+This guide is meant to be a platform agnostic howto on installing and running a Highly Available Docker Swarm to show you the ideas and concepts that may not be as easy to understand from just reading some config management code.</description>
+    </item>
+    
+    <item>
+      <title>Deploying a HA Docker Swarm Cluster</title>
+      <link>http://tech.paulcz.net/2016/01/running-ha-docker-swarm/</link>
+      <pubDate>Sat, 02 Jan 2016 14:44:30 -0600</pubDate>
+      
+      <guid>http://tech.paulcz.net/2016/01/running-ha-docker-swarm/</guid>
       <description>Given Docker&amp;rsquo;s propensity for creating easy to use tools it shouldn&amp;rsquo;t come as a surprise that Docker Swarm is one of the easier to understand and run of the &amp;ldquo;Docker Clustering&amp;rdquo; options currently out there. I recently built some Terraform configs for deploying a Highly Available Docker Swarm cluster on Openstack and learned a fair bit about Swarm in the process.
 This guide is meant to be a platform agnostic howto on installing and running a Highly Available Docker Swarm to show you the ideas and concepts that may not be as easy to understand from just reading some config management code.</description>
     </item>
