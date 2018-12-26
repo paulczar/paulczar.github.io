@@ -109,7 +109,7 @@ if (!doNotTrack) {
 
 <h2 id="soft-and-squishy-multi-tenancy">Soft and Squishy Multi-Tenancy</h2>
 
-<p>However there&rsquo;s one bit sticky problem that&rsquo;s left to solve, and this I believe will prove to be the downfall of the container &hellip;  multi-tenancy.</p>
+<p>There&rsquo;s one sticky problem that&rsquo;s left to solve, and this I believe will prove to be the downfall of the container &hellip;  multi-tenancy.</p>
 
 <p>Linux containers were not built to be secure isolated sandboxes (like Solaris Zones or FreeBSD Jails). Instead they&rsquo;re built upon a shared kernel model that utilizes kernel features to provide basic process isolation. As <a href="https://blog.jessfraz.com/post/containers-zones-jails-vms/">Jessie Frazelle</a> would say &ldquo;Containers aren&rsquo;t a real thing&rdquo;.</p>
 
@@ -151,7 +151,7 @@ if (!doNotTrack) {
 
 <p>We have at least one more optimization to make here. Build out a suitable Hypervisor for the underlying IaaS or cloud provider. If a VM Container is a first level abstraction provided by the IaaS then we increase our resource utilization even further. The minimal number of VMs required to run a Kubernetes cluster goes down to one (or three for HA) to host the Kubernetes control plane exposed to the &ldquo;Superuser&rdquo;.</p>
 
-<h2 id="resource-optimized-multi-tenancy">Resource Optimized Multi-tenancy</h2>
+<h2 id="resource-cost-optimized-multi-tenancy">Resource (cost) Optimized Multi-tenancy</h2>
 
 <p>A Kubernetes deployment with two namespaces both with a number of applications running would look something like this.</p>
 
