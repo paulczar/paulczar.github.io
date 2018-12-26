@@ -19,9 +19,7 @@
       <guid>http://tech.paulcz.net/blog/managing-docker-services-with-this-one-easy-trick/</guid>
       <description>&lt;p&gt;I have been having a lot of internal debate about the idea of running more than one service in a docker container.   A Docker container is built to run a single process in the foreground and to live for only as long as that process is running.  This is great in a utopian world where servers are immutable and sysadmins drink tiki drinks on the beach,  however it doesn&amp;rsquo;t always translate well to the real world.&lt;/p&gt;
 
-&lt;p&gt;Examples where you might want to be able to run multiple servers span from the simple use case of running &lt;code&gt;sshd&lt;/code&gt; as well as your application to running a web app such as &lt;code&gt;wordpress&lt;/code&gt; where you might want both &lt;code&gt;apache&lt;/code&gt; and &lt;code&gt;mysql&lt;/code&gt; running in the same container.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;Examples where you might want to be able to run multiple servers span from the simple use case of running &lt;code&gt;sshd&lt;/code&gt; as well as your application to running a web app such as &lt;code&gt;wordpress&lt;/code&gt; where you might want both &lt;code&gt;apache&lt;/code&gt; and &lt;code&gt;mysql&lt;/code&gt; running in the same container.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -32,9 +30,7 @@
       <guid>http://tech.paulcz.net/2013/10/managing-docker-services-with-this-one-easy-trick/</guid>
       <description>&lt;p&gt;I have been having a lot of internal debate about the idea of running more than one service in a docker container.   A Docker container is built to run a single process in the foreground and to live for only as long as that process is running.  This is great in a utopian world where servers are immutable and sysadmins drink tiki drinks on the beach,  however it doesn&amp;rsquo;t always translate well to the real world.&lt;/p&gt;
 
-&lt;p&gt;Examples where you might want to be able to run multiple servers span from the simple use case of running &lt;code&gt;sshd&lt;/code&gt; as well as your application to running a web app such as &lt;code&gt;wordpress&lt;/code&gt; where you might want both &lt;code&gt;apache&lt;/code&gt; and &lt;code&gt;mysql&lt;/code&gt; running in the same container.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;Examples where you might want to be able to run multiple servers span from the simple use case of running &lt;code&gt;sshd&lt;/code&gt; as well as your application to running a web app such as &lt;code&gt;wordpress&lt;/code&gt; where you might want both &lt;code&gt;apache&lt;/code&gt; and &lt;code&gt;mysql&lt;/code&gt; running in the same container.&lt;/p&gt;</description>
     </item>
     
   </channel>

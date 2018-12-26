@@ -21,9 +21,7 @@
 
 &lt;p&gt;Having battled many times with OS Packages trying to get newer versions of Ruby, or Redis or other software installed and having to hunt down some random package repo or manually build from source this seems like an excellent idea.&lt;/p&gt;
 
-&lt;p&gt;To learn the basics I decided to build an &lt;a href=&#34;https://github.com/paulczar/omnibus-fpm&#34;&gt;omnibus package for fpm&lt;/a&gt; which helped me work out the kinks and learn the basics.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;To learn the basics I decided to build an &lt;a href=&#34;https://github.com/paulczar/omnibus-fpm&#34;&gt;omnibus package for fpm&lt;/a&gt; which helped me work out the kinks and learn the basics.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -36,9 +34,7 @@
 
 &lt;p&gt;Having battled many times with OS Packages trying to get newer versions of Ruby, or Redis or other software installed and having to hunt down some random package repo or manually build from source this seems like an excellent idea.&lt;/p&gt;
 
-&lt;p&gt;To learn the basics I decided to build an &lt;a href=&#34;https://github.com/paulczar/omnibus-fpm&#34;&gt;omnibus package for fpm&lt;/a&gt; which helped me work out the kinks and learn the basics.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;To learn the basics I decided to build an &lt;a href=&#34;https://github.com/paulczar/omnibus-fpm&#34;&gt;omnibus package for fpm&lt;/a&gt; which helped me work out the kinks and learn the basics.&lt;/p&gt;</description>
     </item>
     
   </channel>

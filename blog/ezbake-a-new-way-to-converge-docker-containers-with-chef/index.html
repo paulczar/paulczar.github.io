@@ -8,7 +8,7 @@
     <meta name="description" content="Random musings mostly about tech">
     <link rel="shortcut icon" type="image/x-icon" href="http://tech.paulcz.net/img/favicon.ico">
     <title>EZBake - A new way to converge docker containers with chef</title>
-    <meta name="generator" content="Hugo 0.44" />
+    <meta name="generator" content="Hugo 0.53" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="http://tech.paulcz.net/css/main.css" />
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
@@ -20,7 +20,7 @@
 		<![endif]-->
 
     
-<script>
+<script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -82,8 +82,6 @@ if (!doNotTrack) {
               <p><code>EZ Bake</code> came from an idea I had while watching the <a href="https://twitter.com/hangops">HangOps</a> <a href="https://www.youtube.com/watch?v=clLFKIeSADo&amp;feature=youtu.be">episode 2014-04-11</a> in which they were talking about <code>Docker</code> and Config Management being complementary rather than adversary.</p>
 
 <p>I have expermented with using <code>Chef</code> and <code>Docker</code> together in the <a href="/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io.html">past</a> but wanted to tackle the problem from a slightly different angle.  I&rsquo;ve recently been working on some PAAS stuff, both <a href="http://deis.io">Deis</a> and <a href="http://solum.io">Solum</a> these both utilize the tooling from <a href="https://github.com/flynn/flynn">Flynn</a> which builds heroku style <code>buildpacks</code> in <code>Docker</code>.</p>
-
-<p></p>
 
 <p>EZ Bake takes chef recipes designed for <code>chef-solo</code> ( but could easily be extended to do the same for <code>chef-zero</code>, or <code>chef-client</code> with a server) in a tarball via <code>stdin</code> and converges a docker node using that recipe.</p>
 

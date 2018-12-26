@@ -101,9 +101,7 @@ This guide is meant to be a platform agnostic howto on installing and running a 
 
 &lt;p&gt;Almost since &lt;a href=&#34;http://docker.com&#34;&gt;Docker&lt;/a&gt; was first introduced to the world there has been a fairly strong push to keeping containers to be single process.   This makes a lot of sense and definitely plays into the &lt;a href=&#34;http://12factor.net&#34;&gt;12 Factor&lt;/a&gt; way of thinking where all application output should be pushed to &lt;code&gt;stdout&lt;/code&gt; and docker itself with tools like &lt;a href=&#34;https://github.com/progrium/logspout&#34;&gt;logspout&lt;/a&gt; now has fairly strong tooling to deal with those logs.&lt;/p&gt;
 
-&lt;p&gt;Sometimes however it just makes sense to run more than one process in a container,  a perfect example would be running &lt;a href=&#34;https://github.com/kelseyhightower/confd&#34;&gt;confd&lt;/a&gt; as well as your application in order to modify the application&amp;rsquo;s config file based on changes in service discovery systems like &lt;a href=&#34;https://github.com/coreos/etcd&#34;&gt;etcd&lt;/a&gt;.   The &lt;a href=&#34;https://docs.docker.com/articles/ambassador_pattern_linking/&#34;&gt;ambassador&lt;/a&gt; container way of working can achieve similar things, but I&amp;rsquo;m not sure that running two containers with a process each to run your application is any better than running one container with two processes.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;Sometimes however it just makes sense to run more than one process in a container,  a perfect example would be running &lt;a href=&#34;https://github.com/kelseyhightower/confd&#34;&gt;confd&lt;/a&gt; as well as your application in order to modify the application&amp;rsquo;s config file based on changes in service discovery systems like &lt;a href=&#34;https://github.com/coreos/etcd&#34;&gt;etcd&lt;/a&gt;.   The &lt;a href=&#34;https://docs.docker.com/articles/ambassador_pattern_linking/&#34;&gt;ambassador&lt;/a&gt; container way of working can achieve similar things, but I&amp;rsquo;m not sure that running two containers with a process each to run your application is any better than running one container with two processes.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -116,9 +114,7 @@ This guide is meant to be a platform agnostic howto on installing and running a 
 
 &lt;p&gt;Almost since &lt;a href=&#34;http://docker.com&#34;&gt;Docker&lt;/a&gt; was first introduced to the world there has been a fairly strong push to keeping containers to be single process.   This makes a lot of sense and definitely plays into the &lt;a href=&#34;http://12factor.net&#34;&gt;12 Factor&lt;/a&gt; way of thinking where all application output should be pushed to &lt;code&gt;stdout&lt;/code&gt; and docker itself with tools like &lt;a href=&#34;https://github.com/progrium/logspout&#34;&gt;logspout&lt;/a&gt; now has fairly strong tooling to deal with those logs.&lt;/p&gt;
 
-&lt;p&gt;Sometimes however it just makes sense to run more than one process in a container,  a perfect example would be running &lt;a href=&#34;https://github.com/kelseyhightower/confd&#34;&gt;confd&lt;/a&gt; as well as your application in order to modify the application&amp;rsquo;s config file based on changes in service discovery systems like &lt;a href=&#34;https://github.com/coreos/etcd&#34;&gt;etcd&lt;/a&gt;.   The &lt;a href=&#34;https://docs.docker.com/articles/ambassador_pattern_linking/&#34;&gt;ambassador&lt;/a&gt; container way of working can achieve similar things, but I&amp;rsquo;m not sure that running two containers with a process each to run your application is any better than running one container with two processes.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;Sometimes however it just makes sense to run more than one process in a container,  a perfect example would be running &lt;a href=&#34;https://github.com/kelseyhightower/confd&#34;&gt;confd&lt;/a&gt; as well as your application in order to modify the application&amp;rsquo;s config file based on changes in service discovery systems like &lt;a href=&#34;https://github.com/coreos/etcd&#34;&gt;etcd&lt;/a&gt;.   The &lt;a href=&#34;https://docs.docker.com/articles/ambassador_pattern_linking/&#34;&gt;ambassador&lt;/a&gt; container way of working can achieve similar things, but I&amp;rsquo;m not sure that running two containers with a process each to run your application is any better than running one container with two processes.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -129,9 +125,7 @@ This guide is meant to be a platform agnostic howto on installing and running a 
       <guid>http://tech.paulcz.net/blog/ezbake-a-new-way-to-converge-docker-containers-with-chef/</guid>
       <description>&lt;p&gt;&lt;code&gt;EZ Bake&lt;/code&gt; came from an idea I had while watching the &lt;a href=&#34;https://twitter.com/hangops&#34;&gt;HangOps&lt;/a&gt; &lt;a href=&#34;https://www.youtube.com/watch?v=clLFKIeSADo&amp;amp;feature=youtu.be&#34;&gt;episode 2014-04-11&lt;/a&gt; in which they were talking about &lt;code&gt;Docker&lt;/code&gt; and Config Management being complementary rather than adversary.&lt;/p&gt;
 
-&lt;p&gt;I have expermented with using &lt;code&gt;Chef&lt;/code&gt; and &lt;code&gt;Docker&lt;/code&gt; together in the &lt;a href=&#34;http://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io.html&#34;&gt;past&lt;/a&gt; but wanted to tackle the problem from a slightly different angle.  I&amp;rsquo;ve recently been working on some PAAS stuff, both &lt;a href=&#34;http://deis.io&#34;&gt;Deis&lt;/a&gt; and &lt;a href=&#34;http://solum.io&#34;&gt;Solum&lt;/a&gt; these both utilize the tooling from &lt;a href=&#34;https://github.com/flynn/flynn&#34;&gt;Flynn&lt;/a&gt; which builds heroku style &lt;code&gt;buildpacks&lt;/code&gt; in &lt;code&gt;Docker&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;I have expermented with using &lt;code&gt;Chef&lt;/code&gt; and &lt;code&gt;Docker&lt;/code&gt; together in the &lt;a href=&#34;http://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io.html&#34;&gt;past&lt;/a&gt; but wanted to tackle the problem from a slightly different angle.  I&amp;rsquo;ve recently been working on some PAAS stuff, both &lt;a href=&#34;http://deis.io&#34;&gt;Deis&lt;/a&gt; and &lt;a href=&#34;http://solum.io&#34;&gt;Solum&lt;/a&gt; these both utilize the tooling from &lt;a href=&#34;https://github.com/flynn/flynn&#34;&gt;Flynn&lt;/a&gt; which builds heroku style &lt;code&gt;buildpacks&lt;/code&gt; in &lt;code&gt;Docker&lt;/code&gt;.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -142,9 +136,7 @@ This guide is meant to be a platform agnostic howto on installing and running a 
       <guid>http://tech.paulcz.net/2014/05/ezbake-a-new-way-to-converge-docker-containers-with-chef/</guid>
       <description>&lt;p&gt;&lt;code&gt;EZ Bake&lt;/code&gt; came from an idea I had while watching the &lt;a href=&#34;https://twitter.com/hangops&#34;&gt;HangOps&lt;/a&gt; &lt;a href=&#34;https://www.youtube.com/watch?v=clLFKIeSADo&amp;amp;feature=youtu.be&#34;&gt;episode 2014-04-11&lt;/a&gt; in which they were talking about &lt;code&gt;Docker&lt;/code&gt; and Config Management being complementary rather than adversary.&lt;/p&gt;
 
-&lt;p&gt;I have expermented with using &lt;code&gt;Chef&lt;/code&gt; and &lt;code&gt;Docker&lt;/code&gt; together in the &lt;a href=&#34;http://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io.html&#34;&gt;past&lt;/a&gt; but wanted to tackle the problem from a slightly different angle.  I&amp;rsquo;ve recently been working on some PAAS stuff, both &lt;a href=&#34;http://deis.io&#34;&gt;Deis&lt;/a&gt; and &lt;a href=&#34;http://solum.io&#34;&gt;Solum&lt;/a&gt; these both utilize the tooling from &lt;a href=&#34;https://github.com/flynn/flynn&#34;&gt;Flynn&lt;/a&gt; which builds heroku style &lt;code&gt;buildpacks&lt;/code&gt; in &lt;code&gt;Docker&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;I have expermented with using &lt;code&gt;Chef&lt;/code&gt; and &lt;code&gt;Docker&lt;/code&gt; together in the &lt;a href=&#34;http://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io.html&#34;&gt;past&lt;/a&gt; but wanted to tackle the problem from a slightly different angle.  I&amp;rsquo;ve recently been working on some PAAS stuff, both &lt;a href=&#34;http://deis.io&#34;&gt;Deis&lt;/a&gt; and &lt;a href=&#34;http://solum.io&#34;&gt;Solum&lt;/a&gt; these both utilize the tooling from &lt;a href=&#34;https://github.com/flynn/flynn&#34;&gt;Flynn&lt;/a&gt; which builds heroku style &lt;code&gt;buildpacks&lt;/code&gt; in &lt;code&gt;Docker&lt;/code&gt;.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -153,9 +145,7 @@ This guide is meant to be a platform agnostic howto on installing and running a 
       <pubDate>Sun, 23 Feb 2014 00:00:00 +0000</pubDate>
       
       <guid>http://tech.paulcz.net/blog/running-deis-io-on-rackspace-cloud/</guid>
-      <description>&lt;p&gt;I recently did a presentation at the Cloud Austin meetup titled &lt;a href=&#34;http://tech.paulcz.net/presentation-cloud-austin-deis/#/&#34;&gt;Docking with Unicorns&lt;/a&gt; about new PAAS on the block &lt;a href=&#34;http://deis.io&#34;&gt;DEIS&lt;/a&gt;.   Building out DEIS is quite easy,  make more easy by some tight integration they have with Rackspace Cloud.    If you&amp;rsquo;re interested in what deis is go through my slides linked above, and the documentation on their website.    If you want to build out an environment to kick the tires a bit,  then click &amp;lsquo;Read on&amp;rsquo; below and follow me down the rabbit hole.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;I recently did a presentation at the Cloud Austin meetup titled &lt;a href=&#34;http://tech.paulcz.net/presentation-cloud-austin-deis/#/&#34;&gt;Docking with Unicorns&lt;/a&gt; about new PAAS on the block &lt;a href=&#34;http://deis.io&#34;&gt;DEIS&lt;/a&gt;.   Building out DEIS is quite easy,  make more easy by some tight integration they have with Rackspace Cloud.    If you&amp;rsquo;re interested in what deis is go through my slides linked above, and the documentation on their website.    If you want to build out an environment to kick the tires a bit,  then click &amp;lsquo;Read on&amp;rsquo; below and follow me down the rabbit hole.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -164,9 +154,7 @@ This guide is meant to be a platform agnostic howto on installing and running a 
       <pubDate>Sun, 23 Feb 2014 00:00:00 +0000</pubDate>
       
       <guid>http://tech.paulcz.net/2014/02/running-deis-io-on-rackspace-cloud/</guid>
-      <description>&lt;p&gt;I recently did a presentation at the Cloud Austin meetup titled &lt;a href=&#34;http://tech.paulcz.net/presentation-cloud-austin-deis/#/&#34;&gt;Docking with Unicorns&lt;/a&gt; about new PAAS on the block &lt;a href=&#34;http://deis.io&#34;&gt;DEIS&lt;/a&gt;.   Building out DEIS is quite easy,  make more easy by some tight integration they have with Rackspace Cloud.    If you&amp;rsquo;re interested in what deis is go through my slides linked above, and the documentation on their website.    If you want to build out an environment to kick the tires a bit,  then click &amp;lsquo;Read on&amp;rsquo; below and follow me down the rabbit hole.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;I recently did a presentation at the Cloud Austin meetup titled &lt;a href=&#34;http://tech.paulcz.net/presentation-cloud-austin-deis/#/&#34;&gt;Docking with Unicorns&lt;/a&gt; about new PAAS on the block &lt;a href=&#34;http://deis.io&#34;&gt;DEIS&lt;/a&gt;.   Building out DEIS is quite easy,  make more easy by some tight integration they have with Rackspace Cloud.    If you&amp;rsquo;re interested in what deis is go through my slides linked above, and the documentation on their website.    If you want to build out an environment to kick the tires a bit,  then click &amp;lsquo;Read on&amp;rsquo; below and follow me down the rabbit hole.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -177,9 +165,7 @@ This guide is meant to be a platform agnostic howto on installing and running a 
       <guid>http://tech.paulcz.net/blog/managing-docker-services-with-this-one-easy-trick/</guid>
       <description>&lt;p&gt;I have been having a lot of internal debate about the idea of running more than one service in a docker container.   A Docker container is built to run a single process in the foreground and to live for only as long as that process is running.  This is great in a utopian world where servers are immutable and sysadmins drink tiki drinks on the beach,  however it doesn&amp;rsquo;t always translate well to the real world.&lt;/p&gt;
 
-&lt;p&gt;Examples where you might want to be able to run multiple servers span from the simple use case of running &lt;code&gt;sshd&lt;/code&gt; as well as your application to running a web app such as &lt;code&gt;wordpress&lt;/code&gt; where you might want both &lt;code&gt;apache&lt;/code&gt; and &lt;code&gt;mysql&lt;/code&gt; running in the same container.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;Examples where you might want to be able to run multiple servers span from the simple use case of running &lt;code&gt;sshd&lt;/code&gt; as well as your application to running a web app such as &lt;code&gt;wordpress&lt;/code&gt; where you might want both &lt;code&gt;apache&lt;/code&gt; and &lt;code&gt;mysql&lt;/code&gt; running in the same container.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -190,9 +176,7 @@ This guide is meant to be a platform agnostic howto on installing and running a 
       <guid>http://tech.paulcz.net/2013/10/managing-docker-services-with-this-one-easy-trick/</guid>
       <description>&lt;p&gt;I have been having a lot of internal debate about the idea of running more than one service in a docker container.   A Docker container is built to run a single process in the foreground and to live for only as long as that process is running.  This is great in a utopian world where servers are immutable and sysadmins drink tiki drinks on the beach,  however it doesn&amp;rsquo;t always translate well to the real world.&lt;/p&gt;
 
-&lt;p&gt;Examples where you might want to be able to run multiple servers span from the simple use case of running &lt;code&gt;sshd&lt;/code&gt; as well as your application to running a web app such as &lt;code&gt;wordpress&lt;/code&gt; where you might want both &lt;code&gt;apache&lt;/code&gt; and &lt;code&gt;mysql&lt;/code&gt; running in the same container.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;Examples where you might want to be able to run multiple servers span from the simple use case of running &lt;code&gt;sshd&lt;/code&gt; as well as your application to running a web app such as &lt;code&gt;wordpress&lt;/code&gt; where you might want both &lt;code&gt;apache&lt;/code&gt; and &lt;code&gt;mysql&lt;/code&gt; running in the same container.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -203,9 +187,7 @@ This guide is meant to be a platform agnostic howto on installing and running a 
       <guid>http://tech.paulcz.net/blog/creating-immutable-servers-with-chef-and-docker-dot-io/</guid>
       <description>&lt;p&gt;Building applications in a &lt;a href=&#34;http://docker.io&#34;&gt;docker.io&lt;/a&gt; Dockerfile is relatively simple,  but sometimes you want to just install the application exactly as you would normally via already built chef cookbooks.   Turns out this is actually pretty simple.&lt;/p&gt;
 
-&lt;p&gt;The first thing you&amp;rsquo;ll need to do is build a container with chef-client and berkshelf installed.   You can grab the one I&amp;rsquo;ve built by running &lt;code&gt;docker pull paulczar/chef-solo&lt;/code&gt; or build one youself from a &lt;code&gt;Dockerfile&lt;/code&gt; that looks a little something like the following&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;The first thing you&amp;rsquo;ll need to do is build a container with chef-client and berkshelf installed.   You can grab the one I&amp;rsquo;ve built by running &lt;code&gt;docker pull paulczar/chef-solo&lt;/code&gt; or build one youself from a &lt;code&gt;Dockerfile&lt;/code&gt; that looks a little something like the following&amp;hellip;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -216,9 +198,7 @@ This guide is meant to be a platform agnostic howto on installing and running a 
       <guid>http://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io/</guid>
       <description>&lt;p&gt;Building applications in a &lt;a href=&#34;http://docker.io&#34;&gt;docker.io&lt;/a&gt; Dockerfile is relatively simple,  but sometimes you want to just install the application exactly as you would normally via already built chef cookbooks.   Turns out this is actually pretty simple.&lt;/p&gt;
 
-&lt;p&gt;The first thing you&amp;rsquo;ll need to do is build a container with chef-client and berkshelf installed.   You can grab the one I&amp;rsquo;ve built by running &lt;code&gt;docker pull paulczar/chef-solo&lt;/code&gt; or build one youself from a &lt;code&gt;Dockerfile&lt;/code&gt; that looks a little something like the following&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;The first thing you&amp;rsquo;ll need to do is build a container with chef-client and berkshelf installed.   You can grab the one I&amp;rsquo;ve built by running &lt;code&gt;docker pull paulczar/chef-solo&lt;/code&gt; or build one youself from a &lt;code&gt;Dockerfile&lt;/code&gt; that looks a little something like the following&amp;hellip;&lt;/p&gt;</description>
     </item>
     
   </channel>

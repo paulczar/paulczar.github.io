@@ -21,9 +21,7 @@
 
 &lt;p&gt;After a few weeks of installing and testing alternatives  ( I&amp;rsquo;d really love to run openstack,  but it&amp;rsquo;s just not worth it at home for a single box ) I&amp;rsquo;ve settled on Ubuntu 12.10 server running KVM and Openvswitch.&lt;/p&gt;
 
-&lt;p&gt;After installing Ubuntu 12.10 I did the following to get KVM up and running&amp;hellip;   I cribbed this mostly from &lt;a href=&#34;http://blog.allanglesit.com/2012/10/linux-kvm-ubuntu-12-10-with-openvswitch/&#34;&gt;blog.allanglesit.com&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;After installing Ubuntu 12.10 I did the following to get KVM up and running&amp;hellip;   I cribbed this mostly from &lt;a href=&#34;http://blog.allanglesit.com/2012/10/linux-kvm-ubuntu-12-10-with-openvswitch/&#34;&gt;blog.allanglesit.com&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -36,9 +34,7 @@
 
 &lt;p&gt;After a few weeks of installing and testing alternatives  ( I&amp;rsquo;d really love to run openstack,  but it&amp;rsquo;s just not worth it at home for a single box ) I&amp;rsquo;ve settled on Ubuntu 12.10 server running KVM and Openvswitch.&lt;/p&gt;
 
-&lt;p&gt;After installing Ubuntu 12.10 I did the following to get KVM up and running&amp;hellip;   I cribbed this mostly from &lt;a href=&#34;http://blog.allanglesit.com/2012/10/linux-kvm-ubuntu-12-10-with-openvswitch/&#34;&gt;blog.allanglesit.com&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;After installing Ubuntu 12.10 I did the following to get KVM up and running&amp;hellip;   I cribbed this mostly from &lt;a href=&#34;http://blog.allanglesit.com/2012/10/linux-kvm-ubuntu-12-10-with-openvswitch/&#34;&gt;blog.allanglesit.com&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     
   </channel>

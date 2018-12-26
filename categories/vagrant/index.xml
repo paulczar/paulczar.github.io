@@ -24,9 +24,7 @@
 &lt;li&gt;and building RPM packages with &lt;a href=&#34;https://github.com/jordansissel/fpm&#34;&gt;FPM&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;I realized I was spending a bunch of time flipping back and forth between Vagrant environments and I had no quick way to utilize RPMs built with FPM inside my puppet modules.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;I realized I was spending a bunch of time flipping back and forth between Vagrant environments and I had no quick way to utilize RPMs built with FPM inside my puppet modules.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -42,9 +40,7 @@
 &lt;li&gt;and building RPM packages with &lt;a href=&#34;https://github.com/jordansissel/fpm&#34;&gt;FPM&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;I realized I was spending a bunch of time flipping back and forth between Vagrant environments and I had no quick way to utilize RPMs built with FPM inside my puppet modules.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;I realized I was spending a bunch of time flipping back and forth between Vagrant environments and I had no quick way to utilize RPMs built with FPM inside my puppet modules.&lt;/p&gt;</description>
     </item>
     
   </channel>

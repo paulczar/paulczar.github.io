@@ -6,10 +6,32 @@
     <description>Recent content on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 06 Oct 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 25 Dec 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://tech.paulcz.net/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>The future of Kubernetes is Virtual Machines</title>
+      <link>http://tech.paulcz.net/blog/future-of-kubernetes-is-virtual-machines/</link>
+      <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://tech.paulcz.net/blog/future-of-kubernetes-is-virtual-machines/</guid>
+      <description>Peering into the crystal ball Kubernetes as a technology has been very important to my career this year, and will be even more so for next year too. As 2018 comes to a close its time to drag out the hubris and make a bold prediction. The future of Kubernetes is Virtual Machines, not Containers.
+ The future of Kubernetes is Virtual Machines, not Containers.
+ The Chinese Zodiac calls 2018 the year of the Dog, in tech it was the year of the Kubernetes.</description>
+    </item>
+    
+    <item>
+      <title>The future of Kubernetes is Virtual Machines</title>
+      <link>http://tech.paulcz.net/2018/12/future-of-kubernetes-is-virtual-machines/</link>
+      <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://tech.paulcz.net/2018/12/future-of-kubernetes-is-virtual-machines/</guid>
+      <description>Peering into the crystal ball Kubernetes as a technology has been very important to my career this year, and will be even more so for next year too. As 2018 comes to a close its time to drag out the hubris and make a bold prediction. The future of Kubernetes is Virtual Machines, not Containers.
+ The future of Kubernetes is Virtual Machines, not Containers.
+ The Chinese Zodiac calls 2018 the year of the Dog, in tech it was the year of the Kubernetes.</description>
+    </item>
     
     <item>
       <title>Building a Habitat Supervisor for Kubernetes</title>
@@ -214,9 +236,7 @@ Dockerfile&amp;rsquo;s are regularly [and incorrectly] treated like bash scripts
       <guid>http://tech.paulcz.net/blog/factorish_and_the_12_fakter_app/</guid>
       <description>&lt;p&gt;Unless you&amp;rsquo;ve been living under a rock (in which case I envy you) you&amp;rsquo;ve heard a fair bit about The &lt;a href=&#34;http://12factor.net&#34;&gt;Twelve-Factor App&lt;/a&gt;. A wonderful stateless application that is completely disposable and can run anywhere from your own physical servers to &lt;a href=&#34;http://deis.io&#34;&gt;Deis&lt;/a&gt;, &lt;a href=&#34;http://cloudfoundry.org&#34;&gt;Cloud Foundry&lt;/a&gt; or &lt;a href=&#34;http://heroku.com&#34;&gt;Heroku&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Chances are you&amp;rsquo;re stuck writing and running an application that is decidely not 12Factor, nor will it ever be.  In a perfect world you&amp;rsquo;d scrap it and rewrite it as a dozen microservices that are loosely coupled but run and work indepently of eachother. The reality however is you could never get the okay to do that.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;Chances are you&amp;rsquo;re stuck writing and running an application that is decidely not 12Factor, nor will it ever be.  In a perfect world you&amp;rsquo;d scrap it and rewrite it as a dozen microservices that are loosely coupled but run and work indepently of eachother. The reality however is you could never get the okay to do that.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -227,9 +247,7 @@ Dockerfile&amp;rsquo;s are regularly [and incorrectly] treated like bash scripts
       <guid>http://tech.paulcz.net/2015/01/factorish_and_the_12_fakter_app/</guid>
       <description>&lt;p&gt;Unless you&amp;rsquo;ve been living under a rock (in which case I envy you) you&amp;rsquo;ve heard a fair bit about The &lt;a href=&#34;http://12factor.net&#34;&gt;Twelve-Factor App&lt;/a&gt;. A wonderful stateless application that is completely disposable and can run anywhere from your own physical servers to &lt;a href=&#34;http://deis.io&#34;&gt;Deis&lt;/a&gt;, &lt;a href=&#34;http://cloudfoundry.org&#34;&gt;Cloud Foundry&lt;/a&gt; or &lt;a href=&#34;http://heroku.com&#34;&gt;Heroku&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Chances are you&amp;rsquo;re stuck writing and running an application that is decidely not 12Factor, nor will it ever be.  In a perfect world you&amp;rsquo;d scrap it and rewrite it as a dozen microservices that are loosely coupled but run and work indepently of eachother. The reality however is you could never get the okay to do that.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;Chances are you&amp;rsquo;re stuck writing and running an application that is decidely not 12Factor, nor will it ever be.  In a perfect world you&amp;rsquo;d scrap it and rewrite it as a dozen microservices that are loosely coupled but run and work indepently of eachother. The reality however is you could never get the okay to do that.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -242,9 +260,7 @@ Dockerfile&amp;rsquo;s are regularly [and incorrectly] treated like bash scripts
 
 &lt;p&gt;Almost since &lt;a href=&#34;http://docker.com&#34;&gt;Docker&lt;/a&gt; was first introduced to the world there has been a fairly strong push to keeping containers to be single process.   This makes a lot of sense and definitely plays into the &lt;a href=&#34;http://12factor.net&#34;&gt;12 Factor&lt;/a&gt; way of thinking where all application output should be pushed to &lt;code&gt;stdout&lt;/code&gt; and docker itself with tools like &lt;a href=&#34;https://github.com/progrium/logspout&#34;&gt;logspout&lt;/a&gt; now has fairly strong tooling to deal with those logs.&lt;/p&gt;
 
-&lt;p&gt;Sometimes however it just makes sense to run more than one process in a container,  a perfect example would be running &lt;a href=&#34;https://github.com/kelseyhightower/confd&#34;&gt;confd&lt;/a&gt; as well as your application in order to modify the application&amp;rsquo;s config file based on changes in service discovery systems like &lt;a href=&#34;https://github.com/coreos/etcd&#34;&gt;etcd&lt;/a&gt;.   The &lt;a href=&#34;https://docs.docker.com/articles/ambassador_pattern_linking/&#34;&gt;ambassador&lt;/a&gt; container way of working can achieve similar things, but I&amp;rsquo;m not sure that running two containers with a process each to run your application is any better than running one container with two processes.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;Sometimes however it just makes sense to run more than one process in a container,  a perfect example would be running &lt;a href=&#34;https://github.com/kelseyhightower/confd&#34;&gt;confd&lt;/a&gt; as well as your application in order to modify the application&amp;rsquo;s config file based on changes in service discovery systems like &lt;a href=&#34;https://github.com/coreos/etcd&#34;&gt;etcd&lt;/a&gt;.   The &lt;a href=&#34;https://docs.docker.com/articles/ambassador_pattern_linking/&#34;&gt;ambassador&lt;/a&gt; container way of working can achieve similar things, but I&amp;rsquo;m not sure that running two containers with a process each to run your application is any better than running one container with two processes.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -257,9 +273,7 @@ Dockerfile&amp;rsquo;s are regularly [and incorrectly] treated like bash scripts
 
 &lt;p&gt;Almost since &lt;a href=&#34;http://docker.com&#34;&gt;Docker&lt;/a&gt; was first introduced to the world there has been a fairly strong push to keeping containers to be single process.   This makes a lot of sense and definitely plays into the &lt;a href=&#34;http://12factor.net&#34;&gt;12 Factor&lt;/a&gt; way of thinking where all application output should be pushed to &lt;code&gt;stdout&lt;/code&gt; and docker itself with tools like &lt;a href=&#34;https://github.com/progrium/logspout&#34;&gt;logspout&lt;/a&gt; now has fairly strong tooling to deal with those logs.&lt;/p&gt;
 
-&lt;p&gt;Sometimes however it just makes sense to run more than one process in a container,  a perfect example would be running &lt;a href=&#34;https://github.com/kelseyhightower/confd&#34;&gt;confd&lt;/a&gt; as well as your application in order to modify the application&amp;rsquo;s config file based on changes in service discovery systems like &lt;a href=&#34;https://github.com/coreos/etcd&#34;&gt;etcd&lt;/a&gt;.   The &lt;a href=&#34;https://docs.docker.com/articles/ambassador_pattern_linking/&#34;&gt;ambassador&lt;/a&gt; container way of working can achieve similar things, but I&amp;rsquo;m not sure that running two containers with a process each to run your application is any better than running one container with two processes.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;Sometimes however it just makes sense to run more than one process in a container,  a perfect example would be running &lt;a href=&#34;https://github.com/kelseyhightower/confd&#34;&gt;confd&lt;/a&gt; as well as your application in order to modify the application&amp;rsquo;s config file based on changes in service discovery systems like &lt;a href=&#34;https://github.com/coreos/etcd&#34;&gt;etcd&lt;/a&gt;.   The &lt;a href=&#34;https://docs.docker.com/articles/ambassador_pattern_linking/&#34;&gt;ambassador&lt;/a&gt; container way of working can achieve similar things, but I&amp;rsquo;m not sure that running two containers with a process each to run your application is any better than running one container with two processes.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -290,9 +304,7 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
       <guid>http://tech.paulcz.net/blog/ezbake-a-new-way-to-converge-docker-containers-with-chef/</guid>
       <description>&lt;p&gt;&lt;code&gt;EZ Bake&lt;/code&gt; came from an idea I had while watching the &lt;a href=&#34;https://twitter.com/hangops&#34;&gt;HangOps&lt;/a&gt; &lt;a href=&#34;https://www.youtube.com/watch?v=clLFKIeSADo&amp;amp;feature=youtu.be&#34;&gt;episode 2014-04-11&lt;/a&gt; in which they were talking about &lt;code&gt;Docker&lt;/code&gt; and Config Management being complementary rather than adversary.&lt;/p&gt;
 
-&lt;p&gt;I have expermented with using &lt;code&gt;Chef&lt;/code&gt; and &lt;code&gt;Docker&lt;/code&gt; together in the &lt;a href=&#34;http://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io.html&#34;&gt;past&lt;/a&gt; but wanted to tackle the problem from a slightly different angle.  I&amp;rsquo;ve recently been working on some PAAS stuff, both &lt;a href=&#34;http://deis.io&#34;&gt;Deis&lt;/a&gt; and &lt;a href=&#34;http://solum.io&#34;&gt;Solum&lt;/a&gt; these both utilize the tooling from &lt;a href=&#34;https://github.com/flynn/flynn&#34;&gt;Flynn&lt;/a&gt; which builds heroku style &lt;code&gt;buildpacks&lt;/code&gt; in &lt;code&gt;Docker&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;I have expermented with using &lt;code&gt;Chef&lt;/code&gt; and &lt;code&gt;Docker&lt;/code&gt; together in the &lt;a href=&#34;http://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io.html&#34;&gt;past&lt;/a&gt; but wanted to tackle the problem from a slightly different angle.  I&amp;rsquo;ve recently been working on some PAAS stuff, both &lt;a href=&#34;http://deis.io&#34;&gt;Deis&lt;/a&gt; and &lt;a href=&#34;http://solum.io&#34;&gt;Solum&lt;/a&gt; these both utilize the tooling from &lt;a href=&#34;https://github.com/flynn/flynn&#34;&gt;Flynn&lt;/a&gt; which builds heroku style &lt;code&gt;buildpacks&lt;/code&gt; in &lt;code&gt;Docker&lt;/code&gt;.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -303,9 +315,7 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
       <guid>http://tech.paulcz.net/2014/05/ezbake-a-new-way-to-converge-docker-containers-with-chef/</guid>
       <description>&lt;p&gt;&lt;code&gt;EZ Bake&lt;/code&gt; came from an idea I had while watching the &lt;a href=&#34;https://twitter.com/hangops&#34;&gt;HangOps&lt;/a&gt; &lt;a href=&#34;https://www.youtube.com/watch?v=clLFKIeSADo&amp;amp;feature=youtu.be&#34;&gt;episode 2014-04-11&lt;/a&gt; in which they were talking about &lt;code&gt;Docker&lt;/code&gt; and Config Management being complementary rather than adversary.&lt;/p&gt;
 
-&lt;p&gt;I have expermented with using &lt;code&gt;Chef&lt;/code&gt; and &lt;code&gt;Docker&lt;/code&gt; together in the &lt;a href=&#34;http://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io.html&#34;&gt;past&lt;/a&gt; but wanted to tackle the problem from a slightly different angle.  I&amp;rsquo;ve recently been working on some PAAS stuff, both &lt;a href=&#34;http://deis.io&#34;&gt;Deis&lt;/a&gt; and &lt;a href=&#34;http://solum.io&#34;&gt;Solum&lt;/a&gt; these both utilize the tooling from &lt;a href=&#34;https://github.com/flynn/flynn&#34;&gt;Flynn&lt;/a&gt; which builds heroku style &lt;code&gt;buildpacks&lt;/code&gt; in &lt;code&gt;Docker&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;I have expermented with using &lt;code&gt;Chef&lt;/code&gt; and &lt;code&gt;Docker&lt;/code&gt; together in the &lt;a href=&#34;http://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io.html&#34;&gt;past&lt;/a&gt; but wanted to tackle the problem from a slightly different angle.  I&amp;rsquo;ve recently been working on some PAAS stuff, both &lt;a href=&#34;http://deis.io&#34;&gt;Deis&lt;/a&gt; and &lt;a href=&#34;http://solum.io&#34;&gt;Solum&lt;/a&gt; these both utilize the tooling from &lt;a href=&#34;https://github.com/flynn/flynn&#34;&gt;Flynn&lt;/a&gt; which builds heroku style &lt;code&gt;buildpacks&lt;/code&gt; in &lt;code&gt;Docker&lt;/code&gt;.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -314,9 +324,7 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
       <pubDate>Sun, 23 Feb 2014 00:00:00 +0000</pubDate>
       
       <guid>http://tech.paulcz.net/blog/running-deis-io-on-rackspace-cloud/</guid>
-      <description>&lt;p&gt;I recently did a presentation at the Cloud Austin meetup titled &lt;a href=&#34;http://tech.paulcz.net/presentation-cloud-austin-deis/#/&#34;&gt;Docking with Unicorns&lt;/a&gt; about new PAAS on the block &lt;a href=&#34;http://deis.io&#34;&gt;DEIS&lt;/a&gt;.   Building out DEIS is quite easy,  make more easy by some tight integration they have with Rackspace Cloud.    If you&amp;rsquo;re interested in what deis is go through my slides linked above, and the documentation on their website.    If you want to build out an environment to kick the tires a bit,  then click &amp;lsquo;Read on&amp;rsquo; below and follow me down the rabbit hole.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;I recently did a presentation at the Cloud Austin meetup titled &lt;a href=&#34;http://tech.paulcz.net/presentation-cloud-austin-deis/#/&#34;&gt;Docking with Unicorns&lt;/a&gt; about new PAAS on the block &lt;a href=&#34;http://deis.io&#34;&gt;DEIS&lt;/a&gt;.   Building out DEIS is quite easy,  make more easy by some tight integration they have with Rackspace Cloud.    If you&amp;rsquo;re interested in what deis is go through my slides linked above, and the documentation on their website.    If you want to build out an environment to kick the tires a bit,  then click &amp;lsquo;Read on&amp;rsquo; below and follow me down the rabbit hole.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -325,9 +333,7 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
       <pubDate>Sun, 23 Feb 2014 00:00:00 +0000</pubDate>
       
       <guid>http://tech.paulcz.net/2014/02/running-deis-io-on-rackspace-cloud/</guid>
-      <description>&lt;p&gt;I recently did a presentation at the Cloud Austin meetup titled &lt;a href=&#34;http://tech.paulcz.net/presentation-cloud-austin-deis/#/&#34;&gt;Docking with Unicorns&lt;/a&gt; about new PAAS on the block &lt;a href=&#34;http://deis.io&#34;&gt;DEIS&lt;/a&gt;.   Building out DEIS is quite easy,  make more easy by some tight integration they have with Rackspace Cloud.    If you&amp;rsquo;re interested in what deis is go through my slides linked above, and the documentation on their website.    If you want to build out an environment to kick the tires a bit,  then click &amp;lsquo;Read on&amp;rsquo; below and follow me down the rabbit hole.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;I recently did a presentation at the Cloud Austin meetup titled &lt;a href=&#34;http://tech.paulcz.net/presentation-cloud-austin-deis/#/&#34;&gt;Docking with Unicorns&lt;/a&gt; about new PAAS on the block &lt;a href=&#34;http://deis.io&#34;&gt;DEIS&lt;/a&gt;.   Building out DEIS is quite easy,  make more easy by some tight integration they have with Rackspace Cloud.    If you&amp;rsquo;re interested in what deis is go through my slides linked above, and the documentation on their website.    If you want to build out an environment to kick the tires a bit,  then click &amp;lsquo;Read on&amp;rsquo; below and follow me down the rabbit hole.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -338,9 +344,7 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
       <guid>http://tech.paulcz.net/blog/managing-docker-services-with-this-one-easy-trick/</guid>
       <description>&lt;p&gt;I have been having a lot of internal debate about the idea of running more than one service in a docker container.   A Docker container is built to run a single process in the foreground and to live for only as long as that process is running.  This is great in a utopian world where servers are immutable and sysadmins drink tiki drinks on the beach,  however it doesn&amp;rsquo;t always translate well to the real world.&lt;/p&gt;
 
-&lt;p&gt;Examples where you might want to be able to run multiple servers span from the simple use case of running &lt;code&gt;sshd&lt;/code&gt; as well as your application to running a web app such as &lt;code&gt;wordpress&lt;/code&gt; where you might want both &lt;code&gt;apache&lt;/code&gt; and &lt;code&gt;mysql&lt;/code&gt; running in the same container.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;Examples where you might want to be able to run multiple servers span from the simple use case of running &lt;code&gt;sshd&lt;/code&gt; as well as your application to running a web app such as &lt;code&gt;wordpress&lt;/code&gt; where you might want both &lt;code&gt;apache&lt;/code&gt; and &lt;code&gt;mysql&lt;/code&gt; running in the same container.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -351,9 +355,7 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
       <guid>http://tech.paulcz.net/2013/10/managing-docker-services-with-this-one-easy-trick/</guid>
       <description>&lt;p&gt;I have been having a lot of internal debate about the idea of running more than one service in a docker container.   A Docker container is built to run a single process in the foreground and to live for only as long as that process is running.  This is great in a utopian world where servers are immutable and sysadmins drink tiki drinks on the beach,  however it doesn&amp;rsquo;t always translate well to the real world.&lt;/p&gt;
 
-&lt;p&gt;Examples where you might want to be able to run multiple servers span from the simple use case of running &lt;code&gt;sshd&lt;/code&gt; as well as your application to running a web app such as &lt;code&gt;wordpress&lt;/code&gt; where you might want both &lt;code&gt;apache&lt;/code&gt; and &lt;code&gt;mysql&lt;/code&gt; running in the same container.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;Examples where you might want to be able to run multiple servers span from the simple use case of running &lt;code&gt;sshd&lt;/code&gt; as well as your application to running a web app such as &lt;code&gt;wordpress&lt;/code&gt; where you might want both &lt;code&gt;apache&lt;/code&gt; and &lt;code&gt;mysql&lt;/code&gt; running in the same container.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -364,9 +366,7 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
       <guid>http://tech.paulcz.net/blog/creating-immutable-servers-with-chef-and-docker-dot-io/</guid>
       <description>&lt;p&gt;Building applications in a &lt;a href=&#34;http://docker.io&#34;&gt;docker.io&lt;/a&gt; Dockerfile is relatively simple,  but sometimes you want to just install the application exactly as you would normally via already built chef cookbooks.   Turns out this is actually pretty simple.&lt;/p&gt;
 
-&lt;p&gt;The first thing you&amp;rsquo;ll need to do is build a container with chef-client and berkshelf installed.   You can grab the one I&amp;rsquo;ve built by running &lt;code&gt;docker pull paulczar/chef-solo&lt;/code&gt; or build one youself from a &lt;code&gt;Dockerfile&lt;/code&gt; that looks a little something like the following&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;The first thing you&amp;rsquo;ll need to do is build a container with chef-client and berkshelf installed.   You can grab the one I&amp;rsquo;ve built by running &lt;code&gt;docker pull paulczar/chef-solo&lt;/code&gt; or build one youself from a &lt;code&gt;Dockerfile&lt;/code&gt; that looks a little something like the following&amp;hellip;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -377,9 +377,7 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
       <guid>http://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io/</guid>
       <description>&lt;p&gt;Building applications in a &lt;a href=&#34;http://docker.io&#34;&gt;docker.io&lt;/a&gt; Dockerfile is relatively simple,  but sometimes you want to just install the application exactly as you would normally via already built chef cookbooks.   Turns out this is actually pretty simple.&lt;/p&gt;
 
-&lt;p&gt;The first thing you&amp;rsquo;ll need to do is build a container with chef-client and berkshelf installed.   You can grab the one I&amp;rsquo;ve built by running &lt;code&gt;docker pull paulczar/chef-solo&lt;/code&gt; or build one youself from a &lt;code&gt;Dockerfile&lt;/code&gt; that looks a little something like the following&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;The first thing you&amp;rsquo;ll need to do is build a container with chef-client and berkshelf installed.   You can grab the one I&amp;rsquo;ve built by running &lt;code&gt;docker pull paulczar/chef-solo&lt;/code&gt; or build one youself from a &lt;code&gt;Dockerfile&lt;/code&gt; that looks a little something like the following&amp;hellip;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -392,9 +390,7 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
 
 &lt;p&gt;Having battled many times with OS Packages trying to get newer versions of Ruby, or Redis or other software installed and having to hunt down some random package repo or manually build from source this seems like an excellent idea.&lt;/p&gt;
 
-&lt;p&gt;To learn the basics I decided to build an &lt;a href=&#34;https://github.com/paulczar/omnibus-fpm&#34;&gt;omnibus package for fpm&lt;/a&gt; which helped me work out the kinks and learn the basics.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;To learn the basics I decided to build an &lt;a href=&#34;https://github.com/paulczar/omnibus-fpm&#34;&gt;omnibus package for fpm&lt;/a&gt; which helped me work out the kinks and learn the basics.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -407,9 +403,7 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
 
 &lt;p&gt;Having battled many times with OS Packages trying to get newer versions of Ruby, or Redis or other software installed and having to hunt down some random package repo or manually build from source this seems like an excellent idea.&lt;/p&gt;
 
-&lt;p&gt;To learn the basics I decided to build an &lt;a href=&#34;https://github.com/paulczar/omnibus-fpm&#34;&gt;omnibus package for fpm&lt;/a&gt; which helped me work out the kinks and learn the basics.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;To learn the basics I decided to build an &lt;a href=&#34;https://github.com/paulczar/omnibus-fpm&#34;&gt;omnibus package for fpm&lt;/a&gt; which helped me work out the kinks and learn the basics.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -425,9 +419,7 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
 &lt;li&gt;and building RPM packages with &lt;a href=&#34;https://github.com/jordansissel/fpm&#34;&gt;FPM&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;I realized I was spending a bunch of time flipping back and forth between Vagrant environments and I had no quick way to utilize RPMs built with FPM inside my puppet modules.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;I realized I was spending a bunch of time flipping back and forth between Vagrant environments and I had no quick way to utilize RPMs built with FPM inside my puppet modules.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -443,9 +435,7 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
 &lt;li&gt;and building RPM packages with &lt;a href=&#34;https://github.com/jordansissel/fpm&#34;&gt;FPM&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;I realized I was spending a bunch of time flipping back and forth between Vagrant environments and I had no quick way to utilize RPMs built with FPM inside my puppet modules.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;I realized I was spending a bunch of time flipping back and forth between Vagrant environments and I had no quick way to utilize RPMs built with FPM inside my puppet modules.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -456,9 +446,7 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
       <guid>http://tech.paulcz.net/blog/creating-a-github-pages-blog-with-octopress/</guid>
       <description>&lt;p&gt;A lot of tech bloggers will write their blog posts in &lt;a href=&#34;http://daringfireball.net/projects/markdown/&#34;&gt;Markdown&lt;/a&gt;, convert it to HTML and paste that HTML into their blog of choice and then in the blog&amp;rsquo;s editor clean it up to suit their blog.   This is an excellent way to create easy to read portable documents that can easily be published in multiple formats.&lt;/p&gt;
 
-&lt;p&gt;However what if there was a way to skip the second part of that and just create a markdown page, submit it into your source control ( you &lt;em&gt;do&lt;/em&gt; use source control right? ) and your blog would automagically update.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;However what if there was a way to skip the second part of that and just create a markdown page, submit it into your source control ( you &lt;em&gt;do&lt;/em&gt; use source control right? ) and your blog would automagically update.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -469,9 +457,7 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
       <guid>http://tech.paulcz.net/2012/12/creating-a-github-pages-blog-with-octopress/</guid>
       <description>&lt;p&gt;A lot of tech bloggers will write their blog posts in &lt;a href=&#34;http://daringfireball.net/projects/markdown/&#34;&gt;Markdown&lt;/a&gt;, convert it to HTML and paste that HTML into their blog of choice and then in the blog&amp;rsquo;s editor clean it up to suit their blog.   This is an excellent way to create easy to read portable documents that can easily be published in multiple formats.&lt;/p&gt;
 
-&lt;p&gt;However what if there was a way to skip the second part of that and just create a markdown page, submit it into your source control ( you &lt;em&gt;do&lt;/em&gt; use source control right? ) and your blog would automagically update.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;However what if there was a way to skip the second part of that and just create a markdown page, submit it into your source control ( you &lt;em&gt;do&lt;/em&gt; use source control right? ) and your blog would automagically update.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -484,9 +470,7 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
 
 &lt;p&gt;After a few weeks of installing and testing alternatives  ( I&amp;rsquo;d really love to run openstack,  but it&amp;rsquo;s just not worth it at home for a single box ) I&amp;rsquo;ve settled on Ubuntu 12.10 server running KVM and Openvswitch.&lt;/p&gt;
 
-&lt;p&gt;After installing Ubuntu 12.10 I did the following to get KVM up and running&amp;hellip;   I cribbed this mostly from &lt;a href=&#34;http://blog.allanglesit.com/2012/10/linux-kvm-ubuntu-12-10-with-openvswitch/&#34;&gt;blog.allanglesit.com&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;After installing Ubuntu 12.10 I did the following to get KVM up and running&amp;hellip;   I cribbed this mostly from &lt;a href=&#34;http://blog.allanglesit.com/2012/10/linux-kvm-ubuntu-12-10-with-openvswitch/&#34;&gt;blog.allanglesit.com&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -499,9 +483,7 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
 
 &lt;p&gt;After a few weeks of installing and testing alternatives  ( I&amp;rsquo;d really love to run openstack,  but it&amp;rsquo;s just not worth it at home for a single box ) I&amp;rsquo;ve settled on Ubuntu 12.10 server running KVM and Openvswitch.&lt;/p&gt;
 
-&lt;p&gt;After installing Ubuntu 12.10 I did the following to get KVM up and running&amp;hellip;   I cribbed this mostly from &lt;a href=&#34;http://blog.allanglesit.com/2012/10/linux-kvm-ubuntu-12-10-with-openvswitch/&#34;&gt;blog.allanglesit.com&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;After installing Ubuntu 12.10 I did the following to get KVM up and running&amp;hellip;   I cribbed this mostly from &lt;a href=&#34;http://blog.allanglesit.com/2012/10/linux-kvm-ubuntu-12-10-with-openvswitch/&#34;&gt;blog.allanglesit.com&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -524,9 +506,7 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
 
 &lt;p&gt;To move VMs in ESXi we click on the ESXi server, pick the Configuration tab,  click on &amp;lsquo;Storage&amp;rsquo; and then right-click on the datastore and select &amp;lsquo;Browse Datastore&amp;rsquo;.   Select the VM folder you wish to move and click the move icon.&lt;/p&gt;
 
-&lt;p&gt;{% img &lt;a href=&#34;https://lh6.googleusercontent.com/-R5x6JyT5x14/UMUkr4qNr4I/AAAAAAAAAHY/CYhOlizOLb8/s640/VMWare-move-1.png&#34;&gt;https://lh6.googleusercontent.com/-R5x6JyT5x14/UMUkr4qNr4I/AAAAAAAAAHY/CYhOlizOLb8/s640/VMWare-move-1.png&lt;/a&gt; %}&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;{% img &lt;a href=&#34;https://lh6.googleusercontent.com/-R5x6JyT5x14/UMUkr4qNr4I/AAAAAAAAAHY/CYhOlizOLb8/s640/VMWare-move-1.png&#34;&gt;https://lh6.googleusercontent.com/-R5x6JyT5x14/UMUkr4qNr4I/AAAAAAAAAHY/CYhOlizOLb8/s640/VMWare-move-1.png&lt;/a&gt; %}&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -549,9 +529,7 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
 
 &lt;p&gt;To move VMs in ESXi we click on the ESXi server, pick the Configuration tab,  click on &amp;lsquo;Storage&amp;rsquo; and then right-click on the datastore and select &amp;lsquo;Browse Datastore&amp;rsquo;.   Select the VM folder you wish to move and click the move icon.&lt;/p&gt;
 
-&lt;p&gt;{% img &lt;a href=&#34;https://lh6.googleusercontent.com/-R5x6JyT5x14/UMUkr4qNr4I/AAAAAAAAAHY/CYhOlizOLb8/s640/VMWare-move-1.png&#34;&gt;https://lh6.googleusercontent.com/-R5x6JyT5x14/UMUkr4qNr4I/AAAAAAAAAHY/CYhOlizOLb8/s640/VMWare-move-1.png&lt;/a&gt; %}&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;{% img &lt;a href=&#34;https://lh6.googleusercontent.com/-R5x6JyT5x14/UMUkr4qNr4I/AAAAAAAAAHY/CYhOlizOLb8/s640/VMWare-move-1.png&#34;&gt;https://lh6.googleusercontent.com/-R5x6JyT5x14/UMUkr4qNr4I/AAAAAAAAAHY/CYhOlizOLb8/s640/VMWare-move-1.png&lt;/a&gt; %}&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -562,9 +540,7 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
       <guid>http://tech.paulcz.net/blog/moving-from-a-self-hosted-wordpress-blog-to-blogger/</guid>
       <description>&lt;p&gt;I have a self hosted &lt;a href=&#34;http://xesla.ro&#34;&gt;wordpress food blog&lt;/a&gt; hosted on an old silly domain that I&amp;rsquo;ve wanted to move away from for a while.   I also want to stop paying hosting fees some time soon.   Since I&amp;rsquo;m already looking at moving a lot of my day-to-day activities to the &amp;lsquo;cloud&amp;rsquo;  it made sense to pick a blogging platform that ties into a major cloud hub.   Google&amp;rsquo;s Blogger was the obvious choice as I&amp;rsquo;m already using the Google Apps platform for my new domain &lt;code&gt;paulcz.net&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;Creating a blog on blogger is dead simple.   I went ahead and created two: &lt;a href=&#34;http://food.paulcz.net&#34;&gt;food.paulcz.net&lt;/a&gt; for the new food blog and &lt;a href=&#34;http://tech.paulcz.net&#34;&gt;tech.paulcz.net&lt;/a&gt; to start journalling random tech things.     Transfering the blog content itself  is quite simple,  however, doing it in a way as to preserve links between posts, from other sites, and teaching the search engines how to find your new site requires a little more trickery.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;Creating a blog on blogger is dead simple.   I went ahead and created two: &lt;a href=&#34;http://food.paulcz.net&#34;&gt;food.paulcz.net&lt;/a&gt; for the new food blog and &lt;a href=&#34;http://tech.paulcz.net&#34;&gt;tech.paulcz.net&lt;/a&gt; to start journalling random tech things.     Transfering the blog content itself  is quite simple,  however, doing it in a way as to preserve links between posts, from other sites, and teaching the search engines how to find your new site requires a little more trickery.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -575,9 +551,7 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
       <guid>http://tech.paulcz.net/2012/10/moving-from-a-self-hosted-wordpress-blog-to-blogger/</guid>
       <description>&lt;p&gt;I have a self hosted &lt;a href=&#34;http://xesla.ro&#34;&gt;wordpress food blog&lt;/a&gt; hosted on an old silly domain that I&amp;rsquo;ve wanted to move away from for a while.   I also want to stop paying hosting fees some time soon.   Since I&amp;rsquo;m already looking at moving a lot of my day-to-day activities to the &amp;lsquo;cloud&amp;rsquo;  it made sense to pick a blogging platform that ties into a major cloud hub.   Google&amp;rsquo;s Blogger was the obvious choice as I&amp;rsquo;m already using the Google Apps platform for my new domain &lt;code&gt;paulcz.net&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;Creating a blog on blogger is dead simple.   I went ahead and created two: &lt;a href=&#34;http://food.paulcz.net&#34;&gt;food.paulcz.net&lt;/a&gt; for the new food blog and &lt;a href=&#34;http://tech.paulcz.net&#34;&gt;tech.paulcz.net&lt;/a&gt; to start journalling random tech things.     Transfering the blog content itself  is quite simple,  however, doing it in a way as to preserve links between posts, from other sites, and teaching the search engines how to find your new site requires a little more trickery.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;Creating a blog on blogger is dead simple.   I went ahead and created two: &lt;a href=&#34;http://food.paulcz.net&#34;&gt;food.paulcz.net&lt;/a&gt; for the new food blog and &lt;a href=&#34;http://tech.paulcz.net&#34;&gt;tech.paulcz.net&lt;/a&gt; to start journalling random tech things.     Transfering the blog content itself  is quite simple,  however, doing it in a way as to preserve links between posts, from other sites, and teaching the search engines how to find your new site requires a little more trickery.&lt;/p&gt;</description>
     </item>
     
   </channel>

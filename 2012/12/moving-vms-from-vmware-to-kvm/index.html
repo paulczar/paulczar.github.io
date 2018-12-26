@@ -8,7 +8,7 @@
     <meta name="description" content="Random musings mostly about tech">
     <link rel="shortcut icon" type="image/x-icon" href="http://tech.paulcz.net/img/favicon.ico">
     <title>Moving VMs from VMWare to KVM</title>
-    <meta name="generator" content="Hugo 0.44" />
+    <meta name="generator" content="Hugo 0.53" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="http://tech.paulcz.net/css/main.css" />
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
@@ -20,7 +20,7 @@
 		<![endif]-->
 
     
-<script>
+<script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -94,8 +94,6 @@ if (!doNotTrack) {
 <p>To move VMs in ESXi we click on the ESXi server, pick the Configuration tab,  click on &lsquo;Storage&rsquo; and then right-click on the datastore and select &lsquo;Browse Datastore&rsquo;.   Select the VM folder you wish to move and click the move icon.</p>
 
 <p>{% img <a href="https://lh6.googleusercontent.com/-R5x6JyT5x14/UMUkr4qNr4I/AAAAAAAAAHY/CYhOlizOLb8/s640/VMWare-move-1.png">https://lh6.googleusercontent.com/-R5x6JyT5x14/UMUkr4qNr4I/AAAAAAAAAHY/CYhOlizOLb8/s640/VMWare-move-1.png</a> %}</p>
-
-<p></p>
 
 <p><strong>Convert your VM to qcow2 format</strong></p>
 

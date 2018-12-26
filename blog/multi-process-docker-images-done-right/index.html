@@ -8,7 +8,7 @@
     <meta name="description" content="Random musings mostly about tech">
     <link rel="shortcut icon" type="image/x-icon" href="http://tech.paulcz.net/img/favicon.ico">
     <title>Multi Process Docker Images Done Right</title>
-    <meta name="generator" content="Hugo 0.44" />
+    <meta name="generator" content="Hugo 0.53" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="http://tech.paulcz.net/css/main.css" />
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
@@ -20,7 +20,7 @@
 		<![endif]-->
 
     
-<script>
+<script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -84,8 +84,6 @@ if (!doNotTrack) {
 <p>Almost since <a href="http://docker.com">Docker</a> was first introduced to the world there has been a fairly strong push to keeping containers to be single process.   This makes a lot of sense and definitely plays into the <a href="http://12factor.net">12 Factor</a> way of thinking where all application output should be pushed to <code>stdout</code> and docker itself with tools like <a href="https://github.com/progrium/logspout">logspout</a> now has fairly strong tooling to deal with those logs.</p>
 
 <p>Sometimes however it just makes sense to run more than one process in a container,  a perfect example would be running <a href="https://github.com/kelseyhightower/confd">confd</a> as well as your application in order to modify the application&rsquo;s config file based on changes in service discovery systems like <a href="https://github.com/coreos/etcd">etcd</a>.   The <a href="https://docs.docker.com/articles/ambassador_pattern_linking/">ambassador</a> container way of working can achieve similar things, but I&rsquo;m not sure that running two containers with a process each to run your application is any better than running one container with two processes.</p>
-
-<p></p>
 
 <p>If you&rsquo;re going run multiple processes you have a few options to do it.</p>
 
