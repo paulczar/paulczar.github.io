@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Kubernetes on Paul Czarkowski</title>
-    <link>http://tech.paulcz.net/categories/kubernetes/</link>
+    <link>https://tech.paulcz.net/categories/kubernetes/</link>
     <description>Recent content in Kubernetes on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 25 Dec 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://tech.paulcz.net/categories/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://tech.paulcz.net/categories/kubernetes/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>The future of Kubernetes is Virtual Machines</title>
-      <link>http://tech.paulcz.net/blog/future-of-kubernetes-is-virtual-machines/</link>
+      <link>https://tech.paulcz.net/blog/future-of-kubernetes-is-virtual-machines/</link>
       <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://tech.paulcz.net/blog/future-of-kubernetes-is-virtual-machines/</guid>
+      <guid>https://tech.paulcz.net/blog/future-of-kubernetes-is-virtual-machines/</guid>
       <description>Peering into the crystal ball Kubernetes as a technology has been very important to my career this year, and will be even more so for next year too. As 2018 comes to a close its time to drag out the hubris and make a bold prediction. The future of Kubernetes is Virtual Machines, not Containers.
  The future of Kubernetes is Virtual Machines, not Containers.
  The Chinese Zodiac calls 2018 the year of the Dog, in tech it was the year of the Kubernetes.</description>
@@ -24,10 +24,10 @@
     
     <item>
       <title>The future of Kubernetes is Virtual Machines</title>
-      <link>http://tech.paulcz.net/2018/12/future-of-kubernetes-is-virtual-machines/</link>
+      <link>https://tech.paulcz.net/2018/12/future-of-kubernetes-is-virtual-machines/</link>
       <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://tech.paulcz.net/2018/12/future-of-kubernetes-is-virtual-machines/</guid>
+      <guid>https://tech.paulcz.net/2018/12/future-of-kubernetes-is-virtual-machines/</guid>
       <description>Peering into the crystal ball Kubernetes as a technology has been very important to my career this year, and will be even more so for next year too. As 2018 comes to a close its time to drag out the hubris and make a bold prediction. The future of Kubernetes is Virtual Machines, not Containers.
  The future of Kubernetes is Virtual Machines, not Containers.
  The Chinese Zodiac calls 2018 the year of the Dog, in tech it was the year of the Kubernetes.</description>
@@ -35,40 +35,40 @@
     
     <item>
       <title>Building a Habitat Supervisor for Kubernetes</title>
-      <link>http://tech.paulcz.net/blog/habitat-supervisors-in-kubernetes/</link>
+      <link>https://tech.paulcz.net/blog/habitat-supervisors-in-kubernetes/</link>
       <pubDate>Fri, 06 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tech.paulcz.net/blog/habitat-supervisors-in-kubernetes/</guid>
+      <guid>https://tech.paulcz.net/blog/habitat-supervisors-in-kubernetes/</guid>
       <description>Habitat is a project from Chef that provides you a reasonably simple way to build, package, and configure your application.
  &amp;ldquo;Habitat is an integrated solution to building, running, and maintaining your application throughout its lifetime. It builds your application and its services into immutable artifacts with declarative dependencies, and then provides automatic rebuilds of your application and its services as your application code and dependencies have upstream updates.&amp;rdquo; - Habitat Getting Started Guide.</description>
     </item>
     
     <item>
       <title>Building a Habitat Supervisor for Kubernetes</title>
-      <link>http://tech.paulcz.net/2017/10/habitat-supervisors-in-kubernetes/</link>
+      <link>https://tech.paulcz.net/2017/10/habitat-supervisors-in-kubernetes/</link>
       <pubDate>Fri, 06 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tech.paulcz.net/2017/10/habitat-supervisors-in-kubernetes/</guid>
+      <guid>https://tech.paulcz.net/2017/10/habitat-supervisors-in-kubernetes/</guid>
       <description>Habitat is a project from Chef that provides you a reasonably simple way to build, package, and configure your application.
  &amp;ldquo;Habitat is an integrated solution to building, running, and maintaining your application throughout its lifetime. It builds your application and its services into immutable artifacts with declarative dependencies, and then provides automatic rebuilds of your application and its services as your application code and dependencies have upstream updates.&amp;rdquo; - Habitat Getting Started Guide.</description>
     </item>
     
     <item>
       <title>Writing Your First Helm Chart</title>
-      <link>http://tech.paulcz.net/blog/getting-started-with-helm/</link>
+      <link>https://tech.paulcz.net/blog/getting-started-with-helm/</link>
       <pubDate>Tue, 03 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tech.paulcz.net/blog/getting-started-with-helm/</guid>
+      <guid>https://tech.paulcz.net/blog/getting-started-with-helm/</guid>
       <description>I recently found myself writing instructions on how to deploy an application to several Kubernetes platform and ended up writing a different Kubernetes manifests for each platform. 95% of the content was the same with just a few different directives based on how the particular platform handles ingress, or if we needed a Registry secret or a TLS certificate.
 Kubernetes manifests are very declarative and don&amp;rsquo;t offer any way to put conditionals or variables that could be set in them.</description>
     </item>
     
     <item>
       <title>Writing Your First Helm Chart</title>
-      <link>http://tech.paulcz.net/2017/10/getting-started-with-helm/</link>
+      <link>https://tech.paulcz.net/2017/10/getting-started-with-helm/</link>
       <pubDate>Tue, 03 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tech.paulcz.net/2017/10/getting-started-with-helm/</guid>
+      <guid>https://tech.paulcz.net/2017/10/getting-started-with-helm/</guid>
       <description>I recently found myself writing instructions on how to deploy an application to several Kubernetes platform and ended up writing a different Kubernetes manifests for each platform. 95% of the content was the same with just a few different directives based on how the particular platform handles ingress, or if we needed a Registry secret or a TLS certificate.
 Kubernetes manifests are very declarative and don&amp;rsquo;t offer any way to put conditionals or variables that could be set in them.</description>
     </item>

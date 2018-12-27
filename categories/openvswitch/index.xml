@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Openvswitch on Paul Czarkowski</title>
-    <link>http://tech.paulcz.net/categories/openvswitch/</link>
+    <link>https://tech.paulcz.net/categories/openvswitch/</link>
     <description>Recent content in Openvswitch on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 13 Dec 2012 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://tech.paulcz.net/categories/openvswitch/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://tech.paulcz.net/categories/openvswitch/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Running KVM and Openvswitch on Ubuntu 12.10</title>
-      <link>http://tech.paulcz.net/blog/running-kvm-and-openvswitch-on-ubuntu-12-dot-10/</link>
+      <link>https://tech.paulcz.net/blog/running-kvm-and-openvswitch-on-ubuntu-12-dot-10/</link>
       <pubDate>Thu, 13 Dec 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://tech.paulcz.net/blog/running-kvm-and-openvswitch-on-ubuntu-12-dot-10/</guid>
+      <guid>https://tech.paulcz.net/blog/running-kvm-and-openvswitch-on-ubuntu-12-dot-10/</guid>
       <description>&lt;p&gt;I&amp;rsquo;ve got an aging VMWare ESXi 4.0 server that needs to be replaced with something a little more modern and flexing.   Obviously at home I don&amp;rsquo;t need all the cool features that licensed VMWare comes with,  but I do want more than just the basic free version.&lt;/p&gt;
 
 &lt;p&gt;After a few weeks of installing and testing alternatives  ( I&amp;rsquo;d really love to run openstack,  but it&amp;rsquo;s just not worth it at home for a single box ) I&amp;rsquo;ve settled on Ubuntu 12.10 server running KVM and Openvswitch.&lt;/p&gt;
@@ -26,10 +26,10 @@
     
     <item>
       <title>Running KVM and Openvswitch on Ubuntu 12.10</title>
-      <link>http://tech.paulcz.net/2012/12/running-kvm-and-openvswitch-on-ubuntu-12-dot-10/</link>
+      <link>https://tech.paulcz.net/2012/12/running-kvm-and-openvswitch-on-ubuntu-12-dot-10/</link>
       <pubDate>Thu, 13 Dec 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://tech.paulcz.net/2012/12/running-kvm-and-openvswitch-on-ubuntu-12-dot-10/</guid>
+      <guid>https://tech.paulcz.net/2012/12/running-kvm-and-openvswitch-on-ubuntu-12-dot-10/</guid>
       <description>&lt;p&gt;I&amp;rsquo;ve got an aging VMWare ESXi 4.0 server that needs to be replaced with something a little more modern and flexing.   Obviously at home I don&amp;rsquo;t need all the cool features that licensed VMWare comes with,  but I do want more than just the basic free version.&lt;/p&gt;
 
 &lt;p&gt;After a few weeks of installing and testing alternatives  ( I&amp;rsquo;d really love to run openstack,  but it&amp;rsquo;s just not worth it at home for a single box ) I&amp;rsquo;ve settled on Ubuntu 12.10 server running KVM and Openvswitch.&lt;/p&gt;

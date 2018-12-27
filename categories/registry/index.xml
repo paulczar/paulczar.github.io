@@ -2,51 +2,51 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Registry on Paul Czarkowski</title>
-    <link>http://tech.paulcz.net/categories/registry/</link>
+    <link>https://tech.paulcz.net/categories/registry/</link>
     <description>Recent content in Registry on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 10 Jan 2016 10:22:22 -0600</lastBuildDate>
     
-	<atom:link href="http://tech.paulcz.net/categories/registry/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://tech.paulcz.net/categories/registry/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Flexible Private Docker Registry Infrastructure</title>
-      <link>http://tech.paulcz.net/blog/flexible-docker-registry-infrastructure/</link>
+      <link>https://tech.paulcz.net/blog/flexible-docker-registry-infrastructure/</link>
       <pubDate>Sun, 10 Jan 2016 10:22:22 -0600</pubDate>
       
-      <guid>http://tech.paulcz.net/blog/flexible-docker-registry-infrastructure/</guid>
+      <guid>https://tech.paulcz.net/blog/flexible-docker-registry-infrastructure/</guid>
       <description>Previously I showed how to run a basic secure Docker Registry. I am now going to expand on this to show you something that you might use in production as part of your CI/CD infrastructure.
 The beauty of running Docker is that you can push an image from a developer&amp;rsquo;s laptop all the way into production which helps ensure that what you see in development and your various test/qa/stage environments are exactly the same as what you run in production.</description>
     </item>
     
     <item>
       <title>Flexible Private Docker Registry Infrastructure</title>
-      <link>http://tech.paulcz.net/2016/01/flexible-docker-registry-infrastructure/</link>
+      <link>https://tech.paulcz.net/2016/01/flexible-docker-registry-infrastructure/</link>
       <pubDate>Sun, 10 Jan 2016 10:22:22 -0600</pubDate>
       
-      <guid>http://tech.paulcz.net/2016/01/flexible-docker-registry-infrastructure/</guid>
+      <guid>https://tech.paulcz.net/2016/01/flexible-docker-registry-infrastructure/</guid>
       <description>Previously I showed how to run a basic secure Docker Registry. I am now going to expand on this to show you something that you might use in production as part of your CI/CD infrastructure.
 The beauty of running Docker is that you can push an image from a developer&amp;rsquo;s laptop all the way into production which helps ensure that what you see in development and your various test/qa/stage environments are exactly the same as what you run in production.</description>
     </item>
     
     <item>
       <title>Deploying a Simple and Secure Docker Registry</title>
-      <link>http://tech.paulcz.net/blog/deploying-a-secure-docker-registry/</link>
+      <link>https://tech.paulcz.net/blog/deploying-a-secure-docker-registry/</link>
       <pubDate>Sun, 10 Jan 2016 05:22:22 -0600</pubDate>
       
-      <guid>http://tech.paulcz.net/blog/deploying-a-secure-docker-registry/</guid>
+      <guid>https://tech.paulcz.net/blog/deploying-a-secure-docker-registry/</guid>
       <description>There comes a time in everybody&amp;rsquo;s life where they realize they have to run their own Docker Registry. Unfortunately there&amp;rsquo;s not a lot of good information on how to run one. Docker&amp;rsquo;s documentation is pretty good, but is verbose and across a lot of different pages which means having half a dozen tabs open and searching for the right information.
 While it&amp;rsquo;s pretty common to run the Docker Registry itself with little to no security settings and fronting it with NGINX or Apache to provide this security I wanted to show how it can be done with just the Docker Registry.</description>
     </item>
     
     <item>
       <title>Deploying a Simple and Secure Docker Registry</title>
-      <link>http://tech.paulcz.net/2016/01/deploying-a-secure-docker-registry/</link>
+      <link>https://tech.paulcz.net/2016/01/deploying-a-secure-docker-registry/</link>
       <pubDate>Sun, 10 Jan 2016 05:22:22 -0600</pubDate>
       
-      <guid>http://tech.paulcz.net/2016/01/deploying-a-secure-docker-registry/</guid>
+      <guid>https://tech.paulcz.net/2016/01/deploying-a-secure-docker-registry/</guid>
       <description>There comes a time in everybody&amp;rsquo;s life where they realize they have to run their own Docker Registry. Unfortunately there&amp;rsquo;s not a lot of good information on how to run one. Docker&amp;rsquo;s documentation is pretty good, but is verbose and across a lot of different pages which means having half a dozen tabs open and searching for the right information.
 While it&amp;rsquo;s pretty common to run the Docker Registry itself with little to no security settings and fronting it with NGINX or Apache to provide this security I wanted to show how it can be done with just the Docker Registry.</description>
     </item>

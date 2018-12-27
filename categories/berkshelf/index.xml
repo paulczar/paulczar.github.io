@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Berkshelf on Paul Czarkowski</title>
-    <link>http://tech.paulcz.net/categories/berkshelf/</link>
+    <link>https://tech.paulcz.net/categories/berkshelf/</link>
     <description>Recent content in Berkshelf on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 07 Sep 2013 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://tech.paulcz.net/categories/berkshelf/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://tech.paulcz.net/categories/berkshelf/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Creating immutable servers with chef and docker.io</title>
-      <link>http://tech.paulcz.net/blog/creating-immutable-servers-with-chef-and-docker-dot-io/</link>
+      <link>https://tech.paulcz.net/blog/creating-immutable-servers-with-chef-and-docker-dot-io/</link>
       <pubDate>Sat, 07 Sep 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://tech.paulcz.net/blog/creating-immutable-servers-with-chef-and-docker-dot-io/</guid>
+      <guid>https://tech.paulcz.net/blog/creating-immutable-servers-with-chef-and-docker-dot-io/</guid>
       <description>&lt;p&gt;Building applications in a &lt;a href=&#34;http://docker.io&#34;&gt;docker.io&lt;/a&gt; Dockerfile is relatively simple,  but sometimes you want to just install the application exactly as you would normally via already built chef cookbooks.   Turns out this is actually pretty simple.&lt;/p&gt;
 
 &lt;p&gt;The first thing you&amp;rsquo;ll need to do is build a container with chef-client and berkshelf installed.   You can grab the one I&amp;rsquo;ve built by running &lt;code&gt;docker pull paulczar/chef-solo&lt;/code&gt; or build one youself from a &lt;code&gt;Dockerfile&lt;/code&gt; that looks a little something like the following&amp;hellip;&lt;/p&gt;</description>
@@ -24,10 +24,10 @@
     
     <item>
       <title>Creating immutable servers with chef and docker.io</title>
-      <link>http://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io/</link>
+      <link>https://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io/</link>
       <pubDate>Sat, 07 Sep 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io/</guid>
+      <guid>https://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io/</guid>
       <description>&lt;p&gt;Building applications in a &lt;a href=&#34;http://docker.io&#34;&gt;docker.io&lt;/a&gt; Dockerfile is relatively simple,  but sometimes you want to just install the application exactly as you would normally via already built chef cookbooks.   Turns out this is actually pretty simple.&lt;/p&gt;
 
 &lt;p&gt;The first thing you&amp;rsquo;ll need to do is build a container with chef-client and berkshelf installed.   You can grab the one I&amp;rsquo;ve built by running &lt;code&gt;docker pull paulczar/chef-solo&lt;/code&gt; or build one youself from a &lt;code&gt;Dockerfile&lt;/code&gt; that looks a little something like the following&amp;hellip;&lt;/p&gt;</description>

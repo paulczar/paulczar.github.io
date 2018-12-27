@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Devops on Paul Czarkowski</title>
-    <link>http://tech.paulcz.net/categories/devops/</link>
+    <link>https://tech.paulcz.net/categories/devops/</link>
     <description>Recent content in Devops on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 22 Dec 2014 21:31:03 -0600</lastBuildDate>
     
-	<atom:link href="http://tech.paulcz.net/categories/devops/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://tech.paulcz.net/categories/devops/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Multi Process Docker Images Done Right</title>
-      <link>http://tech.paulcz.net/blog/multi-process-docker-images-done-right/</link>
+      <link>https://tech.paulcz.net/blog/multi-process-docker-images-done-right/</link>
       <pubDate>Mon, 22 Dec 2014 21:31:03 -0600</pubDate>
       
-      <guid>http://tech.paulcz.net/blog/multi-process-docker-images-done-right/</guid>
+      <guid>https://tech.paulcz.net/blog/multi-process-docker-images-done-right/</guid>
       <description>&lt;h2 id=&#34;for-some-values-of-right&#34;&gt;For some values of &amp;lsquo;right&amp;rsquo;&lt;/h2&gt;
 
 &lt;p&gt;Almost since &lt;a href=&#34;http://docker.com&#34;&gt;Docker&lt;/a&gt; was first introduced to the world there has been a fairly strong push to keeping containers to be single process.   This makes a lot of sense and definitely plays into the &lt;a href=&#34;http://12factor.net&#34;&gt;12 Factor&lt;/a&gt; way of thinking where all application output should be pushed to &lt;code&gt;stdout&lt;/code&gt; and docker itself with tools like &lt;a href=&#34;https://github.com/progrium/logspout&#34;&gt;logspout&lt;/a&gt; now has fairly strong tooling to deal with those logs.&lt;/p&gt;
@@ -26,10 +26,10 @@
     
     <item>
       <title>Multi Process Docker Images Done Right</title>
-      <link>http://tech.paulcz.net/2014/12/multi-process-docker-images-done-right/</link>
+      <link>https://tech.paulcz.net/2014/12/multi-process-docker-images-done-right/</link>
       <pubDate>Mon, 22 Dec 2014 21:31:03 -0600</pubDate>
       
-      <guid>http://tech.paulcz.net/2014/12/multi-process-docker-images-done-right/</guid>
+      <guid>https://tech.paulcz.net/2014/12/multi-process-docker-images-done-right/</guid>
       <description>&lt;h2 id=&#34;for-some-values-of-right&#34;&gt;For some values of &amp;lsquo;right&amp;rsquo;&lt;/h2&gt;
 
 &lt;p&gt;Almost since &lt;a href=&#34;http://docker.com&#34;&gt;Docker&lt;/a&gt; was first introduced to the world there has been a fairly strong push to keeping containers to be single process.   This makes a lot of sense and definitely plays into the &lt;a href=&#34;http://12factor.net&#34;&gt;12 Factor&lt;/a&gt; way of thinking where all application output should be pushed to &lt;code&gt;stdout&lt;/code&gt; and docker itself with tools like &lt;a href=&#34;https://github.com/progrium/logspout&#34;&gt;logspout&lt;/a&gt; now has fairly strong tooling to deal with those logs.&lt;/p&gt;
@@ -39,52 +39,52 @@
     
     <item>
       <title>BreadOps - Continuous Delivery of Fresh Baked Bread</title>
-      <link>http://tech.paulcz.net/blog/breadops-continous-delivery-of-fresh-baked-bread/</link>
+      <link>https://tech.paulcz.net/blog/breadops-continous-delivery-of-fresh-baked-bread/</link>
       <pubDate>Wed, 03 Dec 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://tech.paulcz.net/blog/breadops-continous-delivery-of-fresh-baked-bread/</guid>
+      <guid>https://tech.paulcz.net/blog/breadops-continous-delivery-of-fresh-baked-bread/</guid>
       <description>&amp;ldquo;See how this sparkly devop princess bakes bread every day with almost no effort at all with this one weird trick&amp;rdquo;
 Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at most supermarkets is little better than cake baked in a bread shaped mold ( seriously check next time you&amp;rsquo;re at a supermarket ). You might be lucky and have a really good bread baker near you, but like butchers and other important crafts they have all but disappeared.</description>
     </item>
     
     <item>
       <title>BreadOps - Continuous Delivery of Fresh Baked Bread</title>
-      <link>http://tech.paulcz.net/2014/12/breadops-continous-delivery-of-fresh-baked-bread/</link>
+      <link>https://tech.paulcz.net/2014/12/breadops-continous-delivery-of-fresh-baked-bread/</link>
       <pubDate>Wed, 03 Dec 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://tech.paulcz.net/2014/12/breadops-continous-delivery-of-fresh-baked-bread/</guid>
+      <guid>https://tech.paulcz.net/2014/12/breadops-continous-delivery-of-fresh-baked-bread/</guid>
       <description>&amp;ldquo;See how this sparkly devop princess bakes bread every day with almost no effort at all with this one weird trick&amp;rdquo;
 Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at most supermarkets is little better than cake baked in a bread shaped mold ( seriously check next time you&amp;rsquo;re at a supermarket ). You might be lucky and have a really good bread baker near you, but like butchers and other important crafts they have all but disappeared.</description>
     </item>
     
     <item>
       <title>EZBake - A new way to converge docker containers with chef</title>
-      <link>http://tech.paulcz.net/blog/ezbake-a-new-way-to-converge-docker-containers-with-chef/</link>
+      <link>https://tech.paulcz.net/blog/ezbake-a-new-way-to-converge-docker-containers-with-chef/</link>
       <pubDate>Tue, 13 May 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://tech.paulcz.net/blog/ezbake-a-new-way-to-converge-docker-containers-with-chef/</guid>
+      <guid>https://tech.paulcz.net/blog/ezbake-a-new-way-to-converge-docker-containers-with-chef/</guid>
       <description>&lt;p&gt;&lt;code&gt;EZ Bake&lt;/code&gt; came from an idea I had while watching the &lt;a href=&#34;https://twitter.com/hangops&#34;&gt;HangOps&lt;/a&gt; &lt;a href=&#34;https://www.youtube.com/watch?v=clLFKIeSADo&amp;amp;feature=youtu.be&#34;&gt;episode 2014-04-11&lt;/a&gt; in which they were talking about &lt;code&gt;Docker&lt;/code&gt; and Config Management being complementary rather than adversary.&lt;/p&gt;
 
-&lt;p&gt;I have expermented with using &lt;code&gt;Chef&lt;/code&gt; and &lt;code&gt;Docker&lt;/code&gt; together in the &lt;a href=&#34;http://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io.html&#34;&gt;past&lt;/a&gt; but wanted to tackle the problem from a slightly different angle.  I&amp;rsquo;ve recently been working on some PAAS stuff, both &lt;a href=&#34;http://deis.io&#34;&gt;Deis&lt;/a&gt; and &lt;a href=&#34;http://solum.io&#34;&gt;Solum&lt;/a&gt; these both utilize the tooling from &lt;a href=&#34;https://github.com/flynn/flynn&#34;&gt;Flynn&lt;/a&gt; which builds heroku style &lt;code&gt;buildpacks&lt;/code&gt; in &lt;code&gt;Docker&lt;/code&gt;.&lt;/p&gt;</description>
+&lt;p&gt;I have expermented with using &lt;code&gt;Chef&lt;/code&gt; and &lt;code&gt;Docker&lt;/code&gt; together in the &lt;a href=&#34;https://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io.html&#34;&gt;past&lt;/a&gt; but wanted to tackle the problem from a slightly different angle.  I&amp;rsquo;ve recently been working on some PAAS stuff, both &lt;a href=&#34;http://deis.io&#34;&gt;Deis&lt;/a&gt; and &lt;a href=&#34;http://solum.io&#34;&gt;Solum&lt;/a&gt; these both utilize the tooling from &lt;a href=&#34;https://github.com/flynn/flynn&#34;&gt;Flynn&lt;/a&gt; which builds heroku style &lt;code&gt;buildpacks&lt;/code&gt; in &lt;code&gt;Docker&lt;/code&gt;.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>EZBake - A new way to converge docker containers with chef</title>
-      <link>http://tech.paulcz.net/2014/05/ezbake-a-new-way-to-converge-docker-containers-with-chef/</link>
+      <link>https://tech.paulcz.net/2014/05/ezbake-a-new-way-to-converge-docker-containers-with-chef/</link>
       <pubDate>Tue, 13 May 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://tech.paulcz.net/2014/05/ezbake-a-new-way-to-converge-docker-containers-with-chef/</guid>
+      <guid>https://tech.paulcz.net/2014/05/ezbake-a-new-way-to-converge-docker-containers-with-chef/</guid>
       <description>&lt;p&gt;&lt;code&gt;EZ Bake&lt;/code&gt; came from an idea I had while watching the &lt;a href=&#34;https://twitter.com/hangops&#34;&gt;HangOps&lt;/a&gt; &lt;a href=&#34;https://www.youtube.com/watch?v=clLFKIeSADo&amp;amp;feature=youtu.be&#34;&gt;episode 2014-04-11&lt;/a&gt; in which they were talking about &lt;code&gt;Docker&lt;/code&gt; and Config Management being complementary rather than adversary.&lt;/p&gt;
 
-&lt;p&gt;I have expermented with using &lt;code&gt;Chef&lt;/code&gt; and &lt;code&gt;Docker&lt;/code&gt; together in the &lt;a href=&#34;http://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io.html&#34;&gt;past&lt;/a&gt; but wanted to tackle the problem from a slightly different angle.  I&amp;rsquo;ve recently been working on some PAAS stuff, both &lt;a href=&#34;http://deis.io&#34;&gt;Deis&lt;/a&gt; and &lt;a href=&#34;http://solum.io&#34;&gt;Solum&lt;/a&gt; these both utilize the tooling from &lt;a href=&#34;https://github.com/flynn/flynn&#34;&gt;Flynn&lt;/a&gt; which builds heroku style &lt;code&gt;buildpacks&lt;/code&gt; in &lt;code&gt;Docker&lt;/code&gt;.&lt;/p&gt;</description>
+&lt;p&gt;I have expermented with using &lt;code&gt;Chef&lt;/code&gt; and &lt;code&gt;Docker&lt;/code&gt; together in the &lt;a href=&#34;https://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io.html&#34;&gt;past&lt;/a&gt; but wanted to tackle the problem from a slightly different angle.  I&amp;rsquo;ve recently been working on some PAAS stuff, both &lt;a href=&#34;http://deis.io&#34;&gt;Deis&lt;/a&gt; and &lt;a href=&#34;http://solum.io&#34;&gt;Solum&lt;/a&gt; these both utilize the tooling from &lt;a href=&#34;https://github.com/flynn/flynn&#34;&gt;Flynn&lt;/a&gt; which builds heroku style &lt;code&gt;buildpacks&lt;/code&gt; in &lt;code&gt;Docker&lt;/code&gt;.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Logstash &#43; Opscode Omnibus</title>
-      <link>http://tech.paulcz.net/blog/logstash-plus-opscode-omnibus/</link>
+      <link>https://tech.paulcz.net/blog/logstash-plus-opscode-omnibus/</link>
       <pubDate>Mon, 06 May 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://tech.paulcz.net/blog/logstash-plus-opscode-omnibus/</guid>
+      <guid>https://tech.paulcz.net/blog/logstash-plus-opscode-omnibus/</guid>
       <description>&lt;p&gt;At &lt;a href=&#34;http://devopsdays.org/events/2013-austin/&#34;&gt;DevOps Days Austin&lt;/a&gt; &lt;a href=&#34;http://twitter.com/mattray&#34;&gt;@mattray&lt;/a&gt; did an Openspace session on &lt;a href=&#34;https://github.com/opscode/omnibus-ruby&#34;&gt;Omnibus&lt;/a&gt; which is a toolset based around the concept of installing an app and all of it&amp;rsquo;s prerequisites from source into a directory and then building a package ( either .deb or .rpm ) of that using &lt;a href=&#34;https://github.com/jordansissel/fpm&#34;&gt;fpm&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Having battled many times with OS Packages trying to get newer versions of Ruby, or Redis or other software installed and having to hunt down some random package repo or manually build from source this seems like an excellent idea.&lt;/p&gt;
@@ -94,10 +94,10 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
     
     <item>
       <title>Logstash &#43; Opscode Omnibus</title>
-      <link>http://tech.paulcz.net/2013/05/logstash-plus-opscode-omnibus/</link>
+      <link>https://tech.paulcz.net/2013/05/logstash-plus-opscode-omnibus/</link>
       <pubDate>Mon, 06 May 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://tech.paulcz.net/2013/05/logstash-plus-opscode-omnibus/</guid>
+      <guid>https://tech.paulcz.net/2013/05/logstash-plus-opscode-omnibus/</guid>
       <description>&lt;p&gt;At &lt;a href=&#34;http://devopsdays.org/events/2013-austin/&#34;&gt;DevOps Days Austin&lt;/a&gt; &lt;a href=&#34;http://twitter.com/mattray&#34;&gt;@mattray&lt;/a&gt; did an Openspace session on &lt;a href=&#34;https://github.com/opscode/omnibus-ruby&#34;&gt;Omnibus&lt;/a&gt; which is a toolset based around the concept of installing an app and all of it&amp;rsquo;s prerequisites from source into a directory and then building a package ( either .deb or .rpm ) of that using &lt;a href=&#34;https://github.com/jordansissel/fpm&#34;&gt;fpm&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Having battled many times with OS Packages trying to get newer versions of Ruby, or Redis or other software installed and having to hunt down some random package repo or manually build from source this seems like an excellent idea.&lt;/p&gt;
@@ -107,10 +107,10 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
     
     <item>
       <title>Vagrant&#43;Puppet&#43;FPM=Amazeballs</title>
-      <link>http://tech.paulcz.net/blog/vagrant-plus-puppet-plus-fpm-equals-amazeballs/</link>
+      <link>https://tech.paulcz.net/blog/vagrant-plus-puppet-plus-fpm-equals-amazeballs/</link>
       <pubDate>Sun, 07 Apr 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://tech.paulcz.net/blog/vagrant-plus-puppet-plus-fpm-equals-amazeballs/</guid>
+      <guid>https://tech.paulcz.net/blog/vagrant-plus-puppet-plus-fpm-equals-amazeballs/</guid>
       <description>&lt;p&gt;Lately I&amp;rsquo;ve been doing a lot of prototyping with &lt;a href=&#34;http://www.vagrantup.com/&#34;&gt;Vagrant&lt;/a&gt;, specifically for a couple of distinct activities:-&lt;/p&gt;
 
 &lt;ul&gt;
@@ -123,10 +123,10 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
     
     <item>
       <title>Vagrant&#43;Puppet&#43;FPM=Amazeballs</title>
-      <link>http://tech.paulcz.net/2013/04/vagrant-plus-puppet-plus-fpm-equals-amazeballs/</link>
+      <link>https://tech.paulcz.net/2013/04/vagrant-plus-puppet-plus-fpm-equals-amazeballs/</link>
       <pubDate>Sun, 07 Apr 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://tech.paulcz.net/2013/04/vagrant-plus-puppet-plus-fpm-equals-amazeballs/</guid>
+      <guid>https://tech.paulcz.net/2013/04/vagrant-plus-puppet-plus-fpm-equals-amazeballs/</guid>
       <description>&lt;p&gt;Lately I&amp;rsquo;ve been doing a lot of prototyping with &lt;a href=&#34;http://www.vagrantup.com/&#34;&gt;Vagrant&lt;/a&gt;, specifically for a couple of distinct activities:-&lt;/p&gt;
 
 &lt;ul&gt;
