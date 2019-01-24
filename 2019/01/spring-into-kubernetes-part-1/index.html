@@ -142,7 +142,7 @@ Resolving deltas: 100% (2908/2908), done.
 $ cd spring-petclinic
 </code></pre>
 
-<p>Ordinarily you&rsquo;d use <code>docker build</code> to create a docker image, however this repo does not have a <code>Dockerfile</code>, thankfully we have a way through maven to do this using the <a href="https://github.com/GoogleContainerTools/jib">Google JIB project</a>:</p>
+<p>Ordinarily you&rsquo;d use <code>docker build</code> to create a docker image, however for <a href="https://github.com/spring-projects/spring-petclinic/issues/348">some</a> reason the <a href="https://github.com/spring-projects/spring-petclinic/pull/338">spring community</a> has decided <a href="https://github.com/spring-projects/spring-petclinic/issues/339">not to support building docker images in a standard way</a> and thus this repo does not have a <code>Dockerfile</code>, thankfully we have some less obvious ways through maven to do this using tools like the <a href="https://github.com/GoogleContainerTools/jib">Google JIB project</a>:</p>
 
 <pre><code class="language-console">$ mvn compile -Dimage=spring/petclinic:spring-k8s-1 \
     com.google.cloud.tools:jib-maven-plugin:1.0.0:dockerBuild
@@ -158,6 +158,14 @@ $ cd spring-petclinic
 [INFO] Total time: 20.561 s
 [INFO] Finished at: 2019-01-24T08:56:30-06:00
 [INFO] ------------------------------------------------------------------------
+</code></pre>
+
+<p>If like me you don&rsquo;t have <code>java</code> installed on your local desktop you can cheat your way through by mapping your docker socket through to a maven container like this:</p>
+
+<pre><code class="language-console">$ docker run -ti --rm --workdir /src -v $(pwd):/src \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    maven:3.6-jdk-11 mvn compile -Dimage=spring/petclinic:spring-k8s-1 \
+    com.google.cloud.tools:jib-maven-plugin:1.0.0:dockerBuild
 </code></pre>
 
 <p>This will have built an image called <code>spring/petclinic:spring-k8s-1</code>. Verify it:</p>
