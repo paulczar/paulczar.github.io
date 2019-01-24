@@ -142,7 +142,11 @@ Resolving deltas: 100% (2908/2908), done.
 $ cd spring-petclinic
 </code></pre>
 
-<p>Ordinarily you&rsquo;d use <code>docker build</code> to create a docker image, however for <a href="https://github.com/spring-projects/spring-petclinic/issues/348">some</a> reason the <a href="https://github.com/spring-projects/spring-petclinic/pull/338">spring community</a> has decided <a href="https://github.com/spring-projects/spring-petclinic/issues/339">not to support building docker images in a standard way</a> and thus this repo does not have a <code>Dockerfile</code>, thankfully we have some less obvious ways through maven to do this using tools like the <a href="https://github.com/GoogleContainerTools/jib">Google JIB project</a>:</p>
+<p>Ordinarily you&rsquo;d use <code>docker build</code> to create a docker image, however this repo does not have a <code>Dockerfile</code>, so thankfully we have some less obvious ways through maven to do this using tools like the <a href="https://github.com/GoogleContainerTools/jib">Google JIB project</a>:</p>
+
+<blockquote>
+<p>Note: For more ways to build Docker images for Spring Applications see the official <a href="https://spring.io/guides/gs/spring-boot-docker/">Spring documentation</a>.</p>
+</blockquote>
 
 <pre><code class="language-console">$ mvn compile -Dimage=spring/petclinic:spring-k8s-1 \
     com.google.cloud.tools:jib-maven-plugin:1.0.0:dockerBuild
@@ -218,9 +222,9 @@ spring-k8s-1: digest: sha256:0a71768b0a3b199b6ec78dff983f26c4103e6089ed50c17985b
 
 <p>Most advanced users of Kubernetes use the declarative methods, but the imperative are perfect for when you&rsquo;re just getting started or want to do something quickly.</p>
 
-<p>Create a Kubernetes deployment by running the <code>kubectl run</code> command and then validate it with <code>kubectl get all</code>:</p>
+<p>Create a Kubernetes deployment by running the <code>kubectl create</code> command and then validate it with <code>kubectl get all</code>:</p>
 
-<pre><code class="language-console">$ kubectl run petclinic --image=paulczar/petclinic:spring-k8s-1
+<pre><code class="language-console">$ kubectl create deployment petclinic --image=paulczar/petclinic:spring-k8s-1
 deployment.apps/petclinic created
 
 $ kubectl get all
@@ -234,7 +238,11 @@ NAME                                   DESIRED   CURRENT   READY   AGE
 replicaset.apps/petclinic-5ffccf75c4   1         1         1       36s
 </code></pre>
 
-<p>You can see that Kubernetes has created several resources. It created a <strong>Deployment</strong> which is a Kubernetes controller for managing the lifecycle of <strong>ReplicaSets</strong>. The <strong>Deployment</strong> created the <strong>ReplicaSet</strong> which is a controller for ensuring a set number of replicas of your application is running. The <strong>ReplicaSet</strong> created a <strong>Pod</strong> which is your running application.</p>
+<p>You can see that Kubernetes has created several resources. It created a <strong>Deployment</strong> which is reconciled by a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/">Kubernetes controller</a> for managing the lifecycle of <strong>ReplicaSets</strong>. The <strong>Deployment</strong> created the <strong>ReplicaSet</strong> which has a controller for ensuring a set number of replicas of your application is running. The <strong>ReplicaSet</strong> created a <strong>Pod</strong> which is your running application.</p>
+
+<blockquote>
+<p>Note: <a href="https://kubernetes.io/docs/concepts/workloads/controllers/">Controllers</a> are a major part of what makes Kubernetes so good. They create tight control loops around resources to add more complex functionality as described above.</p>
+</blockquote>
 
 <p>You might notice that the Kubernetes output above does not give you an IP address or any hints as to how to access your application. This is because we need to expose the application using a <strong>Service</strong> resource.</p>
 
