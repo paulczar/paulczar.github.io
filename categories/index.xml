@@ -149,7 +149,7 @@
     <item>
       <title>Kubernetes</title>
       <link>https://tech.paulcz.net/categories/kubernetes/</link>
-      <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 24 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>https://tech.paulcz.net/categories/kubernetes/</guid>
       <description></description>
@@ -246,6 +246,15 @@
     </item>
     
     <item>
+      <title>Pivotal</title>
+      <link>https://tech.paulcz.net/categories/pivotal/</link>
+      <pubDate>Thu, 24 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/pivotal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Puppet</title>
       <link>https://tech.paulcz.net/categories/puppet/</link>
       <pubDate>Sun, 07 Apr 2013 00:00:00 +0000</pubDate>
@@ -296,6 +305,15 @@
       <pubDate>Sun, 03 Jan 2016 14:44:30 -0600</pubDate>
       
       <guid>https://tech.paulcz.net/categories/security/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spring</title>
+      <link>https://tech.paulcz.net/categories/spring/</link>
+      <pubDate>Thu, 24 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/spring/</guid>
       <description></description>
     </item>
     
