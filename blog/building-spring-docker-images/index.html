@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="map[]" />
+    <meta name="description" content="Random musings mostly about tech">
+    <link rel="shortcut icon" type="image/x-icon" href="https://tech.paulcz.net/img/favicon.ico">
+    <title>Building Spring Docker Images</title>
+    <meta name="generator" content="Hugo 0.53" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://tech.paulcz.net/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-35638296-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  </head>
+
+  <body>
+    <div id="wrap">
+
+      
+      <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="https://tech.paulcz.net/"><i class="fa fa-home"></i></a>
+    </div>
+    <div id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+        <li><a href="/page/about">ABOUT</a></li>
+        
+        <li><a href="/blog/">BLOG</a></li>
+        
+        <li><a href="/page/resume">RESUME</a></li>
+        
+        <li><a href="https://speaking.paulcz.net/presentations">TALK</a></li>
+        
+      
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      
+      <div class="container">
+        <div class="blog-post">
+          <h3>
+            <strong><a href="https://tech.paulcz.net/blog/building-spring-docker-images/">Building Spring Docker Images</a></strong>
+          </h3>
+        </div>
+        <div class="blog-title">
+          <h4>
+          January 25, 2019
+            &nbsp;&nbsp;
+            
+          </h4>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="blogpost">
+              
+
+<p>While investigating running <a href="https://spring.io">Spring</a> applications on Kubernetes I discovered that a lot of the existing example Spring applications do not have a <code>Dockerfile</code> in their git repository. I thought this odd at first (and frankly still do).</p>
+
+<p>What I discovered though, is there&rsquo;s quite a number of ways to build <a href="https://spring.io/guides/gs/spring-boot-docker/">Spring (and Java in general) container images</a> that don&rsquo;t necessarily rely on writing a Dockerfile.</p>
+
+<p>Full disclosure, I am a firm believe that any opensource project of consequence (where feasible) should ship a Dockerfile in their git repo, and ideally have images up on the Docker hub (or other public container registry) as it allows for newcomers to experience your application or project in just a few seconds with no need to play detective to try and figure out how to get it running.</p>
+
+<p>I will demonstrate building the <a href="https://github.com/spring-projects/spring-petclinic">Spring Pet Clinic example application</a> into container images.</p>
+
+<p>If you want to follow along at home start by cloning down the repo to your local machine:</p>
+
+<pre><code class="language-console">git clone https://github.com/spring-projects/spring-petclinic.git
+
+cd spring-petclinic
+</code></pre>
+
+<h1 id="option-1-dockerfile">Option 1 - Dockerfile</h1>
+
+<p>The Pet Clinic app uses Maven to build a .jar file, so we have a few options here.</p>
+
+<h2 id="build-jar-and-then-copy-it-into-a-java-image">Build .jar and then copy it into a Java Image</h2>
+
+<p>This assumes that you have a suitable version of Java and Maven on your system.</p>
+
+<p>Start by building the project into a .jar file with Maven:</p>
+
+<pre><code class="language-console">$ mvn install -DskipTests
+[INFO] Installing /home/pczarkowski/development/demo/spring-into-kubernetes-1/spring-petclinic/target/spring-petclinic-2.1.0.BUILD-SNAPSHOT.jar to /home/pczarkowski/.m2/repository/org/springframework/samples/spring-petclinic/2.1.0.BUILD-SNAPSHOT/spring-petclinic-2.1.0.BUILD-SNAPSHOT.jar
+[INFO] Installing /home/pczarkowski/development/demo/spring-into-kubernetes-1/spring-petclinic/pom.xml to /home/pczarkowski/.m2/repository/org/springframework/samples/spring-petclinic/2.1.0.BUILD-SNAPSHOT/spring-petclinic-2.1.0.BUILD-SNAPSHOT.pom
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 26.984 s
+[INFO] Finished at: 2019-01-25T09:23:11-06:00
+[INFO] ------------------------------------------------------------------------
+</code></pre>
+
+<p>As you can see this resulted in a Java file <code>spring-petclinic-2.1.0.BUILD-SNAPSHOT.jar</code>.  We can create a Dockerfile to ingest this called <code>Dockerfile.cp</code>:</p>
+
+<pre><code class="language-console">FROM openjdk:11.0.1-jre-slim-stretch
+EXPOSE 8080
+ARG JAR=spring-petclinic-2.1.0.BUILD-SNAPSHOT.jar
+COPY target/$JAR /app.jar
+ENTRYPOINT [&quot;java&quot;,&quot;-jar&quot;,&quot;/app.jar&quot;]
+</code></pre>
+
+<blockquote>
+<p>Note: because we already built the Jar we only need a slim JRE image to run it in. We can also use an ARG for the file name in case we need to change it on build with <code>--build-arg JAR=...</code>.</p>
+</blockquote>
+
+<p>A simple <code>docker build</code> command should create us an image we can run:</p>
+
+<pre><code class="language-console">docker build -f ./Dockerfile.cp -t spring/petclinic .
+Sending build context to Docker daemon  98.22MB
+Step 1/5 : FROM openjdk:11.0.1-jre-slim-stretch
+11.0.1-jre-slim-stretch: Pulling from library/openjdk
+5e6ec7f28fb7: Pull complete
+1cf4e4a3f534: Pull complete
+5d9d21aca480: Pull complete
+0a126fb8ec28: Pull complete
+1904df324545: Pull complete
+e6d9d96381c8: Pull complete
+Digest: sha256:965a07951bee0c3b1f8aff4818619ace3e675d91cfb746895e8fb84e3e6b13ca
+Status: Downloaded newer image for openjdk:11.0.1-jre-slim-stretch
+ ---&gt; 49b31a72a85a
+Step 2/5 : EXPOSE 8080
+ ---&gt; Running in 1aeaae727a80
+Removing intermediate container 1aeaae727a80
+ ---&gt; a1a1850f8e8f
+Step 3/5 : ARG JAR=spring-petclinic-2.1.0.BUILD-SNAPSHOT.jar
+ ---&gt; Running in b6faa7c0faa3
+Removing intermediate container b6faa7c0faa3
+ ---&gt; 2b55681ac9df
+Step 4/5 : COPY target/$JAR /app.jar
+ ---&gt; dec4f0d56c9d
+Step 5/5 : ENTRYPOINT [&quot;java&quot;,&quot;-jar&quot;,&quot;/app.jar&quot;]
+ ---&gt; Running in f492e1668fff
+Removing intermediate container f492e1668fff
+ ---&gt; f669afd61b8d
+Successfully built f669afd61b8d
+Successfully tagged spring/petclinic:latest
+</code></pre>
+
+<p>Start the new container, wait a minute or so (you can watch the logs with <code>docker logs -f petclinic</code> if you want), and then test it:</p>
+
+<pre><code>$ docker run -d --name petclinic -p 8080:8080 spring/petclinic
+a1d51b6f9a47501dfe90f24866e7fb6c82e436323fa4adc09074e8ac7447a1a7
+
+$ curl -s localhost:8080 | head
+&lt;!DOCTYPE html&gt;
+
+&lt;html&gt;
+
+  &lt;head&gt;
+
+    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;/&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+
+$ docker rm -f petclinic
+petclinic
+</code></pre>
+
+<p>You can look at the resultant image size using <code>docker images</code>, if you want to dive deeper you can also use <code>docker inspect</code>:</p>
+
+<pre><code class="language-console">$ docker images spring/petclinic
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+spring/petclinic    latest              f669afd61b8d        41 minutes ago      318MB
+</code></pre>
+
+<h2 id="use-a-multi-stage-dockerfile">Use a multi-stage Dockerfile</h2>
+
+<p>If you don&rsquo;t have Java and Maven on your system, or you want to delegate the whole thing to Docker you can utilize a multi-stage Dockerfile to build the .jar file and then copy it into a slim image.</p>
+
+<pre><code class="language-dockerfile">FROM maven:3.6-jdk-11-slim as BUILD
+COPY . /src
+WORKDIR /src
+RUN mvn install -DskipTests
+
+FROM openjdk:11.0.1-jre-slim-stretch
+EXPOSE 8080
+WORKDIR /app
+ARG JAR=spring-petclinic-2.1.0.BUILD-SNAPSHOT.jar
+
+COPY --from=BUILD /src/target/$JAR /app.jar
+ENTRYPOINT [&quot;java&quot;,&quot;-jar&quot;,&quot;/app.jar&quot;]
+</code></pre>
+
+<p>Like before we can use <code>docker build</code> to build this image, but unlike before we don&rsquo;t need Java or Maven installed locally:</p>
+
+<pre><code class="language-console">$ docker build -f ./Dockerfile.multi -t spring/petclinic .
+...
+...
+Successfully built ee062471d65c
+Successfully tagged spring/petclinic:latest
+
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+spring/petclinic    latest              ee062471d65c        18 minutes ago      318MB
+</code></pre>
+
+<p>As you&rsquo;d expect the Docker Image size is the same as the previous build given we effectively did the same thing, build the Jar and then Copy it into a slim image.</p>
+
+<h1 id="option-2-google-jib">Option 2 - Google JIB</h1>
+
+<p><a href="https://github.com/GoogleContainerTools/jib">Jib</a> builds optimized Docker and OCI images for your Java applications without a Docker daemon - and without deep mastery of Docker best-practices. It is available as plugins for Maven and Gradle and as a Java library.</p>
+
+<p>Normally you&rsquo;d add JIB to your maven build via the pom.xml [as shown here].(<a href="https://github.com/GoogleContainerTools/jib/tree/master/jib-maven-plugin#setup">https://github.com/GoogleContainerTools/jib/tree/master/jib-maven-plugin#setup</a>), To kick the tires we can just pass some extra arguments to maven and get the same result.</p>
+
+<p>You can build your image with JIB (you don&rsquo;t even need Docker running!) and ship it straight up to the docker registry by running the following:</p>
+
+<blockquote>
+<p>Note: In this example I am using my docker registry username in the image name so that it is uploaded correctly, you&rsquo;ll want to swap out <code>paulczar</code> for your own username.</p>
+</blockquote>
+
+<pre><code class="language-console">$ mvn compile com.google.cloud.tools:jib-maven-plugin:1.0.0:build -Dimage=paulczar/petclinic:jib -DskipTests
+[INFO] Containerizing application to paulczar/petclinic:jib...
+[WARNING] Base image 'gcr.io/distroless/java' does not use a specific image digest - build may not be reproducible
+[INFO]
+[INFO] Container entrypoint set to [java, -cp, /app/resources:/app/classes:/app/libs/*, org.springframework.samples.petclinic.PetClinicApplication]
+[INFO]
+[INFO] Built and pushed image as paulczar/petclinic:jib
+[INFO] Executing tasks:
+[INFO] [==============================] 100.0% complete
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 57.478 s
+[INFO] Finished at: 2019-01-25T11:03:25-06:00
+[INFO] ------------------------------------------------------------------------
+</code></pre>
+
+<blockquote>
+<p>Note: This provides a warning <code>build may not be reproducible</code>. You can pass an argument to use your own base Java image to make it more deterministic by adding <code>-Djib.from.image=openjdk:11.0.1-jre-slim-stretch</code>.</p>
+</blockquote>
+
+<p>If you want JIB to build against your local docker install and not push the image to the registry you can run the following:</p>
+
+<pre><code class="language-console">$ mvn compile com.google.cloud.tools:jib-maven-plugin:1.0.0:dockerBuild
+...
+...
+[INFO] Built image to Docker daemon as spring-petclinic:2.1.0.BUILD-SNAPSHOT
+[INFO] Executing tasks:
+[INFO] [==============================] 100.0% complete
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 10.485 s
+[INFO] Finished at: 2019-01-25T11:14:21-06:00
+[INFO] ------------------------------------------------------------------------
+
+docker images spring-petclinic:2.1.0.BUILD-SNAPSHOT
+REPOSITORY          TAG                    IMAGE ID            CREATED             SIZE
+spring-petclinic    2.1.0.BUILD-SNAPSHOT   79d677deeedb        49 years ago        164MB
+</code></pre>
+
+<blockquote>
+<p>Note: This image is much smaller than the rest, this is because by default JIB creates a distroless Java image. This might seem like a good idea for the size, but will like the warning from the previous build give you an image that may not be reproducable. I recommend always using the <code>-Djib.from.image=openjdk:11.0.1-jre-slim-stretch</code> argument to choose your upstream Java image which will again give you a 318Mb image like the previous builds.</p>
+</blockquote>
+
+<h1 id="others">Others</h1>
+
+<p>I&rsquo;ve shown you what I believe are the best methods for building a Docker image for your Spring application. There are some other maven plugins that do the same thing:</p>
+
+<ul>
+<li><a href="https://github.com/spotify/dockerfile-maven">Spotify/dockerfile-maven</a> builds a Jar and then uses a user provided Dockerfile to copy it in.</li>
+<li><a href="https://github.com/spotify/docker-maven-plugin">spotify/docker-maven</a> builds the whole image for you much like JIB.</li>
+<li><a href="https://github.com/fabric8io/docker-maven-plugin">fabricate/docker-maven</a> also builds the whole image like JIB.</li>
+</ul>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Hopefully after reading this you have a better idea how to build Docker images for your Spring (or general Java) Application. Personally I prefer the multi-stage Dockerfile as your Dockerfile becomes the contract on how your image is built, however I do really like the way i can use JIB to build an image without needing Docker as this simplifies my build environment and means I can very easily use tools like <a href="https://travis-ci.org">Travis CI</a> or <a href="https://drone.io">Drone</a> to build my images for me.</p>
+
+              <hr>
+              <div class="related-posts">
+                <h5>Related Posts</h5>
+                
+              </div>
+            </div>
+          </div>
+          <hr>
+        <div class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+
+    (function() {
+      
+      
+      if (window.location.hostname == "localhost")
+        return;
+
+      var disqus_shortname = '';
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+        </div>
+      
+      </div>
+    </div>
+
+    
+    <footer>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+      <a href="http://www.github.com/sumaxime/hugo-sustain/">sustain</a> with ♥</p>
+    </div>
+  </div>
+</footer>
+<div class="footer"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://tech.paulcz.net/js/docs.min.js"></script>
+<script src="https://tech.paulcz.net/js/main.js"></script>
+
+<script src="https://tech.paulcz.net/js/ie10-viewport-bug-workaround.js"></script>
+
+
+
+  </body>
+</html>

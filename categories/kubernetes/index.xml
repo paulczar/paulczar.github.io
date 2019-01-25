@@ -6,10 +6,32 @@
     <description>Recent content in Kubernetes on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 24 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 25 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://tech.paulcz.net/categories/kubernetes/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Building Spring Docker Images</title>
+      <link>https://tech.paulcz.net/blog/building-spring-docker-images/</link>
+      <pubDate>Fri, 25 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/blog/building-spring-docker-images/</guid>
+      <description>While investigating running Spring applications on Kubernetes I discovered that a lot of the existing example Spring applications do not have a Dockerfile in their git repository. I thought this odd at first (and frankly still do).
+What I discovered though, is there&amp;rsquo;s quite a number of ways to build Spring (and Java in general) container images that don&amp;rsquo;t necessarily rely on writing a Dockerfile.
+Full disclosure, I am a firm believe that any opensource project of consequence (where feasible) should ship a Dockerfile in their git repo, and ideally have images up on the Docker hub (or other public container registry) as it allows for newcomers to experience your application or project in just a few seconds with no need to play detective to try and figure out how to get it running.</description>
+    </item>
+    
+    <item>
+      <title>Building Spring Docker Images</title>
+      <link>https://tech.paulcz.net/2019/01/building-spring-docker-images/</link>
+      <pubDate>Fri, 25 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/2019/01/building-spring-docker-images/</guid>
+      <description>While investigating running Spring applications on Kubernetes I discovered that a lot of the existing example Spring applications do not have a Dockerfile in their git repository. I thought this odd at first (and frankly still do).
+What I discovered though, is there&amp;rsquo;s quite a number of ways to build Spring (and Java in general) container images that don&amp;rsquo;t necessarily rely on writing a Dockerfile.
+Full disclosure, I am a firm believe that any opensource project of consequence (where feasible) should ship a Dockerfile in their git repo, and ideally have images up on the Docker hub (or other public container registry) as it allows for newcomers to experience your application or project in just a few seconds with no need to play detective to try and figure out how to get it running.</description>
+    </item>
     
     <item>
       <title>Spring into Kubernetes - Part 1</title>
