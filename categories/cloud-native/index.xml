@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cloud Native on Paul Czarkowski</title>
+    <link>https://tech.paulcz.net/categories/cloud-native/</link>
+    <description>Recent content in Cloud Native on Paul Czarkowski</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 29 Jan 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://tech.paulcz.net/categories/cloud-native/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cloud Native Operations - Kubernetes Controllers</title>
+      <link>https://tech.paulcz.net/blog/cloud-native-operations-k8s-controllers/</link>
+      <pubDate>Tue, 29 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/blog/cloud-native-operations-k8s-controllers/</guid>
+      <description>Lulz what? Cloud Native Operations ?!?!?! Historically Operations practices have lagged behind development. During the 90s a number of lightweight software development practices evolved such as Scrum and Extreme Programming. During the early 2000&amp;rsquo;s it became pretty common to practice (or at least claim to) some form of Agile in software development.
+It wasn&amp;rsquo;t until the last year of that decade that we started to see an uptick in Operations folks wanting to adopt Agile type methodologies and as the devops (and later SRE) movements took off we started to borrow heavily from Lean principals such as Kanban and Value Stream Mapping.</description>
+    </item>
+    
+    <item>
+      <title>Cloud Native Operations - Kubernetes Controllers</title>
+      <link>https://tech.paulcz.net/2019/01/cloud-native-operations-k8s-controllers/</link>
+      <pubDate>Tue, 29 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/2019/01/cloud-native-operations-k8s-controllers/</guid>
+      <description>Lulz what? Cloud Native Operations ?!?!?! Historically Operations practices have lagged behind development. During the 90s a number of lightweight software development practices evolved such as Scrum and Extreme Programming. During the early 2000&amp;rsquo;s it became pretty common to practice (or at least claim to) some form of Agile in software development.
+It wasn&amp;rsquo;t until the last year of that decade that we started to see an uptick in Operations folks wanting to adopt Agile type methodologies and as the devops (and later SRE) movements took off we started to borrow heavily from Lean principals such as Kanban and Value Stream Mapping.</description>
+    </item>
+    
+  </channel>
+</rss>

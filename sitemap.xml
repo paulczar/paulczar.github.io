@@ -3,6 +3,26 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://tech.paulcz.net/blog/spring-into-kubernetes-part-2/</loc>
+    <lastmod>2019-02-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://tech.paulcz.net/2019/02/spring-into-kubernetes-part-2/</loc>
+    <lastmod>2019-02-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://tech.paulcz.net/blog/cloud-native-operations-k8s-controllers/</loc>
+    <lastmod>2019-01-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://tech.paulcz.net/2019/01/cloud-native-operations-k8s-controllers/</loc>
+    <lastmod>2019-01-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://tech.paulcz.net/blog/building-spring-docker-images/</loc>
     <lastmod>2019-01-25T00:00:00+00:00</lastmod>
   </url>
@@ -277,7 +297,7 @@
   
   <url>
     <loc>https://tech.paulcz.net/blog/</loc>
-    <lastmod>2019-01-25T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -306,6 +326,12 @@
   </url>
   
   <url>
+    <loc>https://tech.paulcz.net/categories/cloud-native/</loc>
+    <lastmod>2019-01-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://tech.paulcz.net/categories/deis/</loc>
     <lastmod>2014-02-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -313,7 +339,7 @@
   
   <url>
     <loc>https://tech.paulcz.net/categories/devops/</loc>
-    <lastmod>2014-12-22T21:31:03-06:00</lastmod>
+    <lastmod>2019-01-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -349,7 +375,7 @@
   
   <url>
     <loc>https://tech.paulcz.net/categories/helm/</loc>
-    <lastmod>2017-10-03T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -361,7 +387,7 @@
   
   <url>
     <loc>https://tech.paulcz.net/categories/kubernetes/</loc>
-    <lastmod>2019-01-25T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -427,7 +453,7 @@
   
   <url>
     <loc>https://tech.paulcz.net/</loc>
-    <lastmod>2019-01-25T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -439,13 +465,13 @@
   
   <url>
     <loc>https://tech.paulcz.net/categories/pivotal/</loc>
-    <lastmod>2019-01-25T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://tech.paulcz.net/post/</loc>
-    <lastmod>2019-01-25T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -487,7 +513,7 @@
   
   <url>
     <loc>https://tech.paulcz.net/categories/spring/</loc>
-    <lastmod>2019-01-25T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -6,10 +6,31 @@
     <description>Recent content in Posts on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 25 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 07 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://tech.paulcz.net/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Spring into Kubernetes - Part 2</title>
+      <link>https://tech.paulcz.net/2019/02/spring-into-kubernetes-part-2/</link>
+      <pubDate>Thu, 07 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/2019/02/spring-into-kubernetes-part-2/</guid>
+      <description>Introduction In this installment of Spring into Kubernetes we&amp;rsquo;ll be looking at using Helm to install our Spring application to Kubernetes.
+About Helm Helm is the package manager for Kubernetes. It provides tooling to create, template, package, and share Kubernetes manifests. A helm chart is effectively a signed tarball that contains a set of templated Kubernetes manifests, a metadata file and a set of default values.
+Helm has two major components, the Helm client and the Tiller server.</description>
+    </item>
+    
+    <item>
+      <title>Cloud Native Operations - Kubernetes Controllers</title>
+      <link>https://tech.paulcz.net/2019/01/cloud-native-operations-k8s-controllers/</link>
+      <pubDate>Tue, 29 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/2019/01/cloud-native-operations-k8s-controllers/</guid>
+      <description>Lulz what? Cloud Native Operations ?!?!?! Historically Operations practices have lagged behind development. During the 90s a number of lightweight software development practices evolved such as Scrum and Extreme Programming. During the early 2000&amp;rsquo;s it became pretty common to practice (or at least claim to) some form of Agile in software development.
+It wasn&amp;rsquo;t until the last year of that decade that we started to see an uptick in Operations folks wanting to adopt Agile type methodologies and as the devops (and later SRE) movements took off we started to borrow heavily from Lean principals such as Kanban and Value Stream Mapping.</description>
+    </item>
     
     <item>
       <title>Building Spring Docker Images</title>

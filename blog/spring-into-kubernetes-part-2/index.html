@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="map[]" />
+    <meta name="description" content="Random musings mostly about tech">
+    <link rel="shortcut icon" type="image/x-icon" href="https://tech.paulcz.net/img/favicon.ico">
+    <title>Spring into Kubernetes - Part 2</title>
+    <meta name="generator" content="Hugo 0.53" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://tech.paulcz.net/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-35638296-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  </head>
+
+  <body>
+    <div id="wrap">
+
+      
+      <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="https://tech.paulcz.net/"><i class="fa fa-home"></i></a>
+    </div>
+    <div id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+        <li><a href="/page/about">ABOUT</a></li>
+        
+        <li><a href="/blog/">BLOG</a></li>
+        
+        <li><a href="/page/resume">RESUME</a></li>
+        
+        <li><a href="https://speaking.paulcz.net/presentations">TALK</a></li>
+        
+      
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      
+      <div class="container">
+        <div class="blog-post">
+          <h3>
+            <strong><a href="https://tech.paulcz.net/blog/spring-into-kubernetes-part-2/">Spring into Kubernetes - Part 2</a></strong>
+          </h3>
+        </div>
+        <div class="blog-title">
+          <h4>
+          February 7, 2019
+            &nbsp;&nbsp;
+            
+          </h4>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="blogpost">
+              
+
+<h1 id="introduction">Introduction</h1>
+
+<p>In this installment of Spring into Kubernetes we&rsquo;ll be looking at using <a href="https://helm.sh/">Helm</a> to install our Spring application to Kubernetes.</p>
+
+<h1 id="about-helm">About Helm</h1>
+
+<p><a href="https://helm.sh/">Helm</a> is the package manager for Kubernetes. It provides tooling to create, template, package, and <a href="https://hub.helm.sh/">share</a> Kubernetes manifests. A helm chart is effectively a signed tarball that contains a set of templated Kubernetes manifests, a metadata file and a set of default values.</p>
+
+<p>Helm has two major components, the Helm client and the Tiller server. The Helm client is a CLI tool that you use to create, package and deploy helm charts. The Tiller server is installed into your Kubernetes cluster and is responsible for managing the lifecycle of your applications as instructed by the Helm client.</p>
+
+<blockquote>
+<p>Note: The Tiller server was created before Kubernetes extensions existed and will be removed in Helm 3 in favor of utilizing Kubernetes extensions. You can also use &ldquo;tillerless&rdquo; Helm but that&rsquo;s out of scope for this blog post.</p>
+</blockquote>
+
+<p>Helm charts can be shared via a Helm Repository which gives you an easy way to upload, share, and download packages from a central location. The public <a href="https://hub.helm.sh/">Helm Hub</a> has prebuilt Helm packages for most common open source applications.</p>
+
+<h1 id="step-1-install-helm">Step 1 - Install Helm</h1>
+
+<p><a href="https://docs.helm.sh/using_helm/#installing-helm">Installing Helm</a> is quite simple, if you&rsquo;re on a Mac you can install Helm via Homebrew, otherwise check the <a href="https://docs.helm.sh/using_helm/#installing-helm">Helm install documentation</a> for platform specific instructions:</p>
+
+<pre><code class="language-console">brew install kubernetes-helm
+</code></pre>
+
+<p>With the Helm client installed you can install the Tiller server to your Kubernetes cluster.</p>
+
+<p>If you are using minikube or a single tenant Kubernetes cluster without Role Based Authentication Control (RBAC) enabled you can deploy Tiller by simply running <code>helm init</code>. On most clusters you should create a service account and role binding first like so:</p>
+
+<pre><code class="language-console">kubectl -n kube-system create serviceaccount tiller
+kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
+helm init --service-account=tiller
+</code></pre>
+
+<p>After a minute or so you can check it has finished installing by running <code>helm version</code> which will give you the version of both the client and the server. If the server doesn&rsquo;t respond just want a few more moments and try again:</p>
+
+<pre><code class="language-console">$ helm version
+Client: &amp;version.Version{SemVer:&quot;v2.12.2&quot;, GitCommit:&quot;7d2b0c73d734f6586ed222a567c5d103fed435be&quot;, GitTreeState:&quot;clean&quot;}
+Server: &amp;version.Version{SemVer:&quot;v2.12.2&quot;, GitCommit:&quot;7d2b0c73d734f6586ed222a567c5d103fed435be&quot;, GitTreeState:&quot;clean&quot;}
+</code></pre>
+
+<h1 id="step-2-create-and-deploy-a-new-helm-chart">Step 2 - Create and Deploy a new Helm Chart</h1>
+
+<p>Use the Helm client to create a new Helm chart:</p>
+
+<pre><code class="language-console">$ helm create petclinic
+Creating petclinic
+
+$ cd petclinic
+
+$ tree
+├── charts
+├── Chart.yaml
+├── templates
+│   ├── deployment.yaml
+│   ├── _helpers.tpl
+│   ├── ingress.yaml
+│   ├── NOTES.txt
+│   ├── service.yaml
+│   └── tests
+│       └── test-connection.yaml
+└── values.yaml
+
+</code></pre>
+
+<p>You can see that the Helm chart sets up a boilerplate Helm chart to get you started. This is actually a fully functioning chart so you can go ahead and deploy it right away to ensure that everything is working correctly. You could simply run <code>helm install .</code> but generally you&rsquo;ll want to specify a namespace and release name by using the <code>--namespace</code> and <code>--name</code> for better management.</p>
+
+<pre><code class="language-console">$ helm install --namespace test --name test .
+NAME:   test
+LAST DEPLOYED: Tue Feb  5 06:26:19 2019
+NAMESPACE: test
+STATUS: DEPLOYED
+...
+...
+</code></pre>
+
+<p>You can use <code>kubectl port-forward</code> to test that everything worked right:</p>
+
+<pre><code class="language-console">$ kubectl --namespace test port-forward deployment/test-petclinic 8080:80
+Visit http://127.0.0.1:8080 to use your application
+Forwarding from [::1]:8080 -&gt; 80
+Forwarding from 127.0.0.1:8080 -&gt; 80
+</code></pre>
+
+<p>Point your browser at <a href="http://localhost:8080">http://localhost:8080</a> and you should see the following:</p>
+
+<p><img src="./welcome-nginx.png" alt="Nginx Welcome Screen" /></p>
+
+<p>But this isn&rsquo;t Petclinic it&rsquo;s an empty nginx container. Since our petclinic app is pretty simple we can use this boilerplate chart to deploy Petclinic with just a few minor changes.</p>
+
+<ul>
+<li><p>The nginx app inside the container listens on port 80, petclinic listens on port 8080 so you&rsquo;ll need to edit the file <code>templates/deployment.yaml</code> and find the YAML <code>containerPort: 8080</code> under the container spec and change the value to <code>8080</code>.</p></li>
+
+<li><p>Also in the <code>templates/deployment.yaml</code> file you want to increase the initial timeout for the <code>livenessCheck</code> check as Java takes longer to be ready than nginx. Find the YAML key <code>livenessProbe:</code> and add the keypair <code>initialDelaySeconds: 60</code> to it.</p></li>
+</ul>
+
+<p>The updated section of the <code>templates/deployment.yaml</code> should look like this:</p>
+
+<pre><code class="language-yaml">    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: &quot;{{ .Values.image.repository }}:{{ .Values.image.tag }}&quot;
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            initialDelaySeconds: 60
+            httpGet:
+              path: /
+              port: http
+
+</code></pre>
+
+<blockquote>
+<p>Note: the double curly brace <code>{{ }}</code> signifies for the golang templating engine to process some code, usually print out some values, but can also be used for if/then statements and loops.</p>
+</blockquote>
+
+<p>You also need to set the image and tag to petclinic. You could edit <code>values.yaml</code> to change the defaults, but you can also override default values with <code>--set</code>. Since we&rsquo;ve already deployed the helm chart we can <em>upgrade</em> it by running a <code>helm upgrade</code> and providing the appropriate <code>--set</code> flag like so:</p>
+
+<blockquote>
+<p>Note: <code>helm upgrade</code> helps you to manage the release lifecycle of your application, Tiller keeps track of the releases that you&rsquo;ve deployed and helps you both upgrade and rollback deployments.</p>
+</blockquote>
+
+<pre><code class="language-console">$ helm upgrade test \
+  --set image.repository=paulczar/spring-petclinic \
+  --set image.tag=latest .
+Release &quot;test&quot; has been upgraded. Happy Helming!
+LAST DEPLOYED: Tue Feb  5 06:54:07 2019
+...
+...
+</code></pre>
+
+<p>Forward port 8080 through to the deployment again and check its working via your web browser:</p>
+
+<blockquote>
+<p>Note: the command shown in the <code>helm upgrade</code> output is wrong because we&rsquo;re using port 8080 now, you could fix the output by editing the file <code>templates/NOTES.txt</code>, but for now just run the command below.</p>
+</blockquote>
+
+<pre><code class="language-console">$ kubectl --namespace test port-forward deployment/test-petclinic 8080
+Forwarding from [::1]:8080 -&gt; 8080
+Forwarding from 127.0.0.1:8080 -&gt; 8080
+</code></pre>
+
+<p><img src="./pc-localhost.png" alt="petclinic" /></p>
+
+<h1 id="step-3-cleanup">Step 3 - Cleanup</h1>
+
+<p>To uninstall the helm chart simple run the following command:</p>
+
+<pre><code class="language-console">$ helm delete --purge test
+release &quot;test&quot; deleted
+</code></pre>
+
+<h1 id="step-4-optional-package-your-helm-chart">Step 4 (optional) - Package your Helm Chart</h1>
+
+<p>Helm charts are designed to be packaged and shared via a Helm repository. Simply running <code>helm package .</code> will create the Helm package like so:</p>
+
+<pre><code class="language-console">$ mkdir pkg
+$ helm package -d pkg .
+Successfully packaged chart and saved it to: /tmp/petclinic/petclinic-0.1.0.tgz
+</code></pre>
+
+<p>These packages combined with an index file can be hosted on any static website (github pages is very common) to create a Helm Repository. You can generate the index file with:</p>
+
+<pre><code class="language-console">$ helm repo index pkg
+$ cat pkg/index.yaml
+apiVersion: v1
+entries:
+  petclinic:
+  - apiVersion: v1
+    appVersion: &quot;1.0&quot;
+    created: 2019-02-06T02:45:10.99990157-06:00
+    description: A Helm chart for Kubernetes
+    digest: 86f3740e6bc325ea330428e42af091d6613ca9b92678b3aecdf680f0302b4685
+    name: petclinic
+    urls:
+    - petclinic-0.1.0.tgz
+    version: 0.1.0
+generated: 2019-02-06T02:45:10.99955354-06:00
+</code></pre>
+
+<p>You can use any basic web server as a Helm repository, many folks are using <a href="https://github.com/int128/helm-github-pages">github pages</a> which is quite a clever way to host your Helm Repository right next to the actual code for your Helm chart.</p>
+
+<h1 id="step-5-use-a-helm-repository">Step 5 - Use a Helm Repository</h1>
+
+<p>I have created a more featureful Helm Chart designed specifically to generically run most Spring applications which can be found on my github repo <a href="https://github.com/paulczar/helm-chart-spring">helm-chart-spring</a>. It installs petclinic by default and has options to be able to automatically set up LoadBalancers and Ingress as well as more advanced kubernetes resources such as <code>podDisruptionBudgets</code>.</p>
+
+<p>You can install it straight from my Helm Repository like so:</p>
+
+<pre><code class="language-console">$ helm repo add paulczar http://tech.paulcz.net/helm-chart-spring/repo
+&quot;paulczar&quot; has been added to your repositories
+
+$ helm install --namespace test --name test \
+    paulczar/spring --set service.type=LoadBalancer \
+    --version 0.0.6
+</code></pre>
+
+<p>After a few moments you should be able to access the petclinic app via the LoadBalancer created by the above command.  Run <code>kubectl get svc</code> to find the IP:</p>
+
+<pre><code class="language-console">$ k get svc
+NAME          TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)        AGE
+test-spring   LoadBalancer   10.100.200.137   35.238.37.241   80:30509/TCP   89s
+</code></pre>
+
+<p>Point your browser at the <code>EXTERNAL-IP</code> value:</p>
+
+<p><img src="./kube-lb-pc.png" alt="petclinic" /></p>
+
+<p>Uninstall the Helm chart:</p>
+
+<pre><code class="language-console">$ helm delete --purge test
+release &quot;test&quot; deleted
+</code></pre>
+
+<h1 id="summary">Summary</h1>
+
+<p>Helm has made it incredibly easy to get started creating and customizing charts to install Applications on Kubernetes. By templating and packaging your Kubernetes manifests you get an easy to share package for your application and are able to enable a lot of deployment flexibility to deploy multiple releases of your application to one or many Kubernetes clusters and customize things like the service type giving you tremendous control over how people access it.</p>
+
+<p>Better yet, if you are looking to install an open source application you should first look to the <a href="https://hub.helm.sh/">Helm Hub</a> which is a public repository of hundreds of pre-packaged helm charts that install with just a few keypresses.</p>
+
+              <hr>
+              <div class="related-posts">
+                <h5>Related Posts</h5>
+                
+              </div>
+            </div>
+          </div>
+          <hr>
+        <div class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+
+    (function() {
+      
+      
+      if (window.location.hostname == "localhost")
+        return;
+
+      var disqus_shortname = '';
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+        </div>
+      
+      </div>
+    </div>
+
+    
+    <footer>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+      <a href="http://www.github.com/sumaxime/hugo-sustain/">sustain</a> with ♥</p>
+    </div>
+  </div>
+</footer>
+<div class="footer"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://tech.paulcz.net/js/docs.min.js"></script>
+<script src="https://tech.paulcz.net/js/main.js"></script>
+
+<script src="https://tech.paulcz.net/js/ie10-viewport-bug-workaround.js"></script>
+
+
+
+  </body>
+</html>
