@@ -6,10 +6,32 @@
     <description>Recent content on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 07 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 01 Mar 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://tech.paulcz.net/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Spring into Kubernetes - Using Kubernetes as a Config Server</title>
+      <link>https://tech.paulcz.net/blog/spring-into-kubernetes-config-server/</link>
+      <pubDate>Fri, 01 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/blog/spring-into-kubernetes-config-server/</guid>
+      <description>In previous installments of Spring into Kubernetes I&amp;rsquo;ve shown you how to build images, deploy applications and write a Helm Chart for Spring applications. In this installment we&amp;rsquo;ll look at Spring Cloud Kubernetes integrations, specifically using Kubernetes Config Maps as a Config Server.
+Usually I would use a Pivotal Container Service cluster to demonstrate, but in this demonstration I&amp;rsquo;ll use a local minikube cluster.
+Spring Cloud Kubernetes Spring Cloud Kubernetes brings in a ton of integrations with Kubernetes.</description>
+    </item>
+    
+    <item>
+      <title>Spring into Kubernetes - Using Kubernetes as a Config Server</title>
+      <link>https://tech.paulcz.net/2019/03/spring-into-kubernetes-config-server/</link>
+      <pubDate>Fri, 01 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/2019/03/spring-into-kubernetes-config-server/</guid>
+      <description>In previous installments of Spring into Kubernetes I&amp;rsquo;ve shown you how to build images, deploy applications and write a Helm Chart for Spring applications. In this installment we&amp;rsquo;ll look at Spring Cloud Kubernetes integrations, specifically using Kubernetes Config Maps as a Config Server.
+Usually I would use a Pivotal Container Service cluster to demonstrate, but in this demonstration I&amp;rsquo;ll use a local minikube cluster.
+Spring Cloud Kubernetes Spring Cloud Kubernetes brings in a ton of integrations with Kubernetes.</description>
+    </item>
     
     <item>
       <title>Spring into Kubernetes - Deploying with Helm</title>

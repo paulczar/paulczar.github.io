@@ -170,7 +170,7 @@ Forwarding from 127.0.0.1:8080 -&gt; 80
 <p>But this isn&rsquo;t Petclinic it&rsquo;s an empty nginx container. Since our petclinic app is pretty simple we can use this boilerplate chart to deploy Petclinic with just a few minor changes.</p>
 
 <ul>
-<li><p>The nginx app inside the container listens on port 80, petclinic listens on port 8080 so you&rsquo;ll need to edit the file <code>templates/deployment.yaml</code> and find the YAML <code>containerPort: 8080</code> under the container spec and change the value to <code>8080</code>.</p></li>
+<li><p>The nginx app inside the container listens on port 80, petclinic listens on port 8080 so you&rsquo;ll need to edit the file <code>templates/deployment.yaml</code> and find the YAML <code>containerPort: 80</code> under the container spec and change the value to <code>8080</code>.</p></li>
 
 <li><p>Also in the <code>templates/deployment.yaml</code> file you want to increase the initial timeout for the <code>livenessCheck</code> check as Java takes longer to be ready than nginx. Find the YAML key <code>livenessProbe:</code> and add the keypair <code>initialDelaySeconds: 60</code> to it.</p></li>
 </ul>
