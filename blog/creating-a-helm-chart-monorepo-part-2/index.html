@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="map[]" />
+    <meta name="description" content="Random musings mostly about tech">
+    <link rel="shortcut icon" type="image/x-icon" href="https://tech.paulcz.net/img/favicon.ico">
+    <title>Creating a Helm Chart Repository - Part 2</title>
+    <meta name="generator" content="Hugo 0.53" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://tech.paulcz.net/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-35638296-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  </head>
+
+  <body>
+    <div id="wrap">
+
+      
+      <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="https://tech.paulcz.net/"><i class="fa fa-home"></i></a>
+    </div>
+    <div id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+        <li><a href="/page/about">ABOUT</a></li>
+        
+        <li><a href="/blog/">BLOG</a></li>
+        
+        <li><a href="/page/resume">RESUME</a></li>
+        
+        <li><a href="https://speaking.paulcz.net/presentations">TALK</a></li>
+        
+      
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      
+      <div class="container">
+        <div class="blog-post">
+          <h3>
+            <strong><a href="https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-2/">Creating a Helm Chart Repository - Part 2</a></strong>
+          </h3>
+        </div>
+        <div class="blog-title">
+          <h4>
+          July 3, 2019
+            &nbsp;&nbsp;
+            
+          </h4>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="blogpost">
+              
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Welcome to a three part blog series on Creating a Helm Chart Repository. In <a href="/blog/creating-a-helm-chart-monorepo-part-1">part 1</a> of this series I demonstrated creating a helm chart repository using GitHub and GitHub Pages. In this <strong>part 2</strong> I will add Automation to automatically update the repository, and in <a href="/blog/creating-a-helm-chart-monorepo-part-3">part 2</a> I will add testing for changes to the charts themselves.</p>
+
+<h2 id="use-circle-ci-to-automate-helm-chart-updates">Use Circle CI to automate Helm Chart Updates</h2>
+
+<blockquote>
+<p>Note - You could use any other CI system here, I chose Circle as it is easy to integrate with github and has a free tier. If you do use a different CI system the scripts should still work, but you&rsquo;ll need to rewrite a config file suitable for your CI choice.</p>
+</blockquote>
+
+<p>Now that we&rsquo;ve successfully created a Helm Chart Repostiory using github and github pages we can move on to adding some Automation so that our Chart Repository is updated any time we push changes up to our master branch.</p>
+
+<p>Its pretty easy to create a new Circle CI account. You simply go to their website and hit <a href="https://circleci.com/signup/">sign-up</a>, it will ask you to log using github Oauth2 and once you&rsquo;ve given it access to your repositories you are good to go.</p>
+
+<p>Once logged in you need to hit the <strong>ADD Projects</strong> menu item and hit the <strong>set up project</strong> button next to <strong>my-helm-charts</strong>.</p>
+
+<p><img src="circle-add-project.png" alt="add project" /></p>
+
+<p>You can leave the defaults and just go down and click the <strong>Start Building</strong> button.</p>
+
+<p>It will attempt to run and fail because you don&rsquo;t have a <code>.circleci/config.yml</code> file in your repo yet. We&rsquo;ll create that soon.</p>
+
+<p>Before we do that though we need to create a private key for Circle CI with write access to our project. Hit the <strong>settings</strong> button on the top right of the <strong>Workflows -&gt; username -&gt; my-helm-charts</strong> screen tat looks like a little cog.</p>
+
+<p>From here you want to hit SSH permissions and hit <strong>Checkout SSH Keys</strong>.</p>
+
+<p>There should be a <strong>Add user key</strong> section with a button that says <strong>Authorize with GitHub</strong>, hit that button. To be extra certain it loads the same page and you need to click the <strong>Create and add [username] user key</strong> which will create a key and pass the public key off to github.</p>
+
+<p>On that same <strong>settings</strong> page you need to add some environment variables:</p>
+
+<p><img src="./circle-env-vars.png" alt="circle env vars" /></p>
+
+<p>Now its time to set up our Automation.</p>
+
+<h3 id="create-circle-ci-config-for-uploading-new-packages">Create Circle CI config for uploading new packages</h3>
+
+<p>Create a new directory <code>.circleci</code> and a file inside that called <code>config.yml</code>:</p>
+
+<pre><code class="language-bash">$ mkdir .circleci
+$ touch .circleci/config.yml
+</code></pre>
+
+<p>Write out the <code>config.yml</code> file like so:</p>
+
+<blockquote>
+<p>Note: this CircleCI config file creates two jobs, One to lint the shell scripts we&rsquo;re about to create, the other to release charts and copy documentation into our helm repo website. These tasks will run when code is pushed or merged into the <code>master</code> branch.</p>
+</blockquote>
+
+<h4 id="circleci-config-yml-https-github-com-paulczar-my-helm-charts-blob-part-2-circleci-config-yml"><a href="https://github.com/paulczar/my-helm-charts/blob/part-2/.circleci/config.yml">.circleci/config.yml</a></h4>
+
+<pre><code class="language-yaml">version: 2
+jobs:
+  lint-scripts:
+    docker:
+      - image: koalaman/shellcheck-alpine
+    steps:
+      - checkout
+      - run:
+          name: lint
+          command: shellcheck -x .circleci/*.sh
+  release-charts:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          command: |
+            echo &quot;export GIT_REPOSITORY_URL=$CIRCLE_REPOSITORY_URL&quot; &gt;&gt; $BASH_ENV
+            echo &quot;export GIT_USERNAME=$CIRCLE_PROJECT_USERNAME&quot; &gt;&gt; $BASH_ENV
+            echo &quot;export GIT_REPOSITORY_NAME=$CIRCLE_PROJECT_REPONAME&quot; &gt;&gt; $BASH_ENV
+            .circleci/install_tools.sh
+            .circleci/release.sh
+
+workflows:
+  version: 2
+  release:
+    jobs:
+      - lint-scripts
+      - release-charts:
+          filters:
+            tags:
+              ignore: /.*/
+            branches:
+              only: master
+</code></pre>
+
+<p>We referenced two scripts in the <code>config.yml</code> file, so we better create those. These scripts are a mix of ones that I have written, and have borrowed from others in the <a href="https://github.com/codecentric/helm-charts/blob/master/.circleci/release.sh">Helm Community</a>.</p>
+
+<h4 id="circleci-install-tools-sh-https-github-com-paulczar-my-helm-charts-blob-part-2-circleci-install-tools-sh"><a href="https://github.com/paulczar/my-helm-charts/blob/part-2/.circleci/install_tools.sh">.circleci/install_tools.sh</a></h4>
+
+<pre><code class="language-bash">#!/usr/bin/env bash
+
+set -o errexit
+
+readonly HELM_VERSION=2.13.1
+readonly CHART_RELEASER_VERSION=0.1.4
+
+echo &quot;Installing Helm...&quot;
+curl -LO &quot;https://kubernetes-helm.storage.googleapis.com/helm-v$HELM_VERSION-linux-amd64.tar.gz&quot;
+sudo mkdir -p &quot;/usr/local/helm-v$HELM_VERSION&quot;
+sudo tar -xzf &quot;helm-v$HELM_VERSION-linux-amd64.tar.gz&quot; -C &quot;/usr/local/helm-v$HELM_VERSION&quot;
+sudo ln -s &quot;/usr/local/helm-v$HELM_VERSION/linux-amd64/helm&quot; /usr/local/bin/helm
+rm -f &quot;helm-v$HELM_VERSION-linux-amd64.tar.gz&quot;
+helm init --client-only
+
+echo &quot;Installing chart-releaser...&quot;
+curl -LO &quot;https://github.com/helm/chart-releaser/releases/download/v${CHART_RELEASER_VERSION}/chart-releaser_${CHART_RELEASER_VERSION}_Linux_x86_64.tar.gz&quot;
+sudo mkdir -p &quot;/usr/local/chart-releaser-v$CHART_RELEASER_VERSION&quot;
+sudo tar -xzf &quot;chart-releaser_${CHART_RELEASER_VERSION}_Linux_x86_64.tar.gz&quot; -C &quot;/usr/local/chart-releaser-v$CHART_RELEASER_VERSION&quot;
+sudo ln -s &quot;/usr/local/chart-releaser-v$CHART_RELEASER_VERSION/chart-releaser&quot; /usr/local/bin/chart-releaser
+rm -f &quot;chart-releaser_${CHART_RELEASER_VERSION}_Linux_x86_64.tar.gz&quot;
+</code></pre>
+
+<h4 id="circleci-release-sh-https-github-com-paulczar-my-helm-charts-blob-part-2-circleci-release-sh"><a href="https://github.com/paulczar/my-helm-charts/blob/part-2/.circleci/release.sh">.circleci/release.sh</a></h4>
+
+<pre><code class="language-bash">#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+: &quot;${CH_TOKEN:?Environment variable CH_TOKEN must be set}&quot;
+: &quot;${GIT_REPOSITORY_URL:?Environment variable GIT_REPO_URL must be set}&quot;
+: &quot;${GIT_USERNAME:?Environment variable GIT_USERNAME must be set}&quot;
+: &quot;${GIT_EMAIL:?Environment variable GIT_EMAIL must be set}&quot;
+: &quot;${GIT_REPOSITORY_NAME:?Environment variable GIT_REPOSITORY_NAME must be set}&quot;
+
+readonly REPO_ROOT=&quot;${REPO_ROOT:-$(git rev-parse --show-toplevel)}&quot;
+
+main() {
+    pushd &quot;$REPO_ROOT&quot; &gt; /dev/null
+
+    echo &quot;Fetching tags...&quot;
+    git fetch --tags
+
+    local latest_tag
+    latest_tag=$(find_latest_tag)
+
+    local latest_tag_rev
+    latest_tag_rev=$(git rev-parse --verify &quot;$latest_tag&quot;)
+    echo &quot;$latest_tag_rev $latest_tag (latest tag)&quot;
+
+    local head_rev
+    head_rev=$(git rev-parse --verify HEAD)
+    echo &quot;$head_rev HEAD&quot;
+
+    if [[ &quot;$latest_tag_rev&quot; == &quot;$head_rev&quot; ]]; then
+        echo &quot;No code changes. Nothing to release.&quot;
+        exit
+    fi
+
+    rm -rf .deploy
+    mkdir -p .deploy
+
+    echo &quot;Identifying changed charts since tag '$latest_tag'...&quot;
+
+    local changed_charts=()
+    readarray -t changed_charts &lt;&lt;&lt; &quot;$(git diff --find-renames --name-only &quot;$latest_tag_rev&quot; -- charts | cut -d '/' -f 2 | uniq)&quot;
+
+    if [[ -n &quot;${changed_charts[*]}&quot; ]]; then
+        for chart in &quot;${changed_charts[@]}&quot;; do
+            echo &quot;Packaging chart '$chart'...&quot;
+            package_chart &quot;charts/$chart&quot;
+        done
+
+        release_charts
+        sleep 5
+        update_index
+    else
+        echo &quot;Nothing to do. No chart changes detected.&quot;
+    fi
+
+    popd &gt; /dev/null
+}
+
+find_latest_tag() {
+    if ! git describe --tags --abbrev=0 2&gt; /dev/null; then
+        git rev-list --max-parents=0 --first-parent HEAD
+    fi
+}
+
+package_chart() {
+    local chart=&quot;$1&quot;
+    helm dependency build &quot;$chart&quot;
+    helm package &quot;$chart&quot; --destination .deploy
+}
+
+release_charts() {
+    chart-releaser upload -o &quot;$GIT_USERNAME&quot; -r &quot;$GIT_REPOSITORY_NAME&quot; -p .deploy
+}
+
+update_index() {
+    chart-releaser index -o &quot;$GIT_USERNAME&quot; -r &quot;$GIT_REPOSITORY_NAME&quot; -p .deploy/index.yaml
+
+    git config user.email &quot;$GIT_EMAIL&quot;
+    git config user.name &quot;$GIT_USERNAME&quot;
+
+    for file in charts/*/*.md; do
+        if [[ -e $file ]]; then
+            mkdir -p &quot;.deploy/docs/$(dirname &quot;$file&quot;)&quot;
+            cp --force &quot;$file&quot; &quot;.deploy/docs/$(dirname &quot;$file&quot;)&quot;
+        fi
+    done
+
+    git checkout gh-pages
+    cp --force .deploy/index.yaml index.yaml
+
+    if [[ -e &quot;.deploy/docs/charts&quot; ]]; then
+        mkdir -p charts
+        cp --force --recursive .deploy/docs/charts/* charts/
+    fi
+
+    git checkout master -- README.md
+
+    if ! git diff --quiet; then
+        git add .
+        git commit --message=&quot;Update index.yaml&quot; --signoff
+        git push &quot;$GIT_REPOSITORY_URL&quot; gh-pages
+    fi
+}
+
+main
+</code></pre>
+
+<p>Add these new files to git and push them up to the <code>master</code> branch:</p>
+
+<pre><code class="language-bash">$ git add .
+
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)
+
+  new file:   .circleci/config.yml
+  new file:   .circleci/install_tools.sh
+  new file:   .circleci/release.sh
+
+$ git commit -m 'add circle ci scripts'
+
+$ git push origin master
+</code></pre>
+
+<p>This push should kick off a Circle CI job which will hopefully pass (I usually get it wrong the first few times).</p>
+
+<p><img src="./circle-first-job.png" alt="circle first job" /></p>
+
+<p>You&rsquo;ll notice there&rsquo;s a failed job, that&rsquo;s because when circleci sees the releases being updated it tries to run a job for the <code>gh-pages</code> branch that doesn&rsquo;t have a circle-ci config. We can use this sweet git trick to grab the one from the master branch:</p>
+
+<pre><code class="language-bash">$ git checkout gh-pages
+$ git pull origin gh-pages
+$ mkdir .circleci
+$ git checkout master -- .circleci/config.yml
+$ git add .circleci/config.yml
+$ git commit -m 'add circleci config'
+$ git push origin gh-pages
+</code></pre>
+
+<h3 id="validate-the-release-of-new-charts">Validate the release of new charts</h3>
+
+<p>So far we haven&rsquo;t actually changed our Helm Charts, so the automation hasn&rsquo;t created a new release. We can change this by bumping the chart version of one of them.  Edit <code>./charts/app1/Chart.yaml</code> and bump the version like so:</p>
+
+<pre><code class="language-yaml">apiVersion: v1
+appVersion: &quot;1.0&quot;
+description: A Helm chart for Kubernetes
+name: app1
+version: 0.1.1
+</code></pre>
+
+<p>Push this change up:</p>
+
+<pre><code class="language-bash">$ git add .
+$ git commit -m 'update app1 chart'
+$ git push origin master
+</code></pre>
+
+<p>You should see the new job show up in Circle and complete fairly quickly.</p>
+
+<p>Once the job has completed successfully you can check you now have a <code>myapp-0.1.1</code> release in your github repo and your helm repository now has <code>myapp-0.1.1</code> in its <code>index.yaml</code>.</p>
+
+<pre><code class="language-bash">$ curl http://tech.paulcz.net/my-helm-charts/index.yaml
+apiVersion: v1
+entries:
+  app1:
+  - apiVersion: v1
+    appVersion: &quot;1.0&quot;
+    created: &quot;2019-07-03T23:16:21.087774995Z&quot;
+    description: A Helm chart for Kubernetes
+    digest: 9fbf6f9d10fba82aa3b749875e137b283890136a7379efba2bbff0b645cb1c35
+    name: app1
+    urls:
+    - https://github.com/paulczar/my-helm-charts/releases/download/app1-0.1.1/app1-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v1
+    appVersion: &quot;1.0&quot;
+    created: &quot;2019-07-03T23:16:21.376254864Z&quot;
+    description: A Helm chart for Kubernetes
+    digest: 48cf831b72febeac2860a0be372094250aea68a9c76147c028085c8802dd48ec
+    name: app1
+    urls:
+    - https://github.com/paulczar/my-helm-charts/releases/download/app1-0.1.0/app1-0.1.0.tgz
+    version: 0.1.0
+  app2:
+  - apiVersion: v1
+    appVersion: &quot;1.0&quot;
+    created: &quot;2019-07-03T23:16:21.22793015Z&quot;
+    description: A Helm chart for Kubernetes
+    digest: 64b00fc4804aba524201f64e78ee22ad8e61d0923424f8e24e8b70befed88141
+    name: app2
+    urls:
+    - https://github.com/paulczar/my-helm-charts/releases/download/app2-0.1.0/app2-0.1.0.tgz
+    version: 0.1.0
+generated: &quot;2019-07-03T23:16:20.624914794Z&quot;
+</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>In <a href="/blog/creating-a-helm-chart-monorepo-part-1">Part 1</a> we created set of Helm Charts managed in source control (GitHub) and in Part 2 we just added automation via CircleCI to automate building and deploying Chart packages to a Helm Chart Repository hosted in GitHub pages and GitHub releases.</p>
+
+<p>In <a href="/blog/creating-a-helm-chart-monorepo-part-3">Part 3</a> we will add further automation to test for changes in those Helm charts and to pass them through rigorous testing before allowing them to be merged into the <code>master</code> branch.</p>
+
+              <hr>
+              <div class="related-posts">
+                <h5>Related Posts</h5>
+                
+              </div>
+            </div>
+          </div>
+          <hr>
+        <div class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+
+    (function() {
+      
+      
+      if (window.location.hostname == "localhost")
+        return;
+
+      var disqus_shortname = '';
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+        </div>
+      
+      </div>
+    </div>
+
+    
+    <footer>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+      <a href="http://www.github.com/sumaxime/hugo-sustain/">sustain</a> with ♥</p>
+    </div>
+  </div>
+</footer>
+<div class="footer"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://tech.paulcz.net/js/docs.min.js"></script>
+<script src="https://tech.paulcz.net/js/main.js"></script>
+
+<script src="https://tech.paulcz.net/js/ie10-viewport-bug-workaround.js"></script>
+
+
+
+  </body>
+</html>
