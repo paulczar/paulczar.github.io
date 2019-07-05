@@ -7,7 +7,7 @@
     <meta name="author" content="map[]" />
     <meta name="description" content="Random musings mostly about tech">
     <link rel="shortcut icon" type="image/x-icon" href="https://tech.paulcz.net/img/favicon.ico">
-    <title>Creating a Helm Chart Repository - Part 1</title>
+    <title>Creating a [Helm](https://helm.sh) Chart Repository - Part 1</title>
     <meta name="generator" content="Hugo 0.53" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://tech.paulcz.net/css/main.css" />
@@ -66,7 +66,7 @@ if (!doNotTrack) {
       <div class="container">
         <div class="blog-post">
           <h3>
-            <strong><a href="https://tech.paulcz.net/2019/07/creating-a-helm-chart-monorepo-part-1/">Creating a Helm Chart Repository - Part 1</a></strong>
+            <strong><a href="https://tech.paulcz.net/2019/07/creating-a-helm-chart-monorepo-part-1/">Creating a [Helm](https://helm.sh) Chart Repository - Part 1</a></strong>
           </h3>
         </div>
         <div class="blog-title">
@@ -83,19 +83,19 @@ if (!doNotTrack) {
 
 <h2 id="introduction">Introduction</h2>
 
-<p>Welcome to a three part blog series on Creating a Helm Chart Repository. In <strong>part 1</strong> I will demonstrate creating a helm chart repository using GitHub and GitHub Pages. In <a href="/blog/creating-a-helm-chart-monorepo-part-2">part 2</a> I will add Automation to automatically update the repository, and in <a href="/blog/creating-a-helm-chart-monorepo-part-3">part 3</a> I will add testing for changes to the charts themselves.</p>
+<p>Welcome to a three part blog series on Creating a <a href="https://helm.sh">Helm</a> Chart Repository. In <strong>part 1</strong> I will demonstrate creating a <a href="https://helm.sh">Helm</a> chart repository using <a href="https://github.com">GitHub</a> nd <a href="https://github.com">GitHub</a> ages. In <a href="/blog/creating-a-helm-chart-monorepo-part-2">part 2</a> I will add Automation to automatically update the repository, and in <a href="/blog/creating-a-helm-chart-monorepo-part-3">part 3</a> I will add testing for changes to the charts themselves.</p>
 
-<p>Helm is the defacto tool for packaging, sharing, and running Kubernetes Manifests. I&rsquo;m going to assume you know the basics of Helm and have used it before. There&rsquo;s plenty of great introductory topics around.</p>
+<p>Helm is the defacto tool for packaging, sharing, and running Kubernetes Manifests. I&rsquo;m going to assume you know the basics of <a href="https://helm.sh">Helm</a> and have used it before. There&rsquo;s plenty of great introductory topics around.</p>
 
-<p>You can host and share Helm Charts (packages) via a Helm Repository which is effectively a static website with an <code>index.yaml</code> providing metadata and links to the Helm Packages.</p>
+<p>You can host and share <a href="https://helm.sh">Helm</a> Charts (packages) via a <a href="https://helm.sh">Helm</a> Repository which is effectively a static website with an <code>index.yaml</code> providing metadata and links to the <a href="https://helm.sh">Helm</a> Packages.</p>
 
-<p>This makes hosting a repository perfectly suited to running in GitHub pages, s3, google cloud storage, etc. I like to use GitHub pages as it allows your source code and repo to live effectively in the same place.</p>
+<p>This makes hosting a repository perfectly suited to running in <a href="https://github.com">GitHub</a> ages, s3, google cloud storage, etc. I like to use <a href="https://github.com">GitHub</a> ages as it allows your source code and repo to live effectively in the same place.</p>
 
-<p>I will walk you through creating a new GitHub project hosting multiple helm charts and demonstrate how to set up Continuous Integration with CircleCI to automatically test and publish new changes to your Helm Charts.</p>
+<p>I will walk you through creating a new <a href="https://github.com">GitHub</a> roject hosting multiple <a href="https://helm.sh">Helm</a> charts and demonstrate how to set up Continuous Integration with CircleCI to automatically test and publish new changes to your <a href="https://helm.sh">Helm</a> Charts.</p>
 
-<h2 id="create-a-new-github-repository">Create a new GitHub Repository</h2>
+<h2 id="create-a-new-github-https-github-com-epository">Create a new <a href="https://github.com">GitHub</a> epository</h2>
 
-<p>Log into GitHub and <a href="https://github.com/new">create a new repository</a> called <code>my-helm-charts</code>. I chose to have GitHub create it as with an Apache2 License.</p>
+<p>Log into <a href="https://github.com">GitHub</a> nd <a href="https://github.com/new">create a new repository</a> called <code>my-helm-charts</code>. I chose to have <a href="https://github.com">GitHub</a> reate it as with an Apache2 License.</p>
 
 <p><img src="./github-new-repo.png" alt="Creating new repo" /></p>
 
@@ -119,7 +119,7 @@ $ tree
 0 directories, 2 files
 </code></pre>
 
-<p>You can see we have a default LICENSE file and a default README.md, we can leave them alone for now. Your next step is to create a couple of Helm charts. Since this is purely for demonstration purposes they don&rsquo;t have to be overly functional charts which means we can just use the default boilerplate created by <code>helm create</code>.</p>
+<p>You can see we have a default LICENSE file and a default README.md, we can leave them alone for now. Your next step is to create a couple of <a href="https://helm.sh">Helm</a> charts. Since this is purely for demonstration purposes they don&rsquo;t have to be overly functional charts which means we can just use the default boilerplate created by <code>helm create</code>.</p>
 
 <blockquote>
 <p>You do have <a href="https://github.com/helm/helm#install">helm</a> installed right?</p>
@@ -127,10 +127,10 @@ $ tree
 
 <pre><code class="language-bash">$ mkdir charts
 
-$ helm create charts/app1
+$ [Helm](https://helm.sh) create charts/app1
 Creating charts/app1
 
-$ helm create charts/app2
+$ [Helm](https://helm.sh) create charts/app2
 Creating charts/app2
 
 $ tree
@@ -190,11 +190,11 @@ To github.com:paulczar/my-helm-charts.git
    abdcced..2172141  master -&gt; master
 </code></pre>
 
-<h2 id="publish-your-helm-repository">Publish your Helm Repository</h2>
+<h2 id="publish-your-helm-https-helm-sh-repository">Publish your <a href="https://helm.sh">Helm</a> Repository</h2>
 
-<h3 id="prepare-github-pages">Prepare GitHub Pages</h3>
+<h3 id="prepare-github-https-github-com-ages">Prepare <a href="https://github.com">GitHub</a> ages</h3>
 
-<p>We&rsquo;re going to use a combination of GitHub pages and releases to host our Helm Repository. Therefore we need to ensure we have GitHub pages enabled on the git repo and to create an empty <code>gh-pages</code> branch.</p>
+<p>We&rsquo;re going to use a combination of <a href="https://github.com">GitHub</a> ages and releases to host our <a href="https://helm.sh">Helm</a> Repository. Therefore we need to ensure we have <a href="https://github.com">GitHub</a> ages enabled on the git repo and to create an empty <code>gh-pages</code> branch.</p>
 
 <p>You can create an empty <code>gh-pages</code> branch by creating an orphan branch like so:</p>
 
@@ -220,7 +220,7 @@ To github.com:paulczar/my-helm-charts.git
  * [new branch]      gh-pages -&gt; gh-pages
 </code></pre>
 
-<p>Next check that GitHub pages is enabled by clicking on your git repo settings in GitHub:</p>
+<p>Next check that <a href="https://github.com">GitHub</a> ages is enabled by clicking on your git repo settings in GitHub:</p>
 
 <p><img src="./github-pages.png" alt="github repo settings" /></p>
 
@@ -230,11 +230,11 @@ To github.com:paulczar/my-helm-charts.git
 
 <p>After a few minutes you should have a default rendering on your README.md at the provided URL:</p>
 
-<p><img src="./default-gh-pages.png" alt="default GitHub pages" /></p>
+<p><img src="./default-gh-pages.png" alt="default [GitHub](https://github.com) ages" /></p>
 
 <h3 id="introducing-chart-releaser">Introducing chart-releaser</h3>
 
-<p>You could use a combination of <code>helm package</code> and <code>helm repo</code> commands to construct your Helm repository by hand, or you can simplify your life by using <code>chart-releaser</code> which will not only create your packages, but will upload them as binaries into an appropriately versioned GitHub release.</p>
+<p>You could use a combination of <code>helm package</code> and <code>helm repo</code> commands to construct your <a href="https://helm.sh">Helm</a> repository by hand, or you can simplify your life by using <code>chart-releaser</code> which will not only create your packages, but will upload them as binaries into an appropriately versioned <a href="https://github.com">GitHub</a> elease.</p>
 
 <p>Download chart-releaser for your architecture [here].</p>
 
@@ -250,8 +250,8 @@ $ curl -sSL https://github.com/helm/chart-releaser/releases/download/v0.2.1/char
 $ mv cr ~/bin/cr
 
 $ cr help
-Create Helm chart repositories on GitHub Pages by uploading Chart packages
-and Chart metadata to GitHub Releases and creating a suitable index file
+Create [Helm](https://helm.sh) chart repositories on [GitHub](https://github.com) ages by uploading Chart packages
+and Chart metadata to [GitHub](https://github.com) Releases and creating a suitable index file
 
 Usage:
   cr [command]
@@ -269,7 +269,7 @@ Flags:
 Use &quot;cr [command] --help&quot; for more information about a command.
 </code></pre>
 
-<p>There are two commands we care about <code>cr index</code> and <code>cr upload</code>, the first will create an appropriate <code>index.yaml</code> and the second will upload the packages to GitHub releases. In order to do the latter you&rsquo;ll need to pass it in a GitHub token so that it can use the GitHub APIs.</p>
+<p>There are two commands we care about <code>cr index</code> and <code>cr upload</code>, the first will create an appropriate <code>index.yaml</code> and the second will upload the packages to <a href="https://github.com">GitHub</a> eleases. In order to do the latter you&rsquo;ll need to pass it in a <a href="https://github.com">GitHub</a> oken so that it can use the <a href="https://github.com">GitHub</a> PIs.</p>
 
 <p>In your browser go to your <a href="https://github.com/settings/tokens">github developer settings</a> and create a new personal access token.</p>
 
@@ -284,11 +284,11 @@ Use &quot;cr [command] --help&quot; for more information about a command.
 <pre><code class="language-bash">$  export CH_TOKEN=c4a4ed6ab91a246572b0c46c19c630ccadc1049
 </code></pre>
 
-<h3 id="create-and-upload-helm-packages">Create and Upload Helm Packages</h3>
+<h3 id="create-and-upload-helm-https-helm-sh-packages">Create and Upload <a href="https://helm.sh">Helm</a> Packages</h3>
 
 <p>Your next step is to create and upload the packages:</p>
 
-<pre><code class="language-bash">$ helm package charts/{app1,app2} --destination .deploy
+<pre><code class="language-bash">$ Helm package charts/{app1,app2} --destination .deploy
 Successfully packaged chart and saved it to: .deploy/app1-0.1.0.tgz
 Successfully packaged chart and saved it to: .deploy/app2-0.1.0.tgz
 </code></pre>
@@ -298,11 +298,11 @@ Successfully packaged chart and saved it to: .deploy/app2-0.1.0.tgz
 <pre><code class="language-bash">$ cr upload -o paulczar -r my-helm-charts -p .deploy
 </code></pre>
 
-<p>Check your github repository now has a releases page with two releases:</p>
+<p>Check your <a href="https://github.com">GitHub</a> epository now has a releases page with two releases:</p>
 
 <p><img src="./github-releases" alt="github releases page" /></p>
 
-<h3 id="create-and-upload-index-file-to-github-pages">Create and upload index file to GitHub pages</h3>
+<h3 id="create-and-upload-index-file-to-github-https-github-com-ages">Create and upload index file to <a href="https://github.com">GitHub</a> ages</h3>
 
 <p>Checkout your <code>gh-pages</code> branch and run <code>cr index</code>:</p>
 
@@ -319,7 +319,7 @@ $ cr index -i ./index.yaml -p .deploy --owner paulczar --repo my-helm-charts
 --&gt; Updating index ./index.yaml
 </code></pre>
 
-<p>There should now be a <code>index.yaml</code> file containing the details of your helm packages and the path to their archive:</p>
+<p>There should now be a <code>index.yaml</code> file containing the details of your <a href="https://helm.sh">Helm</a> packages and the path to their archive:</p>
 
 <pre><code class="language-bash">$ cat index.yaml
 apiVersion: v1
@@ -347,7 +347,7 @@ entries:
 generated: &quot;2019-07-03T13:03:05.685803874-05:00&quot;
 </code></pre>
 
-<p>Commit this to git and then wait a few minutes and check that it exists in your GitHub pages url:</p>
+<p>Commit this to git and then wait a few minutes and check that it exists in your <a href="https://github.com">GitHub</a> ages url:</p>
 
 <pre><code class="language-bash">$ git add index.yaml
 
@@ -362,11 +362,11 @@ To github.com:paulczar/my-helm-charts.git
    75f1fe8..696df18  gh-pages -&gt; gh-pages
 </code></pre>
 
-<p>Check it exists in GitHub pages:</p>
+<p>Check it exists in <a href="https://github.com">GitHub</a> ages:</p>
 
 <p><img src="github-pages-index-yaml.png" alt="github pages index.yaml" /></p>
 
-<h3 id="test-your-new-helm-repostiory">Test your new Helm Repostiory</h3>
+<h3 id="test-your-new-helm-https-helm-sh-repostiory">Test your new <a href="https://helm.sh">Helm</a> Repostiory</h3>
 
 <blockquote>
 <p>Note: To do this you&rsquo;ll need a Kubernetes cluster with Helm&rsquo;s tiller installed, but you already know how to do that right?</p>
@@ -433,9 +433,9 @@ release &quot;test&quot; deleted
 
 <p>Edit your README.md to provide details on how to use charts from your repository:</p>
 
-<pre><code class="language-markdown"># My Helm Charts
+<pre><code class="language-markdown"># My [Helm](https://helm.sh) Charts
 
-This repository contains Helm charts for various projects
+This repository contains [Helm](https://helm.sh) charts for various projects
 
 * [Application 1](charts/app1/)
 * [Application 2](charts/app2/)
@@ -465,7 +465,7 @@ $ git push origin master
 
 <h2 id="conclusion">Conclusion</h2>
 
-<p>That&rsquo;s the end of <strong>Part 1</strong> of this three part series. In future posts I will demonstrate adding <a href="/blog/creating-a-helm-chart-monorepo-part-2">automation</a> and <a href="/blog/creating-a-helm-chart-monorepo-part-3">testing</a> to this Helm chart repository.</p>
+<p>That&rsquo;s the end of <strong>Part 1</strong> of this three part series. In future posts I will demonstrate adding <a href="/blog/creating-a-helm-chart-monorepo-part-2">automation</a> and <a href="/blog/creating-a-helm-chart-monorepo-part-3">testing</a> to this <a href="https://helm.sh">Helm</a> chart repository.</p>
 
               <hr>
               <div class="related-posts">

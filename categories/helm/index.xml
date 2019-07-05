@@ -12,63 +12,63 @@
     
     
     <item>
-      <title>Creating a Helm Chart Repository - Part 1</title>
+      <title>Creating a [Helm](https://helm.sh) Chart Repository - Part 1</title>
       <link>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-1/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
       
       <guid>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-1/</guid>
-      <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 I will demonstrate creating a helm chart repository using GitHub and GitHub Pages. In part 2 I will add Automation to automatically update the repository, and in part 3 I will add testing for changes to the charts themselves.
+      <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 I will demonstrate creating a Helm chart repository using GitHub nd GitHub ages. In part 2 I will add Automation to automatically update the repository, and in part 3 I will add testing for changes to the charts themselves.
 Helm is the defacto tool for packaging, sharing, and running Kubernetes Manifests. I&amp;rsquo;m going to assume you know the basics of Helm and have used it before.</description>
     </item>
     
     <item>
-      <title>Creating a Helm Chart Repository - Part 1</title>
+      <title>Creating a [Helm](https://helm.sh) Chart Repository - Part 1</title>
       <link>https://tech.paulcz.net/2019/07/creating-a-helm-chart-monorepo-part-1/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
       
       <guid>https://tech.paulcz.net/2019/07/creating-a-helm-chart-monorepo-part-1/</guid>
-      <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 I will demonstrate creating a helm chart repository using GitHub and GitHub Pages. In part 2 I will add Automation to automatically update the repository, and in part 3 I will add testing for changes to the charts themselves.
+      <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 I will demonstrate creating a Helm chart repository using GitHub nd GitHub ages. In part 2 I will add Automation to automatically update the repository, and in part 3 I will add testing for changes to the charts themselves.
 Helm is the defacto tool for packaging, sharing, and running Kubernetes Manifests. I&amp;rsquo;m going to assume you know the basics of Helm and have used it before.</description>
     </item>
     
     <item>
-      <title>Creating a Helm Chart Repository - Part 2</title>
+      <title>Creating a [Helm](https://helm.sh) Chart Repository - Part 2</title>
       <link>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-2/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
       
       <guid>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-2/</guid>
-      <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 of this series I demonstrated creating a helm chart repository using GitHub and GitHub Pages. In this part 2 I will add Automation to automatically update the repository, and in part 2 I will add testing for changes to the charts themselves.
-Use Circle CI to automate Helm Chart Updates  Note - You could use any other CI system here, I chose Circle as it is easy to integrate with github and has a free tier.</description>
+      <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 of this series I demonstrated creating a Helm chart repository using GitHuband GitHubPages. In this part 2 I will add Automation to automatically update the repository, and in part 2 I will add testing for changes to the charts themselves.
+Use Circle CI to automate Helm Chart Updates  Note - You could use any other CI system here, I chose Circle as it is easy to integrate with GitHuband has a free tier.</description>
     </item>
     
     <item>
-      <title>Creating a Helm Chart Repository - Part 2</title>
+      <title>Creating a [Helm](https://helm.sh) Chart Repository - Part 2</title>
       <link>https://tech.paulcz.net/2019/07/creating-a-helm-chart-monorepo-part-2/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
       
       <guid>https://tech.paulcz.net/2019/07/creating-a-helm-chart-monorepo-part-2/</guid>
-      <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 of this series I demonstrated creating a helm chart repository using GitHub and GitHub Pages. In this part 2 I will add Automation to automatically update the repository, and in part 2 I will add testing for changes to the charts themselves.
-Use Circle CI to automate Helm Chart Updates  Note - You could use any other CI system here, I chose Circle as it is easy to integrate with github and has a free tier.</description>
+      <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 of this series I demonstrated creating a Helm chart repository using GitHuband GitHubPages. In this part 2 I will add Automation to automatically update the repository, and in part 2 I will add testing for changes to the charts themselves.
+Use Circle CI to automate Helm Chart Updates  Note - You could use any other CI system here, I chose Circle as it is easy to integrate with GitHuband has a free tier.</description>
     </item>
     
     <item>
-      <title>Creating a Helm Chart Repository - Part 3</title>
+      <title>Creating a [Helm](https://helm.sh) Chart Repository - Part 3</title>
       <link>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-3/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
       
       <guid>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-3/</guid>
-      <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 of this series I demonstrated creating a helm chart repository using GitHub and GitHub Pages. In part 2 I will add Automation to automatically update the repository, and in part 3 I will add testing for changes to the charts themselves.
-Use Circle CI to test Helm Charts  Note - You could use any other CI system here, I chose Circle as it is easy to integrate with github and has a free tier.</description>
+      <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 of this series I demonstrated creating a Helm chart repository using GitHub nd GitHub ages. In part 2 I will add Automation to automatically update the repository, and in part 3 I will add testing for changes to the charts themselves.
+Use Circle CI to test Helm Charts  Note - You could use any other CI system here, I chose Circle as it is easy to integrate with GitHub nd has a free tier.</description>
     </item>
     
     <item>
-      <title>Creating a Helm Chart Repository - Part 3</title>
+      <title>Creating a [Helm](https://helm.sh) Chart Repository - Part 3</title>
       <link>https://tech.paulcz.net/2019/07/creating-a-helm-chart-monorepo-part-3/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
       
       <guid>https://tech.paulcz.net/2019/07/creating-a-helm-chart-monorepo-part-3/</guid>
-      <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 of this series I demonstrated creating a helm chart repository using GitHub and GitHub Pages. In part 2 I will add Automation to automatically update the repository, and in part 3 I will add testing for changes to the charts themselves.
-Use Circle CI to test Helm Charts  Note - You could use any other CI system here, I chose Circle as it is easy to integrate with github and has a free tier.</description>
+      <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 of this series I demonstrated creating a Helm chart repository using GitHub nd GitHub ages. In part 2 I will add Automation to automatically update the repository, and in part 3 I will add testing for changes to the charts themselves.
+Use Circle CI to test Helm Charts  Note - You could use any other CI system here, I chose Circle as it is easy to integrate with GitHub nd has a free tier.</description>
     </item>
     
     <item>
