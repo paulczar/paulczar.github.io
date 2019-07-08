@@ -12,7 +12,7 @@
     
     
     <item>
-      <title>Creating a [Helm](https://helm.sh) Chart Repository - Part 1</title>
+      <title>Creating a Helm Chart Repository - Part 1</title>
       <link>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-1/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
       
@@ -22,7 +22,7 @@ Helm is the defacto tool for packaging, sharing, and running Kubernetes Manifest
     </item>
     
     <item>
-      <title>Creating a [Helm](https://helm.sh) Chart Repository - Part 1</title>
+      <title>Creating a Helm Chart Repository - Part 1</title>
       <link>https://tech.paulcz.net/2019/07/creating-a-helm-chart-monorepo-part-1/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
       
@@ -32,7 +32,7 @@ Helm is the defacto tool for packaging, sharing, and running Kubernetes Manifest
     </item>
     
     <item>
-      <title>Creating a [Helm](https://helm.sh) Chart Repository - Part 2</title>
+      <title>Creating a Helm Chart Repository - Part 2</title>
       <link>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-2/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
       
@@ -42,7 +42,7 @@ Use Circle CI to automate Helm Chart Updates  Note - You could use any other CI 
     </item>
     
     <item>
-      <title>Creating a [Helm](https://helm.sh) Chart Repository - Part 2</title>
+      <title>Creating a Helm Chart Repository - Part 2</title>
       <link>https://tech.paulcz.net/2019/07/creating-a-helm-chart-monorepo-part-2/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
       
@@ -52,7 +52,7 @@ Use Circle CI to automate Helm Chart Updates  Note - You could use any other CI 
     </item>
     
     <item>
-      <title>Creating a [Helm](https://helm.sh) Chart Repository - Part 3</title>
+      <title>Creating a Helm Chart Repository - Part 3</title>
       <link>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-3/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
       
@@ -62,7 +62,7 @@ Use Circle CI to test Helm Charts  Note - You could use any other CI system here
     </item>
     
     <item>
-      <title>Creating a [Helm](https://helm.sh) Chart Repository - Part 3</title>
+      <title>Creating a Helm Chart Repository - Part 3</title>
       <link>https://tech.paulcz.net/2019/07/creating-a-helm-chart-monorepo-part-3/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
       
