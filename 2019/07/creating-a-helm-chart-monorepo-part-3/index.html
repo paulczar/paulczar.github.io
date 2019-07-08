@@ -83,12 +83,12 @@ if (!doNotTrack) {
 
 <h2 id="introduction">Introduction</h2>
 
-<p>Welcome to a three part blog series on Creating a <a href="https://helm.sh">Helm</a> Chart Repository. In <a href="/blog/creating-a-helm-chart-monorepo-part-1">part 1</a> of this series I demonstrated creating a <a href="https://helm.sh">Helm</a> chart repository using <a href="https://github.com">GitHub</a> nd <a href="https://github.com">GitHub</a> ages. In <a href="/blog/creating-a-helm-chart-monorepo-part-2">part 2</a> I will add Automation to automatically update the repository, and in <strong>part 3</strong> I will add testing for changes to the charts themselves.</p>
+<p>Welcome to a three part blog series on Creating a <a href="https://helm.sh">Helm</a> Chart Repository. In <a href="/blog/creating-a-helm-chart-monorepo-part-1">part 1</a> of this series I demonstrated creating a <a href="https://helm.sh">Helm</a> chart repository using <a href="https://github.com">GitHub</a> and <a href="https://github.com">GitHub</a> Pages. In <a href="/blog/creating-a-helm-chart-monorepo-part-2">part 2</a> I will add Automation to automatically update the repository, and in <strong>part 3</strong> I will add testing for changes to the charts themselves.</p>
 
 <h2 id="use-circle-ci-to-test-helm-https-helm-sh-charts">Use Circle CI to test <a href="https://helm.sh">Helm</a> Charts</h2>
 
 <blockquote>
-<p>Note - You could use any other CI system here, I chose Circle as it is easy to integrate with <a href="https://github.com">GitHub</a> nd has a free tier. If you do use a different CI system the scripts should still work, but you&rsquo;ll need to rewrite a config file suitable for your CI choice.</p>
+<p>Note - You could use any other CI system here, I chose Circle as it is easy to integrate with <a href="https://github.com">GitHub</a> and has a free tier. If you do use a different CI system the scripts should still work, but you&rsquo;ll need to rewrite a config file suitable for your CI choice.</p>
 </blockquote>
 
 <h3 id="introducing-chart-testing">Introducing Chart Testing</h3>
@@ -348,7 +348,7 @@ $ git push origin update-app2-chart
 <p>Note: Since this was a branch, the charts were not released to the Chart Repository as that job is only triggered on the <code>master branch</code>.</p>
 </blockquote>
 
-<p>Next you&rsquo;ll want to create a pull request for this change, you can do that via the <a href="https://github.com">GitHub</a> eb ui:</p>
+<p>Next you&rsquo;ll want to create a pull request for this change, you can do that via the <a href="https://github.com">GitHub</a> web ui:</p>
 
 <p><img src="github-pull-request.png" alt="github pull request" /></p>
 
@@ -379,9 +379,9 @@ entries:
 
 <h2 id="testing-pull-requests">Testing Pull Requests</h2>
 
-<p>In the advanced settings of Circle CI you can tell it to automatically test Pull Requests that come from forks of your <a href="https://github.com">GitHub</a> epository. Adding this is a great feature if you want others to work on your code with you. However you do need to protect your secrets.</p>
+<p>In the advanced settings of Circle CI you can tell it to automatically test Pull Requests that come from forks of your <a href="https://github.com">GitHub</a> repository. Adding this is a great feature if you want others to work on your code with you. However you do need to protect your secrets.</p>
 
-<p>For example a bad actor could add &ldquo;echo $CH_TOKEN&rdquo; to one of the scripts and steal my <a href="https://github.com">GitHub</a> oken which they could then use to mess with my Repositories.</p>
+<p>For example a bad actor could add &ldquo;echo $CH_TOKEN&rdquo; to one of the scripts and steal my <a href="https://github.com">GitHub</a> token which they could then use to mess with my Repositories.</p>
 
 <p>For that reason I&rsquo;ve opted not to include that in this example.</p>
 
@@ -389,7 +389,7 @@ entries:
 
 <p>In <a href="/blog/creating-a-helm-chart-monorepo-part-1">Part 1</a> we created set of <a href="https://helm.sh">Helm</a> Charts managed in source control (GitHub).</p>
 
-<p>In <a href="/blog/creating-a-helm-chart-monorepo-part-2">Part 2</a> we added automation via CircleCI to automate building and deploying Chart packages to a <a href="https://helm.sh">Helm</a> Chart Repository hosted in <a href="https://github.com">GitHub</a> ages and <a href="https://github.com">GitHub</a> eleases.</p>
+<p>In <a href="/blog/creating-a-helm-chart-monorepo-part-2">Part 2</a> we added automation via CircleCI to automate building and deploying Chart packages to a <a href="https://helm.sh">Helm</a> Chart Repository hosted in <a href="https://github.com">GitHub</a> Pages and <a href="https://github.com">GitHub</a> Releases.</p>
 
 <p>In <strong>Part 3</strong> we added further automation to test changes in those <a href="https://helm.sh">Helm</a> charts and to pass them through rigorous testing before allowing them to be merged into the <code>master</code> branch.</p>
 
