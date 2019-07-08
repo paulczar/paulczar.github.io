@@ -99,6 +99,10 @@ if (!doNotTrack) {
 
 <h3 id="creat-a-chart-testing-script-and-update-circle-ci-config">Creat a Chart Testing script and update Circle CI config</h3>
 
+<blockquote>
+<p>Note: While I would usually use <a href="https://concourse-ci.org/">Concourse CI</a> for my CI workflows, I wanted to <em>only</em> use managed services and I chose Circle as that is already commonly used in the Helm community.</p>
+</blockquote>
+
 <p>We need to add a new script, a chart-testing config file, and update the Circle CI config file.</p>
 
 <h4 id="circleci-config-yaml-https-github-com-paulczar-my-helm-charts-blob-part-2-circleci-config-yaml"><a href="https://github.com/paulczar/my-helm-charts/blob/part-2/.circleci/config.yaml">./circleci/config.yaml</a></h4>

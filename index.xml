@@ -38,7 +38,7 @@ Helm is the defacto tool for packaging, sharing, and running Kubernetes Manifest
       
       <guid>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-2/</guid>
       <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 of this series I demonstrated creating a Helm chart repository using GitHuband GitHubPages. In this part 2 I will add Automation to automatically update the repository, and in part 2 I will add testing for changes to the charts themselves.
-Use Circle CI to automate Helm Chart Updates  Note - You could use any other CI system here, I chose Circle as it is easy to integrate with GitHuband has a free tier.</description>
+Use Circle CI to automate Helm Chart Updates  Note: While I would usually use Concourse CI for my CI workflows, I wanted to only use managed services and I chose Circle as that is already commonly used in the Helm community.</description>
     </item>
     
     <item>
@@ -48,7 +48,7 @@ Use Circle CI to automate Helm Chart Updates  Note - You could use any other CI 
       
       <guid>https://tech.paulcz.net/2019/07/creating-a-helm-chart-monorepo-part-2/</guid>
       <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 of this series I demonstrated creating a Helm chart repository using GitHuband GitHubPages. In this part 2 I will add Automation to automatically update the repository, and in part 2 I will add testing for changes to the charts themselves.
-Use Circle CI to automate Helm Chart Updates  Note - You could use any other CI system here, I chose Circle as it is easy to integrate with GitHuband has a free tier.</description>
+Use Circle CI to automate Helm Chart Updates  Note: While I would usually use Concourse CI for my CI workflows, I wanted to only use managed services and I chose Circle as that is already commonly used in the Helm community.</description>
     </item>
     
     <item>
