@@ -105,6 +105,10 @@ if (!doNotTrack) {
 
 <p>Create two new jobs:</p>
 
+<blockquote>
+<p>These scripts and configs were heavily borrowed from <a href="https://twitter.com/unguiculus">Reinhard Nägele</a> who is a primary maintainer of both <a href="https://github.com/helm/chart-testing">chart-testing</a> and <a href="https://github.com/helm/chart-releaser">chart-releaser</a>.</p>
+</blockquote>
+
 <p>The first job tells Chart Testing to lint the charts according to the <a href="https://helm.sh">Helm</a> Community <a href="https://helm.sh/docs/chart_best_practices/">Best Practices Guide</a>.</p>
 
 <p>The second job tells Chart Testing to actually install and test the charts using KIND (Kubernetes IN Docker).</p>
