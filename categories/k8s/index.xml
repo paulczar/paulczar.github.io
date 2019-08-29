@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>K8s on Paul Czarkowski</title>
+    <title>k8s on Paul Czarkowski</title>
     <link>https://tech.paulcz.net/categories/k8s/</link>
-    <description>Recent content in K8s on Paul Czarkowski</description>
+    <description>Recent content in k8s on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 06 Oct 2017 00:00:00 +0000</lastBuildDate>
@@ -22,31 +22,11 @@
     </item>
     
     <item>
-      <title>Building a Habitat Supervisor for Kubernetes</title>
-      <link>https://tech.paulcz.net/2017/10/habitat-supervisors-in-kubernetes/</link>
-      <pubDate>Fri, 06 Oct 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/2017/10/habitat-supervisors-in-kubernetes/</guid>
-      <description>Habitat is a project from Chef that provides you a reasonably simple way to build, package, and configure your application.
- &amp;ldquo;Habitat is an integrated solution to building, running, and maintaining your application throughout its lifetime. It builds your application and its services into immutable artifacts with declarative dependencies, and then provides automatic rebuilds of your application and its services as your application code and dependencies have upstream updates.&amp;rdquo; - Habitat Getting Started Guide.</description>
-    </item>
-    
-    <item>
       <title>Writing Your First Helm Chart</title>
       <link>https://tech.paulcz.net/blog/getting-started-with-helm/</link>
       <pubDate>Tue, 03 Oct 2017 00:00:00 +0000</pubDate>
       
       <guid>https://tech.paulcz.net/blog/getting-started-with-helm/</guid>
-      <description>I recently found myself writing instructions on how to deploy an application to several Kubernetes platform and ended up writing a different Kubernetes manifests for each platform. 95% of the content was the same with just a few different directives based on how the particular platform handles ingress, or if we needed a Registry secret or a TLS certificate.
-Kubernetes manifests are very declarative and don&amp;rsquo;t offer any way to put conditionals or variables that could be set in them.</description>
-    </item>
-    
-    <item>
-      <title>Writing Your First Helm Chart</title>
-      <link>https://tech.paulcz.net/2017/10/getting-started-with-helm/</link>
-      <pubDate>Tue, 03 Oct 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/2017/10/getting-started-with-helm/</guid>
       <description>I recently found myself writing instructions on how to deploy an application to several Kubernetes platform and ended up writing a different Kubernetes manifests for each platform. 95% of the content was the same with just a few different directives based on how the particular platform handles ingress, or if we needed a Registry secret or a TLS certificate.
 Kubernetes manifests are very declarative and don&amp;rsquo;t offer any way to put conditionals or variables that could be set in them.</description>
     </item>

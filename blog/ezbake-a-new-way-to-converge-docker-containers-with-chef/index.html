@@ -8,7 +8,7 @@
     <meta name="description" content="Random musings mostly about tech">
     <link rel="shortcut icon" type="image/x-icon" href="https://tech.paulcz.net/img/favicon.ico">
     <title>EZBake - A new way to converge docker containers with chef</title>
-    <meta name="generator" content="Hugo 0.53" />
+    <meta name="generator" content="Hugo 0.56.3" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://tech.paulcz.net/css/main.css" />
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
@@ -97,15 +97,15 @@ if (!doNotTrack) {
 <li>Converging a container using a local chef recipe</li>
 <li>Committing the container to an image on completion</li>
 <li>Removing the build container</li>
-<li>Running the new image</li>
-</ul>
+
+<li><p>Running the new image</p>
 
 <pre><code>$ git clone paulczar/ezbake
 $ cd ezbake/examples
 $ ID=$(tar cf - . | sudo docker run -i -a stdin paulczar/ezbake) \
-  &amp;&amp; sudo docker attach $ID \
-  &amp;&amp; sudo docker commit $ID java7 
-  &amp;&amp; sudo docker rm $ID
+&amp;&amp; sudo docker attach $ID \
+&amp;&amp; sudo docker commit $ID java7 
+&amp;&amp; sudo docker rm $ID
 
 Running Berkshelf to collect your cookbooks:
 Installing java (1.22.0) from site: 'http://cookbooks.opscode.com/api/v1/cookbooks'
@@ -121,7 +121,8 @@ java version &quot;1.7.0_51&quot;
 Java(TM) SE Runtime Environment (build 1.7.0_51-b13)
 Java HotSpot(TM) 64-Bit Server VM (build 24.51-b03, mixed mode)
 
-</code></pre>
+</code></pre></li>
+</ul>
 
 <p>This could easily be built into a CI pipeline.   a git webhook could call jenkins which would clone the repo and then use a command like  <code>git archive master | docker run -i -a stdin paulczar/ezbake</code> to converge a container from it.</p>
 

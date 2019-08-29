@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>actions on Paul Czarkowski</title>
+    <link>https://tech.paulcz.net/categories/actions/</link>
+    <description>Recent content in actions on Paul Czarkowski</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 29 Aug 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://tech.paulcz.net/categories/actions/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Introduction to GitHub Actions</title>
+      <link>https://tech.paulcz.net/blog/intro-to-github-actions/</link>
+      <pubDate>Thu, 29 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/blog/intro-to-github-actions/</guid>
+      <description>After what seems like an eternity I finally got added to the GitHub Actions beta a few days ago.
+I recently created a Hugo website for learning Kubernetes called k8s.camp which is hosted in GitHub Pages and I figured that switching it from CircleCI to GitHub Actions would be a great way to learn Actions.
+Before I get started I do want to mention that my experience as a new user trying to learn how actions work was sub-optimal.</description>
+    </item>
+    
+  </channel>
+</rss>

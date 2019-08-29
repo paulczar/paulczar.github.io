@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Runit on Paul Czarkowski</title>
+    <title>runit on Paul Czarkowski</title>
     <link>https://tech.paulcz.net/categories/runit/</link>
-    <description>Recent content in Runit on Paul Czarkowski</description>
+    <description>Recent content in runit on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 20 Oct 2013 00:00:00 +0000</lastBuildDate>
@@ -17,17 +17,6 @@
       <pubDate>Sun, 20 Oct 2013 00:00:00 +0000</pubDate>
       
       <guid>https://tech.paulcz.net/blog/managing-docker-services-with-this-one-easy-trick/</guid>
-      <description>&lt;p&gt;I have been having a lot of internal debate about the idea of running more than one service in a docker container.   A Docker container is built to run a single process in the foreground and to live for only as long as that process is running.  This is great in a utopian world where servers are immutable and sysadmins drink tiki drinks on the beach,  however it doesn&amp;rsquo;t always translate well to the real world.&lt;/p&gt;
-
-&lt;p&gt;Examples where you might want to be able to run multiple servers span from the simple use case of running &lt;code&gt;sshd&lt;/code&gt; as well as your application to running a web app such as &lt;code&gt;wordpress&lt;/code&gt; where you might want both &lt;code&gt;apache&lt;/code&gt; and &lt;code&gt;mysql&lt;/code&gt; running in the same container.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Managing docker services with this one easy trick</title>
-      <link>https://tech.paulcz.net/2013/10/managing-docker-services-with-this-one-easy-trick/</link>
-      <pubDate>Sun, 20 Oct 2013 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/2013/10/managing-docker-services-with-this-one-easy-trick/</guid>
       <description>&lt;p&gt;I have been having a lot of internal debate about the idea of running more than one service in a docker container.   A Docker container is built to run a single process in the foreground and to live for only as long as that process is running.  This is great in a utopian world where servers are immutable and sysadmins drink tiki drinks on the beach,  however it doesn&amp;rsquo;t always translate well to the real world.&lt;/p&gt;
 
 &lt;p&gt;Examples where you might want to be able to run multiple servers span from the simple use case of running &lt;code&gt;sshd&lt;/code&gt; as well as your application to running a web app such as &lt;code&gt;wordpress&lt;/code&gt; where you might want both &lt;code&gt;apache&lt;/code&gt; and &lt;code&gt;mysql&lt;/code&gt; running in the same container.&lt;/p&gt;</description>

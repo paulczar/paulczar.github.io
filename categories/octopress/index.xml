@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Octopress on Paul Czarkowski</title>
+    <title>octopress on Paul Czarkowski</title>
     <link>https://tech.paulcz.net/categories/octopress/</link>
-    <description>Recent content in Octopress on Paul Czarkowski</description>
+    <description>Recent content in octopress on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 15 Dec 2012 00:00:00 +0000</lastBuildDate>
@@ -17,17 +17,6 @@
       <pubDate>Sat, 15 Dec 2012 00:00:00 +0000</pubDate>
       
       <guid>https://tech.paulcz.net/blog/creating-a-github-pages-blog-with-octopress/</guid>
-      <description>&lt;p&gt;A lot of tech bloggers will write their blog posts in &lt;a href=&#34;http://daringfireball.net/projects/markdown/&#34;&gt;Markdown&lt;/a&gt;, convert it to HTML and paste that HTML into their blog of choice and then in the blog&amp;rsquo;s editor clean it up to suit their blog.   This is an excellent way to create easy to read portable documents that can easily be published in multiple formats.&lt;/p&gt;
-
-&lt;p&gt;However what if there was a way to skip the second part of that and just create a markdown page, submit it into your source control ( you &lt;em&gt;do&lt;/em&gt; use source control right? ) and your blog would automagically update.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Creating a Github Pages Blog With Octopress</title>
-      <link>https://tech.paulcz.net/2012/12/creating-a-github-pages-blog-with-octopress/</link>
-      <pubDate>Sat, 15 Dec 2012 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/2012/12/creating-a-github-pages-blog-with-octopress/</guid>
       <description>&lt;p&gt;A lot of tech bloggers will write their blog posts in &lt;a href=&#34;http://daringfireball.net/projects/markdown/&#34;&gt;Markdown&lt;/a&gt;, convert it to HTML and paste that HTML into their blog of choice and then in the blog&amp;rsquo;s editor clean it up to suit their blog.   This is an excellent way to create easy to read portable documents that can easily be published in multiple formats.&lt;/p&gt;
 
 &lt;p&gt;However what if there was a way to skip the second part of that and just create a markdown page, submit it into your source control ( you &lt;em&gt;do&lt;/em&gt; use source control right? ) and your blog would automagically update.&lt;/p&gt;</description>

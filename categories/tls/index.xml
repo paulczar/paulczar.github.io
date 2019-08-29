@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tls on Paul Czarkowski</title>
+    <title>tls on Paul Czarkowski</title>
     <link>https://tech.paulcz.net/categories/tls/</link>
-    <description>Recent content in Tls on Paul Czarkowski</description>
+    <description>Recent content in tls on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 03 Jan 2016 14:44:30 -0600</lastBuildDate>
@@ -17,16 +17,6 @@
       <pubDate>Sun, 03 Jan 2016 14:44:30 -0600</pubDate>
       
       <guid>https://tech.paulcz.net/blog/secure-docker-with-tls/</guid>
-      <description>By default Docker (and by extension Docker Swarm) has no authentication or authorization on its API, relying instead on the filesystem security of its unix socket /var/run/docker.sock which by default is only accessible by the root user.
-This is fine for the basic use case of the default behavior of only accessing the Docker API on the local machine via the socket as the root user. However if you wish to use the Docker API over TCP then you&amp;rsquo;ll want to secure it so that you don&amp;rsquo;t give out root access to anyone that happens to poke you on the TCP port.</description>
-    </item>
-    
-    <item>
-      <title>Securing Docker with TLS certificates</title>
-      <link>https://tech.paulcz.net/2016/01/secure-docker-with-tls/</link>
-      <pubDate>Sun, 03 Jan 2016 14:44:30 -0600</pubDate>
-      
-      <guid>https://tech.paulcz.net/2016/01/secure-docker-with-tls/</guid>
       <description>By default Docker (and by extension Docker Swarm) has no authentication or authorization on its API, relying instead on the filesystem security of its unix socket /var/run/docker.sock which by default is only accessible by the root user.
 This is fine for the basic use case of the default behavior of only accessing the Docker API on the local machine via the socket as the root user. However if you wish to use the Docker API over TCP then you&amp;rsquo;ll want to secure it so that you don&amp;rsquo;t give out root access to anyone that happens to poke you on the TCP port.</description>
     </item>

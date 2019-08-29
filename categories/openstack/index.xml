@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Openstack on Paul Czarkowski</title>
+    <title>openstack on Paul Czarkowski</title>
     <link>https://tech.paulcz.net/categories/openstack/</link>
-    <description>Recent content in Openstack on Paul Czarkowski</description>
+    <description>Recent content in openstack on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 02 Jan 2016 13:00:42 -0600</lastBuildDate>
@@ -17,16 +17,6 @@
       <pubDate>Sat, 02 Jan 2016 13:00:42 -0600</pubDate>
       
       <guid>https://tech.paulcz.net/blog/openstacks-and-ecosystems/</guid>
-      <description>I have recently had a number of lengthy discussions on the Twitter about Interop, Users, and Ecosystems. Specifically about our need to focus on the OpenStack ecosystem to extend the OpenStack IaaS user experience to something a bit more platform[ish].
-I wrote a post for SysAdvent this year on developing applications on top of OpenStack using a collection of OpenSource tools to create a PaaS and CI/CD pipelines. I think it turned out quite well and really helped reinforce my beliefs on the subject.</description>
-    </item>
-    
-    <item>
-      <title>Openstacks and Ecosystems</title>
-      <link>https://tech.paulcz.net/2016/01/openstacks-and-ecosystems/</link>
-      <pubDate>Sat, 02 Jan 2016 13:00:42 -0600</pubDate>
-      
-      <guid>https://tech.paulcz.net/2016/01/openstacks-and-ecosystems/</guid>
       <description>I have recently had a number of lengthy discussions on the Twitter about Interop, Users, and Ecosystems. Specifically about our need to focus on the OpenStack ecosystem to extend the OpenStack IaaS user experience to something a bit more platform[ish].
 I wrote a post for SysAdvent this year on developing applications on top of OpenStack using a collection of OpenSource tools to create a PaaS and CI/CD pipelines. I think it turned out quite well and really helped reinforce my beliefs on the subject.</description>
     </item>

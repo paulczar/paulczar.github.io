@@ -6,139 +6,58 @@
     <description>Recent content in Categories on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 07 Sep 2013 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 29 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://tech.paulcz.net/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Berkshelf</title>
-      <link>https://tech.paulcz.net/categories/berkshelf/</link>
-      <pubDate>Sat, 07 Sep 2013 00:00:00 +0000</pubDate>
+      <title>actions</title>
+      <link>https://tech.paulcz.net/categories/actions/</link>
+      <pubDate>Thu, 29 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://tech.paulcz.net/categories/berkshelf/</guid>
+      <guid>https://tech.paulcz.net/categories/actions/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Blog</title>
-      <link>https://tech.paulcz.net/categories/blog/</link>
-      <pubDate>Sat, 15 Dec 2012 00:00:00 +0000</pubDate>
+      <title>cd</title>
+      <link>https://tech.paulcz.net/categories/cd/</link>
+      <pubDate>Thu, 29 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://tech.paulcz.net/categories/blog/</guid>
+      <guid>https://tech.paulcz.net/categories/cd/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Blogger</title>
-      <link>https://tech.paulcz.net/categories/blogger/</link>
-      <pubDate>Sun, 21 Oct 2012 00:00:00 +0000</pubDate>
+      <title>ci</title>
+      <link>https://tech.paulcz.net/categories/ci/</link>
+      <pubDate>Thu, 29 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://tech.paulcz.net/categories/blogger/</guid>
+      <guid>https://tech.paulcz.net/categories/ci/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Bread</title>
-      <link>https://tech.paulcz.net/categories/bread/</link>
-      <pubDate>Wed, 03 Dec 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/bread/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Chef</title>
-      <link>https://tech.paulcz.net/categories/chef/</link>
-      <pubDate>Tue, 13 May 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/chef/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Cloud</title>
-      <link>https://tech.paulcz.net/categories/cloud/</link>
-      <pubDate>Sun, 23 Feb 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/cloud/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Cloud Native</title>
-      <link>https://tech.paulcz.net/categories/cloud-native/</link>
-      <pubDate>Tue, 29 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/cloud-native/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Deis</title>
-      <link>https://tech.paulcz.net/categories/deis/</link>
-      <pubDate>Sun, 23 Feb 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/deis/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Devops</title>
+      <title>devops</title>
       <link>https://tech.paulcz.net/categories/devops/</link>
-      <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 29 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>https://tech.paulcz.net/categories/devops/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Docker</title>
-      <link>https://tech.paulcz.net/categories/docker/</link>
-      <pubDate>Fri, 25 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/docker/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Food</title>
-      <link>https://tech.paulcz.net/categories/food/</link>
-      <pubDate>Wed, 03 Dec 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/food/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Fpm</title>
-      <link>https://tech.paulcz.net/categories/fpm/</link>
-      <pubDate>Sun, 07 Apr 2013 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/fpm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Github</title>
+      <title>github</title>
       <link>https://tech.paulcz.net/categories/github/</link>
-      <pubDate>Sat, 15 Dec 2012 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 29 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>https://tech.paulcz.net/categories/github/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Habitat</title>
-      <link>https://tech.paulcz.net/categories/habitat/</link>
-      <pubDate>Fri, 06 Oct 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/habitat/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Helm</title>
+      <title>helm</title>
       <link>https://tech.paulcz.net/categories/helm/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
       
@@ -147,16 +66,7 @@
     </item>
     
     <item>
-      <title>K8s</title>
-      <link>https://tech.paulcz.net/categories/k8s/</link>
-      <pubDate>Fri, 06 Oct 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/k8s/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Kubernetes</title>
+      <title>kubernetes</title>
       <link>https://tech.paulcz.net/categories/kubernetes/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
       
@@ -165,97 +75,7 @@
     </item>
     
     <item>
-      <title>Kvm</title>
-      <link>https://tech.paulcz.net/categories/kvm/</link>
-      <pubDate>Thu, 13 Dec 2012 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/kvm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Logstash</title>
-      <link>https://tech.paulcz.net/categories/logstash/</link>
-      <pubDate>Mon, 06 May 2013 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/logstash/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Octopress</title>
-      <link>https://tech.paulcz.net/categories/octopress/</link>
-      <pubDate>Sat, 15 Dec 2012 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/octopress/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Omnibus</title>
-      <link>https://tech.paulcz.net/categories/omnibus/</link>
-      <pubDate>Mon, 06 May 2013 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/omnibus/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Openstack</title>
-      <link>https://tech.paulcz.net/categories/openstack/</link>
-      <pubDate>Sat, 02 Jan 2016 13:00:42 -0600</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/openstack/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Openvswitch</title>
-      <link>https://tech.paulcz.net/categories/openvswitch/</link>
-      <pubDate>Thu, 13 Dec 2012 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/openvswitch/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Opscode</title>
-      <link>https://tech.paulcz.net/categories/opscode/</link>
-      <pubDate>Mon, 06 May 2013 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/opscode/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Paas</title>
-      <link>https://tech.paulcz.net/categories/paas/</link>
-      <pubDate>Sun, 23 Feb 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/paas/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Packaging</title>
-      <link>https://tech.paulcz.net/categories/packaging/</link>
-      <pubDate>Sun, 07 Apr 2013 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/packaging/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Perl</title>
-      <link>https://tech.paulcz.net/categories/perl/</link>
-      <pubDate>Sun, 21 Oct 2012 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/perl/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Pivotal</title>
+      <title>pivotal</title>
       <link>https://tech.paulcz.net/categories/pivotal/</link>
       <pubDate>Fri, 01 Mar 2019 00:00:00 +0000</pubDate>
       
@@ -264,61 +84,7 @@
     </item>
     
     <item>
-      <title>Puppet</title>
-      <link>https://tech.paulcz.net/categories/puppet/</link>
-      <pubDate>Sun, 07 Apr 2013 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/puppet/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Rackspace</title>
-      <link>https://tech.paulcz.net/categories/rackspace/</link>
-      <pubDate>Sun, 23 Feb 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/rackspace/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Registry</title>
-      <link>https://tech.paulcz.net/categories/registry/</link>
-      <pubDate>Sun, 10 Jan 2016 10:22:22 -0600</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/registry/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Runit</title>
-      <link>https://tech.paulcz.net/categories/runit/</link>
-      <pubDate>Sun, 20 Oct 2013 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/runit/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Script</title>
-      <link>https://tech.paulcz.net/categories/script/</link>
-      <pubDate>Sun, 21 Oct 2012 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/script/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Security</title>
-      <link>https://tech.paulcz.net/categories/security/</link>
-      <pubDate>Sun, 03 Jan 2016 14:44:30 -0600</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/security/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Spring</title>
+      <title>spring</title>
       <link>https://tech.paulcz.net/categories/spring/</link>
       <pubDate>Fri, 01 Mar 2019 00:00:00 +0000</pubDate>
       
@@ -327,7 +93,61 @@
     </item>
     
     <item>
-      <title>Ssl</title>
+      <title>cloud-native</title>
+      <link>https://tech.paulcz.net/categories/cloud-native/</link>
+      <pubDate>Tue, 29 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/cloud-native/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker</title>
+      <link>https://tech.paulcz.net/categories/docker/</link>
+      <pubDate>Fri, 25 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>habitat</title>
+      <link>https://tech.paulcz.net/categories/habitat/</link>
+      <pubDate>Fri, 06 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/habitat/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>k8s</title>
+      <link>https://tech.paulcz.net/categories/k8s/</link>
+      <pubDate>Fri, 06 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/k8s/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>registry</title>
+      <link>https://tech.paulcz.net/categories/registry/</link>
+      <pubDate>Sun, 10 Jan 2016 10:22:22 -0600</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/registry/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>security</title>
+      <link>https://tech.paulcz.net/categories/security/</link>
+      <pubDate>Sun, 03 Jan 2016 14:44:30 -0600</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/security/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ssl</title>
       <link>https://tech.paulcz.net/categories/ssl/</link>
       <pubDate>Sun, 03 Jan 2016 14:44:30 -0600</pubDate>
       
@@ -336,7 +156,7 @@
     </item>
     
     <item>
-      <title>Swarm</title>
+      <title>swarm</title>
       <link>https://tech.paulcz.net/categories/swarm/</link>
       <pubDate>Sun, 03 Jan 2016 14:44:30 -0600</pubDate>
       
@@ -345,7 +165,7 @@
     </item>
     
     <item>
-      <title>Tls</title>
+      <title>tls</title>
       <link>https://tech.paulcz.net/categories/tls/</link>
       <pubDate>Sun, 03 Jan 2016 14:44:30 -0600</pubDate>
       
@@ -354,16 +174,151 @@
     </item>
     
     <item>
-      <title>Ubuntu</title>
-      <link>https://tech.paulcz.net/categories/ubuntu/</link>
-      <pubDate>Thu, 13 Dec 2012 00:00:00 +0000</pubDate>
+      <title>openstack</title>
+      <link>https://tech.paulcz.net/categories/openstack/</link>
+      <pubDate>Sat, 02 Jan 2016 13:00:42 -0600</pubDate>
       
-      <guid>https://tech.paulcz.net/categories/ubuntu/</guid>
+      <guid>https://tech.paulcz.net/categories/openstack/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Vagrant</title>
+      <title>bread</title>
+      <link>https://tech.paulcz.net/categories/bread/</link>
+      <pubDate>Wed, 03 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/bread/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>food</title>
+      <link>https://tech.paulcz.net/categories/food/</link>
+      <pubDate>Wed, 03 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/food/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>chef</title>
+      <link>https://tech.paulcz.net/categories/chef/</link>
+      <pubDate>Tue, 13 May 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/chef/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cloud</title>
+      <link>https://tech.paulcz.net/categories/cloud/</link>
+      <pubDate>Sun, 23 Feb 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/cloud/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>deis</title>
+      <link>https://tech.paulcz.net/categories/deis/</link>
+      <pubDate>Sun, 23 Feb 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/deis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>paas</title>
+      <link>https://tech.paulcz.net/categories/paas/</link>
+      <pubDate>Sun, 23 Feb 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/paas/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rackspace</title>
+      <link>https://tech.paulcz.net/categories/rackspace/</link>
+      <pubDate>Sun, 23 Feb 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/rackspace/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>runit</title>
+      <link>https://tech.paulcz.net/categories/runit/</link>
+      <pubDate>Sun, 20 Oct 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/runit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>berkshelf</title>
+      <link>https://tech.paulcz.net/categories/berkshelf/</link>
+      <pubDate>Sat, 07 Sep 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/berkshelf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>logstash</title>
+      <link>https://tech.paulcz.net/categories/logstash/</link>
+      <pubDate>Mon, 06 May 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/logstash/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>omnibus</title>
+      <link>https://tech.paulcz.net/categories/omnibus/</link>
+      <pubDate>Mon, 06 May 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/omnibus/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>opscode</title>
+      <link>https://tech.paulcz.net/categories/opscode/</link>
+      <pubDate>Mon, 06 May 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/opscode/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>fpm</title>
+      <link>https://tech.paulcz.net/categories/fpm/</link>
+      <pubDate>Sun, 07 Apr 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/fpm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>packaging</title>
+      <link>https://tech.paulcz.net/categories/packaging/</link>
+      <pubDate>Sun, 07 Apr 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/packaging/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>puppet</title>
+      <link>https://tech.paulcz.net/categories/puppet/</link>
+      <pubDate>Sun, 07 Apr 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/puppet/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vagrant</title>
       <link>https://tech.paulcz.net/categories/vagrant/</link>
       <pubDate>Sun, 07 Apr 2013 00:00:00 +0000</pubDate>
       
@@ -372,7 +327,52 @@
     </item>
     
     <item>
-      <title>Virtualization</title>
+      <title>blog</title>
+      <link>https://tech.paulcz.net/categories/blog/</link>
+      <pubDate>Sat, 15 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/blog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>octopress</title>
+      <link>https://tech.paulcz.net/categories/octopress/</link>
+      <pubDate>Sat, 15 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/octopress/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kvm</title>
+      <link>https://tech.paulcz.net/categories/kvm/</link>
+      <pubDate>Thu, 13 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/kvm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>openvswitch</title>
+      <link>https://tech.paulcz.net/categories/openvswitch/</link>
+      <pubDate>Thu, 13 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/openvswitch/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ubuntu</title>
+      <link>https://tech.paulcz.net/categories/ubuntu/</link>
+      <pubDate>Thu, 13 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/ubuntu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>virtualization</title>
       <link>https://tech.paulcz.net/categories/virtualization/</link>
       <pubDate>Thu, 13 Dec 2012 00:00:00 +0000</pubDate>
       
@@ -381,7 +381,7 @@
     </item>
     
     <item>
-      <title>Vmware</title>
+      <title>vmware</title>
       <link>https://tech.paulcz.net/categories/vmware/</link>
       <pubDate>Sun, 09 Dec 2012 00:00:00 +0000</pubDate>
       
@@ -390,7 +390,34 @@
     </item>
     
     <item>
-      <title>Wordpress</title>
+      <title>blogger</title>
+      <link>https://tech.paulcz.net/categories/blogger/</link>
+      <pubDate>Sun, 21 Oct 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/blogger/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>perl</title>
+      <link>https://tech.paulcz.net/categories/perl/</link>
+      <pubDate>Sun, 21 Oct 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/perl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>script</title>
+      <link>https://tech.paulcz.net/categories/script/</link>
+      <pubDate>Sun, 21 Oct 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/script/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>wordpress</title>
       <link>https://tech.paulcz.net/categories/wordpress/</link>
       <pubDate>Sun, 21 Oct 2012 00:00:00 +0000</pubDate>
       

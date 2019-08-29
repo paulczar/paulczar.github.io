@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Deis on Paul Czarkowski</title>
+    <title>deis on Paul Czarkowski</title>
     <link>https://tech.paulcz.net/categories/deis/</link>
-    <description>Recent content in Deis on Paul Czarkowski</description>
+    <description>Recent content in deis on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 23 Feb 2014 00:00:00 +0000</lastBuildDate>
@@ -17,15 +17,6 @@
       <pubDate>Sun, 23 Feb 2014 00:00:00 +0000</pubDate>
       
       <guid>https://tech.paulcz.net/blog/running-deis-io-on-rackspace-cloud/</guid>
-      <description>&lt;p&gt;I recently did a presentation at the Cloud Austin meetup titled &lt;a href=&#34;http://tech.paulcz.net/presentation-cloud-austin-deis/#/&#34;&gt;Docking with Unicorns&lt;/a&gt; about new PAAS on the block &lt;a href=&#34;http://deis.io&#34;&gt;DEIS&lt;/a&gt;.   Building out DEIS is quite easy,  make more easy by some tight integration they have with Rackspace Cloud.    If you&amp;rsquo;re interested in what deis is go through my slides linked above, and the documentation on their website.    If you want to build out an environment to kick the tires a bit,  then click &amp;lsquo;Read on&amp;rsquo; below and follow me down the rabbit hole.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Running DEIS.IO on Rackspace Cloud</title>
-      <link>https://tech.paulcz.net/2014/02/running-deis-io-on-rackspace-cloud/</link>
-      <pubDate>Sun, 23 Feb 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/2014/02/running-deis-io-on-rackspace-cloud/</guid>
       <description>&lt;p&gt;I recently did a presentation at the Cloud Austin meetup titled &lt;a href=&#34;http://tech.paulcz.net/presentation-cloud-austin-deis/#/&#34;&gt;Docking with Unicorns&lt;/a&gt; about new PAAS on the block &lt;a href=&#34;http://deis.io&#34;&gt;DEIS&lt;/a&gt;.   Building out DEIS is quite easy,  make more easy by some tight integration they have with Rackspace Cloud.    If you&amp;rsquo;re interested in what deis is go through my slides linked above, and the documentation on their website.    If you want to build out an environment to kick the tires a bit,  then click &amp;lsquo;Read on&amp;rsquo; below and follow me down the rabbit hole.&lt;/p&gt;</description>
     </item>
     

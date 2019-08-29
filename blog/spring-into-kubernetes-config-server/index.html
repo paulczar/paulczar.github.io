@@ -8,7 +8,7 @@
     <meta name="description" content="Random musings mostly about tech">
     <link rel="shortcut icon" type="image/x-icon" href="https://tech.paulcz.net/img/favicon.ico">
     <title>Spring into Kubernetes - Using Kubernetes as a Config Server</title>
-    <meta name="generator" content="Hugo 0.53" />
+    <meta name="generator" content="Hugo 0.56.3" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://tech.paulcz.net/css/main.css" />
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
@@ -211,22 +211,30 @@ hello-bb9cf575d-8mwxq   1/1     Running   0          21s
 
 Since you haven't yet created a `configmap` the response from the application should still be the default:
 
-```console
-$ curl http://192.168.99.103:30871
-hello development
 </code></pre>
 
-<p>Next create a <code>configmap</code> that the application will use, by default it will look for a <code>configmap</code> with the same name as the application:</p>
+<p>console
+$ curl <a href="http://192.168.99.103:30871">http://192.168.99.103:30871</a>
+hello development</p>
 
-<pre><code class="language-console">$ kubectl create configmap hello --from-literal=message=&quot;HELLO KUBERNETES&quot;
-configmap/hello created
+<pre><code>
+Next create a `configmap` that the application will use, by default it will look for a `configmap` with the same name as the application:
+
 </code></pre>
 
-<p>Run the <code>curl</code> command again and you should see the new response:</p>
+<p>console
+$ kubectl create configmap hello &ndash;from-literal=message=&ldquo;HELLO KUBERNETES&rdquo;
+configmap/hello created</p>
 
-<pre><code class="language-console">$ curl http://192.168.99.103:30871
+<pre><code>
+Run the `curl` command again and you should see the new response:
+
+</code></pre>
+
+<p>console
+$ curl <a href="http://192.168.99.103:30871">http://192.168.99.103:30871</a>
 HELLO KUBERNETES
-</code></pre>
+```</p>
 
 <h2 id="conclusion">Conclusion</h2>
 

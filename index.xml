@@ -6,10 +6,21 @@
     <description>Recent content on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 03 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 29 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://tech.paulcz.net/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Introduction to GitHub Actions</title>
+      <link>https://tech.paulcz.net/blog/intro-to-github-actions/</link>
+      <pubDate>Thu, 29 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/blog/intro-to-github-actions/</guid>
+      <description>After what seems like an eternity I finally got added to the GitHub Actions beta a few days ago.
+I recently created a Hugo website for learning Kubernetes called k8s.camp which is hosted in GitHub Pages and I figured that switching it from CircleCI to GitHub Actions would be a great way to learn Actions.
+Before I get started I do want to mention that my experience as a new user trying to learn how actions work was sub-optimal.</description>
+    </item>
     
     <item>
       <title>Creating a Helm Chart Repository - Part 1</title>
@@ -17,16 +28,6 @@
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
       
       <guid>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-1/</guid>
-      <description>Note: If this topic has peaked your interest, you can join me for a Webinar on August 15 where I&amp;rsquo;ll dive deep into Cloud Native Operations with Kubernetes and CI/CD Pipelines.
- Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 I will demonstrate creating a Helm chart repository using GitHub and GitHub Pages. In part 2 I will add Automation to automatically update the repository, and in part 3 I will add testing for changes to the charts themselves.</description>
-    </item>
-    
-    <item>
-      <title>Creating a Helm Chart Repository - Part 1</title>
-      <link>https://tech.paulcz.net/2019/07/creating-a-helm-chart-monorepo-part-1/</link>
-      <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/2019/07/creating-a-helm-chart-monorepo-part-1/</guid>
       <description>Note: If this topic has peaked your interest, you can join me for a Webinar on August 15 where I&amp;rsquo;ll dive deep into Cloud Native Operations with Kubernetes and CI/CD Pipelines.
  Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 I will demonstrate creating a Helm chart repository using GitHub and GitHub Pages. In part 2 I will add Automation to automatically update the repository, and in part 3 I will add testing for changes to the charts themselves.</description>
     </item>
@@ -42,16 +43,6 @@
     </item>
     
     <item>
-      <title>Creating a Helm Chart Repository - Part 2</title>
-      <link>https://tech.paulcz.net/2019/07/creating-a-helm-chart-monorepo-part-2/</link>
-      <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/2019/07/creating-a-helm-chart-monorepo-part-2/</guid>
-      <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 of this series I demonstrated creating a Helm chart repository using GitHub and GitHub Pages. In this part 2 I will add Automation to automatically update the repository, and in part 2 I will add testing for changes to the charts themselves.
- If you&amp;rsquo;re into Videos, I walked JJ through starting with Helm from scratch all the way to creating a Helm Repo and CI/CD.</description>
-    </item>
-    
-    <item>
       <title>Creating a Helm Chart Repository - Part 3</title>
       <link>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-3/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
@@ -62,32 +53,11 @@
     </item>
     
     <item>
-      <title>Creating a Helm Chart Repository - Part 3</title>
-      <link>https://tech.paulcz.net/2019/07/creating-a-helm-chart-monorepo-part-3/</link>
-      <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/2019/07/creating-a-helm-chart-monorepo-part-3/</guid>
-      <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 of this series I demonstrated creating a Helm chart repository using GitHub and GitHub Pages. In part 2 I will add Automation to automatically update the repository, and in part 3 I will add testing for changes to the charts themselves.
- If you&amp;rsquo;re into Videos, I walked JJ through starting with Helm from scratch all the way to creating a Helm Repo and CI/CD.</description>
-    </item>
-    
-    <item>
       <title>Spring into Kubernetes - Using Kubernetes as a Config Server</title>
       <link>https://tech.paulcz.net/blog/spring-into-kubernetes-config-server/</link>
       <pubDate>Fri, 01 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>https://tech.paulcz.net/blog/spring-into-kubernetes-config-server/</guid>
-      <description>In previous installments of Spring into Kubernetes I&amp;rsquo;ve shown you how to build images, deploy applications and write a Helm Chart for Spring applications. In this installment we&amp;rsquo;ll look at Spring Cloud Kubernetes integrations, specifically using Kubernetes Config Maps as a Config Server.
-Usually I would use a Pivotal Container Service cluster to demonstrate, but in this demonstration I&amp;rsquo;ll use a local minikube cluster.
-Spring Cloud Kubernetes Spring Cloud Kubernetes brings in a ton of integrations with Kubernetes.</description>
-    </item>
-    
-    <item>
-      <title>Spring into Kubernetes - Using Kubernetes as a Config Server</title>
-      <link>https://tech.paulcz.net/2019/03/spring-into-kubernetes-config-server/</link>
-      <pubDate>Fri, 01 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/2019/03/spring-into-kubernetes-config-server/</guid>
       <description>In previous installments of Spring into Kubernetes I&amp;rsquo;ve shown you how to build images, deploy applications and write a Helm Chart for Spring applications. In this installment we&amp;rsquo;ll look at Spring Cloud Kubernetes integrations, specifically using Kubernetes Config Maps as a Config Server.
 Usually I would use a Pivotal Container Service cluster to demonstrate, but in this demonstration I&amp;rsquo;ll use a local minikube cluster.
 Spring Cloud Kubernetes Spring Cloud Kubernetes brings in a ton of integrations with Kubernetes.</description>
@@ -105,32 +75,11 @@ Helm has two major components, the Helm client and the Tiller server.</descripti
     </item>
     
     <item>
-      <title>Spring into Kubernetes - Deploying with Helm</title>
-      <link>https://tech.paulcz.net/2019/02/spring-into-kubernetes-part-2/</link>
-      <pubDate>Thu, 07 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/2019/02/spring-into-kubernetes-part-2/</guid>
-      <description>Introduction In this installment of Spring into Kubernetes we&amp;rsquo;ll be looking at using Helm to install our Spring application to Kubernetes.
-About Helm Helm is the package manager for Kubernetes. It provides tooling to create, template, package, and share Kubernetes manifests. A helm chart is effectively a signed tarball that contains a set of templated Kubernetes manifests, a metadata file and a set of default values.
-Helm has two major components, the Helm client and the Tiller server.</description>
-    </item>
-    
-    <item>
       <title>Cloud Native Operations - Kubernetes Controllers</title>
       <link>https://tech.paulcz.net/blog/cloud-native-operations-k8s-controllers/</link>
       <pubDate>Tue, 29 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>https://tech.paulcz.net/blog/cloud-native-operations-k8s-controllers/</guid>
-      <description>Note: If this topic has peaked your interest, you can join me for a Webinar on August 15 where I&amp;rsquo;ll dive deep into Cloud Native Operations with Kubernetes and CI/CD Pipelines.
- Lulz what? Cloud Native Operations ?!?!?! Historically Operations practices have lagged behind development. During the 90s a number of lightweight software development practices evolved such as Scrum and Extreme Programming. During the early 2000&amp;rsquo;s it became pretty common to practice (or at least claim to) some form of Agile in software development.</description>
-    </item>
-    
-    <item>
-      <title>Cloud Native Operations - Kubernetes Controllers</title>
-      <link>https://tech.paulcz.net/2019/01/cloud-native-operations-k8s-controllers/</link>
-      <pubDate>Tue, 29 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/2019/01/cloud-native-operations-k8s-controllers/</guid>
       <description>Note: If this topic has peaked your interest, you can join me for a Webinar on August 15 where I&amp;rsquo;ll dive deep into Cloud Native Operations with Kubernetes and CI/CD Pipelines.
  Lulz what? Cloud Native Operations ?!?!?! Historically Operations practices have lagged behind development. During the 90s a number of lightweight software development practices evolved such as Scrum and Extreme Programming. During the early 2000&amp;rsquo;s it became pretty common to practice (or at least claim to) some form of Agile in software development.</description>
     </item>
@@ -147,32 +96,11 @@ Full disclosure, I am a firm believe that any opensource project of consequence 
     </item>
     
     <item>
-      <title>Building Spring Docker Images</title>
-      <link>https://tech.paulcz.net/2019/01/building-spring-docker-images/</link>
-      <pubDate>Fri, 25 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/2019/01/building-spring-docker-images/</guid>
-      <description>While investigating running Spring applications on Kubernetes I discovered that a lot of the existing example Spring applications do not have a Dockerfile in their git repository. I thought this odd at first (and frankly still do).
-What I discovered though, is there&amp;rsquo;s quite a number of ways to build Spring (and Java in general) container images that don&amp;rsquo;t necessarily rely on writing a Dockerfile.
-Full disclosure, I am a firm believe that any opensource project of consequence (where feasible) should ship a Dockerfile in their git repo, and ideally have images up on the Docker hub (or other public container registry) as it allows for newcomers to experience your application or project in just a few seconds with no need to play detective to try and figure out how to get it running.</description>
-    </item>
-    
-    <item>
       <title>Spring into Kubernetes - Part 1</title>
       <link>https://tech.paulcz.net/blog/spring-into-kubernetes-part-1/</link>
       <pubDate>Thu, 24 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>https://tech.paulcz.net/blog/spring-into-kubernetes-part-1/</guid>
-      <description>Introduction Welcome to the first part in a series of blog posts looking at running Spring applications on Kubernetes. To kick the series off we&amp;rsquo;re going to take a look at the Spring Pet Clinic example application and demonstrate how we can quickly and easily get it running on Kubernetes.
-Step 1. Install a Kubernetes Before we get started I would encourage you to read (or at least skim) through Kelsey Hightower&amp;rsquo;s seminal Kubernetes The Hard Way to get an idea for the complexity of installing and operating a Kubernetes cluster.</description>
-    </item>
-    
-    <item>
-      <title>Spring into Kubernetes - Part 1</title>
-      <link>https://tech.paulcz.net/2019/01/spring-into-kubernetes-part-1/</link>
-      <pubDate>Thu, 24 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/2019/01/spring-into-kubernetes-part-1/</guid>
       <description>Introduction Welcome to the first part in a series of blog posts looking at running Spring applications on Kubernetes. To kick the series off we&amp;rsquo;re going to take a look at the Spring Pet Clinic example application and demonstrate how we can quickly and easily get it running on Kubernetes.
 Step 1. Install a Kubernetes Before we get started I would encourage you to read (or at least skim) through Kelsey Hightower&amp;rsquo;s seminal Kubernetes The Hard Way to get an idea for the complexity of installing and operating a Kubernetes cluster.</description>
     </item>
@@ -188,16 +116,6 @@ Step 1. Install a Kubernetes Before we get started I would encourage you to read
     </item>
     
     <item>
-      <title>The future of Kubernetes is Virtual Machines</title>
-      <link>https://tech.paulcz.net/2018/12/future-of-kubernetes-is-virtual-machines/</link>
-      <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/2018/12/future-of-kubernetes-is-virtual-machines/</guid>
-      <description>Note: If this topic has peaked your interest, you can join me for a Webinar on August 15 where I&amp;rsquo;ll dive deep into Cloud Native Operations with Kubernetes and CI/CD Pipelines.
- Peering into the crystal ball Kubernetes as a technology has been very important to my career this year, and will be even more so for next year too. As 2018 comes to a close its time to drag out the hubris and make a bold prediction.</description>
-    </item>
-    
-    <item>
       <title>Building a Habitat Supervisor for Kubernetes</title>
       <link>https://tech.paulcz.net/blog/habitat-supervisors-in-kubernetes/</link>
       <pubDate>Fri, 06 Oct 2017 00:00:00 +0000</pubDate>
@@ -208,31 +126,11 @@ Step 1. Install a Kubernetes Before we get started I would encourage you to read
     </item>
     
     <item>
-      <title>Building a Habitat Supervisor for Kubernetes</title>
-      <link>https://tech.paulcz.net/2017/10/habitat-supervisors-in-kubernetes/</link>
-      <pubDate>Fri, 06 Oct 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/2017/10/habitat-supervisors-in-kubernetes/</guid>
-      <description>Habitat is a project from Chef that provides you a reasonably simple way to build, package, and configure your application.
- &amp;ldquo;Habitat is an integrated solution to building, running, and maintaining your application throughout its lifetime. It builds your application and its services into immutable artifacts with declarative dependencies, and then provides automatic rebuilds of your application and its services as your application code and dependencies have upstream updates.&amp;rdquo; - Habitat Getting Started Guide.</description>
-    </item>
-    
-    <item>
       <title>Writing Your First Helm Chart</title>
       <link>https://tech.paulcz.net/blog/getting-started-with-helm/</link>
       <pubDate>Tue, 03 Oct 2017 00:00:00 +0000</pubDate>
       
       <guid>https://tech.paulcz.net/blog/getting-started-with-helm/</guid>
-      <description>I recently found myself writing instructions on how to deploy an application to several Kubernetes platform and ended up writing a different Kubernetes manifests for each platform. 95% of the content was the same with just a few different directives based on how the particular platform handles ingress, or if we needed a Registry secret or a TLS certificate.
-Kubernetes manifests are very declarative and don&amp;rsquo;t offer any way to put conditionals or variables that could be set in them.</description>
-    </item>
-    
-    <item>
-      <title>Writing Your First Helm Chart</title>
-      <link>https://tech.paulcz.net/2017/10/getting-started-with-helm/</link>
-      <pubDate>Tue, 03 Oct 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/2017/10/getting-started-with-helm/</guid>
       <description>I recently found myself writing instructions on how to deploy an application to several Kubernetes platform and ended up writing a different Kubernetes manifests for each platform. 95% of the content was the same with just a few different directives based on how the particular platform handles ingress, or if we needed a Registry secret or a TLS certificate.
 Kubernetes manifests are very declarative and don&amp;rsquo;t offer any way to put conditionals or variables that could be set in them.</description>
     </item>
@@ -283,31 +181,11 @@ The beauty of running Docker is that you can push an image from a developer&amp;
     </item>
     
     <item>
-      <title>Flexible Private Docker Registry Infrastructure</title>
-      <link>https://tech.paulcz.net/2016/01/flexible-docker-registry-infrastructure/</link>
-      <pubDate>Sun, 10 Jan 2016 10:22:22 -0600</pubDate>
-      
-      <guid>https://tech.paulcz.net/2016/01/flexible-docker-registry-infrastructure/</guid>
-      <description>Previously I showed how to run a basic secure Docker Registry. I am now going to expand on this to show you something that you might use in production as part of your CI/CD infrastructure.
-The beauty of running Docker is that you can push an image from a developer&amp;rsquo;s laptop all the way into production which helps ensure that what you see in development and your various test/qa/stage environments are exactly the same as what you run in production.</description>
-    </item>
-    
-    <item>
       <title>Deploying a Simple and Secure Docker Registry</title>
       <link>https://tech.paulcz.net/blog/deploying-a-secure-docker-registry/</link>
       <pubDate>Sun, 10 Jan 2016 05:22:22 -0600</pubDate>
       
       <guid>https://tech.paulcz.net/blog/deploying-a-secure-docker-registry/</guid>
-      <description>There comes a time in everybody&amp;rsquo;s life where they realize they have to run their own Docker Registry. Unfortunately there&amp;rsquo;s not a lot of good information on how to run one. Docker&amp;rsquo;s documentation is pretty good, but is verbose and across a lot of different pages which means having half a dozen tabs open and searching for the right information.
-While it&amp;rsquo;s pretty common to run the Docker Registry itself with little to no security settings and fronting it with NGINX or Apache to provide this security I wanted to show how it can be done with just the Docker Registry.</description>
-    </item>
-    
-    <item>
-      <title>Deploying a Simple and Secure Docker Registry</title>
-      <link>https://tech.paulcz.net/2016/01/deploying-a-secure-docker-registry/</link>
-      <pubDate>Sun, 10 Jan 2016 05:22:22 -0600</pubDate>
-      
-      <guid>https://tech.paulcz.net/2016/01/deploying-a-secure-docker-registry/</guid>
       <description>There comes a time in everybody&amp;rsquo;s life where they realize they have to run their own Docker Registry. Unfortunately there&amp;rsquo;s not a lot of good information on how to run one. Docker&amp;rsquo;s documentation is pretty good, but is verbose and across a lot of different pages which means having half a dozen tabs open and searching for the right information.
 While it&amp;rsquo;s pretty common to run the Docker Registry itself with little to no security settings and fronting it with NGINX or Apache to provide this security I wanted to show how it can be done with just the Docker Registry.</description>
     </item>
@@ -323,31 +201,11 @@ This is fine for the basic use case of the default behavior of only accessing th
     </item>
     
     <item>
-      <title>Securing Docker with TLS certificates</title>
-      <link>https://tech.paulcz.net/2016/01/secure-docker-with-tls/</link>
-      <pubDate>Sun, 03 Jan 2016 14:44:30 -0600</pubDate>
-      
-      <guid>https://tech.paulcz.net/2016/01/secure-docker-with-tls/</guid>
-      <description>By default Docker (and by extension Docker Swarm) has no authentication or authorization on its API, relying instead on the filesystem security of its unix socket /var/run/docker.sock which by default is only accessible by the root user.
-This is fine for the basic use case of the default behavior of only accessing the Docker API on the local machine via the socket as the root user. However if you wish to use the Docker API over TCP then you&amp;rsquo;ll want to secure it so that you don&amp;rsquo;t give out root access to anyone that happens to poke you on the TCP port.</description>
-    </item>
-    
-    <item>
       <title>Deploying a HA Docker Swarm Cluster</title>
       <link>https://tech.paulcz.net/blog/running-ha-docker-swarm/</link>
       <pubDate>Sat, 02 Jan 2016 14:44:30 -0600</pubDate>
       
       <guid>https://tech.paulcz.net/blog/running-ha-docker-swarm/</guid>
-      <description>Given Docker&amp;rsquo;s propensity for creating easy to use tools it shouldn&amp;rsquo;t come as a surprise that Docker Swarm is one of the easier to understand and run of the &amp;ldquo;Docker Clustering&amp;rdquo; options currently out there. I recently built some Terraform configs for deploying a Highly Available Docker Swarm cluster on Openstack and learned a fair bit about Swarm in the process.
-This guide is meant to be a platform agnostic howto on installing and running a Highly Available Docker Swarm to show you the ideas and concepts that may not be as easy to understand from just reading some config management code.</description>
-    </item>
-    
-    <item>
-      <title>Deploying a HA Docker Swarm Cluster</title>
-      <link>https://tech.paulcz.net/2016/01/running-ha-docker-swarm/</link>
-      <pubDate>Sat, 02 Jan 2016 14:44:30 -0600</pubDate>
-      
-      <guid>https://tech.paulcz.net/2016/01/running-ha-docker-swarm/</guid>
       <description>Given Docker&amp;rsquo;s propensity for creating easy to use tools it shouldn&amp;rsquo;t come as a surprise that Docker Swarm is one of the easier to understand and run of the &amp;ldquo;Docker Clustering&amp;rdquo; options currently out there. I recently built some Terraform configs for deploying a Highly Available Docker Swarm cluster on Openstack and learned a fair bit about Swarm in the process.
 This guide is meant to be a platform agnostic howto on installing and running a Highly Available Docker Swarm to show you the ideas and concepts that may not be as easy to understand from just reading some config management code.</description>
     </item>
@@ -363,16 +221,6 @@ I wrote a post for SysAdvent this year on developing applications on top of Open
     </item>
     
     <item>
-      <title>Openstacks and Ecosystems</title>
-      <link>https://tech.paulcz.net/2016/01/openstacks-and-ecosystems/</link>
-      <pubDate>Sat, 02 Jan 2016 13:00:42 -0600</pubDate>
-      
-      <guid>https://tech.paulcz.net/2016/01/openstacks-and-ecosystems/</guid>
-      <description>I have recently had a number of lengthy discussions on the Twitter about Interop, Users, and Ecosystems. Specifically about our need to focus on the OpenStack ecosystem to extend the OpenStack IaaS user experience to something a bit more platform[ish].
-I wrote a post for SysAdvent this year on developing applications on top of OpenStack using a collection of OpenSource tools to create a PaaS and CI/CD pipelines. I think it turned out quite well and really helped reinforce my beliefs on the subject.</description>
-    </item>
-    
-    <item>
       <title>Optimizing your Dockerfiles</title>
       <link>https://tech.paulcz.net/blog/optimizing-your-dockerfiles/</link>
       <pubDate>Sat, 07 Mar 2015 13:25:29 -0600</pubDate>
@@ -383,32 +231,11 @@ Dockerfile&amp;rsquo;s are regularly [and incorrectly] treated like bash scripts
     </item>
     
     <item>
-      <title>Optimizing your Dockerfiles</title>
-      <link>https://tech.paulcz.net/2015/03/optimizing-your-dockerfiles/</link>
-      <pubDate>Sat, 07 Mar 2015 13:25:29 -0600</pubDate>
-      
-      <guid>https://tech.paulcz.net/2015/03/optimizing-your-dockerfiles/</guid>
-      <description>Docker images are &amp;ldquo;supposed&amp;rdquo; to be small and fast. However unless you&amp;rsquo;re precompiling GO binaries and dropping them in the busybox image they can get quite large and complicated. Without a well constructed Dockerfile to improve build cache hits your docker builds can become unnecessarily slow.
-Dockerfile&amp;rsquo;s are regularly [and incorrectly] treated like bash scripts and therefore are often written out as a series of commands which you would curl | sudo bash from a website to install.</description>
-    </item>
-    
-    <item>
       <title>Factorish and The Twelve-Fakter App</title>
       <link>https://tech.paulcz.net/blog/factorish_and_the_12_fakter_app/</link>
       <pubDate>Tue, 06 Jan 2015 13:29:27 -0600</pubDate>
       
       <guid>https://tech.paulcz.net/blog/factorish_and_the_12_fakter_app/</guid>
-      <description>&lt;p&gt;Unless you&amp;rsquo;ve been living under a rock (in which case I envy you) you&amp;rsquo;ve heard a fair bit about The &lt;a href=&#34;http://12factor.net&#34;&gt;Twelve-Factor App&lt;/a&gt;. A wonderful stateless application that is completely disposable and can run anywhere from your own physical servers to &lt;a href=&#34;http://deis.io&#34;&gt;Deis&lt;/a&gt;, &lt;a href=&#34;http://cloudfoundry.org&#34;&gt;Cloud Foundry&lt;/a&gt; or &lt;a href=&#34;http://heroku.com&#34;&gt;Heroku&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Chances are you&amp;rsquo;re stuck writing and running an application that is decidely not 12Factor, nor will it ever be.  In a perfect world you&amp;rsquo;d scrap it and rewrite it as a dozen microservices that are loosely coupled but run and work indepently of eachother. The reality however is you could never get the okay to do that.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Factorish and The Twelve-Fakter App</title>
-      <link>https://tech.paulcz.net/2015/01/factorish_and_the_12_fakter_app/</link>
-      <pubDate>Tue, 06 Jan 2015 13:29:27 -0600</pubDate>
-      
-      <guid>https://tech.paulcz.net/2015/01/factorish_and_the_12_fakter_app/</guid>
       <description>&lt;p&gt;Unless you&amp;rsquo;ve been living under a rock (in which case I envy you) you&amp;rsquo;ve heard a fair bit about The &lt;a href=&#34;http://12factor.net&#34;&gt;Twelve-Factor App&lt;/a&gt;. A wonderful stateless application that is completely disposable and can run anywhere from your own physical servers to &lt;a href=&#34;http://deis.io&#34;&gt;Deis&lt;/a&gt;, &lt;a href=&#34;http://cloudfoundry.org&#34;&gt;Cloud Foundry&lt;/a&gt; or &lt;a href=&#34;http://heroku.com&#34;&gt;Heroku&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Chances are you&amp;rsquo;re stuck writing and running an application that is decidely not 12Factor, nor will it ever be.  In a perfect world you&amp;rsquo;d scrap it and rewrite it as a dozen microservices that are loosely coupled but run and work indepently of eachother. The reality however is you could never get the okay to do that.&lt;/p&gt;</description>
@@ -428,34 +255,11 @@ Dockerfile&amp;rsquo;s are regularly [and incorrectly] treated like bash scripts
     </item>
     
     <item>
-      <title>Multi Process Docker Images Done Right</title>
-      <link>https://tech.paulcz.net/2014/12/multi-process-docker-images-done-right/</link>
-      <pubDate>Mon, 22 Dec 2014 21:31:03 -0600</pubDate>
-      
-      <guid>https://tech.paulcz.net/2014/12/multi-process-docker-images-done-right/</guid>
-      <description>&lt;h2 id=&#34;for-some-values-of-right&#34;&gt;For some values of &amp;lsquo;right&amp;rsquo;&lt;/h2&gt;
-
-&lt;p&gt;Almost since &lt;a href=&#34;http://docker.com&#34;&gt;Docker&lt;/a&gt; was first introduced to the world there has been a fairly strong push to keeping containers to be single process.   This makes a lot of sense and definitely plays into the &lt;a href=&#34;http://12factor.net&#34;&gt;12 Factor&lt;/a&gt; way of thinking where all application output should be pushed to &lt;code&gt;stdout&lt;/code&gt; and docker itself with tools like &lt;a href=&#34;https://github.com/progrium/logspout&#34;&gt;logspout&lt;/a&gt; now has fairly strong tooling to deal with those logs.&lt;/p&gt;
-
-&lt;p&gt;Sometimes however it just makes sense to run more than one process in a container,  a perfect example would be running &lt;a href=&#34;https://github.com/kelseyhightower/confd&#34;&gt;confd&lt;/a&gt; as well as your application in order to modify the application&amp;rsquo;s config file based on changes in service discovery systems like &lt;a href=&#34;https://github.com/coreos/etcd&#34;&gt;etcd&lt;/a&gt;.   The &lt;a href=&#34;https://docs.docker.com/articles/ambassador_pattern_linking/&#34;&gt;ambassador&lt;/a&gt; container way of working can achieve similar things, but I&amp;rsquo;m not sure that running two containers with a process each to run your application is any better than running one container with two processes.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>BreadOps - Continuous Delivery of Fresh Baked Bread</title>
       <link>https://tech.paulcz.net/blog/breadops-continous-delivery-of-fresh-baked-bread/</link>
       <pubDate>Wed, 03 Dec 2014 00:00:00 +0000</pubDate>
       
       <guid>https://tech.paulcz.net/blog/breadops-continous-delivery-of-fresh-baked-bread/</guid>
-      <description>&amp;ldquo;See how this sparkly devop princess bakes bread every day with almost no effort at all with this one weird trick&amp;rdquo;
-Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at most supermarkets is little better than cake baked in a bread shaped mold ( seriously check next time you&amp;rsquo;re at a supermarket ). You might be lucky and have a really good bread baker near you, but like butchers and other important crafts they have all but disappeared.</description>
-    </item>
-    
-    <item>
-      <title>BreadOps - Continuous Delivery of Fresh Baked Bread</title>
-      <link>https://tech.paulcz.net/2014/12/breadops-continous-delivery-of-fresh-baked-bread/</link>
-      <pubDate>Wed, 03 Dec 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/2014/12/breadops-continous-delivery-of-fresh-baked-bread/</guid>
       <description>&amp;ldquo;See how this sparkly devop princess bakes bread every day with almost no effort at all with this one weird trick&amp;rdquo;
 Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at most supermarkets is little better than cake baked in a bread shaped mold ( seriously check next time you&amp;rsquo;re at a supermarket ). You might be lucky and have a really good bread baker near you, but like butchers and other important crafts they have all but disappeared.</description>
     </item>
@@ -472,17 +276,6 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
     </item>
     
     <item>
-      <title>EZBake - A new way to converge docker containers with chef</title>
-      <link>https://tech.paulcz.net/2014/05/ezbake-a-new-way-to-converge-docker-containers-with-chef/</link>
-      <pubDate>Tue, 13 May 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/2014/05/ezbake-a-new-way-to-converge-docker-containers-with-chef/</guid>
-      <description>&lt;p&gt;&lt;code&gt;EZ Bake&lt;/code&gt; came from an idea I had while watching the &lt;a href=&#34;https://twitter.com/hangops&#34;&gt;HangOps&lt;/a&gt; &lt;a href=&#34;https://www.youtube.com/watch?v=clLFKIeSADo&amp;amp;feature=youtu.be&#34;&gt;episode 2014-04-11&lt;/a&gt; in which they were talking about &lt;code&gt;Docker&lt;/code&gt; and Config Management being complementary rather than adversary.&lt;/p&gt;
-
-&lt;p&gt;I have expermented with using &lt;code&gt;Chef&lt;/code&gt; and &lt;code&gt;Docker&lt;/code&gt; together in the &lt;a href=&#34;https://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io.html&#34;&gt;past&lt;/a&gt; but wanted to tackle the problem from a slightly different angle.  I&amp;rsquo;ve recently been working on some PAAS stuff, both &lt;a href=&#34;http://deis.io&#34;&gt;Deis&lt;/a&gt; and &lt;a href=&#34;http://solum.io&#34;&gt;Solum&lt;/a&gt; these both utilize the tooling from &lt;a href=&#34;https://github.com/flynn/flynn&#34;&gt;Flynn&lt;/a&gt; which builds heroku style &lt;code&gt;buildpacks&lt;/code&gt; in &lt;code&gt;Docker&lt;/code&gt;.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>Running DEIS.IO on Rackspace Cloud</title>
       <link>https://tech.paulcz.net/blog/running-deis-io-on-rackspace-cloud/</link>
       <pubDate>Sun, 23 Feb 2014 00:00:00 +0000</pubDate>
@@ -492,31 +285,11 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
     </item>
     
     <item>
-      <title>Running DEIS.IO on Rackspace Cloud</title>
-      <link>https://tech.paulcz.net/2014/02/running-deis-io-on-rackspace-cloud/</link>
-      <pubDate>Sun, 23 Feb 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/2014/02/running-deis-io-on-rackspace-cloud/</guid>
-      <description>&lt;p&gt;I recently did a presentation at the Cloud Austin meetup titled &lt;a href=&#34;http://tech.paulcz.net/presentation-cloud-austin-deis/#/&#34;&gt;Docking with Unicorns&lt;/a&gt; about new PAAS on the block &lt;a href=&#34;http://deis.io&#34;&gt;DEIS&lt;/a&gt;.   Building out DEIS is quite easy,  make more easy by some tight integration they have with Rackspace Cloud.    If you&amp;rsquo;re interested in what deis is go through my slides linked above, and the documentation on their website.    If you want to build out an environment to kick the tires a bit,  then click &amp;lsquo;Read on&amp;rsquo; below and follow me down the rabbit hole.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>Managing docker services with this one easy trick</title>
       <link>https://tech.paulcz.net/blog/managing-docker-services-with-this-one-easy-trick/</link>
       <pubDate>Sun, 20 Oct 2013 00:00:00 +0000</pubDate>
       
       <guid>https://tech.paulcz.net/blog/managing-docker-services-with-this-one-easy-trick/</guid>
-      <description>&lt;p&gt;I have been having a lot of internal debate about the idea of running more than one service in a docker container.   A Docker container is built to run a single process in the foreground and to live for only as long as that process is running.  This is great in a utopian world where servers are immutable and sysadmins drink tiki drinks on the beach,  however it doesn&amp;rsquo;t always translate well to the real world.&lt;/p&gt;
-
-&lt;p&gt;Examples where you might want to be able to run multiple servers span from the simple use case of running &lt;code&gt;sshd&lt;/code&gt; as well as your application to running a web app such as &lt;code&gt;wordpress&lt;/code&gt; where you might want both &lt;code&gt;apache&lt;/code&gt; and &lt;code&gt;mysql&lt;/code&gt; running in the same container.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Managing docker services with this one easy trick</title>
-      <link>https://tech.paulcz.net/2013/10/managing-docker-services-with-this-one-easy-trick/</link>
-      <pubDate>Sun, 20 Oct 2013 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/2013/10/managing-docker-services-with-this-one-easy-trick/</guid>
       <description>&lt;p&gt;I have been having a lot of internal debate about the idea of running more than one service in a docker container.   A Docker container is built to run a single process in the foreground and to live for only as long as that process is running.  This is great in a utopian world where servers are immutable and sysadmins drink tiki drinks on the beach,  however it doesn&amp;rsquo;t always translate well to the real world.&lt;/p&gt;
 
 &lt;p&gt;Examples where you might want to be able to run multiple servers span from the simple use case of running &lt;code&gt;sshd&lt;/code&gt; as well as your application to running a web app such as &lt;code&gt;wordpress&lt;/code&gt; where you might want both &lt;code&gt;apache&lt;/code&gt; and &lt;code&gt;mysql&lt;/code&gt; running in the same container.&lt;/p&gt;</description>
@@ -534,35 +307,11 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
     </item>
     
     <item>
-      <title>Creating immutable servers with chef and docker.io</title>
-      <link>https://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io/</link>
-      <pubDate>Sat, 07 Sep 2013 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io/</guid>
-      <description>&lt;p&gt;Building applications in a &lt;a href=&#34;http://docker.io&#34;&gt;docker.io&lt;/a&gt; Dockerfile is relatively simple,  but sometimes you want to just install the application exactly as you would normally via already built chef cookbooks.   Turns out this is actually pretty simple.&lt;/p&gt;
-
-&lt;p&gt;The first thing you&amp;rsquo;ll need to do is build a container with chef-client and berkshelf installed.   You can grab the one I&amp;rsquo;ve built by running &lt;code&gt;docker pull paulczar/chef-solo&lt;/code&gt; or build one youself from a &lt;code&gt;Dockerfile&lt;/code&gt; that looks a little something like the following&amp;hellip;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>Logstash &#43; Opscode Omnibus</title>
       <link>https://tech.paulcz.net/blog/logstash-plus-opscode-omnibus/</link>
       <pubDate>Mon, 06 May 2013 00:00:00 +0000</pubDate>
       
       <guid>https://tech.paulcz.net/blog/logstash-plus-opscode-omnibus/</guid>
-      <description>&lt;p&gt;At &lt;a href=&#34;http://devopsdays.org/events/2013-austin/&#34;&gt;DevOps Days Austin&lt;/a&gt; &lt;a href=&#34;http://twitter.com/mattray&#34;&gt;@mattray&lt;/a&gt; did an Openspace session on &lt;a href=&#34;https://github.com/opscode/omnibus-ruby&#34;&gt;Omnibus&lt;/a&gt; which is a toolset based around the concept of installing an app and all of it&amp;rsquo;s prerequisites from source into a directory and then building a package ( either .deb or .rpm ) of that using &lt;a href=&#34;https://github.com/jordansissel/fpm&#34;&gt;fpm&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Having battled many times with OS Packages trying to get newer versions of Ruby, or Redis or other software installed and having to hunt down some random package repo or manually build from source this seems like an excellent idea.&lt;/p&gt;
-
-&lt;p&gt;To learn the basics I decided to build an &lt;a href=&#34;https://github.com/paulczar/omnibus-fpm&#34;&gt;omnibus package for fpm&lt;/a&gt; which helped me work out the kinks and learn the basics.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Logstash &#43; Opscode Omnibus</title>
-      <link>https://tech.paulcz.net/2013/05/logstash-plus-opscode-omnibus/</link>
-      <pubDate>Mon, 06 May 2013 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/2013/05/logstash-plus-opscode-omnibus/</guid>
       <description>&lt;p&gt;At &lt;a href=&#34;http://devopsdays.org/events/2013-austin/&#34;&gt;DevOps Days Austin&lt;/a&gt; &lt;a href=&#34;http://twitter.com/mattray&#34;&gt;@mattray&lt;/a&gt; did an Openspace session on &lt;a href=&#34;https://github.com/opscode/omnibus-ruby&#34;&gt;Omnibus&lt;/a&gt; which is a toolset based around the concept of installing an app and all of it&amp;rsquo;s prerequisites from source into a directory and then building a package ( either .deb or .rpm ) of that using &lt;a href=&#34;https://github.com/jordansissel/fpm&#34;&gt;fpm&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Having battled many times with OS Packages trying to get newer versions of Ruby, or Redis or other software installed and having to hunt down some random package repo or manually build from source this seems like an excellent idea.&lt;/p&gt;
@@ -587,22 +336,6 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
     </item>
     
     <item>
-      <title>Vagrant&#43;Puppet&#43;FPM=Amazeballs</title>
-      <link>https://tech.paulcz.net/2013/04/vagrant-plus-puppet-plus-fpm-equals-amazeballs/</link>
-      <pubDate>Sun, 07 Apr 2013 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/2013/04/vagrant-plus-puppet-plus-fpm-equals-amazeballs/</guid>
-      <description>&lt;p&gt;Lately I&amp;rsquo;ve been doing a lot of prototyping with &lt;a href=&#34;http://www.vagrantup.com/&#34;&gt;Vagrant&lt;/a&gt;, specifically for a couple of distinct activities:-&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;building puppet modules using &lt;a href=&#34;https://github.com/elasticdog/puppet-sandbox&#34;&gt;the excellent puppet sandbox&lt;/a&gt; project&lt;/li&gt;
-&lt;li&gt;and building RPM packages with &lt;a href=&#34;https://github.com/jordansissel/fpm&#34;&gt;FPM&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I realized I was spending a bunch of time flipping back and forth between Vagrant environments and I had no quick way to utilize RPMs built with FPM inside my puppet modules.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>Creating a Github Pages Blog With Octopress</title>
       <link>https://tech.paulcz.net/blog/creating-a-github-pages-blog-with-octopress/</link>
       <pubDate>Sat, 15 Dec 2012 00:00:00 +0000</pubDate>
@@ -614,35 +347,11 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
     </item>
     
     <item>
-      <title>Creating a Github Pages Blog With Octopress</title>
-      <link>https://tech.paulcz.net/2012/12/creating-a-github-pages-blog-with-octopress/</link>
-      <pubDate>Sat, 15 Dec 2012 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/2012/12/creating-a-github-pages-blog-with-octopress/</guid>
-      <description>&lt;p&gt;A lot of tech bloggers will write their blog posts in &lt;a href=&#34;http://daringfireball.net/projects/markdown/&#34;&gt;Markdown&lt;/a&gt;, convert it to HTML and paste that HTML into their blog of choice and then in the blog&amp;rsquo;s editor clean it up to suit their blog.   This is an excellent way to create easy to read portable documents that can easily be published in multiple formats.&lt;/p&gt;
-
-&lt;p&gt;However what if there was a way to skip the second part of that and just create a markdown page, submit it into your source control ( you &lt;em&gt;do&lt;/em&gt; use source control right? ) and your blog would automagically update.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>Running KVM and Openvswitch on Ubuntu 12.10</title>
       <link>https://tech.paulcz.net/blog/running-kvm-and-openvswitch-on-ubuntu-12-dot-10/</link>
       <pubDate>Thu, 13 Dec 2012 00:00:00 +0000</pubDate>
       
       <guid>https://tech.paulcz.net/blog/running-kvm-and-openvswitch-on-ubuntu-12-dot-10/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;ve got an aging VMWare ESXi 4.0 server that needs to be replaced with something a little more modern and flexing.   Obviously at home I don&amp;rsquo;t need all the cool features that licensed VMWare comes with,  but I do want more than just the basic free version.&lt;/p&gt;
-
-&lt;p&gt;After a few weeks of installing and testing alternatives  ( I&amp;rsquo;d really love to run openstack,  but it&amp;rsquo;s just not worth it at home for a single box ) I&amp;rsquo;ve settled on Ubuntu 12.10 server running KVM and Openvswitch.&lt;/p&gt;
-
-&lt;p&gt;After installing Ubuntu 12.10 I did the following to get KVM up and running&amp;hellip;   I cribbed this mostly from &lt;a href=&#34;http://blog.allanglesit.com/2012/10/linux-kvm-ubuntu-12-10-with-openvswitch/&#34;&gt;blog.allanglesit.com&lt;/a&gt;.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Running KVM and Openvswitch on Ubuntu 12.10</title>
-      <link>https://tech.paulcz.net/2012/12/running-kvm-and-openvswitch-on-ubuntu-12-dot-10/</link>
-      <pubDate>Thu, 13 Dec 2012 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/2012/12/running-kvm-and-openvswitch-on-ubuntu-12-dot-10/</guid>
       <description>&lt;p&gt;I&amp;rsquo;ve got an aging VMWare ESXi 4.0 server that needs to be replaced with something a little more modern and flexing.   Obviously at home I don&amp;rsquo;t need all the cool features that licensed VMWare comes with,  but I do want more than just the basic free version.&lt;/p&gt;
 
 &lt;p&gt;After a few weeks of installing and testing alternatives  ( I&amp;rsquo;d really love to run openstack,  but it&amp;rsquo;s just not worth it at home for a single box ) I&amp;rsquo;ve settled on Ubuntu 12.10 server running KVM and Openvswitch.&lt;/p&gt;
@@ -674,45 +383,11 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
     </item>
     
     <item>
-      <title>Moving VMs from VMWare to KVM</title>
-      <link>https://tech.paulcz.net/2012/12/moving-vms-from-vmware-to-kvm/</link>
-      <pubDate>Sun, 09 Dec 2012 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/2012/12/moving-vms-from-vmware-to-kvm/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;m migrating from my old VMWare ESXi box to a new machine running Ubuntu 12.10 and KVM.    Not wanting to rebuild all of my VMs I set about trying to work out the best way to migrate the VMs.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Steps to make Windows migrate without Bluescreen&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;If you migrate a windows box it&amp;rsquo;ll bluescreen due to the shock of so much hardware changing.   The following .reg hack will prevent this from happening by opening up access to a bunch of random system drivers.   Copy and run the .reg file in your VM before doing any further steps.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://gist.github.com/4247499&#34;&gt;c:\temp\vmdriverhack.reg&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Move your VM to shared storage&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;I mounted an nfs partition to vmware from my freenas box and migrated the data across using the vmware datastore tools.   If you don&amp;rsquo;t have a NAS you could export a directory from your KVM server to achieve the same goal.&lt;/p&gt;
-
-&lt;p&gt;To move VMs in ESXi we click on the ESXi server, pick the Configuration tab,  click on &amp;lsquo;Storage&amp;rsquo; and then right-click on the datastore and select &amp;lsquo;Browse Datastore&amp;rsquo;.   Select the VM folder you wish to move and click the move icon.&lt;/p&gt;
-
-&lt;p&gt;{% img &lt;a href=&#34;https://lh6.googleusercontent.com/-R5x6JyT5x14/UMUkr4qNr4I/AAAAAAAAAHY/CYhOlizOLb8/s640/VMWare-move-1.png&#34;&gt;https://lh6.googleusercontent.com/-R5x6JyT5x14/UMUkr4qNr4I/AAAAAAAAAHY/CYhOlizOLb8/s640/VMWare-move-1.png&lt;/a&gt; %}&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>Moving from a self hosted Wordpress blog to Blogger</title>
       <link>https://tech.paulcz.net/blog/moving-from-a-self-hosted-wordpress-blog-to-blogger/</link>
       <pubDate>Sun, 21 Oct 2012 00:00:00 +0000</pubDate>
       
       <guid>https://tech.paulcz.net/blog/moving-from-a-self-hosted-wordpress-blog-to-blogger/</guid>
-      <description>&lt;p&gt;I have a self hosted &lt;a href=&#34;http://xesla.ro&#34;&gt;wordpress food blog&lt;/a&gt; hosted on an old silly domain that I&amp;rsquo;ve wanted to move away from for a while.   I also want to stop paying hosting fees some time soon.   Since I&amp;rsquo;m already looking at moving a lot of my day-to-day activities to the &amp;lsquo;cloud&amp;rsquo;  it made sense to pick a blogging platform that ties into a major cloud hub.   Google&amp;rsquo;s Blogger was the obvious choice as I&amp;rsquo;m already using the Google Apps platform for my new domain &lt;code&gt;paulcz.net&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Creating a blog on blogger is dead simple.   I went ahead and created two: &lt;a href=&#34;http://food.paulcz.net&#34;&gt;food.paulcz.net&lt;/a&gt; for the new food blog and &lt;a href=&#34;http://tech.paulcz.net&#34;&gt;tech.paulcz.net&lt;/a&gt; to start journalling random tech things.     Transfering the blog content itself  is quite simple,  however, doing it in a way as to preserve links between posts, from other sites, and teaching the search engines how to find your new site requires a little more trickery.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Moving from a self hosted Wordpress blog to Blogger</title>
-      <link>https://tech.paulcz.net/2012/10/moving-from-a-self-hosted-wordpress-blog-to-blogger/</link>
-      <pubDate>Sun, 21 Oct 2012 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/2012/10/moving-from-a-self-hosted-wordpress-blog-to-blogger/</guid>
       <description>&lt;p&gt;I have a self hosted &lt;a href=&#34;http://xesla.ro&#34;&gt;wordpress food blog&lt;/a&gt; hosted on an old silly domain that I&amp;rsquo;ve wanted to move away from for a while.   I also want to stop paying hosting fees some time soon.   Since I&amp;rsquo;m already looking at moving a lot of my day-to-day activities to the &amp;lsquo;cloud&amp;rsquo;  it made sense to pick a blogging platform that ties into a major cloud hub.   Google&amp;rsquo;s Blogger was the obvious choice as I&amp;rsquo;m already using the Google Apps platform for my new domain &lt;code&gt;paulcz.net&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;Creating a blog on blogger is dead simple.   I went ahead and created two: &lt;a href=&#34;http://food.paulcz.net&#34;&gt;food.paulcz.net&lt;/a&gt; for the new food blog and &lt;a href=&#34;http://tech.paulcz.net&#34;&gt;tech.paulcz.net&lt;/a&gt; to start journalling random tech things.     Transfering the blog content itself  is quite simple,  however, doing it in a way as to preserve links between posts, from other sites, and teaching the search engines how to find your new site requires a little more trickery.&lt;/p&gt;</description>
