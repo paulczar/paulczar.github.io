@@ -89,9 +89,9 @@ if (!doNotTrack) {
 
 <p>My previous automation for <a href="https://k8s.camp">k8s.camp</a> was using CircleCI which was very intuitive, I can&rsquo;t say the same for GitHub Actions.</p>
 
-<h2 id="no-good-plan-survives-first-contant">No good plan survives first contant</h2>
+<h2 id="no-good-plan-survives-first-contact">No good plan survives first contact</h2>
 
-<p>Obviously the first thing I did was google &ldquo;github actions documentation&rdquo; and the first hit was <a href="https://developer.github.com/actions/">developer.github.com/actions</a> which I hastily clicked on to be greated with the following:</p>
+<p>Obviously the first thing I did was google &ldquo;github actions documentation&rdquo; and the first hit was <a href="https://developer.github.com/actions/">developer.github.com/actions</a> which I hastily clicked on to be greeted with the following:</p>
 
 <p><img src="./doc-move.png" alt="doc move deprecate" /></p>
 
@@ -151,7 +151,7 @@ jobs:
 
 <p>Actions can be local to the repo, or they can be called from another repository.</p>
 
-<p>For example the above workflow calls a remote checkout action <code>uses: actions/checkout@v1</code> which literally looks out to the <code>v1</code> releast of the github repo <code>actions/checkout</code> <a href="https://github.com/actions/checkout/releases/tag/v1.0.0">here</a>.</p>
+<p>For example the above workflow calls a remote checkout action <code>uses: actions/checkout@v1</code> which literally looks out to the <code>v1</code> release of the github repo <code>actions/checkout</code> <a href="https://github.com/actions/checkout/releases/tag/v1.0.0">here</a>.</p>
 
 <p>Actions are run inside Docker containers, and thus an Action is usually a <code>Dockerfile</code> combined with a script to run inside the container. Remote actions should contain an <code>action.yaml</code> to define the action and its interactions.</p>
 
@@ -296,7 +296,7 @@ fi
 
 <p>For the sake of sanity I have kept the workflow for <a href="https://k8s.camp">k8s.camp</a> very simple, but I can see how you could quickly build out a fairly complex set of workflows to perform your CI/CD tasks.</p>
 
-<p>While I kept the Actions in the local repository, I can see a very interesting versitility in having remote actions. I can see myself creating a central Actions github repo with all of my actions which I can then link back to from my various projects.</p>
+<p>While I kept the Actions in the local repository, I can see a very interesting versatility in having remote actions. I can see myself creating a central Actions github repo with all of my actions which I can then link back to from my various projects.</p>
 
 <p>If you have a basic hugo setup publishing to <code>gh-pages</code> feel free to clone down the <a href="https://github.com/paulczar/k8s-camp">paulczar/k8s-camp</a> repo and re-use them in your own.</p>
 
