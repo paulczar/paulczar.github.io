@@ -6,10 +6,55 @@
     <description>Recent content in Categories on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 29 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 22 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://tech.paulcz.net/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>cert-manager</title>
+      <link>https://tech.paulcz.net/categories/cert-manager/</link>
+      <pubDate>Sat, 22 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/cert-manager/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>certificates</title>
+      <link>https://tech.paulcz.net/categories/certificates/</link>
+      <pubDate>Sat, 22 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/certificates/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kubernetes</title>
+      <link>https://tech.paulcz.net/categories/kubernetes/</link>
+      <pubDate>Sat, 22 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/kubernetes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ssl</title>
+      <link>https://tech.paulcz.net/categories/ssl/</link>
+      <pubDate>Sat, 22 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/ssl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tls</title>
+      <link>https://tech.paulcz.net/categories/tls/</link>
+      <pubDate>Sat, 22 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/tls/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>actions</title>
@@ -62,15 +107,6 @@
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
       
       <guid>https://tech.paulcz.net/categories/helm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>kubernetes</title>
-      <link>https://tech.paulcz.net/categories/kubernetes/</link>
-      <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/kubernetes/</guid>
       <description></description>
     </item>
     
@@ -147,29 +183,11 @@
     </item>
     
     <item>
-      <title>ssl</title>
-      <link>https://tech.paulcz.net/categories/ssl/</link>
-      <pubDate>Sun, 03 Jan 2016 14:44:30 -0600</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/ssl/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>swarm</title>
       <link>https://tech.paulcz.net/categories/swarm/</link>
       <pubDate>Sun, 03 Jan 2016 14:44:30 -0600</pubDate>
       
       <guid>https://tech.paulcz.net/categories/swarm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tls</title>
-      <link>https://tech.paulcz.net/categories/tls/</link>
-      <pubDate>Sun, 03 Jan 2016 14:44:30 -0600</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/tls/</guid>
       <description></description>
     </item>
     

@@ -4,25 +4,60 @@
   
   <url>
     <loc>https://tech.paulcz.net/blog/</loc>
-    <lastmod>2019-08-29T00:00:00+00:00</lastmod>
+    <lastmod>2020-02-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://tech.paulcz.net/categories/</loc>
-    <lastmod>2019-08-29T00:00:00+00:00</lastmod>
+    <lastmod>2020-02-22T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tech.paulcz.net/blog/creating-self-signed-certs-on-kubernetes/</loc>
+    <lastmod>2020-02-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://tech.paulcz.net/</loc>
+    <lastmod>2020-02-22T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tech.paulcz.net/categories/cert-manager/</loc>
+    <lastmod>2020-02-22T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tech.paulcz.net/categories/certificates/</loc>
+    <lastmod>2020-02-22T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tech.paulcz.net/categories/kubernetes/</loc>
+    <lastmod>2020-02-22T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tech.paulcz.net/categories/ssl/</loc>
+    <lastmod>2020-02-22T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tech.paulcz.net/categories/tls/</loc>
+    <lastmod>2020-02-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://tech.paulcz.net/blog/intro-to-github-actions/</loc>
     <lastmod>2019-08-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://tech.paulcz.net/</loc>
-    <lastmod>2019-08-29T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -72,12 +107,6 @@
   
   <url>
     <loc>https://tech.paulcz.net/categories/helm/</loc>
-    <lastmod>2019-07-03T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://tech.paulcz.net/categories/kubernetes/</loc>
     <lastmod>2019-07-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -207,19 +236,7 @@
   </url>
   
   <url>
-    <loc>https://tech.paulcz.net/categories/ssl/</loc>
-    <lastmod>2016-01-03T14:44:30-06:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://tech.paulcz.net/categories/swarm/</loc>
-    <lastmod>2016-01-03T14:44:30-06:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://tech.paulcz.net/categories/tls/</loc>
     <lastmod>2016-01-03T14:44:30-06:00</lastmod>
     <priority>0</priority>
   </url>
