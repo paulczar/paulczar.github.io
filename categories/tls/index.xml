@@ -19,7 +19,7 @@
       <guid>https://tech.paulcz.net/blog/creating-self-signed-certs-on-kubernetes/</guid>
       <description>Welcome to 2020. Creating self signed TLS certificates is still hard. Five (5) years ago I created a project on github called omgwtfssl which is a fairly simple bash script wrapping a bunch of openssl commands to create certificates.
 I&amp;rsquo;ve been using it ever since and kind of forgot about the pain of creating certificates.
-Skip the words and jump to the examples: 1. Creating self signed certificates with cert-manager 1.</description>
+Skip the words and jump to the examples Creating self signed certificates with cert-manager, Creating multiple certificates from the same self signed CA with cert-manager.</description>
     </item>
     
     <item>
