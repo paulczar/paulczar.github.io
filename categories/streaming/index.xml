@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>streaming on Paul Czarkowski</title>
+    <link>https://tech.paulcz.net/categories/streaming/</link>
+    <description>Recent content in streaming on Paul Czarkowski</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 01 Apr 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://tech.paulcz.net/categories/streaming/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Streaming from Zoom to Twitch (or YouTube)</title>
+      <link>https://tech.paulcz.net/blog/streaming-from-zoom-to-twitch/</link>
+      <pubDate>Wed, 01 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/blog/streaming-from-zoom-to-twitch/</guid>
+      <description>Zoom meetings are great for a small number of people, and if you&amp;rsquo;re willing to buy a Webinar license you can also use it for a full on webinar (although there are some interesting restrictions to webinars, like you can&amp;rsquo;t have breakout rooms).
+Twitch is a great streaming platform, originally used for streaming video games, its now more commonly being used to stream live coding and another technology related things that involve sharing your screen.</description>
+    </item>
+    
+  </channel>
+</rss>
