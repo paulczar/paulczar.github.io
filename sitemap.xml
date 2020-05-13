@@ -4,43 +4,66 @@
   
   <url>
     <loc>https://tech.paulcz.net/blog/</loc>
-    <lastmod>2020-04-01T00:00:00+00:00</lastmod>
+    <lastmod>2020-05-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://tech.paulcz.net/categories/</loc>
-    <lastmod>2020-04-01T00:00:00+00:00</lastmod>
+    <lastmod>2020-05-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tech.paulcz.net/blog/obs-broadcast-to-zoom-and-twitch/</loc>
+    <lastmod>2020-05-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://tech.paulcz.net/categories/obs/</loc>
+    <lastmod>2020-05-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://tech.paulcz.net/</loc>
-    <lastmod>2020-04-01T00:00:00+00:00</lastmod>
+    <lastmod>2020-05-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tech.paulcz.net/categories/developer-advocate/</loc>
+    <lastmod>2020-05-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tech.paulcz.net/categories/devops/</loc>
+    <lastmod>2020-05-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tech.paulcz.net/categories/streaming/</loc>
+    <lastmod>2020-05-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tech.paulcz.net/categories/twitch/</loc>
+    <lastmod>2020-05-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tech.paulcz.net/categories/youtube/</loc>
+    <lastmod>2020-05-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://tech.paulcz.net/blog/streaming-from-zoom-to-twitch/</loc>
     <lastmod>2020-04-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://tech.paulcz.net/categories/streaming/</loc>
-    <lastmod>2020-04-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://tech.paulcz.net/categories/twitch/</loc>
-    <lastmod>2020-04-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://tech.paulcz.net/categories/youtube/</loc>
-    <lastmod>2020-04-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -103,12 +126,6 @@
   
   <url>
     <loc>https://tech.paulcz.net/categories/ci/</loc>
-    <lastmod>2019-08-29T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://tech.paulcz.net/categories/devops/</loc>
     <lastmod>2019-08-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="map[]" />
+    <meta name="description" content="Random musings mostly about tech">
+    <link rel="shortcut icon" type="image/x-icon" href="https://tech.paulcz.net/img/favicon.ico">
+    <title>How to broadcast to Twitch and Zoom with OBS</title>
+    <meta name="generator" content="Hugo 0.56.3" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://tech.paulcz.net/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-35638296-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  </head>
+
+  <body>
+    <div id="wrap">
+
+      
+      <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="https://tech.paulcz.net/"><i class="fa fa-home"></i></a>
+    </div>
+    <div id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+        <li><a href="/page/about">ABOUT</a></li>
+        
+        <li><a href="/blog/">BLOG</a></li>
+        
+        <li><a href="/page/resume">RESUME</a></li>
+        
+        <li><a href="https://speaking.paulcz.net/presentations">TALK</a></li>
+        
+      
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      
+      <div class="container">
+        <div class="blog-post">
+          <h3>
+            <strong><a href="https://tech.paulcz.net/blog/obs-broadcast-to-zoom-and-twitch/">How to broadcast to Twitch and Zoom with OBS</a></strong>
+          </h3>
+        </div>
+        <div class="blog-title">
+          <h4>
+          May 13, 2020
+            &nbsp;&nbsp;
+            
+          </h4>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="blogpost">
+              
+
+<p>Recent world events (COVID-19) has completely turned the Developer Advocacy role on its head and many of us are scrambling to find new ways to effectively reach audiences remotely.</p>
+
+<p>Many of us have been reaching for tools like <a href="https://zoom.us">Zoom</a> for smaller groups such as Meetups and streaming platforms like <a href="https://twitch.tv">Twitch</a> / (YouTube Live)[<a href="https://youtube.com">https://youtube.com</a>] for reaching larger groups.</p>
+
+<p>Many of us are turning to <a href="https://obsproject.com/">Open Broadcaster Studio</a> (OBS) to turn our PCs into virtual production studios capable of composing multiple artifacts such as windows, audio, and webcams into layered streams. The most basic use case for OBS is to provide the ability to display onscreen code or a terminal session with a webcam image overlayed in the corner</p>
+
+<p><img src="./obs-basic.png" alt="Example of OBS overlay scene" /></p>
+
+<p>OBS can record to a high definition video file on your local machine as well as broadcast it out to Twitch, YouTube, or any other (RTSP)[<a href="https://en.wikipedia.org/wiki/Real_Time_Streaming_Protocol">https://en.wikipedia.org/wiki/Real_Time_Streaming_Protocol</a>] capable platform.</p>
+
+<p>It should come as no surprise that streaming high quality video from multiple sources can be quite taxing and it often makes sense to have OBS running on a separate computer (refurbished Dell desktops are perfect for this) with a video capture device watching the primary screen.</p>
+
+<p>Using OBS its fairly simple to record and broadcast a presentation, or live coding session. However it feels more like a webinar than it does a meetup or conference presentation.</p>
+
+<p>Thus it makes sense to hook up Zoom and OBS in a way that you can broadcast the zoom meeting to your Stream, as well as the contents of your Stream to Zoom. This lets you not only reach multiple audiences, but it also allows your Zoom guests to interact with your Stream.</p>
+
+<p>Unfortunately trying to share a screen and audio through multiple systems is complicated and isn&rsquo;t possible straight out of the box and we need to solve a few problems:</p>
+
+<ol>
+<li><p>Rebroadcast video from Zoom through to your stream</p></li>
+
+<li><p>Rebroadcast video from OBS through to Zoom</p></li>
+
+<li><p>Mix audio from multiple inputs through to multiple outputs (without causing feedback loops)</p></li>
+</ol>
+
+<h2 id="1-rebroadcast-video-from-zoom-through-to-your-stream">1. Rebroadcast video from Zoom through to your stream</h2>
+
+<p><img src="video-zoom-obs.png" alt="diagram showing zoom video in obs" /></p>
+
+<h3 id="multiple-monitors">Multiple Monitors</h3>
+
+<p>If you have multiple monitors you can dedicate one of them to Zoom and add a <strong>Display Capture</strong> source in OBS for that whole display and set zoom to fullscreen on that monitor.</p>
+
+<p><img src="obs-display.png" alt="OBS sharing a whole display" /></p>
+
+<blockquote>
+<p>Note: In this screenshot I only have one monitor, so you&rsquo;re seeing OBS in OBS cascading itself. You&rsquo;d obviously set the display to your secondary monitor.</p>
+</blockquote>
+
+<p>However I&rsquo;m not a fan of the layout of fullscreen zoom calls, so I prefer to capture it as a window, which also means its possible to do this with a single monitor.</p>
+
+<h3 id="single-monitor-window-capture">Single Monitor / Window Capture</h3>
+
+<p>In OBS you can add a <strong>Window Capture</strong> and select your Zoom meeting. This will capture just the Zoom window itself. You can adjust the window size to suit the resolution that you&rsquo;re outputting to.</p>
+
+<p><img src="obs-window.png" alt="OBS sharing just the zoom window" /></p>
+
+<p>Zoom likes to switch to fullscreen when you (or somebody else) shares their screen. Make sure to deselect the <strong>Enter full screen when a participant shares screen</strong> in the <strong>Share Screen</strong> Settings to disable this behavior.</p>
+
+<p>You might be tempted to try and share your screen to Zoom, however Zoom behaves painfully when you do that and you&rsquo;ll most likely lose your capture of the Zoom window. Instead you might want to add the OBS virtual camera which lets you use the contents of your OBS scene as a camera in Zoom.</p>
+
+<h2 id="2-rebroadcast-video-from-obs-through-to-zoom">2. Rebroadcast video from OBS through to Zoom</h2>
+
+<p><img src="video-zoom-obs-zoom.png" alt="diagram showing zoom video in obs and back" /></p>
+
+<p>OBS has a plugin that lets you create a virtual camera which you can then use as your Zoom camera. This means that the people in your Zoom call will see exactly the same video that you&rsquo;re streaming without having to share your screen.</p>
+
+<p>You can download the virtual camera plugin from <a href="https://obsproject.com/forum/resources/obs-virtualcam.949/">here</a> however it currently only supports Windows. (There&rsquo;s a <a href="https://github.com/CatxFish/obs-v4l2sink">video4linux</a> you can use if you&rsquo;re on Linux) for the same effect.</p>
+
+<p><img src="obs-camera-settings.png" alt="OBS Virtual Camera" /></p>
+
+<p>With the Virtual Camera plugin installed and enabled you can the select it as a camera in Zoom.</p>
+
+<p><img src="obs-virtualcam-in-zoom.png" alt="OBS virtual camera in zoom" /></p>
+
+<blockquote>
+<p>You can see the remote camera now showing the host&rsquo;s OBS scene of their webcam nested with their screen share.</p>
+</blockquote>
+
+<h2 id="3-mix-audio-from-multiple-inputs-through-to-multiple-outputs">3. Mix audio from multiple inputs through to multiple outputs</h2>
+
+<p><em>Without causing feedback loops.</em></p>
+
+<p>Setting up the video was relatively straight forward. Audio is the complicated beast. So far I have only solved this on Windows, but am quite certain you could solve it in Linux using the <a href="https://jackaudio.org/">JACK Audio Connection Kit</a> (JACK).</p>
+
+<p>Basically we need to be able to selectively route certain inputs to certain outputs. For instance we want zoom audio to go into OBS, and we want OBS audio to go into Zoom, but we don&rsquo;t want them to loop eachothers audio back and create a feedback loop.</p>
+
+<p><img src="zoom-obs-audio.png" alt="diagram showing audio wiring" /></p>
+
+<p>In order to solve this, you need a Mixer that can mix three discreet inputs (Zoom, Desktop, Mic) to three discreet outputs (Speakers, Zoom, OBS).</p>
+
+<p>You also need virtual audio devices that can act as patch cables.</p>
+
+<p>There&rsquo;s likely a number of different audio solutions out there to solve this, I&rsquo;ll show you what I found works really well and while not free, is extremely affordable.</p>
+
+<p>This is where <a href="https://www.vb-audio.com/">VB Audio</a> comes in. It&rsquo;s a website with an interesting assortment of audio software for Windows, most of which is either Free or Donationware (read the licenses carefully before using it in a commercial setting).</p>
+
+<p><a href="https://www.vb-audio.com/">VB Audio</a> offers <a href="https://www.vb-audio.com/Cable/index.htm">virtual cables</a> that we can use to patch the sound correctly. They have up to 5 cables that you can purchase via Donation. In order to wire up our sound we&rsquo;ll use <strong>VB-CABLE A+B</strong> and <strong>VB-CABLE C+D</strong> which gives us 4 virtual cables.</p>
+
+<p>All audio sent to VB-CABLE inputs is sent to the correspnding VB_CABLE output.</p>
+
+<p>Pay for, download, and install both bundles.</p>
+
+<p>You will still need a Mixer capable of mixing the inputs correctly. Thankfully <a href="https://www.vb-audio.com/">VB Audio</a> also provides <a href="https://www.vb-audio.com/Voicemeeter/index.htm">VoiceMeeter</a>. It comes in three flavors, <a href="https://www.vb-audio.com/Voicemeeter/index.htm">VoiceMeeter</a>, <a href="https://www.vb-audio.com/Voicemeeter/banana.htm">VoiceMeeter Banana</a>, and <a href="https://www.vb-audio.com/Voicemeeter/potato.htm">VoiceMeeter Potato</a>.</p>
+
+<p>The regular VoiceMeeter does not have enough inputs and outputs, so you&rsquo;ll want to use either Banana or Potato. I used Banana as it has exactly the right number of inputs.</p>
+
+<p>Pay for (Donate), download and install <a href="https://www.vb-audio.com/Voicemeeter/banana.htm">VoiceMeeter Banana</a>.</p>
+
+<p>Now you have the Mixer and the Virtual Cables we can hook everything up together.</p>
+
+<h3 id="configure-voicemeeter-banana">Configure VoiceMeeter Banana</h3>
+
+<p><img src="voicemeeter-banana.png" alt="screenshot of voicemeeter banana" /></p>
+
+<p>First open up VoiceMeeter Banana. You&rsquo;ll see there are Three Hardware Inputs and Three Hardware outputs.</p>
+
+<p><strong>Hardware Inputs:</strong></p>
+
+<p><em>You can rename the Inputs by right clicking on their names, and you can select their devices underneath.</em></p>
+
+<ul>
+<li><p>Rename <strong>Hardware input 1</strong> to <strong>Zoom</strong> and set it to <strong>WDB: CABLE-B Output</strong>.</p></li>
+
+<li><p>Rename <strong>Hardware input 2</strong> to <strong>Mic</strong> and set it to your microphone device. Mine is <strong>Microphone (Yeti)</strong>.</p></li>
+
+<li><p>Rename <strong>Hardware input 3</strong> to <strong>Desktop</strong>and set it to <strong>WDB: CABLE-D Output</strong>.</p></li>
+</ul>
+
+<p><strong>Hardware Outputs:</strong></p>
+
+<p>*Set the outputs by clicking the A1, A2, A3 dropdowns next to where it says <strong>HARDWARE OUT</strong>*</p>
+
+<ul>
+<li>A1 -&gt; <strong>Speakers / Headphones</strong></li>
+<li>A2 -&gt; <strong>WDM: Cable-A Input</strong> (Zoom)</li>
+<li>A3 -&gt; <strong>WDM: Cable-C Input</strong> (OBS)</li>
+</ul>
+
+<p><strong>Mixing:</strong></p>
+
+<p><em>Under the Hardware Inputs you can see a Volume selector and a sound activity bar. Beside that you can see options, the outputs to send to as well as Mute.</em></p>
+
+<ul>
+<li>Zoom -&gt; A1 (Speakers), A3 (OBS)</li>
+<li>Mic -&gt; A1 (Speakers), A2 (Zoom), A3 (OBS)</li>
+<li>Desktop -&gt; A1 (Speakers), A2 (Zoom), A3 (OBS)</li>
+</ul>
+
+<p>*I usually set the <strong>Desktop</strong> audio volume to about <code>-33</code> so that random noises don&rsquo;t drown out people speaking.</p>
+
+<h3 id="configure-desktop-audio">Configure Desktop Audio</h3>
+
+<p>In your status bar select the <strong>Speaker</strong> Icon and configure it to output to <strong>Cable-D Input</strong></p>
+
+<p><img src="desktop-audio.png" alt="screenshot of desktop audio" /></p>
+
+<h3 id="configure-zoom-audio">Configure Zoom audio</h3>
+
+<p>In Zoom, go to <strong>Audio Settings</strong>. Set <strong>Speaker</strong> to <strong>Cable-B Input</strong> and set <strong>Microphone</strong> to <strong>Cable-A Output</strong>.</p>
+
+<p><img src="zoom-audio-settings.png" alt="screenshot of zoom audio settings" /></p>
+
+<h3 id="configure-obs-settings">Configure OBS settings</h3>
+
+<p>in OBS under <strong>Settings</strong>-&gt;<strong>Audio</strong> Disable all Audio devices. Then set <strong>Mic/Auxillary Input</strong> to <strong>CABLE-C Output</strong>.</p>
+
+<p><img src="obs-audio-settings.png" alt="screenshot of OBS audio settings" /></p>
+
+<p>Then in the OBS <strong>Audio Mixer</strong> rename the <strong>Mic/Auxillary Input</strong> to <strong>VoiceMeeter</strong> and mute all other devices such as webcams.</p>
+
+<p><img src="obs-audio-mixer.png" alt="screenshot of OBS mixer" /></p>
+
+<h3 id="test-it-out">Test it out</h3>
+
+<p>You should now have everything wired up correctly and just need to test it out.</p>
+
+<p>When you configured the Mic input in VoiceMeeter you chose to send it to all three outputs. This means that you should hear your Mic input through your speakers/headphones.</p>
+
+<p>If you don&rsquo;t like to listen to yourself you can deselect <strong>A1</strong> for the <strong>Mic</strong> input. This is an easy toggle to see if the audio is working.</p>
+
+<p>You can also use the volume meters in the various apps to confirm they match. For instance when you speak in the Microphone you should see the <strong>Mic</strong> meter, and the <strong>A1</strong>, <strong>A2</strong>, <strong>A3</strong> meter move at the same time. You should also see activity in the OBS mixer and Zoom.</p>
+
+<p>You should hit <strong>Start Recording</strong> in OBS and get on a zoom with a friend (or a second computer) and verify sound is working in both directions, and that all of the audio ends up in the OBS recording.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Assuming you didn&rsquo;t hit any issues following this guide you now have your system configured to Stream to both Twitch (or YouTube) and Zoom at the same time, mixing their audio and video appropriately.</p>
+
+<p>This gives you a powerful way to not just record content, but to stream it and share it with both intimate groups on Zoom and Larger audiences on Twitch.</p>
+
+<p>One of the best parts of this setup is how I can easily host someone else on my twitch stream and have them share their desktop and do demos, live coding etc.</p>
+
+<p>I can also run workshops through zoom and people on my twitch stream can also follow along.</p>
+
+              <hr>
+              <div class="related-posts">
+                <h5>Related Posts</h5>
+                
+              </div>
+            </div>
+          </div>
+          <hr>
+        <div class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+
+    (function() {
+      
+      
+      if (window.location.hostname == "localhost")
+        return;
+
+      var disqus_shortname = '';
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+        </div>
+      
+      </div>
+    </div>
+
+    
+    <footer>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+      <a href="http://www.github.com/sumaxime/hugo-sustain/">sustain</a> with ♥</p>
+    </div>
+  </div>
+</footer>
+<div class="footer"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://tech.paulcz.net/js/docs.min.js"></script>
+<script src="https://tech.paulcz.net/js/main.js"></script>
+
+<script src="https://tech.paulcz.net/js/ie10-viewport-bug-workaround.js"></script>
+
+
+
+  </body>
+</html>

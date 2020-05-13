@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>twitch on Paul Czarkowski</title>
-    <link>https://tech.paulcz.net/categories/twitch/</link>
-    <description>Recent content in twitch on Paul Czarkowski</description>
+    <title>developer advocate on Paul Czarkowski</title>
+    <link>https://tech.paulcz.net/categories/developer-advocate/</link>
+    <description>Recent content in developer advocate on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 13 May 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://tech.paulcz.net/categories/twitch/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://tech.paulcz.net/categories/developer-advocate/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -20,16 +20,6 @@
       <description>Recent world events (COVID-19) has completely turned the Developer Advocacy role on its head and many of us are scrambling to find new ways to effectively reach audiences remotely.
 Many of us have been reaching for tools like Zoom for smaller groups such as Meetups and streaming platforms like Twitch / (YouTube Live)[https://youtube.com] for reaching larger groups.
 Many of us are turning to Open Broadcaster Studio (OBS) to turn our PCs into virtual production studios capable of composing multiple artifacts such as windows, audio, and webcams into layered streams.</description>
-    </item>
-    
-    <item>
-      <title>Streaming from Zoom to Twitch (or YouTube)</title>
-      <link>https://tech.paulcz.net/blog/streaming-from-zoom-to-twitch/</link>
-      <pubDate>Wed, 01 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/blog/streaming-from-zoom-to-twitch/</guid>
-      <description>Zoom meetings are great for a small number of people, and if you&amp;rsquo;re willing to buy a Webinar license you can also use it for a full on webinar (although there are some interesting restrictions to webinars, like you can&amp;rsquo;t have breakout rooms).
-Twitch is a great streaming platform, originally used for streaming video games, its now more commonly being used to stream live coding and another technology related things that involve sharing your screen.</description>
     </item>
     
   </channel>

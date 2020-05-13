@@ -6,10 +6,21 @@
     <description>Recent content in Blogs on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 01 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 13 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://tech.paulcz.net/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>How to broadcast to Twitch and Zoom with OBS</title>
+      <link>https://tech.paulcz.net/blog/obs-broadcast-to-zoom-and-twitch/</link>
+      <pubDate>Wed, 13 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/blog/obs-broadcast-to-zoom-and-twitch/</guid>
+      <description>Recent world events (COVID-19) has completely turned the Developer Advocacy role on its head and many of us are scrambling to find new ways to effectively reach audiences remotely.
+Many of us have been reaching for tools like Zoom for smaller groups such as Meetups and streaming platforms like Twitch / (YouTube Live)[https://youtube.com] for reaching larger groups.
+Many of us are turning to Open Broadcaster Studio (OBS) to turn our PCs into virtual production studios capable of composing multiple artifacts such as windows, audio, and webcams into layered streams.</description>
+    </item>
     
     <item>
       <title>Streaming from Zoom to Twitch (or YouTube)</title>
