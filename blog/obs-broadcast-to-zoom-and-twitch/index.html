@@ -89,13 +89,13 @@ if (!doNotTrack) {
 
 <p><img src="./obs-basic.png" alt="Example of OBS overlay scene" /></p>
 
-<p>OBS can record to a high definition video file on your local machine as well as broadcast it out to Twitch, YouTube, or any other (RTSP)[<a href="https://en.wikipedia.org/wiki/Real_Time_Streaming_Protocol">https://en.wikipedia.org/wiki/Real_Time_Streaming_Protocol</a>] capable platform.</p>
+<p>OBS can record to a high definition video file on your local machine as well as broadcast it out to Twitch, YouTube, or any other <a href="https://en.wikipedia.org/wiki/Real_Time_Streaming_Protocol">RTSP</a> capable platform.</p>
 
-<p>It should come as no surprise that streaming high quality video from multiple sources can be quite taxing and it often makes sense to have OBS running on a separate computer (refurbished Dell desktops are perfect for this) with a video capture device watching the primary screen.</p>
+<p>It should come as no surprise that streaming high quality video from multiple sources can be quite taxing and it often makes sense to have <strong>OBS running on a separate computer</strong> (refurbished Dell desktops are perfect for this) with a video capture device (like an Elgato HD60) capturing video from your primary machine.</p>
 
-<p>Using OBS its fairly simple to record and broadcast a presentation, or live coding session. However it feels more like a webinar than it does a meetup or conference presentation.</p>
+<p>Using OBS its fairly simple to record and broadcast a presentation, or live coding session. However it feels more like a webinar than it does a meetup or conference presentation as the interaction is very one way.</p>
 
-<p>Thus it makes sense to hook up Zoom and OBS in a way that you can broadcast the zoom meeting to your Stream, as well as the contents of your Stream to Zoom. This lets you not only reach multiple audiences, but it also allows your Zoom guests to interact with your Stream.</p>
+<p>By hooking up Zoom and OBS bidirectionally you can have the reach of a streaming platform at the same time as the more interative nature of having real live people in the (virtual) room with you. Having even just a few people acting as an audience and being able to talk to them and have them talk back and see their body language and reactions makes all the difference.</p>
 
 <p>Unfortunately trying to share a screen and audio through multiple systems is complicated and isn&rsquo;t possible straight out of the box and we need to solve a few problems:</p>
 
@@ -118,10 +118,10 @@ if (!doNotTrack) {
 <p><img src="obs-display.png" alt="OBS sharing a whole display" /></p>
 
 <blockquote>
-<p>Note: In this screenshot I only have one monitor, so you&rsquo;re seeing OBS in OBS cascading itself. You&rsquo;d obviously set the display to your secondary monitor.</p>
+<p>Note: I was on a Zoom between two machines and only one camera, so pretend <code>Not Paul</code> is a very handsome gentleman.</p>
 </blockquote>
 
-<p>However I&rsquo;m not a fan of the layout of fullscreen zoom calls, so I prefer to capture it as a window, which also means its possible to do this with a single monitor.</p>
+<p>I&rsquo;m not a fan of the layout of fullscreen zoom calls, and I prefer the flexibility of capturing it as a window, which also makes it possible to do this with a single monitor.</p>
 
 <h3 id="single-monitor-window-capture">Single Monitor / Window Capture</h3>
 
@@ -129,15 +129,19 @@ if (!doNotTrack) {
 
 <p><img src="obs-window.png" alt="OBS sharing just the zoom window" /></p>
 
-<p>Zoom likes to switch to fullscreen when you (or somebody else) shares their screen. Make sure to deselect the <strong>Enter full screen when a participant shares screen</strong> in the <strong>Share Screen</strong> Settings to disable this behavior.</p>
+<blockquote>
+<p>Note: The window capture settings are OS dependent, on Windows it would display the name and executable file for the window you want to share.</p>
+</blockquote>
 
-<p>You might be tempted to try and share your screen to Zoom, however Zoom behaves painfully when you do that and you&rsquo;ll most likely lose your capture of the Zoom window. Instead you might want to add the OBS virtual camera which lets you use the contents of your OBS scene as a camera in Zoom.</p>
+<p>One Caveat is that Zoom likes to switch to fullscreen when somebody shares their screen. Make sure to deselect the <strong>Enter full screen when a participant shares screen</strong> in the <strong>Share Screen</strong> Settings to disable this behavior.</p>
+
+<p>You might be tempted to try and share your screen to Zoom, however Zoom behaves painfully when you do that and you&rsquo;ll most likely lose your capture of the Zoom window. Instead you should add the OBS virtual camera (see below) which lets you use the contents of your OBS scene as a camera in Zoom.</p>
 
 <h2 id="2-rebroadcast-video-from-obs-through-to-zoom">2. Rebroadcast video from OBS through to Zoom</h2>
 
 <p><img src="video-zoom-obs-zoom.png" alt="diagram showing zoom video in obs and back" /></p>
 
-<p>OBS has a plugin that lets you create a virtual camera which you can then use as your Zoom camera. This means that the people in your Zoom call will see exactly the same video that you&rsquo;re streaming without having to share your screen.</p>
+<p>OBS has a plugin that lets you create a virtual camera which you can use as your Zoom camera. The people in your Zoom call will see exactly the same video that you&rsquo;re streaming without having to share your screen.</p>
 
 <p>You can download the virtual camera plugin from <a href="https://obsproject.com/forum/resources/obs-virtualcam.949/">here</a> however it currently only supports Windows. (There&rsquo;s a <a href="https://github.com/CatxFish/obs-v4l2sink">video4linux</a> you can use if you&rsquo;re on Linux) for the same effect.</p>
 
