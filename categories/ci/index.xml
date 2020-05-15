@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ci on Paul Czarkowski</title>
@@ -20,6 +20,231 @@
       <description>After what seems like an eternity I finally got added to the GitHub Actions beta a few days ago.
 I recently created a Hugo website for learning Kubernetes called k8s.camp which is hosted in GitHub Pages and I figured that switching it from CircleCI to GitHub Actions would be a great way to learn Actions.
 Before I get started I do want to mention that my experience as a new user trying to learn how actions work was sub-optimal.</description>
+      <content>
+
+&lt;p&gt;After what seems like an &lt;a href=&#34;https://github.blog/2018-10-17-action-demos/&#34;&gt;eternity&lt;/a&gt; I finally got added to the &lt;a href=&#34;https://github.com/features/actions/&#34;&gt;GitHub Actions&lt;/a&gt; beta a few days ago.&lt;/p&gt;
+
+&lt;p&gt;I recently created a &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; website for learning Kubernetes called &lt;a href=&#34;https://k8s.camp&#34;&gt;k8s.camp&lt;/a&gt; which is hosted in GitHub Pages and I figured that switching it from &lt;a href=&#34;https://circleci.com&#34;&gt;CircleCI&lt;/a&gt; to GitHub Actions would be a great way to learn Actions.&lt;/p&gt;
+
+&lt;p&gt;Before I get started I do want to mention that my experience as a new user trying to learn how actions work was sub-optimal.&lt;/p&gt;
+
+&lt;p&gt;My previous automation for &lt;a href=&#34;https://k8s.camp&#34;&gt;k8s.camp&lt;/a&gt; was using CircleCI which was very intuitive, I can&amp;rsquo;t say the same for GitHub Actions.&lt;/p&gt;
+
+&lt;h2 id=&#34;no-good-plan-survives-first-contact&#34;&gt;No good plan survives first contact&lt;/h2&gt;
+
+&lt;p&gt;Obviously the first thing I did was google &amp;ldquo;github actions documentation&amp;rdquo; and the first hit was &lt;a href=&#34;https://developer.github.com/actions/&#34;&gt;developer.github.com/actions&lt;/a&gt; which I hastily clicked on to be greeted with the following:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./doc-move.png&#34; alt=&#34;doc move deprecate&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Which suggested I was off to a rocky start. I clicked through to the &lt;a href=&#34;https://help.github.com/en/categories/automating-your-workflow-with-github-actions&#34;&gt;&amp;ldquo;Automating your workflow with GitHub Actions&amp;rdquo;&lt;/a&gt; page.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Pretty much any time I googled a GitHub Actions question I was sent to the deprecated documentation with the &lt;code&gt;HCL&lt;/code&gt; syntax rather than &lt;code&gt;yaml&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Most of the existing examples are still in &lt;code&gt;HCL&lt;/code&gt;, both in the documentation and out in the wild.&lt;/p&gt;
+
+&lt;p&gt;On top of this the examples in the documentation are quite trite and don&amp;rsquo;t really help do anything useful. It&amp;rsquo;s not even really clear how to structure the workflows and actions in the repo, so I had to fumble my way through it.&lt;/p&gt;
+
+&lt;p&gt;After a bunch of reading documentation and finding incomplete examples and blog posts I managed to slowly grok my way through it.&lt;/p&gt;
+
+&lt;p&gt;Hopefully this blog post will help others have a better first experience.&lt;/p&gt;
+
+&lt;h2 id=&#34;workflows-and-actions&#34;&gt;Workflows and Actions&lt;/h2&gt;
+
+&lt;p&gt;My understanding through trial and error is there are two things you need for GitHub Actions, Workflows and Actions.&lt;/p&gt;
+
+&lt;h3 id=&#34;workflows&#34;&gt;Workflows&lt;/h3&gt;
+
+&lt;p&gt;Workflows are pretty much what you&amp;rsquo;d expect them to be. Files that describe the steps to be taken when an event is triggered.&lt;/p&gt;
+
+&lt;p&gt;These are stored in &lt;code&gt;.github/workflows&lt;/code&gt; in your git repository and look something like this (in fact below is the &lt;a href=&#34;https://github.com/paulczar/k8s-camp/blob/master/.github/workflows/build-and-deploy.yml&#34;&gt;current workflow&lt;/a&gt; for k8s.camp):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;name: Build and Deploy to GitHub Pages
+on:
+  push:
+    branches: [master]
+jobs:
+  build:
+    name: build-and-deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - uses: ./.github/actions/spell-check
+      - uses: ./.github/actions/publish-gh-pages
+        env:
+          PUSH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Note: GitHub Actions act like GitHub Apps which means it gets it&amp;rsquo;s own &lt;code&gt;GITHUB_TOKEN&lt;/code&gt; secret which can be pulled into &lt;em&gt;environment variables&lt;/em&gt; for the Actions. In fact there&amp;rsquo;s a ton of default &lt;em&gt;environment variables&lt;/em&gt; passed into the action such as the repository name and git commit sha.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You can see you define the type of activities to trigger the workflow (in this case a push to the &lt;code&gt;master&lt;/code&gt; branch) and a set of steps to run. These steps call out to actions.&lt;/p&gt;
+
+&lt;p&gt;You can have multiple workflows based on different GitHub activities and even chain them together to create even more complex workflows.&lt;/p&gt;
+
+&lt;h2 id=&#34;actions&#34;&gt;Actions&lt;/h2&gt;
+
+&lt;p&gt;Actions are also pretty self explanatory, they&amp;rsquo;re the discrete units of work required to fulfill each step in the workflow.&lt;/p&gt;
+
+&lt;p&gt;Actions can be local to the repo, or they can be called from another repository.&lt;/p&gt;
+
+&lt;p&gt;For example the above workflow calls a remote checkout action &lt;code&gt;uses: actions/checkout@v1&lt;/code&gt; which literally looks out to the &lt;code&gt;v1&lt;/code&gt; release of the github repo &lt;code&gt;actions/checkout&lt;/code&gt; &lt;a href=&#34;https://github.com/actions/checkout/releases/tag/v1.0.0&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Actions are run inside Docker containers, and thus an Action is usually a &lt;code&gt;Dockerfile&lt;/code&gt; combined with a script to run inside the container. Remote actions should contain an &lt;code&gt;action.yaml&lt;/code&gt; to define the action and its interactions.&lt;/p&gt;
+
+&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;The first step in learning how to use github actions is to learn how to build and run Docker images the wrong way.&lt;/p&gt;&amp;mdash; Czarknado 🦈🌪️ (@pczarkowski) &lt;a href=&#34;https://twitter.com/pczarkowski/status/1167437284410626054?ref_src=twsrc%5Etfw&#34;&gt;August 30, 2019&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;You can vendor your actions into your repo (which I prefer to do, especially compared to pulling in some other random person&amp;rsquo;s action blindly) in which case I prefer to place them in the &lt;code&gt;.github/actions&lt;/code&gt; directory to keep things clean.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-three-steps&#34;&gt;The three steps&lt;/h2&gt;
+
+&lt;p&gt;There are three steps defined in my workflow file above. These will be run in order by the action, if one fails the entire action will halt.&lt;/p&gt;
+
+&lt;h3 id=&#34;step-1-checkout&#34;&gt;Step 1 - checkout&lt;/h3&gt;
+
+&lt;p&gt;The first step is using a github provided action to check out the source at the correct commit.&lt;/p&gt;
+
+&lt;h3 id=&#34;step-2-spellcheck&#34;&gt;Step 2 - spellcheck&lt;/h3&gt;
+
+&lt;p&gt;The second step is running a spellcheck across all of my markdown files.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;As I mentioned an action runs in a Docker container, so an Action is generally defined by a &lt;code&gt;Dockerfile&lt;/code&gt; to build the image, and an &lt;code&gt;ENTRYPOINT&lt;/code&gt; script to run the action inside the image.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;in the k8s.camp repo is the following local action &lt;code&gt;./.github/actions/spell-check&lt;/code&gt; which consists of:&lt;/p&gt;
+
+&lt;h4 id=&#34;dockerfile&#34;&gt;Dockerfile&lt;/h4&gt;
+
+&lt;p&gt;This is a fairly basic Dockerfile that simply starts from a small &lt;code&gt;nodejs&lt;/code&gt; image and adds in my entrypoint script.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Note: the &lt;code&gt;LABEL&lt;/code&gt;s are important to github actions and are documented &lt;a href=&#34;https://developer.github.com/actions/creating-github-actions/creating-a-docker-container/#label&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dockerfile&#34;&gt;FROM node:lts-alpine
+
+LABEL &amp;quot;name&amp;quot;=&amp;quot;Markdown Spell Checker&amp;quot;
+LABEL &amp;quot;maintainer&amp;quot;=&amp;quot;Paul Czarkowski&amp;quot;
+LABEL &amp;quot;version&amp;quot;=&amp;quot;0.0.1&amp;quot;
+
+LABEL &amp;quot;com.github.actions.name&amp;quot;=&amp;quot;Markdown Spell Checker&amp;quot;
+LABEL &amp;quot;com.github.actions.description&amp;quot;=&amp;quot;Markdown Spell Checker&amp;quot;
+LABEL &amp;quot;com.github.actions.icon&amp;quot;=&amp;quot;package&amp;quot;
+LABEL &amp;quot;com.github.actions.color&amp;quot;=&amp;quot;green&amp;quot;
+
+COPY entrypoint.sh /entrypoint.sh
+
+ENTRYPOINT [&amp;quot;/entrypoint.sh&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;entrypoint-sh&#34;&gt;entrypoint.sh&lt;/h4&gt;
+
+&lt;p&gt;The script is really simple and uses &lt;code&gt;npm&lt;/code&gt; to install &lt;code&gt;markdown-spellcheck&lt;/code&gt; locally and then runs it.&lt;/p&gt;
+
+&lt;p&gt;The exit code of &lt;code&gt;markdown-spellcheck&lt;/code&gt; will be used to determine if the step passed or failed.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/bin/sh
+
+cd $GITHUB_WORKSPACE
+
+npm install markdown-spellcheck
+
+./node_modules/markdown-spellcheck/bin/mdspell -r -n -a --en-us &#39;content/**/*.md&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;step-3-publish-to-gh-pages&#34;&gt;Step 3 - Publish to gh-pages&lt;/h3&gt;
+
+&lt;p&gt;The third step will run &lt;code&gt;hugo&lt;/code&gt; to generate the &lt;code&gt;html&lt;/code&gt; for the website and then pushing the results to the &lt;code&gt;gh-pages&lt;/code&gt; branch.&lt;/p&gt;
+
+&lt;h4 id=&#34;dockerfile-1&#34;&gt;Dockerfile&lt;/h4&gt;
+
+&lt;p&gt;Here we have a slightly more complicated &lt;code&gt;Dockerfile&lt;/code&gt; that starts with Ubuntu and installs &lt;code&gt;curl&lt;/code&gt;, &lt;code&gt;git&lt;/code&gt;, and &lt;code&gt;hugo&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dockerfile&#34;&gt;FROM ubuntu:bionic
+
+LABEL &amp;quot;name&amp;quot;=&amp;quot;Publish k8s.camp&amp;quot;
+LABEL &amp;quot;maintainer&amp;quot;=&amp;quot;Paul Czarkowski&amp;quot;
+LABEL &amp;quot;version&amp;quot;=&amp;quot;0.0.1&amp;quot;
+
+LABEL &amp;quot;com.github.actions.name&amp;quot;=&amp;quot;Publish k8s.camp&amp;quot;
+LABEL &amp;quot;com.github.actions.description&amp;quot;=&amp;quot;Publish k8s.camp via gh-pages&amp;quot;
+LABEL &amp;quot;com.github.actions.icon&amp;quot;=&amp;quot;package&amp;quot;
+LABEL &amp;quot;com.github.actions.color&amp;quot;=&amp;quot;green&amp;quot;
+
+RUN apt-get update &amp;gt; /dev/null &amp;amp;&amp;amp; apt-get -yqq install curl git &amp;gt; /dev/null
+
+RUN curl -sSL \
+    https://github.com/gohugoio/hugo/releases/download/v0.56.3/hugo_0.56.3_Linux-64bit.tar.gz | \
+    tar xzf - hugo &amp;amp;&amp;amp; \
+    chmod +x /hugo &amp;amp;&amp;amp; \
+    /hugo version
+
+COPY entrypoint.sh /entrypoint.sh
+
+ENTRYPOINT [&amp;quot;/entrypoint.sh&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;entrypoint-sh-1&#34;&gt;entrypoint.sh&lt;/h4&gt;
+
+&lt;p&gt;The entrypoint script configures git, checks out the &lt;code&gt;gh-pages&lt;/code&gt; branch, and generates the html into that branch before pushing it back up to git using the &lt;code&gt;GITHUB_TOKEN&lt;/code&gt; which is passed to it as the environment variable &lt;code&gt;PUSH_TOKEN&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/bin/bash
+
+set -o pipefail
+
+echo &amp;quot;--&amp;gt; Configure git client&amp;quot;
+
+git config --global user.email &amp;quot;username.taken@gmail.com&amp;quot;
+git config --global user.name &amp;quot;Hugo Publisher&amp;quot;
+
+echo &amp;quot;--&amp;gt; check out gh-pages&amp;quot;
+git worktree add -B gh-pages public origin/gh-pages
+
+echo &amp;quot;--&amp;gt; hugo publish&amp;quot;
+cd $GITHUB_WORKSPACE
+/hugo
+
+echo &amp;quot;--&amp;gt; push gh-pages&amp;quot;
+if [[ -z &amp;quot;$PUSH_TOKEN&amp;quot; ]]; then
+  echo &amp;quot;No push token provided, skipping publish&amp;quot;
+else
+  cd public
+  git add --all &amp;amp;&amp;amp; \
+  git commit -m &amp;quot;Github Action Build ${GITHUB_SHA} `date +&#39;%Y-%m-%d %H:%M:%S&#39;`&amp;quot; --allow-empty &amp;amp;&amp;amp; \
+  git remote set-url origin https://${GITHUB_ACTOR}:${PUSH_TOKEN}@github.com/${GITHUB_REPOSITORY}
+  git push origin gh-pages:gh-pages
+fi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Note: I am using &lt;code&gt;git remote set-url&lt;/code&gt; to update the git repo URL to include the &lt;code&gt;PUSH_TOKEN&lt;/code&gt; which gives the action &lt;code&gt;push&lt;/code&gt; access to the repository.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;end-result&#34;&gt;End Result&lt;/h2&gt;
+
+&lt;p&gt;Pushing this new &lt;code&gt;.github&lt;/code&gt; directory structure defining a workflow and a set of steps up to my git repo is all I needed to set up the Actions, and the workflow triggered from this very first push.&lt;/p&gt;
+
+&lt;p&gt;Like all &lt;code&gt;ci&lt;/code&gt; tools I had a dozen or so commits to stabilize the actual test scripts and workflow, but now all I have to do to publish a new version of the &lt;a href=&#34;https://k8s.camp&#34;&gt;k8s.camp&lt;/a&gt; website is to merge a commit into the &lt;code&gt;master&lt;/code&gt; branch of the repo.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./actions2.png&#34; alt=&#34;screenshot of github actions&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Once you get through the initial hump of learning how GitHub actions work it becomes fairly straightforward to configure and use actions.&lt;/p&gt;
+
+&lt;p&gt;For the sake of sanity I have kept the workflow for &lt;a href=&#34;https://k8s.camp&#34;&gt;k8s.camp&lt;/a&gt; very simple, but I can see how you could quickly build out a fairly complex set of workflows to perform your CI/CD tasks.&lt;/p&gt;
+
+&lt;p&gt;While I kept the Actions in the local repository, I can see a very interesting versatility in having remote actions. I can see myself creating a central Actions github repo with all of my actions which I can then link back to from my various projects.&lt;/p&gt;
+
+&lt;p&gt;If you have a basic hugo setup publishing to &lt;code&gt;gh-pages&lt;/code&gt; feel free to clone down the &lt;a href=&#34;https://github.com/paulczar/k8s-camp&#34;&gt;paulczar/k8s-camp&lt;/a&gt; repo and re-use them in your own.&lt;/p&gt;
+</content>
     </item>
     
   </channel>

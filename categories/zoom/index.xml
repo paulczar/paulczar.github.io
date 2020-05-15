@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>zoom on Paul Czarkowski</title>
@@ -19,6 +19,73 @@
       <guid>https://tech.paulcz.net/blog/streaming-from-zoom-to-twitch/</guid>
       <description>Zoom meetings are great for a small number of people, and if you&amp;rsquo;re willing to buy a Webinar license you can also use it for a full on webinar (although there are some interesting restrictions to webinars, like you can&amp;rsquo;t have breakout rooms).
 Twitch is a great streaming platform, originally used for streaming video games, its now more commonly being used to stream live coding and another technology related things that involve sharing your screen.</description>
+      <content>
+
+&lt;p&gt;Zoom meetings are great for a small number of people, and if you&amp;rsquo;re willing to buy a Webinar license you can also use it for a full on webinar (although there are some interesting restrictions to webinars, like you can&amp;rsquo;t have breakout rooms).&lt;/p&gt;
+
+&lt;p&gt;Twitch is a great streaming platform, originally used for streaming video games, its now more commonly being used to stream live coding and another technology related things that involve sharing your screen.&lt;/p&gt;
+
+&lt;p&gt;Traditionally you&amp;rsquo;d use software called &lt;a href=&#34;https://obsproject.com/&#34;&gt;Open Broadcaster Software (OBS)&lt;/a&gt; which you can compose multiple video/audio inputs into a single video that can be streamed to Twitch. This is how folks will compose their xbox, a chat screen and a webcam together in their stream.&lt;/p&gt;
+
+&lt;p&gt;However OBS is quite CPU hungry (I think a GPU might help) and by the time you run OBS on a standard machine its tough to run anything else without starving OBS of resources and causing stuttering on the stream.&lt;/p&gt;
+
+&lt;p&gt;Its made worse if you want to have multiple people on the stream and you end up running something like Zoom which allows you all to chat, and one or more of you to share your screen via zoom, then you just push Zoom itself through OBS.&lt;/p&gt;
+
+&lt;p&gt;But if you&amp;rsquo;re already streaming video via Zoom, wouldn&amp;rsquo;t it be great if you could just use Zoom to stream directly to Twitch and cutout the middle man?  Turns out you can!&lt;/p&gt;
+
+&lt;h2 id=&#34;setting-up-zoom-to-stream-to-twitch&#34;&gt;Setting up Zoom to stream to Twitch&lt;/h2&gt;
+
+&lt;p&gt;Preamble aside, its fairly easy, but completely unintuitive to stream Zoom to Twitch. So lets talk it through. First of all you do need a paid [Pro, Business, Education, or Enterprise] account, hopefully you have that through your workplace.&lt;/p&gt;
+
+&lt;p&gt;Log into your organization&amp;rsquo;s Zoom, and hit the &lt;strong&gt;Settings&lt;/strong&gt; button on the left hand menu. Scroll down to &lt;strong&gt;Advanced settings&lt;/strong&gt; and turn &lt;strong&gt;Allow live streaming meetings&lt;/strong&gt; on. Check either the &lt;strong&gt;YouTube&lt;/strong&gt; or the &lt;strong&gt;Custom Live Streaming Service&lt;/strong&gt;, the latter which we&amp;rsquo;ll configure for Twitch.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;zoom-settings.png&#34; alt=&#34;Zoom Settings Page&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Since I&amp;rsquo;m bad at remembering things, I throw the following in the instructions text box so I remember when setting up the meeting how to do it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;stream url: rtmp://live.twitch.tv/app
+stream key: &amp;lt;your twitch account stream key&amp;gt;
+live streaming url: https://twitch.tv/accountname
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then just hit Save. You&amp;rsquo;re now ready to stream. You can either set up the actual stream live in a Zoom meeting, or you can Schedule a meeting and configure it there. Let&amp;rsquo;s take a look at the latter.&lt;/p&gt;
+
+&lt;h2 id=&#34;schedule-a-zoom-meeting-with-twitch-streaming&#34;&gt;Schedule a Zoom meeting with Twitch Streaming&lt;/h2&gt;
+
+&lt;p&gt;In your Zoom account on the zoom website click &lt;strong&gt;Schedule a meeting&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Set a name, the start time, duration etc and click &lt;strong&gt;Save&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;This will drop you to the settings page for the meeting you just scheduled and on the bottom of that page is the &lt;strong&gt;Live Streaming&lt;/strong&gt; configuration setting. Click &lt;strong&gt;configure live stream settings&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;schedule-a-meeting.png&#34; alt=&#34;schedule a meeting&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Here you enter the details following the instructions you conveniently placed in the Stream settings:&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;You can find the twitch key at the following URL &lt;a href=&#34;https://dashboard.twitch.tv/u/&#34;&gt;https://dashboard.twitch.tv/u/&lt;/a&gt;&lt;username&gt;/settings/channel&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;configure-live-stream.png&#34; alt=&#34;configure live stream&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Hit Save. Now when you join the Meeting it will automatically configure the Live Stream, but you&amp;rsquo;ll still need to start the Stream by clicking the &lt;strong&gt;&amp;hellip; More&lt;/strong&gt; button and select the streaming option from there.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;If you didn&amp;rsquo;t configure live streaming for the meeting, you can actually configure it here as long as you&amp;rsquo;ve enabled streaming in Settings&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;from-in-zoom-meeting.png&#34; alt=&#34;configure live stream in meeting&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Zoom will redirect you to a browser and configure the stream before redirecting it to your twitch streaming page.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;start-stream.png&#34; alt=&#34;starting stream&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can close this twitch streaming window once its started or leave it open. If you leave it open turn off its sound or you&amp;rsquo;ll create some fun echo loopbacks.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s the Twitch view:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;twitch-streaming.png&#34; alt=&#34;twitch stream&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s the Zoom View:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;zoom-streaming.png&#34; alt=&#34;zoom stream&#34; /&gt;&lt;/p&gt;
+</content>
     </item>
     
   </channel>

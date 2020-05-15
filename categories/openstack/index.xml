@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>openstack on Paul Czarkowski</title>
@@ -19,6 +19,22 @@
       <guid>https://tech.paulcz.net/blog/openstacks-and-ecosystems/</guid>
       <description>I have recently had a number of lengthy discussions on the Twitter about Interop, Users, and Ecosystems. Specifically about our need to focus on the OpenStack ecosystem to extend the OpenStack IaaS user experience to something a bit more platform[ish].
 I wrote a post for SysAdvent this year on developing applications on top of OpenStack using a collection of OpenSource tools to create a PaaS and CI/CD pipelines. I think it turned out quite well and really helped reinforce my beliefs on the subject.</description>
+      <content>&lt;p&gt;I have recently had a number of lengthy discussions on the &lt;a href=&#34;https://twitter.com/zehicle/status/678736665792356352&#34;&gt;Twitter&lt;/a&gt; about Interop, Users, and Ecosystems. Specifically about our need to focus on the OpenStack ecosystem to extend the OpenStack IaaS user experience to something a bit more platform[ish].&lt;/p&gt;
+
+&lt;p&gt;I wrote a post for &lt;a href=&#34;http://sysadvent.blogspot.com/2015/12/day-16-merry-paasmas-and-very.html&#34;&gt;SysAdvent&lt;/a&gt; this year on developing applications on top of OpenStack using a collection of OpenSource tools to create a PaaS and CI/CD pipelines. I think it turned out quite well and really helped reinforce my beliefs on the subject.&lt;/p&gt;
+
+&lt;p&gt;My buddy and future OpenStack Board member &lt;a href=&#34;https://twitter.com/jjasghar&#34;&gt;JJ Asghar&lt;/a&gt; has been spearheading a new &lt;a href=&#34;https://wiki.openstack.org/wiki/Osops&#34;&gt;OpenStack Operators Project&lt;/a&gt;. I plan to contribute to this project by creating some examples of deploying tools that provide higher level services on top of the OpenStack IaaS layer.&lt;/p&gt;
+
+&lt;p&gt;Given that I am very bullish about the &lt;a href=&#34;http://docker.com&#34;&gt;Docker&lt;/a&gt; ecosystem it makes sense that my first contribution would be focussed on running one of the several &amp;ldquo;Docker container scheduling/cluster&amp;rdquo; tools.&lt;/p&gt;
+
+&lt;p&gt;After playing around with a few of them, I settled on starting with Docker Swarm as its one of the easier to understand and run and doesn&amp;rsquo;t require any special tooling other than a recent install of the Docker binary to use.&lt;/p&gt;
+
+&lt;p&gt;To increase simplicity I chose to use Hashicorp&amp;rsquo;s &lt;a href=&#34;http://terraform.io&#34;&gt;Terraform&lt;/a&gt; and use only the most basic of the OpenStack services to ensure a fairly high likelyhood that it will run on most fairly up to date OpenStack clouds.&lt;/p&gt;
+
+&lt;p&gt;Based on the project&amp;rsquo;s suggestion I posted the Terraform files up to the &lt;a href=&#34;https://github.com/openstack/osops-tools-contrib/tree/master/terraform/dockerswarm-coreos&#34;&gt;osops-tools-contrib&lt;/a&gt; along with fairly comprehensive documentation on using it.&lt;/p&gt;
+
+&lt;p&gt;I hope this and future work I plan to do to create similar examples will help the OpenStack Community out in some small way.&lt;/p&gt;
+</content>
     </item>
     
   </channel>

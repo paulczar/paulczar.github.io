@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>devops on Paul Czarkowski</title>
@@ -20,6 +20,206 @@
       <description>If you prefer a Video Tutorial, you can watch me screencast it on youtube, otherwise read on below.
   Recent world events (COVID-19) has completely turned the Developer Advocacy role on its head and many of us are scrambling to find new ways to effectively reach audiences remotely.
 Many of us have been reaching for tools like Zoom for smaller groups such as Meetups and streaming platforms like Twitch / YouTube Live for reaching larger groups.</description>
+      <content>
+
+&lt;p&gt;If you prefer a Video Tutorial, you can watch me screencast it on youtube, otherwise read on below.&lt;/p&gt;
+
+&lt;div class=&#34;embed video-player&#34;&gt;
+&lt;iframe class=&#34;youtube-player&#34; type=&#34;text/html&#34; width=&#34;640&#34; height=&#34;385&#34; src=&#34;http://www.youtube.com/embed/0q05_AMWUug&#34; allowfullscreen frameborder=&#34;0&#34;&gt;
+&lt;/iframe&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;Recent world events (COVID-19) has completely turned the Developer Advocacy role on its head and many of us are scrambling to find new ways to effectively reach audiences remotely.&lt;/p&gt;
+
+&lt;p&gt;Many of us have been reaching for tools like &lt;a href=&#34;https://zoom.us&#34;&gt;Zoom&lt;/a&gt; for smaller groups such as Meetups and streaming platforms like &lt;a href=&#34;https://twitch.tv&#34;&gt;Twitch&lt;/a&gt; / &lt;a href=&#34;https://youtube.com&#34;&gt;YouTube Live&lt;/a&gt; for reaching larger groups.&lt;/p&gt;
+
+&lt;p&gt;Many of us are turning to &lt;a href=&#34;https://obsproject.com/&#34;&gt;Open Broadcaster Studio&lt;/a&gt; (OBS) to turn our PCs into virtual production studios capable of composing multiple artifacts such as windows, audio, and webcams into layered streams. The most basic use case for OBS is to provide the ability to display onscreen code or a terminal session with a webcam image overlayed in the corner&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./obs-basic.png&#34; alt=&#34;Example of OBS overlay scene&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;OBS can record to a high definition video file on your local machine as well as broadcast it out to Twitch, YouTube, or any other &lt;a href=&#34;https://en.wikipedia.org/wiki/Real_Time_Streaming_Protocol&#34;&gt;RTSP&lt;/a&gt; capable platform.&lt;/p&gt;
+
+&lt;p&gt;It should come as no surprise that streaming high quality video from multiple sources can be quite taxing and it often makes sense to have &lt;strong&gt;OBS running on a separate computer&lt;/strong&gt; (refurbished Dell desktops are perfect for this) with a video capture device (like an Elgato HD60) capturing video from your primary machine.&lt;/p&gt;
+
+&lt;p&gt;Using OBS its fairly simple to record and broadcast a presentation, or live coding session. However it feels more like a webinar than it does a meetup or conference presentation as the interaction is very one way.&lt;/p&gt;
+
+&lt;p&gt;By hooking up Zoom and OBS bidirectionally you can have the reach of a streaming platform at the same time as the more interative nature of having real live people in the (virtual) room with you. Having even just a few people acting as an audience and being able to talk to them and have them talk back and see their body language and reactions makes all the difference.&lt;/p&gt;
+
+&lt;p&gt;Unfortunately trying to share a screen and audio through multiple systems is complicated and isn&amp;rsquo;t possible straight out of the box and we need to solve a few problems:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Rebroadcast video from Zoom through to your stream&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Rebroadcast video from OBS through to Zoom&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Mix audio from multiple inputs through to multiple outputs (without causing feedback loops)&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;1-rebroadcast-video-from-zoom-through-to-your-stream&#34;&gt;1. Rebroadcast video from Zoom through to your stream&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;video-zoom-obs.png&#34; alt=&#34;diagram showing zoom video in obs&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;multiple-monitors&#34;&gt;Multiple Monitors&lt;/h3&gt;
+
+&lt;p&gt;If you have multiple monitors you can dedicate one of them to Zoom and add a &lt;strong&gt;Display Capture&lt;/strong&gt; source in OBS for that whole display and set zoom to fullscreen on that monitor.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;obs-display.png&#34; alt=&#34;OBS sharing a whole display&#34; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Note: I was on a Zoom between two machines and only one camera, so pretend &lt;code&gt;Not Paul&lt;/code&gt; is a very handsome gentleman.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I&amp;rsquo;m not a fan of the layout of fullscreen zoom calls, and I prefer the flexibility of capturing it as a window, which also makes it possible to do this with a single monitor.&lt;/p&gt;
+
+&lt;h3 id=&#34;single-monitor-window-capture&#34;&gt;Single Monitor / Window Capture&lt;/h3&gt;
+
+&lt;p&gt;In OBS you can add a &lt;strong&gt;Window Capture&lt;/strong&gt; and select your Zoom meeting. This will capture just the Zoom window itself. You can adjust the window size to suit the resolution that you&amp;rsquo;re outputting to.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;obs-window.png&#34; alt=&#34;OBS sharing just the zoom window&#34; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Note: The window capture settings are OS dependent, on Windows it would display the name and executable file for the window you want to share.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;One Caveat is that Zoom likes to switch to fullscreen when somebody shares their screen. Make sure to deselect the &lt;strong&gt;Enter full screen when a participant shares screen&lt;/strong&gt; in the &lt;strong&gt;Share Screen&lt;/strong&gt; Settings to disable this behavior.&lt;/p&gt;
+
+&lt;p&gt;You might be tempted to try and share your screen to Zoom, however Zoom behaves painfully when you do that and you&amp;rsquo;ll most likely lose your capture of the Zoom window. Instead you should add the OBS virtual camera (see below) which lets you use the contents of your OBS scene as a camera in Zoom.&lt;/p&gt;
+
+&lt;h2 id=&#34;2-rebroadcast-video-from-obs-through-to-zoom&#34;&gt;2. Rebroadcast video from OBS through to Zoom&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;video-zoom-obs-zoom.png&#34; alt=&#34;diagram showing zoom video in obs and back&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;OBS has a plugin that lets you create a virtual camera which you can use as your Zoom camera. The people in your Zoom call will see exactly the same video that you&amp;rsquo;re streaming without having to share your screen.&lt;/p&gt;
+
+&lt;p&gt;You can download the virtual camera plugin from &lt;a href=&#34;https://obsproject.com/forum/resources/obs-virtualcam.949/&#34;&gt;here&lt;/a&gt; however it currently only supports Windows. (There&amp;rsquo;s a &lt;a href=&#34;https://github.com/CatxFish/obs-v4l2sink&#34;&gt;video4linux&lt;/a&gt; you can use if you&amp;rsquo;re on Linux) for the same effect.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;obs-camera-settings.png&#34; alt=&#34;OBS Virtual Camera&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;With the Virtual Camera plugin installed and enabled you can the select it as a camera in Zoom.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;obs-virtualcam-in-zoom.png&#34; alt=&#34;OBS virtual camera in zoom&#34; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;You can see the remote camera now showing the host&amp;rsquo;s OBS scene of their webcam nested with their screen share.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;3-mix-audio-from-multiple-inputs-through-to-multiple-outputs&#34;&gt;3. Mix audio from multiple inputs through to multiple outputs&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;Without causing feedback loops.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Setting up the video was relatively straight forward. Audio is the complicated beast. So far I have only solved this on Windows, but am quite certain you could solve it in Linux using the &lt;a href=&#34;https://jackaudio.org/&#34;&gt;JACK Audio Connection Kit&lt;/a&gt; (JACK).&lt;/p&gt;
+
+&lt;p&gt;Basically we need to be able to selectively route certain inputs to certain outputs. For instance we want zoom audio to go into OBS, and we want OBS audio to go into Zoom, but we don&amp;rsquo;t want them to loop eachothers audio back and create a feedback loop.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;zoom-obs-audio.png&#34; alt=&#34;diagram showing audio wiring&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In order to solve this, you need a Mixer that can mix three discreet inputs (Zoom, Desktop, Mic) to three discreet outputs (Speakers, Zoom, OBS).&lt;/p&gt;
+
+&lt;p&gt;You also need virtual audio devices that can act as patch cables.&lt;/p&gt;
+
+&lt;p&gt;There&amp;rsquo;s likely a number of different audio solutions out there to solve this, I&amp;rsquo;ll show you what I found works really well and while not free, is extremely affordable.&lt;/p&gt;
+
+&lt;p&gt;This is where &lt;a href=&#34;https://www.vb-audio.com/&#34;&gt;VB Audio&lt;/a&gt; comes in. It&amp;rsquo;s a website with an interesting assortment of audio software for Windows, most of which is either Free or Donationware (read the licenses carefully before using it in a commercial setting).&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.vb-audio.com/&#34;&gt;VB Audio&lt;/a&gt; offers &lt;a href=&#34;https://www.vb-audio.com/Cable/index.htm&#34;&gt;virtual cables&lt;/a&gt; that we can use to patch the sound correctly. They have up to 5 cables that you can purchase via Donation. In order to wire up our sound we&amp;rsquo;ll use &lt;strong&gt;VB-CABLE A+B&lt;/strong&gt; and &lt;strong&gt;VB-CABLE C+D&lt;/strong&gt; which gives us 4 virtual cables.&lt;/p&gt;
+
+&lt;p&gt;All audio sent to VB-CABLE inputs is sent to the correspnding VB_CABLE output.&lt;/p&gt;
+
+&lt;p&gt;Pay for, download, and install both bundles.&lt;/p&gt;
+
+&lt;p&gt;You will still need a Mixer capable of mixing the inputs correctly. Thankfully &lt;a href=&#34;https://www.vb-audio.com/&#34;&gt;VB Audio&lt;/a&gt; also provides &lt;a href=&#34;https://www.vb-audio.com/Voicemeeter/index.htm&#34;&gt;VoiceMeeter&lt;/a&gt;. It comes in three flavors, &lt;a href=&#34;https://www.vb-audio.com/Voicemeeter/index.htm&#34;&gt;VoiceMeeter&lt;/a&gt;, &lt;a href=&#34;https://www.vb-audio.com/Voicemeeter/banana.htm&#34;&gt;VoiceMeeter Banana&lt;/a&gt;, and &lt;a href=&#34;https://www.vb-audio.com/Voicemeeter/potato.htm&#34;&gt;VoiceMeeter Potato&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The regular VoiceMeeter does not have enough inputs and outputs, so you&amp;rsquo;ll want to use either Banana or Potato. I used Banana as it has exactly the right number of inputs.&lt;/p&gt;
+
+&lt;p&gt;Pay for (Donate), download and install &lt;a href=&#34;https://www.vb-audio.com/Voicemeeter/banana.htm&#34;&gt;VoiceMeeter Banana&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now you have the Mixer and the Virtual Cables we can hook everything up together.&lt;/p&gt;
+
+&lt;h3 id=&#34;configure-voicemeeter-banana&#34;&gt;Configure VoiceMeeter Banana&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;voicemeeter-banana.png&#34; alt=&#34;screenshot of voicemeeter banana&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;First open up VoiceMeeter Banana. You&amp;rsquo;ll see there are Three Hardware Inputs and Three Hardware outputs.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Hardware Inputs:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;You can rename the Inputs by right clicking on their names, and you can select their devices underneath.&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Rename &lt;strong&gt;Hardware input 1&lt;/strong&gt; to &lt;strong&gt;Zoom&lt;/strong&gt; and set it to &lt;strong&gt;WDB: CABLE-B Output&lt;/strong&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Rename &lt;strong&gt;Hardware input 2&lt;/strong&gt; to &lt;strong&gt;Mic&lt;/strong&gt; and set it to your microphone device. Mine is &lt;strong&gt;Microphone (Yeti)&lt;/strong&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Rename &lt;strong&gt;Hardware input 3&lt;/strong&gt; to &lt;strong&gt;Desktop&lt;/strong&gt;and set it to &lt;strong&gt;WDB: CABLE-D Output&lt;/strong&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Hardware Outputs:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;*Set the outputs by clicking the A1, A2, A3 dropdowns next to where it says &lt;strong&gt;HARDWARE OUT&lt;/strong&gt;*&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A1 -&amp;gt; &lt;strong&gt;Speakers / Headphones&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;A2 -&amp;gt; &lt;strong&gt;WDM: Cable-A Input&lt;/strong&gt; (Zoom)&lt;/li&gt;
+&lt;li&gt;A3 -&amp;gt; &lt;strong&gt;WDM: Cable-C Input&lt;/strong&gt; (OBS)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Mixing:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Under the Hardware Inputs you can see a Volume selector and a sound activity bar. Beside that you can see options, the outputs to send to as well as Mute.&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Zoom -&amp;gt; A1 (Speakers), A3 (OBS)&lt;/li&gt;
+&lt;li&gt;Mic -&amp;gt; A1 (Speakers), A2 (Zoom), A3 (OBS)&lt;/li&gt;
+&lt;li&gt;Desktop -&amp;gt; A1 (Speakers), A2 (Zoom), A3 (OBS)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;*I usually set the &lt;strong&gt;Desktop&lt;/strong&gt; audio volume to about &lt;code&gt;-33&lt;/code&gt; so that random noises don&amp;rsquo;t drown out people speaking.&lt;/p&gt;
+
+&lt;h3 id=&#34;configure-desktop-audio&#34;&gt;Configure Desktop Audio&lt;/h3&gt;
+
+&lt;p&gt;In your status bar select the &lt;strong&gt;Speaker&lt;/strong&gt; Icon and configure it to output to &lt;strong&gt;Cable-D Input&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;desktop-audio.png&#34; alt=&#34;screenshot of desktop audio&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;configure-zoom-audio&#34;&gt;Configure Zoom audio&lt;/h3&gt;
+
+&lt;p&gt;In Zoom, go to &lt;strong&gt;Audio Settings&lt;/strong&gt;. Set &lt;strong&gt;Speaker&lt;/strong&gt; to &lt;strong&gt;Cable-B Input&lt;/strong&gt; and set &lt;strong&gt;Microphone&lt;/strong&gt; to &lt;strong&gt;Cable-A Output&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;zoom-audio-settings.png&#34; alt=&#34;screenshot of zoom audio settings&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;configure-obs-settings&#34;&gt;Configure OBS settings&lt;/h3&gt;
+
+&lt;p&gt;in OBS under &lt;strong&gt;Settings&lt;/strong&gt;-&amp;gt;&lt;strong&gt;Audio&lt;/strong&gt; Disable all Audio devices. Then set &lt;strong&gt;Mic/Auxillary Input&lt;/strong&gt; to &lt;strong&gt;CABLE-C Output&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;obs-audio-settings.png&#34; alt=&#34;screenshot of OBS audio settings&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Then in the OBS &lt;strong&gt;Audio Mixer&lt;/strong&gt; rename the &lt;strong&gt;Mic/Auxillary Input&lt;/strong&gt; to &lt;strong&gt;VoiceMeeter&lt;/strong&gt; and mute all other devices such as webcams.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;obs-audio-mixer.png&#34; alt=&#34;screenshot of OBS mixer&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;test-it-out&#34;&gt;Test it out&lt;/h3&gt;
+
+&lt;p&gt;You should now have everything wired up correctly and just need to test it out.&lt;/p&gt;
+
+&lt;p&gt;When you configured the Mic input in VoiceMeeter you chose to send it to all three outputs. This means that you should hear your Mic input through your speakers/headphones.&lt;/p&gt;
+
+&lt;p&gt;If you don&amp;rsquo;t like to listen to yourself you can deselect &lt;strong&gt;A1&lt;/strong&gt; for the &lt;strong&gt;Mic&lt;/strong&gt; input. This is an easy toggle to see if the audio is working.&lt;/p&gt;
+
+&lt;p&gt;You can also use the volume meters in the various apps to confirm they match. For instance when you speak in the Microphone you should see the &lt;strong&gt;Mic&lt;/strong&gt; meter, and the &lt;strong&gt;A1&lt;/strong&gt;, &lt;strong&gt;A2&lt;/strong&gt;, &lt;strong&gt;A3&lt;/strong&gt; meter move at the same time. You should also see activity in the OBS mixer and Zoom.&lt;/p&gt;
+
+&lt;p&gt;You should hit &lt;strong&gt;Start Recording&lt;/strong&gt; in OBS and get on a zoom with a friend (or a second computer) and verify sound is working in both directions, and that all of the audio ends up in the OBS recording.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Assuming you didn&amp;rsquo;t hit any issues following this guide you now have your system configured to Stream to both Twitch (or YouTube) and Zoom at the same time, mixing their audio and video appropriately.&lt;/p&gt;
+
+&lt;p&gt;This gives you a powerful way to not just record content, but to stream it and share it with both intimate groups on Zoom and Larger audiences on Twitch.&lt;/p&gt;
+
+&lt;p&gt;One of the best parts of this setup is how I can easily host someone else on my twitch stream and have them share their desktop and do demos, live coding etc.&lt;/p&gt;
+
+&lt;p&gt;I can also run workshops through zoom and people on my twitch stream can also follow along.&lt;/p&gt;
+</content>
     </item>
     
     <item>
@@ -31,6 +231,231 @@ Many of us have been reaching for tools like Zoom for smaller groups such as Mee
       <description>After what seems like an eternity I finally got added to the GitHub Actions beta a few days ago.
 I recently created a Hugo website for learning Kubernetes called k8s.camp which is hosted in GitHub Pages and I figured that switching it from CircleCI to GitHub Actions would be a great way to learn Actions.
 Before I get started I do want to mention that my experience as a new user trying to learn how actions work was sub-optimal.</description>
+      <content>
+
+&lt;p&gt;After what seems like an &lt;a href=&#34;https://github.blog/2018-10-17-action-demos/&#34;&gt;eternity&lt;/a&gt; I finally got added to the &lt;a href=&#34;https://github.com/features/actions/&#34;&gt;GitHub Actions&lt;/a&gt; beta a few days ago.&lt;/p&gt;
+
+&lt;p&gt;I recently created a &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; website for learning Kubernetes called &lt;a href=&#34;https://k8s.camp&#34;&gt;k8s.camp&lt;/a&gt; which is hosted in GitHub Pages and I figured that switching it from &lt;a href=&#34;https://circleci.com&#34;&gt;CircleCI&lt;/a&gt; to GitHub Actions would be a great way to learn Actions.&lt;/p&gt;
+
+&lt;p&gt;Before I get started I do want to mention that my experience as a new user trying to learn how actions work was sub-optimal.&lt;/p&gt;
+
+&lt;p&gt;My previous automation for &lt;a href=&#34;https://k8s.camp&#34;&gt;k8s.camp&lt;/a&gt; was using CircleCI which was very intuitive, I can&amp;rsquo;t say the same for GitHub Actions.&lt;/p&gt;
+
+&lt;h2 id=&#34;no-good-plan-survives-first-contact&#34;&gt;No good plan survives first contact&lt;/h2&gt;
+
+&lt;p&gt;Obviously the first thing I did was google &amp;ldquo;github actions documentation&amp;rdquo; and the first hit was &lt;a href=&#34;https://developer.github.com/actions/&#34;&gt;developer.github.com/actions&lt;/a&gt; which I hastily clicked on to be greeted with the following:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./doc-move.png&#34; alt=&#34;doc move deprecate&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Which suggested I was off to a rocky start. I clicked through to the &lt;a href=&#34;https://help.github.com/en/categories/automating-your-workflow-with-github-actions&#34;&gt;&amp;ldquo;Automating your workflow with GitHub Actions&amp;rdquo;&lt;/a&gt; page.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Pretty much any time I googled a GitHub Actions question I was sent to the deprecated documentation with the &lt;code&gt;HCL&lt;/code&gt; syntax rather than &lt;code&gt;yaml&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Most of the existing examples are still in &lt;code&gt;HCL&lt;/code&gt;, both in the documentation and out in the wild.&lt;/p&gt;
+
+&lt;p&gt;On top of this the examples in the documentation are quite trite and don&amp;rsquo;t really help do anything useful. It&amp;rsquo;s not even really clear how to structure the workflows and actions in the repo, so I had to fumble my way through it.&lt;/p&gt;
+
+&lt;p&gt;After a bunch of reading documentation and finding incomplete examples and blog posts I managed to slowly grok my way through it.&lt;/p&gt;
+
+&lt;p&gt;Hopefully this blog post will help others have a better first experience.&lt;/p&gt;
+
+&lt;h2 id=&#34;workflows-and-actions&#34;&gt;Workflows and Actions&lt;/h2&gt;
+
+&lt;p&gt;My understanding through trial and error is there are two things you need for GitHub Actions, Workflows and Actions.&lt;/p&gt;
+
+&lt;h3 id=&#34;workflows&#34;&gt;Workflows&lt;/h3&gt;
+
+&lt;p&gt;Workflows are pretty much what you&amp;rsquo;d expect them to be. Files that describe the steps to be taken when an event is triggered.&lt;/p&gt;
+
+&lt;p&gt;These are stored in &lt;code&gt;.github/workflows&lt;/code&gt; in your git repository and look something like this (in fact below is the &lt;a href=&#34;https://github.com/paulczar/k8s-camp/blob/master/.github/workflows/build-and-deploy.yml&#34;&gt;current workflow&lt;/a&gt; for k8s.camp):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;name: Build and Deploy to GitHub Pages
+on:
+  push:
+    branches: [master]
+jobs:
+  build:
+    name: build-and-deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - uses: ./.github/actions/spell-check
+      - uses: ./.github/actions/publish-gh-pages
+        env:
+          PUSH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Note: GitHub Actions act like GitHub Apps which means it gets it&amp;rsquo;s own &lt;code&gt;GITHUB_TOKEN&lt;/code&gt; secret which can be pulled into &lt;em&gt;environment variables&lt;/em&gt; for the Actions. In fact there&amp;rsquo;s a ton of default &lt;em&gt;environment variables&lt;/em&gt; passed into the action such as the repository name and git commit sha.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You can see you define the type of activities to trigger the workflow (in this case a push to the &lt;code&gt;master&lt;/code&gt; branch) and a set of steps to run. These steps call out to actions.&lt;/p&gt;
+
+&lt;p&gt;You can have multiple workflows based on different GitHub activities and even chain them together to create even more complex workflows.&lt;/p&gt;
+
+&lt;h2 id=&#34;actions&#34;&gt;Actions&lt;/h2&gt;
+
+&lt;p&gt;Actions are also pretty self explanatory, they&amp;rsquo;re the discrete units of work required to fulfill each step in the workflow.&lt;/p&gt;
+
+&lt;p&gt;Actions can be local to the repo, or they can be called from another repository.&lt;/p&gt;
+
+&lt;p&gt;For example the above workflow calls a remote checkout action &lt;code&gt;uses: actions/checkout@v1&lt;/code&gt; which literally looks out to the &lt;code&gt;v1&lt;/code&gt; release of the github repo &lt;code&gt;actions/checkout&lt;/code&gt; &lt;a href=&#34;https://github.com/actions/checkout/releases/tag/v1.0.0&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Actions are run inside Docker containers, and thus an Action is usually a &lt;code&gt;Dockerfile&lt;/code&gt; combined with a script to run inside the container. Remote actions should contain an &lt;code&gt;action.yaml&lt;/code&gt; to define the action and its interactions.&lt;/p&gt;
+
+&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;The first step in learning how to use github actions is to learn how to build and run Docker images the wrong way.&lt;/p&gt;&amp;mdash; Czarknado 🦈🌪️ (@pczarkowski) &lt;a href=&#34;https://twitter.com/pczarkowski/status/1167437284410626054?ref_src=twsrc%5Etfw&#34;&gt;August 30, 2019&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;You can vendor your actions into your repo (which I prefer to do, especially compared to pulling in some other random person&amp;rsquo;s action blindly) in which case I prefer to place them in the &lt;code&gt;.github/actions&lt;/code&gt; directory to keep things clean.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-three-steps&#34;&gt;The three steps&lt;/h2&gt;
+
+&lt;p&gt;There are three steps defined in my workflow file above. These will be run in order by the action, if one fails the entire action will halt.&lt;/p&gt;
+
+&lt;h3 id=&#34;step-1-checkout&#34;&gt;Step 1 - checkout&lt;/h3&gt;
+
+&lt;p&gt;The first step is using a github provided action to check out the source at the correct commit.&lt;/p&gt;
+
+&lt;h3 id=&#34;step-2-spellcheck&#34;&gt;Step 2 - spellcheck&lt;/h3&gt;
+
+&lt;p&gt;The second step is running a spellcheck across all of my markdown files.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;As I mentioned an action runs in a Docker container, so an Action is generally defined by a &lt;code&gt;Dockerfile&lt;/code&gt; to build the image, and an &lt;code&gt;ENTRYPOINT&lt;/code&gt; script to run the action inside the image.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;in the k8s.camp repo is the following local action &lt;code&gt;./.github/actions/spell-check&lt;/code&gt; which consists of:&lt;/p&gt;
+
+&lt;h4 id=&#34;dockerfile&#34;&gt;Dockerfile&lt;/h4&gt;
+
+&lt;p&gt;This is a fairly basic Dockerfile that simply starts from a small &lt;code&gt;nodejs&lt;/code&gt; image and adds in my entrypoint script.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Note: the &lt;code&gt;LABEL&lt;/code&gt;s are important to github actions and are documented &lt;a href=&#34;https://developer.github.com/actions/creating-github-actions/creating-a-docker-container/#label&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dockerfile&#34;&gt;FROM node:lts-alpine
+
+LABEL &amp;quot;name&amp;quot;=&amp;quot;Markdown Spell Checker&amp;quot;
+LABEL &amp;quot;maintainer&amp;quot;=&amp;quot;Paul Czarkowski&amp;quot;
+LABEL &amp;quot;version&amp;quot;=&amp;quot;0.0.1&amp;quot;
+
+LABEL &amp;quot;com.github.actions.name&amp;quot;=&amp;quot;Markdown Spell Checker&amp;quot;
+LABEL &amp;quot;com.github.actions.description&amp;quot;=&amp;quot;Markdown Spell Checker&amp;quot;
+LABEL &amp;quot;com.github.actions.icon&amp;quot;=&amp;quot;package&amp;quot;
+LABEL &amp;quot;com.github.actions.color&amp;quot;=&amp;quot;green&amp;quot;
+
+COPY entrypoint.sh /entrypoint.sh
+
+ENTRYPOINT [&amp;quot;/entrypoint.sh&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;entrypoint-sh&#34;&gt;entrypoint.sh&lt;/h4&gt;
+
+&lt;p&gt;The script is really simple and uses &lt;code&gt;npm&lt;/code&gt; to install &lt;code&gt;markdown-spellcheck&lt;/code&gt; locally and then runs it.&lt;/p&gt;
+
+&lt;p&gt;The exit code of &lt;code&gt;markdown-spellcheck&lt;/code&gt; will be used to determine if the step passed or failed.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/bin/sh
+
+cd $GITHUB_WORKSPACE
+
+npm install markdown-spellcheck
+
+./node_modules/markdown-spellcheck/bin/mdspell -r -n -a --en-us &#39;content/**/*.md&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;step-3-publish-to-gh-pages&#34;&gt;Step 3 - Publish to gh-pages&lt;/h3&gt;
+
+&lt;p&gt;The third step will run &lt;code&gt;hugo&lt;/code&gt; to generate the &lt;code&gt;html&lt;/code&gt; for the website and then pushing the results to the &lt;code&gt;gh-pages&lt;/code&gt; branch.&lt;/p&gt;
+
+&lt;h4 id=&#34;dockerfile-1&#34;&gt;Dockerfile&lt;/h4&gt;
+
+&lt;p&gt;Here we have a slightly more complicated &lt;code&gt;Dockerfile&lt;/code&gt; that starts with Ubuntu and installs &lt;code&gt;curl&lt;/code&gt;, &lt;code&gt;git&lt;/code&gt;, and &lt;code&gt;hugo&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dockerfile&#34;&gt;FROM ubuntu:bionic
+
+LABEL &amp;quot;name&amp;quot;=&amp;quot;Publish k8s.camp&amp;quot;
+LABEL &amp;quot;maintainer&amp;quot;=&amp;quot;Paul Czarkowski&amp;quot;
+LABEL &amp;quot;version&amp;quot;=&amp;quot;0.0.1&amp;quot;
+
+LABEL &amp;quot;com.github.actions.name&amp;quot;=&amp;quot;Publish k8s.camp&amp;quot;
+LABEL &amp;quot;com.github.actions.description&amp;quot;=&amp;quot;Publish k8s.camp via gh-pages&amp;quot;
+LABEL &amp;quot;com.github.actions.icon&amp;quot;=&amp;quot;package&amp;quot;
+LABEL &amp;quot;com.github.actions.color&amp;quot;=&amp;quot;green&amp;quot;
+
+RUN apt-get update &amp;gt; /dev/null &amp;amp;&amp;amp; apt-get -yqq install curl git &amp;gt; /dev/null
+
+RUN curl -sSL \
+    https://github.com/gohugoio/hugo/releases/download/v0.56.3/hugo_0.56.3_Linux-64bit.tar.gz | \
+    tar xzf - hugo &amp;amp;&amp;amp; \
+    chmod +x /hugo &amp;amp;&amp;amp; \
+    /hugo version
+
+COPY entrypoint.sh /entrypoint.sh
+
+ENTRYPOINT [&amp;quot;/entrypoint.sh&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;entrypoint-sh-1&#34;&gt;entrypoint.sh&lt;/h4&gt;
+
+&lt;p&gt;The entrypoint script configures git, checks out the &lt;code&gt;gh-pages&lt;/code&gt; branch, and generates the html into that branch before pushing it back up to git using the &lt;code&gt;GITHUB_TOKEN&lt;/code&gt; which is passed to it as the environment variable &lt;code&gt;PUSH_TOKEN&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/bin/bash
+
+set -o pipefail
+
+echo &amp;quot;--&amp;gt; Configure git client&amp;quot;
+
+git config --global user.email &amp;quot;username.taken@gmail.com&amp;quot;
+git config --global user.name &amp;quot;Hugo Publisher&amp;quot;
+
+echo &amp;quot;--&amp;gt; check out gh-pages&amp;quot;
+git worktree add -B gh-pages public origin/gh-pages
+
+echo &amp;quot;--&amp;gt; hugo publish&amp;quot;
+cd $GITHUB_WORKSPACE
+/hugo
+
+echo &amp;quot;--&amp;gt; push gh-pages&amp;quot;
+if [[ -z &amp;quot;$PUSH_TOKEN&amp;quot; ]]; then
+  echo &amp;quot;No push token provided, skipping publish&amp;quot;
+else
+  cd public
+  git add --all &amp;amp;&amp;amp; \
+  git commit -m &amp;quot;Github Action Build ${GITHUB_SHA} `date +&#39;%Y-%m-%d %H:%M:%S&#39;`&amp;quot; --allow-empty &amp;amp;&amp;amp; \
+  git remote set-url origin https://${GITHUB_ACTOR}:${PUSH_TOKEN}@github.com/${GITHUB_REPOSITORY}
+  git push origin gh-pages:gh-pages
+fi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Note: I am using &lt;code&gt;git remote set-url&lt;/code&gt; to update the git repo URL to include the &lt;code&gt;PUSH_TOKEN&lt;/code&gt; which gives the action &lt;code&gt;push&lt;/code&gt; access to the repository.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;end-result&#34;&gt;End Result&lt;/h2&gt;
+
+&lt;p&gt;Pushing this new &lt;code&gt;.github&lt;/code&gt; directory structure defining a workflow and a set of steps up to my git repo is all I needed to set up the Actions, and the workflow triggered from this very first push.&lt;/p&gt;
+
+&lt;p&gt;Like all &lt;code&gt;ci&lt;/code&gt; tools I had a dozen or so commits to stabilize the actual test scripts and workflow, but now all I have to do to publish a new version of the &lt;a href=&#34;https://k8s.camp&#34;&gt;k8s.camp&lt;/a&gt; website is to merge a commit into the &lt;code&gt;master&lt;/code&gt; branch of the repo.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./actions2.png&#34; alt=&#34;screenshot of github actions&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Once you get through the initial hump of learning how GitHub actions work it becomes fairly straightforward to configure and use actions.&lt;/p&gt;
+
+&lt;p&gt;For the sake of sanity I have kept the workflow for &lt;a href=&#34;https://k8s.camp&#34;&gt;k8s.camp&lt;/a&gt; very simple, but I can see how you could quickly build out a fairly complex set of workflows to perform your CI/CD tasks.&lt;/p&gt;
+
+&lt;p&gt;While I kept the Actions in the local repository, I can see a very interesting versatility in having remote actions. I can see myself creating a central Actions github repo with all of my actions which I can then link back to from my various projects.&lt;/p&gt;
+
+&lt;p&gt;If you have a basic hugo setup publishing to &lt;code&gt;gh-pages&lt;/code&gt; feel free to clone down the &lt;a href=&#34;https://github.com/paulczar/k8s-camp&#34;&gt;paulczar/k8s-camp&lt;/a&gt; repo and re-use them in your own.&lt;/p&gt;
+</content>
     </item>
     
     <item>
@@ -41,6 +466,410 @@ Before I get started I do want to mention that my experience as a new user tryin
       <guid>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-1/</guid>
       <description>Note: If this topic has peaked your interest, you can join me for a Webinar on August 15 where I&amp;rsquo;ll dive deep into Cloud Native Operations with Kubernetes and CI/CD Pipelines.
  Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 I will demonstrate creating a Helm chart repository using GitHub and GitHub Pages. In part 2 I will add Automation to automatically update the repository, and in part 3 I will add testing for changes to the charts themselves.</description>
+      <content>
+
+&lt;blockquote&gt;
+&lt;p&gt;Note: If this topic has peaked your interest, you can join me for a Webinar on August 15 where I&amp;rsquo;ll dive deep into &lt;a href=&#34;https://content.pivotal.io/webinars/aug-15-cloud-native-operations-with-kubernetes-and-ci-cd-webinar?utm_campaign=cno-k8s-ci-cd-q319&amp;amp;utm_source=blog&amp;amp;utm_medium=website&#34;&gt;Cloud Native Operations with Kubernetes and CI/CD Pipelines&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;Welcome to a three part blog series on Creating a &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; Chart Repository. In &lt;strong&gt;part 1&lt;/strong&gt; I will demonstrate creating a &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; chart repository using &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; and &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; Pages. In &lt;a href=&#34;https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-2&#34;&gt;part 2&lt;/a&gt; I will add Automation to automatically update the repository, and in &lt;a href=&#34;https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-3&#34;&gt;part 3&lt;/a&gt; I will add testing for changes to the charts themselves.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;If you&amp;rsquo;re into Videos, I walked JJ through starting with Helm from scratch all the way to creating a Helm Repo and CI/CD.  &lt;div class=&#34;embed video-player&#34;&gt;
+&lt;iframe class=&#34;youtube-player&#34; type=&#34;text/html&#34; width=&#34;640&#34; height=&#34;385&#34; src=&#34;http://www.youtube.com/embed/xn63krHJNKI&#34; allowfullscreen frameborder=&#34;0&#34;&gt;
+&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Helm is the defacto tool for packaging, sharing, and running Kubernetes Manifests. I&amp;rsquo;m going to assume you know the basics of &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; and have used it before. There&amp;rsquo;s plenty of great introductory topics around.&lt;/p&gt;
+
+&lt;p&gt;You can host and share &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; Charts (packages) via a &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; Repository which is effectively a static website with an &lt;code&gt;index.yaml&lt;/code&gt; providing metadata and links to the &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; Packages.&lt;/p&gt;
+
+&lt;p&gt;This makes hosting a repository perfectly suited to running in &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; Pages, s3, google cloud storage, etc. I like to use &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; Pages as it allows your source code and repo to live effectively in the same place.&lt;/p&gt;
+
+&lt;p&gt;I will walk you through creating a new &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; Project hosting multiple &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; charts and demonstrate how to set up Continuous Integration with CircleCI to automatically test and publish new changes to your &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; Charts.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Note: While I would usually use &lt;a href=&#34;https://concourse-ci.org/&#34;&gt;Concourse CI&lt;/a&gt; for my CI workflows, I wanted to &lt;em&gt;only&lt;/em&gt; use managed services and I chose Circle as that is already commonly used in the Helm community.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;create-a-new-github-https-github-com-repository&#34;&gt;Create a new &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; Repository&lt;/h2&gt;
+
+&lt;p&gt;Log into &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; and &lt;a href=&#34;https://github.com/new&#34;&gt;create a new repository&lt;/a&gt; called &lt;code&gt;my-helm-charts&lt;/code&gt;. I chose to have &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; create it as with an Apache2 License.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./github-new-repo.png&#34; alt=&#34;Creating new repo&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can now clone down this repository and get to work:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ git clone git@github.com:paulczar/my-helm-charts.git
+Cloning into &#39;my-helm-charts&#39;...
+remote: Enumerating objects: 4, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 4 (delta 0), reused 0 (delta 0), pack-reused 0
+Receiving objects: 100% (4/4), 4.52 KiB | 4.52 MiB/s, done.
+
+$ cd my-helm-charts
+
+$ tree
+.
+├── LICENSE
+└── README.md
+
+0 directories, 2 files
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can see we have a default LICENSE file and a default README.md, we can leave them alone for now. Your next step is to create a couple of &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; charts. Since this is purely for demonstration purposes they don&amp;rsquo;t have to be overly functional charts which means we can just use the default boilerplate created by &lt;code&gt;helm create&lt;/code&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;You do have &lt;a href=&#34;https://github.com/helm/helm#install&#34;&gt;helm&lt;/a&gt; installed right?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ mkdir charts
+
+$ [Helm](https://helm.sh) create charts/app1
+Creating charts/app1
+
+$ [Helm](https://helm.sh) create charts/app2
+Creating charts/app2
+
+$ tree
+.
+├── charts
+│   ├── app1
+│   │   ├── charts
+│   │   ├── Chart.yaml
+│   │   ├── templates
+│   │   │   ├── deployment.yaml
+│   │   │   ├── _helpers.tpl
+│   │   │   ├── ingress.yaml
+│   │   │   ├── NOTES.txt
+│   │   │   ├── service.yaml
+│   │   │   └── tests
+│   │   │       └── test-connection.yaml
+│   │   └── values.yaml
+│   └── app2
+│       ├── charts
+│       ├── Chart.yaml
+│       ├── templates
+│       │   ├── deployment.yaml
+│       │   ├── _helpers.tpl
+│       │   ├── ingress.yaml
+│       │   ├── NOTES.txt
+│       │   ├── service.yaml
+│       │   └── tests
+│       │       └── test-connection.yaml
+│       └── values.yaml
+├── LICENSE
+└── README.md
+
+9 directories, 18 files
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Push these changes to git:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;echo &amp;quot;.deploy&amp;quot; &amp;gt;&amp;gt; .gitignore
+
+$ git add .
+
+$ git commit -m &#39;Initial Commit&#39;
+[master 2172141] Initial Commit
+ 18 files changed, 524 insertions(+)
+...
+...
+
+$ git push origin master
+Enumerating objects: 27, done.
+Counting objects: 100% (27/27), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (24/24), done.
+Writing objects: 100% (26/26), 4.72 KiB | 536.00 KiB/s, done.
+Total 26 (delta 8), reused 0 (delta 0)
+remote: Resolving deltas: 100% (8/8), done.
+To github.com:paulczar/my-helm-charts.git
+   abdcced..2172141  master -&amp;gt; master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;publish-your-helm-https-helm-sh-repository&#34;&gt;Publish your &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; Repository&lt;/h2&gt;
+
+&lt;h3 id=&#34;prepare-github-https-github-com-pages&#34;&gt;Prepare &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; Pages&lt;/h3&gt;
+
+&lt;p&gt;We&amp;rsquo;re going to use a combination of &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; Pages and releases to host our &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; Repository. Therefore we need to ensure we have &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; Pages enabled on the git repo and to create an empty &lt;code&gt;gh-pages&lt;/code&gt; branch.&lt;/p&gt;
+
+&lt;p&gt;You can create an empty &lt;code&gt;gh-pages&lt;/code&gt; branch by creating an orphan branch like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git checkout --orphan gh-pages
+Switched to a new branch &#39;gh-pages&#39;
+
+$ rm -rf charts
+
+$ git add . --all
+
+$ git commit -m &#39;initial gh-pages&#39;
+git commit -m &#39;initial gh-pages&#39;
+[gh-pages a9ce382] initial gh-pages
+ 18 files changed, 524 deletions(-)
+...
+...
+
+$ git push origin gh-pages
+Enumerating objects: 3, done.
+...
+...
+To github.com:paulczar/my-helm-charts.git
+ * [new branch]      gh-pages -&amp;gt; gh-pages
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next check that &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; Pages is enabled by clicking on your git repo settings in GitHub:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./github-pages.png&#34; alt=&#34;github repo settings&#34; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Note: I have a custom domain set up, your URL will probably be username.github.io/my-helm-charts.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;After a few minutes you should have a default rendering on your README.md at the provided URL:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./default-gh-pages.png&#34; alt=&#34;default [GitHub](https://github.com) ages&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;introducing-chart-releaser&#34;&gt;Introducing chart-releaser&lt;/h3&gt;
+
+&lt;p&gt;You could use a combination of &lt;code&gt;helm package&lt;/code&gt; and &lt;code&gt;helm repo&lt;/code&gt; commands to construct your &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; repository by hand, or you can simplify your life by using &lt;code&gt;chart-releaser&lt;/code&gt; which will not only create your packages, but will upload them as binaries into an appropriately versioned &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; Release.&lt;/p&gt;
+
+&lt;p&gt;Download chart-releaser for your architecture [here].&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Note: I&amp;rsquo;m doing this on a linux machine, so you may need to update the commands below for Mac OS.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In a new terminal download and unpackage it, moving it to an executable path:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;cd /tmp
+$ curl -sSL https://github.com/helm/chart-releaser/releases/download/v0.2.1/chart-releaser_0.2.1_linux_amd64.tar.gz | tar xzf -
+
+$ mv cr ~/bin/cr
+
+$ cr help
+Create [Helm](https://helm.sh) chart repositories on [GitHub](https://github.com) Pages by uploading Chart packages
+and Chart metadata to [GitHub](https://github.com) Releases and creating a suitable index file
+
+Usage:
+  cr [command]
+
+Available Commands:
+  help        Help about any command
+  index       Update Helm repo index.yaml for the given GitHub repo
+  upload      Upload Helm chart packages to GitHub Releases
+  version     Print version information
+
+Flags:
+      --config string   Config file (default is $HOME/.cr.yaml)
+  -h, --help            help for cr
+
+Use &amp;quot;cr [command] --help&amp;quot; for more information about a command.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There are two commands we care about &lt;code&gt;cr index&lt;/code&gt; and &lt;code&gt;cr upload&lt;/code&gt;, the first will create an appropriate &lt;code&gt;index.yaml&lt;/code&gt; and the second will upload the packages to &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; Releases. In order to do the latter you&amp;rsquo;ll need to pass it in a &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; Token so that it can use the &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; APIs.&lt;/p&gt;
+
+&lt;p&gt;In your browser go to your &lt;a href=&#34;https://github.com/settings/tokens&#34;&gt;github developer settings&lt;/a&gt; and create a new personal access token.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./personal-access-token.png&#34; alt=&#34;create personal access token&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Create an environment variable (or a &lt;code&gt;~/.cr.yaml&lt;/code&gt; config file) containing the access token:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Pro-tip: put an additional space in your command right before &lt;code&gt;export&lt;/code&gt; and it won&amp;rsquo;t be saved to your command history.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$  export CH_TOKEN=c4a4ed6ab91a246572b0c46c19c630ccadc1049
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;create-and-upload-helm-https-helm-sh-packages&#34;&gt;Create and Upload &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; Packages&lt;/h3&gt;
+
+&lt;p&gt;Your next step is to create and upload the packages:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ Helm package charts/{app1,app2} --destination .deploy
+Successfully packaged chart and saved it to: .deploy/app1-0.1.0.tgz
+Successfully packaged chart and saved it to: .deploy/app2-0.1.0.tgz
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Run &lt;code&gt;cr upload&lt;/code&gt; to create releases and upload the packages, note if it runs correctly there&amp;rsquo;s no output.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ cr upload -o paulczar -r my-helm-charts -p .deploy
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Check your &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; repository now has a releases page with two releases:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./github-releases&#34; alt=&#34;github releases page&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;create-and-upload-index-file-to-github-https-github-com-pages&#34;&gt;Create and upload index file to &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; Pages&lt;/h3&gt;
+
+&lt;p&gt;Checkout your &lt;code&gt;gh-pages&lt;/code&gt; branch and run &lt;code&gt;cr index&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ git checkout gh-pages
+
+$ cr index -i ./index.yaml -p .deploy --owner paulczar --repo my-helm-charts
+====&amp;gt; UpdateIndexFile new index at ./index.yaml
+====&amp;gt; Found app1-0.1.0.tgz
+====&amp;gt; Extracting chart metadata from .deploy/app1-0.1.0.tgz
+====&amp;gt; Calculating Hash for .deploy/app1-0.1.0.tgz
+====&amp;gt; Found app2-0.1.0.tgz
+====&amp;gt; Extracting chart metadata from .deploy/app2-0.1.0.tgz
+====&amp;gt; Calculating Hash for .deploy/app2-0.1.0.tgz
+--&amp;gt; Updating index ./index.yaml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There should now be a &lt;code&gt;index.yaml&lt;/code&gt; file containing the details of your &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; packages and the path to their archive:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ cat index.yaml
+apiVersion: v1
+entries:
+  app1:
+  - apiVersion: v1
+    appVersion: &amp;quot;1.0&amp;quot;
+    created: &amp;quot;2019-07-03T13:03:06.139332963-05:00&amp;quot;
+    description: A Helm chart for Kubernetes
+    digest: 48cf831b72febeac2860a0be372094250aea68a9c76147c028085c8802dd48ec
+    name: app1
+    urls:
+    - https://github.com/paulczar/my-helm-charts/releases/download/app1-0.1.0/app1-0.1.0.tgz
+    version: 0.1.0
+  app2:
+  - apiVersion: v1
+    appVersion: &amp;quot;1.0&amp;quot;
+    created: &amp;quot;2019-07-03T13:03:07.301308677-05:00&amp;quot;
+    description: A Helm chart for Kubernetes
+    digest: 64b00fc4804aba524201f64e78ee22ad8e61d0923424f8e24e8b70befed88141
+    name: app2
+    urls:
+    - https://github.com/paulczar/my-helm-charts/releases/download/app2-0.1.0/app2-0.1.0.tgz
+    version: 0.1.0
+generated: &amp;quot;2019-07-03T13:03:05.685803874-05:00&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Commit this to git and then wait a few minutes and check that it exists in your &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; Pages url:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ git add index.yaml
+
+$ git commit -m &#39;release 0.1.0&#39;
+[gh-pages 696df18] release 0.1.0
+ 1 file changed, 23 insertions(+)
+ create mode 100644 index.yaml
+
+$ git push origin gh-pages
+...
+To github.com:paulczar/my-helm-charts.git
+   75f1fe8..696df18  gh-pages -&amp;gt; gh-pages
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Check it exists in &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; Pages:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;github-pages-index-yaml.png&#34; alt=&#34;github pages index.yaml&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;test-your-new-helm-https-helm-sh-repostiory&#34;&gt;Test your new &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; Repostiory&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Note: To do this you&amp;rsquo;ll need a Kubernetes cluster with Helm&amp;rsquo;s tiller installed, but you already know how to do that right?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code&gt;$ helm repo add my-helm-charts https://tech.paulcz.net/my-helm-charts
+&amp;quot;my-helm-charts&amp;quot; has been added to your repositories
+
+$ helm install --name test --namespace test my-helm-charts/app1
+NAME:   test
+LAST DEPLOYED: Wed Jul  3 13:17:32 2019
+NAMESPACE: test
+STATUS: DEPLOYED
+
+RESOURCES:
+==&amp;gt; v1/Deployment
+NAME       READY  UP-TO-DATE  AVAILABLE  AGE
+test-app1  0/1    1           0          0s
+
+==&amp;gt; v1/Pod(related)
+NAME                        READY  STATUS             RESTARTS  AGE
+test-app1-7b575d95f6-zhlh2  0/1    ContainerCreating  0         0s
+
+==&amp;gt; v1/Service
+NAME       TYPE       CLUSTER-IP      EXTERNAL-IP  PORT(S)  AGE
+test-app1  ClusterIP  10.100.200.213  &amp;lt;none&amp;gt;       80/TCP   0s
+
+
+NOTES:
+1. Get the application URL by running these commands:
+  export POD_NAME=$(kubectl get pods --namespace test -l &amp;quot;app.kubernetes.io/name=app1,app.kubernetes.io/instance=test&amp;quot; -o jsonpath=&amp;quot;{.items[0].metadata.name}&amp;quot;)
+  echo &amp;quot;Visit http://127.0.0.1:8080 to use your application&amp;quot;
+  kubectl port-forward $POD_NAME 8080:80
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Check that it deployed ok:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ kubectl -n test get all
+NAME                             READY   STATUS    RESTARTS   AGE
+pod/test-app1-7b575d95f6-zhlh2   1/1     Running   0          42m
+
+NAME                TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE
+service/test-app1   ClusterIP   10.100.200.213   &amp;lt;none&amp;gt;        80/TCP    42m
+
+NAME                        READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/test-app1   1/1     1            1           42m
+
+NAME                                   DESIRED   CURRENT   READY   AGE
+replicaset.apps/test-app1-7b575d95f6   1         1         1       42m
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Clean up:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ helm delete --purge test
+release &amp;quot;test&amp;quot; deleted
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;update-the-readme-md-with-instructions-on-using&#34;&gt;Update the README.md with instructions on using&lt;/h3&gt;
+
+&lt;p&gt;switch back to your &lt;code&gt;master&lt;/code&gt; brach:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ git checkout master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Edit your README.md to provide details on how to use charts from your repository:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;# My [Helm](https://helm.sh) Charts
+
+This repository contains [Helm](https://helm.sh) charts for various projects
+
+* [Application 1](charts/app1/)
+* [Application 2](charts/app2/)
+
+## Installing Charts from this Repository
+
+Add the Repository to Helm:
+
+    helm repo add my-helm-charts https://tech.paulcz.net/my-helm-charts
+
+Install Application 1:
+
+    helm install my-helm-charts/app1
+
+Install Application 2:
+
+    helm install my-helm-charts/app2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Commit the change up to GitHub:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ git add README.md
+$ git commit -m &#39;update readme with instructions&#39;
+$ git push origin master
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;That&amp;rsquo;s the end of &lt;strong&gt;Part 1&lt;/strong&gt; of this three part series. In future posts I will demonstrate adding &lt;a href=&#34;https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-2&#34;&gt;automation&lt;/a&gt; and &lt;a href=&#34;https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-3&#34;&gt;testing&lt;/a&gt; to this &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; chart repository.&lt;/p&gt;
+</content>
     </item>
     
     <item>
@@ -51,6 +880,341 @@ Before I get started I do want to mention that my experience as a new user tryin
       <guid>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-2/</guid>
       <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 of this series I demonstrated creating a Helm chart repository using GitHub and GitHub Pages. In this part 2 I will add Automation to automatically update the repository, and in part 2 I will add testing for changes to the charts themselves.
  If you&amp;rsquo;re into Videos, I walked JJ through starting with Helm from scratch all the way to creating a Helm Repo and CI/CD.</description>
+      <content>
+
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;Welcome to a three part blog series on Creating a &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; Chart Repository. In &lt;a href=&#34;https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-1&#34;&gt;part 1&lt;/a&gt; of this series I demonstrated creating a &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; chart repository using &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; and &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; Pages. In this &lt;strong&gt;part 2&lt;/strong&gt; I will add Automation to automatically update the repository, and in &lt;a href=&#34;https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-3&#34;&gt;part 2&lt;/a&gt; I will add testing for changes to the charts themselves.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;If you&amp;rsquo;re into Videos, I walked JJ through starting with Helm from scratch all the way to creating a Helm Repo and CI/CD.  &lt;div class=&#34;embed video-player&#34;&gt;
+&lt;iframe class=&#34;youtube-player&#34; type=&#34;text/html&#34; width=&#34;640&#34; height=&#34;385&#34; src=&#34;http://www.youtube.com/embed/xn63krHJNKI&#34; allowfullscreen frameborder=&#34;0&#34;&gt;
+&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;use-circle-ci-to-automate-helm-https-helm-sh-chart-updates&#34;&gt;Use Circle CI to automate &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; Chart Updates&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Note: While I would usually use &lt;a href=&#34;https://concourse-ci.org/&#34;&gt;Concourse CI&lt;/a&gt; for my CI workflows, I wanted to &lt;em&gt;only&lt;/em&gt; use managed services and I chose Circle as that is already commonly used in the Helm community. It would be trivial to whip up a Concourse Pipeline to do the same thing.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Now that we&amp;rsquo;ve successfully created a &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; Chart Repostiory using &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; and &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; pages we can move on to adding some Automation so that our Chart Repository is updated any time we push changes up to our master branch.&lt;/p&gt;
+
+&lt;p&gt;Its pretty easy to create a new Circle CI account. You simply go to their website and hit &lt;a href=&#34;https://circleci.com/signup/&#34;&gt;sign-up&lt;/a&gt;, it will ask you to log using &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt;Oauth2 and once you&amp;rsquo;ve given it access to your repositories you are good to go.&lt;/p&gt;
+
+&lt;p&gt;Once logged in you need to hit the &lt;strong&gt;ADD Projects&lt;/strong&gt; menu item and hit the &lt;strong&gt;set up project&lt;/strong&gt; button next to &lt;strong&gt;my-helm-charts&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;circle-add-project.png&#34; alt=&#34;add project&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can leave the defaults and just go down and click the &lt;strong&gt;Start Building&lt;/strong&gt; button.&lt;/p&gt;
+
+&lt;p&gt;It will attempt to run and fail because you don&amp;rsquo;t have a &lt;code&gt;.circleci/config.yml&lt;/code&gt; file in your repo yet. We&amp;rsquo;ll create that soon.&lt;/p&gt;
+
+&lt;p&gt;Before we do that though we need to create a private key for Circle CI with write access to our project. Hit the &lt;strong&gt;settings&lt;/strong&gt; button on the top right of the &lt;strong&gt;Workflows -&amp;gt; username -&amp;gt; my-helm-charts&lt;/strong&gt; screen tat looks like a little cog.&lt;/p&gt;
+
+&lt;p&gt;From here you want to hit SSH permissions and hit &lt;strong&gt;Checkout SSH Keys&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;There should be a &lt;strong&gt;Add user key&lt;/strong&gt; section with a button that says &lt;strong&gt;Authorize with GitHub&lt;/strong&gt;, hit that button. To be extra certain it loads the same page and you need to click the &lt;strong&gt;Create and add [username] user key&lt;/strong&gt; which will create a key and pass the public key off to github.&lt;/p&gt;
+
+&lt;p&gt;On that same &lt;strong&gt;settings&lt;/strong&gt; page you need to add some environment variables:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./circle-env-vars.png&#34; alt=&#34;circle env vars&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now its time to set up our Automation.&lt;/p&gt;
+
+&lt;h3 id=&#34;create-circle-ci-config-for-uploading-new-packages&#34;&gt;Create Circle CI config for uploading new packages&lt;/h3&gt;
+
+&lt;p&gt;Create a new directory &lt;code&gt;.circleci&lt;/code&gt; and a file inside that called &lt;code&gt;config.yml&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ mkdir .circleci
+$ touch .circleci/config.yml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Write out the &lt;code&gt;config.yml&lt;/code&gt; file like so:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Note: this CircleCI config file creates two jobs, One to lint the shell scripts we&amp;rsquo;re about to create, the other to release charts and copy documentation into our &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; repo website. These tasks will run when code is pushed or merged into the &lt;code&gt;master&lt;/code&gt; branch.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&#34;circleci-config-yml-https-github-com-paulczar-my-helm-charts-blob-part-2-circleci-config-yml&#34;&gt;&lt;a href=&#34;https://github.com/paulczar/my-helm-charts/blob/part-2/.circleci/config.yml&#34;&gt;.circleci/config.yml&lt;/a&gt;&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;version: 2
+jobs:
+  lint-scripts:
+    docker:
+      - image: koalaman/shellcheck-alpine
+    steps:
+      - checkout
+      - run:
+          name: lint
+          command: shellcheck -x .circleci/*.sh
+  release-charts:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          command: |
+            echo &amp;quot;export GIT_REPOSITORY_URL=$CIRCLE_REPOSITORY_URL&amp;quot; &amp;gt;&amp;gt; $BASH_ENV
+            echo &amp;quot;export GIT_USERNAME=$CIRCLE_PROJECT_USERNAME&amp;quot; &amp;gt;&amp;gt; $BASH_ENV
+            echo &amp;quot;export GIT_REPOSITORY_NAME=$CIRCLE_PROJECT_REPONAME&amp;quot; &amp;gt;&amp;gt; $BASH_ENV
+            .circleci/install_tools.sh
+            .circleci/release.sh
+
+workflows:
+  version: 2
+  release:
+    jobs:
+      - lint-scripts
+      - release-charts:
+          filters:
+            tags:
+              ignore: /.*/
+            branches:
+              only: master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We referenced two scripts in the &lt;code&gt;config.yml&lt;/code&gt; file, so we better create those. These scripts are a mix of ones that I have written, and have borrowed from &lt;a href=&#34;https://twitter.com/unguiculus&#34;&gt;Reinhard Nägele&lt;/a&gt; one of the main contributors to awesome tooling in the Helm Community as found &lt;a href=&#34;https://github.com/codecentric/helm-charts/blob/master/.circleci/release.sh&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;It&amp;rsquo;s no surprise that these scripts came from &lt;a href=&#34;https://twitter.com/unguiculus&#34;&gt;Reinhard Nägele&lt;/a&gt;as he is a primary maintainer of both &lt;a href=&#34;https://github.com/helm/chart-testing&#34;&gt;chart-testing&lt;/a&gt; and &lt;a href=&#34;https://github.com/helm/chart-releaser&#34;&gt;chart-releaser&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&#34;circleci-install-tools-sh-https-github-com-paulczar-my-helm-charts-blob-part-2-circleci-install-tools-sh&#34;&gt;&lt;a href=&#34;https://github.com/paulczar/my-helm-charts/blob/part-2/.circleci/install_tools.sh&#34;&gt;.circleci/install_tools.sh&lt;/a&gt;&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/usr/bin/env bash
+
+set -o errexit
+
+readonly HELM_VERSION=2.13.1
+readonly CHART_RELEASER_VERSION=0.1.4
+
+echo &amp;quot;Installing Helm...&amp;quot;
+curl -LO &amp;quot;https://kubernetes-helm.storage.googleapis.com/helm-v$HELM_VERSION-linux-amd64.tar.gz&amp;quot;
+sudo mkdir -p &amp;quot;/usr/local/helm-v$HELM_VERSION&amp;quot;
+sudo tar -xzf &amp;quot;helm-v$HELM_VERSION-linux-amd64.tar.gz&amp;quot; -C &amp;quot;/usr/local/helm-v$HELM_VERSION&amp;quot;
+sudo ln -s &amp;quot;/usr/local/helm-v$HELM_VERSION/linux-amd64/helm&amp;quot; /usr/local/bin/helm
+rm -f &amp;quot;helm-v$HELM_VERSION-linux-amd64.tar.gz&amp;quot;
+helm init --client-only
+
+echo &amp;quot;Installing chart-releaser...&amp;quot;
+curl -LO &amp;quot;https://github.com/helm/chart-releaser/releases/download/v${CHART_RELEASER_VERSION}/chart-releaser_${CHART_RELEASER_VERSION}_Linux_x86_64.tar.gz&amp;quot;
+sudo mkdir -p &amp;quot;/usr/local/chart-releaser-v$CHART_RELEASER_VERSION&amp;quot;
+sudo tar -xzf &amp;quot;chart-releaser_${CHART_RELEASER_VERSION}_Linux_x86_64.tar.gz&amp;quot; -C &amp;quot;/usr/local/chart-releaser-v$CHART_RELEASER_VERSION&amp;quot;
+sudo ln -s &amp;quot;/usr/local/chart-releaser-v$CHART_RELEASER_VERSION/chart-releaser&amp;quot; /usr/local/bin/chart-releaser
+rm -f &amp;quot;chart-releaser_${CHART_RELEASER_VERSION}_Linux_x86_64.tar.gz&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;circleci-release-sh-https-github-com-paulczar-my-helm-charts-blob-part-2-circleci-release-sh&#34;&gt;&lt;a href=&#34;https://github.com/paulczar/my-helm-charts/blob/part-2/.circleci/release.sh&#34;&gt;.circleci/release.sh&lt;/a&gt;&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+: &amp;quot;${CH_TOKEN:?Environment variable CH_TOKEN must be set}&amp;quot;
+: &amp;quot;${GIT_REPOSITORY_URL:?Environment variable GIT_REPO_URL must be set}&amp;quot;
+: &amp;quot;${GIT_USERNAME:?Environment variable GIT_USERNAME must be set}&amp;quot;
+: &amp;quot;${GIT_EMAIL:?Environment variable GIT_EMAIL must be set}&amp;quot;
+: &amp;quot;${GIT_REPOSITORY_NAME:?Environment variable GIT_REPOSITORY_NAME must be set}&amp;quot;
+
+readonly REPO_ROOT=&amp;quot;${REPO_ROOT:-$(git rev-parse --show-toplevel)}&amp;quot;
+
+main() {
+    pushd &amp;quot;$REPO_ROOT&amp;quot; &amp;gt; /dev/null
+
+    echo &amp;quot;Fetching tags...&amp;quot;
+    git fetch --tags
+
+    local latest_tag
+    latest_tag=$(find_latest_tag)
+
+    local latest_tag_rev
+    latest_tag_rev=$(git rev-parse --verify &amp;quot;$latest_tag&amp;quot;)
+    echo &amp;quot;$latest_tag_rev $latest_tag (latest tag)&amp;quot;
+
+    local head_rev
+    head_rev=$(git rev-parse --verify HEAD)
+    echo &amp;quot;$head_rev HEAD&amp;quot;
+
+    if [[ &amp;quot;$latest_tag_rev&amp;quot; == &amp;quot;$head_rev&amp;quot; ]]; then
+        echo &amp;quot;No code changes. Nothing to release.&amp;quot;
+        exit
+    fi
+
+    rm -rf .deploy
+    mkdir -p .deploy
+
+    echo &amp;quot;Identifying changed charts since tag &#39;$latest_tag&#39;...&amp;quot;
+
+    local changed_charts=()
+    readarray -t changed_charts &amp;lt;&amp;lt;&amp;lt; &amp;quot;$(git diff --find-renames --name-only &amp;quot;$latest_tag_rev&amp;quot; -- charts | cut -d &#39;/&#39; -f 2 | uniq)&amp;quot;
+
+    if [[ -n &amp;quot;${changed_charts[*]}&amp;quot; ]]; then
+        for chart in &amp;quot;${changed_charts[@]}&amp;quot;; do
+            echo &amp;quot;Packaging chart &#39;$chart&#39;...&amp;quot;
+            package_chart &amp;quot;charts/$chart&amp;quot;
+        done
+
+        release_charts
+        sleep 5
+        update_index
+    else
+        echo &amp;quot;Nothing to do. No chart changes detected.&amp;quot;
+    fi
+
+    popd &amp;gt; /dev/null
+}
+
+find_latest_tag() {
+    if ! git describe --tags --abbrev=0 2&amp;gt; /dev/null; then
+        git rev-list --max-parents=0 --first-parent HEAD
+    fi
+}
+
+package_chart() {
+    local chart=&amp;quot;$1&amp;quot;
+    Helm dependency build &amp;quot;$chart&amp;quot;
+    Helm package &amp;quot;$chart&amp;quot; --destination .deploy
+}
+
+release_charts() {
+    chart-releaser upload -o &amp;quot;$GIT_USERNAME&amp;quot; -r &amp;quot;$GIT_REPOSITORY_NAME&amp;quot; -p .deploy
+}
+
+update_index() {
+    chart-releaser index -o &amp;quot;$GIT_USERNAME&amp;quot; -r &amp;quot;$GIT_REPOSITORY_NAME&amp;quot; -p .deploy/index.yaml
+
+    git config user.email &amp;quot;$GIT_EMAIL&amp;quot;
+    git config user.name &amp;quot;$GIT_USERNAME&amp;quot;
+
+    for file in charts/*/*.md; do
+        if [[ -e $file ]]; then
+            mkdir -p &amp;quot;.deploy/docs/$(dirname &amp;quot;$file&amp;quot;)&amp;quot;
+            cp --force &amp;quot;$file&amp;quot; &amp;quot;.deploy/docs/$(dirname &amp;quot;$file&amp;quot;)&amp;quot;
+        fi
+    done
+
+    git checkout gh-pages
+    cp --force .deploy/index.yaml index.yaml
+
+    if [[ -e &amp;quot;.deploy/docs/charts&amp;quot; ]]; then
+        mkdir -p charts
+        cp --force --recursive .deploy/docs/charts/* charts/
+    fi
+
+    git checkout master -- README.md
+
+    if ! git diff --quiet; then
+        git add .
+        git commit --message=&amp;quot;Update index.yaml&amp;quot; --signoff
+        git push &amp;quot;$GIT_REPOSITORY_URL&amp;quot; gh-pages
+    fi
+}
+
+main
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Add these new files to git and push them up to the &lt;code&gt;master&lt;/code&gt; branch:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ git add .
+
+$ git status
+On branch master
+Your branch is up to date with &#39;origin/master&#39;.
+
+Changes to be committed:
+  (use &amp;quot;git reset HEAD &amp;lt;file&amp;gt;...&amp;quot; to unstage)
+
+  new file:   .circleci/config.yml
+  new file:   .circleci/install_tools.sh
+  new file:   .circleci/release.sh
+
+$ git commit -m &#39;add circle ci scripts&#39;
+
+$ git push origin master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This push should kick off a Circle CI job which will hopefully pass (I usually get it wrong the first few times).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./circle-first-job.png&#34; alt=&#34;circle first job&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You&amp;rsquo;ll notice there&amp;rsquo;s a failed job, that&amp;rsquo;s because when circleci sees the releases being updated it tries to run a job for the &lt;code&gt;gh-pages&lt;/code&gt; branch that doesn&amp;rsquo;t have a circle-ci config. We can use this sweet git trick to grab the one from the master branch:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ git checkout gh-pages
+$ git pull origin gh-pages
+$ mkdir .circleci
+$ git checkout master -- .circleci/config.yml
+$ git add .circleci/config.yml
+$ git commit -m &#39;add circleci config&#39;
+$ git push origin gh-pages
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;validate-the-release-of-new-charts&#34;&gt;Validate the release of new charts&lt;/h3&gt;
+
+&lt;p&gt;So far we haven&amp;rsquo;t actually changed our &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; Charts, so the automation hasn&amp;rsquo;t created a new release. We can change this by bumping the chart version of one of them.  Edit &lt;code&gt;./charts/app1/Chart.yaml&lt;/code&gt; and bump the version like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;apiVersion: v1
+appVersion: &amp;quot;1.0&amp;quot;
+description: A Helm chart for Kubernetes
+name: app1
+version: 0.1.1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Push this change up:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ git add .
+$ git commit -m &#39;update app1 chart&#39;
+$ git push origin master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You should see the new job show up in Circle and complete fairly quickly.&lt;/p&gt;
+
+&lt;p&gt;Once the job has completed successfully you can check you now have a &lt;code&gt;myapp-0.1.1&lt;/code&gt; release in your &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt;repo and your &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; repository now has &lt;code&gt;myapp-0.1.1&lt;/code&gt; in its &lt;code&gt;index.yaml&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ curl http://tech.paulcz.net/my-helm-charts/index.yaml
+apiVersion: v1
+entries:
+  app1:
+  - apiVersion: v1
+    appVersion: &amp;quot;1.0&amp;quot;
+    created: &amp;quot;2019-07-03T23:16:21.087774995Z&amp;quot;
+    description: A Helm chart for Kubernetes
+    digest: 9fbf6f9d10fba82aa3b749875e137b283890136a7379efba2bbff0b645cb1c35
+    name: app1
+    urls:
+    - https://github.com/paulczar/my-helm-charts/releases/download/app1-0.1.1/app1-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v1
+    appVersion: &amp;quot;1.0&amp;quot;
+    created: &amp;quot;2019-07-03T23:16:21.376254864Z&amp;quot;
+    description: A Helm chart for Kubernetes
+    digest: 48cf831b72febeac2860a0be372094250aea68a9c76147c028085c8802dd48ec
+    name: app1
+    urls:
+    - https://github.com/paulczar/my-helm-charts/releases/download/app1-0.1.0/app1-0.1.0.tgz
+    version: 0.1.0
+  app2:
+  - apiVersion: v1
+    appVersion: &amp;quot;1.0&amp;quot;
+    created: &amp;quot;2019-07-03T23:16:21.22793015Z&amp;quot;
+    description: Helm chart for Kubernetes
+    digest: 64b00fc4804aba524201f64e78ee22ad8e61d0923424f8e24e8b70befed88141
+    name: app2
+    urls:
+    - https://github.com/paulczar/my-helm-charts/releases/download/app2-0.1.0/app2-0.1.0.tgz
+    version: 0.1.0
+generated: &amp;quot;2019-07-03T23:16:20.624914794Z&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;In &lt;a href=&#34;https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-1&#34;&gt;Part 1&lt;/a&gt; we created set of &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; Charts managed in source control (GitHub) and in Part 2 we just added automation via CircleCI to automate building and deploying Chart packages to a &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; Chart Repository hosted in &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; pages and &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt;releases.&lt;/p&gt;
+
+&lt;p&gt;In &lt;a href=&#34;https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-3&#34;&gt;Part 3&lt;/a&gt; we will add further automation to test for changes in those &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; charts and to pass them through rigorous testing before allowing them to be merged into the &lt;code&gt;master&lt;/code&gt; branch.&lt;/p&gt;
+</content>
     </item>
     
     <item>
@@ -61,6 +1225,328 @@ Before I get started I do want to mention that my experience as a new user tryin
       <guid>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-3/</guid>
       <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 of this series I demonstrated creating a Helm chart repository using GitHub and GitHub Pages. In part 2 I will add Automation to automatically update the repository, and in part 3 I will add testing for changes to the charts themselves.
  If you&amp;rsquo;re into Videos, I walked JJ through starting with Helm from scratch all the way to creating a Helm Repo and CI/CD.</description>
+      <content>
+
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;Welcome to a three part blog series on Creating a &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; Chart Repository. In &lt;a href=&#34;https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-1&#34;&gt;part 1&lt;/a&gt; of this series I demonstrated creating a &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; chart repository using &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; and &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; Pages. In &lt;a href=&#34;https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-2&#34;&gt;part 2&lt;/a&gt; I will add Automation to automatically update the repository, and in &lt;strong&gt;part 3&lt;/strong&gt; I will add testing for changes to the charts themselves.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;If you&amp;rsquo;re into Videos, I walked JJ through starting with Helm from scratch all the way to creating a Helm Repo and CI/CD.  &lt;div class=&#34;embed video-player&#34;&gt;
+&lt;iframe class=&#34;youtube-player&#34; type=&#34;text/html&#34; width=&#34;640&#34; height=&#34;385&#34; src=&#34;http://www.youtube.com/embed/xn63krHJNKI&#34; allowfullscreen frameborder=&#34;0&#34;&gt;
+&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;use-circle-ci-to-test-helm-https-helm-sh-charts&#34;&gt;Use Circle CI to test &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; Charts&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Note - You could use any other CI system here, I chose Circle as it is easy to integrate with &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; and has a free tier. If you do use a different CI system the scripts should still work, but you&amp;rsquo;ll need to rewrite a config file suitable for your CI choice.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;introducing-chart-testing&#34;&gt;Introducing Chart Testing&lt;/h3&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; community has built a tool very imaginitively named [Chart Testing]((&lt;a href=&#34;https://github.com/helm/chart-testing&#34;&gt;https://github.com/helm/chart-testing&lt;/a&gt;) specifically for testing &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; charts. Not only is it capable of linting and performing test installs of a &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; chart, but its also designed to work within a monorepo and only test those charts that have changed.&lt;/p&gt;
+
+&lt;p&gt;You can download and use &lt;a href=&#34;https://github.com/helm/chart-testing/releases&#34;&gt;Chart Testing&lt;/a&gt; locally, but really the power of it is using it in CI, so lets go straight to that.&lt;/p&gt;
+
+&lt;h3 id=&#34;creat-a-chart-testing-script-and-update-circle-ci-config&#34;&gt;Creat a Chart Testing script and update Circle CI config&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Note: While I would usually use &lt;a href=&#34;https://concourse-ci.org/&#34;&gt;Concourse CI&lt;/a&gt; for my CI workflows, I wanted to &lt;em&gt;only&lt;/em&gt; use managed services and I chose Circle as that is already commonly used in the Helm community.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;We need to add a new script, a chart-testing config file, and update the Circle CI config file.&lt;/p&gt;
+
+&lt;h4 id=&#34;circleci-config-yaml-https-github-com-paulczar-my-helm-charts-blob-part-2-circleci-config-yaml&#34;&gt;&lt;a href=&#34;https://github.com/paulczar/my-helm-charts/blob/part-2/.circleci/config.yaml&#34;&gt;./circleci/config.yaml&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;Create two new jobs:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;These scripts and configs were heavily borrowed from &lt;a href=&#34;https://twitter.com/unguiculus&#34;&gt;Reinhard Nägele&lt;/a&gt; who is a primary maintainer of both &lt;a href=&#34;https://github.com/helm/chart-testing&#34;&gt;chart-testing&lt;/a&gt; and &lt;a href=&#34;https://github.com/helm/chart-releaser&#34;&gt;chart-releaser&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The first job tells Chart Testing to lint the charts according to the &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; Community &lt;a href=&#34;https://helm.sh/docs/chart_best_practices/&#34;&gt;Best Practices Guide&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The second job tells Chart Testing to actually install and test the charts using KIND (Kubernetes IN Docker).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;  lint-charts:
+    docker:
+      - image: gcr.io/kubernetes-charts-ci/test-image:v3.3.2
+    steps:
+      - checkout
+      - run:
+          name: lint
+          command: |
+            git remote add upstream https://github.com/paulczar/percona-helm-charts
+            git fetch upstream master
+            ct lint --config .circleci/ct.yaml
+
+  install-charts:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          no_output_timeout: 12m
+          command: .circleci/install_charts.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Add a new workflow telling Circle to lint and test any changes.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Note: it excludes the &lt;code&gt;master&lt;/code&gt; branch as we don&amp;rsquo;t want to try to retest charts as they&amp;rsquo;re merged in after successfully testing the new commit.:&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;  lint-and-install:
+    jobs:
+      - lint-scripts
+      - lint-charts:
+          filters:
+            branches:
+              ignore: master
+            tags:
+              ignore: /.*/
+      - install-charts:
+          requires:
+            - lint-charts
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;circleci-ct-yaml-https-github-com-paulczar-my-helm-charts-blob-part-3-circleci-ct-yaml&#34;&gt;&lt;a href=&#34;https://github.com/paulczar/my-helm-charts/blob/part-3/.circleci/ct.yaml&#34;&gt;./circleci/ct.yaml&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;This file provides configuration for Chart Testing. For now all we need is to tell it to provide &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; with a longer timeout:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;helm-extra-args: --timeout 600
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;circleci-kind-config-yaml-https-github-com-paulczar-my-helm-charts-blob-part-3-circleci-kind-config-yaml&#34;&gt;&lt;a href=&#34;https://github.com/paulczar/my-helm-charts/blob/part-3/.circleci/kind-config.yaml&#34;&gt;./circleci/kind-config.yaml&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;This file provides a configuration for KIND to use:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;kind: Cluster
+apiVersion: kind.sigs.k8s.io/v1alpha3
+nodes:
+  - role: control-plane
+  - role: worker
+  - role: worker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;circleci-install-charts-sh-https-github-com-paulczar-my-helm-charts-blob-part-3-circleci-install-charts-sh&#34;&gt;&lt;a href=&#34;https://github.com/paulczar/my-helm-charts/blob/part-3/.circleci/install_charts.sh&#34;&gt;./circleci/install_charts.sh&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;Finally this script will install KIND and will perform test installations for any changed &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; Charts:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+readonly CT_VERSION=v2.3.3
+readonly KIND_VERSION=0.2.1
+readonly CLUSTER_NAME=chart-testing
+readonly K8S_VERSION=v1.14.0
+
+run_ct_container() {
+    echo &#39;Running ct container...&#39;
+    docker run --rm --interactive --detach --network host --name ct \
+        --volume &amp;quot;$(pwd)/.circleci/ct.yaml:/etc/ct/ct.yaml&amp;quot; \
+        --volume &amp;quot;$(pwd):/workdir&amp;quot; \
+        --workdir /workdir \
+        &amp;quot;quay.io/helmpack/chart-testing:$CT_VERSION&amp;quot; \
+        cat
+    echo
+}
+
+cleanup() {
+    echo &#39;Removing ct container...&#39;
+    docker kill ct &amp;gt; /dev/null 2&amp;gt;&amp;amp;1
+
+    echo &#39;Done!&#39;
+}
+
+docker_exec() {
+    docker exec --interactive ct &amp;quot;$@&amp;quot;
+}
+
+create_kind_cluster() {
+    echo &#39;Installing kind...&#39;
+
+    curl -sSLo kind &amp;quot;https://github.com/kubernetes-sigs/kind/releases/download/$KIND_VERSION/kind-linux-amd64&amp;quot;
+    chmod +x kind
+    sudo mv kind /usr/local/bin/kind
+
+    kind create cluster --name &amp;quot;$CLUSTER_NAME&amp;quot; --config .circleci/kind-config.yaml --image &amp;quot;kindest/node:$K8S_VERSION&amp;quot; --wait 60s
+
+    docker_exec mkdir -p /root/.kube
+
+    echo &#39;Copying kubeconfig to container...&#39;
+    local kubeconfig
+    kubeconfig=&amp;quot;$(kind get kubeconfig-path --name &amp;quot;$CLUSTER_NAME&amp;quot;)&amp;quot;
+    docker cp &amp;quot;$kubeconfig&amp;quot; ct:/root/.kube/config
+
+    docker_exec kubectl cluster-info
+    echo
+
+    docker_exec kubectl get nodes
+    echo
+}
+
+install_local_path_provisioner() {
+    docker_exec kubectl delete storageclass standard
+    docker_exec kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
+}
+
+install_tiller() {
+    echo &#39;Installing Tiller...&#39;
+    docker_exec kubectl --namespace kube-system create sa tiller
+    docker_exec kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+    docker_exec helm init --service-account tiller --upgrade --wait
+    echo
+}
+
+install_charts() {
+    docker_exec ct install
+    echo
+}
+
+main() {
+    run_ct_container
+    trap cleanup EXIT
+
+    changed=$(docker_exec ct list-changed)
+    if [[ -z &amp;quot;$changed&amp;quot; ]]; then
+        echo &#39;No chart changes detected.&#39;
+        return
+    fi
+
+    echo &#39;Chart changes detected.&#39;
+    create_kind_cluster
+    install_local_path_provisioner
+    install_tiller
+    install_charts
+}
+
+main
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;commit-the-changes&#34;&gt;Commit the changes&lt;/h3&gt;
+
+&lt;p&gt;Next up commit these new changes to your master branch:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ git add .
+$ git commit -m &#39;add chart testing on PRs&#39;
+$ git push origin master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;test-the-new-automation&#34;&gt;Test the new Automation&lt;/h2&gt;
+
+&lt;p&gt;Create a new branch:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ git checkout -b update-app2-chart
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Modify the app2 &lt;code&gt;Chart.yaml&lt;/code&gt; to be a new version number:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;apiVersion: v1
+appVersion: &amp;quot;1.0&amp;quot;
+description: A Helm chart for Kubernetes
+name: app2
+version: 0.1.1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Commit and Push the changes:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ git add charts/app2/Chart.yaml
+$ git commit -m &#39;bump chart2 version&#39;
+$ git push origin update-app2-chart
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Circle CI should run tests and should fail:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;circle-test-fail.png&#34; alt=&#34;circle fail test&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This failure is because when &lt;code&gt;helm create&lt;/code&gt; creates your chart, it doesn&amp;rsquo;t implement all of our best practices. If you check in the Circle CI job log you&amp;rsquo;ll see:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;Error validating data /root/project/charts/app2/Chart.yaml with schema /etc/ct/chart_schema.yaml
+  home: Required field missing
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The error is quite clear, we should have a field &lt;code&gt;home&lt;/code&gt; in our &lt;code&gt;Chart.yaml&lt;/code&gt;. In fact there should also be a &lt;code&gt;maintainers&lt;/code&gt; field. Let&amp;rsquo;s add those into both chart&amp;rsquo;s &lt;code&gt;Chart.yaml&lt;/code&gt; files:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;home: http://github.com/paulczar/my-helm-charts
+maintainers:
+  - name: paulczar
+    email: username.taken@gmail.com
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Note: Since you&amp;rsquo;re also changing App1, you should bump its version a patch level to &lt;code&gt;0.1.2&lt;/code&gt;, all changes to a Chart, even non functional one should bump the chart version.&lt;/p&gt;
+
+&lt;p&gt;Note: Ensure you leave a blank line at the end of the &lt;code&gt;Chart.yaml&lt;/code&gt; file. I forgot to and had to resubmit.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Push these new changes:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ git add .
+$ git commit -m &#39;comply to chart best practices&#39;
+$ git push origin update-app2-chart
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After a few seconds you should see the new jobs start in CircleCI and this time all three tasks should complete successfully:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;circle-lint-and-install.png&#34; alt=&#34;circle ci lint and install&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It took about 6 minutes to run, because it did a full install of both Charts (as we changed them both) to a disposable KIND cluster.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Note: Since this was a branch, the charts were not released to the Chart Repository as that job is only triggered on the &lt;code&gt;master branch&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Next you&amp;rsquo;ll want to create a pull request for this change, you can do that via the &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; web ui:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;github-pull-request.png&#34; alt=&#34;github pull request&#34; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Note: Since Circle CI has already tested the commits in this PR (Pull Request) it shows handy little test pass/fail marks against the commits.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Since the PR is showing as passing tests, you can go ahead and Merge it by clicking that green &lt;code&gt;Merge&lt;/code&gt; button (although I like to use &lt;code&gt;Squash and Merge&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;This Merge into the &lt;code&gt;master&lt;/code&gt; branch will kick off the &lt;code&gt;release-charts&lt;/code&gt; workflow and after a few seconds we&amp;rsquo;ll have an updated &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; Repository:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ curl http://tech.paulcz.net/my-helm-charts/index.yaml
+apiVersion: v1
+entries:
+...
+...
+  app1:
+    name: app1
+    version: 0.1.2
+...
+...
+  app2:
+    name: app2
+    version: 0.1.1
+...
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;testing-pull-requests&#34;&gt;Testing Pull Requests&lt;/h2&gt;
+
+&lt;p&gt;In the advanced settings of Circle CI you can tell it to automatically test Pull Requests that come from forks of your &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; repository. Adding this is a great feature if you want others to work on your code with you. However you do need to protect your secrets.&lt;/p&gt;
+
+&lt;p&gt;For example a bad actor could add &amp;ldquo;echo $CH_TOKEN&amp;rdquo; to one of the scripts and steal my &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; token which they could then use to mess with my Repositories.&lt;/p&gt;
+
+&lt;p&gt;For that reason I&amp;rsquo;ve opted not to include that in this example.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;In &lt;a href=&#34;https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-1&#34;&gt;Part 1&lt;/a&gt; we created set of &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; Charts managed in source control (GitHub).&lt;/p&gt;
+
+&lt;p&gt;In &lt;a href=&#34;https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-2&#34;&gt;Part 2&lt;/a&gt; we added automation via CircleCI to automate building and deploying Chart packages to a &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; Chart Repository hosted in &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; Pages and &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt; Releases.&lt;/p&gt;
+
+&lt;p&gt;In &lt;strong&gt;Part 3&lt;/strong&gt; we added further automation to test changes in those &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; charts and to pass them through rigorous testing before allowing them to be merged into the &lt;code&gt;master&lt;/code&gt; branch.&lt;/p&gt;
+</content>
     </item>
     
     <item>
@@ -71,6 +1557,125 @@ Before I get started I do want to mention that my experience as a new user tryin
       <guid>https://tech.paulcz.net/blog/cloud-native-operations-k8s-controllers/</guid>
       <description>Note: If this topic has peaked your interest, you can join me for a Webinar on August 15 where I&amp;rsquo;ll dive deep into Cloud Native Operations with Kubernetes and CI/CD Pipelines.
  Lulz what? Cloud Native Operations ?!?!?! Historically Operations practices have lagged behind development. During the 90s a number of lightweight software development practices evolved such as Scrum and Extreme Programming. During the early 2000&amp;rsquo;s it became pretty common to practice (or at least claim to) some form of Agile in software development.</description>
+      <content>
+
+&lt;blockquote&gt;
+&lt;p&gt;Note: If this topic has peaked your interest, you can join me for a Webinar on August 15 where I&amp;rsquo;ll dive deep into &lt;a href=&#34;https://content.pivotal.io/webinars/aug-15-cloud-native-operations-with-kubernetes-and-ci-cd-webinar?utm_campaign=cno-k8s-ci-cd-q319&amp;amp;utm_source=blog&amp;amp;utm_medium=website&#34;&gt;Cloud Native Operations with Kubernetes and CI/CD Pipelines&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&#34;lulz-what-cloud-native-operations&#34;&gt;Lulz what? Cloud Native Operations ?!?!?!&lt;/h1&gt;
+
+&lt;p&gt;Historically Operations practices have lagged behind development. During the 90s a number of lightweight software development practices evolved such as Scrum and Extreme Programming. During the early 2000&amp;rsquo;s it became pretty common to practice (or at least claim to) some form of Agile in software development.&lt;/p&gt;
+
+&lt;p&gt;It wasn&amp;rsquo;t until the last year of that decade that we started to see an uptick in Operations folks wanting to adopt Agile type methodologies and as the devops (and later SRE) movements took off we started to borrow heavily from Lean principals such as Kanban and Value Stream Mapping.&lt;/p&gt;
+
+&lt;p&gt;Cloud Computing has brought about another shift in software development, going from large monolithic applications to collections of microservices that work together, and even further into being event based via messages and streams which now falls under the umbrella of &amp;ldquo;cloud native&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;With the rise of Kubernetes and similar platforms as well as companies like Hashicorp and stalwarts of Agile Operations such as Google and Pivotal we&amp;rsquo;re starting to see that same shift in Operations as we start to talk about &lt;strong&gt;Platform as Product&lt;/strong&gt; and turning engineering [operations] teams into product teams.&lt;/p&gt;
+
+&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;this means we all need to learn to get better at product engineering, kittens.  and turning infra engineering teams into infra product teams. &lt;a href=&#34;https://t.co/t1Vj6RKbdd&#34;&gt;pic.twitter.com/t1Vj6RKbdd&lt;/a&gt;&lt;/p&gt;&amp;mdash; Charity Majors (@mipsytipsy) &lt;a href=&#34;https://twitter.com/mipsytipsy/status/1088673759291011073?ref_src=twsrc%5Etfw&#34;&gt;January 25, 2019&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
+
+
+&lt;h1 id=&#34;kubernetes-controllers&#34;&gt;Kubernetes Controllers&lt;/h1&gt;
+
+&lt;p&gt;There&amp;rsquo;s a lot more to be said about Cloud Native Operations and Platform as Product (the two go hand-in-hand) but for now I want to focus on a fundamental aspect of Kubernetes that will be a force multiplier for making the composable building blocks of Cloud Native Operations.&lt;/p&gt;
+
+&lt;p&gt;Most resources in Kubernetes are managed by a Controller. A Kubernetes Controller is to microservices what a Chef recipe is to a Monolith.&lt;/p&gt;
+
+&lt;p&gt;Each resource is controlled by its own control loop. This is a step forward from previous systems like Chef or Puppet which both have control loops but at the server level, not the resource.&lt;/p&gt;
+
+&lt;p&gt;A Controller is a fairly simple piece of code that creates a control loop over a single resource to ensure that resource is behaving correctly. These Control loops cam stack together to create complex functionality with simple interfaces.&lt;/p&gt;
+
+&lt;p&gt;The canonical example of this in action is in how we manage pods in Kubernetes. A Pod is [effectively] a running copy of your application that a specific worker node is asked to run. If that application crashes the kubelet running on that node will start it again.&lt;/p&gt;
+
+&lt;p&gt;However if that node crashes the Pod is not recovered as the control loop (via the kubelet process) responsible for the resource no longer exists. To make applications more resiliant Kubernetes has the ReplicaSet controller.&lt;/p&gt;
+
+&lt;p&gt;Kubernetes has a process running on the masters called a &lt;code&gt;controller-manager&lt;/code&gt; that run the controllers for these more advanced resources. This is where the ReplicaSet controller runs, and it is responsible for ensuring that a set number of copies of your application are always running.&lt;/p&gt;
+
+&lt;p&gt;To do this the ReplicaSet controller requests that the provided number of Pods are created and then it routinely checks that the correct number of Pods are still running and will request more pods, or destroy existing pods to do so.&lt;/p&gt;
+
+&lt;p&gt;By requesting a ReplicaSet from Kubernetes you get a self-healing deployment of your application. You can further add lifecycle management to your workload by requesting a Deployment which is a controller that manages ReplicaSets.&lt;/p&gt;
+
+&lt;p&gt;These Controllers are great for managing Kubernetes resources, but are also fantastic for managing resources outside of Kubernetes. You can extend Kubernetes by writing a Controller that watches for events and annotations and performs extra work, or by writing a Custom Resource Definition.&lt;/p&gt;
+
+&lt;h1 id=&#34;example-external-dns-controller&#34;&gt;Example - External DNS Controller&lt;/h1&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://github.com/kubernetes-incubator/external-dns&#34;&gt;external-dns&lt;/a&gt; controller is a perfect example of a watcher. You configure it with your DNS provider and it will watch resources such as Services and Ingresses. When one of those resources changes it will inspect them for annotations which will tell it if it needs to perform an action.&lt;/p&gt;
+
+&lt;p&gt;With the &lt;code&gt;external-dns&lt;/code&gt; controller running in your cluster you can simply add the following annotation to a service and it will go out and create a matching DNS A record for that resource:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;kubectl annotate service nginx \
+    &amp;quot;external-dns.alpha.kubernetes.io/hostname=nginx.example.org.&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can change other characteristics such as the TTL value of the DNS record:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-console&#34;&gt;kubectl annotate service nginx \
+    &amp;quot;external-dns.alpha.kubernetes.io/ttl=10&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Just like that you now have automatic DNS management for your applications and services in Kubernetes that reacts to any changes in your cluster to ensure your DNS is correct.&lt;/p&gt;
+
+&lt;h1 id=&#34;example-certificate-manager-operator&#34;&gt;Example - Certificate Manager Operator&lt;/h1&gt;
+
+&lt;p&gt;Like the &lt;code&gt;external-dns&lt;/code&gt; controller the &lt;a href=&#34;http://docs.cert-manager.io/en/latest/&#34;&gt;cert-manager&lt;/a&gt; will react to changes in resources, but also comes with a Custom Resource Definition that will allow you to request certificates as a resource in of themselves, not just a byproduct of an annotation.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;cert-manager&lt;/code&gt; works with &lt;a href=&#34;https://letsencrypt.org/&#34;&gt;Lets Encrypt&lt;/a&gt; and other sources of Certificates to request valid signed TLS certificates. You can even use it in combination with &lt;code&gt;external-dns&lt;/code&gt; like the following which will register &lt;code&gt;web.example.com&lt;/code&gt; and retrieve a TLS certificate from Lets Encrypt and store that in a Secret.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    certmanager.k8s.io/acme-http01-edit-in-place: &amp;quot;true&amp;quot;
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: &amp;quot;true&amp;quot;
+  name: example
+spec:
+  rules:
+  - host: web.example.com
+    http:
+      paths:
+      - backend:
+          serviceName: example
+          servicePort: 80
+        path: /*
+  tls:
+  - hosts:
+    - web.example.com
+    secretName: example-tls
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can also request a certificate directly from the &lt;code&gt;cert-manager&lt;/code&gt; CRD like so which like above will result in a certificate keypair being stored in a Kubernetes secret:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: example-com
+  namespace: default
+spec:
+  secretName: example-com-tls
+  issuerRef:
+    name: letsencrypt-staging
+  commonName: example.com
+  dnsNames:
+  - www.example.com
+  acme:
+    config:
+    - http01:
+        ingressClass: nginx
+      domains:
+      - example.com
+    - http01:
+        ingress: my-ingress
+      domains:
+      - www.example.com
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;This was just a quick look at one of the ways that Kubernetes is helping enable a new wave of changes to how we operate software. This is a favorite topic of mine, so look forward to hearing more.&lt;/p&gt;
+</content>
     </item>
     
     <item>
@@ -84,6 +1689,117 @@ Before I get started I do want to mention that my experience as a new user tryin
 &lt;p&gt;Almost since &lt;a href=&#34;http://docker.com&#34;&gt;Docker&lt;/a&gt; was first introduced to the world there has been a fairly strong push to keeping containers to be single process.   This makes a lot of sense and definitely plays into the &lt;a href=&#34;http://12factor.net&#34;&gt;12 Factor&lt;/a&gt; way of thinking where all application output should be pushed to &lt;code&gt;stdout&lt;/code&gt; and docker itself with tools like &lt;a href=&#34;https://github.com/progrium/logspout&#34;&gt;logspout&lt;/a&gt; now has fairly strong tooling to deal with those logs.&lt;/p&gt;
 
 &lt;p&gt;Sometimes however it just makes sense to run more than one process in a container,  a perfect example would be running &lt;a href=&#34;https://github.com/kelseyhightower/confd&#34;&gt;confd&lt;/a&gt; as well as your application in order to modify the application&amp;rsquo;s config file based on changes in service discovery systems like &lt;a href=&#34;https://github.com/coreos/etcd&#34;&gt;etcd&lt;/a&gt;.   The &lt;a href=&#34;https://docs.docker.com/articles/ambassador_pattern_linking/&#34;&gt;ambassador&lt;/a&gt; container way of working can achieve similar things, but I&amp;rsquo;m not sure that running two containers with a process each to run your application is any better than running one container with two processes.&lt;/p&gt;</description>
+      <content>&lt;h2 id=&#34;for-some-values-of-right&#34;&gt;For some values of &amp;lsquo;right&amp;rsquo;&lt;/h2&gt;
+
+&lt;p&gt;Almost since &lt;a href=&#34;http://docker.com&#34;&gt;Docker&lt;/a&gt; was first introduced to the world there has been a fairly strong push to keeping containers to be single process.   This makes a lot of sense and definitely plays into the &lt;a href=&#34;http://12factor.net&#34;&gt;12 Factor&lt;/a&gt; way of thinking where all application output should be pushed to &lt;code&gt;stdout&lt;/code&gt; and docker itself with tools like &lt;a href=&#34;https://github.com/progrium/logspout&#34;&gt;logspout&lt;/a&gt; now has fairly strong tooling to deal with those logs.&lt;/p&gt;
+
+&lt;p&gt;Sometimes however it just makes sense to run more than one process in a container,  a perfect example would be running &lt;a href=&#34;https://github.com/kelseyhightower/confd&#34;&gt;confd&lt;/a&gt; as well as your application in order to modify the application&amp;rsquo;s config file based on changes in service discovery systems like &lt;a href=&#34;https://github.com/coreos/etcd&#34;&gt;etcd&lt;/a&gt;.   The &lt;a href=&#34;https://docs.docker.com/articles/ambassador_pattern_linking/&#34;&gt;ambassador&lt;/a&gt; container way of working can achieve similar things, but I&amp;rsquo;m not sure that running two containers with a process each to run your application is any better than running one container with two processes.&lt;/p&gt;
+
+&lt;p&gt;If you&amp;rsquo;re going run multiple processes you have a few options to do it.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Start the container with the first process adnd then use the new &lt;code&gt;docker exec&lt;/code&gt; command to start the second.&lt;/li&gt;
+&lt;li&gt;Start them in sequence in a &lt;code&gt;bash&lt;/code&gt; script and background all but the last process with a &lt;code&gt;&amp;amp;&lt;/code&gt; at the end of the line.&lt;/li&gt;
+&lt;li&gt;Use a Process Supervisor such as Supervisord or Runit.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I haven&amp;rsquo;t really messed around with the first option, maybe it could work out, but you&amp;rsquo;d lose the logs from the second process as it would need to output via the first process&amp;rsquo; &lt;code&gt;stdout&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-bash-script&#34;&gt;The Bash Script&lt;/h2&gt;
+
+&lt;p&gt;Up until recently the way I have been running multiple processes is via the &lt;code&gt;bash&lt;/code&gt; script method, but it feels really clumsy and fragile and while it works I&amp;rsquo;ve never been particularly fond of it.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s an snippet from such a script from my &lt;a href=&#34;https://github.com/paulczar/docker-elk_confd&#34;&gt;docker-elk_confd&lt;/a&gt; project which builds out the [ELK]() stack using values in &lt;code&gt;etcd&lt;/code&gt; to orchestrate clustering and configuration via &lt;code&gt;confd&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;echo Starting ${APP_NAME}
+
+confd -node $ETCD -config-file /app/confd.toml -confdir /app &amp;amp;
+/opt/elasticsearch/bin/elasticsearch -p /app/elasticsearch.pid &amp;amp;
+
+# while the port is listening, publish to etcd
+while [[ ! -z $(netstat -lnt | awk &amp;quot;\$6 == \&amp;quot;LISTEN\&amp;quot; &amp;amp;&amp;amp; \$4 ~ \&amp;quot;.$PUBLISH\&amp;quot; &amp;amp;&amp;amp; \$1 ~ \&amp;quot;$PROTO.?\&amp;quot;&amp;quot;) ]] ; do
+  publish_to_etcd
+  sleep 5 # sleep for half the TTL
+done
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you can see I&amp;rsquo;ve started two processes &lt;code&gt;elasticsearch&lt;/code&gt; and &lt;code&gt;confd&lt;/code&gt; both backgrounded and then I finish with a loop which publishes data to etcd every 5 seconds until the &lt;code&gt;elasticsearch&lt;/code&gt; process quits listening on its published tcp port.  This works, but it leaves me feeling a bit icky.&lt;/p&gt;
+
+&lt;h2 id=&#34;process-supervisor&#34;&gt;Process Supervisor&lt;/h2&gt;
+
+&lt;p&gt;I have used various supervisors in containers before but never really liked the experience as I could never get all the logs out to &lt;code&gt;stdout&lt;/code&gt; and using the standard docker logging mechanisms so I&amp;rsquo;ve always gone back to the &lt;code&gt;bash&lt;/code&gt; script method.  Recently while working on the ELK project mentioned above I decided to give using a process supervisor another chance.&lt;/p&gt;
+
+&lt;p&gt;My primary measure of success for using a supervisor going forward was to come up with a way to push all output to the supervisor&amp;rsquo;s stdout so that I can use the regular docker logging.&lt;/p&gt;
+
+&lt;p&gt;I decided to try with &lt;a href=&#34;http://supervisord.org&#34;&gt;supervisor&lt;/a&gt; as a starting point because it is a fairly small install and has an easily templatable config.   At about the same time I was looking at this I found a &lt;a href=&#34;http://supervisord.org&#34;&gt;blog post&lt;/a&gt; ( I believe it was linked in a recent Docker Weekly ) that talked about using &lt;code&gt;supervisor&lt;/code&gt; in docker containers.  They had even (sortof) solved the logging problem,  however the logging was appended with debug lines and made it messy and difficult to read.  I figured there had to be a cleaner way.&lt;/p&gt;
+
+&lt;p&gt;Reading through the documentation I saw that you can specify a file to log each supervised process to.   I just needed a way to hijack that config item to write to supervisor&amp;rsquo;s stdout instead.   Turns out that&amp;rsquo;s quite easy as there&amp;rsquo;s a special device &lt;code&gt;/dev/stdout&lt;/code&gt; which links to &lt;code&gt;/dev/self/fd/1&lt;/code&gt; which is the &lt;code&gt;stdout&lt;/code&gt; for the running application.   I quickly threw together a test and it did indeed pipe the logs from the process through &lt;code&gt;stdout&lt;/code&gt; of supervisor.&lt;/p&gt;
+
+&lt;p&gt;I end up with a &lt;code&gt;/etc/supervisord.conf&lt;/code&gt; ( which is written out by confd before supervisor is started ) file that looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[supervisord]
+logfile=/dev/null
+pidfile=/var/run/supervisord.pid
+nodaemon=true
+
+[program:publish_etcd]
+command=/app/bin/publish_etcd
+redirect_stderr=true
+stdout_logfile=/dev/stdout
+stdout_logfile_maxbytes=0
+auto_start=true
+autorestart=true
+
+[program:confd]
+command=confd -node %(ENV_ETCD)s -config-file /app/confd.toml -confdir /app
+redirect_stderr=true
+stdout_logfile=/dev/stdout
+stdout_logfile_maxbytes=0
+auto_start=true
+autorestart=true
+
+[program:elasticsearch]
+command=/opt/elasticsearch/bin/elasticsearch
+redirect_stderr=true
+stdout_logfile=/dev/stdout
+stdout_logfile_maxbytes=0
+auto_start=true
+autorestart=true
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and my boot script that docker runs the following to launch my app:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;echo Starting ${APP_NAME}
+/usr/bin/supervisord -c /etc/supervisor/supervisord.conf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;All output from &lt;code&gt;Elasticsearch&lt;/code&gt;, &lt;code&gt;confd&lt;/code&gt;, &lt;code&gt;supervisord&lt;/code&gt; now output via the docker logging systems so that I can see what is going on by running:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker logs elasticsearch
+docker logs -f 7270755ce94c03dda930fbdedeee7722dddf6fdbbf8902aaee52c9f94f2147ca
+2014-12-23T04:46:02Z 7270755ce94c confd[37]: INFO /opt/elasticsearch/config/elasticsearch.yml has md5sum 08a09998560b7b786eca1e594b004ddc should be d83b49b485b5acad2666aa03b1ee90a0
+2014-12-23T04:46:02Z 7270755ce94c confd[37]: INFO Target config /opt/elasticsearch/config/elasticsearch.yml out of sync
+2014-12-23T04:46:02Z 7270755ce94c confd[37]: INFO Target config /opt/elasticsearch/config/elasticsearch.yml has been updated
+2014-12-23T04:46:02Z 7270755ce94c confd[37]: INFO /etc/supervisor/supervisord.conf has mode -rw-r--r-- should be -rwxr-xr-x
+2014-12-23T04:46:02Z 7270755ce94c confd[37]: INFO /etc/supervisor/supervisord.conf has md5sum 99dc7e8a1178ede9ae9794aaecbca436 should be ad9bc3735991d133a09f4fc665e2305f
+2014-12-23T04:46:02Z 7270755ce94c confd[37]: INFO Target config /etc/supervisor/supervisord.conf out of sync
+2014-12-23T04:46:02Z 7270755ce94c confd[37]: INFO Target config /etc/supervisor/supervisord.conf has been updated
+Starting elasticsearch
+2014-12-23 04:46:02,245 CRIT Supervisor running as root (no user in config file)
+2014-12-23 04:46:02,251 INFO supervisord started with pid 51
+2014-12-23 04:46:03,255 INFO spawned: &#39;publish_etcd&#39; with pid 54
+2014-12-23 04:46:03,258 INFO spawned: &#39;elasticsearch&#39; with pid 55
+2014-12-23 04:46:03,260 INFO spawned: &#39;confd&#39; with pid 56
+==&amp;gt; sleeping for 20 seconds, then testing if elasticsearch is up.
+[2014-12-23 04:46:04,146][INFO ][node                     ] [Sultan] version[1.4.2], pid[55], build[927caff/2014-12-16T14:11:12Z]
+[2014-12-23 04:46:04,149][INFO ][node                     ] [Sultan] initializing ...
+[2014-12-23 04:46:04,156][INFO ][plugins                  ] [Sultan] loaded [], sites []
+2014-12-23 04:46:05,158 INFO success: publish_etcd entered RUNNING state, process has stayed up for &amp;gt; than 1 seconds (startsecs)
+2014-12-23 04:46:05,159 INFO success: elasticsearch entered RUNNING state, process has stayed up for &amp;gt; than 1 seconds (startsecs)
+2014-12-23 04:46:05,161 INFO success: confd entered RUNNING state, process has stayed up for &amp;gt; than 1 seconds (startsecs)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;One last thing that I should mention.  the &lt;code&gt;publish_etcd&lt;/code&gt; talk in the supervisor config is running a script that contains the &lt;code&gt;while&lt;/code&gt; loop to make sure that &lt;code&gt;elasticsearch&lt;/code&gt; is listening on the approriate port, If that loop is broken it means that&lt;code&gt;elasticsearch&lt;/code&gt; is not responding and it sends a kill signal to &lt;code&gt;supervisor&lt;/code&gt; which then causes the container to shoot itself in the head because the rest of the  processes running are useless without &lt;code&gt;elasticsearch&lt;/code&gt; running.&lt;/p&gt;</content>
     </item>
     
     <item>
@@ -94,6 +1810,204 @@ Before I get started I do want to mention that my experience as a new user tryin
       <guid>https://tech.paulcz.net/blog/breadops-continous-delivery-of-fresh-baked-bread/</guid>
       <description>&amp;ldquo;See how this sparkly devop princess bakes bread every day with almost no effort at all with this one weird trick&amp;rdquo;
 Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at most supermarkets is little better than cake baked in a bread shaped mold ( seriously check next time you&amp;rsquo;re at a supermarket ). You might be lucky and have a really good bread baker near you, but like butchers and other important crafts they have all but disappeared.</description>
+      <content>
+
+&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/-rMMuR_Itcmk/VH9eSsVZ18I/AAAAAAAAOc8/bJBp9UaoMI0/s1024/20141203_124907.jpg&#34; alt=&#34;the best way to eat fresh bread&#34; /&gt;
+&amp;ldquo;See how this sparkly devop princess bakes bread every day with almost no effort at all with this one weird trick&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;Store bought bread is shit.  Even the  &amp;ldquo;artisanal&amp;rdquo; bread at most supermarkets is little better than cake baked in a bread shaped mold ( seriously check next time you&amp;rsquo;re at a supermarket ).  You might be lucky and have a really good bread baker near you,  but like butchers and other important crafts they have all but disappeared.  My solution to this was to start baking bread myself.  I did a ton of research, started my own sourdough starter ( 5 years and going strong! ) and started baking bread regularly.&lt;/p&gt;
+
+&lt;p&gt;Reading Boyd&amp;rsquo;s excellent blog post on &lt;a href=&#34;http://stackengine.com/laundryops-practical-devops-at-home/&#34;&gt;LaundryOps&lt;/a&gt; made me realize that I should write this up as I had somewhat unwittingly applied these DevOps practices to baking bread.&lt;/p&gt;
+
+&lt;!--more --&gt;
+
+&lt;p&gt;For a while it was tough going making bread all the time,  starters and doughs are fickle beasts and required constant care and feeding ( literally, you have to feed a sourdough starter at least twice a day ).   After almost giving up several times I started to apply what I now know as &lt;em&gt;devops techniques&lt;/em&gt;. Over time I worked to constantly improve my processes specifically optimizing for my time.  I can even apply CAMS across it:&lt;/p&gt;
+
+&lt;h2 id=&#34;culture&#34;&gt;Culture&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Lactobacillus &amp;hellip; HAHAHAHA Bakers joke!&lt;/li&gt;
+&lt;li&gt;A long fermentation time which converts more of the sugars into gas and makes the proteins more digestible&amp;hellip; Wait still wrong culture.&lt;/li&gt;
+&lt;li&gt;Minimal human interaction ( approx 5 minutes per loaf ) reduces impact on normal life.&lt;/li&gt;
+&lt;li&gt;Healthy Fresh bread for you and your family&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;automation&#34;&gt;Automation&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Slow ferment reduces requirement to knead to almost zero.&lt;/li&gt;
+&lt;li&gt;Refrigerating the dough allows me to take control of the timetable.&lt;/li&gt;
+&lt;li&gt;Usable for 5-7 days from the fridge.  &lt;strong&gt;Multiple loaves from the one batch.&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;measurement&#34;&gt;Measurement&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;How much active time did I spend on it ?&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;How long did it take to ferment?&lt;/li&gt;
+&lt;li&gt;How is the crust?  How is the crumb ?&lt;/li&gt;
+&lt;li&gt;Is it better or worse than the previous iteration ?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;sharing&#34;&gt;Sharing&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A &lt;em&gt;lot&lt;/em&gt; of people have received loaves of bread from me during experimentation.&lt;/li&gt;
+&lt;li&gt;Ensure this process is approachable by others.&lt;/li&gt;
+&lt;li&gt;This blog post.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The final technique that I came up with is not exactly unique and is similar to a number of several hundred page thirty dollar books aimed at making baking bread more accessible to the home cook, where it differs is that this is just a short blog post and is free as in beer and speech.  It&amp;rsquo;s fairly descriptive and may seem like a lot of work, but I tend to average a little over 5 minutes of active time per loaf of bread which is a negligible amount of time.&lt;/p&gt;
+
+&lt;h2 id=&#34;ingredients-and-tools&#34;&gt;Ingredients and Tools&lt;/h2&gt;
+
+&lt;p&gt;I worked hard to ensure that you don&amp;rsquo;t need to use any specialized tools.   No need for a standmixer or other expensive tools.  There are only two things (listed first) that you might not have in your kitchen, and they&amp;rsquo;re both so versatile that you &lt;em&gt;should&lt;/em&gt; have them.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://lh4.googleusercontent.com/v_kKOKFKupOdtI2_44MImjl5L8GYzq7QYMs1BxRyGgc=w1229-h692-no&#34; alt=&#34;things what you need to make bread&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Kitchen Scale[1]
+
+&lt;ul&gt;
+&lt;li&gt;capable of measuring to the gram&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Baking Stone[2]
+
+&lt;ul&gt;
+&lt;li&gt;large square one, the biggest that will fit in your oven&lt;/li&gt;
+&lt;li&gt;A cast iron pan or dutch oven will do in a pinch.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;One large and one small mixing bowl&lt;/li&gt;
+&lt;li&gt;Plastic Wrap
+
+&lt;ul&gt;
+&lt;li&gt;always cover your dough.&lt;/li&gt;
+&lt;li&gt;a showercap makes a great reusable cover.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Flour
+
+&lt;ul&gt;
+&lt;li&gt;almost any flour will work, even All Purpose&lt;/li&gt;
+&lt;li&gt;I recomend you start with King Arthur Bread Flour.&lt;/li&gt;
+&lt;li&gt;I usually do a mix of KABF and stone ground whole wheat.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Salt
+
+&lt;ul&gt;
+&lt;li&gt;any salt as long as its not iodized.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Water
+
+&lt;ul&gt;
+&lt;li&gt;tap water is fine.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Yeast ( if using )
+
+&lt;ul&gt;
+&lt;li&gt;I used Fleischmansn&amp;rsquo;s Active Dry.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Olive Oil
+
+&lt;ul&gt;
+&lt;li&gt;For oiling the bowls used in the final shaping.&lt;/li&gt;
+&lt;li&gt;I usually line the bowl with floured cheesecloth instead.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;[1] Measuring by volume is a mugs game.  Flour and Salt across different brands have different sized grains and this are different weights for the same volume.&lt;/p&gt;
+
+&lt;p&gt;[2] you could get away with using a baking tray, but a baking stone or a cast iron skillet will give you the best results.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-starter&#34;&gt;The Starter&lt;/h2&gt;
+
+&lt;p&gt;I use a &lt;a href=&#34;http://www.sourdoughhome.com/index.php?content=startermyway2&#34;&gt;sourdough starter&lt;/a&gt;, and I would recommend that you do the same &amp;hellip; But unless you already have a starter or have a friend who will give you some ( I&amp;rsquo;d be happy to give you some of mine ) You&amp;rsquo;ll probably want to use regular yeast which is what I&amp;rsquo;ll describe below.  If you have a sourdough starter then skip this step.&lt;/p&gt;
+
+&lt;p&gt;Mix 50g Flour, 50g Water, 3g yeast until it forms a paste and then cover with plastic wrap:
+&lt;img src=&#34;https://lh3.googleusercontent.com/-IKFdhJcTr7c/VHtUZeGewaI/AAAAAAAAObE/NQpFh4jQiCs/w1228-h691-no/20141124_123134.jpg&#34; alt=&#34;Starter&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After 4-6 hours it should be all bubby and smell yeasty and ready for The Mix:
+&lt;img src=&#34;https://lh6.googleusercontent.com/-_ap54clqH38/VH9em5xPMRI/AAAAAAAAOdk/syJCBF_2AJA/s640/20141201_085112.jpg&#34; alt=&#34;fermented starter&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;the-mix&#34;&gt;The Mix&lt;/h2&gt;
+
+&lt;p&gt;Add the Starter and 375g of water to the large bowl and mix with a fork until it looks like milk:&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Metric protip: a gram of water is the same as a milliliter of water&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://lh4.googleusercontent.com/-0Se5tsoJoH4/VHtUWeoTVdI/AAAAAAAAOa0/57hyMA0sBPk/w1228-h691-no/20141124_140942.jpg&#34; alt=&#34;don&#39;t drink it silly!&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Add 500g of flour and 15g salt.  Mix it until fully incorporated ( we&amp;rsquo;re not kneading here, just making sure there is no dry flour left ):
+&lt;img src=&#34;https://lh5.googleusercontent.com/-FGpOS40YpWM/VH9elHUFGCI/AAAAAAAAOdc/tKkrmoXplWw/s640/20141201_085637.jpg&#34; alt=&#34;mixed&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;These quantities form a ratio that can be used to make batches as big or as small as your want.  I usually double it which gives me a decent sized loaf every two days.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;the-warm-ferment&#34;&gt;The Warm Ferment&lt;/h2&gt;
+
+&lt;p&gt;Cover the bowl and leave it at room temperature for 4 to 8 hours.  The timing doesn&amp;rsquo;t have to be precise,  you&amp;rsquo;re just looking for sings of the yeast to start fermenting the flour and creating air bubbles.  Cover and refrigerate for at least 24 hours, up to 5 days:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://lh3.googleusercontent.com/-DRtoK892ZEI/VH-U6UZeLFI/AAAAAAAAOd8/pmbYgIUPmJU/s640/20141105_101952.jpg&#34; alt=&#34;fermentation activated&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;the-shaping&#34;&gt;The Shaping&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;Whenever you are working with the dough, it is important to try to lose as little air as possible.  Do not punch it down.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://lh6.googleusercontent.com/-bXb_SAwYxSY/VHtUTmXk2SI/AAAAAAAAOak/ME5g9N5mkpM/w1228-h691-no/20141129_143244.jpg&#34; alt=&#34;ready for shaping&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Lightly flour the bench and turn out your dough.   Cut off a piece to use and put the rest back in the bowl and back into the fridge:
+&lt;img src=&#34;https://lh6.googleusercontent.com/-B3N3OIQFnsA/VHtUSAIq2OI/AAAAAAAAOac/GsZeRXf4yjk/w1228-h691-no/20141129_143342.jpg&#34; alt=&#34;fresh from the cold ferment&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Protip: You can use the final piece of dough as the starter for the next batch and skip a step.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Gently stretch the piece dough out into a squaring shape and then fold each edge into the middle:
+&lt;img src=&#34;https://lh3.googleusercontent.com/-jU4S-UI5kvw/VHtUQoyLJYI/AAAAAAAAOaU/VyQFf1qb06Y/w1228-h691-no/20141129_143427.jpg&#34; alt=&#34;folding&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Turn the dough over and shape it into a ball:
+&lt;img src=&#34;https://lh3.googleusercontent.com/-wHWpKg-1IVM/VHtUPA1T5QI/AAAAAAAAOaM/ANaEWZyDuJ0/w1228-h691-no/20141129_143521.jpg&#34; alt=&#34;dough balls&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Watch this &lt;a href=&#34;https://www.youtube.com/watch?feature=player_detailpage&amp;amp;v=4VdVrib2PQo#t=20&#34;&gt;video&lt;/a&gt; (not mine) for the technique used to shape the dough into balls.
+&lt;div class=&#34;embed video-player&#34;&gt;
+&lt;iframe class=&#34;youtube-player&#34; type=&#34;text/html&#34; width=&#34;640&#34; height=&#34;385&#34; src=&#34;http://www.youtube.com/embed/4VdVrib2PQo&#34; allowfullscreen frameborder=&#34;0&#34;&gt;
+&lt;/iframe&gt;
+&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Oil your shaping bowl and flip your ball over so that the top of the dough is facing down in the bowl and cover it:
+&lt;img src=&#34;https://lh5.googleusercontent.com/-xbzq6cwYJis/VHtUNHuDbiI/AAAAAAAAOaE/8EdixPbGN1k/w1228-h691-no/20141129_144021.jpg&#34; alt=&#34;final shaping&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can easily make Ciabatta ( just fold it over itself in one direction and crimp the edges ), or Baguettes ( harder to explain, but youtube has plenty of guides ), or any other style of bread that you prefer.   Even works great for pizza bases!&lt;/p&gt;
+
+&lt;h2 id=&#34;the-final-ferment&#34;&gt;The Final Ferment&lt;/h2&gt;
+
+&lt;p&gt;Let the dough warm back up to room temperature and the yeasts to wake up and get active again.   This will probably take about two hours.  Crank the oven on to 450F after about an hour.  This gives the oven a good solid hour to get up to temperature and stabilize.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-bake&#34;&gt;The Bake&lt;/h2&gt;
+
+&lt;p&gt;Turn the oven up to 500F, open the door, and slide the rack with the pizza stone out so that you can get to it without burning yourself.   upend the bowl onto the stone and run a knife quickly over the top to create a shallow cut:
+&lt;img src=&#34;https://lh3.googleusercontent.com/-Pzk8zAWIWt0/VHtULim3WvI/AAAAAAAAOZ8/NTrxiDnOXmk/w1228-h691-no/20141129_155656.jpg&#34; alt=&#34;ready for baking&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Bake for 5 minutes, then turn the oven back down to 450F and bake for another 20 minutes:
+&lt;img src=&#34;https://lh4.googleusercontent.com/-hX_Gpo4YIOE/VHtTrWwzT8I/AAAAAAAAOZ0/EY1snf5ymew/w1228-h691-no/20141129_180734.jpg&#34; alt=&#34;baked&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;the-cooldown&#34;&gt;The Cooldown&lt;/h2&gt;
+
+&lt;p&gt;Avoid the tempation to cut into the bread while its still hot.  Bread continues to cook as it cools down and its important to not allow steam and heat to escape.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://lh4.googleusercontent.com/-8v2AonhRmTE/VH9eUSh3hxI/AAAAAAAAOdE/kx4in89KNTk/s640/20141202_184332.jpg&#34; alt=&#34;some other styles&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;the-eatening&#34;&gt;The Eatening&lt;/h2&gt;
+
+&lt;p&gt;Fresh bread is best enjoyed simply with some high quality extra virgin olive oil and balsamic vinegar:
+&lt;img src=&#34;https://lh3.googleusercontent.com/-_AuYSwAc_8A/VHtTnddC1CI/AAAAAAAAOZc/9cgRejB_s4g/w1228-h691-no/20141129_181010.jpg&#34; alt=&#34;ready to eat&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;tips-and-tricks&#34;&gt;Tips and Tricks&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Make your starter from Ikea&amp;rsquo;s &lt;a href=&#34;http://www.ikea.com/us/en/catalog/products/00229031/&#34;&gt;BRÖDMIX FLERKORN&lt;/a&gt; which contains all sorts of interesting grains as well as Yeast and &amp;ldquo;Sourdough Powder&amp;rdquo; whatever that is.&lt;/li&gt;
+&lt;li&gt;Make &lt;a href=&#34;http://food.paulcz.net/2010/05/sourdough-pancakes.html&#34;&gt;sourdough pancakes&lt;/a&gt; from your leftover starter.&lt;/li&gt;
+&lt;li&gt;Shape your dough into a &lt;a href=&#34;http://food.paulcz.net/2013/02/austin-style-pizza.html&#34;&gt;pizza dough&lt;/a&gt; and bake it in a cast iron skillet.&lt;/li&gt;
+&lt;li&gt;You don&amp;rsquo;t have to make round loafs. use a sandwhich loaf tin, or make ciabatta or baguettes.  It&amp;rsquo;s all it the shaping.&lt;/li&gt;
+&lt;li&gt;If you&amp;rsquo;re brave make your dough wetter and ferment for longer.   you&amp;rsquo;ll get cazy large holes in your crumb.&lt;/li&gt;
+&lt;/ul&gt;
+</content>
     </item>
     
     <item>
@@ -105,6 +2019,54 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
       <description>&lt;p&gt;&lt;code&gt;EZ Bake&lt;/code&gt; came from an idea I had while watching the &lt;a href=&#34;https://twitter.com/hangops&#34;&gt;HangOps&lt;/a&gt; &lt;a href=&#34;https://www.youtube.com/watch?v=clLFKIeSADo&amp;amp;feature=youtu.be&#34;&gt;episode 2014-04-11&lt;/a&gt; in which they were talking about &lt;code&gt;Docker&lt;/code&gt; and Config Management being complementary rather than adversary.&lt;/p&gt;
 
 &lt;p&gt;I have expermented with using &lt;code&gt;Chef&lt;/code&gt; and &lt;code&gt;Docker&lt;/code&gt; together in the &lt;a href=&#34;https://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io.html&#34;&gt;past&lt;/a&gt; but wanted to tackle the problem from a slightly different angle.  I&amp;rsquo;ve recently been working on some PAAS stuff, both &lt;a href=&#34;http://deis.io&#34;&gt;Deis&lt;/a&gt; and &lt;a href=&#34;http://solum.io&#34;&gt;Solum&lt;/a&gt; these both utilize the tooling from &lt;a href=&#34;https://github.com/flynn/flynn&#34;&gt;Flynn&lt;/a&gt; which builds heroku style &lt;code&gt;buildpacks&lt;/code&gt; in &lt;code&gt;Docker&lt;/code&gt;.&lt;/p&gt;</description>
+      <content>&lt;p&gt;&lt;code&gt;EZ Bake&lt;/code&gt; came from an idea I had while watching the &lt;a href=&#34;https://twitter.com/hangops&#34;&gt;HangOps&lt;/a&gt; &lt;a href=&#34;https://www.youtube.com/watch?v=clLFKIeSADo&amp;amp;feature=youtu.be&#34;&gt;episode 2014-04-11&lt;/a&gt; in which they were talking about &lt;code&gt;Docker&lt;/code&gt; and Config Management being complementary rather than adversary.&lt;/p&gt;
+
+&lt;p&gt;I have expermented with using &lt;code&gt;Chef&lt;/code&gt; and &lt;code&gt;Docker&lt;/code&gt; together in the &lt;a href=&#34;https://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io.html&#34;&gt;past&lt;/a&gt; but wanted to tackle the problem from a slightly different angle.  I&amp;rsquo;ve recently been working on some PAAS stuff, both &lt;a href=&#34;http://deis.io&#34;&gt;Deis&lt;/a&gt; and &lt;a href=&#34;http://solum.io&#34;&gt;Solum&lt;/a&gt; these both utilize the tooling from &lt;a href=&#34;https://github.com/flynn/flynn&#34;&gt;Flynn&lt;/a&gt; which builds heroku style &lt;code&gt;buildpacks&lt;/code&gt; in &lt;code&gt;Docker&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;EZ Bake takes chef recipes designed for &lt;code&gt;chef-solo&lt;/code&gt; ( but could easily be extended to do the same for &lt;code&gt;chef-zero&lt;/code&gt;, or &lt;code&gt;chef-client&lt;/code&gt; with a server) in a tarball via &lt;code&gt;stdin&lt;/code&gt; and converges a docker node using that recipe.&lt;/p&gt;
+
+&lt;p&gt;This methodology seems a little weird at first,  but it gives you the ability to ship your Chef cookbooks as self-contained tarballs, or even more interestingly use the &lt;code&gt;git archive&lt;/code&gt; command from your git repository to do this automatically and then pipe that directly to the &lt;code&gt;docker run&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;p&gt;In order to recognize and run your cookbook ( or repo ) it needs to contain the following files: &lt;code&gt;Berksfile&lt;/code&gt;, &lt;code&gt;solo.json&lt;/code&gt;, &lt;code&gt;solo.rb&lt;/code&gt; in the root of your cookbook.   There is some provision for providing different locations for these via environment variables.   This is pre-ChefDK and will probably become easier with ChefDK.&lt;/p&gt;
+
+&lt;p&gt;I have provided an example in the ezbake repo that will install Java7 in the container.&lt;/p&gt;
+
+&lt;p&gt;This example shows:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Converging a container using a local chef recipe&lt;/li&gt;
+&lt;li&gt;Committing the container to an image on completion&lt;/li&gt;
+&lt;li&gt;Removing the build container&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Running the new image&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git clone paulczar/ezbake
+$ cd ezbake/examples
+$ ID=$(tar cf - . | sudo docker run -i -a stdin paulczar/ezbake) \
+&amp;amp;&amp;amp; sudo docker attach $ID \
+&amp;amp;&amp;amp; sudo docker commit $ID java7 
+&amp;amp;&amp;amp; sudo docker rm $ID
+
+Running Berkshelf to collect your cookbooks:
+Installing java (1.22.0) from site: &#39;http://cookbooks.opscode.com/api/v1/cookbooks&#39;
+Converging your container:
+[2014-04-12T22:10:24+00:00] INFO: Forking chef instance to converge...
+....
+[2014-04-12T22:16:52+00:00] INFO: Chef Run complete in 154.563192281 seconds
+[2014-04-12T22:16:52+00:00] INFO: Running report handlers
+[2014-04-12T22:16:52+00:00] INFO: Report handlers complete
+
+$ sudo docker run -t java7 java -version
+java version &amp;quot;1.7.0_51&amp;quot;
+Java(TM) SE Runtime Environment (build 1.7.0_51-b13)
+Java HotSpot(TM) 64-Bit Server VM (build 24.51-b03, mixed mode)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This could easily be built into a CI pipeline.   a git webhook could call jenkins which would clone the repo and then use a command like  &lt;code&gt;git archive master | docker run -i -a stdin paulczar/ezbake&lt;/code&gt; to converge a container from it.&lt;/p&gt;
+
+&lt;p&gt;It could also very easily be used in &lt;code&gt;Deis&lt;/code&gt; or &lt;code&gt;Solum&lt;/code&gt; as an alternative to a Heroku buildpack.&lt;/p&gt;</content>
     </item>
     
     <item>
@@ -118,6 +2080,21 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
 &lt;p&gt;Having battled many times with OS Packages trying to get newer versions of Ruby, or Redis or other software installed and having to hunt down some random package repo or manually build from source this seems like an excellent idea.&lt;/p&gt;
 
 &lt;p&gt;To learn the basics I decided to build an &lt;a href=&#34;https://github.com/paulczar/omnibus-fpm&#34;&gt;omnibus package for fpm&lt;/a&gt; which helped me work out the kinks and learn the basics.&lt;/p&gt;</description>
+      <content>&lt;p&gt;At &lt;a href=&#34;http://devopsdays.org/events/2013-austin/&#34;&gt;DevOps Days Austin&lt;/a&gt; &lt;a href=&#34;http://twitter.com/mattray&#34;&gt;@mattray&lt;/a&gt; did an Openspace session on &lt;a href=&#34;https://github.com/opscode/omnibus-ruby&#34;&gt;Omnibus&lt;/a&gt; which is a toolset based around the concept of installing an app and all of it&amp;rsquo;s prerequisites from source into a directory and then building a package ( either .deb or .rpm ) of that using &lt;a href=&#34;https://github.com/jordansissel/fpm&#34;&gt;fpm&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Having battled many times with OS Packages trying to get newer versions of Ruby, or Redis or other software installed and having to hunt down some random package repo or manually build from source this seems like an excellent idea.&lt;/p&gt;
+
+&lt;p&gt;To learn the basics I decided to build an &lt;a href=&#34;https://github.com/paulczar/omnibus-fpm&#34;&gt;omnibus package for fpm&lt;/a&gt; which helped me work out the kinks and learn the basics.&lt;/p&gt;
+
+&lt;p&gt;From there I moved onto something a little more ambitious&amp;hellip; &lt;a href=&#34;http://logstash.net/&#34;&gt;logstash&lt;/a&gt;, which is an awesome opensource project for log aggregation and searching.&lt;/p&gt;
+
+&lt;p&gt;Using Omnibus I took the Logstash .jar file and bundled in Redis, Kibana, Kibana3(+NodeJS), RabbitMQ, Elasticsearch along with all of their depedencies into a big fat package which installs to /opt/logstash and includes init scripts and default configs for each.&lt;/p&gt;
+
+&lt;p&gt;The Logstash Omnibus project can be found &lt;a href=&#34;https://github.com/paulczar/omnibus-logstash&#34;&gt;here&lt;/a&gt;.  I also uploaded the resultant packages for &lt;a href=&#34;https://s3-us-west-2.amazonaws.com/paulcz-packages/logstash-omnibus-1.1.10_amd64.deb&#34;&gt;Ubuntu 12.04&lt;/a&gt; and &lt;a href=&#34;https://s3-us-west-2.amazonaws.com/paulcz-packages/logstash-omnibus-1.1.10.el6.x86_64.rpm&#34;&gt;RHEL 6&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;This gives us a really powerful platform to deploy logstash and all of its prequisites in a completely repeatable manner and not have to worry about the existing versions of Ruby, Java, etc.    It also gives a super simple testing platform where a new user to logstash can install logstash with a single &lt;code&gt;dpkg&lt;/code&gt; or &lt;code&gt;rpm&lt;/code&gt; command and immediately be able to push logs to it via syslog or redis.&lt;/p&gt;
+
+&lt;p&gt;Read more about using and building the &lt;a href=&#34;https://github.com/paulczar/omnibus-logstash/blob/master/README.md&#34;&gt;Logstash Omnibus package here&lt;/a&gt;&lt;/p&gt;</content>
     </item>
     
     <item>
@@ -134,6 +2111,52 @@ Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at mo
 &lt;/ul&gt;
 
 &lt;p&gt;I realized I was spending a bunch of time flipping back and forth between Vagrant environments and I had no quick way to utilize RPMs built with FPM inside my puppet modules.&lt;/p&gt;</description>
+      <content>&lt;p&gt;Lately I&amp;rsquo;ve been doing a lot of prototyping with &lt;a href=&#34;http://www.vagrantup.com/&#34;&gt;Vagrant&lt;/a&gt;, specifically for a couple of distinct activities:-&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;building puppet modules using &lt;a href=&#34;https://github.com/elasticdog/puppet-sandbox&#34;&gt;the excellent puppet sandbox&lt;/a&gt; project&lt;/li&gt;
+&lt;li&gt;and building RPM packages with &lt;a href=&#34;https://github.com/jordansissel/fpm&#34;&gt;FPM&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I realized I was spending a bunch of time flipping back and forth between Vagrant environments and I had no quick way to utilize RPMs built with FPM inside my puppet modules.&lt;/p&gt;
+
+&lt;p&gt;An idea was born.   I forked off the &lt;a href=&#34;https://github.com/paulczar/puppet-sandbox&#34;&gt;puppet sandbox&lt;/a&gt; project and added a Yum repo module &lt;code&gt;repository&lt;/code&gt; to the standalone puppet provisioner that vagrant uses when it first brings up a box.   It adds a Yum repo on the puppet server called &lt;code&gt;sandbox&lt;/code&gt; and adds a repo file to the client boxes pointing to the repo.   Now I can simply push an RPM to &lt;code&gt;packages/rpm&lt;/code&gt; and run &lt;code&gt;vagrant provision puppet&lt;/code&gt; which reruns puppet and rebuilds the yum repo.&lt;/p&gt;
+
+&lt;p&gt;Given that I often flip back and forth between Ubuntu and CentOS boxes I also created &lt;code&gt;Vagrantfile.centos63&lt;/code&gt; and &lt;code&gt;Vagrantfile.precise64&lt;/code&gt; so I can swiftly destroy the existing environment and bring up another of a different flavour by simply symlinking &lt;code&gt;Vagrantfile&lt;/code&gt; to the appropriate file.&lt;/p&gt;
+
+&lt;p&gt;This worked out pretty well for a while until I realized I was still jumping back and forth between vagrant environments and I realized I had another improvement to make.   So I then went on to create a definition in the puppet sandbox &lt;code&gt;Vagrantfile&lt;/code&gt; file for a &lt;code&gt;FPM server&lt;/code&gt; and a new module in the provisioner to install FPM on it.   Given that this module simply adds a few packages this module works for both CentOS and Ubuntu.&lt;/p&gt;
+
+&lt;p&gt;I also created a couple of sample scripts to download source and build RPMs for both Redis and Elasticsearch which get pushed via the provisioner to &lt;code&gt;/tmp/redis-rpm.sh&lt;/code&gt; and &lt;code&gt;/tmp/elasticsearch-rpm.sh&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Now ( For CentOS boxes at least ) I can very quickly iterate on puppet modules and create RPM packages on the fly and have them instantly available.   The process is very simple and looks a little something like this :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git clone https://github.com/paulczar/puppet-sandbox
+$ cd puppet-sandbox
+$ vagrant up puppet fpm client1
+$ vagrant ssh fpm
+[vagrant@fpm ~]$ sudo /tmp/redis-rpm.sh
+  ... 
+  ... A bunch of scrolling text while files are downloaded and rpm is built
+  ...
+[vagrant@fpm ~]$ exit
+$ vagrant provision puppet
+$ vagrant ssh client1
+[vagrant@client1 ~]$ sudo yum clean all
+[vagrant@client1 ~]$ sudo yum -y install redis
+[vagrant@client1 ~]$ sudo service redis-server start
+[vagrant@client1 ~]$ redis-cli ping
+PONG
+[vagrant@client1 ~]$
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If I&amp;rsquo;m building a puppet module that needs redis I can now add the following to it&amp;rsquo;s init.pp ( or more properly create a module for redis and request it from the module I&amp;rsquo;m building )&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  package { &#39;redis&#39;:
+    ensure =&amp;gt; &#39;present&#39;;
+  }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Of course Debian/Ubuntu doesn&amp;rsquo;t use Yum/RPM for package management.    I&amp;rsquo;d love to accept a pull request from somebody who wants to extend it to also support a local APT repository.   I left breadcrumbs in the &lt;code&gt;repository&lt;/code&gt; module for some appropriate classes to be spliced in&amp;hellip;&lt;/p&gt;</content>
     </item>
     
   </channel>

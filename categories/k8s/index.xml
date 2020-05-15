@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>k8s on Paul Czarkowski</title>
@@ -19,6 +19,108 @@
       <guid>https://tech.paulcz.net/blog/habitat-supervisors-in-kubernetes/</guid>
       <description>Habitat is a project from Chef that provides you a reasonably simple way to build, package, and configure your application.
  &amp;ldquo;Habitat is an integrated solution to building, running, and maintaining your application throughout its lifetime. It builds your application and its services into immutable artifacts with declarative dependencies, and then provides automatic rebuilds of your application and its services as your application code and dependencies have upstream updates.&amp;rdquo; - Habitat Getting Started Guide.</description>
+      <content>
+
+&lt;p&gt;&lt;a href=&#34;https://habitat.sh&#34;&gt;Habitat&lt;/a&gt; is a project from &lt;a href=&#34;https://chef.io&#34;&gt;Chef&lt;/a&gt; that
+provides you a reasonably simple way to build, package, and configure your
+application.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;Habitat is an integrated solution to building, running, and maintaining your application throughout its lifetime. It builds your application and its services into immutable artifacts with declarative dependencies, and then provides automatic rebuilds of your application and its services as your application code and dependencies have upstream updates.&amp;rdquo; - &lt;a href=&#34;https://www.habitat.sh/tutorials/get-started/&#34;&gt;Habitat Getting Started Guide&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;One of Habitat&amp;rsquo;s core features is that its Supervisor creates a gossip based cluster
+for managing configuration and state of your applications. Kubernetes also provides similar functionality this ability with the user defined Kubernetes manifests and the Kubernetes APIs. Initially it may seem odd that you would skip using Kubernetes to provide this functionality, however it does provide a way to have a universal system for your application management.&lt;/p&gt;
+
+&lt;p&gt;Personally I&amp;rsquo;m still on the fence about how useful it is to have this extra abstraction for application lifecycle management on top of what Kubernetes already offers, but I don&amp;rsquo;t discount it as something that could be useful in a lot of organizations.&lt;/p&gt;
+
+&lt;p&gt;Documentation for running Habitat built applications on Kubernetes is scant and feels fairly incomplete so I figured I would spend some time to work it out and come up with something myself.&lt;/p&gt;
+
+&lt;p&gt;Of course the first thing I had to do was decide on an application to build to demonstrate it. Initially I was going to use the &lt;a href=&#34;https://www.habitat.sh/tutorials/get-started/&#34;&gt;basic tutorial&lt;/a&gt; app from the Habitat getting started tutorial, but instead decided I should write a very lightweight golang app to reduce the dependencies required to build and run it.&lt;/p&gt;
+
+&lt;p&gt;The application I wrote is dead simple. Just a &lt;a href=&#34;https://github.com/paulczar/habsup/blob/master/main.go&#34;&gt;few lines&lt;/a&gt; of Golang to provide an API that responds to a &lt;code&gt;GET /health&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func main() {
+  handler := health.NewHandler()
+  http.Handle(&amp;quot;/health/&amp;quot;, handler)
+  http.ListenAndServe(&amp;quot;:8080&amp;quot;, nil)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After writing this simplest of applications I realized I had inadvertently created a way to run the Habitat Supervisor effectively standalone which would also allow me to bootstrap a Habitat Gossip Cluster that other applications can join as needed.&lt;/p&gt;
+
+&lt;p&gt;Next I had to get my Habitat environment set up. I was able to follow the Habitat Tutorial and figure out how to build this Golang app instead of a Ruby app. This was fairly &lt;a href=&#34;https://github.com/paulczar/habsup/tree/master/habitat&#34;&gt;straight forward&lt;/a&gt;
+and was some edits to a &lt;a href=&#34;https://github.com/paulczar/habsup/blob/master/habitat/plan.sh&#34;&gt;plan.sh&lt;/a&gt;
+file and a few &lt;a href=&#34;https://github.com/paulczar/habsup/tree/master/habitat/hooks&#34;&gt;hooks&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Performing the Build and exporting the &lt;code&gt;.hart&lt;/code&gt; file to a Docker image was fairly easy after I stumbled my way through &lt;code&gt;hab setup&lt;/code&gt; and getting a key etc working (the documentation for this could be improved to provide a more delightful experience).&lt;/p&gt;
+
+&lt;h2 id=&#34;habitat-build-demo&#34;&gt;Habitat Build Demo&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ git clone https://github.com/paulczar/habsup.git
+$ cd habsup
+$ hab studio enter
+$ build
+$ hab pkg export docker ./results/paulczar-habsuper-...hart
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://tech.paulcz.net/habitat-supervisors-in-kubernetes/images/habstudio.gif&#34; alt=&#34;habitat build&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;My next step was to test it using Docker to make sure the app started and cluster formed etc. This mean writing a simple &lt;a href=&#34;https://github.com/paulczar/habsup/blob/master/docker-compose.yaml&#34;&gt;docker-compose.yaml&lt;/a&gt; file to launch three containers and tell them how to connect to eachother with links. and then launch the containers and check that the exposed Habitat Supervisor API is accessible.&lt;/p&gt;
+
+&lt;h2 id=&#34;docker-demo&#34;&gt;Docker Demo&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ git clone https://github.com/paulczar/habsup.git
+$ cd habsup
+$ docker-compose up -d
+$ docker-compose logs -f
+$ curl http://localhost:9631/services
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://tech.paulcz.net/habitat-supervisors-in-kubernetes/images/docker.gif&#34; alt=&#34;habitat docker compose&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: you can see the habitat supervisors running the health check at the end once the containers are running.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Now that I had the Supervisor as a standalone image it was time to put together the appropriate &lt;a href=&#34;https://github.com/paulczar/habsup/blob/master/kubernetes/manifests/supervisor.yaml&#34;&gt;Kubernetes manifest&lt;/a&gt;. To do so I had to do some research on the various Kubernetes resources and how they&amp;rsquo;d help me achieve my goal.&lt;/p&gt;
+
+&lt;p&gt;After some experimentation I decided that it made sense to use the &lt;code&gt;StatefulSet&lt;/code&gt; resource for to run the supervisor in and run two services, the first being a headless service (meaning it is internal only) for the gossip protocol and the second being a regular service (with external access possible) for the API. Using a &lt;code&gt;StatefulSet&lt;/code&gt; gave me predictable pod names and starts up the replicas in order which makes it much easier for the gossip protocol to work.&lt;/p&gt;
+
+&lt;p&gt;Initially I was using a single service for both the gossip and API ports but I wanted the Gossip to be internal only, but allow access (if needed) to the API. Creating two services gives me the ability to do both of those things. A headless service also has the benefit of creating a predictable KubeDNS entry for both the service and each pod which can come in handy.&lt;/p&gt;
+
+&lt;p&gt;Another interesting thing I discovered is that Kubernetes doesn&amp;rsquo;t publish the service DNS until at least one pod is running. This created a chicken-and-egg issue if I tried to use a &lt;code&gt;readinessProbe&lt;/code&gt; for the hab api as habitat wouldn&amp;rsquo;t start until DNS was ready and DNS wouldn&amp;rsquo;t be created as it was waiting for a success from the probe. Thankfully there is an alpha feature that you can enable with an annotation &lt;code&gt;service.alpha.kubernetes.io/tolerate-unready-endpoints: &amp;quot;true&amp;quot;&lt;/code&gt; that allows you to use DNS before the pods are ready.&lt;/p&gt;
+
+&lt;h2 id=&#34;kubernetes-demo&#34;&gt;Kubernetes Demo&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ git clone https://github.com/paulczar/habsup.git
+$ cd habsup
+$ kubectl create -f kubernetes/manifests
+$ kubectl get pods -w
+$ kubectl logs habitat-supervisor-0
+$ curl $(minikube service habitat-supervisor-http --url)/services
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://tech.paulcz.net/habitat-supervisors-in-kubernetes/images/kubernetes.gif&#34; alt=&#34;habitat kubernetes&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Hopefully this was enough to bootstrap a person looking to use Habitat on Kubernetes. It would be fairly trivial to use the manifests I provided and do one of the following:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Use the Habitat cluster created here as a permanent Habitat cluster and have your applications join and leave that cluster as they come up.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Swap out the use of &lt;code&gt;paulczar/habsup&lt;/code&gt; image with your own image and adjust the ports and other values accordingly and have it run as a self contained cluster.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Getting Habitat to work in Kubernetes was fairly straight forward, however I had to do a few tricky things that shouldn&amp;rsquo;t be necessary. In order for Habitat to get solid adoption on Kubernetes I believe the following needs to be addressed:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Gossip cluster bootstrap relies on an ordered startup with &lt;code&gt;--peer ip-or-dns-of-first&lt;/code&gt;. Habitat should support a Kuberenetes based discovery which would ask the Kubernetes API to provide the peer details to join.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The API should come online with an approriate health status before the cluster is created. This would allow the use of a readinessProbe and avoid the problem I suggested earlier.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Habitat should consider a mode that uses the Kubernetes APIs and the contents of the Manifest to configure itself rather than forming the gossip cluster.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
     </item>
     
     <item>
@@ -29,6 +131,362 @@
       <guid>https://tech.paulcz.net/blog/getting-started-with-helm/</guid>
       <description>I recently found myself writing instructions on how to deploy an application to several Kubernetes platform and ended up writing a different Kubernetes manifests for each platform. 95% of the content was the same with just a few different directives based on how the particular platform handles ingress, or if we needed a Registry secret or a TLS certificate.
 Kubernetes manifests are very declarative and don&amp;rsquo;t offer any way to put conditionals or variables that could be set in them.</description>
+      <content>
+
+&lt;p&gt;I recently found myself writing &lt;a href=&#34;https://github.com/IBM/activator-lagom-java-chirper/blob/master/docs/README.md&#34;&gt;instructions&lt;/a&gt; on how to deploy an
+application to several Kubernetes platform and ended up writing a different Kubernetes manifests for each
+platform. 95% of the content was the same with just a few different directives
+based on how the particular platform handles ingress, or if we needed a Registry secret or a TLS certificate.&lt;/p&gt;
+
+&lt;p&gt;Kubernetes manifests are very declarative and don&amp;rsquo;t offer any way to put conditionals or variables that could be set in them. This
+is both a good and a bad thing. Enter &lt;a href=&#34;https://docs.helm.sh/&#34;&gt;Helm&lt;/a&gt; a Package Manager for Kubernetes. Helm allows you to package up
+your Kubernetes application as a package that can be deployed easily to Kubernetes, One of its features (and the one that interested me)
+the ability to template out your Kubernetes manifests.&lt;/p&gt;
+
+&lt;p&gt;If you already have a Kubernetes manifest its very easy to turn it into a Helm Chart that you can then
+iterate over and improve as you need to add more flexibility to it. In fact your first iteration of a
+Helm chart can be as simple as moving your manifests into a new directory and adding a few lines
+to a Chart.yaml file.&lt;/p&gt;
+
+&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
+
+&lt;p&gt;You&amp;rsquo;ll need the following installed to follow along with this tutorial:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://kubernetes.io/docs/tasks/tools/install-minikube/&#34;&gt;Minikube&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/kubernetes/helm/blob/master/docs/install.md&#34;&gt;Helm&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://kubernetes.io/docs/tasks/tools/install-kubectl/&#34;&gt;kubectl&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;prepare-environment&#34;&gt;Prepare Environment&lt;/h2&gt;
+
+&lt;p&gt;Bring up a test Kubernetes environment using Minikube:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ minikube start
+Starting local Kubernetes v1.7.5 cluster...
+Starting VM...
+Getting VM IP address...
+Moving files into cluster...
+Setting up certs...
+Connecting to cluster...
+Setting up kubeconfig...
+Starting cluster components...
+Kubectl is now configured to use the cluster.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Wait a minute or so and install Helm&amp;rsquo;s tiller service to Kubernetes:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ helm init
+$HELM_HOME has been configured at /home/pczarkowski/.helm.
+
+Tiller (the Helm server-side component) has been installed into your Kubernetes Cluster.
+Happy Helming!
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Create a path to work in:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ mkdir -p ~/development/my-first-helm-chart
+$ cd ~/development/my-first-helm-chart
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;If it fails out you may need to wait a few more minutes for minikube to become
+accessible.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;create-example-kubernetes-manifest&#34;&gt;Create Example Kubernetes Manifest.&lt;/h2&gt;
+
+&lt;p&gt;Writing a Helm Chart is easier when you&amp;rsquo;re starting with an existing set of
+Kubernetes manifests. One of the easiest ways to get a basic working manifest
+is to ask Kubernetes to
+&lt;a href=&#34;https://blog.heptio.com/using-kubectl-to-jumpstart-a-yaml-file-heptioprotip-6f5b8a63a3ea&#34;&gt;run something and then fetch the manifest&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ mkdir manifests
+$ kubectl run example --image=nginx:1.13.5-alpine \
+    -o yaml &amp;gt; manifests/deployment.yaml
+$ kubectl expose deployment example --port=80 --type=NodePort \
+    -o yaml &amp;gt; manifests/service.yaml
+$ minikube service example --url       
+http://192.168.99.100:30254
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;All going well you should be able to hit the provided URL and get the &amp;ldquo;Welcome to nginx!&amp;rdquo;
+page. You&amp;rsquo;ll see you now have two Kubernetes manifests saved. We can use these
+to bootstrap our helm charts:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ tree manifests
+manifests
+├── deployment.yaml
+└── service.yaml
+0 directories, 2 files
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Before we move on we should clean up our environment.  We can use the newly
+created manifests to help:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ kubectl delete -f manifests
+deployment &amp;quot;example&amp;quot; deleted
+service &amp;quot;example&amp;quot; deleted
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;create-and-deploy-a-basic-helm-chart&#34;&gt;Create and Deploy a Basic Helm Chart&lt;/h2&gt;
+
+&lt;p&gt;Helm has some tooling to create the scaffolding needed to start developing a
+new Helm Chart. We&amp;rsquo;ll create it with a placeholder name of &lt;code&gt;helm&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ helm create helm
+Creating helm
+tree helm
+helm
+├── charts
+├── Chart.yaml
+├── templates
+│   ├── deployment.yaml
+│   ├── _helpers.tpl
+│   ├── ingress.yaml
+│   ├── NOTES.txt
+│   └── service.yaml
+└── values.yaml
+2 directories, 7 files
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Helm will have created a number of files and directories.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Chart.yaml&lt;/code&gt; - the metadata for your Helm Chart.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;values.yaml&lt;/code&gt; - values that can be used as variables in your templates.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;templates/*.yaml&lt;/code&gt; - Example Kubernetes manifests.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;_helpers.tpl&lt;/code&gt; - helper functions that can be used inside the templates.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;templates/NOTES.txt&lt;/code&gt; - templated notes that are displayed on Chart install.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Edit &lt;code&gt;Chart.yaml&lt;/code&gt; so that it looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;apiVersion: v1
+description: My First Helm Chart - NGINX Example
+name: my-first-helm-chart
+version: 0.1.0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Copy our example Kubernetes manifests over the provided templates and remove the
+currently unused &lt;code&gt;ingress.yaml&lt;/code&gt; and &lt;code&gt;NOTES.txt&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ cp manifests/* helm/templates/
+$ rm helm/templates/ingress.yaml
+$ rm helm/templates/NOTES.txt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next we should be able to install our helm chart which will deploy our application
+to Kubernetes:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ helm install -n my-first-helm-chart helm
+NAME:   my-first-helm-chart
+LAST DEPLOYED: Tue Oct  3 10:20:57 2017
+NAMESPACE: default
+STATUS: DEPLOYED
+
+RESOURCES:
+==&amp;gt; v1/Service
+NAME     CLUSTER-IP  EXTERNAL-IP  PORT(S)       AGE
+example  10.0.0.210  &amp;lt;nodes&amp;gt;      80:30254/TCP  0s
+
+==&amp;gt; v1beta1/Deployment
+NAME     DESIRED  CURRENT  UP-TO-DATE  AVAILABLE  AGE
+example  1        1        1           0          0s
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;Like before we can use &lt;code&gt;minikube&lt;/code&gt; to get the URL:&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ minikube service example --url    
+http://192.168.99.100:30254
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Again accessing that URL via your we browser should get you the default NGINX welcome page.&lt;/p&gt;
+
+&lt;p&gt;Congratulations!  You&amp;rsquo;ve just created and deployed your first Helm chart. However we&amp;rsquo;re
+not quite done yet. use Helm to delete your deployment and then lets move on to customizing
+the Helm Chart with variables and values:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ helm del --purge my-first-helm-chart
+release &amp;quot;my-first-helm-chart&amp;quot; deleted
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;add-variables-to-your-helm-chart&#34;&gt;Add variables to your Helm Chart&lt;/h2&gt;
+
+&lt;p&gt;Check out &lt;code&gt;helm/values.yaml&lt;/code&gt; and you&amp;rsquo;ll see there&amp;rsquo;s a lot of variables already
+defined by the example that helm provided when you created the helm chart. You&amp;rsquo;ll
+notice that it is has values for &lt;code&gt;nginx&lt;/code&gt; in there. This is because Helm also uses
+nginx as their example. We can re-use some of the values provided but we should clean
+it up a bit.&lt;/p&gt;
+
+&lt;p&gt;Edit &lt;code&gt;helm/values.yaml&lt;/code&gt; to look like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;replicaCount: 1
+image:
+  repository: nginx
+  tag: 1.13.5-alpine
+  pullPolicy: IfNotPresent
+  pullSecret:
+service:
+  type: NodePort
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can access any of these values in our templates using the golang templating
+engine. For example accessing &lt;code&gt;replicaCount&lt;/code&gt; would be written as &lt;code&gt;{{ .Values.replicaCount }}&lt;/code&gt;.
+Helm also provides information about the Chart and Release which we&amp;rsquo;ll also utilize.&lt;/p&gt;
+
+&lt;p&gt;Update your &lt;code&gt;helm/templates/deployment.yaml&lt;/code&gt; to utilize our values:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: 2017-10-03T15:03:17Z
+  generation: 1
+  labels:
+    run: &amp;quot;{{ .Release.Name }}&amp;quot;
+    chart: &amp;quot;{{ .Chart.Name }}-{{ .Chart.Version }}&amp;quot;
+    release: &amp;quot;{{ .Release.Name }}&amp;quot;
+    heritage: &amp;quot;{{ .Release.Service }}&amp;quot;     
+  name: &amp;quot;{{ .Release.Name }}&amp;quot;
+  namespace: default
+  resourceVersion: &amp;quot;3030&amp;quot;
+  selfLink: /apis/extensions/v1beta1/namespaces/default/deployments/example
+  uid: fd03ac95-a84b-11e7-a417-0800277e13b3
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      run: &amp;quot;{{ .Release.Name }}&amp;quot;
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: &amp;quot;{{ .Release.Name }}&amp;quot;
+    spec:
+      {{- if .Values.image.pullSecret }}    
+            imagePullSecrets:
+              - name: &amp;quot;{{ .Values.image.pullSecret }}&amp;quot;
+      {{- end }}          
+      containers:
+      - image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        name: example
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status: {}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;Note the use of the &lt;code&gt;if&lt;/code&gt; statement around &lt;code&gt;image.pullSecret&lt;/code&gt; being set. This
+sort of conditional becomes very important when making your Helm Chart portable across
+different Kubernetes platforms.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Next edit your &lt;code&gt;helm/templates/service.yaml&lt;/code&gt; to look like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: 2017-10-03T15:03:30Z
+  labels:
+    run: &amp;quot;{{ .Release.Name }}&amp;quot;
+    chart: &amp;quot;{{ .Chart.Name }}-{{ .Chart.Version }}&amp;quot;
+    release: &amp;quot;{{ .Release.Name }}&amp;quot;
+    heritage: &amp;quot;{{ .Release.Service }}&amp;quot;  
+  name: &amp;quot;{{ .Release.Name }}&amp;quot;
+  namespace: default
+  resourceVersion: &amp;quot;3066&amp;quot;
+  selfLink: /api/v1/namespaces/default/services/example
+  uid: 044d2b7e-a84c-11e7-a417-0800277e13b3
+spec:
+  clusterIP:
+  externalTrafficPolicy: Cluster
+  ports:
+  - nodePort: 30254
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    run: &amp;quot;{{ .Release.Name }}&amp;quot;
+  sessionAffinity: None
+  type: &amp;quot;{{ .Values.service.type }}&amp;quot;
+status:
+  loadBalancer: {}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once your files are written out you should be able to install the Helm Chart:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ helm install -n second helm
+NAME:   second
+LAST DEPLOYED: Tue Oct  3 10:59:41 2017
+NAMESPACE: default
+STATUS: DEPLOYED
+
+RESOURCES:
+==&amp;gt; v1/Service
+NAME    CLUSTER-IP  EXTERNAL-IP  PORT(S)       AGE
+second  10.0.0.160  &amp;lt;nodes&amp;gt;      80:30254/TCP  1s
+
+==&amp;gt; v1beta1/Deployment
+NAME    DESIRED  CURRENT  UP-TO-DATE  AVAILABLE  AGE
+second  1        1        1           0          1s
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next use minikube to get the URL of the service, but since we templated the
+service name to match the release you&amp;rsquo;ll want to use this new name:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ minikube service second --url
+http://192.168.99.100:30254
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now lets try something fun. Change the image we&amp;rsquo;re using by upgrading the helm release
+and overriding some values on the command line:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ helm upgrade --set image.repository=httpd --set image.tag=2.2.34-alpine second helm
+Release &amp;quot;second&amp;quot; has been upgraded. Happy Helming!
+LAST DEPLOYED: Tue Oct  3 11:09:30 2017
+NAMESPACE: default
+STATUS: DEPLOYED
+
+RESOURCES:
+==&amp;gt; v1/Service
+NAME    CLUSTER-IP  EXTERNAL-IP  PORT(S)       AGE
+second  10.0.0.160  &amp;lt;nodes&amp;gt;      80:30254/TCP  9m
+
+==&amp;gt; v1beta1/Deployment
+NAME    DESIRED  CURRENT  UP-TO-DATE  AVAILABLE  AGE
+second  1        1        1           0          9m
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then go to our minikube provided URL and you&amp;rsquo;ll see a different message &lt;code&gt;It works!&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;clean-up&#34;&gt;Clean up&lt;/h2&gt;
+
+&lt;p&gt;use &lt;code&gt;minikube delete&lt;/code&gt; to clean up your environment:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;minikube delete
+Deleting local Kubernetes cluster...
+Machine deleted.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Helm is a very powerful way to package up your Kubernetes manifests to make them
+extensible and portable. While it is quite complicated its fairly easy to get started
+with it and if you&amp;rsquo;re like me you&amp;rsquo;ll find yourself replacing the Kubernetes manifests
+in your code repos with Helm Charts.&lt;/p&gt;
+
+&lt;p&gt;There&amp;rsquo;s a lot more you can do with Helm, we&amp;rsquo;ve just scratched the surface. Enjoy
+using and learning more about them!&lt;/p&gt;
+</content>
     </item>
     
   </channel>
