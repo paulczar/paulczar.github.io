@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Paul Czarkowski</title>
@@ -18,7 +18,6 @@
       
       <guid>https://tech.paulcz.net/categories/obs/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -28,7 +27,6 @@
       
       <guid>https://tech.paulcz.net/categories/developer-advocate/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -38,7 +36,6 @@
       
       <guid>https://tech.paulcz.net/categories/devops/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -48,7 +45,6 @@
       
       <guid>https://tech.paulcz.net/categories/streaming/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -58,7 +54,6 @@
       
       <guid>https://tech.paulcz.net/categories/twitch/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -68,7 +63,6 @@
       
       <guid>https://tech.paulcz.net/categories/youtube/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -78,7 +72,6 @@
       
       <guid>https://tech.paulcz.net/categories/zoom/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -88,7 +81,6 @@
       
       <guid>https://tech.paulcz.net/categories/cert-manager/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -98,7 +90,6 @@
       
       <guid>https://tech.paulcz.net/categories/certificates/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -108,7 +99,6 @@
       
       <guid>https://tech.paulcz.net/categories/kubernetes/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -118,7 +108,6 @@
       
       <guid>https://tech.paulcz.net/categories/ssl/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -128,7 +117,6 @@
       
       <guid>https://tech.paulcz.net/categories/tls/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -138,7 +126,6 @@
       
       <guid>https://tech.paulcz.net/categories/actions/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -148,7 +135,6 @@
       
       <guid>https://tech.paulcz.net/categories/cd/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -158,7 +144,6 @@
       
       <guid>https://tech.paulcz.net/categories/ci/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -168,7 +153,6 @@
       
       <guid>https://tech.paulcz.net/categories/github/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -178,7 +162,6 @@
       
       <guid>https://tech.paulcz.net/categories/helm/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -188,7 +171,6 @@
       
       <guid>https://tech.paulcz.net/categories/pivotal/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -198,7 +180,6 @@
       
       <guid>https://tech.paulcz.net/categories/spring/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -208,7 +189,6 @@
       
       <guid>https://tech.paulcz.net/categories/cloud-native/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -218,7 +198,6 @@
       
       <guid>https://tech.paulcz.net/categories/docker/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -228,7 +207,6 @@
       
       <guid>https://tech.paulcz.net/categories/habitat/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -238,7 +216,6 @@
       
       <guid>https://tech.paulcz.net/categories/k8s/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -248,7 +225,6 @@
       
       <guid>https://tech.paulcz.net/categories/registry/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -258,7 +234,6 @@
       
       <guid>https://tech.paulcz.net/categories/security/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -268,7 +243,6 @@
       
       <guid>https://tech.paulcz.net/categories/swarm/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -278,7 +252,6 @@
       
       <guid>https://tech.paulcz.net/categories/openstack/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -288,7 +261,6 @@
       
       <guid>https://tech.paulcz.net/categories/bread/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -298,7 +270,6 @@
       
       <guid>https://tech.paulcz.net/categories/food/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -308,7 +279,6 @@
       
       <guid>https://tech.paulcz.net/categories/chef/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -318,7 +288,6 @@
       
       <guid>https://tech.paulcz.net/categories/cloud/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -328,7 +297,6 @@
       
       <guid>https://tech.paulcz.net/categories/deis/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -338,7 +306,6 @@
       
       <guid>https://tech.paulcz.net/categories/paas/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -348,7 +315,6 @@
       
       <guid>https://tech.paulcz.net/categories/rackspace/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -358,7 +324,6 @@
       
       <guid>https://tech.paulcz.net/categories/runit/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -368,7 +333,6 @@
       
       <guid>https://tech.paulcz.net/categories/berkshelf/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -378,7 +342,6 @@
       
       <guid>https://tech.paulcz.net/categories/logstash/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -388,7 +351,6 @@
       
       <guid>https://tech.paulcz.net/categories/omnibus/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -398,7 +360,6 @@
       
       <guid>https://tech.paulcz.net/categories/opscode/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -408,7 +369,6 @@
       
       <guid>https://tech.paulcz.net/categories/fpm/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -418,7 +378,6 @@
       
       <guid>https://tech.paulcz.net/categories/packaging/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -428,7 +387,6 @@
       
       <guid>https://tech.paulcz.net/categories/puppet/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -438,7 +396,6 @@
       
       <guid>https://tech.paulcz.net/categories/vagrant/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -448,7 +405,6 @@
       
       <guid>https://tech.paulcz.net/categories/blog/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -458,7 +414,6 @@
       
       <guid>https://tech.paulcz.net/categories/octopress/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -468,7 +423,6 @@
       
       <guid>https://tech.paulcz.net/categories/kvm/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -478,7 +432,6 @@
       
       <guid>https://tech.paulcz.net/categories/openvswitch/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -488,7 +441,6 @@
       
       <guid>https://tech.paulcz.net/categories/ubuntu/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -498,7 +450,6 @@
       
       <guid>https://tech.paulcz.net/categories/virtualization/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -508,7 +459,6 @@
       
       <guid>https://tech.paulcz.net/categories/vmware/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -518,7 +468,6 @@
       
       <guid>https://tech.paulcz.net/categories/blogger/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -528,7 +477,6 @@
       
       <guid>https://tech.paulcz.net/categories/perl/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -538,7 +486,6 @@
       
       <guid>https://tech.paulcz.net/categories/script/</guid>
       <description></description>
-      <content></content>
     </item>
     
     <item>
@@ -548,7 +495,6 @@
       
       <guid>https://tech.paulcz.net/categories/wordpress/</guid>
       <description></description>
-      <content></content>
     </item>
     
   </channel>
