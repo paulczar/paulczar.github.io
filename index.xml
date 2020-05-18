@@ -107,6 +107,8 @@
 
 &lt;p&gt;Setting up the video was relatively straight forward. Audio is the complicated beast. So far I have only solved this on Windows, but am quite certain you could solve it in Linux using the &lt;a href=&#34;https://jackaudio.org/&#34;&gt;JACK Audio Connection Kit&lt;/a&gt; (JACK).&lt;/p&gt;
 
+&lt;p&gt;If you&amp;rsquo;re running a Mac you should be able to use &lt;a href=&#34;https://rogueamoeba.com/loopback/&#34;&gt;Rogue Amoeba&amp;rsquo;s Loopback app&lt;/a&gt; to perform similar (and maybe even more advanced) audio filtering. Thanks &lt;a href=&#34;https://twitter.com/mattstratton&#34;&gt;Matty Stratton&lt;/a&gt; for the tip.&lt;/p&gt;
+
 &lt;p&gt;Basically we need to be able to selectively route certain inputs to certain outputs. For instance we want zoom audio to go into OBS, and we want OBS audio to go into Zoom, but we don&amp;rsquo;t want them to loop eachothers audio back and create a feedback loop.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;zoom-obs-audio.png&#34; alt=&#34;diagram showing audio wiring&#34; /&gt;&lt;/p&gt;
