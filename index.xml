@@ -33,7 +33,7 @@
 
 &lt;p&gt;Many of us are turning to &lt;a href=&#34;https://obsproject.com/&#34;&gt;Open Broadcaster Studio&lt;/a&gt; (OBS) to turn our PCs into virtual production studios capable of composing multiple artifacts such as windows, audio, and webcams into layered streams. The most basic use case for OBS is to provide the ability to display onscreen code or a terminal session with a webcam image overlayed in the corner&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;./obs-basic.png&#34; alt=&#34;Example of OBS overlay scene&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://tech.paulcz.net/blog/obs-broadcast-to-zoom-and-twitch/obs-basic.png&#34; alt=&#34;Example of OBS overlay scene&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;OBS can record to a high definition video file on your local machine as well as broadcast it out to Twitch, YouTube, or any other &lt;a href=&#34;https://en.wikipedia.org/wiki/Real_Time_Streaming_Protocol&#34;&gt;RTSP&lt;/a&gt; capable platform.&lt;/p&gt;
 
@@ -55,13 +55,13 @@
 
 &lt;h2 id=&#34;1-rebroadcast-video-from-zoom-through-to-your-stream&#34;&gt;1. Rebroadcast video from Zoom through to your stream&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&#34;video-zoom-obs.png&#34; alt=&#34;diagram showing zoom video in obs&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://tech.paulcz.net/blog/obs-broadcast-to-zoom-and-twitch/video-zoom-obs.png&#34; alt=&#34;diagram showing zoom video in obs&#34; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;multiple-monitors&#34;&gt;Multiple Monitors&lt;/h3&gt;
 
 &lt;p&gt;If you have multiple monitors you can dedicate one of them to Zoom and add a &lt;strong&gt;Display Capture&lt;/strong&gt; source in OBS for that whole display and set zoom to fullscreen on that monitor.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;obs-display.png&#34; alt=&#34;OBS sharing a whole display&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://tech.paulcz.net/blog/obs-broadcast-to-zoom-and-twitch/obs-display.png&#34; alt=&#34;OBS sharing a whole display&#34; /&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;Note: I was on a Zoom between two machines and only one camera, so pretend &lt;code&gt;Not Paul&lt;/code&gt; is a very handsome gentleman.&lt;/p&gt;
@@ -73,7 +73,7 @@
 
 &lt;p&gt;In OBS you can add a &lt;strong&gt;Window Capture&lt;/strong&gt; and select your Zoom meeting. This will capture just the Zoom window itself. You can adjust the window size to suit the resolution that you&amp;rsquo;re outputting to.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;obs-window.png&#34; alt=&#34;OBS sharing just the zoom window&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://tech.paulcz.net/blog/obs-broadcast-to-zoom-and-twitch/obs-window.png&#34; alt=&#34;OBS sharing just the zoom window&#34; /&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;Note: The window capture settings are OS dependent, on Windows it would display the name and executable file for the window you want to share.&lt;/p&gt;
@@ -85,17 +85,17 @@
 
 &lt;h2 id=&#34;2-rebroadcast-video-from-obs-through-to-zoom&#34;&gt;2. Rebroadcast video from OBS through to Zoom&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&#34;video-zoom-obs-zoom.png&#34; alt=&#34;diagram showing zoom video in obs and back&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://tech.paulcz.net/blog/obs-broadcast-to-zoom-and-twitch/video-zoom-obs-zoom.png&#34; alt=&#34;diagram showing zoom video in obs and back&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;OBS has a plugin that lets you create a virtual camera which you can use as your Zoom camera. The people in your Zoom call will see exactly the same video that you&amp;rsquo;re streaming without having to share your screen.&lt;/p&gt;
 
 &lt;p&gt;You can download the virtual camera plugin from &lt;a href=&#34;https://obsproject.com/forum/resources/obs-virtualcam.949/&#34;&gt;here&lt;/a&gt; however it currently only supports Windows. (There&amp;rsquo;s a &lt;a href=&#34;https://github.com/CatxFish/obs-v4l2sink&#34;&gt;video4linux&lt;/a&gt; you can use if you&amp;rsquo;re on Linux) for the same effect.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;obs-camera-settings.png&#34; alt=&#34;OBS Virtual Camera&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://tech.paulcz.net/blog/obs-broadcast-to-zoom-and-twitch/obs-camera-settings.png&#34; alt=&#34;OBS Virtual Camera&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;With the Virtual Camera plugin installed and enabled you can the select it as a camera in Zoom.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;obs-virtualcam-in-zoom.png&#34; alt=&#34;OBS virtual camera in zoom&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://tech.paulcz.net/blog/obs-broadcast-to-zoom-and-twitch/obs-virtualcam-in-zoom.png&#34; alt=&#34;OBS virtual camera in zoom&#34; /&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;You can see the remote camera now showing the host&amp;rsquo;s OBS scene of their webcam nested with their screen share.&lt;/p&gt;
@@ -111,7 +111,7 @@
 
 &lt;p&gt;Basically we need to be able to selectively route certain inputs to certain outputs. For instance we want zoom audio to go into OBS, and we want OBS audio to go into Zoom, but we don&amp;rsquo;t want them to loop eachothers audio back and create a feedback loop.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;zoom-obs-audio.png&#34; alt=&#34;diagram showing audio wiring&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://tech.paulcz.net/blog/obs-broadcast-to-zoom-and-twitch/zoom-obs-audio.png&#34; alt=&#34;diagram showing audio wiring&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;In order to solve this, you need a Mixer that can mix three discreet inputs (Zoom, Desktop, Mic) to three discreet outputs (Speakers, Zoom, OBS).&lt;/p&gt;
 
@@ -123,7 +123,7 @@
 
 &lt;p&gt;&lt;a href=&#34;https://www.vb-audio.com/&#34;&gt;VB Audio&lt;/a&gt; offers &lt;a href=&#34;https://www.vb-audio.com/Cable/index.htm&#34;&gt;virtual cables&lt;/a&gt; that we can use to patch the sound correctly. They have up to 5 cables that you can purchase via Donation. In order to wire up our sound we&amp;rsquo;ll use &lt;strong&gt;VB-CABLE A+B&lt;/strong&gt; and &lt;strong&gt;VB-CABLE C+D&lt;/strong&gt; which gives us 4 virtual cables.&lt;/p&gt;
 
-&lt;p&gt;All audio sent to VB-CABLE inputs is sent to the correspnding VB_CABLE output.&lt;/p&gt;
+&lt;p&gt;All audio sent to VB-CABLE inputs is sent to the corresponding VB_CABLE output.&lt;/p&gt;
 
 &lt;p&gt;Pay for, download, and install both bundles.&lt;/p&gt;
 
@@ -137,7 +137,7 @@
 
 &lt;h3 id=&#34;configure-voicemeeter-banana&#34;&gt;Configure VoiceMeeter Banana&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&#34;voicemeeter-banana.png&#34; alt=&#34;screenshot of voicemeeter banana&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://tech.paulcz.net/blog/obs-broadcast-to-zoom-and-twitch/voicemeeter-banana.png&#34; alt=&#34;screenshot of voicemeeter banana&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;First open up VoiceMeeter Banana. You&amp;rsquo;ll see there are Three Hardware Inputs and Three Hardware outputs.&lt;/p&gt;
 
@@ -179,23 +179,23 @@
 
 &lt;p&gt;In your status bar select the &lt;strong&gt;Speaker&lt;/strong&gt; Icon and configure it to output to &lt;strong&gt;Cable-D Input&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;desktop-audio.png&#34; alt=&#34;screenshot of desktop audio&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://tech.paulcz.net/blog/obs-broadcast-to-zoom-and-twitch/desktop-audio.png&#34; alt=&#34;screenshot of desktop audio&#34; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;configure-zoom-audio&#34;&gt;Configure Zoom audio&lt;/h3&gt;
 
 &lt;p&gt;In Zoom, go to &lt;strong&gt;Audio Settings&lt;/strong&gt;. Set &lt;strong&gt;Speaker&lt;/strong&gt; to &lt;strong&gt;Cable-B Input&lt;/strong&gt; and set &lt;strong&gt;Microphone&lt;/strong&gt; to &lt;strong&gt;Cable-A Output&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;zoom-audio-settings.png&#34; alt=&#34;screenshot of zoom audio settings&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://tech.paulcz.net/blog/obs-broadcast-to-zoom-and-twitch/zoom-audio-settings.png&#34; alt=&#34;screenshot of zoom audio settings&#34; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;configure-obs-settings&#34;&gt;Configure OBS settings&lt;/h3&gt;
 
 &lt;p&gt;in OBS under &lt;strong&gt;Settings&lt;/strong&gt;-&amp;gt;&lt;strong&gt;Audio&lt;/strong&gt; Disable all Audio devices. Then set &lt;strong&gt;Mic/Auxillary Input&lt;/strong&gt; to &lt;strong&gt;CABLE-C Output&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;obs-audio-settings.png&#34; alt=&#34;screenshot of OBS audio settings&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://tech.paulcz.net/blog/obs-broadcast-to-zoom-and-twitch/obs-audio-settings.png&#34; alt=&#34;screenshot of OBS audio settings&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Then in the OBS &lt;strong&gt;Audio Mixer&lt;/strong&gt; rename the &lt;strong&gt;Mic/Auxillary Input&lt;/strong&gt; to &lt;strong&gt;VoiceMeeter&lt;/strong&gt; and mute all other devices such as webcams.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;obs-audio-mixer.png&#34; alt=&#34;screenshot of OBS mixer&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://tech.paulcz.net/blog/obs-broadcast-to-zoom-and-twitch/obs-audio-mixer.png&#34; alt=&#34;screenshot of OBS mixer&#34; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;test-it-out&#34;&gt;Test it out&lt;/h3&gt;
 
@@ -247,7 +247,7 @@
 
 &lt;p&gt;Log into your organization&amp;rsquo;s Zoom, and hit the &lt;strong&gt;Settings&lt;/strong&gt; button on the left hand menu. Scroll down to &lt;strong&gt;Advanced settings&lt;/strong&gt; and turn &lt;strong&gt;Allow live streaming meetings&lt;/strong&gt; on. Check either the &lt;strong&gt;YouTube&lt;/strong&gt; or the &lt;strong&gt;Custom Live Streaming Service&lt;/strong&gt;, the latter which we&amp;rsquo;ll configure for Twitch.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;zoom-settings.png&#34; alt=&#34;Zoom Settings Page&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://tech.paulcz.net/blog/streaming-from-zoom-to-twitch/zoom-settings.png&#34; alt=&#34;Zoom Settings Page&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Since I&amp;rsquo;m bad at remembering things, I throw the following in the instructions text box so I remember when setting up the meeting how to do it.&lt;/p&gt;
 
@@ -266,33 +266,33 @@ live streaming url: https://twitch.tv/accountname
 
 &lt;p&gt;This will drop you to the settings page for the meeting you just scheduled and on the bottom of that page is the &lt;strong&gt;Live Streaming&lt;/strong&gt; configuration setting. Click &lt;strong&gt;configure live stream settings&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;schedule-a-meeting.png&#34; alt=&#34;schedule a meeting&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://tech.paulcz.net/blog/streaming-from-zoom-to-twitch/schedule-a-meeting.png&#34; alt=&#34;schedule a meeting&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Here you enter the details following the instructions you conveniently placed in the Stream settings:&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;You can find the twitch key at the following URL &lt;a href=&#34;https://dashboard.twitch.tv/u/&#34;&gt;https://dashboard.twitch.tv/u/&lt;/a&gt;&lt;username&gt;/settings/channel&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;configure-live-stream.png&#34; alt=&#34;configure live stream&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://tech.paulcz.net/blog/streaming-from-zoom-to-twitch/configure-live-stream.png&#34; alt=&#34;configure live stream&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Hit Save. Now when you join the Meeting it will automatically configure the Live Stream, but you&amp;rsquo;ll still need to start the Stream by clicking the &lt;strong&gt;&amp;hellip; More&lt;/strong&gt; button and select the streaming option from there.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;If you didn&amp;rsquo;t configure live streaming for the meeting, you can actually configure it here as long as you&amp;rsquo;ve enabled streaming in Settings&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;from-in-zoom-meeting.png&#34; alt=&#34;configure live stream in meeting&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://tech.paulcz.net/blog/streaming-from-zoom-to-twitch/from-in-zoom-meeting.png&#34; alt=&#34;configure live stream in meeting&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Zoom will redirect you to a browser and configure the stream before redirecting it to your twitch streaming page.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;start-stream.png&#34; alt=&#34;starting stream&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://tech.paulcz.net/blog/streaming-from-zoom-to-twitch/start-stream.png&#34; alt=&#34;starting stream&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;You can close this twitch streaming window once its started or leave it open. If you leave it open turn off its sound or you&amp;rsquo;ll create some fun echo loopbacks.&lt;/p&gt;
 
 &lt;p&gt;Here&amp;rsquo;s the Twitch view:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;twitch-streaming.png&#34; alt=&#34;twitch stream&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://tech.paulcz.net/blog/streaming-from-zoom-to-twitch/twitch-streaming.png&#34; alt=&#34;twitch stream&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Here&amp;rsquo;s the Zoom View:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;zoom-streaming.png&#34; alt=&#34;zoom stream&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://tech.paulcz.net/blog/streaming-from-zoom-to-twitch/zoom-streaming.png&#34; alt=&#34;zoom stream&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
