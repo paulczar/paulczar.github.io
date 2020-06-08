@@ -169,14 +169,14 @@ if (!doNotTrack) {
 <pre><code class="language-bash">gcloud iam service-accounts create cnrm-system
 </code></pre>
 
-<p>Bind the roles/owner to the service account:</p>
+<p>Bind the <code>roles/owner</code> to the service account:</p>
 
 <pre><code class="language-bash">gcloud projects add-iam-policy-binding ${PROJECT_ID} \
   --member=&quot;serviceAccount:cnrm-system@${PROJECT_ID}.iam.gserviceaccount.com&quot; \
   --role=&quot;roles/owner&quot;
 </code></pre>
 
-<p>Bind roles/iam.workloadIdentityUser to the cnrm-controller-manager Kubernetes Service Account in the cnrm-system Namespace:</p>
+<p>Bind <code>roles/iam.workloadIdentityUser</code> to the <code>cnrm-controller-manager</code> Kubernetes Service Account in the <code>cnrm-system</code> Namespace:</p>
 
 <pre><code class="language-bash">gcloud iam service-accounts add-iam-policy-binding \
   --role=&quot;roles/iam.workloadIdentityUser&quot; \
@@ -194,7 +194,7 @@ cnrm-system@${PROJECT_ID}.iam.gserviceaccount.com
 <pre><code class="language-bash">tar zxvf release-bundle.tar.gz
 </code></pre>
 
-<p>Fix the manifest with your project id:</p>
+<p>Update the manifest with your project id:</p>
 
 <pre><code class="language-bash">sed -i.bak &quot;s/\${PROJECT_ID?}/${PROJECT_ID}/&quot; \
   install-bundle-workload-identity/0-cnrm-system.yaml
