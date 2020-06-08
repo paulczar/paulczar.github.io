@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="map[]" />
+    <meta name="description" content="Random musings mostly about tech">
+    <link rel="shortcut icon" type="image/x-icon" href="https://tech.paulcz.net/img/favicon.ico">
+    <title>Deploying and accessing a GCP SQL database via Kubernetes</title>
+    <meta name="generator" content="Hugo 0.56.3" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://tech.paulcz.net/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-35638296-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  </head>
+
+  <body>
+    <div id="wrap">
+
+      
+      <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="https://tech.paulcz.net/"><i class="fa fa-home"></i></a>
+    </div>
+    <div id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+        <li><a href="/page/about">ABOUT</a></li>
+        
+        <li><a href="/blog/">BLOG</a></li>
+        
+        <li><a href="/page/resume">RESUME</a></li>
+        
+        <li><a href="https://speaking.paulcz.net/presentations">TALK</a></li>
+        
+      
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      
+      <div class="container">
+        <div class="blog-post">
+          <h3>
+            <strong><a href="https://tech.paulcz.net/blog/gcp-config-connect-sql-database/">Deploying and accessing a GCP SQL database via Kubernetes</a></strong>
+          </h3>
+        </div>
+        <div class="blog-title">
+          <h4>
+          June 8, 2020
+            &nbsp;&nbsp;
+            
+          </h4>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="blogpost">
+              
+
+<p><em>Sorry for the long preamble, feel free to just skip straight to the <a href="#deploying-a-cloudsql-instance-via-gcc">technical details</a>.</em></p>
+
+<p>Two years ago, faced with the challenge of wanting to reduce the tooling required to deploy infrastructure to Google Cloud I started working on a <a href="https://github.com/paulczar/gcp-cloud-compute-operator">Google Cloud Operator</a>. The goal of this project was to be able to stand up networks, images, and Virtual Machines for installing Pivotal&rsquo;s <a href="https://docs.pivotal.io/pks/1-4/index.html">PKS</a> (now Tanzu Kubernetes Grid Integrated).</p>
+
+<p>This worked out pretty well for me and I was able to create/destroy environments at will seeded from a single node GKE cluster running the operator.</p>
+
+<p>Thankfully later some folks at Google started working on an Operator of their own which they named <a href="https://cloud.google.com/config-connector/docs/overview">Google Config Connector</a> which sought to solve roughly the same problem. Although their original intent was more around backing services for Kubernetes workloads such as databases.</p>
+
+<p>As they brought in additional features I was able to start offloading some of the work my own <a href="https://www.youtube.com/watch?v=XL-icNS-IEg&amp;t=38s">operator was doing to GCC</a>, however only recently did they support the full set of services that I require.</p>
+
+<p>Recently I&rsquo;ve been doing some work around running applications on Kubernetes and been thinking about how I want to handle databases in Dev vs Prod. Using a tool like <a href="https://helm.sh">Helm</a> or <a href="https://get-ytt.io/">ytt</a> I could in theory have a flag that determines whether it should create a Postgres deployment in Kubernetes, or a <a href="https://cloud.google.com/sql">CloudSQL</a> instance.</p>
+
+<p>I hadn&rsquo;t actually used the Google Config Connector operator to stand up a Database to be accessed from inside a GKE cluster, so I figured that would be the natural place to start.</p>
+
+<p>Unfortunately I found <a href="https://github.com/GoogleCloudPlatform/k8s-config-connector/issues/201">gaps</a> in both the <a href="https://github.com/GoogleCloudPlatform/k8s-config-connector/tree/master/samples/resources/sqlinstance/private-ip-instance">GCC examples</a> and the <a href="https://cloud.google.com/sql/docs/mysql/connect-kubernetes-engine">CloudSQL documentation</a>.</p>
+
+<p>I could get the database running easily enough but I just could not get applications running on GKE to access it over the Private IP. Finally I found this statement <code>For connecting using private IP, the GKE cluster must be VPC-native and in the same VPC network as the Cloud SQL instance.</code>.</p>
+
+<p>Doing some digging it became apparent that GKE clusters are not <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/alias-ips">VPC-native</a> by default. I also found that SQL Instances actually never live in your VPC and you need to allocate an IP Range to peering in that network and set up a <a href="https://cloud.google.com/vpc/docs/configure-private-services-access#creating-connection">Service Network Connection</a>.</p>
+
+<p>With that figured out I was able to successfully create a new GKE cluster, install GCC, and deploy and use a Cloud SQL instance over its private IP.</p>
+
+<h2 id="deploying-a-cloudsql-instance-via-gcc">Deploying a CloudSQL instance via GCC</h2>
+
+<p>If you want to refer to a <code>ytt</code> templated version of the manifests created below you can find a fully working example (that also includes Google SQL Proxy) <a href="https://github.com/paulczar/gcc-cloudsql">here</a>.</p>
+
+<h3 id="create-gke-cluster">Create GKE Cluster</h3>
+
+<p>Before we do anything we need to ensure a few of the Google Cloud APIs are enabled.</p>
+
+<pre><code class="language-bash">gcloud services enable \
+  servicenetworking.googleapis.com \
+  servicemanagement.googleapis.com \
+  iamcredentials.googleapis.com
+</code></pre>
+
+<p>Some of our commands require your Google Cloud Project ID, you can find it and save it as a variable for later use like so:</p>
+
+<pre><code class="language-bash">PROJECT_ID=$(gcloud config get-value project)
+</code></pre>
+
+<p>Create a Small GKE Cluster using <code>--workload-pool</code> to enable workload identity and <code>--enable-ip-alias</code> to create a VPC-native cluster:</p>
+
+<pre><code class="language-bash">gcloud container clusters create gcc-cloudsql \
+  --num-nodes=1 --zone us-central1-c \
+  --cluster-version 1.16 --machine-type n1-standard-2 \
+  --workload-pool=${PROJECT_ID}.svc.id.goog \
+  --enable-ip-alias
+</code></pre>
+
+<p>Check the cluster is accessible:</p>
+
+<pre><code class="language-bash">kubectl cluster-info
+</code></pre>
+
+<p>In order for Applications in GKE to access the Private IP of CloudSQL instances you need to create a VPC Peering Range and a Service Networking Connection.</p>
+
+<p><em>This only has to be done once per Network in your account.</em></p>
+
+<p>Create a VPC Peering range:</p>
+
+<pre><code class="language-bash">gcloud compute addresses create cloudsql-peer \
+    --global \
+    --purpose=VPC_PEERING \
+    --prefix-length=16 \
+    --description=&quot;peering range for CloudSQL&quot; \
+    --network=default \
+    --project=$PROJECT_ID
+</code></pre>
+
+<p>Peer that range with our default network:</p>
+
+<pre><code class="language-bash">gcloud services vpc-peerings connect \
+    --service=servicenetworking.googleapis.com \
+    --ranges=cloudsql-peer \
+    --network=default \
+    --project=$PROJECT_ID
+</code></pre>
+
+<p><em>If this command fails with Cannot modify allocated ranges in CreateConnection then rerun the command but replace <code>connect</code> with <code>update --force</code>.</em></p>
+
+<h3 id="deploy-google-config-connector">Deploy Google Config Connector</h3>
+
+<p>Create a service account for GCC:</p>
+
+<pre><code class="language-bash">gcloud iam service-accounts create cnrm-system
+</code></pre>
+
+<p>Bind the roles/owner to the service account:</p>
+
+<pre><code class="language-bash">gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+  --member=&quot;serviceAccount:cnrm-system@${PROJECT_ID}.iam.gserviceaccount.com&quot; \
+  --role=&quot;roles/owner&quot;
+</code></pre>
+
+<p>Bind roles/iam.workloadIdentityUser to the cnrm-controller-manager Kubernetes Service Account in the cnrm-system Namespace:</p>
+
+<pre><code class="language-bash">gcloud iam service-accounts add-iam-policy-binding \
+  --role=&quot;roles/iam.workloadIdentityUser&quot; \
+  --member=&quot;serviceAccount:${PROJECT_ID}.svc.id.goog[cnrm-system/cnrm-controller-manager]&quot; \
+cnrm-system@${PROJECT_ID}.iam.gserviceaccount.com
+</code></pre>
+
+<p>Download GCC:</p>
+
+<pre><code class="language-bash">gsutil cp gs://cnrm/latest/release-bundle.tar.gz release-bundle.tar.gz
+</code></pre>
+
+<p>Extract GCC:</p>
+
+<pre><code class="language-bash">tar zxvf release-bundle.tar.gz
+</code></pre>
+
+<p>Fix the manifest with your project id:</p>
+
+<pre><code class="language-bash">sed -i.bak &quot;s/\${PROJECT_ID?}/${PROJECT_ID}/&quot; \
+  install-bundle-workload-identity/0-cnrm-system.yaml
+</code></pre>
+
+<p>Apply the manifest to your cluster:</p>
+
+<pre><code class="language-bash">kubectl apply -f install-bundle-workload-identity/
+</code></pre>
+
+<p>Wait until GCC is fully online:</p>
+
+<pre><code class="language-bash">kubectl wait -n cnrm-system --for=condition=Ready pod --all
+</code></pre>
+
+<h3 id="deploy-cloudsql-instance">Deploy CloudSQL Instance</h3>
+
+<p>Create a Namespace:</p>
+
+<pre><code class="language-bash">kubectl create namespace $PROJECT_ID
+</code></pre>
+
+<p>Create the Cloud SQL Instance:</p>
+
+<pre><code class="language-bash">kubectl -n $PROJECT_ID apply -f &lt;(cat &lt;&lt; EOF
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLInstance
+metadata:
+  name: example
+spec:
+  region: us-central1
+  databaseVersion: POSTGRES_9_6
+  settings:
+    tier: db-custom-1-3840
+    ipConfiguration:
+      ipv4Enabled: false
+      requireSsl: false
+      privateNetworkRef:
+        external: default
+EOF
+)
+</code></pre>
+
+<p>Create a Cloud SQL User:</p>
+
+<pre><code class="language-bash">kubectl -n $PROJECT_ID apply -f &lt;(cat &lt;&lt; EOF
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLUser
+metadata:
+  name: example
+spec:
+  instanceRef:
+    name: example
+  password:
+    value: &quot;bad-password&quot;
+EOF
+)
+</code></pre>
+
+<p>After a few moments check that the SQL Instance is being created:</p>
+
+<pre><code class="language-bash">watch gcloud sql instances list
+</code></pre>
+
+<p>Once the <code>STATUS</code> changes from <code>PENDING_CREATE</code> to <code>RUNNABLE</code> hit CTRL-C to exit the <code>watch</code> command.</p>
+
+<p>We should now be able to confirm that an Application running in the GKE cluster can access the database. To validate this we can use the <code>postgres:13-alpine</code> image.</p>
+
+<p>Run the postgres image as a Pod with an interactive shell:</p>
+
+<pre><code class="language-bash">kubectl run -ti --restart=Never --image postgres:13-alpine --rm psql -- sh
+</code></pre>
+
+<p>Inside that shell run <code>psql</code>:</p>
+
+<p><em>Change the IP to match the IP from the <code>gcloud sql instances list</code> command. Enter the password <code>bad-password</code> when prompted</em></p>
+
+<pre><code class="language-bash">$ psql -h ip.add.re.ss --username=example -d postgres
+Password for user example: bad-password
+psql (13beta1, server 9.6.16)
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
+Type &quot;help&quot; for help.
+</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>That&rsquo;s it! Super easy and powerful way to get a managed database provisioned and usable without ever leaving Kubernetes.</p>
+
+<p>If you want to make things even more Kubernetes friendly you can use Google&rsquo;s <a href="https://github.com/paulczar/gcc-cloudsql/blob/master/ytt/cloudsql/proxy.yaml">SQL Proxy</a> inside your Kubernetes cluster which helps manage your SSL Connections to the databases as well as being able to use predictable names rather than hunting for IP addresses.</p>
+
+              <hr>
+              <div class="related-posts">
+                <h5>Related Posts</h5>
+                
+              </div>
+            </div>
+          </div>
+          <hr>
+        <div class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+
+    (function() {
+      
+      
+      if (window.location.hostname == "localhost")
+        return;
+
+      var disqus_shortname = '';
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+        </div>
+      
+      </div>
+    </div>
+
+    
+    <footer>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+      <a href="http://www.github.com/sumaxime/hugo-sustain/">sustain</a> with ♥</p>
+    </div>
+  </div>
+</footer>
+<div class="footer"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://tech.paulcz.net/js/docs.min.js"></script>
+<script src="https://tech.paulcz.net/js/main.js"></script>
+
+<script src="https://tech.paulcz.net/js/ie10-viewport-bug-workaround.js"></script>
+
+
+
+  </body>
+</html>

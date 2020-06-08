@@ -6,10 +6,224 @@
     <description>Recent content on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 13 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 08 Jun 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://tech.paulcz.net/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Deploying and accessing a GCP SQL database via Kubernetes</title>
+      <link>https://tech.paulcz.net/blog/gcp-config-connect-sql-database/</link>
+      <pubDate>Mon, 08 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/blog/gcp-config-connect-sql-database/</guid>
+      <description>
+
+&lt;p&gt;&lt;em&gt;Sorry for the long preamble, feel free to just skip straight to the &lt;a href=&#34;#deploying-a-cloudsql-instance-via-gcc&#34;&gt;technical details&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Two years ago, faced with the challenge of wanting to reduce the tooling required to deploy infrastructure to Google Cloud I started working on a &lt;a href=&#34;https://github.com/paulczar/gcp-cloud-compute-operator&#34;&gt;Google Cloud Operator&lt;/a&gt;. The goal of this project was to be able to stand up networks, images, and Virtual Machines for installing Pivotal&amp;rsquo;s &lt;a href=&#34;https://docs.pivotal.io/pks/1-4/index.html&#34;&gt;PKS&lt;/a&gt; (now Tanzu Kubernetes Grid Integrated).&lt;/p&gt;
+
+&lt;p&gt;This worked out pretty well for me and I was able to create/destroy environments at will seeded from a single node GKE cluster running the operator.&lt;/p&gt;
+
+&lt;p&gt;Thankfully later some folks at Google started working on an Operator of their own which they named &lt;a href=&#34;https://cloud.google.com/config-connector/docs/overview&#34;&gt;Google Config Connector&lt;/a&gt; which sought to solve roughly the same problem. Although their original intent was more around backing services for Kubernetes workloads such as databases.&lt;/p&gt;
+
+&lt;p&gt;As they brought in additional features I was able to start offloading some of the work my own &lt;a href=&#34;https://www.youtube.com/watch?v=XL-icNS-IEg&amp;amp;t=38s&#34;&gt;operator was doing to GCC&lt;/a&gt;, however only recently did they support the full set of services that I require.&lt;/p&gt;
+
+&lt;p&gt;Recently I&amp;rsquo;ve been doing some work around running applications on Kubernetes and been thinking about how I want to handle databases in Dev vs Prod. Using a tool like &lt;a href=&#34;https://helm.sh&#34;&gt;Helm&lt;/a&gt; or &lt;a href=&#34;https://get-ytt.io/&#34;&gt;ytt&lt;/a&gt; I could in theory have a flag that determines whether it should create a Postgres deployment in Kubernetes, or a &lt;a href=&#34;https://cloud.google.com/sql&#34;&gt;CloudSQL&lt;/a&gt; instance.&lt;/p&gt;
+
+&lt;p&gt;I hadn&amp;rsquo;t actually used the Google Config Connector operator to stand up a Database to be accessed from inside a GKE cluster, so I figured that would be the natural place to start.&lt;/p&gt;
+
+&lt;p&gt;Unfortunately I found &lt;a href=&#34;https://github.com/GoogleCloudPlatform/k8s-config-connector/issues/201&#34;&gt;gaps&lt;/a&gt; in both the &lt;a href=&#34;https://github.com/GoogleCloudPlatform/k8s-config-connector/tree/master/samples/resources/sqlinstance/private-ip-instance&#34;&gt;GCC examples&lt;/a&gt; and the &lt;a href=&#34;https://cloud.google.com/sql/docs/mysql/connect-kubernetes-engine&#34;&gt;CloudSQL documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I could get the database running easily enough but I just could not get applications running on GKE to access it over the Private IP. Finally I found this statement &lt;code&gt;For connecting using private IP, the GKE cluster must be VPC-native and in the same VPC network as the Cloud SQL instance.&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Doing some digging it became apparent that GKE clusters are not &lt;a href=&#34;https://cloud.google.com/kubernetes-engine/docs/how-to/alias-ips&#34;&gt;VPC-native&lt;/a&gt; by default. I also found that SQL Instances actually never live in your VPC and you need to allocate an IP Range to peering in that network and set up a &lt;a href=&#34;https://cloud.google.com/vpc/docs/configure-private-services-access#creating-connection&#34;&gt;Service Network Connection&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;With that figured out I was able to successfully create a new GKE cluster, install GCC, and deploy and use a Cloud SQL instance over its private IP.&lt;/p&gt;
+
+&lt;h2 id=&#34;deploying-a-cloudsql-instance-via-gcc&#34;&gt;Deploying a CloudSQL instance via GCC&lt;/h2&gt;
+
+&lt;p&gt;If you want to refer to a &lt;code&gt;ytt&lt;/code&gt; templated version of the manifests created below you can find a fully working example (that also includes Google SQL Proxy) &lt;a href=&#34;https://github.com/paulczar/gcc-cloudsql&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;create-gke-cluster&#34;&gt;Create GKE Cluster&lt;/h3&gt;
+
+&lt;p&gt;Before we do anything we need to ensure a few of the Google Cloud APIs are enabled.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;gcloud services enable \
+  servicenetworking.googleapis.com \
+  servicemanagement.googleapis.com \
+  iamcredentials.googleapis.com
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Some of our commands require your Google Cloud Project ID, you can find it and save it as a variable for later use like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;PROJECT_ID=$(gcloud config get-value project)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Create a Small GKE Cluster using &lt;code&gt;--workload-pool&lt;/code&gt; to enable workload identity and &lt;code&gt;--enable-ip-alias&lt;/code&gt; to create a VPC-native cluster:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;gcloud container clusters create gcc-cloudsql \
+  --num-nodes=1 --zone us-central1-c \
+  --cluster-version 1.16 --machine-type n1-standard-2 \
+  --workload-pool=${PROJECT_ID}.svc.id.goog \
+  --enable-ip-alias
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Check the cluster is accessible:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;kubectl cluster-info
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In order for Applications in GKE to access the Private IP of CloudSQL instances you need to create a VPC Peering Range and a Service Networking Connection.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;This only has to be done once per Network in your account.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Create a VPC Peering range:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;gcloud compute addresses create cloudsql-peer \
+    --global \
+    --purpose=VPC_PEERING \
+    --prefix-length=16 \
+    --description=&amp;quot;peering range for CloudSQL&amp;quot; \
+    --network=default \
+    --project=$PROJECT_ID
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Peer that range with our default network:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;gcloud services vpc-peerings connect \
+    --service=servicenetworking.googleapis.com \
+    --ranges=cloudsql-peer \
+    --network=default \
+    --project=$PROJECT_ID
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;If this command fails with Cannot modify allocated ranges in CreateConnection then rerun the command but replace &lt;code&gt;connect&lt;/code&gt; with &lt;code&gt;update --force&lt;/code&gt;.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;deploy-google-config-connector&#34;&gt;Deploy Google Config Connector&lt;/h3&gt;
+
+&lt;p&gt;Create a service account for GCC:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;gcloud iam service-accounts create cnrm-system
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Bind the roles/owner to the service account:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+  --member=&amp;quot;serviceAccount:cnrm-system@${PROJECT_ID}.iam.gserviceaccount.com&amp;quot; \
+  --role=&amp;quot;roles/owner&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Bind roles/iam.workloadIdentityUser to the cnrm-controller-manager Kubernetes Service Account in the cnrm-system Namespace:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;gcloud iam service-accounts add-iam-policy-binding \
+  --role=&amp;quot;roles/iam.workloadIdentityUser&amp;quot; \
+  --member=&amp;quot;serviceAccount:${PROJECT_ID}.svc.id.goog[cnrm-system/cnrm-controller-manager]&amp;quot; \
+cnrm-system@${PROJECT_ID}.iam.gserviceaccount.com
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Download GCC:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;gsutil cp gs://cnrm/latest/release-bundle.tar.gz release-bundle.tar.gz
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Extract GCC:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;tar zxvf release-bundle.tar.gz
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Fix the manifest with your project id:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sed -i.bak &amp;quot;s/\${PROJECT_ID?}/${PROJECT_ID}/&amp;quot; \
+  install-bundle-workload-identity/0-cnrm-system.yaml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Apply the manifest to your cluster:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;kubectl apply -f install-bundle-workload-identity/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Wait until GCC is fully online:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;kubectl wait -n cnrm-system --for=condition=Ready pod --all
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;deploy-cloudsql-instance&#34;&gt;Deploy CloudSQL Instance&lt;/h3&gt;
+
+&lt;p&gt;Create a Namespace:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;kubectl create namespace $PROJECT_ID
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Create the Cloud SQL Instance:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;kubectl -n $PROJECT_ID apply -f &amp;lt;(cat &amp;lt;&amp;lt; EOF
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLInstance
+metadata:
+  name: example
+spec:
+  region: us-central1
+  databaseVersion: POSTGRES_9_6
+  settings:
+    tier: db-custom-1-3840
+    ipConfiguration:
+      ipv4Enabled: false
+      requireSsl: false
+      privateNetworkRef:
+        external: default
+EOF
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Create a Cloud SQL User:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;kubectl -n $PROJECT_ID apply -f &amp;lt;(cat &amp;lt;&amp;lt; EOF
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLUser
+metadata:
+  name: example
+spec:
+  instanceRef:
+    name: example
+  password:
+    value: &amp;quot;bad-password&amp;quot;
+EOF
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After a few moments check that the SQL Instance is being created:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;watch gcloud sql instances list
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once the &lt;code&gt;STATUS&lt;/code&gt; changes from &lt;code&gt;PENDING_CREATE&lt;/code&gt; to &lt;code&gt;RUNNABLE&lt;/code&gt; hit CTRL-C to exit the &lt;code&gt;watch&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;p&gt;We should now be able to confirm that an Application running in the GKE cluster can access the database. To validate this we can use the &lt;code&gt;postgres:13-alpine&lt;/code&gt; image.&lt;/p&gt;
+
+&lt;p&gt;Run the postgres image as a Pod with an interactive shell:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;kubectl run -ti --restart=Never --image postgres:13-alpine --rm psql -- sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Inside that shell run &lt;code&gt;psql&lt;/code&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Change the IP to match the IP from the &lt;code&gt;gcloud sql instances list&lt;/code&gt; command. Enter the password &lt;code&gt;bad-password&lt;/code&gt; when prompted&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ psql -h ip.add.re.ss --username=example -d postgres
+Password for user example: bad-password
+psql (13beta1, server 9.6.16)
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
+Type &amp;quot;help&amp;quot; for help.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;That&amp;rsquo;s it! Super easy and powerful way to get a managed database provisioned and usable without ever leaving Kubernetes.&lt;/p&gt;
+
+&lt;p&gt;If you want to make things even more Kubernetes friendly you can use Google&amp;rsquo;s &lt;a href=&#34;https://github.com/paulczar/gcc-cloudsql/blob/master/ytt/cloudsql/proxy.yaml&#34;&gt;SQL Proxy&lt;/a&gt; inside your Kubernetes cluster which helps manage your SSL Connections to the databases as well as being able to use predictable names rather than hunting for IP addresses.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>How to broadcast to Twitch and Zoom with OBS</title>
