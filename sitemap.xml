@@ -137,6 +137,17 @@
   </url>
   
   <url>
+    <loc>https://tech.paulcz.net/page/</loc>
+    <lastmod>2020-02-09T09:04:08-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://tech.paulcz.net/page/resume/</loc>
+    <lastmod>2020-02-09T09:04:08-06:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://tech.paulcz.net/blog/intro-to-github-actions/</loc>
     <lastmod>2019-08-29T00:00:00+00:00</lastmod>
   </url>
@@ -254,17 +265,6 @@
   <url>
     <loc>https://tech.paulcz.net/blog/getting-started-with-helm/</loc>
     <lastmod>2017-10-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://tech.paulcz.net/page/</loc>
-    <lastmod>2017-06-25T09:04:08-06:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://tech.paulcz.net/page/resume/</loc>
-    <lastmod>2017-06-25T09:04:08-06:00</lastmod>
   </url>
   
   <url>
