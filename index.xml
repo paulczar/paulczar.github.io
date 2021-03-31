@@ -21,6 +21,8 @@
 
 &lt;p&gt;I recently had the privilege to help organize DevOpsDays Texas 2021 a virtual event that we ran to try and scratch our DevOpsDays itch given that in-person conferences won&amp;rsquo;t be happening any time soon.&lt;/p&gt;
 
+&lt;p&gt;To see the final product you can watch the &lt;a href=&#34;https://www.youtube.com/watch?v=Ji_Dl92D6ps&#34;&gt;Day 1&lt;/a&gt; and &lt;a href=&#34;https://www.youtube.com/watch?v=AvuWHRPqcCA&#34;&gt;Day 2&lt;/a&gt; streams over on &lt;a href=&#34;https://www.youtube.com/channel/UC4KuCn1Fy1tgt9NRIN3rlFg&#34;&gt;youtube&lt;/a&gt;.&lt;/p&gt;
+
 &lt;p&gt;I had the misfortune of being the most experienced at OBS setup for live streaming and therefore was nominated as the person to figure out how to live stream the event to Youtube.&lt;/p&gt;
 
 &lt;p&gt;I chose to use &lt;a href=&#34;https://obsproject.com/&#34;&gt;Open Broadcaster Software (OBS)&lt;/a&gt; to manage the stream and Windows as the OS to run it on (OBS support is generally best on windows).&lt;/p&gt;
