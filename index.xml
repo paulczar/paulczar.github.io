@@ -6,10 +6,254 @@
     <description>Recent content on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 08 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 31 Mar 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://tech.paulcz.net/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Streaming DevOpsDays Texas</title>
+      <link>https://tech.paulcz.net/blog/streaming-devopsdays-texas/</link>
+      <pubDate>Wed, 31 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/blog/streaming-devopsdays-texas/</guid>
+      <description>
+
+&lt;p&gt;I recently had the privilege to help organize DevOpsDays Texas 2021 a virtual event that we ran to try and scratch our DevOpsDays itch given that in-person conferences won&amp;rsquo;t be happening any time soon.&lt;/p&gt;
+
+&lt;p&gt;I had the misfortune of being the most experienced at OBS setup for live streaming and therefore was nominated as the person to figure out how to live stream the event to Youtube.&lt;/p&gt;
+
+&lt;p&gt;I chose to use &lt;a href=&#34;https://obsproject.com/&#34;&gt;Open Broadcaster Software (OBS)&lt;/a&gt; to manage the stream and Windows as the OS to run it on (OBS support is generally best on windows).&lt;/p&gt;
+
+&lt;h2 id=&#34;setting-up-the-streaming-box&#34;&gt;Setting up the streaming box&lt;/h2&gt;
+
+&lt;p&gt;I already have a pretty decent streaming box at home, its a couple year old Dell workstation that I added an SSD and a Nvidia GTX 1050 ti. The most important component of an OBS machine is that it contains something capable of doing h.264 encoding in hardware, otherwise the CPU will be blasted.&lt;/p&gt;
+
+&lt;p&gt;The 1050ti is a few years old, but still supports &lt;code&gt;nvenc&lt;/code&gt; which is the Nvidia library for doing hardware encoding. One important thing to note is that for &lt;code&gt;nvenc&lt;/code&gt; to work you must have a display hooked up to the card. This means you cannot use the Windows Remote Desktop tool as it swaps out the display for a virtual one.&lt;/p&gt;
+
+&lt;p&gt;I use NoMachine as a remote desktop tool to connect to my streaming box and I have a &lt;a href=&#34;https://www.amazon.com/Headless-Display-Emulator-Headless-1920x1080-Generation/dp/B06XT1Z9TF/&#34;&gt;cheap HDMI dummy monitor&lt;/a&gt; which tricks the GPU into thinking it has a monitor plugged in.&lt;/p&gt;
+
+&lt;p&gt;I then installed &lt;a href=&#34;https://obsproject.com/download&#34;&gt;OBS Studio 26.1.1&lt;/a&gt; and two OBS plugins &lt;a href=&#34;https://obsproject.com/forum/resources/audio-monitor.1186/&#34;&gt;Audio Monitor&lt;/a&gt; and &lt;a href=&#34;https://obsproject.com/forum/resources/advanced-scene-switcher.395/&#34;&gt;Advanced Scene Switcher&lt;/a&gt; which I&amp;rsquo;ll detail later.&lt;/p&gt;
+
+&lt;p&gt;Knowing that I would need to do some advanced audio work I also downloaded &lt;a href=&#34;https://vb-audio.com/Cable/&#34;&gt;VB-Cable Virtual Audio Device&lt;/a&gt; to use to ensure I could get audio from Zoom to OBS. For previous streams I&amp;rsquo;ve needed more cables and have used their A+B and C+D cable packs as well as &lt;a href=&#34;https://vb-audio.com/Voicemeeter/banana.htm&#34;&gt;Voicemeeter Banana&lt;/a&gt; for mixing the audio, but for this event I was able to get by with just the one Cable.&lt;/p&gt;
+
+&lt;p&gt;I knew I would want to run a backup streaming server in the cloud so I kept all my files in a sensible path &lt;code&gt;c:\obs\dod-tx&lt;/code&gt; which meant I could export profiles and scene collections, copy up the whole thing and import them from the same location on the streaming server.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://ibm.com/cloud&#34;&gt;IBM Cloud&lt;/a&gt; kindly offered to provide us with a dedicated GPU server which we gladly took them up on. Unfortunately they did not have a Dummy HDMI monitor dongle so I was unable to take advantage of the GPU, but the CPU onboard was powerful enough to handle the encoding.&lt;/p&gt;
+
+&lt;p&gt;Knowing that I would need to keep files in sync between the two servers I looked into the state of the art for copying files between windows servers securely over the internet. To my chagrin I found no great answer and ended up doing something that I haven&amp;rsquo;t done in fifteen or more years, installing &lt;a href=&#34;https://www.cygwin.com/&#34;&gt;Cygwin&lt;/a&gt; and rsync. I&amp;rsquo;m sure there is something better out there, but at least this gave me the ability to sync &lt;code&gt;c:\obs\dod-tx&lt;/code&gt; between the two machines over SSH which is secure enough for me.&lt;/p&gt;
+
+&lt;h2 id=&#34;obs-plugins&#34;&gt;OBS Plugins&lt;/h2&gt;
+
+&lt;h3 id=&#34;audio-monitor&#34;&gt;Audio Monitor&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://obsproject.com/forum/resources/audio-monitor.1186/&#34;&gt;Audio Monitor&lt;/a&gt; is a plugin that allows you to apply one or more &lt;strong&gt;Audio Monitor&lt;/strong&gt; plugins to any audio feed in OBS. For each audio source we set up two Audio Monitors, one to a set of headphones, the other to the VB Virtual Audio Cable which we could route to the Microphone source in Zoom and OBS.Ninja.&lt;/p&gt;
+
+&lt;h3 id=&#34;advanced-scene-switcher&#34;&gt;Advanced Scene Switcher&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://obsproject.com/forum/resources/advanced-scene-switcher.395/&#34;&gt;Advanced Scene Switcher&lt;/a&gt; is a plugin that lets you automate OBS changing scenes based on a number of triggers such as the current time, or when a media source finishes playing.&lt;/p&gt;
+
+&lt;h2 id=&#34;obs-overlay-and-underlay-scenes&#34;&gt;OBS Overlay and Underlay Scenes&lt;/h2&gt;
+
+&lt;p&gt;In OBS you create a Scene that contains one or more sources that are layered on top of each-other. You can use another Scene as a source. This means that you can compose fairly complex scenes together into the stream.&lt;/p&gt;
+
+&lt;p&gt;This allowed us to have a few master scenes that were the base for the rest of the scenes.&lt;/p&gt;
+
+&lt;p&gt;We had a basic Interstitial (that&amp;rsquo;s a big word, I think I&amp;rsquo;m using it right) scene that consisted of a basic background which we could add into a specific scene with a text source over the top of it. This was used for breaks to show what was coming up next etc.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./interstitial.png&#34; alt=&#34;interstitial scene showing kickoff time&#34; /&gt;
+&lt;em&gt;This shows our starting soon scene which contains the interstitial scene and a text source that says &amp;ldquo;stay tuned we&amp;rsquo;ll kick off at 9am&amp;rdquo;.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;the-conference-schedule&#34;&gt;The Conference Schedule&lt;/h2&gt;
+
+&lt;p&gt;Obviously to build out DOD TX scene collections I needed to first determine the schedule. Thankfully we&amp;rsquo;d had a very successful CFP and we had two Keynotes, eleven 30-minute Sessions, two panels (which we called fire starter chats), thirteen 5-minute Ignites, and twelve sponsor pitches. We also had opening and closing messages for each day, speaker introductions, and a couple of how-to videos scheduled during breaks etc.&lt;/p&gt;
+
+&lt;p&gt;Most of the content was pre-recorded and we asked Speakers, Ignites, and Sponsors to provide 1920x1080 resolution videos. Quite a number of the speakers used Zoom or similar to do their recordings and we ended up with a lot of videos that were &lt;em&gt;not quite&lt;/em&gt; 1080p. This is relatively easy to fix with OBS, so it wasn&amp;rsquo;t a big deal.&lt;/p&gt;
+
+&lt;p&gt;We did however want to do the closing  messages live each day, and the fire-starter chats were live, so we had two all day Zoom meetings that we could capture the audio/video from for those. Much to our annoyance, Zoom does require at least two people in a meeting at all times or it will eventually time the meeting out. This happened to us a few times, however we could just re-open the same meeting so it wasn&amp;rsquo;t a big deal.&lt;/p&gt;
+
+&lt;h2 id=&#34;captions-and-live-drawing&#34;&gt;Captions and Live Drawing&lt;/h2&gt;
+
+&lt;p&gt;We knew that we wanted to ensure the conference was accessible so we opted to hire &lt;a href=&#34;https://whitecoatcaptioning.com/&#34;&gt;White Coat Captioning&lt;/a&gt; to do live captioning and we also hired Ashton from &lt;a href=&#34;https://www.mindseyecreative.ca/&#34;&gt;Minds Eye Creative&lt;/a&gt; to do a live drawing of the contents of each 30-minute session.&lt;/p&gt;
+
+&lt;h3 id=&#34;obs-ninja-pre-stream-feed&#34;&gt;OBS.Ninja pre-stream feed&lt;/h3&gt;
+
+&lt;p&gt;I needed a way to get our conference audio/video live to both parties, Streaming services usually add some delay for processing to a stream, so it was important that we were able to provide them with an un-delayed live video/audio feed. I could have used Zoom, but I was already going to use that for live content, therefore I opted to do this with a web based &lt;a href=&#34;obs.ninja&#34;&gt;obs.ninja&lt;/a&gt; room.&lt;/p&gt;
+
+&lt;p&gt;In OBS Ninja I shared the OBS virtual camera and VB Virtual Audio Cable from the Control room. Both the captioning team and Ashton would connect to this and able be able to see and hear the live feed from OBS without any delays, plus broadcast their own video/audio (if needed) to be captured as a Browser source in OBS.&lt;/p&gt;
+
+&lt;h3 id=&#34;live-drawing&#34;&gt;Live Drawing&lt;/h3&gt;
+
+&lt;p&gt;When Connected Ashton would see and hear the OBS feed live, and would share her camera/desktop via a custom receive URL.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./ashton-view.png&#34; alt=&#34;Ashton&#39;s view of the conference&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Ashton&amp;rsquo;s view of the conference, when a session is running she sees the live video from OBS which includes the session video as well as her own screenshare, so she has a preview of what the live stream will see.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;I then created a Scene in OBS called &lt;code&gt;_ashton - drawing&lt;/code&gt; which contained two sources, and Image that would be displayed if Ashton&amp;rsquo;s feed was offline and Ashton&amp;rsquo;s OBS.ninja feed to which she shared her screen focussed on her drawing app.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./ashton-scene.png&#34; alt=&#34;OBS Scene for Ashton&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;The OBS Scene containing Ashton&amp;rsquo;s cartoon.  I&amp;rsquo;ve added a touch of transparency to her source so that you can faintly see the image behind it that would show if she was offline. During the conference this was totally opaque.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;captions&#34;&gt;Captions&lt;/h3&gt;
+
+&lt;p&gt;The captioning team would see exactly the same feed as Ashton above. However we didn&amp;rsquo;t want to capture anything directly from White Coat, instead they send a text stream to a &lt;a href=&#34;https://www.streamtext.net&#34;&gt;streaming text&lt;/a&gt; website. The website would show an auto-scrolling wall of text as the captionering team did their thing. I created an OBS Scene that contained a Browser source pointing at the text stream like so.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Note: There is an &lt;a href=&#34;https://github.com/EddieCameron/obs-websocket-streamtext-captions&#34;&gt;OBS websocket plugin&lt;/a&gt; to create a better interface to capturing from streamtext, but it involves setting up a NodeJS service and I didn&amp;rsquo;t want climb that particular hill.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;./caption-scene.png&#34; alt=&#34;OBS Scene for Captioning&#34; /&gt;
+&lt;em&gt;The captions scene shows the whole stream text website.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The captioning team would blast carriage returns at the start of each day to ensure that when the captioning started it would be on the last two lines and the auto-scrolling would keep it there. This means we can add the &lt;code&gt;_captioning&lt;/code&gt; scene above as a source into any scenes that we wished to display the captions and crop the source to show just the last two lines of the source.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./captions-in-session.png&#34; alt=&#34;Captioning cropped out in session&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;The captions thus appear in a captions bar across the top of any scenes that we wanted captioned.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;live-sessions-zoom&#34;&gt;Live Sessions - Zoom&lt;/h2&gt;
+
+&lt;p&gt;In order to facilitate live sessions I chose to use Zoom. I could have used OBS.Ninja like above, however that would have required a bunch of extra work vs doing the basic window-grab of Zoom.&lt;/p&gt;
+
+&lt;p&gt;I created a Zoom scene in OBS in which I added a Window source for Zoom, a &amp;ldquo;technical difficulties&amp;rdquo; source under the Zoom source (so it would show if zoom crashed or whatever) and an Audio Input source for the Virtual Audio Cable.&lt;/p&gt;
+
+&lt;p&gt;I used the CTRL-Drag of the bounding box for the Zoom source to cut out the borders and controls of the zoom window to make it look a little less &amp;ldquo;zoomy&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;I also configured Zoom to use the Virtual Audio Cable as the speaker, I wouldn&amp;rsquo;t be sending audio to Zoom so I just left the Mic on the default setting, but I could have used a second Virtual Audio Cable to route audio from OBS to Zoom&amp;rsquo;s Mic.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./zoom-scene.png&#34; alt=&#34;Zoom Scene&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;With Zoom not currently running the technical difficulties message is shown.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;I scheduled two all-day Zoom calls and shared the invite links to the people giving live sessions. Apart from keeping the meeting open and ensuring the right people were on Zoom at the right time there was very little effort required.&lt;/p&gt;
+
+&lt;h2 id=&#34;content-scenes-sessions-ignites-etc&#34;&gt;Content Scenes - Sessions, Ignites, etc&lt;/h2&gt;
+
+&lt;p&gt;With the plumbing out of the way I could start building out Scenes for the Sessions, Ignites, Sponsors, etc. Given the even was time based I made the decision to prefix each scene with the time that I expected to play it.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./scene-names.png&#34; alt=&#34;scene naming&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;By prefixing the scenes with their times it was obvious from the OBS interface what scene to play when and helped ensure the scenes were ordered chronologically.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;We wanted to make sure that folks had plenty of chances for breaks, so we chose to sandwich all content with some sort of short break, usually 5 minutes at a time, as well as a longer break for lunch. We also wanted to ensure that we had a variety of content so we tried not to have two pieces of similar content in a row.&lt;/p&gt;
+
+&lt;p&gt;We had captions and live drawing for our Keynotes and main sessions, but not for other content such as Ignites and Sponsor pitches. So I built two main overlays.&lt;/p&gt;
+
+&lt;h3 id=&#34;keynote-and-session-scenes&#34;&gt;Keynote and Session Scenes&lt;/h3&gt;
+
+&lt;p&gt;The Keynote and Session overlay was a scene that started with a graphics source that was had a border with DOD TX colors and graphics (designed by the talented Ashton) with a blank title bar at the bottom and a transparent rectangle (16:9 ratio to match 1080p videos).&lt;/p&gt;
+
+&lt;p&gt;I added a text source to point viewers to our sign-up url so they could get access to discord, as well as the captions scene at the top of the window and the live drawing scene on the right.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./session-overlay.png&#34; alt=&#34;keynote and session overlay&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Here you can see the blank session overlay Scene.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;I then created individual scenes per Keynote and Session that started with the main content source, in most cases a media source that contained the pre-recorded session video. By default I added both the Compression and Noise Suppression filters to the videos (this helped a ton with background noise and substandard microphones) and 2 x Audio Monitor filters (one for OBS ninja, one for headphones) to ensure sound got to where it needed to go. I also skimmed through the video and made sure sound was high green to mid orange at peak and adjusted the gain to suit.&lt;/p&gt;
+
+&lt;p&gt;Next I added the Session overlay and adjusted the Video media to fit inside the virtual frame of the overlay. If the video source wasn&amp;rsquo;t perfectly 16:9 I made the video slightly bigger than the transparent part of the overlay and let it  crop off the edges.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Note: you can copy transforms and filters from one source to another, this made it very easy to make the videos consistently sized.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Finally I added a text overlay that went over the title bar to add the Session title and speaker name.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./captions-in-session.png&#34; alt=&#34;keynote and session overlays&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;The result was a consistent look across all sessions with branding, captions, and live drawing.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;ignite-and-sponsor-pitch-overlay&#34;&gt;Ignite, and Sponsor pitch overlay&lt;/h3&gt;
+
+&lt;p&gt;This overlay was very similar to the Session overlay, only without the captioning or live drawing (although I did go back and add the captioning source to the ignite scenes later).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./ignite-overlay-in-use.png&#34; alt=&#34;Ignite and sponsor overlays&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Here you can see the simpler overlay used for Ignites and Sponsor pitches&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;transition-scenes&#34;&gt;Transition Scenes&lt;/h2&gt;
+
+&lt;p&gt;With the majority of the content scenes out of the way, it was time to build out transition scenes. I knew I would need some text focussed transition scenes like &amp;ldquo;Stay tuned we&amp;rsquo;ll be kicking off at 9:00am&amp;rdquo; and &amp;ldquo;break time! next up&amp;hellip;&amp;rdquo; as well as introduction transition scenes to play personalized introduction videos for our sessions.&lt;/p&gt;
+
+&lt;h3 id=&#34;text-based-transition-scenes&#34;&gt;Text based Transition Scenes&lt;/h3&gt;
+
+&lt;p&gt;The text based transitions were fairly straight forward. I had Ashton build me a 1080p image with a big space for text. She created a brilliant image with a cactus (one of the recurring DOD Texas characters she created) and a speech bubble.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./intermission-scene.png&#34; alt=&#34;base intermission scene&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Here you can see the text base transition scene.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;I created a Scene for Starting Soon, Finished, Breaks, and a few other transitions that included the base intermission scene and then added some text in everyone&amp;rsquo;s favorite font.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./starting-soon.png&#34; alt=&#34;starting soon intermission scene&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Here you can see the starting soon transition scene with the text overlayed over the base scene.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;speaker-introductions&#34;&gt;Speaker Introductions&lt;/h3&gt;
+
+&lt;p&gt;We also wanted to create personalized speaker introductions, Dan Collins and Laura Santamaria volunteered to record a roughly 1 minute introduction for each speaker, and did an amazing job of it, their experience in creating compelling videos really shone through.&lt;/p&gt;
+
+&lt;p&gt;Ashton had created social cards for each speaker to be used on various social media platforms to promote their session, so I collected those and use them as a background for each speaker introduction, and then I layered the introduction video on top of it, that way when the video ended it would show the speaker&amp;rsquo;s avatar and session title while I fumbled to switch to the scene for that session.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./speaker-intro.png&#34; alt=&#34;speaker introduction scene&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Here you can see Kiran&amp;rsquo;s introduction done by Laura, Laura included the social card in her videos too, so we had a really great transition experience.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;automating-scene-transitions&#34;&gt;Automating Scene Transitions&lt;/h2&gt;
+
+&lt;p&gt;By this stage I had two scene collections set up one for Day 1, one for Day 2. Each scene collection had the scenes that consisted of the day&amp;rsquo;s event listed in the order in which they were to be played and prefixed with the times that they should be played.&lt;/p&gt;
+
+&lt;p&gt;When I was setting this up originally I had expected that I would be setting alarms and clicking between each scene. However I stumbled across the &lt;a href=&#34;https://obsproject.com/forum/resources/advanced-scene-switcher.395/&#34;&gt;Advanced Scene Switcher&lt;/a&gt; OBS plugin that allowed you to set various triggers to switch between scenes.&lt;/p&gt;
+
+&lt;p&gt;The triggers I used were &amp;ldquo;Media&amp;rdquo;, &amp;ldquo;Time&amp;rdquo;, and &amp;ldquo;Sequence&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;Initially I was going to use &lt;em&gt;Time&lt;/em&gt; based triggers for the whole event, but I discovered that since most of our content wasn&amp;rsquo;t exactly timed (Session videos were slated for 30 minutes, but most were around 25 minutes, and some were event less) which meant that when a Session video finished it would stay on an empty session scene until the time was up.&lt;/p&gt;
+
+&lt;p&gt;To combat this, I switched most of the triggers to be &lt;em&gt;media&lt;/em&gt; based and set the action to be &amp;ldquo;When Media &lt;strong&gt;session - Nigel&lt;/strong&gt; state is &lt;strong&gt;Played to end&lt;/strong&gt; switch to &lt;strong&gt;11:40 - Lunch Breaks&lt;/strong&gt; scene.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./media-switches.png&#34; alt=&#34;screenshot of media switches&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Here you can see the lengthy list of media based switches that drove most of the automated scene switching.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;This was perfect as we had some form of break after every session, so if a session finished early it would immediately transition into the specific Break&amp;rsquo;s transition scene and we&amp;rsquo;d just get a slightly longer break.&lt;/p&gt;
+
+&lt;p&gt;This means that &lt;em&gt;Time&lt;/em&gt; based switching was used to trigger the scheduled content such as &amp;ldquo;at &lt;strong&gt;10:35&lt;/strong&gt; switch to &lt;strong&gt;10:35 - Ignite Intro&lt;/strong&gt; and the &lt;em&gt;Media&lt;/em&gt; based switching was used to trigger the transition scenes.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./time-switches.png&#34; alt=&#34;screenshot of time switches&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Here you can see the Time based switches that drove the scheduled scenes.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;I also had a few text based introduction scenes like the above mentioned &lt;strong&gt;10:35 - Ignite Intro&lt;/strong&gt; which I solved with the &lt;em&gt;Sequence&lt;/em&gt; based triggers such as &amp;ldquo;When &lt;strong&gt;10:35 - Ignite Intro&lt;/strong&gt; is active switch to &lt;strong&gt;10:35 Ignites - Jeremy&lt;/strong&gt; after &lt;strong&gt;10 seconds&lt;/strong&gt;&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./sequence-switches.png&#34; alt=&#34;screenshot of sequence switches&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Finally here&amp;rsquo;s the sequence switches.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;With these in place, both days were fully automated, the only thing I had to do was hit &amp;ldquo;Start Streaming&amp;rdquo; and &amp;ldquo;Stop Streaming&amp;rdquo; at the start and end of each day.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-actual-streams&#34;&gt;The actual streams&lt;/h2&gt;
+
+&lt;p&gt;A few days prior to the events I had the both days fully automated, and was able to test them on unpublished youtube streams. This gave us the opportunity to preview the streams and fix any issues. We found a few, but not all of the issues.&lt;/p&gt;
+
+&lt;p&gt;I also used rsync to make sure that the content was synced to the IBM Cloud server and I had exported and imported the scene collections so that I could drive the event from the cloud server and fall back to my personal streaming box in emergency.  I also gave JJ Asghar a quick rundown on what to do in case I lost power or got hit by a falling aircraft engine.&lt;/p&gt;
+
+&lt;p&gt;On both days of the event I set the &lt;strong&gt;8:00 Starting Soon&lt;/strong&gt; scene as active hit the start streaming button at 8:00am. From here I just had to monitor things and hope I got the automation right, If not, I could always override it.&lt;/p&gt;
+
+&lt;p&gt;The event was not without a few glitches. Somewhere I had managed to schedule it to &lt;strong&gt;Start Recording&lt;/strong&gt; part way through the first session. The streaming server had just a single slow disk and this action caused the stream to stutter and have issues. On the first day it took a while to figure out what went wrong and fix it. We nearly switched to my backup streaming box when I saw the &lt;strong&gt;Recording&lt;/strong&gt; was on.  Turning it off fixed it, but not before I had accidently clicked off the scene and then had to try and scrool through to the right spot in the media playback.&lt;/p&gt;
+
+&lt;p&gt;As we played through both days there were a few scenes that weren&amp;rsquo;t quite right, and I was able to switch to &lt;strong&gt;Studio Mode&lt;/strong&gt; which lets you edit a scene without switching to it live, which allowed me to fix most of the issues, however a few times I forgot to switch to Studio Mode and accidently switched scenes. This was a sign that unless a scene glitch is really major, better just to leave it glitched than to try and fix it live.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Overall I would say that while tedious, it was actually fairly easy to build out the OBS setup to stream the event. The few live glitches we had were really stressful, but ultimately small enough that it didn&amp;rsquo;t affect the overall viewing experience.&lt;/p&gt;
+
+&lt;p&gt;I definitely gained an appreciation of the hard work and planning that goes into the production side of an event like this, and definitely feel that if you have the budget, partnering with a production company to do this for you is well worth it.&lt;/p&gt;
+
+&lt;p&gt;Would I do this again? If you had asked me a few days after the event, I would say no way, but now, with some time passed, I would probably say yes.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Deploying and accessing a GCP SQL database via Kubernetes</title>

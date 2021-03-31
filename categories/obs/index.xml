@@ -6,10 +6,21 @@
     <description>Recent content in OBS on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 13 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 31 Mar 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://tech.paulcz.net/categories/obs/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Streaming DevOpsDays Texas</title>
+      <link>https://tech.paulcz.net/blog/streaming-devopsdays-texas/</link>
+      <pubDate>Wed, 31 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/blog/streaming-devopsdays-texas/</guid>
+      <description>I recently had the privilege to help organize DevOpsDays Texas 2021 a virtual event that we ran to try and scratch our DevOpsDays itch given that in-person conferences won&amp;rsquo;t be happening any time soon.
+I had the misfortune of being the most experienced at OBS setup for live streaming and therefore was nominated as the person to figure out how to live stream the event to Youtube.
+I chose to use Open Broadcaster Software (OBS) to manage the stream and Windows as the OS to run it on (OBS support is generally best on windows).</description>
+    </item>
     
     <item>
       <title>How to broadcast to Twitch and Zoom with OBS</title>

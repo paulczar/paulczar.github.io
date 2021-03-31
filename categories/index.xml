@@ -6,10 +6,73 @@
     <description>Recent content in Categories on Paul Czarkowski</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 08 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 31 Mar 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://tech.paulcz.net/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OBS</title>
+      <link>https://tech.paulcz.net/categories/obs/</link>
+      <pubDate>Wed, 31 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/obs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>developer advocate</title>
+      <link>https://tech.paulcz.net/categories/developer-advocate/</link>
+      <pubDate>Wed, 31 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/developer-advocate/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>devops</title>
+      <link>https://tech.paulcz.net/categories/devops/</link>
+      <pubDate>Wed, 31 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/devops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dod</title>
+      <link>https://tech.paulcz.net/categories/dod/</link>
+      <pubDate>Wed, 31 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/dod/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>streaming</title>
+      <link>https://tech.paulcz.net/categories/streaming/</link>
+      <pubDate>Wed, 31 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/streaming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>twitch</title>
+      <link>https://tech.paulcz.net/categories/twitch/</link>
+      <pubDate>Wed, 31 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/twitch/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>youtube</title>
+      <link>https://tech.paulcz.net/categories/youtube/</link>
+      <pubDate>Wed, 31 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://tech.paulcz.net/categories/youtube/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>gcp</title>
@@ -53,60 +116,6 @@
       <pubDate>Mon, 08 Jun 2020 00:00:00 +0000</pubDate>
       
       <guid>https://tech.paulcz.net/categories/kubernetes/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>OBS</title>
-      <link>https://tech.paulcz.net/categories/obs/</link>
-      <pubDate>Wed, 13 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/obs/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>developer advocate</title>
-      <link>https://tech.paulcz.net/categories/developer-advocate/</link>
-      <pubDate>Wed, 13 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/developer-advocate/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>devops</title>
-      <link>https://tech.paulcz.net/categories/devops/</link>
-      <pubDate>Wed, 13 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/devops/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>streaming</title>
-      <link>https://tech.paulcz.net/categories/streaming/</link>
-      <pubDate>Wed, 13 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/streaming/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>twitch</title>
-      <link>https://tech.paulcz.net/categories/twitch/</link>
-      <pubDate>Wed, 13 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/twitch/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>youtube</title>
-      <link>https://tech.paulcz.net/categories/youtube/</link>
-      <pubDate>Wed, 13 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://tech.paulcz.net/categories/youtube/</guid>
       <description></description>
     </item>
     
