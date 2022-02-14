@@ -1111,7 +1111,7 @@ openssl s_server \
 
 &lt;h1 id=&#34;paul-czarkowski&#34;&gt;Paul Czarkowski&lt;/h1&gt;
 
-&lt;p&gt;&lt;strong&gt;Staff Technologist (Developer Advocate) @ VMware&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Principal Managed OpenShift Black Belt @ Red Hat&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;mailto:username.taken@gmail.com&#34;&gt;username.taken@gmail.com&lt;/a&gt;&lt;/p&gt;
 
@@ -1126,7 +1126,9 @@ openssl s_server \
 &lt;p&gt;I am an experienced hands-on Architect / DevOps Engineer who accidently fell into a Developer
 Advocate role. I have a long history in Operations and Infrastructure Automation.  I have a broad depth of experience across most IT and Operations related areas with strong experience in using and evangelizing DevOps tools and methodologies.&lt;/p&gt;
 
-&lt;p&gt;My current role at VMware has me primarily acting as a Developer Advocate. This is a customer and public facing role in which I work to Advocate for customers and opensource communities into VMware, as well as Advocating for VMware to customers and communities. I also have a key role in improving the Operator experience for a number of VMware&amp;rsquo;s flagship products. I am heavily involved in the Kubernetes community and can be found all over the world advocating for Kubernetes and am an core member of the Helm and Helm Charts community.&lt;/p&gt;
+&lt;p&gt;My current team (Managed OpenShift Black Belts) at Red Hat is a post-sales techincal team focussed at removing technical and organizational blockers within customers to help them accellerate their usage of our cloud services. In doing this I have developed expertise in not just OpenShift, but the underlying clouds (Azure, AWS, Google) and any number of integrations with the native cloud services. You can see much of my public facing work at &lt;a href=&#34;https://mobb.ninja&#34;&gt;mobb.ninja&lt;/a&gt; showing these off.&lt;/p&gt;
+
+&lt;p&gt;Previously at at VMware I worked as a Developer Advocate. It was a customer and public facing role in which I worked to Advocate for customers and opensource communities into VMware, as well as Advocating for VMware to customers and communities. I als hado have a key role in improving the Operator experience for a number of VMware&amp;rsquo;s flagship products. I was (and am still) heavily involved in the Kubernetes community and can be found all over the world advocating for Kubernetes and am an core member of the Helm and Helm Charts community.&lt;/p&gt;
 
 &lt;p&gt;My previous role at IBM has me focused on helping to rebuild the IBM developer advocacy programs and content creation processes.  Previous to that I led the conversion of our OpenStack Automation platform (&lt;a href=&#34;https://github.com/blueboxgroup/ursula&#34;&gt;ursula&lt;/a&gt;) from just Ubuntu to also supporting Redhat Enterprise Linux.  I also architected and built the Blue Box Cloud SRE Operations Platform (which was open-sourced as &lt;a href=&#34;https://github.com/IBM/cuttle&#34;&gt;cuttle&lt;/a&gt;) and built a team to maintain it.&lt;/p&gt;
 
@@ -1210,7 +1212,13 @@ Advocate role. I have a long history in Operations and Infrastructure Automation
 
 &lt;h2 id=&#34;employment-history&#34;&gt;Employment History&lt;/h2&gt;
 
-&lt;h3 id=&#34;vmware-pivotal-software-nov-2017-to-current&#34;&gt;VMWare / Pivotal Software - Nov 2017 to Current&lt;/h3&gt;
+&lt;h3 id=&#34;red-hat-april-2021-to-current&#34;&gt;Red Hat - April 2021 to Current&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;Austin, Texas&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Principal Managed OpenShift Black Belt&lt;/p&gt;
+
+&lt;h3 id=&#34;vmware-pivotal-software-nov-2017-to-april-2021&#34;&gt;VMWare / Pivotal Software - Nov 2017 to April 2021&lt;/h3&gt;
 
 &lt;p&gt;&lt;em&gt;Austin, Texas&lt;/em&gt;&lt;/p&gt;
 
@@ -1340,7 +1348,7 @@ jobs:
 
 &lt;p&gt;Actions are run inside Docker containers, and thus an Action is usually a &lt;code&gt;Dockerfile&lt;/code&gt; combined with a script to run inside the container. Remote actions should contain an &lt;code&gt;action.yaml&lt;/code&gt; to define the action and its interactions.&lt;/p&gt;
 
-&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;The first step in learning how to use github actions is to learn how to build and run Docker images the wrong way.&lt;/p&gt;&amp;mdash; Czark8ski (@pczarkowski) &lt;a href=&#34;https://twitter.com/pczarkowski/status/1167437284410626054?ref_src=twsrc%5Etfw&#34;&gt;August 30, 2019&lt;/a&gt;&lt;/blockquote&gt;
+&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;The first step in learning how to use github actions is to learn how to build and run Docker images the wrong way.&lt;/p&gt;&amp;mdash; Czarcuterie Board of Insults (@pczarkowski) &lt;a href=&#34;https://twitter.com/pczarkowski/status/1167437284410626054?ref_src=twsrc%5Etfw&#34;&gt;August 30, 2019&lt;/a&gt;&lt;/blockquote&gt;
 &lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
 
 
