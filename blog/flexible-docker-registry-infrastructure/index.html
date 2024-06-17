@@ -4,42 +4,33 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="map[]" />
-    <meta name="description" content="Random musings mostly about tech">
+    <meta name="author" content="Paul Czarkowski">
     <link rel="shortcut icon" type="image/x-icon" href="https://tech.paulcz.net/img/favicon.ico">
-    <title>Flexible Private Docker Registry Infrastructure</title>
-    <meta name="generator" content="Hugo 0.56.3" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://tech.paulcz.net/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    <title>Flexible Private Docker Registry Infrastructure | Paul Czarkowski</title>
+    <meta name="description" content="Previously I showed how to run a basic secure Docker Registry. I am now going to expand on this to show you something that you might use in production as part of your CI/CD infrastructure.
+The beauty of running Docker is that you can push an image from a developer&rsquo;s laptop all the way into production which helps ensure that what you see in development and your various test/qa/stage environments are exactly the same as what you run in production.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    
+    <link rel="preload stylesheet" href="/css/main.min.css" as="style">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old">
     
     <!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
-
+  
     
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-35638296-2', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
+      
+    
+  
+
 
   </head>
-
   <body>
-    <div id="wrap">
-
-      
-      <nav class="navbar navbar-default">
+    <div id="content">
+  
+  <nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
       <a class="navbar-brand" href="https://tech.paulcz.net/"><i class="fa fa-home"></i></a>
@@ -62,48 +53,31 @@ if (!doNotTrack) {
   </div>
 </nav>
 
-      
-      <div class="container">
-        <div class="blog-post">
-          <h3>
-            <strong><a href="https://tech.paulcz.net/blog/flexible-docker-registry-infrastructure/">Flexible Private Docker Registry Infrastructure</a></strong>
-          </h3>
-        </div>
-        <div class="blog-title">
-          <h4>
-          January 10, 2016
-            &nbsp;&nbsp;
-            
-          </h4>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="blogpost">
-              
 
-<p>Previously I showed how to run a <a href="http://tech.paulcz.net/2016/01/deploying-a-secure-docker-registry/">basic secure Docker Registry</a>.  I am now going to expand on this to show you something that you might use in production as part of your CI/CD infrastructure.</p>
-
+  <div class="container">
+    <h3 class="mt-3"><b><a href="https://tech.paulcz.net/blog/flexible-docker-registry-infrastructure/">Flexible Private Docker Registry Infrastructure</a></b></h3>
+    <div class="blog-title my-4">
+      <h6>
+        January 10, 2016
+        &nbsp;&nbsp;
+        
+      </h6>
+    </div>
+    <div class="panel">
+      <div class="panel-body">
+        <div class="blogpost">
+          <p>Previously I showed how to run a <a href="http://tech.paulcz.net/2016/01/deploying-a-secure-docker-registry/">basic secure Docker Registry</a>.  I am now going to expand on this to show you something that you might use in production as part of your CI/CD infrastructure.</p>
 <p>The beauty of running Docker is that you <em>can</em> push an image from a developer&rsquo;s laptop all the way into production which helps ensure that what you see in development and your various test/qa/stage environments are exactly the same as what you run in production.</p>
-
 <p>So they tell you anyway. The reality is that you don&rsquo;t ever want to push an image built on a developer&rsquo;s machine into production as you can&rsquo;t be sure what is in it.  Instead you want to have a trusted build server build images from a <code>Dockerfile</code> in your git repository and have it promoted through your environments from there.</p>
-
 <p>To ensure the integrity of your images you&rsquo;ll want to run a Docker Registry that can be reached by all of your servers (and potentially people), but can only be written to by your build server (and/or an administrative user).</p>
-
 <p>You could run your <a href="https://www.docker.com/docker-registry">Docker Registry</a> behind a <a href="https://docs.docker.com/registry/recipes/">complicated reverse proxy</a> and create rules about who can GET/POST/etc through to the <a href="https://www.docker.com/docker-registry">Docker Registry</a> however we can use the magic of &ldquo;<a href="https://github.com/panicsteve/cloud-to-butt">The Cloud</a>&rdquo; to reduce the complexity and thus the need for a reverse proxy.</p>
-
 <p>You will want to use either the <a href="https://wiki.openstack.org/wiki/Swift">Openstack Swift</a> or the <a href="https://aws.amazon.com/s3/">Amazon S3</a> object storage driver for the <a href="https://www.docker.com/docker-registry">Docker Registry</a>. I will demonstrate using Swift, but using S3 should be very similar.</p>
-
 <p>You will of course want to also build all of these servers with Configuration Management including the commands to actually run the <a href="https://www.docker.com/docker-registry">Docker Registry</a>.</p>
-
-<h2 id="build-server-s">Build Server(s)</h2>
-
+<h2 id="build-servers">Build Server(s)</h2>
 <p>For your build server(s) you&rsquo;ll want to be running an OS with Docker installed on it. I use the <a href="https://hub.docker.com/_/jenkins/">Jenkins</a> Docker image on <a href="http://coreos.com/">CoreOS</a> for both my Jenkins Master and Slaves, however this is just personal preference.</p>
-
 <p>On each server you want to run a <a href="https://www.docker.com/docker-registry">Docker Registry</a> with your Swift credentials passed through to it. Since we&rsquo;re only accessing this via <code>127.0.0.1</code> we do not need to secure it with TLS or authentication.</p>
-
 <p>Run the following on each build server to run the Registry backed by Swift, replacing the OpenStack credentials with your own:</p>
-
-<pre><code>build01$ docker run -d \
+<pre tabindex="0"><code>build01$ docker run -d \
               -p 127.0.0.1:5000:5000 \
               --name registry \
               --restart always \
@@ -114,11 +88,8 @@ if (!doNotTrack) {
               -e REGISTRY_STORAGE_SWIFT_AUTHURL=${OS_AUTH_URL} \
               -e REGISTRY_STORAGE_SWIFT_CONTAINER=docker-registry \
               registry:2
-</code></pre>
-
-<p>Push an image to make sure it worked:</p>
-
-<pre><code>build01$ docker pull alpine
+</code></pre><p>Push an image to make sure it worked:</p>
+<pre tabindex="0"><code>build01$ docker pull alpine
 Using default tag: latest
 latest: Pulling from library/alpine
 Digest: sha256:78a756d480bcbc35db6dcc05b08228a39b32c2b2c7e02336a2dcaa196547a41d
@@ -128,34 +99,24 @@ $ docker push 127.0.0.1:5000/alpine
 The push refers to a repository [127.0.0.1:5000/alpine] (len: 1)
 74e49af2062e: Pushed 
 latest: digest: sha256:a96155be113bb2b4b82ebbc11cf1b511726c5b41617a70e0772f8180afc72fa5 size: 1369
-</code></pre>
-
-<p>If you have more that one build server try to pull the image from one of the others, since we&rsquo;re backing the <a href="https://www.docker.com/docker-registry">Docker Registry</a> with an object store they should retrieve it just fine:</p>
-
-<pre><code>build02$ docker pull 127.0.0.1:5000/alpine
+</code></pre><p>If you have more that one build server try to pull the image from one of the others, since we&rsquo;re backing the <a href="https://www.docker.com/docker-registry">Docker Registry</a> with an object store they should retrieve it just fine:</p>
+<pre tabindex="0"><code>build02$ docker pull 127.0.0.1:5000/alpine
 Using default tag: latest
 latest: Pulling from alpine
 
 340b2f9a2643: Already exists 
 Digest: sha256:a96155be113bb2b4b82ebbc11cf1b511726c5b41617a70e0772f8180afc72fa5
 Status: Downloaded newer image for 127.0.0.1:5000/alpine:latest
-</code></pre>
-
-<h2 id="regular-server-s">Regular Server(s)</h2>
-
+</code></pre><h2 id="regular-servers">Regular Server(s)</h2>
 <p>We have a couple of options here.  You can run a <a href="https://www.docker.com/docker-registry">Docker Registry</a> on each server listening only on localhost, or you can run one or more of them on their own servers that will listen on an IP and be secured with TLS.</p>
-
 <p>We&rsquo;ll cover the former use case, for the latter use case you can adapt the instructions found <a href="http://tech.paulcz.net/2016/01/deploying-a-secure-docker-registry/">at my previous blog post</a>.</p>
-
 <p>The important step in either case is to start the Registry as read-only so that regular servers cannot alter the contents of the Registry.</p>
-
 <p>The <a href="https://www.docker.com/docker-registry">Docker Registry</a> is fairly light-weight when the files are in external storage and thus will use a neglible amount of your system resources and provides the advantages and security of running the registry on localhost and not needed to set <code>--insecure-registry</code> settings or worrying about TLS certs for the docker daemon.</p>
-
-<pre><code>$ docker run -d \
+<pre tabindex="0"><code>$ docker run -d \
       -p 127.0.0.1:5000:5000 \
       --name registry \
       --restart always \
-      -e REGISTRY_STORAGE_MAINTENANCE_READONLY='enabled: true' \
+      -e REGISTRY_STORAGE_MAINTENANCE_READONLY=&#39;enabled: true&#39; \
       -e REGISTRY_STORAGE=swift \
       -e REGISTRY_STORAGE_SWIFT_USERNAME=${OS_USERNAME} \
       -e REGISTRY_STORAGE_SWIFT_PASSWORD=${OS_PASSWORD} \
@@ -163,32 +124,22 @@ Status: Downloaded newer image for 127.0.0.1:5000/alpine:latest
       -e REGISTRY_STORAGE_SWIFT_AUTHURL=${OS_AUTH_URL} \
       -e REGISTRY_STORAGE_SWIFT_CONTAINER=docker-registry \
       registry:2
-</code></pre>
-
-<p>With <code>REGISTRY_STORAGE_MAINTENANCE_READONLY='enabled: true</code> set, when we try to push to the registry it should fail:</p>
-
-<pre><code>$ docker push 127.0.0.1:5000/alpine
+</code></pre><p>With <code>REGISTRY_STORAGE_MAINTENANCE_READONLY='enabled: true</code> set, when we try to push to the registry it should fail:</p>
+<pre tabindex="0"><code>$ docker push 127.0.0.1:5000/alpine
 The push refers to a repository [127.0.0.1:5000/alpine] (len: 1)
 f4fddc471ec2: Preparing 
-Error parsing HTTP response: invalid character 'M' looking for beginning of value: &quot;Method not allowed\n&quot;
-</code></pre>
-
-<h2 id="user-access-to-registry">User Access to Registry:</h2>
-
+Error parsing HTTP response: invalid character &#39;M&#39; looking for beginning of value: &#34;Method not allowed\n&#34;
+</code></pre><h2 id="user-access-to-registry">User Access to Registry:</h2>
 <p>If you want to provide access to regular users and don&rsquo;t mind maintaining the password files locally you can adapt my <a href="http://tech.paulcz.net/2016/01/deploying-a-secure-docker-registry/">basic secure Docker Registry</a> blog post to use the object storage backend.</p>
-
 <p>Assuming you&rsquo;ve followed the instructions provided to create the TLS certificates you can run two <a href="https://www.docker.com/docker-registry">Docker Registry</a>s each pointing at a different <code>htpasswd</code> file.</p>
-
 <p>These can run on the same server, or on seperate servers.  They can also be run on multiple servers that are load balanced via an external load balancer or via round-robin-dns for high availability.</p>
-
 <h3 id="read-only-users">Read only Users</h3>
-
-<pre><code>$ docker run -d \
+<pre tabindex="0"><code>$ docker run -d \
       -p 443:5000 \
       --name registry \
       --restart always \
       -v /opt/registry \
-      -e REGISTRY_STORAGE_MAINTENANCE_READONLY='enabled: true' \
+      -e REGISTRY_STORAGE_MAINTENANCE_READONLY=&#39;enabled: true&#39; \
       -e REGISTRY_STORAGE=swift \
       -e REGISTRY_STORAGE_SWIFT_USERNAME=${OS_USERNAME} \
       -e REGISTRY_STORAGE_SWIFT_PASSWORD=${OS_PASSWORD} \
@@ -196,17 +147,14 @@ Error parsing HTTP response: invalid character 'M' looking for beginning of valu
       -e REGISTRY_STORAGE_SWIFT_AUTHURL=${OS_AUTH_URL} \
       -e REGISTRY_STORAGE_SWIFT_CONTAINER=docker-registry \
       -e REGISTRY_AUTH=htpasswd \
-      -e &quot;REGISTRY_AUTH_HTPASSWD_REALM=Admin Registry Realm&quot; \
+      -e &#34;REGISTRY_AUTH_HTPASSWD_REALM=Admin Registry Realm&#34; \
       -e REGISTRY_AUTH_HTPASSWD_PATH=/opt/registry/auth/admin.htpasswd \
       -e REGISTRY_HTTP_SECRET=qerldsljckjqr \
       -e REGISTRY_HTTP_TLS_CERTIFICATE=/opt/registry/ssl/cert.pem \
       -e REGISTRY_HTTP_TLS_KEY=/opt/registry/ssl/key.pem \
       registry:2
-</code></pre>
-
-<h3 id="admin-read-write">Admin Read/Write</h3>
-
-<pre><code>$ docker run -d \
+</code></pre><h3 id="admin-readwrite">Admin Read/Write</h3>
+<pre tabindex="0"><code>$ docker run -d \
       -p 444:5000 \
       --name registry \
       --restart always \
@@ -218,75 +166,38 @@ Error parsing HTTP response: invalid character 'M' looking for beginning of valu
       -e REGISTRY_STORAGE_SWIFT_AUTHURL=${OS_AUTH_URL} \
       -e REGISTRY_STORAGE_SWIFT_CONTAINER=docker-registry \
       -e REGISTRY_AUTH=htpasswd \
-      -e &quot;REGISTRY_AUTH_HTPASSWD_REALM=Read Only Registry Realm&quot; \
+      -e &#34;REGISTRY_AUTH_HTPASSWD_REALM=Read Only Registry Realm&#34; \
       -e REGISTRY_AUTH_HTPASSWD_PATH=/opt/registry/auth/users.htpasswd \
       -e REGISTRY_HTTP_SECRET=hlyrehbrvgszd \
       -e REGISTRY_HTTP_TLS_CERTIFICATE=/opt/registry/ssl/cert.pem \
       -e REGISTRY_HTTP_TLS_KEY=/opt/registry/ssl/key.pem \
       registry:2
-</code></pre>
-
-<p>Before pushing or pull images to these registries you&rsquo;ll need to log in using <code>docker login myregistrydomain.com:443</code> or <code>docker login myregistrydomain.com:444</code>.</p>
-
+</code></pre><p>Before pushing or pull images to these registries you&rsquo;ll need to log in using <code>docker login myregistrydomain.com:443</code> or <code>docker login myregistrydomain.com:444</code>.</p>
 <p>By using external storage for the Registry we have increased our ability to run a resiliant Docker Registry with no single points of failure. All of the servers access the registry itself via localhost which means they have almost no reliance on external systems (except for a very robust object storage platform) and no need for complicated authentication systems.</p>
-
 <p>We also provide access to both Admin (read/write) and Regular (read-only) users via <code>htpasswd</code> files and <code>TLS</code> certificates/encryption which can be managed by Configuration Management.</p>
-
 <p>It goes without saying that you should further lock down all of these services with network based access restrictions in the form of Firewall/IPTables/Security-Groups so that only certain trusted networks can access any of the public endpoints we have created.</p>
 
-              <hr>
-              <div class="related-posts">
-                <h5>Related Posts</h5>
-                
-              </div>
-            </div>
-          </div>
-          <hr>
-        <div class="disqus">
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-
-    (function() {
-      
-      
-      if (window.location.hostname == "localhost")
-        return;
-
-      var disqus_shortname = '';
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-</div>
+          
+          
         </div>
-      
+      </div>
+      <div class="disqus">
+        
       </div>
     </div>
+  </div>
 
-    
-    <footer>
-  <div id="footer">
-    <div class="container">
-      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
-      <a href="http://www.github.com/sumaxime/hugo-sustain/">sustain</a> with ♥</p>
     </div>
+    
+    <footer class="footer">
+  <div class="container">
+    <div class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+    <a href="http://www.github.com/nurlansu/hugo-sustain/">sustain</a> with ♥</div>
   </div>
 </footer>
-<div class="footer"></div>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://tech.paulcz.net/js/docs.min.js"></script>
-<script src="https://tech.paulcz.net/js/main.js"></script>
-
-<script src="https://tech.paulcz.net/js/ie10-viewport-bug-workaround.js"></script>
-
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
 
   </body>
 </html>

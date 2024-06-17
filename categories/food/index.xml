@@ -1,25 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>food on Paul Czarkowski</title>
+    <title>Food on Paul Czarkowski</title>
     <link>https://tech.paulcz.net/categories/food/</link>
-    <description>Recent content in food on Paul Czarkowski</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Food on Paul Czarkowski</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 03 Dec 2014 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://tech.paulcz.net/categories/food/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="https://tech.paulcz.net/categories/food/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>BreadOps - Continuous Delivery of Fresh Baked Bread</title>
       <link>https://tech.paulcz.net/blog/breadops-continous-delivery-of-fresh-baked-bread/</link>
       <pubDate>Wed, 03 Dec 2014 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/breadops-continous-delivery-of-fresh-baked-bread/</guid>
-      <description>&amp;ldquo;See how this sparkly devop princess bakes bread every day with almost no effort at all with this one weird trick&amp;rdquo;
-Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at most supermarkets is little better than cake baked in a bread shaped mold ( seriously check next time you&amp;rsquo;re at a supermarket ). You might be lucky and have a really good bread baker near you, but like butchers and other important crafts they have all but disappeared.</description>
+      <description>&amp;ldquo;See how this sparkly devop princess bakes bread every day with almost no effort at all with this one weird trick&amp;rdquo;&#xA;Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at most supermarkets is little better than cake baked in a bread shaped mold ( seriously check next time you&amp;rsquo;re at a supermarket ). You might be lucky and have a really good bread baker near you, but like butchers and other important crafts they have all but disappeared.</description>
     </item>
-    
   </channel>
 </rss>

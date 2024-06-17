@@ -1,68 +1,47 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>pivotal on Paul Czarkowski</title>
+    <title>Pivotal on Paul Czarkowski</title>
     <link>https://tech.paulcz.net/categories/pivotal/</link>
-    <description>Recent content in pivotal on Paul Czarkowski</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Pivotal on Paul Czarkowski</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 01 Mar 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://tech.paulcz.net/categories/pivotal/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="https://tech.paulcz.net/categories/pivotal/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Spring into Kubernetes - Using Kubernetes as a Config Server</title>
       <link>https://tech.paulcz.net/blog/spring-into-kubernetes-config-server/</link>
       <pubDate>Fri, 01 Mar 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/spring-into-kubernetes-config-server/</guid>
-      <description>In previous installments of Spring into Kubernetes I&amp;rsquo;ve shown you how to build images, deploy applications and write a Helm Chart for Spring applications. In this installment we&amp;rsquo;ll look at Spring Cloud Kubernetes integrations, specifically using Kubernetes Config Maps as a Config Server.
-Usually I would use a Pivotal Container Service cluster to demonstrate, but in this demonstration I&amp;rsquo;ll use a local minikube cluster.
-Spring Cloud Kubernetes Spring Cloud Kubernetes brings in a ton of integrations with Kubernetes.</description>
+      <description>In previous installments of Spring into Kubernetes I&amp;rsquo;ve shown you how to build images, deploy applications and write a Helm Chart for Spring applications. In this installment we&amp;rsquo;ll look at Spring Cloud Kubernetes integrations, specifically using Kubernetes Config Maps as a Config Server.&#xA;Usually I would use a Pivotal Container Service cluster to demonstrate, but in this demonstration I&amp;rsquo;ll use a local minikube cluster.&#xA;Spring Cloud Kubernetes Spring Cloud Kubernetes brings in a ton of integrations with Kubernetes.</description>
     </item>
-    
     <item>
       <title>Spring into Kubernetes - Deploying with Helm</title>
       <link>https://tech.paulcz.net/blog/spring-into-kubernetes-part-2/</link>
       <pubDate>Thu, 07 Feb 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/spring-into-kubernetes-part-2/</guid>
-      <description>Introduction In this installment of Spring into Kubernetes we&amp;rsquo;ll be looking at using Helm to install our Spring application to Kubernetes.
-About Helm Helm is the package manager for Kubernetes. It provides tooling to create, template, package, and share Kubernetes manifests. A helm chart is effectively a signed tarball that contains a set of templated Kubernetes manifests, a metadata file and a set of default values.
-Helm has two major components, the Helm client and the Tiller server.</description>
+      <description>Introduction In this installment of Spring into Kubernetes we&amp;rsquo;ll be looking at using Helm to install our Spring application to Kubernetes.&#xA;About Helm Helm is the package manager for Kubernetes. It provides tooling to create, template, package, and share Kubernetes manifests. A helm chart is effectively a signed tarball that contains a set of templated Kubernetes manifests, a metadata file and a set of default values.&#xA;Helm has two major components, the Helm client and the Tiller server.</description>
     </item>
-    
     <item>
       <title>Cloud Native Operations - Kubernetes Controllers</title>
       <link>https://tech.paulcz.net/blog/cloud-native-operations-k8s-controllers/</link>
       <pubDate>Tue, 29 Jan 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/cloud-native-operations-k8s-controllers/</guid>
-      <description>Note: If this topic has peaked your interest, you can join me for a Webinar on August 15 where I&amp;rsquo;ll dive deep into Cloud Native Operations with Kubernetes and CI/CD Pipelines.
- Lulz what? Cloud Native Operations ?!?!?! Historically Operations practices have lagged behind development. During the 90s a number of lightweight software development practices evolved such as Scrum and Extreme Programming. During the early 2000&amp;rsquo;s it became pretty common to practice (or at least claim to) some form of Agile in software development.</description>
+      <description>Note: If this topic has peaked your interest, you can join me for a Webinar on August 15 where I&amp;rsquo;ll dive deep into Cloud Native Operations with Kubernetes and CI/CD Pipelines.&#xA;Lulz what? Cloud Native Operations ?!?!?! Historically Operations practices have lagged behind development. During the 90s a number of lightweight software development practices evolved such as Scrum and Extreme Programming. During the early 2000&amp;rsquo;s it became pretty common to practice (or at least claim to) some form of Agile in software development.</description>
     </item>
-    
     <item>
       <title>Building Spring Docker Images</title>
       <link>https://tech.paulcz.net/blog/building-spring-docker-images/</link>
       <pubDate>Fri, 25 Jan 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/building-spring-docker-images/</guid>
-      <description>While investigating running Spring applications on Kubernetes I discovered that a lot of the existing example Spring applications do not have a Dockerfile in their git repository. I thought this odd at first (and frankly still do).
-What I discovered though, is there&amp;rsquo;s quite a number of ways to build Spring (and Java in general) container images that don&amp;rsquo;t necessarily rely on writing a Dockerfile.
-Full disclosure, I am a firm believe that any opensource project of consequence (where feasible) should ship a Dockerfile in their git repo, and ideally have images up on the Docker hub (or other public container registry) as it allows for newcomers to experience your application or project in just a few seconds with no need to play detective to try and figure out how to get it running.</description>
+      <description>While investigating running Spring applications on Kubernetes I discovered that a lot of the existing example Spring applications do not have a Dockerfile in their git repository. I thought this odd at first (and frankly still do).&#xA;What I discovered though, is there&amp;rsquo;s quite a number of ways to build Spring (and Java in general) container images that don&amp;rsquo;t necessarily rely on writing a Dockerfile.&#xA;Full disclosure, I am a firm believe that any opensource project of consequence (where feasible) should ship a Dockerfile in their git repo, and ideally have images up on the Docker hub (or other public container registry) as it allows for newcomers to experience your application or project in just a few seconds with no need to play detective to try and figure out how to get it running.</description>
     </item>
-    
     <item>
       <title>Spring into Kubernetes - Part 1</title>
       <link>https://tech.paulcz.net/blog/spring-into-kubernetes-part-1/</link>
       <pubDate>Thu, 24 Jan 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/spring-into-kubernetes-part-1/</guid>
-      <description>Introduction Welcome to the first part in a series of blog posts looking at running Spring applications on Kubernetes. To kick the series off we&amp;rsquo;re going to take a look at the Spring Pet Clinic example application and demonstrate how we can quickly and easily get it running on Kubernetes.
-Step 1. Install a Kubernetes Before we get started I would encourage you to read (or at least skim) through Kelsey Hightower&amp;rsquo;s seminal Kubernetes The Hard Way to get an idea for the complexity of installing and operating a Kubernetes cluster.</description>
+      <description>Introduction Welcome to the first part in a series of blog posts looking at running Spring applications on Kubernetes. To kick the series off we&amp;rsquo;re going to take a look at the Spring Pet Clinic example application and demonstrate how we can quickly and easily get it running on Kubernetes.&#xA;Step 1. Install a Kubernetes Before we get started I would encourage you to read (or at least skim) through Kelsey Hightower&amp;rsquo;s seminal Kubernetes The Hard Way to get an idea for the complexity of installing and operating a Kubernetes cluster.</description>
     </item>
-    
   </channel>
 </rss>

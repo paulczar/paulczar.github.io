@@ -4,42 +4,34 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="map[]" />
-    <meta name="description" content="Random musings mostly about tech">
+    <meta name="author" content="Paul Czarkowski">
     <link rel="shortcut icon" type="image/x-icon" href="https://tech.paulcz.net/img/favicon.ico">
-    <title>Multi Process Docker Images Done Right</title>
-    <meta name="generator" content="Hugo 0.56.3" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://tech.paulcz.net/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    <title>Multi Process Docker Images Done Right | Paul Czarkowski</title>
+    <meta name="description" content="For some values of &lsquo;right&rsquo;
+Almost since Docker was first introduced to the world there has been a fairly strong push to keeping containers to be single process.   This makes a lot of sense and definitely plays into the 12 Factor way of thinking where all application output should be pushed to stdout and docker itself with tools like logspout now has fairly strong tooling to deal with those logs.
+Sometimes however it just makes sense to run more than one process in a container,  a perfect example would be running confd as well as your application in order to modify the application&rsquo;s config file based on changes in service discovery systems like etcd.   The ambassador container way of working can achieve similar things, but I&rsquo;m not sure that running two containers with a process each to run your application is any better than running one container with two processes.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    
+    <link rel="preload stylesheet" href="/css/main.min.css" as="style">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old">
     
     <!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
-
+  
     
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-35638296-2', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
+      
+    
+  
+
 
   </head>
-
   <body>
-    <div id="wrap">
-
-      
-      <nav class="navbar navbar-default">
+    <div id="content">
+  
+  <nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
       <a class="navbar-brand" href="https://tech.paulcz.net/"><i class="fa fa-home"></i></a>
@@ -62,72 +54,50 @@ if (!doNotTrack) {
   </div>
 </nav>
 
-      
-      <div class="container">
-        <div class="blog-post">
-          <h3>
-            <strong><a href="https://tech.paulcz.net/blog/multi-process-docker-images-done-right/">Multi Process Docker Images Done Right</a></strong>
-          </h3>
-        </div>
-        <div class="blog-title">
-          <h4>
-          December 22, 2014
-            &nbsp;&nbsp;
-            
-          </h4>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="blogpost">
-              <h2 id="for-some-values-of-right">For some values of &lsquo;right&rsquo;</h2>
 
+  <div class="container">
+    <h3 class="mt-3"><b><a href="https://tech.paulcz.net/blog/multi-process-docker-images-done-right/">Multi Process Docker Images Done Right</a></b></h3>
+    <div class="blog-title my-4">
+      <h6>
+        December 22, 2014
+        &nbsp;&nbsp;
+        
+      </h6>
+    </div>
+    <div class="panel">
+      <div class="panel-body">
+        <div class="blogpost">
+          <h2 id="for-some-values-of-right">For some values of &lsquo;right&rsquo;</h2>
 <p>Almost since <a href="http://docker.com">Docker</a> was first introduced to the world there has been a fairly strong push to keeping containers to be single process.   This makes a lot of sense and definitely plays into the <a href="http://12factor.net">12 Factor</a> way of thinking where all application output should be pushed to <code>stdout</code> and docker itself with tools like <a href="https://github.com/progrium/logspout">logspout</a> now has fairly strong tooling to deal with those logs.</p>
-
 <p>Sometimes however it just makes sense to run more than one process in a container,  a perfect example would be running <a href="https://github.com/kelseyhightower/confd">confd</a> as well as your application in order to modify the application&rsquo;s config file based on changes in service discovery systems like <a href="https://github.com/coreos/etcd">etcd</a>.   The <a href="https://docs.docker.com/articles/ambassador_pattern_linking/">ambassador</a> container way of working can achieve similar things, but I&rsquo;m not sure that running two containers with a process each to run your application is any better than running one container with two processes.</p>
-
 <p>If you&rsquo;re going run multiple processes you have a few options to do it.</p>
-
 <ol>
 <li>Start the container with the first process adnd then use the new <code>docker exec</code> command to start the second.</li>
 <li>Start them in sequence in a <code>bash</code> script and background all but the last process with a <code>&amp;</code> at the end of the line.</li>
 <li>Use a Process Supervisor such as Supervisord or Runit.</li>
 </ol>
-
 <p>I haven&rsquo;t really messed around with the first option, maybe it could work out, but you&rsquo;d lose the logs from the second process as it would need to output via the first process&rsquo; <code>stdout</code>.</p>
-
 <h2 id="the-bash-script">The Bash Script</h2>
-
 <p>Up until recently the way I have been running multiple processes is via the <code>bash</code> script method, but it feels really clumsy and fragile and while it works I&rsquo;ve never been particularly fond of it.</p>
-
-<p>Here&rsquo;s an snippet from such a script from my <a href="https://github.com/paulczar/docker-elk_confd">docker-elk_confd</a> project which builds out the [ELK]() stack using values in <code>etcd</code> to orchestrate clustering and configuration via <code>confd</code>.</p>
-
-<pre><code>echo Starting ${APP_NAME}
+<p>Here&rsquo;s an snippet from such a script from my <a href="https://github.com/paulczar/docker-elk_confd">docker-elk_confd</a> project which builds out the <a href="">ELK</a> stack using values in <code>etcd</code> to orchestrate clustering and configuration via <code>confd</code>.</p>
+<pre tabindex="0"><code>echo Starting ${APP_NAME}
 
 confd -node $ETCD -config-file /app/confd.toml -confdir /app &amp;
 /opt/elasticsearch/bin/elasticsearch -p /app/elasticsearch.pid &amp;
 
 # while the port is listening, publish to etcd
-while [[ ! -z $(netstat -lnt | awk &quot;\$6 == \&quot;LISTEN\&quot; &amp;&amp; \$4 ~ \&quot;.$PUBLISH\&quot; &amp;&amp; \$1 ~ \&quot;$PROTO.?\&quot;&quot;) ]] ; do
+while [[ ! -z $(netstat -lnt | awk &#34;\$6 == \&#34;LISTEN\&#34; &amp;&amp; \$4 ~ \&#34;.$PUBLISH\&#34; &amp;&amp; \$1 ~ \&#34;$PROTO.?\&#34;&#34;) ]] ; do
   publish_to_etcd
   sleep 5 # sleep for half the TTL
 done
-</code></pre>
-
-<p>As you can see I&rsquo;ve started two processes <code>elasticsearch</code> and <code>confd</code> both backgrounded and then I finish with a loop which publishes data to etcd every 5 seconds until the <code>elasticsearch</code> process quits listening on its published tcp port.  This works, but it leaves me feeling a bit icky.</p>
-
+</code></pre><p>As you can see I&rsquo;ve started two processes <code>elasticsearch</code> and <code>confd</code> both backgrounded and then I finish with a loop which publishes data to etcd every 5 seconds until the <code>elasticsearch</code> process quits listening on its published tcp port.  This works, but it leaves me feeling a bit icky.</p>
 <h2 id="process-supervisor">Process Supervisor</h2>
-
 <p>I have used various supervisors in containers before but never really liked the experience as I could never get all the logs out to <code>stdout</code> and using the standard docker logging mechanisms so I&rsquo;ve always gone back to the <code>bash</code> script method.  Recently while working on the ELK project mentioned above I decided to give using a process supervisor another chance.</p>
-
 <p>My primary measure of success for using a supervisor going forward was to come up with a way to push all output to the supervisor&rsquo;s stdout so that I can use the regular docker logging.</p>
-
 <p>I decided to try with <a href="http://supervisord.org">supervisor</a> as a starting point because it is a fairly small install and has an easily templatable config.   At about the same time I was looking at this I found a <a href="http://supervisord.org">blog post</a> ( I believe it was linked in a recent Docker Weekly ) that talked about using <code>supervisor</code> in docker containers.  They had even (sortof) solved the logging problem,  however the logging was appended with debug lines and made it messy and difficult to read.  I figured there had to be a cleaner way.</p>
-
 <p>Reading through the documentation I saw that you can specify a file to log each supervised process to.   I just needed a way to hijack that config item to write to supervisor&rsquo;s stdout instead.   Turns out that&rsquo;s quite easy as there&rsquo;s a special device <code>/dev/stdout</code> which links to <code>/dev/self/fd/1</code> which is the <code>stdout</code> for the running application.   I quickly threw together a test and it did indeed pipe the logs from the process through <code>stdout</code> of supervisor.</p>
-
 <p>I end up with a <code>/etc/supervisord.conf</code> ( which is written out by confd before supervisor is started ) file that looks like this:</p>
-
-<pre><code>[supervisord]
+<pre tabindex="0"><code>[supervisord]
 logfile=/dev/null
 pidfile=/var/run/supervisord.pid
 nodaemon=true
@@ -155,17 +125,11 @@ stdout_logfile=/dev/stdout
 stdout_logfile_maxbytes=0
 auto_start=true
 autorestart=true
-</code></pre>
-
-<p>and my boot script that docker runs the following to launch my app:</p>
-
-<pre><code>echo Starting ${APP_NAME}
+</code></pre><p>and my boot script that docker runs the following to launch my app:</p>
+<pre tabindex="0"><code>echo Starting ${APP_NAME}
 /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
-</code></pre>
-
-<p>All output from <code>Elasticsearch</code>, <code>confd</code>, <code>supervisord</code> now output via the docker logging systems so that I can see what is going on by running:</p>
-
-<pre><code>$ docker logs elasticsearch
+</code></pre><p>All output from <code>Elasticsearch</code>, <code>confd</code>, <code>supervisord</code> now output via the docker logging systems so that I can see what is going on by running:</p>
+<pre tabindex="0"><code>$ docker logs elasticsearch
 docker logs -f 7270755ce94c03dda930fbdedeee7722dddf6fdbbf8902aaee52c9f94f2147ca
 2014-12-23T04:46:02Z 7270755ce94c confd[37]: INFO /opt/elasticsearch/config/elasticsearch.yml has md5sum 08a09998560b7b786eca1e594b004ddc should be d83b49b485b5acad2666aa03b1ee90a0
 2014-12-23T04:46:02Z 7270755ce94c confd[37]: INFO Target config /opt/elasticsearch/config/elasticsearch.yml out of sync
@@ -177,9 +141,9 @@ docker logs -f 7270755ce94c03dda930fbdedeee7722dddf6fdbbf8902aaee52c9f94f2147ca
 Starting elasticsearch
 2014-12-23 04:46:02,245 CRIT Supervisor running as root (no user in config file)
 2014-12-23 04:46:02,251 INFO supervisord started with pid 51
-2014-12-23 04:46:03,255 INFO spawned: 'publish_etcd' with pid 54
-2014-12-23 04:46:03,258 INFO spawned: 'elasticsearch' with pid 55
-2014-12-23 04:46:03,260 INFO spawned: 'confd' with pid 56
+2014-12-23 04:46:03,255 INFO spawned: &#39;publish_etcd&#39; with pid 54
+2014-12-23 04:46:03,258 INFO spawned: &#39;elasticsearch&#39; with pid 55
+2014-12-23 04:46:03,260 INFO spawned: &#39;confd&#39; with pid 56
 ==&gt; sleeping for 20 seconds, then testing if elasticsearch is up.
 [2014-12-23 04:46:04,146][INFO ][node                     ] [Sultan] version[1.4.2], pid[55], build[927caff/2014-12-16T14:11:12Z]
 [2014-12-23 04:46:04,149][INFO ][node                     ] [Sultan] initializing ...
@@ -187,62 +151,28 @@ Starting elasticsearch
 2014-12-23 04:46:05,158 INFO success: publish_etcd entered RUNNING state, process has stayed up for &gt; than 1 seconds (startsecs)
 2014-12-23 04:46:05,159 INFO success: elasticsearch entered RUNNING state, process has stayed up for &gt; than 1 seconds (startsecs)
 2014-12-23 04:46:05,161 INFO success: confd entered RUNNING state, process has stayed up for &gt; than 1 seconds (startsecs)
-</code></pre>
-
-<p>One last thing that I should mention.  the <code>publish_etcd</code> talk in the supervisor config is running a script that contains the <code>while</code> loop to make sure that <code>elasticsearch</code> is listening on the approriate port, If that loop is broken it means that<code>elasticsearch</code> is not responding and it sends a kill signal to <code>supervisor</code> which then causes the container to shoot itself in the head because the rest of the  processes running are useless without <code>elasticsearch</code> running.</p>
-              <hr>
-              <div class="related-posts">
-                <h5>Related Posts</h5>
-                
-              </div>
-            </div>
-          </div>
-          <hr>
-        <div class="disqus">
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-
-    (function() {
-      
-      
-      if (window.location.hostname == "localhost")
-        return;
-
-      var disqus_shortname = '';
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-</div>
+</code></pre><p>One last thing that I should mention.  the <code>publish_etcd</code> talk in the supervisor config is running a script that contains the <code>while</code> loop to make sure that <code>elasticsearch</code> is listening on the approriate port, If that loop is broken it means that<code>elasticsearch</code> is not responding and it sends a kill signal to <code>supervisor</code> which then causes the container to shoot itself in the head because the rest of the  processes running are useless without <code>elasticsearch</code> running.</p>
+          
+          
         </div>
-      
+      </div>
+      <div class="disqus">
+        
       </div>
     </div>
+  </div>
 
-    
-    <footer>
-  <div id="footer">
-    <div class="container">
-      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
-      <a href="http://www.github.com/sumaxime/hugo-sustain/">sustain</a> with ♥</p>
     </div>
+    
+    <footer class="footer">
+  <div class="container">
+    <div class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+    <a href="http://www.github.com/nurlansu/hugo-sustain/">sustain</a> with ♥</div>
   </div>
 </footer>
-<div class="footer"></div>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://tech.paulcz.net/js/docs.min.js"></script>
-<script src="https://tech.paulcz.net/js/main.js"></script>
-
-<script src="https://tech.paulcz.net/js/ie10-viewport-bug-workaround.js"></script>
-
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
 
   </body>
 </html>

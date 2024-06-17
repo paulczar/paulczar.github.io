@@ -4,42 +4,33 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="map[]" />
-    <meta name="description" content="Random musings mostly about tech">
+    <meta name="author" content="Paul Czarkowski">
     <link rel="shortcut icon" type="image/x-icon" href="https://tech.paulcz.net/img/favicon.ico">
-    <title>Building a Habitat Supervisor for Kubernetes</title>
-    <meta name="generator" content="Hugo 0.56.3" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://tech.paulcz.net/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    <title>Building a Habitat Supervisor for Kubernetes | Paul Czarkowski</title>
+    <meta name="description" content="Habitat is a project from Chef that provides you a reasonably simple way to build, package, and configure your application.
+&ldquo;Habitat is an integrated solution to building, running, and maintaining your application throughout its lifetime. It builds your application and its services into immutable artifacts with declarative dependencies, and then provides automatic rebuilds of your application and its services as your application code and dependencies have upstream updates.&rdquo; - Habitat Getting Started Guide.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    
+    <link rel="preload stylesheet" href="/css/main.min.css" as="style">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old">
     
     <!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
-
+  
     
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-35638296-2', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
+      
+    
+  
+
 
   </head>
-
   <body>
-    <div id="wrap">
-
-      
-      <nav class="navbar navbar-default">
+    <div id="content">
+  
+  <nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
       <a class="navbar-brand" href="https://tech.paulcz.net/"><i class="fa fa-home"></i></a>
@@ -62,178 +53,113 @@ if (!doNotTrack) {
   </div>
 </nav>
 
-      
-      <div class="container">
-        <div class="blog-post">
-          <h3>
-            <strong><a href="https://tech.paulcz.net/blog/habitat-supervisors-in-kubernetes/">Building a Habitat Supervisor for Kubernetes</a></strong>
-          </h3>
-        </div>
-        <div class="blog-title">
-          <h4>
-          October 6, 2017
-            &nbsp;&nbsp;
-            
-          </h4>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="blogpost">
-              
 
-<p><a href="https://habitat.sh">Habitat</a> is a project from <a href="https://chef.io">Chef</a> that
+  <div class="container">
+    <h3 class="mt-3"><b><a href="https://tech.paulcz.net/blog/habitat-supervisors-in-kubernetes/">Building a Habitat Supervisor for Kubernetes</a></b></h3>
+    <div class="blog-title my-4">
+      <h6>
+        October 6, 2017
+        &nbsp;&nbsp;
+        
+      </h6>
+    </div>
+    <div class="panel">
+      <div class="panel-body">
+        <div class="blogpost">
+          <p><a href="https://habitat.sh">Habitat</a> is a project from <a href="https://chef.io">Chef</a> that
 provides you a reasonably simple way to build, package, and configure your
 application.</p>
-
 <blockquote>
 <p>&ldquo;Habitat is an integrated solution to building, running, and maintaining your application throughout its lifetime. It builds your application and its services into immutable artifacts with declarative dependencies, and then provides automatic rebuilds of your application and its services as your application code and dependencies have upstream updates.&rdquo; - <a href="https://www.habitat.sh/tutorials/get-started/">Habitat Getting Started Guide</a>.</p>
 </blockquote>
-
 <p>One of Habitat&rsquo;s core features is that its Supervisor creates a gossip based cluster
 for managing configuration and state of your applications. Kubernetes also provides similar functionality this ability with the user defined Kubernetes manifests and the Kubernetes APIs. Initially it may seem odd that you would skip using Kubernetes to provide this functionality, however it does provide a way to have a universal system for your application management.</p>
-
 <p>Personally I&rsquo;m still on the fence about how useful it is to have this extra abstraction for application lifecycle management on top of what Kubernetes already offers, but I don&rsquo;t discount it as something that could be useful in a lot of organizations.</p>
-
 <p>Documentation for running Habitat built applications on Kubernetes is scant and feels fairly incomplete so I figured I would spend some time to work it out and come up with something myself.</p>
-
 <p>Of course the first thing I had to do was decide on an application to build to demonstrate it. Initially I was going to use the <a href="https://www.habitat.sh/tutorials/get-started/">basic tutorial</a> app from the Habitat getting started tutorial, but instead decided I should write a very lightweight golang app to reduce the dependencies required to build and run it.</p>
-
 <p>The application I wrote is dead simple. Just a <a href="https://github.com/paulczar/habsup/blob/master/main.go">few lines</a> of Golang to provide an API that responds to a <code>GET /health</code>:</p>
-
-<pre><code class="language-go">func main() {
-  handler := health.NewHandler()
-  http.Handle(&quot;/health/&quot;, handler)
-  http.ListenAndServe(&quot;:8080&quot;, nil)
-}
-</code></pre>
-
-<p>After writing this simplest of applications I realized I had inadvertently created a way to run the Habitat Supervisor effectively standalone which would also allow me to bootstrap a Habitat Gossip Cluster that other applications can join as needed.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">handler</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">health</span>.<span style="color:#a6e22e">NewHandler</span>()
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Handle</span>(<span style="color:#e6db74">&#34;/health/&#34;</span>, <span style="color:#a6e22e">handler</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ListenAndServe</span>(<span style="color:#e6db74">&#34;:8080&#34;</span>, <span style="color:#66d9ef">nil</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>After writing this simplest of applications I realized I had inadvertently created a way to run the Habitat Supervisor effectively standalone which would also allow me to bootstrap a Habitat Gossip Cluster that other applications can join as needed.</p>
 <p>Next I had to get my Habitat environment set up. I was able to follow the Habitat Tutorial and figure out how to build this Golang app instead of a Ruby app. This was fairly <a href="https://github.com/paulczar/habsup/tree/master/habitat">straight forward</a>
 and was some edits to a <a href="https://github.com/paulczar/habsup/blob/master/habitat/plan.sh">plan.sh</a>
 file and a few <a href="https://github.com/paulczar/habsup/tree/master/habitat/hooks">hooks</a>.</p>
-
 <p>Performing the Build and exporting the <code>.hart</code> file to a Docker image was fairly easy after I stumbled my way through <code>hab setup</code> and getting a key etc working (the documentation for this could be improved to provide a more delightful experience).</p>
-
 <h2 id="habitat-build-demo">Habitat Build Demo</h2>
-
-<pre><code class="language-bash">$ git clone https://github.com/paulczar/habsup.git
-$ cd habsup
-$ hab studio enter
-$ build
-$ hab pkg export docker ./results/paulczar-habsuper-...hart
-</code></pre>
-
-<p><img src="/habitat-supervisors-in-kubernetes/images/habstudio.gif" alt="habitat build" /></p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git clone https://github.com/paulczar/habsup.git
+</span></span><span style="display:flex;"><span>$ cd habsup
+</span></span><span style="display:flex;"><span>$ hab studio enter
+</span></span><span style="display:flex;"><span>$ build
+</span></span><span style="display:flex;"><span>$ hab pkg export docker ./results/paulczar-habsuper-...hart
+</span></span></code></pre></div><p><img src="/habitat-supervisors-in-kubernetes/images/habstudio.gif" alt="habitat build"></p>
 <p>My next step was to test it using Docker to make sure the app started and cluster formed etc. This mean writing a simple <a href="https://github.com/paulczar/habsup/blob/master/docker-compose.yaml">docker-compose.yaml</a> file to launch three containers and tell them how to connect to eachother with links. and then launch the containers and check that the exposed Habitat Supervisor API is accessible.</p>
-
 <h2 id="docker-demo">Docker Demo</h2>
-
-<pre><code class="language-bash">$ git clone https://github.com/paulczar/habsup.git
-$ cd habsup
-$ docker-compose up -d
-$ docker-compose logs -f
-$ curl http://localhost:9631/services
-</code></pre>
-
-<p><img src="/habitat-supervisors-in-kubernetes/images/docker.gif" alt="habitat docker compose" /></p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git clone https://github.com/paulczar/habsup.git
+</span></span><span style="display:flex;"><span>$ cd habsup
+</span></span><span style="display:flex;"><span>$ docker-compose up -d
+</span></span><span style="display:flex;"><span>$ docker-compose logs -f
+</span></span><span style="display:flex;"><span>$ curl http://localhost:9631/services
+</span></span></code></pre></div><p><img src="/habitat-supervisors-in-kubernetes/images/docker.gif" alt="habitat docker compose"></p>
 <p><em>Note: you can see the habitat supervisors running the health check at the end once the containers are running.</em></p>
-
 <p>Now that I had the Supervisor as a standalone image it was time to put together the appropriate <a href="https://github.com/paulczar/habsup/blob/master/kubernetes/manifests/supervisor.yaml">Kubernetes manifest</a>. To do so I had to do some research on the various Kubernetes resources and how they&rsquo;d help me achieve my goal.</p>
-
 <p>After some experimentation I decided that it made sense to use the <code>StatefulSet</code> resource for to run the supervisor in and run two services, the first being a headless service (meaning it is internal only) for the gossip protocol and the second being a regular service (with external access possible) for the API. Using a <code>StatefulSet</code> gave me predictable pod names and starts up the replicas in order which makes it much easier for the gossip protocol to work.</p>
-
 <p>Initially I was using a single service for both the gossip and API ports but I wanted the Gossip to be internal only, but allow access (if needed) to the API. Creating two services gives me the ability to do both of those things. A headless service also has the benefit of creating a predictable KubeDNS entry for both the service and each pod which can come in handy.</p>
-
 <p>Another interesting thing I discovered is that Kubernetes doesn&rsquo;t publish the service DNS until at least one pod is running. This created a chicken-and-egg issue if I tried to use a <code>readinessProbe</code> for the hab api as habitat wouldn&rsquo;t start until DNS was ready and DNS wouldn&rsquo;t be created as it was waiting for a success from the probe. Thankfully there is an alpha feature that you can enable with an annotation <code>service.alpha.kubernetes.io/tolerate-unready-endpoints: &quot;true&quot;</code> that allows you to use DNS before the pods are ready.</p>
-
 <h2 id="kubernetes-demo">Kubernetes Demo</h2>
-
-<pre><code class="language-bash">$ git clone https://github.com/paulczar/habsup.git
-$ cd habsup
-$ kubectl create -f kubernetes/manifests
-$ kubectl get pods -w
-$ kubectl logs habitat-supervisor-0
-$ curl $(minikube service habitat-supervisor-http --url)/services
-</code></pre>
-
-<p><img src="/habitat-supervisors-in-kubernetes/images/kubernetes.gif" alt="habitat kubernetes" /></p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git clone https://github.com/paulczar/habsup.git
+</span></span><span style="display:flex;"><span>$ cd habsup
+</span></span><span style="display:flex;"><span>$ kubectl create -f kubernetes/manifests
+</span></span><span style="display:flex;"><span>$ kubectl get pods -w
+</span></span><span style="display:flex;"><span>$ kubectl logs habitat-supervisor-0
+</span></span><span style="display:flex;"><span>$ curl <span style="color:#66d9ef">$(</span>minikube service habitat-supervisor-http --url<span style="color:#66d9ef">)</span>/services
+</span></span></code></pre></div><p><img src="/habitat-supervisors-in-kubernetes/images/kubernetes.gif" alt="habitat kubernetes"></p>
 <h2 id="conclusion">Conclusion</h2>
-
 <p>Hopefully this was enough to bootstrap a person looking to use Habitat on Kubernetes. It would be fairly trivial to use the manifests I provided and do one of the following:</p>
-
 <ol>
-<li><p>Use the Habitat cluster created here as a permanent Habitat cluster and have your applications join and leave that cluster as they come up.</p></li>
-
-<li><p>Swap out the use of <code>paulczar/habsup</code> image with your own image and adjust the ports and other values accordingly and have it run as a self contained cluster.</p></li>
+<li>
+<p>Use the Habitat cluster created here as a permanent Habitat cluster and have your applications join and leave that cluster as they come up.</p>
+</li>
+<li>
+<p>Swap out the use of <code>paulczar/habsup</code> image with your own image and adjust the ports and other values accordingly and have it run as a self contained cluster.</p>
+</li>
 </ol>
-
 <p>Getting Habitat to work in Kubernetes was fairly straight forward, however I had to do a few tricky things that shouldn&rsquo;t be necessary. In order for Habitat to get solid adoption on Kubernetes I believe the following needs to be addressed:</p>
-
 <ol>
-<li><p>Gossip cluster bootstrap relies on an ordered startup with <code>--peer ip-or-dns-of-first</code>. Habitat should support a Kuberenetes based discovery which would ask the Kubernetes API to provide the peer details to join.</p></li>
-
-<li><p>The API should come online with an approriate health status before the cluster is created. This would allow the use of a readinessProbe and avoid the problem I suggested earlier.</p></li>
-
-<li><p>Habitat should consider a mode that uses the Kubernetes APIs and the contents of the Manifest to configure itself rather than forming the gossip cluster.</p></li>
+<li>
+<p>Gossip cluster bootstrap relies on an ordered startup with <code>--peer ip-or-dns-of-first</code>. Habitat should support a Kuberenetes based discovery which would ask the Kubernetes API to provide the peer details to join.</p>
+</li>
+<li>
+<p>The API should come online with an approriate health status before the cluster is created. This would allow the use of a readinessProbe and avoid the problem I suggested earlier.</p>
+</li>
+<li>
+<p>Habitat should consider a mode that uses the Kubernetes APIs and the contents of the Manifest to configure itself rather than forming the gossip cluster.</p>
+</li>
 </ol>
 
-              <hr>
-              <div class="related-posts">
-                <h5>Related Posts</h5>
-                
-              </div>
-            </div>
-          </div>
-          <hr>
-        <div class="disqus">
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-
-    (function() {
-      
-      
-      if (window.location.hostname == "localhost")
-        return;
-
-      var disqus_shortname = '';
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-</div>
+          
+          
         </div>
-      
+      </div>
+      <div class="disqus">
+        
       </div>
     </div>
+  </div>
 
-    
-    <footer>
-  <div id="footer">
-    <div class="container">
-      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
-      <a href="http://www.github.com/sumaxime/hugo-sustain/">sustain</a> with ♥</p>
     </div>
+    
+    <footer class="footer">
+  <div class="container">
+    <div class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+    <a href="http://www.github.com/nurlansu/hugo-sustain/">sustain</a> with ♥</div>
   </div>
 </footer>
-<div class="footer"></div>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://tech.paulcz.net/js/docs.min.js"></script>
-<script src="https://tech.paulcz.net/js/main.js"></script>
-
-<script src="https://tech.paulcz.net/js/ie10-viewport-bug-workaround.js"></script>
-
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
 
   </body>
 </html>

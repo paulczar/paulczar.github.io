@@ -4,42 +4,34 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="map[]" />
-    <meta name="description" content="Random musings mostly about tech">
+    <meta name="author" content="Paul Czarkowski">
     <link rel="shortcut icon" type="image/x-icon" href="https://tech.paulcz.net/img/favicon.ico">
-    <title>Spring into Kubernetes - Using Kubernetes as a Config Server</title>
-    <meta name="generator" content="Hugo 0.56.3" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://tech.paulcz.net/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    <title>Spring into Kubernetes - Using Kubernetes as a Config Server | Paul Czarkowski</title>
+    <meta name="description" content="In previous installments of Spring into Kubernetes I&rsquo;ve shown you how to build images, deploy applications and write a Helm Chart for Spring applications. In this installment we&rsquo;ll look at Spring Cloud Kubernetes integrations, specifically using Kubernetes Config Maps as a Config Server.
+Usually I would use a Pivotal Container Service cluster to demonstrate, but in this demonstration I&rsquo;ll use a local minikube cluster.
+Spring Cloud Kubernetes Spring Cloud Kubernetes brings in a ton of integrations with Kubernetes.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    
+    <link rel="preload stylesheet" href="/css/main.min.css" as="style">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old">
     
     <!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
-
+  
     
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-35638296-2', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
+      
+    
+  
+
 
   </head>
-
   <body>
-    <div id="wrap">
-
-      
-      <nav class="navbar navbar-default">
+    <div id="content">
+  
+  <nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
       <a class="navbar-brand" href="https://tech.paulcz.net/"><i class="fa fa-home"></i></a>
@@ -62,239 +54,141 @@ if (!doNotTrack) {
   </div>
 </nav>
 
-      
-      <div class="container">
-        <div class="blog-post">
-          <h3>
-            <strong><a href="https://tech.paulcz.net/blog/spring-into-kubernetes-config-server/">Spring into Kubernetes - Using Kubernetes as a Config Server</a></strong>
-          </h3>
-        </div>
-        <div class="blog-title">
-          <h4>
-          March 1, 2019
-            &nbsp;&nbsp;
-            
-          </h4>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="blogpost">
-              
 
-<p>In previous installments of Spring into Kubernetes I&rsquo;ve shown you how to <a href="https://tech.paulcz.net/blog/building-spring-docker-images/">build images</a>, <a href="https://tech.paulcz.net/blog/spring-into-kubernetes-part-1/">deploy applications</a> and write a <a href="https://tech.paulcz.net/blog/spring-into-kubernetes-part-2/">Helm Chart</a> for Spring applications. In this installment we&rsquo;ll look at <a href="https://github.com/spring-cloud/spring-cloud-kubernetes">Spring Cloud Kubernetes</a> integrations, specifically using Kubernetes <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#create-configmaps-from-files">Config Maps</a> as a Config Server.</p>
-
+  <div class="container">
+    <h3 class="mt-3"><b><a href="https://tech.paulcz.net/blog/spring-into-kubernetes-config-server/">Spring into Kubernetes - Using Kubernetes as a Config Server</a></b></h3>
+    <div class="blog-title my-4">
+      <h6>
+        March 1, 2019
+        &nbsp;&nbsp;
+        
+      </h6>
+    </div>
+    <div class="panel">
+      <div class="panel-body">
+        <div class="blogpost">
+          <p>In previous installments of Spring into Kubernetes I&rsquo;ve shown you how to <a href="https://tech.paulcz.net/blog/building-spring-docker-images/">build images</a>, <a href="https://tech.paulcz.net/blog/spring-into-kubernetes-part-1/">deploy applications</a> and write a <a href="https://tech.paulcz.net/blog/spring-into-kubernetes-part-2/">Helm Chart</a> for Spring applications. In this installment we&rsquo;ll look at <a href="https://github.com/spring-cloud/spring-cloud-kubernetes">Spring Cloud Kubernetes</a> integrations, specifically using Kubernetes <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#create-configmaps-from-files">Config Maps</a> as a Config Server.</p>
 <p>Usually I would use a <a href="https://pivotal.io/platform/pivotal-container-service">Pivotal Container Service</a> cluster to demonstrate, but in this demonstration I&rsquo;ll use a local <a href="https://kubernetes.io/docs/tasks/tools/install-minikube/">minikube</a> cluster.</p>
-
 <h2 id="spring-cloud-kubernetes">Spring Cloud Kubernetes</h2>
-
 <p><a href="https://github.com/spring-cloud/spring-cloud-kubernetes">Spring Cloud Kubernetes</a> brings in a ton of integrations with Kubernetes. This demonstration will focus just on the ability to integrate Kubernetes as a <a href="https://github.com/spring-cloud/spring-cloud-kubernetes#kubernetes-propertysource-implementations">configuration server</a>.</p>
-
 <p>Minimal changes are needed to your applications, you need to simply add the following classes to your <code>pom.xml</code>:</p>
-
-<pre><code class="language-xml">&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-cloud-starter-kubernetes-config&lt;/artifactId&gt;
-&lt;/dependency&gt;
-</code></pre>
-
-<p>You also need to enable it in your <code>bootstrap.yaml</code> (or <code>.properties</code>):</p>
-
-<pre><code class="language-yaml">spring.cloud.kubernetes.config.enabled: true
-spring.cloud.kubernetes.reload.enabled: true
-</code></pre>
-
-<h2 id="getting-started">Getting Started</h2>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;groupId&gt;</span>org.springframework.boot<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;artifactId&gt;</span>spring-boot-starter-actuator<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;groupId&gt;</span>org.springframework.cloud<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;artifactId&gt;</span>spring-cloud-starter-kubernetes-config<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span></code></pre></div><p>You also need to enable it in your <code>bootstrap.yaml</code> (or <code>.properties</code>):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">spring.cloud.kubernetes.config.enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spring.cloud.kubernetes.reload.enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span></code></pre></div><h2 id="getting-started">Getting Started</h2>
 <p>You&rsquo;ll need to <a href="https://kubernetes.io/docs/tasks/tools/install-minikube/">install minikube</a> by following the instructions provided for your Operating System. You&rsquo;ll also need <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">kubectl</a> so that you can give instructions to Kubernetes.</p>
-
 <p>Start Minikube:</p>
-
-<pre><code class="language-console">$ minikube start
-😄  minikube v0.34.1 on linux (amd64)
-💡  Tip: Use 'minikube start -p &lt;name&gt;' to create a new cluster, or 'minikube delete' to delete this one.
-🔄  Restarting existing virtualbox VM for &quot;minikube&quot; ...
-⌛  Waiting for SSH access ...
-📶  &quot;minikube&quot; IP address is 192.168.99.103
-🐳  Configuring Docker as the container runtime ...
-✨  Preparing Kubernetes environment ...
-🚜  Pulling images required by Kubernetes v1.13.3 ...
-🔄  Relaunching Kubernetes v1.13.3 using kubeadm ...
-⌛  Waiting for kube-proxy to come back up ...
-🤔  Verifying component health ......
-💗  kubectl is now configured to use &quot;minikube&quot;
-🏄  Done! Thank you for using minikube!
-</code></pre>
-
-<p>Ensure that you can communicate with minikube:</p>
-
-<pre><code class="language-console">$ kubectl get nodes
-NAME       STATUS   ROLES    AGE   VERSION
-minikube   Ready    master   36h   v1.13.3
-</code></pre>
-
-<h2 id="deploy-spring-hello-world">Deploy Spring Hello World</h2>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>$ minikube start
+</span></span><span style="display:flex;"><span>😄  minikube v0.34.1 on linux (amd64)
+</span></span><span style="display:flex;"><span>💡  Tip: Use &#39;minikube start -p &lt;name&gt;&#39; to create a new cluster, or &#39;minikube delete&#39; to delete this one.
+</span></span><span style="display:flex;"><span>🔄  Restarting existing virtualbox VM for &#34;minikube&#34; ...
+</span></span><span style="display:flex;"><span>⌛  Waiting for SSH access ...
+</span></span><span style="display:flex;"><span>📶  &#34;minikube&#34; IP address is 192.168.99.103
+</span></span><span style="display:flex;"><span>🐳  Configuring Docker as the container runtime ...
+</span></span><span style="display:flex;"><span>✨  Preparing Kubernetes environment ...
+</span></span><span style="display:flex;"><span>🚜  Pulling images required by Kubernetes v1.13.3 ...
+</span></span><span style="display:flex;"><span>🔄  Relaunching Kubernetes v1.13.3 using kubeadm ...
+</span></span><span style="display:flex;"><span>⌛  Waiting for kube-proxy to come back up ...
+</span></span><span style="display:flex;"><span>🤔  Verifying component health ......
+</span></span><span style="display:flex;"><span>💗  kubectl is now configured to use &#34;minikube&#34;
+</span></span><span style="display:flex;"><span>🏄  Done! Thank you for using minikube!
+</span></span></code></pre></div><p>Ensure that you can communicate with minikube:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>$ kubectl get nodes
+</span></span><span style="display:flex;"><span>NAME       STATUS   ROLES    AGE   VERSION
+</span></span><span style="display:flex;"><span>minikube   Ready    master   36h   v1.13.3
+</span></span></code></pre></div><h2 id="deploy-spring-hello-world">Deploy Spring Hello World</h2>
 <p>The source for this demo can be found at <a href="https://github.com/paulczar/spring-helloworld">paulczar/spring-hello</a> on github. Of importance it will respond to a web request with the contents of the application property <code>message</code>.</p>
-
 <p>Deploy the example Hello World application and expose it via a service:</p>
-
-<pre><code class="language-console">$ kubectl run hello --image=paulczar/spring-hello:k8s001 --port=8080
-deployment.apps/hello created
-
-$ kubectl expose deployment hello --type=LoadBalancer --port 80 --target-port 8080
-service/hello exposed
-</code></pre>
-
-<p>You can use <code>minikube service list</code> to get a list of services and the URLs for those services. This helps make up for the lack of LoadBalancer support in minikube:</p>
-
-<pre><code class="language-console">$ minikube service list
-|-------------|------------|-----------------------------|
-|  NAMESPACE  |    NAME    |             URL             |
-|-------------|------------|-----------------------------|
-| default     | hello      | http://192.168.99.103:30871 |
-| default     | kubernetes | No node port                |
-| kube-system | kube-dns   | No node port                |
-|-------------|------------|-----------------------------|
-</code></pre>
-
-<p>Use the URL provided for the <code>hello</code> service:</p>
-
-<pre><code>$ curl http://192.168.99.103:30871
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>$ kubectl run hello --image<span style="color:#f92672">=</span>paulczar/spring-hello:k8s001 --port<span style="color:#f92672">=</span><span style="color:#ae81ff">8080</span>
+</span></span><span style="display:flex;"><span>deployment.apps/hello created
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>$ kubectl expose deployment hello --type<span style="color:#f92672">=</span>LoadBalancer --port <span style="color:#ae81ff">80</span> --target-port <span style="color:#ae81ff">8080</span>
+</span></span><span style="display:flex;"><span>service/hello exposed
+</span></span></code></pre></div><p>You can use <code>minikube service list</code> to get a list of services and the URLs for those services. This helps make up for the lack of LoadBalancer support in minikube:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>$ minikube service list
+</span></span><span style="display:flex;"><span>|-------------|------------|-----------------------------|
+</span></span><span style="display:flex;"><span>|  NAMESPACE  |    NAME    |             URL             |
+</span></span><span style="display:flex;"><span>|-------------|------------|-----------------------------|
+</span></span><span style="display:flex;"><span>| default     | hello      | http://192.168.99.103:30871 |
+</span></span><span style="display:flex;"><span>| default     | kubernetes | No node port                |
+</span></span><span style="display:flex;"><span>| kube-system | kube-dns   | No node port                |
+</span></span><span style="display:flex;"><span>|-------------|------------|-----------------------------|
+</span></span></code></pre></div><p>Use the URL provided for the <code>hello</code> service:</p>
+<pre tabindex="0"><code>$ curl http://192.168.99.103:30871
 hello development
-</code></pre>
-
-<p>Our application is running and responding with <code>hello development</code>. This is the default value for <code>message</code> in the <code>development</code> spring profile.</p>
-
+</code></pre><p>Our application is running and responding with <code>hello development</code>. This is the default value for <code>message</code> in the <code>development</code> spring profile.</p>
 <h2 id="configure-kubernetes-support-for-spring-hello-world">Configure Kubernetes support for Spring Hello World</h2>
-
 <p>If you have <code>rbac</code> enabled in your cluster (which you should, we&rsquo;re not animals) the service account your application is running and will be unable to view kubernetes resources. You can see these errors in the pod&rsquo;s logs:</p>
-
-<pre><code class="language-console">k logs deployment/hello
-2019-03-01 16:13:02.629  WARN 1 --- [           main] o.s.cloud.kubernetes.StandardPodUtils    : Failed to get pod with name:[hello-bb9cf575d-rqt6n]. You should look into this if things aren't working as you expect. Are you missing serviceaccount permissions?
-
-io.fabric8.kubernetes.client.KubernetesClientException: Failure executing: GET at: https://10.96.0.1/api/v1/namespaces/default/pods/hello-bb9cf575d-rqt6n. Message: Forbidden!Configured service account doesn't have access. Service account may have been revoked. pods &quot;hello-bb9cf575d-rqt6n&quot; is forbidden: User &quot;system:serviceaccount:default:default&quot; cannot get resource &quot;pods&quot; in API group &quot;&quot; in the namespace &quot;default&quot;.
-...
-...
-</code></pre>
-
-<p>You could create a new service user and give it the appropriate permissions, or you could give permissions to the default service account. Do the latter using a kubernetes manifest found <a href="https://raw.githubusercontent.com/paulczar/spring-helloworld/master/deploy/rbac.yaml">here</a>.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>k logs deployment/hello
+</span></span><span style="display:flex;"><span>2019-03-01 16:13:02.629  WARN 1 --- [           main] o.s.cloud.kubernetes.StandardPodUtils    : Failed to get pod with name:[hello-bb9cf575d-rqt6n]. You should look into this if things aren&#39;t working as you expect. Are you missing serviceaccount permissions?
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>io.fabric8.kubernetes.client.KubernetesClientException: Failure executing: GET at: https://10.96.0.1/api/v1/namespaces/default/pods/hello-bb9cf575d-rqt6n. Message: Forbidden!Configured service account doesn&#39;t have access. Service account may have been revoked. pods &#34;hello-bb9cf575d-rqt6n&#34; is forbidden: User &#34;system:serviceaccount:default:default&#34; cannot get resource &#34;pods&#34; in API group &#34;&#34; in the namespace &#34;default&#34;.
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>...
+</span></span></code></pre></div><p>You could create a new service user and give it the appropriate permissions, or you could give permissions to the default service account. Do the latter using a kubernetes manifest found <a href="https://raw.githubusercontent.com/paulczar/spring-helloworld/master/deploy/rbac.yaml">here</a>.</p>
 <p>Update the <code>rolebinding</code> for the default user:</p>
-
-<pre><code class="language-console">$ kubectl apply -f https://raw.githubusercontent.com/paulczar/spring-helloworld/master/deploy/rbac.yaml
-</code></pre>
-
-<p>Delete the current pod to have the kubernetes deployment start a new one which should now have permissions:</p>
-
-<pre><code class="language-console">$ kubectl get pods
-NAME                    READY   STATUS    RESTARTS   AGE
-hello-bb9cf575d-rqt6n   1/1     Running   0          12m
-
-$ kubectl delete pod hello-bb9cf575d-rqt6n
-pod &quot;hello-bb9cf575d-rqt6n&quot; deleted
-
-$ kubectl get pods
-NAME                    READY   STATUS    RESTARTS   AGE
-hello-bb9cf575d-8mwxq   1/1     Running   0          21s
-</code></pre>
-
-<p>If you look at the logs you&rsquo;ll see the error has disappeared and you can see it is looking for a <code>configmap</code>:</p>
-
-<pre><code class="language-console">$ kubectl logs deployment/hello
-2019-03-01 16:26:33.080 DEBUG 1 --- [           main] o.s.cloud.kubernetes.config.ConfigUtils  : Config Map name has not been set, taking it from property/env spring.application.name (default=application)
-2019-03-01 16:26:33.080 DEBUG 1 --- [           main] o.s.cloud.kubernetes.config.ConfigUtils  : Config Map namespace has not been set, taking it from client (ns=default)
-2019-03-01 16:26:33.188  INFO 1 --- [           main] b.c.PropertySourceBootstrapConfiguration : Located property source: CompositePropertySource {name='composite-configmap', propertySources=[ConfigMapPropertySource@872306601 {name='configmap.hello.default', properties={}}]}
-
-Since you haven't yet created a `configmap` the response from the application should still be the default:
-
-</code></pre>
-
-<p>console
-$ curl <a href="http://192.168.99.103:30871">http://192.168.99.103:30871</a>
-hello development</p>
-
-<pre><code>
-Next create a `configmap` that the application will use, by default it will look for a `configmap` with the same name as the application:
-
-</code></pre>
-
-<p>console
-$ kubectl create configmap hello &ndash;from-literal=message=&ldquo;HELLO KUBERNETES&rdquo;
-configmap/hello created</p>
-
-<pre><code>
-Run the `curl` command again and you should see the new response:
-
-</code></pre>
-
-<p>console
-$ curl <a href="http://192.168.99.103:30871">http://192.168.99.103:30871</a>
-HELLO KUBERNETES
-```</p>
-
-<h2 id="conclusion">Conclusion</h2>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>$ kubectl apply -f https://raw.githubusercontent.com/paulczar/spring-helloworld/master/deploy/rbac.yaml
+</span></span></code></pre></div><p>Delete the current pod to have the kubernetes deployment start a new one which should now have permissions:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>$ kubectl get pods
+</span></span><span style="display:flex;"><span>NAME                    READY   STATUS    RESTARTS   AGE
+</span></span><span style="display:flex;"><span>hello-bb9cf575d-rqt6n   1/1     Running   0          12m
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>$ kubectl delete pod hello-bb9cf575d-rqt6n
+</span></span><span style="display:flex;"><span>pod &#34;hello-bb9cf575d-rqt6n&#34; deleted
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>$ kubectl get pods
+</span></span><span style="display:flex;"><span>NAME                    READY   STATUS    RESTARTS   AGE
+</span></span><span style="display:flex;"><span>hello-bb9cf575d-8mwxq   1/1     Running   0          21s
+</span></span></code></pre></div><p>If you look at the logs you&rsquo;ll see the error has disappeared and you can see it is looking for a <code>configmap</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>$ kubectl logs deployment/hello
+</span></span><span style="display:flex;"><span>2019-03-01 16:26:33.080 DEBUG 1 --- [           main] o.s.cloud.kubernetes.config.ConfigUtils  : Config Map name has not been set, taking it from property/env spring.application.name (default=application)
+</span></span><span style="display:flex;"><span>2019-03-01 16:26:33.080 DEBUG 1 --- [           main] o.s.cloud.kubernetes.config.ConfigUtils  : Config Map namespace has not been set, taking it from client (ns=default)
+</span></span><span style="display:flex;"><span>2019-03-01 16:26:33.188  INFO 1 --- [           main] b.c.PropertySourceBootstrapConfiguration : Located property source: CompositePropertySource {name=&#39;composite-configmap&#39;, propertySources=[ConfigMapPropertySource@872306601 {name=&#39;configmap.hello.default&#39;, properties={}}]}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>Since you haven&#39;t yet created a `configmap` the response from the application should still be the default:
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>```console
+</span></span><span style="display:flex;"><span>$ curl http://192.168.99.103:30871
+</span></span><span style="display:flex;"><span>hello development
+</span></span></code></pre></div><p>Next create a <code>configmap</code> that the application will use, by default it will look for a <code>configmap</code> with the same name as the application:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>$ kubectl create configmap hello --from-literal<span style="color:#f92672">=</span>message<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;HELLO KUBERNETES&#34;</span>
+</span></span><span style="display:flex;"><span>configmap/hello created
+</span></span></code></pre></div><p>Run the <code>curl</code> command again and you should see the new response:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>$ curl http://192.168.99.103:30871
+</span></span><span style="display:flex;"><span>HELLO KUBERNETES
+</span></span></code></pre></div><h2 id="conclusion">Conclusion</h2>
 <p>While this was a fairly simple demonstration of the Spring Cloud Kubernetes integrations you can see how useful it can be. By integrating directly into Kubernetes you can avoid running a <a href="https://spring.io/projects/spring-cloud-config">Spring Cloud Config</a> service to get dynamic configuration of your application.</p>
-
 <p>You can also load up an entire application properties file (either <code>.properties</code> or <code>.yaml</code>) inside a <code>configmap</code>, you can also store passwords and keys in a Kubernetes <code>secret</code> and dynamically load those.</p>
 
-              <hr>
-              <div class="related-posts">
-                <h5>Related Posts</h5>
-                
-              </div>
-            </div>
-          </div>
-          <hr>
-        <div class="disqus">
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-
-    (function() {
-      
-      
-      if (window.location.hostname == "localhost")
-        return;
-
-      var disqus_shortname = '';
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-</div>
+          
+          
         </div>
-      
+      </div>
+      <div class="disqus">
+        
       </div>
     </div>
+  </div>
 
-    
-    <footer>
-  <div id="footer">
-    <div class="container">
-      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
-      <a href="http://www.github.com/sumaxime/hugo-sustain/">sustain</a> with ♥</p>
     </div>
+    
+    <footer class="footer">
+  <div class="container">
+    <div class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+    <a href="http://www.github.com/nurlansu/hugo-sustain/">sustain</a> with ♥</div>
   </div>
 </footer>
-<div class="footer"></div>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://tech.paulcz.net/js/docs.min.js"></script>
-<script src="https://tech.paulcz.net/js/main.js"></script>
-
-<script src="https://tech.paulcz.net/js/ie10-viewport-bug-workaround.js"></script>
-
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
 
   </body>
 </html>

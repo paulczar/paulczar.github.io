@@ -4,42 +4,34 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="map[]" />
-    <meta name="description" content="Random musings mostly about tech">
+    <meta name="author" content="Paul Czarkowski">
     <link rel="shortcut icon" type="image/x-icon" href="https://tech.paulcz.net/img/favicon.ico">
-    <title>Introduction to GitHub Actions</title>
-    <meta name="generator" content="Hugo 0.56.3" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://tech.paulcz.net/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    <title>Introduction to GitHub Actions | Paul Czarkowski</title>
+    <meta name="description" content="After what seems like an eternity I finally got added to the GitHub Actions beta a few days ago.
+I recently created a Hugo website for learning Kubernetes called k8s.camp which is hosted in GitHub Pages and I figured that switching it from CircleCI to GitHub Actions would be a great way to learn Actions.
+Before I get started I do want to mention that my experience as a new user trying to learn how actions work was sub-optimal.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    
+    <link rel="preload stylesheet" href="/css/main.min.css" as="style">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old">
     
     <!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
-
+  
     
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-35638296-2', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
+      
+    
+  
+
 
   </head>
-
   <body>
-    <div id="wrap">
-
-      
-      <nav class="navbar navbar-default">
+    <div id="content">
+  
+  <nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
       <a class="navbar-brand" href="https://tech.paulcz.net/"><i class="fa fa-home"></i></a>
@@ -62,301 +54,197 @@ if (!doNotTrack) {
   </div>
 </nav>
 
-      
-      <div class="container">
-        <div class="blog-post">
-          <h3>
-            <strong><a href="https://tech.paulcz.net/blog/intro-to-github-actions/">Introduction to GitHub Actions</a></strong>
-          </h3>
-        </div>
-        <div class="blog-title">
-          <h4>
-          August 29, 2019
-            &nbsp;&nbsp;
-            
-          </h4>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="blogpost">
-              
 
-<p>After what seems like an <a href="https://github.blog/2018-10-17-action-demos/">eternity</a> I finally got added to the <a href="https://github.com/features/actions/">GitHub Actions</a> beta a few days ago.</p>
-
+  <div class="container">
+    <h3 class="mt-3"><b><a href="https://tech.paulcz.net/blog/intro-to-github-actions/">Introduction to GitHub Actions</a></b></h3>
+    <div class="blog-title my-4">
+      <h6>
+        August 29, 2019
+        &nbsp;&nbsp;
+        
+      </h6>
+    </div>
+    <div class="panel">
+      <div class="panel-body">
+        <div class="blogpost">
+          <p>After what seems like an <a href="https://github.blog/2018-10-17-action-demos/">eternity</a> I finally got added to the <a href="https://github.com/features/actions/">GitHub Actions</a> beta a few days ago.</p>
 <p>I recently created a <a href="https://gohugo.io">Hugo</a> website for learning Kubernetes called <a href="https://k8s.camp">k8s.camp</a> which is hosted in GitHub Pages and I figured that switching it from <a href="https://circleci.com">CircleCI</a> to GitHub Actions would be a great way to learn Actions.</p>
-
 <p>Before I get started I do want to mention that my experience as a new user trying to learn how actions work was sub-optimal.</p>
-
 <p>My previous automation for <a href="https://k8s.camp">k8s.camp</a> was using CircleCI which was very intuitive, I can&rsquo;t say the same for GitHub Actions.</p>
-
 <h2 id="no-good-plan-survives-first-contact">No good plan survives first contact</h2>
-
 <p>Obviously the first thing I did was google &ldquo;github actions documentation&rdquo; and the first hit was <a href="https://developer.github.com/actions/">developer.github.com/actions</a> which I hastily clicked on to be greeted with the following:</p>
-
-<p><img src="./doc-move.png" alt="doc move deprecate" /></p>
-
+<p><img src="./doc-move.png" alt="doc move deprecate"></p>
 <p>Which suggested I was off to a rocky start. I clicked through to the <a href="https://help.github.com/en/categories/automating-your-workflow-with-github-actions">&ldquo;Automating your workflow with GitHub Actions&rdquo;</a> page.</p>
-
 <blockquote>
 <p>Pretty much any time I googled a GitHub Actions question I was sent to the deprecated documentation with the <code>HCL</code> syntax rather than <code>yaml</code>.</p>
 </blockquote>
-
 <p>Most of the existing examples are still in <code>HCL</code>, both in the documentation and out in the wild.</p>
-
 <p>On top of this the examples in the documentation are quite trite and don&rsquo;t really help do anything useful. It&rsquo;s not even really clear how to structure the workflows and actions in the repo, so I had to fumble my way through it.</p>
-
 <p>After a bunch of reading documentation and finding incomplete examples and blog posts I managed to slowly grok my way through it.</p>
-
 <p>Hopefully this blog post will help others have a better first experience.</p>
-
 <h2 id="workflows-and-actions">Workflows and Actions</h2>
-
 <p>My understanding through trial and error is there are two things you need for GitHub Actions, Workflows and Actions.</p>
-
 <h3 id="workflows">Workflows</h3>
-
 <p>Workflows are pretty much what you&rsquo;d expect them to be. Files that describe the steps to be taken when an event is triggered.</p>
-
 <p>These are stored in <code>.github/workflows</code> in your git repository and look something like this (in fact below is the <a href="https://github.com/paulczar/k8s-camp/blob/master/.github/workflows/build-and-deploy.yml">current workflow</a> for k8s.camp):</p>
-
-<pre><code class="language-yaml">name: Build and Deploy to GitHub Pages
-on:
-  push:
-    branches: [master]
-jobs:
-  build:
-    name: build-and-deploy
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-        with:
-          fetch-depth: 1
-      - uses: ./.github/actions/spell-check
-      - uses: ./.github/actions/publish-gh-pages
-        env:
-          PUSH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-</code></pre>
-
-<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">name</span>: <span style="color:#ae81ff">Build and Deploy to GitHub Pages</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">on</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">push</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">branches</span>: [<span style="color:#ae81ff">master]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">jobs</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">build</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">build-and-deploy</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">runs-on</span>: <span style="color:#ae81ff">ubuntu-latest</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">steps</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/checkout@v1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">with</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">fetch-depth</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">./.github/actions/spell-check</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">./.github/actions/publish-gh-pages</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">env</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">PUSH_TOKEN</span>: <span style="color:#ae81ff">${{ secrets.GITHUB_TOKEN }}</span>
+</span></span></code></pre></div><blockquote>
 <p>Note: GitHub Actions act like GitHub Apps which means it gets it&rsquo;s own <code>GITHUB_TOKEN</code> secret which can be pulled into <em>environment variables</em> for the Actions. In fact there&rsquo;s a ton of default <em>environment variables</em> passed into the action such as the repository name and git commit sha.</p>
 </blockquote>
-
 <p>You can see you define the type of activities to trigger the workflow (in this case a push to the <code>master</code> branch) and a set of steps to run. These steps call out to actions.</p>
-
 <p>You can have multiple workflows based on different GitHub activities and even chain them together to create even more complex workflows.</p>
-
 <h2 id="actions">Actions</h2>
-
 <p>Actions are also pretty self explanatory, they&rsquo;re the discrete units of work required to fulfill each step in the workflow.</p>
-
 <p>Actions can be local to the repo, or they can be called from another repository.</p>
-
 <p>For example the above workflow calls a remote checkout action <code>uses: actions/checkout@v1</code> which literally looks out to the <code>v1</code> release of the github repo <code>actions/checkout</code> <a href="https://github.com/actions/checkout/releases/tag/v1.0.0">here</a>.</p>
-
 <p>Actions are run inside Docker containers, and thus an Action is usually a <code>Dockerfile</code> combined with a script to run inside the container. Remote actions should contain an <code>action.yaml</code> to define the action and its interactions.</p>
-
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">The first step in learning how to use github actions is to learn how to build and run Docker images the wrong way.</p>&mdash; Czarcuterie Board of Insults 🇺🇦 (@pczarkowski) <a href="https://twitter.com/pczarkowski/status/1167437284410626054?ref_src=twsrc%5Etfw">August 30, 2019</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>You can vendor your actions into your repo (which I prefer to do, especially compared to pulling in some other random person&rsquo;s action blindly) in which case I prefer to place them in the <code>.github/actions</code> directory to keep things clean.</p>
-
 <h2 id="the-three-steps">The three steps</h2>
-
 <p>There are three steps defined in my workflow file above. These will be run in order by the action, if one fails the entire action will halt.</p>
-
-<h3 id="step-1-checkout">Step 1 - checkout</h3>
-
+<h3 id="step-1---checkout">Step 1 - checkout</h3>
 <p>The first step is using a github provided action to check out the source at the correct commit.</p>
-
-<h3 id="step-2-spellcheck">Step 2 - spellcheck</h3>
-
+<h3 id="step-2---spellcheck">Step 2 - spellcheck</h3>
 <p>The second step is running a spellcheck across all of my markdown files.</p>
-
 <blockquote>
 <p>As I mentioned an action runs in a Docker container, so an Action is generally defined by a <code>Dockerfile</code> to build the image, and an <code>ENTRYPOINT</code> script to run the action inside the image.</p>
 </blockquote>
-
 <p>in the k8s.camp repo is the following local action <code>./.github/actions/spell-check</code> which consists of:</p>
-
 <h4 id="dockerfile">Dockerfile</h4>
-
 <p>This is a fairly basic Dockerfile that simply starts from a small <code>nodejs</code> image and adds in my entrypoint script.</p>
-
 <blockquote>
 <p>Note: the <code>LABEL</code>s are important to github actions and are documented <a href="https://developer.github.com/actions/creating-github-actions/creating-a-docker-container/#label">here</a></p>
 </blockquote>
-
-<pre><code class="language-dockerfile">FROM node:lts-alpine
-
-LABEL &quot;name&quot;=&quot;Markdown Spell Checker&quot;
-LABEL &quot;maintainer&quot;=&quot;Paul Czarkowski&quot;
-LABEL &quot;version&quot;=&quot;0.0.1&quot;
-
-LABEL &quot;com.github.actions.name&quot;=&quot;Markdown Spell Checker&quot;
-LABEL &quot;com.github.actions.description&quot;=&quot;Markdown Spell Checker&quot;
-LABEL &quot;com.github.actions.icon&quot;=&quot;package&quot;
-LABEL &quot;com.github.actions.color&quot;=&quot;green&quot;
-
-COPY entrypoint.sh /entrypoint.sh
-
-ENTRYPOINT [&quot;/entrypoint.sh&quot;]
-</code></pre>
-
-<h4 id="entrypoint-sh">entrypoint.sh</h4>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> node:lts-alpine</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">LABEL</span> <span style="color:#e6db74">&#34;name&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Markdown Spell Checker&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">LABEL</span> <span style="color:#e6db74">&#34;maintainer&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Paul Czarkowski&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">LABEL</span> <span style="color:#e6db74">&#34;version&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0.0.1&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">LABEL</span> <span style="color:#e6db74">&#34;com.github.actions.name&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Markdown Spell Checker&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">LABEL</span> <span style="color:#e6db74">&#34;com.github.actions.description&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Markdown Spell Checker&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">LABEL</span> <span style="color:#e6db74">&#34;com.github.actions.icon&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;package&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">LABEL</span> <span style="color:#e6db74">&#34;com.github.actions.color&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;green&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> entrypoint.sh /entrypoint.sh<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENTRYPOINT</span> [<span style="color:#e6db74">&#34;/entrypoint.sh&#34;</span>]<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><h4 id="entrypointsh">entrypoint.sh</h4>
 <p>The script is really simple and uses <code>npm</code> to install <code>markdown-spellcheck</code> locally and then runs it.</p>
-
 <p>The exit code of <code>markdown-spellcheck</code> will be used to determine if the step passed or failed.</p>
-
-<pre><code class="language-bash">#!/bin/sh
-
-cd $GITHUB_WORKSPACE
-
-npm install markdown-spellcheck
-
-./node_modules/markdown-spellcheck/bin/mdspell -r -n -a --en-us 'content/**/*.md'
-</code></pre>
-
-<h3 id="step-3-publish-to-gh-pages">Step 3 - Publish to gh-pages</h3>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/sh
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>cd $GITHUB_WORKSPACE
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>npm install markdown-spellcheck
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>./node_modules/markdown-spellcheck/bin/mdspell -r -n -a --en-us <span style="color:#e6db74">&#39;content/**/*.md&#39;</span>
+</span></span></code></pre></div><h3 id="step-3---publish-to-gh-pages">Step 3 - Publish to gh-pages</h3>
 <p>The third step will run <code>hugo</code> to generate the <code>html</code> for the website and then pushing the results to the <code>gh-pages</code> branch.</p>
-
 <h4 id="dockerfile-1">Dockerfile</h4>
-
 <p>Here we have a slightly more complicated <code>Dockerfile</code> that starts with Ubuntu and installs <code>curl</code>, <code>git</code>, and <code>hugo</code></p>
-
-<pre><code class="language-dockerfile">FROM ubuntu:bionic
-
-LABEL &quot;name&quot;=&quot;Publish k8s.camp&quot;
-LABEL &quot;maintainer&quot;=&quot;Paul Czarkowski&quot;
-LABEL &quot;version&quot;=&quot;0.0.1&quot;
-
-LABEL &quot;com.github.actions.name&quot;=&quot;Publish k8s.camp&quot;
-LABEL &quot;com.github.actions.description&quot;=&quot;Publish k8s.camp via gh-pages&quot;
-LABEL &quot;com.github.actions.icon&quot;=&quot;package&quot;
-LABEL &quot;com.github.actions.color&quot;=&quot;green&quot;
-
-RUN apt-get update &gt; /dev/null &amp;&amp; apt-get -yqq install curl git &gt; /dev/null
-
-RUN curl -sSL \
-    https://github.com/gohugoio/hugo/releases/download/v0.56.3/hugo_0.56.3_Linux-64bit.tar.gz | \
-    tar xzf - hugo &amp;&amp; \
-    chmod +x /hugo &amp;&amp; \
-    /hugo version
-
-COPY entrypoint.sh /entrypoint.sh
-
-ENTRYPOINT [&quot;/entrypoint.sh&quot;]
-</code></pre>
-
-<h4 id="entrypoint-sh-1">entrypoint.sh</h4>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> ubuntu:bionic</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">LABEL</span> <span style="color:#e6db74">&#34;name&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Publish k8s.camp&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">LABEL</span> <span style="color:#e6db74">&#34;maintainer&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Paul Czarkowski&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">LABEL</span> <span style="color:#e6db74">&#34;version&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0.0.1&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">LABEL</span> <span style="color:#e6db74">&#34;com.github.actions.name&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Publish k8s.camp&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">LABEL</span> <span style="color:#e6db74">&#34;com.github.actions.description&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Publish k8s.camp via gh-pages&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">LABEL</span> <span style="color:#e6db74">&#34;com.github.actions.icon&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;package&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">LABEL</span> <span style="color:#e6db74">&#34;com.github.actions.color&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;green&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> apt-get update &gt; /dev/null <span style="color:#f92672">&amp;&amp;</span> apt-get -yqq install curl git &gt; /dev/null<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> curl -sSL <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    https://github.com/gohugoio/hugo/releases/download/v0.56.3/hugo_0.56.3_Linux-64bit.tar.gz | <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    tar xzf - hugo <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    chmod +x /hugo <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    /hugo version<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> entrypoint.sh /entrypoint.sh<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENTRYPOINT</span> [<span style="color:#e6db74">&#34;/entrypoint.sh&#34;</span>]<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><h4 id="entrypointsh-1">entrypoint.sh</h4>
 <p>The entrypoint script configures git, checks out the <code>gh-pages</code> branch, and generates the html into that branch before pushing it back up to git using the <code>GITHUB_TOKEN</code> which is passed to it as the environment variable <code>PUSH_TOKEN</code>.</p>
-
-<pre><code class="language-bash">#!/bin/bash
-
-set -o pipefail
-
-echo &quot;--&gt; Configure git client&quot;
-
-git config --global user.email &quot;username.taken@gmail.com&quot;
-git config --global user.name &quot;Hugo Publisher&quot;
-
-echo &quot;--&gt; check out gh-pages&quot;
-git worktree add -B gh-pages public origin/gh-pages
-
-echo &quot;--&gt; hugo publish&quot;
-cd $GITHUB_WORKSPACE
-/hugo
-
-echo &quot;--&gt; push gh-pages&quot;
-if [[ -z &quot;$PUSH_TOKEN&quot; ]]; then
-  echo &quot;No push token provided, skipping publish&quot;
-else
-  cd public
-  git add --all &amp;&amp; \
-  git commit -m &quot;Github Action Build ${GITHUB_SHA} `date +'%Y-%m-%d %H:%M:%S'`&quot; --allow-empty &amp;&amp; \
-  git remote set-url origin https://${GITHUB_ACTOR}:${PUSH_TOKEN}@github.com/${GITHUB_REPOSITORY}
-  git push origin gh-pages:gh-pages
-fi
-</code></pre>
-
-<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>set -o pipefail
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;--&gt; Configure git client&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>git config --global user.email <span style="color:#e6db74">&#34;username.taken@gmail.com&#34;</span>
+</span></span><span style="display:flex;"><span>git config --global user.name <span style="color:#e6db74">&#34;Hugo Publisher&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;--&gt; check out gh-pages&#34;</span>
+</span></span><span style="display:flex;"><span>git worktree add -B gh-pages public origin/gh-pages
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;--&gt; hugo publish&#34;</span>
+</span></span><span style="display:flex;"><span>cd $GITHUB_WORKSPACE
+</span></span><span style="display:flex;"><span>/hugo
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;--&gt; push gh-pages&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> -z <span style="color:#e6db74">&#34;</span>$PUSH_TOKEN<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>  echo <span style="color:#e6db74">&#34;No push token provided, skipping publish&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>  cd public
+</span></span><span style="display:flex;"><span>  git add --all <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  git commit -m <span style="color:#e6db74">&#34;Github Action Build </span><span style="color:#e6db74">${</span>GITHUB_SHA<span style="color:#e6db74">}</span><span style="color:#e6db74"> `date +&#39;%Y-%m-%d %H:%M:%S&#39;`&#34;</span> --allow-empty <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  git remote set-url origin https://<span style="color:#e6db74">${</span>GITHUB_ACTOR<span style="color:#e6db74">}</span>:<span style="color:#e6db74">${</span>PUSH_TOKEN<span style="color:#e6db74">}</span>@github.com/<span style="color:#e6db74">${</span>GITHUB_REPOSITORY<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>  git push origin gh-pages:gh-pages
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span></code></pre></div><blockquote>
 <p>Note: I am using <code>git remote set-url</code> to update the git repo URL to include the <code>PUSH_TOKEN</code> which gives the action <code>push</code> access to the repository.</p>
 </blockquote>
-
 <h2 id="end-result">End Result</h2>
-
 <p>Pushing this new <code>.github</code> directory structure defining a workflow and a set of steps up to my git repo is all I needed to set up the Actions, and the workflow triggered from this very first push.</p>
-
 <p>Like all <code>ci</code> tools I had a dozen or so commits to stabilize the actual test scripts and workflow, but now all I have to do to publish a new version of the <a href="https://k8s.camp">k8s.camp</a> website is to merge a commit into the <code>master</code> branch of the repo.</p>
-
-<p><img src="./actions2.png" alt="screenshot of github actions" /></p>
-
+<p><img src="./actions2.png" alt="screenshot of github actions"></p>
 <h2 id="conclusion">Conclusion</h2>
-
 <p>Once you get through the initial hump of learning how GitHub actions work it becomes fairly straightforward to configure and use actions.</p>
-
 <p>For the sake of sanity I have kept the workflow for <a href="https://k8s.camp">k8s.camp</a> very simple, but I can see how you could quickly build out a fairly complex set of workflows to perform your CI/CD tasks.</p>
-
 <p>While I kept the Actions in the local repository, I can see a very interesting versatility in having remote actions. I can see myself creating a central Actions github repo with all of my actions which I can then link back to from my various projects.</p>
-
 <p>If you have a basic hugo setup publishing to <code>gh-pages</code> feel free to clone down the <a href="https://github.com/paulczar/k8s-camp">paulczar/k8s-camp</a> repo and re-use them in your own.</p>
 
-              <hr>
-              <div class="related-posts">
-                <h5>Related Posts</h5>
-                
-              </div>
-            </div>
-          </div>
-          <hr>
-        <div class="disqus">
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-
-    (function() {
-      
-      
-      if (window.location.hostname == "localhost")
-        return;
-
-      var disqus_shortname = '';
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-</div>
+          
+          
         </div>
-      
+      </div>
+      <div class="disqus">
+        
       </div>
     </div>
+  </div>
 
-    
-    <footer>
-  <div id="footer">
-    <div class="container">
-      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
-      <a href="http://www.github.com/sumaxime/hugo-sustain/">sustain</a> with ♥</p>
     </div>
+    
+    <footer class="footer">
+  <div class="container">
+    <div class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+    <a href="http://www.github.com/nurlansu/hugo-sustain/">sustain</a> with ♥</div>
   </div>
 </footer>
-<div class="footer"></div>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://tech.paulcz.net/js/docs.min.js"></script>
-<script src="https://tech.paulcz.net/js/main.js"></script>
-
-<script src="https://tech.paulcz.net/js/ie10-viewport-bug-workaround.js"></script>
-
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
 
   </body>
 </html>

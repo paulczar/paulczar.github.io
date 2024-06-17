@@ -1,47 +1,33 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>streaming on Paul Czarkowski</title>
+    <title>Streaming on Paul Czarkowski</title>
     <link>https://tech.paulcz.net/categories/streaming/</link>
-    <description>Recent content in streaming on Paul Czarkowski</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Streaming on Paul Czarkowski</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 31 Mar 2021 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://tech.paulcz.net/categories/streaming/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="https://tech.paulcz.net/categories/streaming/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Streaming DevOpsDays Texas</title>
       <link>https://tech.paulcz.net/blog/streaming-devopsdays-texas/</link>
       <pubDate>Wed, 31 Mar 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/streaming-devopsdays-texas/</guid>
-      <description>I recently had the privilege to help organize DevOpsDays Texas 2021, a virtual event that we ran to try and scratch our DevOpsDays itch given that in-person conferences won&amp;rsquo;t be happening any time soon.
- To see the replays of the event you can watch the Day 1 and Day 2 streams over on youtube.
- I had the dubious honor of being the most experienced at the technical setup for live streaming and therefore was nominated as the person to figure out how to live stream the event to Youtube.</description>
+      <description>I recently had the privilege to help organize DevOpsDays Texas 2021, a virtual event that we ran to try and scratch our DevOpsDays itch given that in-person conferences won&amp;rsquo;t be happening any time soon.&#xA;To see the replays of the event you can watch the Day 1 and Day 2 streams over on youtube.&#xA;I had the dubious honor of being the most experienced at the technical setup for live streaming and therefore was nominated as the person to figure out how to live stream the event to Youtube.</description>
     </item>
-    
     <item>
       <title>How to broadcast to Twitch and Zoom with OBS</title>
       <link>https://tech.paulcz.net/blog/obs-broadcast-to-zoom-and-twitch/</link>
       <pubDate>Wed, 13 May 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/obs-broadcast-to-zoom-and-twitch/</guid>
-      <description>Note: I have an updated, simpler version of this on Github with saved exports of profile and sources here.
- If you prefer a Video Tutorial, you can watch me screencast it on youtube, otherwise read on below.
-  Recent world events (COVID-19) has completely turned the Developer Advocacy role on its head and many of us are scrambling to find new ways to effectively reach audiences remotely.</description>
+      <description>Note: I have an updated, simpler version of this on Github with saved exports of profile and sources here.&#xA;If you prefer a Video Tutorial, you can watch me screencast it on youtube, otherwise read on below.&#xA;Recent world events (COVID-19) has completely turned the Developer Advocacy role on its head and many of us are scrambling to find new ways to effectively reach audiences remotely.&#xA;Many of us have been reaching for tools like Zoom for smaller groups such as Meetups and streaming platforms like Twitch / YouTube Live for reaching larger groups.</description>
     </item>
-    
     <item>
       <title>Streaming from Zoom to Twitch (or YouTube)</title>
       <link>https://tech.paulcz.net/blog/streaming-from-zoom-to-twitch/</link>
       <pubDate>Wed, 01 Apr 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/streaming-from-zoom-to-twitch/</guid>
-      <description>Zoom meetings are great for a small number of people, and if you&amp;rsquo;re willing to buy a Webinar license you can also use it for a full on webinar (although there are some interesting restrictions to webinars, like you can&amp;rsquo;t have breakout rooms).
-Twitch is a great streaming platform, originally used for streaming video games, its now more commonly being used to stream live coding and another technology related things that involve sharing your screen.</description>
+      <description>Zoom meetings are great for a small number of people, and if you&amp;rsquo;re willing to buy a Webinar license you can also use it for a full on webinar (although there are some interesting restrictions to webinars, like you can&amp;rsquo;t have breakout rooms).&#xA;Twitch is a great streaming platform, originally used for streaming video games, its now more commonly being used to stream live coding and another technology related things that involve sharing your screen.</description>
     </item>
-    
   </channel>
 </rss>

@@ -1,149 +1,103 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>kubernetes on Paul Czarkowski</title>
+    <title>Kubernetes on Paul Czarkowski</title>
     <link>https://tech.paulcz.net/categories/kubernetes/</link>
-    <description>Recent content in kubernetes on Paul Czarkowski</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Kubernetes on Paul Czarkowski</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 08 Jun 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://tech.paulcz.net/categories/kubernetes/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="https://tech.paulcz.net/categories/kubernetes/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Deploying and accessing a GCP SQL database via Kubernetes</title>
       <link>https://tech.paulcz.net/blog/gcp-config-connect-sql-database/</link>
       <pubDate>Mon, 08 Jun 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/gcp-config-connect-sql-database/</guid>
-      <description>Sorry for the long preamble, feel free to just skip straight to the technical details.
-Two years ago, faced with the challenge of wanting to reduce the tooling required to deploy infrastructure to Google Cloud I started working on a Google Cloud Operator. The goal of this project was to be able to stand up networks, images, and Virtual Machines for installing Pivotal&amp;rsquo;s PKS (now Tanzu Kubernetes Grid Integrated).</description>
+      <description>Sorry for the long preamble, feel free to just skip straight to the technical details.&#xA;Two years ago, faced with the challenge of wanting to reduce the tooling required to deploy infrastructure to Google Cloud I started working on a Google Cloud Operator. The goal of this project was to be able to stand up networks, images, and Virtual Machines for installing Pivotal&amp;rsquo;s PKS (now Tanzu Kubernetes Grid Integrated).&#xA;This worked out pretty well for me and I was able to create/destroy environments at will seeded from a single node GKE cluster running the operator.</description>
     </item>
-    
     <item>
       <title>Creating Self Signed Certificates on Kubernetes</title>
       <link>https://tech.paulcz.net/blog/creating-self-signed-certs-on-kubernetes/</link>
       <pubDate>Sat, 22 Feb 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/creating-self-signed-certs-on-kubernetes/</guid>
-      <description>Welcome to 2020. Creating self signed TLS certificates is still hard. Five (5) years ago I created a project on github called omgwtfssl which is a fairly simple bash script wrapping a bunch of openssl commands to create certificates.
-I&amp;rsquo;ve been using it ever since and kind of forgot about the pain of creating certificates.
-Skip the words and jump to the examples Creating self signed certificates with cert-manager, Creating multiple certificates from the same self signed CA with cert-manager.</description>
+      <description>Welcome to 2020. Creating self signed TLS certificates is still hard. Five (5) years ago I created a project on github called omgwtfssl which is a fairly simple bash script wrapping a bunch of openssl commands to create certificates.&#xA;I&amp;rsquo;ve been using it ever since and kind of forgot about the pain of creating certificates.&#xA;Skip the words and jump to the examples [Creating self signed certificates with cert-manager] (#creating-self-signed-certificates-with-cert-manager), Creating multiple certificates from the same self signed CA with cert-manager.</description>
     </item>
-    
     <item>
       <title>Creating a Helm Chart Repository - Part 1</title>
       <link>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-1/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-1/</guid>
-      <description>Note: If this topic has peaked your interest, you can join me for a Webinar on August 15 where I&amp;rsquo;ll dive deep into Cloud Native Operations with Kubernetes and CI/CD Pipelines.
- Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 I will demonstrate creating a Helm chart repository using GitHub and GitHub Pages. In part 2 I will add Automation to automatically update the repository, and in part 3 I will add testing for changes to the charts themselves.</description>
+      <description>Note: If this topic has peaked your interest, you can join me for a Webinar on August 15 where I&amp;rsquo;ll dive deep into Cloud Native Operations with Kubernetes and CI/CD Pipelines.&#xA;Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 I will demonstrate creating a Helm chart repository using GitHub and GitHub Pages. In part 2 I will add Automation to automatically update the repository, and in part 3 I will add testing for changes to the charts themselves.</description>
     </item>
-    
     <item>
       <title>Creating a Helm Chart Repository - Part 2</title>
       <link>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-2/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-2/</guid>
-      <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 of this series I demonstrated creating a Helm chart repository using GitHub and GitHub Pages. In this part 2 I will add Automation to automatically update the repository, and in part 2 I will add testing for changes to the charts themselves.
- If you&amp;rsquo;re into Videos, I walked JJ through starting with Helm from scratch all the way to creating a Helm Repo and CI/CD.</description>
+      <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 of this series I demonstrated creating a Helm chart repository using GitHub and GitHub Pages. In this part 2 I will add Automation to automatically update the repository, and in part 2 I will add testing for changes to the charts themselves.&#xA;If you&amp;rsquo;re into Videos, I walked JJ through starting with Helm from scratch all the way to creating a Helm Repo and CI/CD.</description>
     </item>
-    
     <item>
       <title>Creating a Helm Chart Repository - Part 3</title>
       <link>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-3/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-3/</guid>
-      <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 of this series I demonstrated creating a Helm chart repository using GitHub and GitHub Pages. In part 2 I will add Automation to automatically update the repository, and in part 3 I will add testing for changes to the charts themselves.
- If you&amp;rsquo;re into Videos, I walked JJ through starting with Helm from scratch all the way to creating a Helm Repo and CI/CD.</description>
+      <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 of this series I demonstrated creating a Helm chart repository using GitHub and GitHub Pages. In part 2 I will add Automation to automatically update the repository, and in part 3 I will add testing for changes to the charts themselves.&#xA;If you&amp;rsquo;re into Videos, I walked JJ through starting with Helm from scratch all the way to creating a Helm Repo and CI/CD.</description>
     </item>
-    
     <item>
       <title>Spring into Kubernetes - Using Kubernetes as a Config Server</title>
       <link>https://tech.paulcz.net/blog/spring-into-kubernetes-config-server/</link>
       <pubDate>Fri, 01 Mar 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/spring-into-kubernetes-config-server/</guid>
-      <description>In previous installments of Spring into Kubernetes I&amp;rsquo;ve shown you how to build images, deploy applications and write a Helm Chart for Spring applications. In this installment we&amp;rsquo;ll look at Spring Cloud Kubernetes integrations, specifically using Kubernetes Config Maps as a Config Server.
-Usually I would use a Pivotal Container Service cluster to demonstrate, but in this demonstration I&amp;rsquo;ll use a local minikube cluster.
-Spring Cloud Kubernetes Spring Cloud Kubernetes brings in a ton of integrations with Kubernetes.</description>
+      <description>In previous installments of Spring into Kubernetes I&amp;rsquo;ve shown you how to build images, deploy applications and write a Helm Chart for Spring applications. In this installment we&amp;rsquo;ll look at Spring Cloud Kubernetes integrations, specifically using Kubernetes Config Maps as a Config Server.&#xA;Usually I would use a Pivotal Container Service cluster to demonstrate, but in this demonstration I&amp;rsquo;ll use a local minikube cluster.&#xA;Spring Cloud Kubernetes Spring Cloud Kubernetes brings in a ton of integrations with Kubernetes.</description>
     </item>
-    
     <item>
       <title>Spring into Kubernetes - Deploying with Helm</title>
       <link>https://tech.paulcz.net/blog/spring-into-kubernetes-part-2/</link>
       <pubDate>Thu, 07 Feb 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/spring-into-kubernetes-part-2/</guid>
-      <description>Introduction In this installment of Spring into Kubernetes we&amp;rsquo;ll be looking at using Helm to install our Spring application to Kubernetes.
-About Helm Helm is the package manager for Kubernetes. It provides tooling to create, template, package, and share Kubernetes manifests. A helm chart is effectively a signed tarball that contains a set of templated Kubernetes manifests, a metadata file and a set of default values.
-Helm has two major components, the Helm client and the Tiller server.</description>
+      <description>Introduction In this installment of Spring into Kubernetes we&amp;rsquo;ll be looking at using Helm to install our Spring application to Kubernetes.&#xA;About Helm Helm is the package manager for Kubernetes. It provides tooling to create, template, package, and share Kubernetes manifests. A helm chart is effectively a signed tarball that contains a set of templated Kubernetes manifests, a metadata file and a set of default values.&#xA;Helm has two major components, the Helm client and the Tiller server.</description>
     </item>
-    
     <item>
       <title>Cloud Native Operations - Kubernetes Controllers</title>
       <link>https://tech.paulcz.net/blog/cloud-native-operations-k8s-controllers/</link>
       <pubDate>Tue, 29 Jan 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/cloud-native-operations-k8s-controllers/</guid>
-      <description>Note: If this topic has peaked your interest, you can join me for a Webinar on August 15 where I&amp;rsquo;ll dive deep into Cloud Native Operations with Kubernetes and CI/CD Pipelines.
- Lulz what? Cloud Native Operations ?!?!?! Historically Operations practices have lagged behind development. During the 90s a number of lightweight software development practices evolved such as Scrum and Extreme Programming. During the early 2000&amp;rsquo;s it became pretty common to practice (or at least claim to) some form of Agile in software development.</description>
+      <description>Note: If this topic has peaked your interest, you can join me for a Webinar on August 15 where I&amp;rsquo;ll dive deep into Cloud Native Operations with Kubernetes and CI/CD Pipelines.&#xA;Lulz what? Cloud Native Operations ?!?!?! Historically Operations practices have lagged behind development. During the 90s a number of lightweight software development practices evolved such as Scrum and Extreme Programming. During the early 2000&amp;rsquo;s it became pretty common to practice (or at least claim to) some form of Agile in software development.</description>
     </item>
-    
     <item>
       <title>Building Spring Docker Images</title>
       <link>https://tech.paulcz.net/blog/building-spring-docker-images/</link>
       <pubDate>Fri, 25 Jan 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/building-spring-docker-images/</guid>
-      <description>While investigating running Spring applications on Kubernetes I discovered that a lot of the existing example Spring applications do not have a Dockerfile in their git repository. I thought this odd at first (and frankly still do).
-What I discovered though, is there&amp;rsquo;s quite a number of ways to build Spring (and Java in general) container images that don&amp;rsquo;t necessarily rely on writing a Dockerfile.
-Full disclosure, I am a firm believe that any opensource project of consequence (where feasible) should ship a Dockerfile in their git repo, and ideally have images up on the Docker hub (or other public container registry) as it allows for newcomers to experience your application or project in just a few seconds with no need to play detective to try and figure out how to get it running.</description>
+      <description>While investigating running Spring applications on Kubernetes I discovered that a lot of the existing example Spring applications do not have a Dockerfile in their git repository. I thought this odd at first (and frankly still do).&#xA;What I discovered though, is there&amp;rsquo;s quite a number of ways to build Spring (and Java in general) container images that don&amp;rsquo;t necessarily rely on writing a Dockerfile.&#xA;Full disclosure, I am a firm believe that any opensource project of consequence (where feasible) should ship a Dockerfile in their git repo, and ideally have images up on the Docker hub (or other public container registry) as it allows for newcomers to experience your application or project in just a few seconds with no need to play detective to try and figure out how to get it running.</description>
     </item>
-    
     <item>
       <title>Spring into Kubernetes - Part 1</title>
       <link>https://tech.paulcz.net/blog/spring-into-kubernetes-part-1/</link>
       <pubDate>Thu, 24 Jan 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/spring-into-kubernetes-part-1/</guid>
-      <description>Introduction Welcome to the first part in a series of blog posts looking at running Spring applications on Kubernetes. To kick the series off we&amp;rsquo;re going to take a look at the Spring Pet Clinic example application and demonstrate how we can quickly and easily get it running on Kubernetes.
-Step 1. Install a Kubernetes Before we get started I would encourage you to read (or at least skim) through Kelsey Hightower&amp;rsquo;s seminal Kubernetes The Hard Way to get an idea for the complexity of installing and operating a Kubernetes cluster.</description>
+      <description>Introduction Welcome to the first part in a series of blog posts looking at running Spring applications on Kubernetes. To kick the series off we&amp;rsquo;re going to take a look at the Spring Pet Clinic example application and demonstrate how we can quickly and easily get it running on Kubernetes.&#xA;Step 1. Install a Kubernetes Before we get started I would encourage you to read (or at least skim) through Kelsey Hightower&amp;rsquo;s seminal Kubernetes The Hard Way to get an idea for the complexity of installing and operating a Kubernetes cluster.</description>
     </item>
-    
     <item>
       <title>The future of Kubernetes is Virtual Machines</title>
       <link>https://tech.paulcz.net/blog/future-of-kubernetes-is-virtual-machines/</link>
       <pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/future-of-kubernetes-is-virtual-machines/</guid>
-      <description>Note: If this topic has peaked your interest, you can join me for a Webinar on August 15 where I&amp;rsquo;ll dive deep into Cloud Native Operations with Kubernetes and CI/CD Pipelines.
- Peering into the crystal ball Kubernetes as a technology has been very important to my career this year, and will be even more so for next year too. As 2018 comes to a close its time to drag out the hubris and make a bold prediction.</description>
+      <description>Note: If this topic has peaked your interest, you can join me for a Webinar on August 15 where I&amp;rsquo;ll dive deep into Cloud Native Operations with Kubernetes and CI/CD Pipelines.&#xA;Peering into the crystal ball Kubernetes as a technology has been very important to my career this year, and will be even more so for next year too. As 2018 comes to a close its time to drag out the hubris and make a bold prediction.</description>
     </item>
-    
     <item>
       <title>Building a Habitat Supervisor for Kubernetes</title>
       <link>https://tech.paulcz.net/blog/habitat-supervisors-in-kubernetes/</link>
       <pubDate>Fri, 06 Oct 2017 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/habitat-supervisors-in-kubernetes/</guid>
-      <description>Habitat is a project from Chef that provides you a reasonably simple way to build, package, and configure your application.
- &amp;ldquo;Habitat is an integrated solution to building, running, and maintaining your application throughout its lifetime. It builds your application and its services into immutable artifacts with declarative dependencies, and then provides automatic rebuilds of your application and its services as your application code and dependencies have upstream updates.&amp;rdquo; - Habitat Getting Started Guide.</description>
+      <description>Habitat is a project from Chef that provides you a reasonably simple way to build, package, and configure your application.&#xA;&amp;ldquo;Habitat is an integrated solution to building, running, and maintaining your application throughout its lifetime. It builds your application and its services into immutable artifacts with declarative dependencies, and then provides automatic rebuilds of your application and its services as your application code and dependencies have upstream updates.&amp;rdquo; - Habitat Getting Started Guide.</description>
     </item>
-    
     <item>
       <title>Writing Your First Helm Chart</title>
       <link>https://tech.paulcz.net/blog/getting-started-with-helm/</link>
       <pubDate>Tue, 03 Oct 2017 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/getting-started-with-helm/</guid>
-      <description>I recently found myself writing instructions on how to deploy an application to several Kubernetes platform and ended up writing a different Kubernetes manifests for each platform. 95% of the content was the same with just a few different directives based on how the particular platform handles ingress, or if we needed a Registry secret or a TLS certificate.
-Kubernetes manifests are very declarative and don&amp;rsquo;t offer any way to put conditionals or variables that could be set in them.</description>
+      <description>I recently found myself writing instructions on how to deploy an application to several Kubernetes platform and ended up writing a different Kubernetes manifests for each platform. 95% of the content was the same with just a few different directives based on how the particular platform handles ingress, or if we needed a Registry secret or a TLS certificate.&#xA;Kubernetes manifests are very declarative and don&amp;rsquo;t offer any way to put conditionals or variables that could be set in them.</description>
     </item>
-    
   </channel>
 </rss>

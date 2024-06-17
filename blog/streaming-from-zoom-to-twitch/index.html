@@ -4,42 +4,33 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="map[]" />
-    <meta name="description" content="Random musings mostly about tech">
+    <meta name="author" content="Paul Czarkowski">
     <link rel="shortcut icon" type="image/x-icon" href="https://tech.paulcz.net/img/favicon.ico">
-    <title>Streaming from Zoom to Twitch (or YouTube)</title>
-    <meta name="generator" content="Hugo 0.56.3" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://tech.paulcz.net/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    <title>Streaming from Zoom to Twitch (or YouTube) | Paul Czarkowski</title>
+    <meta name="description" content="Zoom meetings are great for a small number of people, and if you&rsquo;re willing to buy a Webinar license you can also use it for a full on webinar (although there are some interesting restrictions to webinars, like you can&rsquo;t have breakout rooms).
+Twitch is a great streaming platform, originally used for streaming video games, its now more commonly being used to stream live coding and another technology related things that involve sharing your screen.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    
+    <link rel="preload stylesheet" href="/css/main.min.css" as="style">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old">
     
     <!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
-
+  
     
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-35638296-2', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
+      
+    
+  
+
 
   </head>
-
   <body>
-    <div id="wrap">
-
-      
-      <nav class="navbar navbar-default">
+    <div id="content">
+  
+  <nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
       <a class="navbar-brand" href="https://tech.paulcz.net/"><i class="fa fa-home"></i></a>
@@ -62,143 +53,74 @@ if (!doNotTrack) {
   </div>
 </nav>
 
-      
-      <div class="container">
-        <div class="blog-post">
-          <h3>
-            <strong><a href="https://tech.paulcz.net/blog/streaming-from-zoom-to-twitch/">Streaming from Zoom to Twitch (or YouTube)</a></strong>
-          </h3>
-        </div>
-        <div class="blog-title">
-          <h4>
-          April 1, 2020
-            &nbsp;&nbsp;
-            
-          </h4>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="blogpost">
-              
 
-<p>Zoom meetings are great for a small number of people, and if you&rsquo;re willing to buy a Webinar license you can also use it for a full on webinar (although there are some interesting restrictions to webinars, like you can&rsquo;t have breakout rooms).</p>
-
+  <div class="container">
+    <h3 class="mt-3"><b><a href="https://tech.paulcz.net/blog/streaming-from-zoom-to-twitch/">Streaming from Zoom to Twitch (or YouTube)</a></b></h3>
+    <div class="blog-title my-4">
+      <h6>
+        April 1, 2020
+        &nbsp;&nbsp;
+        
+      </h6>
+    </div>
+    <div class="panel">
+      <div class="panel-body">
+        <div class="blogpost">
+          <p>Zoom meetings are great for a small number of people, and if you&rsquo;re willing to buy a Webinar license you can also use it for a full on webinar (although there are some interesting restrictions to webinars, like you can&rsquo;t have breakout rooms).</p>
 <p>Twitch is a great streaming platform, originally used for streaming video games, its now more commonly being used to stream live coding and another technology related things that involve sharing your screen.</p>
-
 <p>Traditionally you&rsquo;d use software called <a href="https://obsproject.com/">Open Broadcaster Software (OBS)</a> which you can compose multiple video/audio inputs into a single video that can be streamed to Twitch. This is how folks will compose their xbox, a chat screen and a webcam together in their stream.</p>
-
 <p>However OBS is quite CPU hungry (I think a GPU might help) and by the time you run OBS on a standard machine its tough to run anything else without starving OBS of resources and causing stuttering on the stream.</p>
-
 <p>Its made worse if you want to have multiple people on the stream and you end up running something like Zoom which allows you all to chat, and one or more of you to share your screen via zoom, then you just push Zoom itself through OBS.</p>
-
 <p>But if you&rsquo;re already streaming video via Zoom, wouldn&rsquo;t it be great if you could just use Zoom to stream directly to Twitch and cutout the middle man?  Turns out you can!</p>
-
 <h2 id="setting-up-zoom-to-stream-to-twitch">Setting up Zoom to stream to Twitch</h2>
-
 <p>Preamble aside, its fairly easy, but completely unintuitive to stream Zoom to Twitch. So lets talk it through. First of all you do need a paid [Pro, Business, Education, or Enterprise] account, hopefully you have that through your workplace.</p>
-
 <p>Log into your organization&rsquo;s Zoom, and hit the <strong>Settings</strong> button on the left hand menu. Scroll down to <strong>Advanced settings</strong> and turn <strong>Allow live streaming meetings</strong> on. Check either the <strong>YouTube</strong> or the <strong>Custom Live Streaming Service</strong>, the latter which we&rsquo;ll configure for Twitch.</p>
-
-<p><img src="/blog/streaming-from-zoom-to-twitch/zoom-settings.png" alt="Zoom Settings Page" /></p>
-
+<p><img src="/blog/streaming-from-zoom-to-twitch/zoom-settings.png" alt="Zoom Settings Page"></p>
 <p>Since I&rsquo;m bad at remembering things, I throw the following in the instructions text box so I remember when setting up the meeting how to do it.</p>
-
-<pre><code>stream url: rtmp://live.twitch.tv/app
+<pre tabindex="0"><code>stream url: rtmp://live.twitch.tv/app
 stream key: &lt;your twitch account stream key&gt;
 live streaming url: https://twitch.tv/accountname
-</code></pre>
-
-<p>Then just hit Save. You&rsquo;re now ready to stream. You can either set up the actual stream live in a Zoom meeting, or you can Schedule a meeting and configure it there. Let&rsquo;s take a look at the latter.</p>
-
+</code></pre><p>Then just hit Save. You&rsquo;re now ready to stream. You can either set up the actual stream live in a Zoom meeting, or you can Schedule a meeting and configure it there. Let&rsquo;s take a look at the latter.</p>
 <h2 id="schedule-a-zoom-meeting-with-twitch-streaming">Schedule a Zoom meeting with Twitch Streaming</h2>
-
 <p>In your Zoom account on the zoom website click <strong>Schedule a meeting</strong>.</p>
-
 <p>Set a name, the start time, duration etc and click <strong>Save</strong>.</p>
-
 <p>This will drop you to the settings page for the meeting you just scheduled and on the bottom of that page is the <strong>Live Streaming</strong> configuration setting. Click <strong>configure live stream settings</strong>.</p>
-
-<p><img src="/blog/streaming-from-zoom-to-twitch/schedule-a-meeting.png" alt="schedule a meeting" /></p>
-
+<p><img src="/blog/streaming-from-zoom-to-twitch/schedule-a-meeting.png" alt="schedule a meeting"></p>
 <p>Here you enter the details following the instructions you conveniently placed in the Stream settings:</p>
-
-<p><em>You can find the twitch key at the following URL <a href="https://dashboard.twitch.tv/u/">https://dashboard.twitch.tv/u/</a><username>/settings/channel</em></p>
-
-<p><img src="/blog/streaming-from-zoom-to-twitch/configure-live-stream.png" alt="configure live stream" /></p>
-
+<p><em>You can find the twitch key at the following URL <a href="https://dashboard.twitch.tv/u/">https://dashboard.twitch.tv/u/</a><!-- raw HTML omitted -->/settings/channel</em></p>
+<p><img src="/blog/streaming-from-zoom-to-twitch/configure-live-stream.png" alt="configure live stream"></p>
 <p>Hit Save. Now when you join the Meeting it will automatically configure the Live Stream, but you&rsquo;ll still need to start the Stream by clicking the <strong>&hellip; More</strong> button and select the streaming option from there.</p>
-
 <p><em>If you didn&rsquo;t configure live streaming for the meeting, you can actually configure it here as long as you&rsquo;ve enabled streaming in Settings</em></p>
-
-<p><img src="/blog/streaming-from-zoom-to-twitch/from-in-zoom-meeting.png" alt="configure live stream in meeting" /></p>
-
+<p><img src="/blog/streaming-from-zoom-to-twitch/from-in-zoom-meeting.png" alt="configure live stream in meeting"></p>
 <p>Zoom will redirect you to a browser and configure the stream before redirecting it to your twitch streaming page.</p>
-
-<p><img src="/blog/streaming-from-zoom-to-twitch/start-stream.png" alt="starting stream" /></p>
-
+<p><img src="/blog/streaming-from-zoom-to-twitch/start-stream.png" alt="starting stream"></p>
 <p>You can close this twitch streaming window once its started or leave it open. If you leave it open turn off its sound or you&rsquo;ll create some fun echo loopbacks.</p>
-
 <p>Here&rsquo;s the Twitch view:</p>
-
-<p><img src="/blog/streaming-from-zoom-to-twitch/twitch-streaming.png" alt="twitch stream" /></p>
-
+<p><img src="/blog/streaming-from-zoom-to-twitch/twitch-streaming.png" alt="twitch stream"></p>
 <p>Here&rsquo;s the Zoom View:</p>
+<p><img src="/blog/streaming-from-zoom-to-twitch/zoom-streaming.png" alt="zoom stream"></p>
 
-<p><img src="/blog/streaming-from-zoom-to-twitch/zoom-streaming.png" alt="zoom stream" /></p>
-
-              <hr>
-              <div class="related-posts">
-                <h5>Related Posts</h5>
-                
-              </div>
-            </div>
-          </div>
-          <hr>
-        <div class="disqus">
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-
-    (function() {
-      
-      
-      if (window.location.hostname == "localhost")
-        return;
-
-      var disqus_shortname = '';
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-</div>
+          
+          
         </div>
-      
+      </div>
+      <div class="disqus">
+        
       </div>
     </div>
+  </div>
 
-    
-    <footer>
-  <div id="footer">
-    <div class="container">
-      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
-      <a href="http://www.github.com/sumaxime/hugo-sustain/">sustain</a> with ♥</p>
     </div>
+    
+    <footer class="footer">
+  <div class="container">
+    <div class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+    <a href="http://www.github.com/nurlansu/hugo-sustain/">sustain</a> with ♥</div>
   </div>
 </footer>
-<div class="footer"></div>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://tech.paulcz.net/js/docs.min.js"></script>
-<script src="https://tech.paulcz.net/js/main.js"></script>
-
-<script src="https://tech.paulcz.net/js/ie10-viewport-bug-workaround.js"></script>
-
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
 
   </body>
 </html>

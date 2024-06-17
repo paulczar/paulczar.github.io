@@ -4,42 +4,33 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="map[]" />
-    <meta name="description" content="Random musings mostly about tech">
+    <meta name="author" content="Paul Czarkowski">
     <link rel="shortcut icon" type="image/x-icon" href="https://tech.paulcz.net/img/favicon.ico">
-    <title>Creating a Helm Chart Repository - Part 1</title>
-    <meta name="generator" content="Hugo 0.56.3" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://tech.paulcz.net/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    <title>Creating a Helm Chart Repository - Part 1 | Paul Czarkowski</title>
+    <meta name="description" content="Note: If this topic has peaked your interest, you can join me for a Webinar on August 15 where I&rsquo;ll dive deep into Cloud Native Operations with Kubernetes and CI/CD Pipelines.
+Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 I will demonstrate creating a Helm chart repository using GitHub and GitHub Pages. In part 2 I will add Automation to automatically update the repository, and in part 3 I will add testing for changes to the charts themselves.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    
+    <link rel="preload stylesheet" href="/css/main.min.css" as="style">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old">
     
     <!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
-
+  
     
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-35638296-2', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
+      
+    
+  
+
 
   </head>
-
   <body>
-    <div id="wrap">
-
-      
-      <nav class="navbar navbar-default">
+    <div id="content">
+  
+  <nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
       <a class="navbar-brand" href="https://tech.paulcz.net/"><i class="fa fa-home"></i></a>
@@ -62,33 +53,24 @@ if (!doNotTrack) {
   </div>
 </nav>
 
-      
-      <div class="container">
-        <div class="blog-post">
-          <h3>
-            <strong><a href="https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-1/">Creating a Helm Chart Repository - Part 1</a></strong>
-          </h3>
-        </div>
-        <div class="blog-title">
-          <h4>
-          July 3, 2019
-            &nbsp;&nbsp;
-            
-          </h4>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="blogpost">
-              
 
-<blockquote>
+  <div class="container">
+    <h3 class="mt-3"><b><a href="https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-1/">Creating a Helm Chart Repository - Part 1</a></b></h3>
+    <div class="blog-title my-4">
+      <h6>
+        July 3, 2019
+        &nbsp;&nbsp;
+        
+      </h6>
+    </div>
+    <div class="panel">
+      <div class="panel-body">
+        <div class="blogpost">
+          <blockquote>
 <p>Note: If this topic has peaked your interest, you can join me for a Webinar on August 15 where I&rsquo;ll dive deep into <a href="https://content.pivotal.io/webinars/aug-15-cloud-native-operations-with-kubernetes-and-ci-cd-webinar?utm_campaign=cno-k8s-ci-cd-q319&amp;utm_source=blog&amp;utm_medium=website">Cloud Native Operations with Kubernetes and CI/CD Pipelines</a>.</p>
 </blockquote>
-
 <h2 id="introduction">Introduction</h2>
-
 <p>Welcome to a three part blog series on Creating a <a href="https://helm.sh">Helm</a> Chart Repository. In <strong>part 1</strong> I will demonstrate creating a <a href="https://helm.sh">Helm</a> chart repository using <a href="https://github.com">GitHub</a> and <a href="https://github.com">GitHub</a> Pages. In <a href="/blog/creating-a-helm-chart-monorepo-part-2">part 2</a> I will add Automation to automatically update the repository, and in <a href="/blog/creating-a-helm-chart-monorepo-part-3">part 3</a> I will add testing for changes to the charts themselves.</p>
-
 <blockquote>
 <p>If you&rsquo;re into Videos, I walked JJ through starting with Helm from scratch all the way to creating a Helm Repo and CI/CD.  <div class="embed video-player">
 <iframe class="youtube-player" type="text/html" width="640" height="385" src="http://www.youtube.com/embed/xn63krHJNKI" allowfullscreen frameborder="0">
@@ -96,133 +78,110 @@ if (!doNotTrack) {
 </div>
 </p>
 </blockquote>
-
 <p>Helm is the defacto tool for packaging, sharing, and running Kubernetes Manifests. I&rsquo;m going to assume you know the basics of <a href="https://helm.sh">Helm</a> and have used it before. There&rsquo;s plenty of great introductory topics around.</p>
-
 <p>You can host and share <a href="https://helm.sh">Helm</a> Charts (packages) via a <a href="https://helm.sh">Helm</a> Repository which is effectively a static website with an <code>index.yaml</code> providing metadata and links to the <a href="https://helm.sh">Helm</a> Packages.</p>
-
 <p>This makes hosting a repository perfectly suited to running in <a href="https://github.com">GitHub</a> Pages, s3, google cloud storage, etc. I like to use <a href="https://github.com">GitHub</a> Pages as it allows your source code and repo to live effectively in the same place.</p>
-
 <p>I will walk you through creating a new <a href="https://github.com">GitHub</a> Project hosting multiple <a href="https://helm.sh">Helm</a> charts and demonstrate how to set up Continuous Integration with CircleCI to automatically test and publish new changes to your <a href="https://helm.sh">Helm</a> Charts.</p>
-
 <blockquote>
 <p>Note: While I would usually use <a href="https://concourse-ci.org/">Concourse CI</a> for my CI workflows, I wanted to <em>only</em> use managed services and I chose Circle as that is already commonly used in the Helm community.</p>
 </blockquote>
-
-<h2 id="create-a-new-github-https-github-com-repository">Create a new <a href="https://github.com">GitHub</a> Repository</h2>
-
+<h2 id="create-a-new-githubhttpsgithubcom-repository">Create a new <a href="https://github.com">GitHub</a> Repository</h2>
 <p>Log into <a href="https://github.com">GitHub</a> and <a href="https://github.com/new">create a new repository</a> called <code>my-helm-charts</code>. I chose to have <a href="https://github.com">GitHub</a> create it as with an Apache2 License.</p>
-
-<p><img src="./github-new-repo.png" alt="Creating new repo" /></p>
-
+<p><img src="./github-new-repo.png" alt="Creating new repo"></p>
 <p>You can now clone down this repository and get to work:</p>
-
-<pre><code class="language-bash">$ git clone git@github.com:paulczar/my-helm-charts.git
-Cloning into 'my-helm-charts'...
-remote: Enumerating objects: 4, done.
-remote: Counting objects: 100% (4/4), done.
-remote: Compressing objects: 100% (3/3), done.
-remote: Total 4 (delta 0), reused 0 (delta 0), pack-reused 0
-Receiving objects: 100% (4/4), 4.52 KiB | 4.52 MiB/s, done.
-
-$ cd my-helm-charts
-
-$ tree
-.
-├── LICENSE
-└── README.md
-
-0 directories, 2 files
-</code></pre>
-
-<p>You can see we have a default LICENSE file and a default README.md, we can leave them alone for now. Your next step is to create a couple of <a href="https://helm.sh">Helm</a> charts. Since this is purely for demonstration purposes they don&rsquo;t have to be overly functional charts which means we can just use the default boilerplate created by <code>helm create</code>.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git clone git@github.com:paulczar/my-helm-charts.git
+</span></span><span style="display:flex;"><span>Cloning into <span style="color:#e6db74">&#39;my-helm-charts&#39;</span>...
+</span></span><span style="display:flex;"><span>remote: Enumerating objects: 4, <span style="color:#66d9ef">done</span>.
+</span></span><span style="display:flex;"><span>remote: Counting objects: 100% <span style="color:#f92672">(</span>4/4<span style="color:#f92672">)</span>, <span style="color:#66d9ef">done</span>.
+</span></span><span style="display:flex;"><span>remote: Compressing objects: 100% <span style="color:#f92672">(</span>3/3<span style="color:#f92672">)</span>, <span style="color:#66d9ef">done</span>.
+</span></span><span style="display:flex;"><span>remote: Total <span style="color:#ae81ff">4</span> <span style="color:#f92672">(</span>delta 0<span style="color:#f92672">)</span>, reused <span style="color:#ae81ff">0</span> <span style="color:#f92672">(</span>delta 0<span style="color:#f92672">)</span>, pack-reused <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>Receiving objects: 100% <span style="color:#f92672">(</span>4/4<span style="color:#f92672">)</span>, 4.52 KiB | 4.52 MiB/s, <span style="color:#66d9ef">done</span>.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ cd my-helm-charts
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ tree
+</span></span><span style="display:flex;"><span>.
+</span></span><span style="display:flex;"><span>├── LICENSE
+</span></span><span style="display:flex;"><span>└── README.md
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span> directories, <span style="color:#ae81ff">2</span> files
+</span></span></code></pre></div><p>You can see we have a default LICENSE file and a default README.md, we can leave them alone for now. Your next step is to create a couple of <a href="https://helm.sh">Helm</a> charts. Since this is purely for demonstration purposes they don&rsquo;t have to be overly functional charts which means we can just use the default boilerplate created by <code>helm create</code>.</p>
 <blockquote>
 <p>You do have <a href="https://github.com/helm/helm#install">helm</a> installed right?</p>
 </blockquote>
-
-<pre><code class="language-bash">$ mkdir charts
-
-$ [Helm](https://helm.sh) create charts/app1
-Creating charts/app1
-
-$ [Helm](https://helm.sh) create charts/app2
-Creating charts/app2
-
-$ tree
-.
-├── charts
-│   ├── app1
-│   │   ├── charts
-│   │   ├── Chart.yaml
-│   │   ├── templates
-│   │   │   ├── deployment.yaml
-│   │   │   ├── _helpers.tpl
-│   │   │   ├── ingress.yaml
-│   │   │   ├── NOTES.txt
-│   │   │   ├── service.yaml
-│   │   │   └── tests
-│   │   │       └── test-connection.yaml
-│   │   └── values.yaml
-│   └── app2
-│       ├── charts
-│       ├── Chart.yaml
-│       ├── templates
-│       │   ├── deployment.yaml
-│       │   ├── _helpers.tpl
-│       │   ├── ingress.yaml
-│       │   ├── NOTES.txt
-│       │   ├── service.yaml
-│       │   └── tests
-│       │       └── test-connection.yaml
-│       └── values.yaml
-├── LICENSE
-└── README.md
-
-9 directories, 18 files
-</code></pre>
-
-<p>Push these changes to git:</p>
-
-<pre><code class="language-bash">echo &quot;.deploy&quot; &gt;&gt; .gitignore
-
-$ git add .
-
-$ git commit -m 'Initial Commit'
-[master 2172141] Initial Commit
- 18 files changed, 524 insertions(+)
-...
-...
-
-$ git push origin master
-Enumerating objects: 27, done.
-Counting objects: 100% (27/27), done.
-Delta compression using up to 4 threads
-Compressing objects: 100% (24/24), done.
-Writing objects: 100% (26/26), 4.72 KiB | 536.00 KiB/s, done.
-Total 26 (delta 8), reused 0 (delta 0)
-remote: Resolving deltas: 100% (8/8), done.
-To github.com:paulczar/my-helm-charts.git
-   abdcced..2172141  master -&gt; master
-</code></pre>
-
-<h2 id="publish-your-helm-https-helm-sh-repository">Publish your <a href="https://helm.sh">Helm</a> Repository</h2>
-
-<h3 id="prepare-github-https-github-com-pages">Prepare <a href="https://github.com">GitHub</a> Pages</h3>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ mkdir charts
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ <span style="color:#f92672">[</span>Helm<span style="color:#f92672">](</span>https://helm.sh<span style="color:#f92672">)</span> create charts/app1
+</span></span><span style="display:flex;"><span>Creating charts/app1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ <span style="color:#f92672">[</span>Helm<span style="color:#f92672">](</span>https://helm.sh<span style="color:#f92672">)</span> create charts/app2
+</span></span><span style="display:flex;"><span>Creating charts/app2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ tree
+</span></span><span style="display:flex;"><span>.
+</span></span><span style="display:flex;"><span>├── charts
+</span></span><span style="display:flex;"><span>│   ├── app1
+</span></span><span style="display:flex;"><span>│   │   ├── charts
+</span></span><span style="display:flex;"><span>│   │   ├── Chart.yaml
+</span></span><span style="display:flex;"><span>│   │   ├── templates
+</span></span><span style="display:flex;"><span>│   │   │   ├── deployment.yaml
+</span></span><span style="display:flex;"><span>│   │   │   ├── _helpers.tpl
+</span></span><span style="display:flex;"><span>│   │   │   ├── ingress.yaml
+</span></span><span style="display:flex;"><span>│   │   │   ├── NOTES.txt
+</span></span><span style="display:flex;"><span>│   │   │   ├── service.yaml
+</span></span><span style="display:flex;"><span>│   │   │   └── tests
+</span></span><span style="display:flex;"><span>│   │   │       └── test-connection.yaml
+</span></span><span style="display:flex;"><span>│   │   └── values.yaml
+</span></span><span style="display:flex;"><span>│   └── app2
+</span></span><span style="display:flex;"><span>│       ├── charts
+</span></span><span style="display:flex;"><span>│       ├── Chart.yaml
+</span></span><span style="display:flex;"><span>│       ├── templates
+</span></span><span style="display:flex;"><span>│       │   ├── deployment.yaml
+</span></span><span style="display:flex;"><span>│       │   ├── _helpers.tpl
+</span></span><span style="display:flex;"><span>│       │   ├── ingress.yaml
+</span></span><span style="display:flex;"><span>│       │   ├── NOTES.txt
+</span></span><span style="display:flex;"><span>│       │   ├── service.yaml
+</span></span><span style="display:flex;"><span>│       │   └── tests
+</span></span><span style="display:flex;"><span>│       │       └── test-connection.yaml
+</span></span><span style="display:flex;"><span>│       └── values.yaml
+</span></span><span style="display:flex;"><span>├── LICENSE
+</span></span><span style="display:flex;"><span>└── README.md
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">9</span> directories, <span style="color:#ae81ff">18</span> files
+</span></span></code></pre></div><p>Push these changes to git:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;.deploy&#34;</span> &gt;&gt; .gitignore
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ git add .
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ git commit -m <span style="color:#e6db74">&#39;Initial Commit&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>master 2172141<span style="color:#f92672">]</span> Initial Commit
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">18</span> files changed, <span style="color:#ae81ff">524</span> insertions<span style="color:#f92672">(</span>+<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ git push origin master
+</span></span><span style="display:flex;"><span>Enumerating objects: 27, <span style="color:#66d9ef">done</span>.
+</span></span><span style="display:flex;"><span>Counting objects: 100% <span style="color:#f92672">(</span>27/27<span style="color:#f92672">)</span>, <span style="color:#66d9ef">done</span>.
+</span></span><span style="display:flex;"><span>Delta compression using up to <span style="color:#ae81ff">4</span> threads
+</span></span><span style="display:flex;"><span>Compressing objects: 100% <span style="color:#f92672">(</span>24/24<span style="color:#f92672">)</span>, <span style="color:#66d9ef">done</span>.
+</span></span><span style="display:flex;"><span>Writing objects: 100% <span style="color:#f92672">(</span>26/26<span style="color:#f92672">)</span>, 4.72 KiB | 536.00 KiB/s, <span style="color:#66d9ef">done</span>.
+</span></span><span style="display:flex;"><span>Total <span style="color:#ae81ff">26</span> <span style="color:#f92672">(</span>delta 8<span style="color:#f92672">)</span>, reused <span style="color:#ae81ff">0</span> <span style="color:#f92672">(</span>delta 0<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>remote: Resolving deltas: 100% <span style="color:#f92672">(</span>8/8<span style="color:#f92672">)</span>, <span style="color:#66d9ef">done</span>.
+</span></span><span style="display:flex;"><span>To github.com:paulczar/my-helm-charts.git
+</span></span><span style="display:flex;"><span>   abdcced..2172141  master -&gt; master
+</span></span></code></pre></div><h2 id="publish-your-helmhttpshelmsh-repository">Publish your <a href="https://helm.sh">Helm</a> Repository</h2>
+<h3 id="prepare-githubhttpsgithubcom-pages">Prepare <a href="https://github.com">GitHub</a> Pages</h3>
 <p>We&rsquo;re going to use a combination of <a href="https://github.com">GitHub</a> Pages and releases to host our <a href="https://helm.sh">Helm</a> Repository. Therefore we need to ensure we have <a href="https://github.com">GitHub</a> Pages enabled on the git repo and to create an empty <code>gh-pages</code> branch.</p>
-
 <p>You can create an empty <code>gh-pages</code> branch by creating an orphan branch like so:</p>
-
-<pre><code>$ git checkout --orphan gh-pages
-Switched to a new branch 'gh-pages'
+<pre tabindex="0"><code>$ git checkout --orphan gh-pages
+Switched to a new branch &#39;gh-pages&#39;
 
 $ rm -rf charts
 
 $ git add . --all
 
-$ git commit -m 'initial gh-pages'
-git commit -m 'initial gh-pages'
+$ git commit -m &#39;initial gh-pages&#39;
+git commit -m &#39;initial gh-pages&#39;
 [gh-pages a9ce382] initial gh-pages
  18 files changed, 524 deletions(-)
 ...
@@ -234,162 +193,118 @@ Enumerating objects: 3, done.
 ...
 To github.com:paulczar/my-helm-charts.git
  * [new branch]      gh-pages -&gt; gh-pages
-</code></pre>
-
-<p>Next check that <a href="https://github.com">GitHub</a> Pages is enabled by clicking on your git repo settings in GitHub:</p>
-
-<p><img src="./github-pages.png" alt="github repo settings" /></p>
-
+</code></pre><p>Next check that <a href="https://github.com">GitHub</a> Pages is enabled by clicking on your git repo settings in GitHub:</p>
+<p><img src="./github-pages.png" alt="github repo settings"></p>
 <blockquote>
 <p>Note: I have a custom domain set up, your URL will probably be username.github.io/my-helm-charts.</p>
 </blockquote>
-
 <p>After a few minutes you should have a default rendering on your README.md at the provided URL:</p>
-
-<p><img src="./default-gh-pages.png" alt="default [GitHub](https://github.com) ages" /></p>
-
+<p><img src="./default-gh-pages.png" alt="default GitHub ages"></p>
 <h3 id="introducing-chart-releaser">Introducing chart-releaser</h3>
-
 <p>You could use a combination of <code>helm package</code> and <code>helm repo</code> commands to construct your <a href="https://helm.sh">Helm</a> repository by hand, or you can simplify your life by using <code>chart-releaser</code> which will not only create your packages, but will upload them as binaries into an appropriately versioned <a href="https://github.com">GitHub</a> Release.</p>
-
 <p>Download chart-releaser for your architecture [here].</p>
-
 <blockquote>
 <p>Note: I&rsquo;m doing this on a linux machine, so you may need to update the commands below for Mac OS.</p>
 </blockquote>
-
 <p>In a new terminal download and unpackage it, moving it to an executable path:</p>
-
-<pre><code class="language-bash">cd /tmp
-$ curl -sSL https://github.com/helm/chart-releaser/releases/download/v0.2.1/chart-releaser_0.2.1_linux_amd64.tar.gz | tar xzf -
-
-$ mv cr ~/bin/cr
-
-$ cr help
-Create [Helm](https://helm.sh) chart repositories on [GitHub](https://github.com) Pages by uploading Chart packages
-and Chart metadata to [GitHub](https://github.com) Releases and creating a suitable index file
-
-Usage:
-  cr [command]
-
-Available Commands:
-  help        Help about any command
-  index       Update Helm repo index.yaml for the given GitHub repo
-  upload      Upload Helm chart packages to GitHub Releases
-  version     Print version information
-
-Flags:
-      --config string   Config file (default is $HOME/.cr.yaml)
-  -h, --help            help for cr
-
-Use &quot;cr [command] --help&quot; for more information about a command.
-</code></pre>
-
-<p>There are two commands we care about <code>cr index</code> and <code>cr upload</code>, the first will create an appropriate <code>index.yaml</code> and the second will upload the packages to <a href="https://github.com">GitHub</a> Releases. In order to do the latter you&rsquo;ll need to pass it in a <a href="https://github.com">GitHub</a> Token so that it can use the <a href="https://github.com">GitHub</a> APIs.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd /tmp
+</span></span><span style="display:flex;"><span>$ curl -sSL https://github.com/helm/chart-releaser/releases/download/v0.2.1/chart-releaser_0.2.1_linux_amd64.tar.gz | tar xzf -
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ mv cr ~/bin/cr
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ cr help
+</span></span><span style="display:flex;"><span>Create <span style="color:#f92672">[</span>Helm<span style="color:#f92672">](</span>https://helm.sh<span style="color:#f92672">)</span> chart repositories on <span style="color:#f92672">[</span>GitHub<span style="color:#f92672">](</span>https://github.com<span style="color:#f92672">)</span> Pages by uploading Chart packages
+</span></span><span style="display:flex;"><span>and Chart metadata to <span style="color:#f92672">[</span>GitHub<span style="color:#f92672">](</span>https://github.com<span style="color:#f92672">)</span> Releases and creating a suitable index file
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Usage:
+</span></span><span style="display:flex;"><span>  cr <span style="color:#f92672">[</span>command<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Available Commands:
+</span></span><span style="display:flex;"><span>  help        Help about any command
+</span></span><span style="display:flex;"><span>  index       Update Helm repo index.yaml <span style="color:#66d9ef">for</span> the given GitHub repo
+</span></span><span style="display:flex;"><span>  upload      Upload Helm chart packages to GitHub Releases
+</span></span><span style="display:flex;"><span>  version     Print version information
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Flags:
+</span></span><span style="display:flex;"><span>      --config string   Config file <span style="color:#f92672">(</span>default is $HOME/.cr.yaml<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  -h, --help            help <span style="color:#66d9ef">for</span> cr
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Use <span style="color:#e6db74">&#34;cr [command] --help&#34;</span> <span style="color:#66d9ef">for</span> more information about a command.
+</span></span></code></pre></div><p>There are two commands we care about <code>cr index</code> and <code>cr upload</code>, the first will create an appropriate <code>index.yaml</code> and the second will upload the packages to <a href="https://github.com">GitHub</a> Releases. In order to do the latter you&rsquo;ll need to pass it in a <a href="https://github.com">GitHub</a> Token so that it can use the <a href="https://github.com">GitHub</a> APIs.</p>
 <p>In your browser go to your <a href="https://github.com/settings/tokens">github developer settings</a> and create a new personal access token.</p>
-
-<p><img src="./personal-access-token.png" alt="create personal access token" /></p>
-
+<p><img src="./personal-access-token.png" alt="create personal access token"></p>
 <p>Create an environment variable (or a <code>~/.cr.yaml</code> config file) containing the access token:</p>
-
 <blockquote>
-<p>Pro-tip: put an additional space in your command right before <code>export</code> and it won&rsquo;t be saved to your command history.</p>
+<p>Pro-tip: put an additional space in your command right before <code> export</code> and it won&rsquo;t be saved to your command history.</p>
 </blockquote>
-
-<pre><code class="language-bash">$  export CH_TOKEN=c4a4ed6ab91a246572b0c46c19c630ccadc1049
-</code></pre>
-
-<h3 id="create-and-upload-helm-https-helm-sh-packages">Create and Upload <a href="https://helm.sh">Helm</a> Packages</h3>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$  export CH_TOKEN<span style="color:#f92672">=</span>c4a4ed6ab91a246572b0c46c19c630ccadc1049
+</span></span></code></pre></div><h3 id="create-and-upload-helmhttpshelmsh-packages">Create and Upload <a href="https://helm.sh">Helm</a> Packages</h3>
 <p>Your next step is to create and upload the packages:</p>
-
-<pre><code class="language-bash">$ Helm package charts/{app1,app2} --destination .deploy
-Successfully packaged chart and saved it to: .deploy/app1-0.1.0.tgz
-Successfully packaged chart and saved it to: .deploy/app2-0.1.0.tgz
-</code></pre>
-
-<p>Run <code>cr upload</code> to create releases and upload the packages, note if it runs correctly there&rsquo;s no output.</p>
-
-<pre><code class="language-bash">$ cr upload -o paulczar -r my-helm-charts -p .deploy
-</code></pre>
-
-<p>Check your <a href="https://github.com">GitHub</a> repository now has a releases page with two releases:</p>
-
-<p><img src="./github-releases" alt="github releases page" /></p>
-
-<h3 id="create-and-upload-index-file-to-github-https-github-com-pages">Create and upload index file to <a href="https://github.com">GitHub</a> Pages</h3>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ Helm package charts/<span style="color:#f92672">{</span>app1,app2<span style="color:#f92672">}</span> --destination .deploy
+</span></span><span style="display:flex;"><span>Successfully packaged chart and saved it to: .deploy/app1-0.1.0.tgz
+</span></span><span style="display:flex;"><span>Successfully packaged chart and saved it to: .deploy/app2-0.1.0.tgz
+</span></span></code></pre></div><p>Run <code>cr upload</code> to create releases and upload the packages, note if it runs correctly there&rsquo;s no output.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ cr upload -o paulczar -r my-helm-charts -p .deploy
+</span></span></code></pre></div><p>Check your <a href="https://github.com">GitHub</a> repository now has a releases page with two releases:</p>
+<p><img src="./github-releases" alt="github releases page"></p>
+<h3 id="create-and-upload-index-file-to-githubhttpsgithubcom-pages">Create and upload index file to <a href="https://github.com">GitHub</a> Pages</h3>
 <p>Checkout your <code>gh-pages</code> branch and run <code>cr index</code>:</p>
-
-<pre><code class="language-bash">$ git checkout gh-pages
-
-$ cr index -i ./index.yaml -p .deploy --owner paulczar --repo my-helm-charts
-====&gt; UpdateIndexFile new index at ./index.yaml
-====&gt; Found app1-0.1.0.tgz
-====&gt; Extracting chart metadata from .deploy/app1-0.1.0.tgz
-====&gt; Calculating Hash for .deploy/app1-0.1.0.tgz
-====&gt; Found app2-0.1.0.tgz
-====&gt; Extracting chart metadata from .deploy/app2-0.1.0.tgz
-====&gt; Calculating Hash for .deploy/app2-0.1.0.tgz
---&gt; Updating index ./index.yaml
-</code></pre>
-
-<p>There should now be a <code>index.yaml</code> file containing the details of your <a href="https://helm.sh">Helm</a> packages and the path to their archive:</p>
-
-<pre><code class="language-bash">$ cat index.yaml
-apiVersion: v1
-entries:
-  app1:
-  - apiVersion: v1
-    appVersion: &quot;1.0&quot;
-    created: &quot;2019-07-03T13:03:06.139332963-05:00&quot;
-    description: A Helm chart for Kubernetes
-    digest: 48cf831b72febeac2860a0be372094250aea68a9c76147c028085c8802dd48ec
-    name: app1
-    urls:
-    - https://github.com/paulczar/my-helm-charts/releases/download/app1-0.1.0/app1-0.1.0.tgz
-    version: 0.1.0
-  app2:
-  - apiVersion: v1
-    appVersion: &quot;1.0&quot;
-    created: &quot;2019-07-03T13:03:07.301308677-05:00&quot;
-    description: A Helm chart for Kubernetes
-    digest: 64b00fc4804aba524201f64e78ee22ad8e61d0923424f8e24e8b70befed88141
-    name: app2
-    urls:
-    - https://github.com/paulczar/my-helm-charts/releases/download/app2-0.1.0/app2-0.1.0.tgz
-    version: 0.1.0
-generated: &quot;2019-07-03T13:03:05.685803874-05:00&quot;
-</code></pre>
-
-<p>Commit this to git and then wait a few minutes and check that it exists in your <a href="https://github.com">GitHub</a> Pages url:</p>
-
-<pre><code class="language-bash">$ git add index.yaml
-
-$ git commit -m 'release 0.1.0'
-[gh-pages 696df18] release 0.1.0
- 1 file changed, 23 insertions(+)
- create mode 100644 index.yaml
-
-$ git push origin gh-pages
-...
-To github.com:paulczar/my-helm-charts.git
-   75f1fe8..696df18  gh-pages -&gt; gh-pages
-</code></pre>
-
-<p>Check it exists in <a href="https://github.com">GitHub</a> Pages:</p>
-
-<p><img src="github-pages-index-yaml.png" alt="github pages index.yaml" /></p>
-
-<h3 id="test-your-new-helm-https-helm-sh-repostiory">Test your new <a href="https://helm.sh">Helm</a> Repostiory</h3>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git checkout gh-pages
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ cr index -i ./index.yaml -p .deploy --owner paulczar --repo my-helm-charts
+</span></span><span style="display:flex;"><span><span style="color:#f92672">====</span>&gt; UpdateIndexFile new index at ./index.yaml
+</span></span><span style="display:flex;"><span><span style="color:#f92672">====</span>&gt; Found app1-0.1.0.tgz
+</span></span><span style="display:flex;"><span><span style="color:#f92672">====</span>&gt; Extracting chart metadata from .deploy/app1-0.1.0.tgz
+</span></span><span style="display:flex;"><span><span style="color:#f92672">====</span>&gt; Calculating Hash <span style="color:#66d9ef">for</span> .deploy/app1-0.1.0.tgz
+</span></span><span style="display:flex;"><span><span style="color:#f92672">====</span>&gt; Found app2-0.1.0.tgz
+</span></span><span style="display:flex;"><span><span style="color:#f92672">====</span>&gt; Extracting chart metadata from .deploy/app2-0.1.0.tgz
+</span></span><span style="display:flex;"><span><span style="color:#f92672">====</span>&gt; Calculating Hash <span style="color:#66d9ef">for</span> .deploy/app2-0.1.0.tgz
+</span></span><span style="display:flex;"><span>--&gt; Updating index ./index.yaml
+</span></span></code></pre></div><p>There should now be a <code>index.yaml</code> file containing the details of your <a href="https://helm.sh">Helm</a> packages and the path to their archive:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ cat index.yaml
+</span></span><span style="display:flex;"><span>apiVersion: v1
+</span></span><span style="display:flex;"><span>entries:
+</span></span><span style="display:flex;"><span>  app1:
+</span></span><span style="display:flex;"><span>  - apiVersion: v1
+</span></span><span style="display:flex;"><span>    appVersion: <span style="color:#e6db74">&#34;1.0&#34;</span>
+</span></span><span style="display:flex;"><span>    created: <span style="color:#e6db74">&#34;2019-07-03T13:03:06.139332963-05:00&#34;</span>
+</span></span><span style="display:flex;"><span>    description: A Helm chart <span style="color:#66d9ef">for</span> Kubernetes
+</span></span><span style="display:flex;"><span>    digest: 48cf831b72febeac2860a0be372094250aea68a9c76147c028085c8802dd48ec
+</span></span><span style="display:flex;"><span>    name: app1
+</span></span><span style="display:flex;"><span>    urls:
+</span></span><span style="display:flex;"><span>    - https://github.com/paulczar/my-helm-charts/releases/download/app1-0.1.0/app1-0.1.0.tgz
+</span></span><span style="display:flex;"><span>    version: 0.1.0
+</span></span><span style="display:flex;"><span>  app2:
+</span></span><span style="display:flex;"><span>  - apiVersion: v1
+</span></span><span style="display:flex;"><span>    appVersion: <span style="color:#e6db74">&#34;1.0&#34;</span>
+</span></span><span style="display:flex;"><span>    created: <span style="color:#e6db74">&#34;2019-07-03T13:03:07.301308677-05:00&#34;</span>
+</span></span><span style="display:flex;"><span>    description: A Helm chart <span style="color:#66d9ef">for</span> Kubernetes
+</span></span><span style="display:flex;"><span>    digest: 64b00fc4804aba524201f64e78ee22ad8e61d0923424f8e24e8b70befed88141
+</span></span><span style="display:flex;"><span>    name: app2
+</span></span><span style="display:flex;"><span>    urls:
+</span></span><span style="display:flex;"><span>    - https://github.com/paulczar/my-helm-charts/releases/download/app2-0.1.0/app2-0.1.0.tgz
+</span></span><span style="display:flex;"><span>    version: 0.1.0
+</span></span><span style="display:flex;"><span>generated: <span style="color:#e6db74">&#34;2019-07-03T13:03:05.685803874-05:00&#34;</span>
+</span></span></code></pre></div><p>Commit this to git and then wait a few minutes and check that it exists in your <a href="https://github.com">GitHub</a> Pages url:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git add index.yaml
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ git commit -m <span style="color:#e6db74">&#39;release 0.1.0&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>gh-pages 696df18<span style="color:#f92672">]</span> release 0.1.0
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">1</span> file changed, <span style="color:#ae81ff">23</span> insertions<span style="color:#f92672">(</span>+<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span> create mode <span style="color:#ae81ff">100644</span> index.yaml
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ git push origin gh-pages
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>To github.com:paulczar/my-helm-charts.git
+</span></span><span style="display:flex;"><span>   75f1fe8..696df18  gh-pages -&gt; gh-pages
+</span></span></code></pre></div><p>Check it exists in <a href="https://github.com">GitHub</a> Pages:</p>
+<p><img src="github-pages-index-yaml.png" alt="github pages index.yaml"></p>
+<h3 id="test-your-new-helmhttpshelmsh-repostiory">Test your new <a href="https://helm.sh">Helm</a> Repostiory</h3>
 <blockquote>
 <p>Note: To do this you&rsquo;ll need a Kubernetes cluster with Helm&rsquo;s tiller installed, but you already know how to do that right?</p>
 </blockquote>
-
-<pre><code>$ helm repo add my-helm-charts https://tech.paulcz.net/my-helm-charts
-&quot;my-helm-charts&quot; has been added to your repositories
+<pre tabindex="0"><code>$ helm repo add my-helm-charts https://tech.paulcz.net/my-helm-charts
+&#34;my-helm-charts&#34; has been added to your repositories
 
 $ helm install --name test --namespace test my-helm-charts/app1
 NAME:   test
@@ -413,129 +328,78 @@ test-app1  ClusterIP  10.100.200.213  &lt;none&gt;       80/TCP   0s
 
 NOTES:
 1. Get the application URL by running these commands:
-  export POD_NAME=$(kubectl get pods --namespace test -l &quot;app.kubernetes.io/name=app1,app.kubernetes.io/instance=test&quot; -o jsonpath=&quot;{.items[0].metadata.name}&quot;)
-  echo &quot;Visit http://127.0.0.1:8080 to use your application&quot;
+  export POD_NAME=$(kubectl get pods --namespace test -l &#34;app.kubernetes.io/name=app1,app.kubernetes.io/instance=test&#34; -o jsonpath=&#34;{.items[0].metadata.name}&#34;)
+  echo &#34;Visit http://127.0.0.1:8080 to use your application&#34;
   kubectl port-forward $POD_NAME 8080:80
-</code></pre>
-
-<p>Check that it deployed ok:</p>
-
-<pre><code class="language-bash">$ kubectl -n test get all
-NAME                             READY   STATUS    RESTARTS   AGE
-pod/test-app1-7b575d95f6-zhlh2   1/1     Running   0          42m
-
-NAME                TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE
-service/test-app1   ClusterIP   10.100.200.213   &lt;none&gt;        80/TCP    42m
-
-NAME                        READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/test-app1   1/1     1            1           42m
-
-NAME                                   DESIRED   CURRENT   READY   AGE
-replicaset.apps/test-app1-7b575d95f6   1         1         1       42m
-</code></pre>
-
-<p>Clean up:</p>
-
-<pre><code class="language-bash">$ helm delete --purge test
-release &quot;test&quot; deleted
-</code></pre>
-
-<h3 id="update-the-readme-md-with-instructions-on-using">Update the README.md with instructions on using</h3>
-
+</code></pre><p>Check that it deployed ok:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ kubectl -n test get all
+</span></span><span style="display:flex;"><span>NAME                             READY   STATUS    RESTARTS   AGE
+</span></span><span style="display:flex;"><span>pod/test-app1-7b575d95f6-zhlh2   1/1     Running   <span style="color:#ae81ff">0</span>          42m
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>NAME                TYPE        CLUSTER-IP       EXTERNAL-IP   PORT<span style="color:#f92672">(</span>S<span style="color:#f92672">)</span>   AGE
+</span></span><span style="display:flex;"><span>service/test-app1   ClusterIP   10.100.200.213   &lt;none&gt;        80/TCP    42m
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>NAME                        READY   UP-TO-DATE   AVAILABLE   AGE
+</span></span><span style="display:flex;"><span>deployment.apps/test-app1   1/1     <span style="color:#ae81ff">1</span>            <span style="color:#ae81ff">1</span>           42m
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>NAME                                   DESIRED   CURRENT   READY   AGE
+</span></span><span style="display:flex;"><span>replicaset.apps/test-app1-7b575d95f6   <span style="color:#ae81ff">1</span>         <span style="color:#ae81ff">1</span>         <span style="color:#ae81ff">1</span>       42m
+</span></span></code></pre></div><p>Clean up:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ helm delete --purge test
+</span></span><span style="display:flex;"><span>release <span style="color:#e6db74">&#34;test&#34;</span> deleted
+</span></span></code></pre></div><h3 id="update-the-readmemd-with-instructions-on-using">Update the README.md with instructions on using</h3>
 <p>switch back to your <code>master</code> brach:</p>
-
-<pre><code class="language-bash">$ git checkout master
-</code></pre>
-
-<p>Edit your README.md to provide details on how to use charts from your repository:</p>
-
-<pre><code class="language-markdown"># My [Helm](https://helm.sh) Charts
-
-This repository contains [Helm](https://helm.sh) charts for various projects
-
-* [Application 1](charts/app1/)
-* [Application 2](charts/app2/)
-
-## Installing Charts from this Repository
-
-Add the Repository to Helm:
-
-    helm repo add my-helm-charts https://tech.paulcz.net/my-helm-charts
-
-Install Application 1:
-
-    helm install my-helm-charts/app1
-
-Install Application 2:
-
-    helm install my-helm-charts/app2
-</code></pre>
-
-<p>Commit the change up to GitHub:</p>
-
-<pre><code class="language-bash">$ git add README.md
-$ git commit -m 'update readme with instructions'
-$ git push origin master
-...
-</code></pre>
-
-<h2 id="conclusion">Conclusion</h2>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git checkout master
+</span></span></code></pre></div><p>Edit your README.md to provide details on how to use charts from your repository:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span># My [Helm](https://helm.sh) Charts
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>This repository contains [<span style="color:#f92672">Helm</span>](<span style="color:#a6e22e">https://helm.sh</span>) charts for various projects
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">*</span> [<span style="color:#f92672">Application 1</span>](<span style="color:#a6e22e">charts/app1/</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">*</span> [<span style="color:#f92672">Application 2</span>](<span style="color:#a6e22e">charts/app2/</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Installing Charts from this Repository
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>Add the Repository to Helm:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    helm repo add my-helm-charts https://tech.paulcz.net/my-helm-charts
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Install Application 1:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    helm install my-helm-charts/app1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Install Application 2:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    helm install my-helm-charts/app2
+</span></span></code></pre></div><p>Commit the change up to GitHub:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git add README.md
+</span></span><span style="display:flex;"><span>$ git commit -m <span style="color:#e6db74">&#39;update readme with instructions&#39;</span>
+</span></span><span style="display:flex;"><span>$ git push origin master
+</span></span><span style="display:flex;"><span>...
+</span></span></code></pre></div><h2 id="conclusion">Conclusion</h2>
 <p>That&rsquo;s the end of <strong>Part 1</strong> of this three part series. In future posts I will demonstrate adding <a href="/blog/creating-a-helm-chart-monorepo-part-2">automation</a> and <a href="/blog/creating-a-helm-chart-monorepo-part-3">testing</a> to this <a href="https://helm.sh">Helm</a> chart repository.</p>
 
-              <hr>
-              <div class="related-posts">
-                <h5>Related Posts</h5>
-                
-              </div>
-            </div>
-          </div>
-          <hr>
-        <div class="disqus">
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-
-    (function() {
-      
-      
-      if (window.location.hostname == "localhost")
-        return;
-
-      var disqus_shortname = '';
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-</div>
+          
+          
         </div>
-      
+      </div>
+      <div class="disqus">
+        
       </div>
     </div>
+  </div>
 
-    
-    <footer>
-  <div id="footer">
-    <div class="container">
-      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
-      <a href="http://www.github.com/sumaxime/hugo-sustain/">sustain</a> with ♥</p>
     </div>
+    
+    <footer class="footer">
+  <div class="container">
+    <div class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+    <a href="http://www.github.com/nurlansu/hugo-sustain/">sustain</a> with ♥</div>
   </div>
 </footer>
-<div class="footer"></div>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://tech.paulcz.net/js/docs.min.js"></script>
-<script src="https://tech.paulcz.net/js/main.js"></script>
-
-<script src="https://tech.paulcz.net/js/ie10-viewport-bug-workaround.js"></script>
-
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
 
   </body>
 </html>

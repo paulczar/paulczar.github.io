@@ -1,25 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>gcp on Paul Czarkowski</title>
+    <title>Gcp on Paul Czarkowski</title>
     <link>https://tech.paulcz.net/categories/gcp/</link>
-    <description>Recent content in gcp on Paul Czarkowski</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Gcp on Paul Czarkowski</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 08 Jun 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://tech.paulcz.net/categories/gcp/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="https://tech.paulcz.net/categories/gcp/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Deploying and accessing a GCP SQL database via Kubernetes</title>
       <link>https://tech.paulcz.net/blog/gcp-config-connect-sql-database/</link>
       <pubDate>Mon, 08 Jun 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/gcp-config-connect-sql-database/</guid>
-      <description>Sorry for the long preamble, feel free to just skip straight to the technical details.
-Two years ago, faced with the challenge of wanting to reduce the tooling required to deploy infrastructure to Google Cloud I started working on a Google Cloud Operator. The goal of this project was to be able to stand up networks, images, and Virtual Machines for installing Pivotal&amp;rsquo;s PKS (now Tanzu Kubernetes Grid Integrated).</description>
+      <description>Sorry for the long preamble, feel free to just skip straight to the technical details.&#xA;Two years ago, faced with the challenge of wanting to reduce the tooling required to deploy infrastructure to Google Cloud I started working on a Google Cloud Operator. The goal of this project was to be able to stand up networks, images, and Virtual Machines for installing Pivotal&amp;rsquo;s PKS (now Tanzu Kubernetes Grid Integrated).&#xA;This worked out pretty well for me and I was able to create/destroy environments at will seeded from a single node GKE cluster running the operator.</description>
     </item>
-    
   </channel>
 </rss>

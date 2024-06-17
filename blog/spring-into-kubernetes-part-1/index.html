@@ -4,42 +4,33 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="map[]" />
-    <meta name="description" content="Random musings mostly about tech">
+    <meta name="author" content="Paul Czarkowski">
     <link rel="shortcut icon" type="image/x-icon" href="https://tech.paulcz.net/img/favicon.ico">
-    <title>Spring into Kubernetes - Part 1</title>
-    <meta name="generator" content="Hugo 0.56.3" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://tech.paulcz.net/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    <title>Spring into Kubernetes - Part 1 | Paul Czarkowski</title>
+    <meta name="description" content="Introduction Welcome to the first part in a series of blog posts looking at running Spring applications on Kubernetes. To kick the series off we&rsquo;re going to take a look at the Spring Pet Clinic example application and demonstrate how we can quickly and easily get it running on Kubernetes.
+Step 1. Install a Kubernetes Before we get started I would encourage you to read (or at least skim) through Kelsey Hightower&rsquo;s seminal Kubernetes The Hard Way to get an idea for the complexity of installing and operating a Kubernetes cluster.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    
+    <link rel="preload stylesheet" href="/css/main.min.css" as="style">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old">
     
     <!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
-
+  
     
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-35638296-2', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
+      
+    
+  
+
 
   </head>
-
   <body>
-    <div id="wrap">
-
-      
-      <nav class="navbar navbar-default">
+    <div id="content">
+  
+  <nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
       <a class="navbar-brand" href="https://tech.paulcz.net/"><i class="fa fa-home"></i></a>
@@ -62,309 +53,194 @@ if (!doNotTrack) {
   </div>
 </nav>
 
-      
-      <div class="container">
-        <div class="blog-post">
-          <h3>
-            <strong><a href="https://tech.paulcz.net/blog/spring-into-kubernetes-part-1/">Spring into Kubernetes - Part 1</a></strong>
-          </h3>
-        </div>
-        <div class="blog-title">
-          <h4>
-          January 24, 2019
-            &nbsp;&nbsp;
-            
-          </h4>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="blogpost">
-              
 
-<h1 id="introduction">Introduction</h1>
-
+  <div class="container">
+    <h3 class="mt-3"><b><a href="https://tech.paulcz.net/blog/spring-into-kubernetes-part-1/">Spring into Kubernetes - Part 1</a></b></h3>
+    <div class="blog-title my-4">
+      <h6>
+        January 24, 2019
+        &nbsp;&nbsp;
+        
+      </h6>
+    </div>
+    <div class="panel">
+      <div class="panel-body">
+        <div class="blogpost">
+          <h1 id="introduction">Introduction</h1>
 <p>Welcome to the first part in a series of blog posts looking at running Spring applications on Kubernetes. To kick the series off we&rsquo;re going to take a look at the <a href="https://github.com/spring-projects/spring-petclinic">Spring Pet Clinic</a> example application and demonstrate how we can quickly and easily get it running on Kubernetes.</p>
-
-<h1 id="step-1-install-a-kubernetes">Step 1.  Install a Kubernetes</h1>
-
+<h1 id="step-1--install-a-kubernetes">Step 1.  Install a Kubernetes</h1>
 <p>Before we get started I would encourage you to read (or at least skim) through Kelsey Hightower&rsquo;s seminal <a href="https://github.com/kelseyhightower/kubernetes-the-hard-way">Kubernetes The Hard Way</a> to get an idea for the complexity of installing and operating a Kubernetes cluster.</p>
-
 <p>Once you&rsquo;ve done that you should be thoroughly discouraged from installing Kubernetes. That&rsquo;s a good thing! Most people should have no need to run their own production grade Kubernetes cluster. Every major public cloud has a Kubernetes service, and Pivotal provides the <a href="https://pivotal.io/platform/pivotal-container-service">Pivotal Container Service</a> to ease the burden of installing and managing Kubernetes in your own Datacenter.</p>
-
 <p>I&rsquo;ll be using <a href="https://pivotal.io/platform/pivotal-container-service">Pivotal Container Service</a>. You should be able to use any flavor of Kubernetes to follow along with this series of blog posts. The simplest way to do so is to probably install and run <a href="https://kubernetes.io/docs/tasks/tools/install-minikube/">Minikube</a> which will give you a single node Kubernetes cluster running in a VM on your laptop.</p>
-
 <h1 id="step-2-validate-your-kubernetes-cluster-is-ready">Step 2. Validate your Kubernetes cluster is ready</h1>
-
 <p>However you got your Kubernetes cluster is between you and your deity of choice and I won&rsquo;t ask any questions. You should have received [or had one automatically created] a Kubernetes config file and you should have downloaded the <code>kubectl</code> command line tool.</p>
-
 <p>Run the following commands to ensure that your Kubernetes config and cluster are working correctly:</p>
-
-<pre><code class="language-console">$ kubectl version
-kubClient Version: version.Info{Major:&quot;1&quot;, Minor:&quot;13&quot;, GitVersion:&quot;v1.13.2&quot;, GitCommit:&quot;cff46ab41ff0bb44d8584413b598ad8360ec1def&quot;, GitTreeState:&quot;clean&quot;, BuildDate:&quot;2019-01-10T23:35:51Z&quot;, GoVersion:&quot;go1.11.4&quot;, Compiler:&quot;gc&quot;, Platform:&quot;linux/amd64&quot;}
-Server Version: version.Info{Major:&quot;1&quot;, Minor:&quot;12&quot;, GitVersion:&quot;v1.12.4&quot;, GitCommit:&quot;f49fa022dbe63faafd0da106ef7e05a29721d3f1&quot;, GitTreeState:&quot;clean&quot;, BuildDate:&quot;2018-12-14T06:59:37Z&quot;, GoVersion:&quot;go1.10.4&quot;, Compiler:&quot;gc&quot;, Platform:&quot;linux/amd64&quot;}
-
-$ kubectl get nodes
-NAME                                      STATUS   ROLES    AGE     VERSION
-vm-16ff7fc4-88fa-406d-5f6a-7ccc92286c08   Ready    &lt;none&gt;   2d11h   v1.12.4
-vm-5bfb8f6e-d715-45ba-77df-047447995ac1   Ready    &lt;none&gt;   2d11h   v1.12.4
-vm-c2c16e34-1a73-4a78-50b4-bdec12d3de77   Ready    &lt;none&gt;   2d11h   v1.12.4
-</code></pre>
-
-<p>looking great! Create a namespace to work in that you can delete when finished to easily clean up after the demo.</p>
-
-<pre><code class="language-console">$ kubectl create namespace spring-into-kubernetes-1
-namespace/spring-into-kubernetes-1 created
-</code></pre>
-
-<p>Update your Kubernetes config to use this new namespace by default:</p>
-
-<pre><code class="language-console">$ kubectl config set-context $(kubectl config current-context) --namespace=spring-into-kubernetes-1
-Context &quot;cluster1&quot; modified.
-</code></pre>
-
-<h1 id="step-3-build-a-docker-image-for-spring-pet-clinic">Step 3. Build a Docker image for Spring Pet Clinic</h1>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>$ kubectl version
+</span></span><span style="display:flex;"><span>kubClient Version: version.Info{Major:&#34;1&#34;, Minor:&#34;13&#34;, GitVersion:&#34;v1.13.2&#34;, GitCommit:&#34;cff46ab41ff0bb44d8584413b598ad8360ec1def&#34;, GitTreeState:&#34;clean&#34;, BuildDate:&#34;2019-01-10T23:35:51Z&#34;, GoVersion:&#34;go1.11.4&#34;, Compiler:&#34;gc&#34;, Platform:&#34;linux/amd64&#34;}
+</span></span><span style="display:flex;"><span>Server Version: version.Info{Major:&#34;1&#34;, Minor:&#34;12&#34;, GitVersion:&#34;v1.12.4&#34;, GitCommit:&#34;f49fa022dbe63faafd0da106ef7e05a29721d3f1&#34;, GitTreeState:&#34;clean&#34;, BuildDate:&#34;2018-12-14T06:59:37Z&#34;, GoVersion:&#34;go1.10.4&#34;, Compiler:&#34;gc&#34;, Platform:&#34;linux/amd64&#34;}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>$ kubectl get nodes
+</span></span><span style="display:flex;"><span>NAME                                      STATUS   ROLES    AGE     VERSION
+</span></span><span style="display:flex;"><span>vm-16ff7fc4-88fa-406d-5f6a-7ccc92286c08   Ready    &lt;none&gt;   2d11h   v1.12.4
+</span></span><span style="display:flex;"><span>vm-5bfb8f6e-d715-45ba-77df-047447995ac1   Ready    &lt;none&gt;   2d11h   v1.12.4
+</span></span><span style="display:flex;"><span>vm-c2c16e34-1a73-4a78-50b4-bdec12d3de77   Ready    &lt;none&gt;   2d11h   v1.12.4
+</span></span></code></pre></div><p>looking great! Create a namespace to work in that you can delete when finished to easily clean up after the demo.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>$ kubectl create namespace spring-into-kubernetes-1
+</span></span><span style="display:flex;"><span>namespace/spring-into-kubernetes-1 created
+</span></span></code></pre></div><p>Update your Kubernetes config to use this new namespace by default:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>$ kubectl config set-context <span style="color:#66d9ef">$(</span>kubectl config current-context<span style="color:#66d9ef">)</span> --namespace<span style="color:#f92672">=</span>spring-into-kubernetes-1
+</span></span><span style="display:flex;"><span>Context &#34;cluster1&#34; modified.
+</span></span></code></pre></div><h1 id="step-3-build-a-docker-image-for-spring-pet-clinic">Step 3. Build a Docker image for Spring Pet Clinic</h1>
 <blockquote>
 <p>Note: If you are using minikube you can use the <a href="https://github.com/kubernetes/minikube/blob/master/docs/reusing_the_docker_daemon.md">minikube docker socket</a> and skip pushing the image up to a registry.</p>
-
+</blockquote>
+<blockquote>
 <p>Note: If you don&rsquo;t want to build your own image you can use the one that I&rsquo;ve already built <code>paulczar/petclinic:spring-k8s-1</code> and skip straight to running it.</p>
 </blockquote>
-
 <p>Use <code>git</code> to clone down the Spring Pet Clinic git repo locally:</p>
-
-<pre><code class="language-console">$ git clone https://github.com/spring-projects/spring-petclinic.git
-Cloning into 'spring-petclinic'...
-remote: Enumerating objects: 7860, done.
-remote: Total 7860 (delta 0), reused 0 (delta 0), pack-reused 7860
-Receiving objects: 100% (7860/7860), 6.99 MiB | 14.57 MiB/s, done.
-Resolving deltas: 100% (2908/2908), done.
-
-$ cd spring-petclinic
-</code></pre>
-
-<p>Ordinarily you&rsquo;d use <code>docker build</code> to create a docker image, however this repo does not have a <code>Dockerfile</code>, so thankfully we have some less obvious ways through maven to do this using tools like the <a href="https://github.com/GoogleContainerTools/jib">Google JIB project</a>:</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>$ git clone https://github.com/spring-projects/spring-petclinic.git
+</span></span><span style="display:flex;"><span>Cloning into &#39;spring-petclinic&#39;...
+</span></span><span style="display:flex;"><span>remote: Enumerating objects: 7860, done.
+</span></span><span style="display:flex;"><span>remote: Total 7860 (delta 0), reused 0 (delta 0), pack-reused 7860
+</span></span><span style="display:flex;"><span>Receiving objects: 100% (7860/7860), 6.99 MiB | 14.57 MiB/s, done.
+</span></span><span style="display:flex;"><span>Resolving deltas: 100% (2908/2908), done.
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>$ cd spring-petclinic
+</span></span></code></pre></div><p>Ordinarily you&rsquo;d use <code>docker build</code> to create a docker image, however this repo does not have a <code>Dockerfile</code>, so thankfully we have some less obvious ways through maven to do this using tools like the <a href="https://github.com/GoogleContainerTools/jib">Google JIB project</a>:</p>
 <blockquote>
 <p>Note: For more ways to build Docker images for Spring Applications see the official <a href="https://spring.io/guides/gs/spring-boot-docker/">Spring documentation</a>.</p>
 </blockquote>
-
-<pre><code class="language-console">$ mvn compile -Dimage=spring/petclinic:spring-k8s-1 \
-    com.google.cloud.tools:jib-maven-plugin:1.0.0:dockerBuild
-...
-...
-[INFO] Built image to Docker daemon as spring-petclinic:2.1.0.BUILD-SNAPSHOT
-[INFO] Executing tasks:
-[INFO] [==============================] 100.0% complete
-[INFO]
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time: 20.561 s
-[INFO] Finished at: 2019-01-24T08:56:30-06:00
-[INFO] ------------------------------------------------------------------------
-</code></pre>
-
-<p>If like me you don&rsquo;t have <code>java</code> installed on your local desktop you can cheat your way through by mapping your docker socket through to a maven container like this:</p>
-
-<pre><code class="language-console">$ docker run -ti --rm --workdir /src -v $(pwd):/src \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    maven:3.6-jdk-11 mvn compile -Dimage=spring/petclinic:spring-k8s-1 \
-    com.google.cloud.tools:jib-maven-plugin:1.0.0:dockerBuild
-</code></pre>
-
-<p>This will have built an image called <code>spring/petclinic:spring-k8s-1</code>. Verify it:</p>
-
-<pre><code class="language-console">$ docker images spring/petclinic:spring-k8s-1
-REPOSITORY          TAG                    IMAGE ID            CREATED             SIZE
-spring/petclinic    spring-k8s-1   6afb36ee7749        15 seconds ago        164MB
-</code></pre>
-
-<p>Tag this image for your Docker registry username (anywhere you see my registry username you should swap it for yours) and push it up:</p>
-
-<pre><code class="language-console">$ docker tag spring/petclinic:spring-k8s-1 paulczar/petclinic:spring-k8s-1
-$ docker push paulczar/petclinic:spring-k8s-1
-The push refers to repository [docker.io/paulczar/petclinic]
-1f5a2dd7582f: Layer already exists
-6e01ddadb469: Pushed
-185699264bb4: Layer already exists
-5b0bbc8b30cc: Pushed
-6189abe095d5: Pushed
-c5204564c844: Pushed
-spring-k8s-1: digest: sha256:0a71768b0a3b199b6ec78dff983f26c4103e6089ed50c17985b58c120c3aaf72 size: 1581
-
-</code></pre>
-
-<h1 id="step-4-optional-validate-the-docker-image-works-locally">Step 4. (optional) Validate the Docker Image works locally</h1>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>$ mvn compile -Dimage<span style="color:#f92672">=</span>spring/petclinic:spring-k8s-1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    com.google.cloud.tools:jib-maven-plugin:1.0.0:dockerBuild
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>[INFO] Built image to Docker daemon as spring-petclinic:2.1.0.BUILD-SNAPSHOT
+</span></span><span style="display:flex;"><span>[INFO] Executing tasks:
+</span></span><span style="display:flex;"><span>[INFO] [==============================] 100.0% complete
+</span></span><span style="display:flex;"><span>[INFO]
+</span></span><span style="display:flex;"><span>[INFO] ------------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>[INFO] BUILD SUCCESS
+</span></span><span style="display:flex;"><span>[INFO] ------------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>[INFO] Total time: 20.561 s
+</span></span><span style="display:flex;"><span>[INFO] Finished at: 2019-01-24T08:56:30-06:00
+</span></span><span style="display:flex;"><span>[INFO] ------------------------------------------------------------------------
+</span></span></code></pre></div><p>If like me you don&rsquo;t have <code>java</code> installed on your local desktop you can cheat your way through by mapping your docker socket through to a maven container like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>$ docker run -ti --rm --workdir /src -v <span style="color:#66d9ef">$(</span>pwd<span style="color:#66d9ef">)</span>:/src <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -v /var/run/docker.sock:/var/run/docker.sock \
+</span></span><span style="display:flex;"><span>    maven:3.6-jdk-11 mvn compile -Dimage=spring/petclinic:spring-k8s-1 \
+</span></span><span style="display:flex;"><span>    com.google.cloud.tools:jib-maven-plugin:1.0.0:dockerBuild
+</span></span></code></pre></div><p>This will have built an image called <code>spring/petclinic:spring-k8s-1</code>. Verify it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>$ docker images spring/petclinic:spring-k8s-1
+</span></span><span style="display:flex;"><span>REPOSITORY          TAG                    IMAGE ID            CREATED             SIZE
+</span></span><span style="display:flex;"><span>spring/petclinic    spring-k8s-1   6afb36ee7749        15 seconds ago        164MB
+</span></span></code></pre></div><p>Tag this image for your Docker registry username (anywhere you see my registry username you should swap it for yours) and push it up:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>$ docker tag spring/petclinic:spring-k8s-1 paulczar/petclinic:spring-k8s-1
+</span></span><span style="display:flex;"><span>$ docker push paulczar/petclinic:spring-k8s-1
+</span></span><span style="display:flex;"><span>The push refers to repository [docker.io/paulczar/petclinic]
+</span></span><span style="display:flex;"><span>1f5a2dd7582f: Layer already exists
+</span></span><span style="display:flex;"><span>6e01ddadb469: Pushed
+</span></span><span style="display:flex;"><span>185699264bb4: Layer already exists
+</span></span><span style="display:flex;"><span>5b0bbc8b30cc: Pushed
+</span></span><span style="display:flex;"><span>6189abe095d5: Pushed
+</span></span><span style="display:flex;"><span>c5204564c844: Pushed
+</span></span><span style="display:flex;"><span>spring-k8s-1: digest: sha256:0a71768b0a3b199b6ec78dff983f26c4103e6089ed50c17985b58c120c3aaf72 size: 1581
+</span></span></code></pre></div><h1 id="step-4-optional-validate-the-docker-image-works-locally">Step 4. (optional) Validate the Docker Image works locally</h1>
 <p>It&rsquo;s usually a good idea to validate things locally in Docker before moving ahead, so go ahead and do that by running Spring Petclinic via your local docker daemon:</p>
-
 <blockquote>
 <p>Note: We&rsquo;re running docker with the <code>-ti</code> flag to keep it in the foreground, <code>--rm</code> to delete the container when done and <code>-p</code> to map a port from localhost.</p>
 </blockquote>
-
-<pre><code class="language-console">$ docker run -ti --rm -p 8080:8080 paulczar/petclinic:spring-k8s-1
-...
-...
-2019-01-24 15:07:35.928  INFO 1 --- [  restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 15 endpoint(s) beneath base path '/manage'
-2019-01-24 15:07:36.057  INFO 1 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2019-01-24 15:07:36.061  INFO 1 --- [  restartedMain] o.s.s.petclinic.PetClinicApplication     : Started PetClinicApplication in 7.151 seconds (JVM running for 7.522)
-</code></pre>
-
-<p>Validate it works by pointint your web browser at localhost port 8080:</p>
-
-<p><img src="./pc-localhost.png" alt="Spring Pet Clinic via Docker" /></p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>$ docker run -ti --rm -p 8080:8080 paulczar/petclinic:spring-k8s-1
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>2019-01-24 15:07:35.928  INFO 1 --- [  restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 15 endpoint(s) beneath base path &#39;/manage&#39;
+</span></span><span style="display:flex;"><span>2019-01-24 15:07:36.057  INFO 1 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path &#39;&#39;
+</span></span><span style="display:flex;"><span>2019-01-24 15:07:36.061  INFO 1 --- [  restartedMain] o.s.s.petclinic.PetClinicApplication     : Started PetClinicApplication in 7.151 seconds (JVM running for 7.522)
+</span></span></code></pre></div><p>Validate it works by pointint your web browser at localhost port 8080:</p>
+<p><img src="./pc-localhost.png" alt="Spring Pet Clinic via Docker"></p>
 <p>Stop and delete your running container by hitting <code>control c</code> in the terminal running the docker image.</p>
-
 <h1 id="step-5-run-pet-clinic-in-kubernetes">Step 5. Run Pet Clinic in Kubernetes</h1>
-
 <p>There are two main ways of interacting with Kubernetes. <strong>declarative</strong> and <strong>imperative</strong>. With declarative you run <code>kubectl apply</code> with a local copy of the Kubernetes manifest and let Kubernetes determine how to ensure the running resources matches. When you use Kubernetes imperatively you give it more precise commands like <code>kubectl create</code> and <code>kubectl run</code>.</p>
-
 <p>Most advanced users of Kubernetes use the declarative methods, but the imperative are perfect for when you&rsquo;re just getting started or want to do something quickly.</p>
-
 <p>Create a Kubernetes deployment by running the <code>kubectl create</code> command and then validate it with <code>kubectl get all</code>:</p>
-
-<pre><code class="language-console">$ kubectl create deployment petclinic --image=paulczar/petclinic:spring-k8s-1
-deployment.apps/petclinic created
-
-$ kubectl get all
-NAME                             READY   STATUS    RESTARTS   AGE
-pod/petclinic-5ffccf75c4-snhdd   1/1     Running   0          36s
-
-NAME                        DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/petclinic   1         1         1            1           36s
-
-NAME                                   DESIRED   CURRENT   READY   AGE
-replicaset.apps/petclinic-5ffccf75c4   1         1         1       36s
-</code></pre>
-
-<p>You can see that Kubernetes has created several resources. It created a <strong>Deployment</strong> which is reconciled by a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/">Kubernetes controller</a> for managing the lifecycle of <strong>ReplicaSets</strong>. The <strong>Deployment</strong> created the <strong>ReplicaSet</strong> which has a controller for ensuring a set number of replicas of your application is running. The <strong>ReplicaSet</strong> created a <strong>Pod</strong> which is your running application.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>$ kubectl create deployment petclinic --image<span style="color:#f92672">=</span>paulczar/petclinic:spring-k8s-1
+</span></span><span style="display:flex;"><span>deployment.apps/petclinic created
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>$ kubectl get all
+</span></span><span style="display:flex;"><span>NAME                             READY   STATUS    RESTARTS   AGE
+</span></span><span style="display:flex;"><span>pod/petclinic-5ffccf75c4-snhdd   1/1     Running   0          36s
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>NAME                        DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+</span></span><span style="display:flex;"><span>deployment.apps/petclinic   1         1         1            1           36s
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>NAME                                   DESIRED   CURRENT   READY   AGE
+</span></span><span style="display:flex;"><span>replicaset.apps/petclinic-5ffccf75c4   1         1         1       36s
+</span></span></code></pre></div><p>You can see that Kubernetes has created several resources. It created a <strong>Deployment</strong> which is reconciled by a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/">Kubernetes controller</a> for managing the lifecycle of <strong>ReplicaSets</strong>. The <strong>Deployment</strong> created the <strong>ReplicaSet</strong> which has a controller for ensuring a set number of replicas of your application is running. The <strong>ReplicaSet</strong> created a <strong>Pod</strong> which is your running application.</p>
 <blockquote>
 <p>Note: <a href="https://kubernetes.io/docs/concepts/workloads/controllers/">Controllers</a> are a major part of what makes Kubernetes so good. They create tight control loops around resources to add more complex functionality as described above.</p>
 </blockquote>
-
 <p>You might notice that the Kubernetes output above does not give you an IP address or any hints as to how to access your application. This is because we need to expose the application using a <strong>Service</strong> resource.</p>
-
 <h1 id="step-6-expose-your-application-to-the-internet">Step 6. Expose your application to the Internet</h1>
-
 <p>If you don&rsquo;t care about making your application available to the internet and just want to validate that it works you can run <code>kubectl port-forward</code> and access your application via a <code>localhost</code> port forward like so:</p>
-
-<pre><code class="language-console">kubectl port-forward deployment/petclinic 8080:8080
-Forwarding from 127.0.0.1:8080 -&gt; 8080
-Forwarding from [::1]:8080 -&gt; 8080
-</code></pre>
-
-<p>Access the petclinic app just like we did earlier by pointing your browser at localhost:8080:</p>
-
-<p><img src="./pc-localhost.png" alt="Spring Pet Clinic via Docker" /></p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>kubectl port-forward deployment/petclinic 8080:8080
+</span></span><span style="display:flex;"><span>Forwarding from 127.0.0.1:8080 -&gt; 8080
+</span></span><span style="display:flex;"><span>Forwarding from [::1]:8080 -&gt; 8080
+</span></span></code></pre></div><p>Access the petclinic app just like we did earlier by pointing your browser at localhost:8080:</p>
+<p><img src="./pc-localhost.png" alt="Spring Pet Clinic via Docker"></p>
 <p>Stop the port forward with a <code>control-C</code> on in the terminal.</p>
-
 <p>Use the <code>kubectl expose</code> command to create a LoadBalancer service in Kubernetes and then validate it with <code>kubectl get services</code>:</p>
-
-<pre><code class="language-console">$ kubectl expose deployment petclinic --type=LoadBalancer --port 80 --target-port 8080
-service/petclinic exposed
-
-$ kubectl get service
-NAME        TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
-petclinic   LoadBalancer   10.100.200.110   &lt;pending&gt;     80:31148/TCP   15s
-</code></pre>
-
-<p>After a few minutes the <code>EXTERNAL-IP</code> field should go from <code>&lt;pending&gt;</code> to having an IP address:</p>
-
-<pre><code class="language-console">$ kubectl get service
-NAME        TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
-petclinic   LoadBalancer   10.100.200.110   35.238.37.241    80:31148/TCP   15s
-</code></pre>
-
-<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>$ kubectl expose deployment petclinic --type<span style="color:#f92672">=</span>LoadBalancer --port <span style="color:#ae81ff">80</span> --target-port <span style="color:#ae81ff">8080</span>
+</span></span><span style="display:flex;"><span>service/petclinic exposed
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>$ kubectl get service
+</span></span><span style="display:flex;"><span>NAME        TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+</span></span><span style="display:flex;"><span>petclinic   LoadBalancer   10.100.200.110   &lt;pending&gt;     80:31148/TCP   15s
+</span></span></code></pre></div><p>After a few minutes the <code>EXTERNAL-IP</code> field should go from <code>&lt;pending&gt;</code> to having an IP address:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>$ kubectl get service
+</span></span><span style="display:flex;"><span>NAME        TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+</span></span><span style="display:flex;"><span>petclinic   LoadBalancer   10.100.200.110   35.238.37.241    80:31148/TCP   15s
+</span></span></code></pre></div><blockquote>
 <p>Note: If you are running minikube you won&rsquo;t get a real loadbalancer and can run <code>minikube service example-service --url</code> to get an IP/Port combo that should work.</p>
 </blockquote>
-
 <p>Point your web browser at that IP address on port 80:</p>
-
-<p><img src="./kube-lb-pc.png" alt="Spring Pet Clinic via Docker" /></p>
-
+<p><img src="./kube-lb-pc.png" alt="Spring Pet Clinic via Docker"></p>
 <h1 id="step-7-cleanup">Step 7. Cleanup</h1>
-
 <p>Delete the service and deployment by running the <code>kubectl delete</code> command:</p>
-
-<pre><code class="language-console">$ k8s-platform-ops kubectl delete deployment petclinic
-deployment.extensions &quot;petclinic&quot; deleted
-$ k8s-platform-ops kubectl delete service petclinic
-$ k8s-platform-ops kubectl get all
-No resources found.
-</code></pre>
-
-<p>Delete your namespace and switch back to the <code>default</code> namespace:</p>
-
-<pre><code class="language-console">$ kubectl delete namespace spring-into-kubernetes-1
-namespace &quot;spring-into-kubernetes-1&quot; deleted
-
-$ kubectl config set-context $(kubectl config current-context) --namespace=default
-Context &quot;cluster1&quot; modified.
-</code></pre>
-
-<h1 id="conclusion">Conclusion</h1>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>$ k8s-platform-ops kubectl delete deployment petclinic
+</span></span><span style="display:flex;"><span>deployment.extensions &#34;petclinic&#34; deleted
+</span></span><span style="display:flex;"><span>$ k8s-platform-ops kubectl delete service petclinic
+</span></span><span style="display:flex;"><span>$ k8s-platform-ops kubectl get all
+</span></span><span style="display:flex;"><span>No resources found.
+</span></span></code></pre></div><p>Delete your namespace and switch back to the <code>default</code> namespace:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>$ kubectl delete namespace spring-into-kubernetes-1
+</span></span><span style="display:flex;"><span>namespace &#34;spring-into-kubernetes-1&#34; deleted
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>$ kubectl config set-context <span style="color:#66d9ef">$(</span>kubectl config current-context<span style="color:#66d9ef">)</span> --namespace<span style="color:#f92672">=</span>default
+</span></span><span style="display:flex;"><span>Context &#34;cluster1&#34; modified.
+</span></span></code></pre></div><h1 id="conclusion">Conclusion</h1>
 <p>Congratulations! You&rsquo;ve successfully deployed a basic Spring application to Kubernetes and it wasn&rsquo;t even all that hard.</p>
-
 <p>Using Kubernetes imperatively like this is a great way to get started and easily demonstrate running an application on Kubernetes. Of course there&rsquo;s many more things to take into consideration if you want to run an application in production on Kubernetes and we&rsquo;ll explore some of those things in future installments of Spring Into Kubernetes.</p>
 
-              <hr>
-              <div class="related-posts">
-                <h5>Related Posts</h5>
-                
-              </div>
-            </div>
-          </div>
-          <hr>
-        <div class="disqus">
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-
-    (function() {
-      
-      
-      if (window.location.hostname == "localhost")
-        return;
-
-      var disqus_shortname = '';
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-</div>
+          
+          
         </div>
-      
+      </div>
+      <div class="disqus">
+        
       </div>
     </div>
+  </div>
 
-    
-    <footer>
-  <div id="footer">
-    <div class="container">
-      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
-      <a href="http://www.github.com/sumaxime/hugo-sustain/">sustain</a> with ♥</p>
     </div>
+    
+    <footer class="footer">
+  <div class="container">
+    <div class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+    <a href="http://www.github.com/nurlansu/hugo-sustain/">sustain</a> with ♥</div>
   </div>
 </footer>
-<div class="footer"></div>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://tech.paulcz.net/js/docs.min.js"></script>
-<script src="https://tech.paulcz.net/js/main.js"></script>
-
-<script src="https://tech.paulcz.net/js/ie10-viewport-bug-workaround.js"></script>
-
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
 
   </body>
 </html>

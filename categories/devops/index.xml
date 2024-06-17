@@ -1,151 +1,96 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>devops on Paul Czarkowski</title>
+    <title>Devops on Paul Czarkowski</title>
     <link>https://tech.paulcz.net/categories/devops/</link>
-    <description>Recent content in devops on Paul Czarkowski</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Devops on Paul Czarkowski</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 31 Mar 2021 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://tech.paulcz.net/categories/devops/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="https://tech.paulcz.net/categories/devops/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Streaming DevOpsDays Texas</title>
       <link>https://tech.paulcz.net/blog/streaming-devopsdays-texas/</link>
       <pubDate>Wed, 31 Mar 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/streaming-devopsdays-texas/</guid>
-      <description>I recently had the privilege to help organize DevOpsDays Texas 2021, a virtual event that we ran to try and scratch our DevOpsDays itch given that in-person conferences won&amp;rsquo;t be happening any time soon.
- To see the replays of the event you can watch the Day 1 and Day 2 streams over on youtube.
- I had the dubious honor of being the most experienced at the technical setup for live streaming and therefore was nominated as the person to figure out how to live stream the event to Youtube.</description>
+      <description>I recently had the privilege to help organize DevOpsDays Texas 2021, a virtual event that we ran to try and scratch our DevOpsDays itch given that in-person conferences won&amp;rsquo;t be happening any time soon.&#xA;To see the replays of the event you can watch the Day 1 and Day 2 streams over on youtube.&#xA;I had the dubious honor of being the most experienced at the technical setup for live streaming and therefore was nominated as the person to figure out how to live stream the event to Youtube.</description>
     </item>
-    
     <item>
       <title>How to broadcast to Twitch and Zoom with OBS</title>
       <link>https://tech.paulcz.net/blog/obs-broadcast-to-zoom-and-twitch/</link>
       <pubDate>Wed, 13 May 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/obs-broadcast-to-zoom-and-twitch/</guid>
-      <description>Note: I have an updated, simpler version of this on Github with saved exports of profile and sources here.
- If you prefer a Video Tutorial, you can watch me screencast it on youtube, otherwise read on below.
-  Recent world events (COVID-19) has completely turned the Developer Advocacy role on its head and many of us are scrambling to find new ways to effectively reach audiences remotely.</description>
+      <description>Note: I have an updated, simpler version of this on Github with saved exports of profile and sources here.&#xA;If you prefer a Video Tutorial, you can watch me screencast it on youtube, otherwise read on below.&#xA;Recent world events (COVID-19) has completely turned the Developer Advocacy role on its head and many of us are scrambling to find new ways to effectively reach audiences remotely.&#xA;Many of us have been reaching for tools like Zoom for smaller groups such as Meetups and streaming platforms like Twitch / YouTube Live for reaching larger groups.</description>
     </item>
-    
     <item>
       <title>Introduction to GitHub Actions</title>
       <link>https://tech.paulcz.net/blog/intro-to-github-actions/</link>
       <pubDate>Thu, 29 Aug 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/intro-to-github-actions/</guid>
-      <description>After what seems like an eternity I finally got added to the GitHub Actions beta a few days ago.
-I recently created a Hugo website for learning Kubernetes called k8s.camp which is hosted in GitHub Pages and I figured that switching it from CircleCI to GitHub Actions would be a great way to learn Actions.
-Before I get started I do want to mention that my experience as a new user trying to learn how actions work was sub-optimal.</description>
+      <description>After what seems like an eternity I finally got added to the GitHub Actions beta a few days ago.&#xA;I recently created a Hugo website for learning Kubernetes called k8s.camp which is hosted in GitHub Pages and I figured that switching it from CircleCI to GitHub Actions would be a great way to learn Actions.&#xA;Before I get started I do want to mention that my experience as a new user trying to learn how actions work was sub-optimal.</description>
     </item>
-    
     <item>
       <title>Creating a Helm Chart Repository - Part 1</title>
       <link>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-1/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-1/</guid>
-      <description>Note: If this topic has peaked your interest, you can join me for a Webinar on August 15 where I&amp;rsquo;ll dive deep into Cloud Native Operations with Kubernetes and CI/CD Pipelines.
- Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 I will demonstrate creating a Helm chart repository using GitHub and GitHub Pages. In part 2 I will add Automation to automatically update the repository, and in part 3 I will add testing for changes to the charts themselves.</description>
+      <description>Note: If this topic has peaked your interest, you can join me for a Webinar on August 15 where I&amp;rsquo;ll dive deep into Cloud Native Operations with Kubernetes and CI/CD Pipelines.&#xA;Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 I will demonstrate creating a Helm chart repository using GitHub and GitHub Pages. In part 2 I will add Automation to automatically update the repository, and in part 3 I will add testing for changes to the charts themselves.</description>
     </item>
-    
     <item>
       <title>Creating a Helm Chart Repository - Part 2</title>
       <link>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-2/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-2/</guid>
-      <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 of this series I demonstrated creating a Helm chart repository using GitHub and GitHub Pages. In this part 2 I will add Automation to automatically update the repository, and in part 2 I will add testing for changes to the charts themselves.
- If you&amp;rsquo;re into Videos, I walked JJ through starting with Helm from scratch all the way to creating a Helm Repo and CI/CD.</description>
+      <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 of this series I demonstrated creating a Helm chart repository using GitHub and GitHub Pages. In this part 2 I will add Automation to automatically update the repository, and in part 2 I will add testing for changes to the charts themselves.&#xA;If you&amp;rsquo;re into Videos, I walked JJ through starting with Helm from scratch all the way to creating a Helm Repo and CI/CD.</description>
     </item>
-    
     <item>
       <title>Creating a Helm Chart Repository - Part 3</title>
       <link>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-3/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-3/</guid>
-      <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 of this series I demonstrated creating a Helm chart repository using GitHub and GitHub Pages. In part 2 I will add Automation to automatically update the repository, and in part 3 I will add testing for changes to the charts themselves.
- If you&amp;rsquo;re into Videos, I walked JJ through starting with Helm from scratch all the way to creating a Helm Repo and CI/CD.</description>
+      <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 of this series I demonstrated creating a Helm chart repository using GitHub and GitHub Pages. In part 2 I will add Automation to automatically update the repository, and in part 3 I will add testing for changes to the charts themselves.&#xA;If you&amp;rsquo;re into Videos, I walked JJ through starting with Helm from scratch all the way to creating a Helm Repo and CI/CD.</description>
     </item>
-    
     <item>
       <title>Cloud Native Operations - Kubernetes Controllers</title>
       <link>https://tech.paulcz.net/blog/cloud-native-operations-k8s-controllers/</link>
       <pubDate>Tue, 29 Jan 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/cloud-native-operations-k8s-controllers/</guid>
-      <description>Note: If this topic has peaked your interest, you can join me for a Webinar on August 15 where I&amp;rsquo;ll dive deep into Cloud Native Operations with Kubernetes and CI/CD Pipelines.
- Lulz what? Cloud Native Operations ?!?!?! Historically Operations practices have lagged behind development. During the 90s a number of lightweight software development practices evolved such as Scrum and Extreme Programming. During the early 2000&amp;rsquo;s it became pretty common to practice (or at least claim to) some form of Agile in software development.</description>
+      <description>Note: If this topic has peaked your interest, you can join me for a Webinar on August 15 where I&amp;rsquo;ll dive deep into Cloud Native Operations with Kubernetes and CI/CD Pipelines.&#xA;Lulz what? Cloud Native Operations ?!?!?! Historically Operations practices have lagged behind development. During the 90s a number of lightweight software development practices evolved such as Scrum and Extreme Programming. During the early 2000&amp;rsquo;s it became pretty common to practice (or at least claim to) some form of Agile in software development.</description>
     </item>
-    
     <item>
       <title>Multi Process Docker Images Done Right</title>
       <link>https://tech.paulcz.net/blog/multi-process-docker-images-done-right/</link>
       <pubDate>Mon, 22 Dec 2014 21:31:03 -0600</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/multi-process-docker-images-done-right/</guid>
-      <description>&lt;h2 id=&#34;for-some-values-of-right&#34;&gt;For some values of &amp;lsquo;right&amp;rsquo;&lt;/h2&gt;
-
-&lt;p&gt;Almost since &lt;a href=&#34;http://docker.com&#34;&gt;Docker&lt;/a&gt; was first introduced to the world there has been a fairly strong push to keeping containers to be single process.   This makes a lot of sense and definitely plays into the &lt;a href=&#34;http://12factor.net&#34;&gt;12 Factor&lt;/a&gt; way of thinking where all application output should be pushed to &lt;code&gt;stdout&lt;/code&gt; and docker itself with tools like &lt;a href=&#34;https://github.com/progrium/logspout&#34;&gt;logspout&lt;/a&gt; now has fairly strong tooling to deal with those logs.&lt;/p&gt;
-
-&lt;p&gt;Sometimes however it just makes sense to run more than one process in a container,  a perfect example would be running &lt;a href=&#34;https://github.com/kelseyhightower/confd&#34;&gt;confd&lt;/a&gt; as well as your application in order to modify the application&amp;rsquo;s config file based on changes in service discovery systems like &lt;a href=&#34;https://github.com/coreos/etcd&#34;&gt;etcd&lt;/a&gt;.   The &lt;a href=&#34;https://docs.docker.com/articles/ambassador_pattern_linking/&#34;&gt;ambassador&lt;/a&gt; container way of working can achieve similar things, but I&amp;rsquo;m not sure that running two containers with a process each to run your application is any better than running one container with two processes.&lt;/p&gt;</description>
+      <description>&lt;h2 id=&#34;for-some-values-of-right&#34;&gt;For some values of &amp;lsquo;right&amp;rsquo;&lt;/h2&gt;&#xA;&lt;p&gt;Almost since &lt;a href=&#34;http://docker.com&#34;&gt;Docker&lt;/a&gt; was first introduced to the world there has been a fairly strong push to keeping containers to be single process.   This makes a lot of sense and definitely plays into the &lt;a href=&#34;http://12factor.net&#34;&gt;12 Factor&lt;/a&gt; way of thinking where all application output should be pushed to &lt;code&gt;stdout&lt;/code&gt; and docker itself with tools like &lt;a href=&#34;https://github.com/progrium/logspout&#34;&gt;logspout&lt;/a&gt; now has fairly strong tooling to deal with those logs.&lt;/p&gt;&#xA;&lt;p&gt;Sometimes however it just makes sense to run more than one process in a container,  a perfect example would be running &lt;a href=&#34;https://github.com/kelseyhightower/confd&#34;&gt;confd&lt;/a&gt; as well as your application in order to modify the application&amp;rsquo;s config file based on changes in service discovery systems like &lt;a href=&#34;https://github.com/coreos/etcd&#34;&gt;etcd&lt;/a&gt;.   The &lt;a href=&#34;https://docs.docker.com/articles/ambassador_pattern_linking/&#34;&gt;ambassador&lt;/a&gt; container way of working can achieve similar things, but I&amp;rsquo;m not sure that running two containers with a process each to run your application is any better than running one container with two processes.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>BreadOps - Continuous Delivery of Fresh Baked Bread</title>
       <link>https://tech.paulcz.net/blog/breadops-continous-delivery-of-fresh-baked-bread/</link>
       <pubDate>Wed, 03 Dec 2014 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/breadops-continous-delivery-of-fresh-baked-bread/</guid>
-      <description>&amp;ldquo;See how this sparkly devop princess bakes bread every day with almost no effort at all with this one weird trick&amp;rdquo;
-Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at most supermarkets is little better than cake baked in a bread shaped mold ( seriously check next time you&amp;rsquo;re at a supermarket ). You might be lucky and have a really good bread baker near you, but like butchers and other important crafts they have all but disappeared.</description>
+      <description>&amp;ldquo;See how this sparkly devop princess bakes bread every day with almost no effort at all with this one weird trick&amp;rdquo;&#xA;Store bought bread is shit. Even the &amp;ldquo;artisanal&amp;rdquo; bread at most supermarkets is little better than cake baked in a bread shaped mold ( seriously check next time you&amp;rsquo;re at a supermarket ). You might be lucky and have a really good bread baker near you, but like butchers and other important crafts they have all but disappeared.</description>
     </item>
-    
     <item>
       <title>EZBake - A new way to converge docker containers with chef</title>
       <link>https://tech.paulcz.net/blog/ezbake-a-new-way-to-converge-docker-containers-with-chef/</link>
       <pubDate>Tue, 13 May 2014 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/ezbake-a-new-way-to-converge-docker-containers-with-chef/</guid>
-      <description>&lt;p&gt;&lt;code&gt;EZ Bake&lt;/code&gt; came from an idea I had while watching the &lt;a href=&#34;https://twitter.com/hangops&#34;&gt;HangOps&lt;/a&gt; &lt;a href=&#34;https://www.youtube.com/watch?v=clLFKIeSADo&amp;amp;feature=youtu.be&#34;&gt;episode 2014-04-11&lt;/a&gt; in which they were talking about &lt;code&gt;Docker&lt;/code&gt; and Config Management being complementary rather than adversary.&lt;/p&gt;
-
-&lt;p&gt;I have expermented with using &lt;code&gt;Chef&lt;/code&gt; and &lt;code&gt;Docker&lt;/code&gt; together in the &lt;a href=&#34;https://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io.html&#34;&gt;past&lt;/a&gt; but wanted to tackle the problem from a slightly different angle.  I&amp;rsquo;ve recently been working on some PAAS stuff, both &lt;a href=&#34;http://deis.io&#34;&gt;Deis&lt;/a&gt; and &lt;a href=&#34;http://solum.io&#34;&gt;Solum&lt;/a&gt; these both utilize the tooling from &lt;a href=&#34;https://github.com/flynn/flynn&#34;&gt;Flynn&lt;/a&gt; which builds heroku style &lt;code&gt;buildpacks&lt;/code&gt; in &lt;code&gt;Docker&lt;/code&gt;.&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;code&gt;EZ Bake&lt;/code&gt; came from an idea I had while watching the &lt;a href=&#34;https://twitter.com/hangops&#34;&gt;HangOps&lt;/a&gt; &lt;a href=&#34;https://www.youtube.com/watch?v=clLFKIeSADo&amp;amp;feature=youtu.be&#34;&gt;episode 2014-04-11&lt;/a&gt; in which they were talking about &lt;code&gt;Docker&lt;/code&gt; and Config Management being complementary rather than adversary.&lt;/p&gt;&#xA;&lt;p&gt;I have expermented with using &lt;code&gt;Chef&lt;/code&gt; and &lt;code&gt;Docker&lt;/code&gt; together in the &lt;a href=&#34;https://tech.paulcz.net/2013/09/creating-immutable-servers-with-chef-and-docker-dot-io.html&#34;&gt;past&lt;/a&gt; but wanted to tackle the problem from a slightly different angle.  I&amp;rsquo;ve recently been working on some PAAS stuff, both &lt;a href=&#34;http://deis.io&#34;&gt;Deis&lt;/a&gt; and &lt;a href=&#34;http://solum.io&#34;&gt;Solum&lt;/a&gt; these both utilize the tooling from &lt;a href=&#34;https://github.com/flynn/flynn&#34;&gt;Flynn&lt;/a&gt; which builds heroku style &lt;code&gt;buildpacks&lt;/code&gt; in &lt;code&gt;Docker&lt;/code&gt;.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Logstash &#43; Opscode Omnibus</title>
       <link>https://tech.paulcz.net/blog/logstash-plus-opscode-omnibus/</link>
       <pubDate>Mon, 06 May 2013 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/logstash-plus-opscode-omnibus/</guid>
-      <description>&lt;p&gt;At &lt;a href=&#34;http://devopsdays.org/events/2013-austin/&#34;&gt;DevOps Days Austin&lt;/a&gt; &lt;a href=&#34;http://twitter.com/mattray&#34;&gt;@mattray&lt;/a&gt; did an Openspace session on &lt;a href=&#34;https://github.com/opscode/omnibus-ruby&#34;&gt;Omnibus&lt;/a&gt; which is a toolset based around the concept of installing an app and all of it&amp;rsquo;s prerequisites from source into a directory and then building a package ( either .deb or .rpm ) of that using &lt;a href=&#34;https://github.com/jordansissel/fpm&#34;&gt;fpm&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Having battled many times with OS Packages trying to get newer versions of Ruby, or Redis or other software installed and having to hunt down some random package repo or manually build from source this seems like an excellent idea.&lt;/p&gt;
-
-&lt;p&gt;To learn the basics I decided to build an &lt;a href=&#34;https://github.com/paulczar/omnibus-fpm&#34;&gt;omnibus package for fpm&lt;/a&gt; which helped me work out the kinks and learn the basics.&lt;/p&gt;</description>
+      <description>&lt;p&gt;At &lt;a href=&#34;http://devopsdays.org/events/2013-austin/&#34;&gt;DevOps Days Austin&lt;/a&gt; &lt;a href=&#34;http://twitter.com/mattray&#34;&gt;@mattray&lt;/a&gt; did an Openspace session on &lt;a href=&#34;https://github.com/opscode/omnibus-ruby&#34;&gt;Omnibus&lt;/a&gt; which is a toolset based around the concept of installing an app and all of it&amp;rsquo;s prerequisites from source into a directory and then building a package ( either .deb or .rpm ) of that using &lt;a href=&#34;https://github.com/jordansissel/fpm&#34;&gt;fpm&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Having battled many times with OS Packages trying to get newer versions of Ruby, or Redis or other software installed and having to hunt down some random package repo or manually build from source this seems like an excellent idea.&lt;/p&gt;&#xA;&lt;p&gt;To learn the basics I decided to build an &lt;a href=&#34;https://github.com/paulczar/omnibus-fpm&#34;&gt;omnibus package for fpm&lt;/a&gt; which helped me work out the kinks and learn the basics.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Vagrant&#43;Puppet&#43;FPM=Amazeballs</title>
       <link>https://tech.paulcz.net/blog/vagrant-plus-puppet-plus-fpm-equals-amazeballs/</link>
       <pubDate>Sun, 07 Apr 2013 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/vagrant-plus-puppet-plus-fpm-equals-amazeballs/</guid>
-      <description>&lt;p&gt;Lately I&amp;rsquo;ve been doing a lot of prototyping with &lt;a href=&#34;http://www.vagrantup.com/&#34;&gt;Vagrant&lt;/a&gt;, specifically for a couple of distinct activities:-&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;building puppet modules using &lt;a href=&#34;https://github.com/elasticdog/puppet-sandbox&#34;&gt;the excellent puppet sandbox&lt;/a&gt; project&lt;/li&gt;
-&lt;li&gt;and building RPM packages with &lt;a href=&#34;https://github.com/jordansissel/fpm&#34;&gt;FPM&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I realized I was spending a bunch of time flipping back and forth between Vagrant environments and I had no quick way to utilize RPMs built with FPM inside my puppet modules.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Lately I&amp;rsquo;ve been doing a lot of prototyping with &lt;a href=&#34;http://www.vagrantup.com/&#34;&gt;Vagrant&lt;/a&gt;, specifically for a couple of distinct activities:-&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;building puppet modules using &lt;a href=&#34;https://github.com/elasticdog/puppet-sandbox&#34;&gt;the excellent puppet sandbox&lt;/a&gt; project&lt;/li&gt;&#xA;&lt;li&gt;and building RPM packages with &lt;a href=&#34;https://github.com/jordansissel/fpm&#34;&gt;FPM&lt;/a&gt;.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;I realized I was spending a bunch of time flipping back and forth between Vagrant environments and I had no quick way to utilize RPMs built with FPM inside my puppet modules.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

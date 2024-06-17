@@ -1,37 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>github on Paul Czarkowski</title>
+    <title>Github on Paul Czarkowski</title>
     <link>https://tech.paulcz.net/categories/github/</link>
-    <description>Recent content in github on Paul Czarkowski</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Github on Paul Czarkowski</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 29 Aug 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://tech.paulcz.net/categories/github/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="https://tech.paulcz.net/categories/github/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Introduction to GitHub Actions</title>
       <link>https://tech.paulcz.net/blog/intro-to-github-actions/</link>
       <pubDate>Thu, 29 Aug 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/intro-to-github-actions/</guid>
-      <description>After what seems like an eternity I finally got added to the GitHub Actions beta a few days ago.
-I recently created a Hugo website for learning Kubernetes called k8s.camp which is hosted in GitHub Pages and I figured that switching it from CircleCI to GitHub Actions would be a great way to learn Actions.
-Before I get started I do want to mention that my experience as a new user trying to learn how actions work was sub-optimal.</description>
+      <description>After what seems like an eternity I finally got added to the GitHub Actions beta a few days ago.&#xA;I recently created a Hugo website for learning Kubernetes called k8s.camp which is hosted in GitHub Pages and I figured that switching it from CircleCI to GitHub Actions would be a great way to learn Actions.&#xA;Before I get started I do want to mention that my experience as a new user trying to learn how actions work was sub-optimal.</description>
     </item>
-    
     <item>
       <title>Creating a Github Pages Blog With Octopress</title>
       <link>https://tech.paulcz.net/blog/creating-a-github-pages-blog-with-octopress/</link>
       <pubDate>Sat, 15 Dec 2012 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/creating-a-github-pages-blog-with-octopress/</guid>
-      <description>&lt;p&gt;A lot of tech bloggers will write their blog posts in &lt;a href=&#34;http://daringfireball.net/projects/markdown/&#34;&gt;Markdown&lt;/a&gt;, convert it to HTML and paste that HTML into their blog of choice and then in the blog&amp;rsquo;s editor clean it up to suit their blog.   This is an excellent way to create easy to read portable documents that can easily be published in multiple formats.&lt;/p&gt;
-
-&lt;p&gt;However what if there was a way to skip the second part of that and just create a markdown page, submit it into your source control ( you &lt;em&gt;do&lt;/em&gt; use source control right? ) and your blog would automagically update.&lt;/p&gt;</description>
+      <description>&lt;p&gt;A lot of tech bloggers will write their blog posts in &lt;a href=&#34;http://daringfireball.net/projects/markdown/&#34;&gt;Markdown&lt;/a&gt;, convert it to HTML and paste that HTML into their blog of choice and then in the blog&amp;rsquo;s editor clean it up to suit their blog.   This is an excellent way to create easy to read portable documents that can easily be published in multiple formats.&lt;/p&gt;&#xA;&lt;p&gt;However what if there was a way to skip the second part of that and just create a markdown page, submit it into your source control ( you &lt;em&gt;do&lt;/em&gt; use source control right? ) and your blog would automagically update.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

@@ -4,42 +4,34 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="map[]" />
-    <meta name="description" content="Random musings mostly about tech">
+    <meta name="author" content="Paul Czarkowski">
     <link rel="shortcut icon" type="image/x-icon" href="https://tech.paulcz.net/img/favicon.ico">
-    <title>Streaming DevOpsDays Texas</title>
-    <meta name="generator" content="Hugo 0.56.3" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://tech.paulcz.net/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    <title>Streaming DevOpsDays Texas | Paul Czarkowski</title>
+    <meta name="description" content="I recently had the privilege to help organize DevOpsDays Texas 2021, a virtual event that we ran to try and scratch our DevOpsDays itch given that in-person conferences won&rsquo;t be happening any time soon.
+To see the replays of the event you can watch the Day 1 and Day 2 streams over on youtube.
+I had the dubious honor of being the most experienced at the technical setup for live streaming and therefore was nominated as the person to figure out how to live stream the event to Youtube.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    
+    <link rel="preload stylesheet" href="/css/main.min.css" as="style">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old">
     
     <!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
-
+  
     
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-35638296-2', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
+      
+    
+  
+
 
   </head>
-
   <body>
-    <div id="wrap">
-
-      
-      <nav class="navbar navbar-default">
+    <div id="content">
+  
+  <nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
       <a class="navbar-brand" href="https://tech.paulcz.net/"><i class="fa fa-home"></i></a>
@@ -62,324 +54,168 @@ if (!doNotTrack) {
   </div>
 </nav>
 
-      
-      <div class="container">
-        <div class="blog-post">
-          <h3>
-            <strong><a href="https://tech.paulcz.net/blog/streaming-devopsdays-texas/">Streaming DevOpsDays Texas</a></strong>
-          </h3>
-        </div>
-        <div class="blog-title">
-          <h4>
-          March 31, 2021
-            &nbsp;&nbsp;
-            
-          </h4>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="blogpost">
-              
 
-<p>I recently had the privilege to help organize DevOpsDays Texas 2021, a virtual event that we ran to try and scratch our DevOpsDays itch given that in-person conferences won&rsquo;t be happening any time soon.</p>
-
+  <div class="container">
+    <h3 class="mt-3"><b><a href="https://tech.paulcz.net/blog/streaming-devopsdays-texas/">Streaming DevOpsDays Texas</a></b></h3>
+    <div class="blog-title my-4">
+      <h6>
+        March 31, 2021
+        &nbsp;&nbsp;
+        
+      </h6>
+    </div>
+    <div class="panel">
+      <div class="panel-body">
+        <div class="blogpost">
+          <p>I recently had the privilege to help organize DevOpsDays Texas 2021, a virtual event that we ran to try and scratch our DevOpsDays itch given that in-person conferences won&rsquo;t be happening any time soon.</p>
 <blockquote>
 <p>To see the replays of the event you can watch the <a href="https://www.youtube.com/watch?v=Ji_Dl92D6ps">Day 1</a> and <a href="https://www.youtube.com/watch?v=AvuWHRPqcCA">Day 2</a> streams over on <a href="https://www.youtube.com/channel/UC4KuCn1Fy1tgt9NRIN3rlFg">youtube</a>.</p>
 </blockquote>
-
 <p>I had the dubious honor of being the most experienced at the technical setup for live streaming and therefore was nominated as the person to figure out how to live stream the event to Youtube.</p>
-
 <p>I chose to use <a href="https://obsproject.com/">Open Broadcaster Software (OBS)</a> to manage the stream and Windows as the OS to run it on (OBS support is generally best on windows).</p>
-
 <h2 id="setting-up-the-streaming-box">Setting up the streaming box</h2>
-
 <p>I already have a pretty decent streaming box at home, its a couple year old Dell workstation that I added an SSD and a Nvidia GTX 1050 ti. The most important component of an OBS machine is that it contains something capable of doing h.264 encoding in hardware, otherwise the CPU will be blasted.</p>
-
 <p>The 1050ti is a few years old, but still supports <code>nvenc</code> which is the Nvidia library for doing hardware encoding. One important thing to note is that for <code>nvenc</code> to work you must have a display hooked up to the card. This means you cannot use the Windows Remote Desktop tool as it swaps out the display for a virtual one, as I later discovered this becomes a major issue when working with GPU enabled cloud instances.</p>
-
 <p>To work around this locally I use NoMachine as a remote desktop tool to connect to my streaming machine and I have a <a href="https://www.amazon.com/Headless-Display-Emulator-Headless-1920x1080-Generation/dp/B06XT1Z9TF/">cheap HDMI dummy monitor</a> which tricks the GPU into thinking it has a monitor plugged in.</p>
-
 <p>I then installed <a href="https://obsproject.com/download">OBS Studio 26.1.1</a> and two OBS plugins <a href="https://obsproject.com/forum/resources/audio-monitor.1186/">Audio Monitor</a> and <a href="https://obsproject.com/forum/resources/advanced-scene-switcher.395/">Advanced Scene Switcher</a> which I&rsquo;ll detail later.</p>
-
 <p>Knowing that I would need to do some advanced audio work I also downloaded <a href="https://vb-audio.com/Cable/">VB-Cable Virtual Audio Cables A+B</a> (donationware) to use to ensure I could get audio from Zoom to OBS. For previous streams I&rsquo;ve needed more cables and have used all five of their virtual cables as well as <a href="https://vb-audio.com/Voicemeeter/banana.htm">Voicemeeter Banana</a> for mixing the audio, but for this event I was able to get by with just the two Virtual Cables.</p>
-
-<p><img src="./audio-wiring.drawio.png" alt="A diagram describing the audio routing" /></p>
-
+<p><img src="./audio-wiring.drawio.png" alt="A diagram describing the audio routing"></p>
 <p><em>Here you can see a diagram showing how I wired the audio up between OBS, Zoom, and OBS.Ninja using the Virtual Cables. It may be useful to refer back to this when I describe their setup.</em></p>
-
 <p>I knew I would want to run a backup streaming server in the cloud so I kept all my files in a sensible path <code>c:\obs\dod-tx</code> which meant I could export profiles and scene collections, copy up the whole thing and import them from the same location on the streaming server.</p>
-
 <p>Speaking of which <a href="https://ibm.com/cloud">IBM Cloud</a> kindly offered to provide us with a dedicated GPU server which we gladly took them up on. Unfortunately they did not have a Dummy HDMI monitor dongle so I was unable to take advantage of the GPU, but the CPU onboard was powerful enough to handle the encoding. I did however need to install an alternative <a href="https://www.supermicro.com/wdl/driver/VGA/ASPEED/">virtual monitor driver</a> to get higher than 1024x768 resolution on the remote desktop.</p>
-
 <p>I repeated all of the software install steps on the IBM Cloud backup server.</p>
-
 <p>Knowing that I would need to keep files in sync between the two servers I looked into the state of the art for copying files between windows servers securely over the internet. To my chagrin I found no great answer and ended up doing something that I haven&rsquo;t done in fifteen or more years, installing <a href="https://www.cygwin.com/">Cygwin</a> and rsync. I&rsquo;m sure there is something better out there, but at least this gave me the ability to sync <code>c:\obs\dod-tx</code> between the two machines over SSH which is secure enough for me.</p>
-
 <h2 id="obs-and-obs-plugins">OBS and OBS Plugins</h2>
-
 <p>I installed the <a href="https://cdn-fastly.obsproject.com/downloads/OBS-Studio-26.1.1-Full-Installer-x64.exe">latest version</a> (26.1.1 at time of writing) of OBS. OBS is constantly adding improvements, so its really useful to stay current, plus the Audio Monitor plugin (described later) requires a very recent version of OBS.</p>
-
 <h3 id="audio-monitor">Audio Monitor</h3>
-
 <p><a href="https://obsproject.com/forum/resources/audio-monitor.1186/">Audio Monitor</a> is a plugin that allows you to apply one or more <strong>Audio Monitor</strong> plugins to any audio feed in OBS. For each audio source we set up two Audio Monitors, one to a set of headphones, the other to the VB Virtual Audio Cable which we could route to the Microphone source in Zoom and OBS.Ninja.</p>
-
 <h3 id="advanced-scene-switcher">Advanced Scene Switcher</h3>
-
 <p><a href="https://obsproject.com/forum/resources/advanced-scene-switcher.395/">Advanced Scene Switcher</a> is a plugin that lets you automate OBS changing scenes based on a number of triggers such as the current time, or when a media source finishes playing.</p>
-
 <h2 id="obs-overlay-and-underlay-scenes">OBS Overlay and Underlay Scenes</h2>
-
 <p>In OBS you create a Scene that contains one or more sources that are layered on top of each-other. You can use another Scene as a source. This means that you can compose fairly complex scenes together into the stream.</p>
-
 <p>This allowed us to have a few master scenes that were the base for the rest of the scenes.</p>
-
 <p>We had a basic Interstitial (that&rsquo;s a big word, I think I&rsquo;m using it right) scene that consisted of a basic background which we could add into a specific scene with a text source over the top of it. This was used for breaks to show what was coming up next etc.</p>
-
-<p><img src="./interstitial.png" alt="interstitial scene showing kickoff time" />
+<p><img src="./interstitial.png" alt="interstitial scene showing kickoff time">
 <em>This shows our starting soon scene which contains the interstitial scene and a text source that says &ldquo;stay tuned we&rsquo;ll kick off at 9am&rdquo;.</em></p>
-
 <h2 id="the-conference-schedule">The Conference Schedule</h2>
-
 <p>Obviously to build out DOD TX scene collections I needed to first determine the schedule. Thankfully we&rsquo;d had a very successful CFP and we had two Keynotes, eleven 30-minute Sessions, two panels (which we called fire starter chats), thirteen 5-minute Ignites, and twelve sponsor pitches. We also had opening and closing messages for each day, speaker introductions, and a couple of how-to videos scheduled during breaks etc.</p>
-
 <p>Most of the content was pre-recorded and we asked Speakers, Ignites, and Sponsors to provide 1920x1080 resolution videos. Quite a number of the speakers used Zoom or similar to do their recordings and we ended up with a lot of videos that were <em>not quite</em> 1080p. This is relatively easy to fix with OBS, so it wasn&rsquo;t a big deal.</p>
-
 <p>We did however want to do the closing messages live each day, and the fire-starter chats were live, so we had two all day Zoom meetings that we could capture the audio/video from for those. Much to our annoyance, Zoom does require at least two people in a meeting at all times or it will eventually time the meeting out. This happened to us a few times, however we could just re-open the same meeting so it wasn&rsquo;t a big deal.</p>
-
 <h2 id="captions-and-live-drawing">Captions and Live Drawing</h2>
-
 <p>We knew that we wanted to ensure the conference was accessible so we opted to hire <a href="https://whitecoatcaptioning.com/">White Coat Captioning</a> to do live captioning and we also hired Ashton from <a href="https://www.mindseyecreative.ca/">Minds Eye Creative</a> to do a live drawing of the contents of each 30-minute session.</p>
-
-<h3 id="obs-ninja-pre-stream-feed">OBS.Ninja pre-stream feed</h3>
-
+<h3 id="obsninja-pre-stream-feed">OBS.Ninja pre-stream feed</h3>
 <p>I needed a way to get our conference audio/video live to both parties, Streaming services usually add some delay for processing to a stream, so it was important that we were able to provide them with an un-delayed live video/audio feed. I could have used Zoom, but I was already going to use that for live content, therefore I opted to do this with a web based <a href="obs.ninja">obs.ninja</a> room.</p>
-
 <p>In OBS Ninja I shared the OBS virtual camera and <strong>VB Virtual Audio Cable A</strong> as a microphone from the Control room. Both the captioning team and Ashton would connect to this and able be able to see and hear the live feed from OBS without any delays, plus broadcast their own video/audio (if needed) to be captured as a Browser source in OBS.</p>
-
 <h3 id="live-drawing">Live Drawing</h3>
-
 <p>When Connected Ashton would see and hear the OBS feed live, and would share her camera/desktop via a custom receive URL.</p>
-
-<p><img src="./ashton-view.png" alt="Ashton's view of the conference" /></p>
-
+<p><img src="./ashton-view.png" alt="Ashton&rsquo;s view of the conference"></p>
 <p><em>Ashton&rsquo;s view of the conference, when a session is running she sees the live video from OBS which includes the session video as well as her own screenshare, so she has a preview of what the live stream will see.</em></p>
-
 <p>I then created a Scene in OBS called <code>_ashton - drawing</code> which contained two sources, and Image that would be displayed if Ashton&rsquo;s feed was offline and Ashton&rsquo;s OBS.ninja feed to which she shared her screen focussed on her drawing app.</p>
-
-<p><img src="./ashton-scene.png" alt="OBS Scene for Ashton" /></p>
-
+<p><img src="./ashton-scene.png" alt="OBS Scene for Ashton"></p>
 <p><em>The OBS Scene containing Ashton&rsquo;s cartoon.  I&rsquo;ve added a touch of transparency to her source so that you can faintly see the image behind it that would show if she was offline. During the conference this was totally opaque.</em></p>
-
 <h3 id="captions">Captions</h3>
-
 <p>The captioning team would see exactly the same feed as Ashton above. However we didn&rsquo;t want to capture anything directly from White Coat, instead they send a text stream to a <a href="https://www.streamtext.net">streaming text</a> website. The website would show an auto-scrolling wall of text as the captionering team did their thing. I created an OBS Scene that contained a Browser source pointing at the text stream like so.</p>
-
 <blockquote>
 <p>Note: There is an <a href="https://github.com/EddieCameron/obs-websocket-streamtext-captions">OBS websocket plugin</a> to create a better interface to capturing from streamtext, but it involves setting up a NodeJS service and I didn&rsquo;t want climb that particular hill.</p>
 </blockquote>
-
-<p><img src="./caption-scene.png" alt="OBS Scene for Captioning" />
+<p><img src="./caption-scene.png" alt="OBS Scene for Captioning">
 <em>The captions scene shows the whole stream text website.</em></p>
-
 <p>The captioning team would blast carriage returns at the start of each day to ensure that when the captioning started it would be on the last two lines and the auto-scrolling would keep it there. This means we can add the <code>_captioning</code> scene above as a source into any scenes that we wished to display the captions and crop the source to show just the last two lines of the source.</p>
-
-<p><img src="./captions-in-session.png" alt="Captioning cropped out in session" /></p>
-
+<p><img src="./captions-in-session.png" alt="Captioning cropped out in session"></p>
 <p><em>The captions thus appear in a captions bar across the top of any scenes that we wanted captioned.</em></p>
-
-<h2 id="live-sessions-zoom">Live Sessions - Zoom</h2>
-
+<h2 id="live-sessions---zoom">Live Sessions - Zoom</h2>
 <p>In order to facilitate live sessions I chose to use Zoom. I could have used OBS.Ninja like above, however that would have required a bunch of extra work vs doing the basic window-grab of Zoom.</p>
-
 <p>I created a Zoom scene in OBS in which I added a Window source for Zoom, a &ldquo;technical difficulties&rdquo; source under the Zoom source (so it would show if zoom crashed or whatever) and an Audio Input source for the <strong>Virtual Audio Cable B</strong>.</p>
-
 <p>I used the CTRL-Drag of the bounding box for the Zoom source to cut out the borders and controls of the zoom window to make it look a little less &ldquo;zoomy&rdquo;.</p>
-
 <p>I configured Zoom to use the <strong>Virtual Audio Cable B</strong> as the speaker, I wouldn&rsquo;t be sending audio to Zoom but just in case I set the Zoom Mic on the to <strong>Virtual Audio Cable A</strong> and muted it. If I needed to test Audio with the guests I could unmute it in Zoom and they would hear the stream audio.</p>
-
-<p><img src="./zoom-scene.png" alt="Zoom Scene" /></p>
-
+<p><img src="./zoom-scene.png" alt="Zoom Scene"></p>
 <p><em>With Zoom not currently running the technical difficulties message is shown.</em></p>
-
 <p>I scheduled two all-day Zoom calls and shared the invite links to the people giving live sessions. Apart from keeping the meeting open and ensuring the right people were on Zoom at the right time there was very little effort required.</p>
-
-<h2 id="content-scenes-sessions-ignites-etc">Content Scenes - Sessions, Ignites, etc</h2>
-
+<h2 id="content-scenes---sessions-ignites-etc">Content Scenes - Sessions, Ignites, etc</h2>
 <p>With the plumbing out of the way I could start building out Scenes for the Sessions, Ignites, Sponsors, etc. Given the even was time based I made the decision to prefix each scene with the time that I expected to play it.</p>
-
-<p><img src="./scene-names.png" alt="scene naming" /></p>
-
+<p><img src="./scene-names.png" alt="scene naming"></p>
 <p><em>By prefixing the scenes with their times it was obvious from the OBS interface what scene to play when and helped ensure the scenes were ordered chronologically.</em></p>
-
 <p>We wanted to make sure that folks had plenty of chances for breaks, so we chose to sandwich all content with some sort of short break, usually 5 minutes at a time, as well as a longer break for lunch. We also wanted to ensure that we had a variety of content so we tried not to have two pieces of similar content in a row.</p>
-
 <p>We had captions and live drawing for our Keynotes and main sessions, but not for other content such as Ignites and Sponsor pitches. So I built two main overlays.</p>
-
 <h3 id="keynote-and-session-scenes">Keynote and Session Scenes</h3>
-
 <p>The Keynote and Session overlay was a scene that started with a graphics source that was had a border with DOD TX colors and graphics (designed by the talented Ashton) with a blank title bar at the bottom and a transparent rectangle (16:9 ratio to match 1080p videos).</p>
-
 <p>I added a text source to point viewers to our sign-up url so they could get access to discord, as well as the captions scene at the top of the window and the live drawing scene on the right.</p>
-
-<p><img src="./session-overlay.png" alt="keynote and session overlay" /></p>
-
+<p><img src="./session-overlay.png" alt="keynote and session overlay"></p>
 <p><em>Here you can see the blank session overlay Scene.</em></p>
-
 <p>I then created individual scenes per Keynote and Session that started with the main content source, in most cases a media source that contained the pre-recorded session video. By default I added both the Compression and Noise Suppression filters to the videos (this helped a ton with background noise and substandard microphones) and 2 x Audio Monitor filters (one for OBS ninja, one for headphones) to ensure sound got to where it needed to go. I also skimmed through the video and made sure sound was high green to mid orange at peak and adjusted the gain to suit.</p>
-
 <p>Next I added the Session overlay and adjusted the Video media to fit inside the virtual frame of the overlay. If the video source wasn&rsquo;t perfectly 16:9 I made the video slightly bigger than the transparent part of the overlay and let it  crop off the edges.</p>
-
 <blockquote>
 <p>Note: you can copy transforms and filters from one source to another, this made it very easy to make the videos consistently sized.</p>
 </blockquote>
-
 <p>Finally I added a text overlay that went over the title bar to add the Session title and speaker name.</p>
-
-<p><img src="./captions-in-session.png" alt="keynote and session overlays" /></p>
-
+<p><img src="./captions-in-session.png" alt="keynote and session overlays"></p>
 <p><em>The result was a consistent look across all sessions with branding, captions, and live drawing.</em></p>
-
 <h3 id="ignite-and-sponsor-pitch-overlay">Ignite, and Sponsor pitch overlay</h3>
-
 <p>This overlay was very similar to the Session overlay, only without the captioning or live drawing (although I did go back and add the captioning source to the ignite scenes later).</p>
-
-<p><img src="./ignite-overlay-in-use.png" alt="Ignite and sponsor overlays" /></p>
-
+<p><img src="./ignite-overlay-in-use.png" alt="Ignite and sponsor overlays"></p>
 <p><em>Here you can see the simpler overlay used for Ignites and Sponsor pitches</em></p>
-
 <h2 id="transition-scenes">Transition Scenes</h2>
-
 <p>With the majority of the content scenes out of the way, it was time to build out transition scenes. I knew I would need some text focussed transition scenes like &ldquo;Stay tuned we&rsquo;ll be kicking off at 9:00am&rdquo; and &ldquo;break time! next up&hellip;&rdquo; as well as introduction transition scenes to play personalized introduction videos for our sessions.</p>
-
 <h3 id="text-based-transition-scenes">Text based Transition Scenes</h3>
-
 <p>The text based transitions were fairly straight forward. I had Ashton build me a 1080p image with a big space for text. She created a brilliant image with a cactus (one of the recurring DOD Texas characters she created) and a speech bubble.</p>
-
-<p><img src="./intermission-scene.png" alt="base intermission scene" /></p>
-
+<p><img src="./intermission-scene.png" alt="base intermission scene"></p>
 <p><em>Here you can see the text base transition scene.</em></p>
-
 <p>I created a Scene for Starting Soon, Finished, Breaks, and a few other transitions that included the base intermission scene and then added some text in everyone&rsquo;s favorite font.</p>
-
-<p><img src="./starting-soon.png" alt="starting soon intermission scene" /></p>
-
+<p><img src="./starting-soon.png" alt="starting soon intermission scene"></p>
 <p><em>Here you can see the starting soon transition scene with the text overlayed over the base scene.</em></p>
-
 <h3 id="speaker-introductions">Speaker Introductions</h3>
-
 <p>We also wanted to create personalized speaker introductions, Dan Collins and Laura Santamaria volunteered to record a roughly 1 minute introduction for each speaker, and did an amazing job of it, their experience in creating compelling videos really shone through.</p>
-
 <p>Ashton had created social cards for each speaker to be used on various social media platforms to promote their session, so I collected those and use them as a background for each speaker introduction, and then I layered the introduction video on top of it, that way when the video ended it would show the speaker&rsquo;s avatar and session title while I fumbled to switch to the scene for that session.</p>
-
-<p><img src="./speaker-intro.png" alt="speaker introduction scene" /></p>
-
+<p><img src="./speaker-intro.png" alt="speaker introduction scene"></p>
 <p><em>Here you can see Kiran&rsquo;s introduction done by Laura, Laura included the social card in her videos too, so we had a really great transition experience.</em></p>
-
 <h2 id="automating-scene-transitions">Automating Scene Transitions</h2>
-
 <p>By this stage I had two scene collections set up one for Day 1, one for Day 2. Each scene collection had the scenes that consisted of the day&rsquo;s event listed in the order in which they were to be played and prefixed with the times that they should be played.</p>
-
 <p>When I was setting this up originally I had expected that I would be setting alarms and clicking between each scene. However I stumbled across the <a href="https://obsproject.com/forum/resources/advanced-scene-switcher.395/">Advanced Scene Switcher</a> OBS plugin that allowed you to set various triggers to switch between scenes.</p>
-
 <p>The triggers I used were &ldquo;Media&rdquo;, &ldquo;Time&rdquo;, and &ldquo;Sequence&rdquo;.</p>
-
 <p>Initially I was going to use <em>Time</em> based triggers for the whole event, but I discovered that since most of our content wasn&rsquo;t exactly timed (Session videos were slated for 30 minutes, but most were around 25 minutes, and some were event less) which meant that when a Session video finished it would stay on an empty session scene until the time was up.</p>
-
 <p>To combat this, I switched most of the triggers to be <em>media</em> based and set the action to be &ldquo;When Media <strong>session - Nigel</strong> state is <strong>Played to end</strong> switch to <strong>11:40 - Lunch Breaks</strong> scene.</p>
-
-<p><img src="./media-switches.png" alt="screenshot of media switches" /></p>
-
+<p><img src="./media-switches.png" alt="screenshot of media switches"></p>
 <p><em>Here you can see the lengthy list of media based switches that drove most of the automated scene switching.</em></p>
-
 <p>This was perfect as we had some form of break after every session, so if a session finished early it would immediately transition into the specific Break&rsquo;s transition scene and we&rsquo;d just get a slightly longer break.</p>
-
 <p>This means that <em>Time</em> based switching was used to trigger the scheduled content such as &ldquo;at <strong>10:35</strong> switch to <strong>10:35 - Ignite Intro</strong> and the <em>Media</em> based switching was used to trigger the transition scenes.</p>
-
-<p><img src="./time-switches.png" alt="screenshot of time switches" /></p>
-
+<p><img src="./time-switches.png" alt="screenshot of time switches"></p>
 <p><em>Here you can see the Time based switches that drove the scheduled scenes.</em></p>
-
 <p>I also had a few text based introduction scenes like the above mentioned <strong>10:35 - Ignite Intro</strong> which I solved with the <em>Sequence</em> based triggers such as &ldquo;When <strong>10:35 - Ignite Intro</strong> is active switch to <strong>10:35 Ignites - Jeremy</strong> after <strong>10 seconds</strong>&rdquo;.</p>
-
-<p><img src="./sequence-switches.png" alt="screenshot of sequence switches" /></p>
-
+<p><img src="./sequence-switches.png" alt="screenshot of sequence switches"></p>
 <p><em>Finally here&rsquo;s the sequence switches.</em></p>
-
 <p>With these in place, both days were fully automated, the only thing I had to do was hit &ldquo;Start Streaming&rdquo; and &ldquo;Stop Streaming&rdquo; at the start and end of each day.</p>
-
 <h2 id="the-actual-streams">The actual streams</h2>
-
 <p>A few days prior to the events I had the both days fully automated, and was able to test them on unpublished youtube streams. This gave us the opportunity to preview the streams and fix any issues. We found a few, but not all of the issues.</p>
-
 <p>I also used rsync to make sure that the content was synced to the IBM Cloud server and I had exported and imported the scene collections so that I could drive the event from the cloud server and fall back to my personal streaming box in emergency.  I also gave JJ Asghar a quick rundown on what to do in case I lost power or got hit by a falling aircraft engine.</p>
-
 <p>On both days of the event I set the <strong>8:00 Starting Soon</strong> scene as active hit the start streaming button at 8:00am. From here I just had to monitor things and hope I got the automation right, If not, I could always override it.</p>
-
 <p>The event was not without a few glitches. Somewhere I had managed to schedule it to <strong>Start Recording</strong> part way through the first session. The streaming server had just a single slow disk and this action caused the stream to stutter and have issues. On the first day it took a while to figure out what went wrong and fix it. We nearly switched to my backup streaming box when I saw the <strong>Recording</strong> was on.  Turning it off fixed it, but not before I had accidently clicked off the scene and then had to try and scrool through to the right spot in the media playback.</p>
-
 <p>As we played through both days there were a few scenes that weren&rsquo;t quite right, and I was able to switch to <strong>Studio Mode</strong> which lets you edit a scene without switching to it live, which allowed me to fix most of the issues, however a few times I forgot to switch to Studio Mode and accidently switched scenes. This was a sign that unless a scene glitch is really major, better just to leave it glitched than to try and fix it live.</p>
-
 <h2 id="conclusion">Conclusion</h2>
-
 <p>Overall I would say that while tedious, it was actually fairly easy to build out the OBS setup to stream the event. The few live glitches we had were really stressful, but ultimately small enough that it didn&rsquo;t affect the overall viewing experience.</p>
-
 <p>I definitely gained an appreciation of the hard work and planning that goes into the production side of an event like this, and definitely feel that if you have the budget, partnering with a production company to do this for you is well worth it.</p>
-
 <p>Would I do this again? If you had asked me a few days after the event, I would say no way, but now, with some time passed, I would probably say yes.</p>
 
-              <hr>
-              <div class="related-posts">
-                <h5>Related Posts</h5>
-                
-              </div>
-            </div>
-          </div>
-          <hr>
-        <div class="disqus">
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-
-    (function() {
-      
-      
-      if (window.location.hostname == "localhost")
-        return;
-
-      var disqus_shortname = '';
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-</div>
+          
+          
         </div>
-      
+      </div>
+      <div class="disqus">
+        
       </div>
     </div>
+  </div>
 
-    
-    <footer>
-  <div id="footer">
-    <div class="container">
-      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
-      <a href="http://www.github.com/sumaxime/hugo-sustain/">sustain</a> with ♥</p>
     </div>
+    
+    <footer class="footer">
+  <div class="container">
+    <div class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+    <a href="http://www.github.com/nurlansu/hugo-sustain/">sustain</a> with ♥</div>
   </div>
 </footer>
-<div class="footer"></div>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://tech.paulcz.net/js/docs.min.js"></script>
-<script src="https://tech.paulcz.net/js/main.js"></script>
-
-<script src="https://tech.paulcz.net/js/ie10-viewport-bug-workaround.js"></script>
-
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
 
   </body>
 </html>

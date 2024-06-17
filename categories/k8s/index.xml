@@ -1,45 +1,33 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>k8s on Paul Czarkowski</title>
+    <title>K8s on Paul Czarkowski</title>
     <link>https://tech.paulcz.net/categories/k8s/</link>
-    <description>Recent content in k8s on Paul Czarkowski</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in K8s on Paul Czarkowski</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 08 Jun 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://tech.paulcz.net/categories/k8s/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="https://tech.paulcz.net/categories/k8s/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Deploying and accessing a GCP SQL database via Kubernetes</title>
       <link>https://tech.paulcz.net/blog/gcp-config-connect-sql-database/</link>
       <pubDate>Mon, 08 Jun 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/gcp-config-connect-sql-database/</guid>
-      <description>Sorry for the long preamble, feel free to just skip straight to the technical details.
-Two years ago, faced with the challenge of wanting to reduce the tooling required to deploy infrastructure to Google Cloud I started working on a Google Cloud Operator. The goal of this project was to be able to stand up networks, images, and Virtual Machines for installing Pivotal&amp;rsquo;s PKS (now Tanzu Kubernetes Grid Integrated).</description>
+      <description>Sorry for the long preamble, feel free to just skip straight to the technical details.&#xA;Two years ago, faced with the challenge of wanting to reduce the tooling required to deploy infrastructure to Google Cloud I started working on a Google Cloud Operator. The goal of this project was to be able to stand up networks, images, and Virtual Machines for installing Pivotal&amp;rsquo;s PKS (now Tanzu Kubernetes Grid Integrated).&#xA;This worked out pretty well for me and I was able to create/destroy environments at will seeded from a single node GKE cluster running the operator.</description>
     </item>
-    
     <item>
       <title>Building a Habitat Supervisor for Kubernetes</title>
       <link>https://tech.paulcz.net/blog/habitat-supervisors-in-kubernetes/</link>
       <pubDate>Fri, 06 Oct 2017 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/habitat-supervisors-in-kubernetes/</guid>
-      <description>Habitat is a project from Chef that provides you a reasonably simple way to build, package, and configure your application.
- &amp;ldquo;Habitat is an integrated solution to building, running, and maintaining your application throughout its lifetime. It builds your application and its services into immutable artifacts with declarative dependencies, and then provides automatic rebuilds of your application and its services as your application code and dependencies have upstream updates.&amp;rdquo; - Habitat Getting Started Guide.</description>
+      <description>Habitat is a project from Chef that provides you a reasonably simple way to build, package, and configure your application.&#xA;&amp;ldquo;Habitat is an integrated solution to building, running, and maintaining your application throughout its lifetime. It builds your application and its services into immutable artifacts with declarative dependencies, and then provides automatic rebuilds of your application and its services as your application code and dependencies have upstream updates.&amp;rdquo; - Habitat Getting Started Guide.</description>
     </item>
-    
     <item>
       <title>Writing Your First Helm Chart</title>
       <link>https://tech.paulcz.net/blog/getting-started-with-helm/</link>
       <pubDate>Tue, 03 Oct 2017 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/getting-started-with-helm/</guid>
-      <description>I recently found myself writing instructions on how to deploy an application to several Kubernetes platform and ended up writing a different Kubernetes manifests for each platform. 95% of the content was the same with just a few different directives based on how the particular platform handles ingress, or if we needed a Registry secret or a TLS certificate.
-Kubernetes manifests are very declarative and don&amp;rsquo;t offer any way to put conditionals or variables that could be set in them.</description>
+      <description>I recently found myself writing instructions on how to deploy an application to several Kubernetes platform and ended up writing a different Kubernetes manifests for each platform. 95% of the content was the same with just a few different directives based on how the particular platform handles ingress, or if we needed a Registry secret or a TLS certificate.&#xA;Kubernetes manifests are very declarative and don&amp;rsquo;t offer any way to put conditionals or variables that could be set in them.</description>
     </item>
-    
   </channel>
 </rss>

@@ -4,42 +4,33 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="map[]" />
-    <meta name="description" content="Random musings mostly about tech">
+    <meta name="author" content="Paul Czarkowski">
     <link rel="shortcut icon" type="image/x-icon" href="https://tech.paulcz.net/img/favicon.ico">
-    <title>Cloud Native Operations - Kubernetes Controllers</title>
-    <meta name="generator" content="Hugo 0.56.3" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://tech.paulcz.net/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    <title>Cloud Native Operations - Kubernetes Controllers | Paul Czarkowski</title>
+    <meta name="description" content="Note: If this topic has peaked your interest, you can join me for a Webinar on August 15 where I&rsquo;ll dive deep into Cloud Native Operations with Kubernetes and CI/CD Pipelines.
+Lulz what? Cloud Native Operations ?!?!?! Historically Operations practices have lagged behind development. During the 90s a number of lightweight software development practices evolved such as Scrum and Extreme Programming. During the early 2000&rsquo;s it became pretty common to practice (or at least claim to) some form of Agile in software development.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    
+    <link rel="preload stylesheet" href="/css/main.min.css" as="style">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old">
     
     <!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
-
+  
     
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-35638296-2', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
+      
+    
+  
+
 
   </head>
-
   <body>
-    <div id="wrap">
-
-      
-      <nav class="navbar navbar-default">
+    <div id="content">
+  
+  <nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
       <a class="navbar-brand" href="https://tech.paulcz.net/"><i class="fa fa-home"></i></a>
@@ -62,195 +53,122 @@ if (!doNotTrack) {
   </div>
 </nav>
 
-      
-      <div class="container">
-        <div class="blog-post">
-          <h3>
-            <strong><a href="https://tech.paulcz.net/blog/cloud-native-operations-k8s-controllers/">Cloud Native Operations - Kubernetes Controllers</a></strong>
-          </h3>
-        </div>
-        <div class="blog-title">
-          <h4>
-          January 29, 2019
-            &nbsp;&nbsp;
-            
-          </h4>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="blogpost">
-              
 
-<blockquote>
+  <div class="container">
+    <h3 class="mt-3"><b><a href="https://tech.paulcz.net/blog/cloud-native-operations-k8s-controllers/">Cloud Native Operations - Kubernetes Controllers</a></b></h3>
+    <div class="blog-title my-4">
+      <h6>
+        January 29, 2019
+        &nbsp;&nbsp;
+        
+      </h6>
+    </div>
+    <div class="panel">
+      <div class="panel-body">
+        <div class="blogpost">
+          <blockquote>
 <p>Note: If this topic has peaked your interest, you can join me for a Webinar on August 15 where I&rsquo;ll dive deep into <a href="https://content.pivotal.io/webinars/aug-15-cloud-native-operations-with-kubernetes-and-ci-cd-webinar?utm_campaign=cno-k8s-ci-cd-q319&amp;utm_source=blog&amp;utm_medium=website">Cloud Native Operations with Kubernetes and CI/CD Pipelines</a>.</p>
 </blockquote>
-
-<h1 id="lulz-what-cloud-native-operations">Lulz what? Cloud Native Operations ?!?!?!</h1>
-
+<h1 id="lulz-what-cloud-native-operations-">Lulz what? Cloud Native Operations ?!?!?!</h1>
 <p>Historically Operations practices have lagged behind development. During the 90s a number of lightweight software development practices evolved such as Scrum and Extreme Programming. During the early 2000&rsquo;s it became pretty common to practice (or at least claim to) some form of Agile in software development.</p>
-
 <p>It wasn&rsquo;t until the last year of that decade that we started to see an uptick in Operations folks wanting to adopt Agile type methodologies and as the devops (and later SRE) movements took off we started to borrow heavily from Lean principals such as Kanban and Value Stream Mapping.</p>
-
 <p>Cloud Computing has brought about another shift in software development, going from large monolithic applications to collections of microservices that work together, and even further into being event based via messages and streams which now falls under the umbrella of &ldquo;cloud native&rdquo;.</p>
-
 <p>With the rise of Kubernetes and similar platforms as well as companies like Hashicorp and stalwarts of Agile Operations such as Google and Pivotal we&rsquo;re starting to see that same shift in Operations as we start to talk about <strong>Platform as Product</strong> and turning engineering [operations] teams into product teams.</p>
-
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">this means we all need to learn to get better at product engineering, kittens.  and turning infra engineering teams into infra product teams. <a href="https://t.co/t1Vj6RKbdd">pic.twitter.com/t1Vj6RKbdd</a></p>&mdash; Charity Majors (@mipsytipsy) <a href="https://twitter.com/mipsytipsy/status/1088673759291011073?ref_src=twsrc%5Etfw">January 25, 2019</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <h1 id="kubernetes-controllers">Kubernetes Controllers</h1>
-
 <p>There&rsquo;s a lot more to be said about Cloud Native Operations and Platform as Product (the two go hand-in-hand) but for now I want to focus on a fundamental aspect of Kubernetes that will be a force multiplier for making the composable building blocks of Cloud Native Operations.</p>
-
 <p>Most resources in Kubernetes are managed by a Controller. A Kubernetes Controller is to microservices what a Chef recipe is to a Monolith.</p>
-
 <p>Each resource is controlled by its own control loop. This is a step forward from previous systems like Chef or Puppet which both have control loops but at the server level, not the resource.</p>
-
 <p>A Controller is a fairly simple piece of code that creates a control loop over a single resource to ensure that resource is behaving correctly. These Control loops cam stack together to create complex functionality with simple interfaces.</p>
-
 <p>The canonical example of this in action is in how we manage pods in Kubernetes. A Pod is [effectively] a running copy of your application that a specific worker node is asked to run. If that application crashes the kubelet running on that node will start it again.</p>
-
 <p>However if that node crashes the Pod is not recovered as the control loop (via the kubelet process) responsible for the resource no longer exists. To make applications more resiliant Kubernetes has the ReplicaSet controller.</p>
-
 <p>Kubernetes has a process running on the masters called a <code>controller-manager</code> that run the controllers for these more advanced resources. This is where the ReplicaSet controller runs, and it is responsible for ensuring that a set number of copies of your application are always running.</p>
-
 <p>To do this the ReplicaSet controller requests that the provided number of Pods are created and then it routinely checks that the correct number of Pods are still running and will request more pods, or destroy existing pods to do so.</p>
-
 <p>By requesting a ReplicaSet from Kubernetes you get a self-healing deployment of your application. You can further add lifecycle management to your workload by requesting a Deployment which is a controller that manages ReplicaSets.</p>
-
 <p>These Controllers are great for managing Kubernetes resources, but are also fantastic for managing resources outside of Kubernetes. You can extend Kubernetes by writing a Controller that watches for events and annotations and performs extra work, or by writing a Custom Resource Definition.</p>
-
-<h1 id="example-external-dns-controller">Example - External DNS Controller</h1>
-
+<h1 id="example---external-dns-controller">Example - External DNS Controller</h1>
 <p>The <a href="https://github.com/kubernetes-incubator/external-dns">external-dns</a> controller is a perfect example of a watcher. You configure it with your DNS provider and it will watch resources such as Services and Ingresses. When one of those resources changes it will inspect them for annotations which will tell it if it needs to perform an action.</p>
-
 <p>With the <code>external-dns</code> controller running in your cluster you can simply add the following annotation to a service and it will go out and create a matching DNS A record for that resource:</p>
-
-<pre><code class="language-console">kubectl annotate service nginx \
-    &quot;external-dns.alpha.kubernetes.io/hostname=nginx.example.org.&quot;
-</code></pre>
-
-<p>You can change other characteristics such as the TTL value of the DNS record:</p>
-
-<pre><code class="language-console">kubectl annotate service nginx \
-    &quot;external-dns.alpha.kubernetes.io/ttl=10&quot;
-</code></pre>
-
-<p>Just like that you now have automatic DNS management for your applications and services in Kubernetes that reacts to any changes in your cluster to ensure your DNS is correct.</p>
-
-<h1 id="example-certificate-manager-operator">Example - Certificate Manager Operator</h1>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>kubectl annotate service nginx \
+</span></span><span style="display:flex;"><span>    &#34;external-dns.alpha.kubernetes.io/hostname=nginx.example.org.&#34;
+</span></span></code></pre></div><p>You can change other characteristics such as the TTL value of the DNS record:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>kubectl annotate service nginx \
+</span></span><span style="display:flex;"><span>    &#34;external-dns.alpha.kubernetes.io/ttl=10&#34;
+</span></span></code></pre></div><p>Just like that you now have automatic DNS management for your applications and services in Kubernetes that reacts to any changes in your cluster to ensure your DNS is correct.</p>
+<h1 id="example---certificate-manager-operator">Example - Certificate Manager Operator</h1>
 <p>Like the <code>external-dns</code> controller the <a href="http://docs.cert-manager.io/en/latest/">cert-manager</a> will react to changes in resources, but also comes with a Custom Resource Definition that will allow you to request certificates as a resource in of themselves, not just a byproduct of an annotation.</p>
-
 <p><code>cert-manager</code> works with <a href="https://letsencrypt.org/">Lets Encrypt</a> and other sources of Certificates to request valid signed TLS certificates. You can even use it in combination with <code>external-dns</code> like the following which will register <code>web.example.com</code> and retrieve a TLS certificate from Lets Encrypt and store that in a Secret.</p>
-
-<pre><code class="language-yaml">apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  annotations:
-    certmanager.k8s.io/acme-http01-edit-in-place: &quot;true&quot;
-    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
-    kubernetes.io/tls-acme: &quot;true&quot;
-  name: example
-spec:
-  rules:
-  - host: web.example.com
-    http:
-      paths:
-      - backend:
-          serviceName: example
-          servicePort: 80
-        path: /*
-  tls:
-  - hosts:
-    - web.example.com
-    secretName: example-tls
-</code></pre>
-
-<p>You can also request a certificate directly from the <code>cert-manager</code> CRD like so which like above will result in a certificate keypair being stored in a Kubernetes secret:</p>
-
-<pre><code class="language-yaml">apiVersion: certmanager.k8s.io/v1alpha1
-kind: Certificate
-metadata:
-  name: example-com
-  namespace: default
-spec:
-  secretName: example-com-tls
-  issuerRef:
-    name: letsencrypt-staging
-  commonName: example.com
-  dnsNames:
-  - www.example.com
-  acme:
-    config:
-    - http01:
-        ingressClass: nginx
-      domains:
-      - example.com
-    - http01:
-        ingress: my-ingress
-      domains:
-      - www.example.com
-</code></pre>
-
-<h1 id="conclusion">Conclusion</h1>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">extensions/v1beta1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Ingress</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">annotations</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">certmanager.k8s.io/acme-http01-edit-in-place</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">certmanager.k8s.io/cluster-issuer</span>: <span style="color:#ae81ff">letsencrypt-prod</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">kubernetes.io/tls-acme</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">example</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">rules</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">host</span>: <span style="color:#ae81ff">web.example.com</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">http</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">paths</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">backend</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">serviceName</span>: <span style="color:#ae81ff">example</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">servicePort</span>: <span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/*</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">tls</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">hosts</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">web.example.com</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">secretName</span>: <span style="color:#ae81ff">example-tls</span>
+</span></span></code></pre></div><p>You can also request a certificate directly from the <code>cert-manager</code> CRD like so which like above will result in a certificate keypair being stored in a Kubernetes secret:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">certmanager.k8s.io/v1alpha1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Certificate</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">example-com</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">default</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">secretName</span>: <span style="color:#ae81ff">example-com-tls</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">issuerRef</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">letsencrypt-staging</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">commonName</span>: <span style="color:#ae81ff">example.com</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">dnsNames</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">www.example.com</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">acme</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">config</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">http01</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">ingressClass</span>: <span style="color:#ae81ff">nginx</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">domains</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">example.com</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">http01</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">ingress</span>: <span style="color:#ae81ff">my-ingress</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">domains</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">www.example.com</span>
+</span></span></code></pre></div><h1 id="conclusion">Conclusion</h1>
 <p>This was just a quick look at one of the ways that Kubernetes is helping enable a new wave of changes to how we operate software. This is a favorite topic of mine, so look forward to hearing more.</p>
 
-              <hr>
-              <div class="related-posts">
-                <h5>Related Posts</h5>
-                
-              </div>
-            </div>
-          </div>
-          <hr>
-        <div class="disqus">
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-
-    (function() {
-      
-      
-      if (window.location.hostname == "localhost")
-        return;
-
-      var disqus_shortname = '';
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-</div>
+          
+          
         </div>
-      
+      </div>
+      <div class="disqus">
+        
       </div>
     </div>
+  </div>
 
-    
-    <footer>
-  <div id="footer">
-    <div class="container">
-      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
-      <a href="http://www.github.com/sumaxime/hugo-sustain/">sustain</a> with ♥</p>
     </div>
+    
+    <footer class="footer">
+  <div class="container">
+    <div class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+    <a href="http://www.github.com/nurlansu/hugo-sustain/">sustain</a> with ♥</div>
   </div>
 </footer>
-<div class="footer"></div>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://tech.paulcz.net/js/docs.min.js"></script>
-<script src="https://tech.paulcz.net/js/main.js"></script>
-
-<script src="https://tech.paulcz.net/js/ie10-viewport-bug-workaround.js"></script>
-
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
 
   </body>
 </html>

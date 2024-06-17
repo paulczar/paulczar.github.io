@@ -1,66 +1,47 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>helm on Paul Czarkowski</title>
+    <title>Helm on Paul Czarkowski</title>
     <link>https://tech.paulcz.net/categories/helm/</link>
-    <description>Recent content in helm on Paul Czarkowski</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Helm on Paul Czarkowski</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 03 Jul 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://tech.paulcz.net/categories/helm/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="https://tech.paulcz.net/categories/helm/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Creating a Helm Chart Repository - Part 1</title>
       <link>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-1/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-1/</guid>
-      <description>Note: If this topic has peaked your interest, you can join me for a Webinar on August 15 where I&amp;rsquo;ll dive deep into Cloud Native Operations with Kubernetes and CI/CD Pipelines.
- Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 I will demonstrate creating a Helm chart repository using GitHub and GitHub Pages. In part 2 I will add Automation to automatically update the repository, and in part 3 I will add testing for changes to the charts themselves.</description>
+      <description>Note: If this topic has peaked your interest, you can join me for a Webinar on August 15 where I&amp;rsquo;ll dive deep into Cloud Native Operations with Kubernetes and CI/CD Pipelines.&#xA;Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 I will demonstrate creating a Helm chart repository using GitHub and GitHub Pages. In part 2 I will add Automation to automatically update the repository, and in part 3 I will add testing for changes to the charts themselves.</description>
     </item>
-    
     <item>
       <title>Creating a Helm Chart Repository - Part 2</title>
       <link>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-2/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-2/</guid>
-      <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 of this series I demonstrated creating a Helm chart repository using GitHub and GitHub Pages. In this part 2 I will add Automation to automatically update the repository, and in part 2 I will add testing for changes to the charts themselves.
- If you&amp;rsquo;re into Videos, I walked JJ through starting with Helm from scratch all the way to creating a Helm Repo and CI/CD.</description>
+      <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 of this series I demonstrated creating a Helm chart repository using GitHub and GitHub Pages. In this part 2 I will add Automation to automatically update the repository, and in part 2 I will add testing for changes to the charts themselves.&#xA;If you&amp;rsquo;re into Videos, I walked JJ through starting with Helm from scratch all the way to creating a Helm Repo and CI/CD.</description>
     </item>
-    
     <item>
       <title>Creating a Helm Chart Repository - Part 3</title>
       <link>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-3/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-3/</guid>
-      <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 of this series I demonstrated creating a Helm chart repository using GitHub and GitHub Pages. In part 2 I will add Automation to automatically update the repository, and in part 3 I will add testing for changes to the charts themselves.
- If you&amp;rsquo;re into Videos, I walked JJ through starting with Helm from scratch all the way to creating a Helm Repo and CI/CD.</description>
+      <description>Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 of this series I demonstrated creating a Helm chart repository using GitHub and GitHub Pages. In part 2 I will add Automation to automatically update the repository, and in part 3 I will add testing for changes to the charts themselves.&#xA;If you&amp;rsquo;re into Videos, I walked JJ through starting with Helm from scratch all the way to creating a Helm Repo and CI/CD.</description>
     </item>
-    
     <item>
       <title>Spring into Kubernetes - Deploying with Helm</title>
       <link>https://tech.paulcz.net/blog/spring-into-kubernetes-part-2/</link>
       <pubDate>Thu, 07 Feb 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/spring-into-kubernetes-part-2/</guid>
-      <description>Introduction In this installment of Spring into Kubernetes we&amp;rsquo;ll be looking at using Helm to install our Spring application to Kubernetes.
-About Helm Helm is the package manager for Kubernetes. It provides tooling to create, template, package, and share Kubernetes manifests. A helm chart is effectively a signed tarball that contains a set of templated Kubernetes manifests, a metadata file and a set of default values.
-Helm has two major components, the Helm client and the Tiller server.</description>
+      <description>Introduction In this installment of Spring into Kubernetes we&amp;rsquo;ll be looking at using Helm to install our Spring application to Kubernetes.&#xA;About Helm Helm is the package manager for Kubernetes. It provides tooling to create, template, package, and share Kubernetes manifests. A helm chart is effectively a signed tarball that contains a set of templated Kubernetes manifests, a metadata file and a set of default values.&#xA;Helm has two major components, the Helm client and the Tiller server.</description>
     </item>
-    
     <item>
       <title>Writing Your First Helm Chart</title>
       <link>https://tech.paulcz.net/blog/getting-started-with-helm/</link>
       <pubDate>Tue, 03 Oct 2017 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/getting-started-with-helm/</guid>
-      <description>I recently found myself writing instructions on how to deploy an application to several Kubernetes platform and ended up writing a different Kubernetes manifests for each platform. 95% of the content was the same with just a few different directives based on how the particular platform handles ingress, or if we needed a Registry secret or a TLS certificate.
-Kubernetes manifests are very declarative and don&amp;rsquo;t offer any way to put conditionals or variables that could be set in them.</description>
+      <description>I recently found myself writing instructions on how to deploy an application to several Kubernetes platform and ended up writing a different Kubernetes manifests for each platform. 95% of the content was the same with just a few different directives based on how the particular platform handles ingress, or if we needed a Registry secret or a TLS certificate.&#xA;Kubernetes manifests are very declarative and don&amp;rsquo;t offer any way to put conditionals or variables that could be set in them.</description>
     </item>
-    
   </channel>
 </rss>

@@ -1,35 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>swarm on Paul Czarkowski</title>
+    <title>Swarm on Paul Czarkowski</title>
     <link>https://tech.paulcz.net/categories/swarm/</link>
-    <description>Recent content in swarm on Paul Czarkowski</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Swarm on Paul Czarkowski</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 03 Jan 2016 14:44:30 -0600</lastBuildDate>
-    
-	<atom:link href="https://tech.paulcz.net/categories/swarm/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="https://tech.paulcz.net/categories/swarm/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Securing Docker with TLS certificates</title>
       <link>https://tech.paulcz.net/blog/secure-docker-with-tls/</link>
       <pubDate>Sun, 03 Jan 2016 14:44:30 -0600</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/secure-docker-with-tls/</guid>
-      <description>By default Docker (and by extension Docker Swarm) has no authentication or authorization on its API, relying instead on the filesystem security of its unix socket /var/run/docker.sock which by default is only accessible by the root user.
-This is fine for the basic use case of the default behavior of only accessing the Docker API on the local machine via the socket as the root user. However if you wish to use the Docker API over TCP then you&amp;rsquo;ll want to secure it so that you don&amp;rsquo;t give out root access to anyone that happens to poke you on the TCP port.</description>
+      <description>By default Docker (and by extension Docker Swarm) has no authentication or authorization on its API, relying instead on the filesystem security of its unix socket /var/run/docker.sock which by default is only accessible by the root user.&#xA;This is fine for the basic use case of the default behavior of only accessing the Docker API on the local machine via the socket as the root user. However if you wish to use the Docker API over TCP then you&amp;rsquo;ll want to secure it so that you don&amp;rsquo;t give out root access to anyone that happens to poke you on the TCP port.</description>
     </item>
-    
     <item>
       <title>Deploying a HA Docker Swarm Cluster</title>
       <link>https://tech.paulcz.net/blog/running-ha-docker-swarm/</link>
       <pubDate>Sat, 02 Jan 2016 14:44:30 -0600</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/running-ha-docker-swarm/</guid>
-      <description>Given Docker&amp;rsquo;s propensity for creating easy to use tools it shouldn&amp;rsquo;t come as a surprise that Docker Swarm is one of the easier to understand and run of the &amp;ldquo;Docker Clustering&amp;rdquo; options currently out there. I recently built some Terraform configs for deploying a Highly Available Docker Swarm cluster on Openstack and learned a fair bit about Swarm in the process.
-This guide is meant to be a platform agnostic howto on installing and running a Highly Available Docker Swarm to show you the ideas and concepts that may not be as easy to understand from just reading some config management code.</description>
+      <description>Given Docker&amp;rsquo;s propensity for creating easy to use tools it shouldn&amp;rsquo;t come as a surprise that Docker Swarm is one of the easier to understand and run of the &amp;ldquo;Docker Clustering&amp;rdquo; options currently out there. I recently built some Terraform configs for deploying a Highly Available Docker Swarm cluster on Openstack and learned a fair bit about Swarm in the process.&#xA;This guide is meant to be a platform agnostic howto on installing and running a Highly Available Docker Swarm to show you the ideas and concepts that may not be as easy to understand from just reading some config management code.</description>
     </item>
-    
   </channel>
 </rss>

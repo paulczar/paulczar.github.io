@@ -1,36 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>tls on Paul Czarkowski</title>
+    <title>Tls on Paul Czarkowski</title>
     <link>https://tech.paulcz.net/categories/tls/</link>
-    <description>Recent content in tls on Paul Czarkowski</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Tls on Paul Czarkowski</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 22 Feb 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://tech.paulcz.net/categories/tls/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="https://tech.paulcz.net/categories/tls/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Creating Self Signed Certificates on Kubernetes</title>
       <link>https://tech.paulcz.net/blog/creating-self-signed-certs-on-kubernetes/</link>
       <pubDate>Sat, 22 Feb 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/creating-self-signed-certs-on-kubernetes/</guid>
-      <description>Welcome to 2020. Creating self signed TLS certificates is still hard. Five (5) years ago I created a project on github called omgwtfssl which is a fairly simple bash script wrapping a bunch of openssl commands to create certificates.
-I&amp;rsquo;ve been using it ever since and kind of forgot about the pain of creating certificates.
-Skip the words and jump to the examples Creating self signed certificates with cert-manager, Creating multiple certificates from the same self signed CA with cert-manager.</description>
+      <description>Welcome to 2020. Creating self signed TLS certificates is still hard. Five (5) years ago I created a project on github called omgwtfssl which is a fairly simple bash script wrapping a bunch of openssl commands to create certificates.&#xA;I&amp;rsquo;ve been using it ever since and kind of forgot about the pain of creating certificates.&#xA;Skip the words and jump to the examples [Creating self signed certificates with cert-manager] (#creating-self-signed-certificates-with-cert-manager), Creating multiple certificates from the same self signed CA with cert-manager.</description>
     </item>
-    
     <item>
       <title>Securing Docker with TLS certificates</title>
       <link>https://tech.paulcz.net/blog/secure-docker-with-tls/</link>
       <pubDate>Sun, 03 Jan 2016 14:44:30 -0600</pubDate>
-      
       <guid>https://tech.paulcz.net/blog/secure-docker-with-tls/</guid>
-      <description>By default Docker (and by extension Docker Swarm) has no authentication or authorization on its API, relying instead on the filesystem security of its unix socket /var/run/docker.sock which by default is only accessible by the root user.
-This is fine for the basic use case of the default behavior of only accessing the Docker API on the local machine via the socket as the root user. However if you wish to use the Docker API over TCP then you&amp;rsquo;ll want to secure it so that you don&amp;rsquo;t give out root access to anyone that happens to poke you on the TCP port.</description>
+      <description>By default Docker (and by extension Docker Swarm) has no authentication or authorization on its API, relying instead on the filesystem security of its unix socket /var/run/docker.sock which by default is only accessible by the root user.&#xA;This is fine for the basic use case of the default behavior of only accessing the Docker API on the local machine via the socket as the root user. However if you wish to use the Docker API over TCP then you&amp;rsquo;ll want to secure it so that you don&amp;rsquo;t give out root access to anyone that happens to poke you on the TCP port.</description>
     </item>
-    
   </channel>
 </rss>

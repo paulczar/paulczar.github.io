@@ -4,42 +4,33 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="map[]" />
-    <meta name="description" content="Random musings mostly about tech">
+    <meta name="author" content="Paul Czarkowski">
     <link rel="shortcut icon" type="image/x-icon" href="https://tech.paulcz.net/img/favicon.ico">
-    <title>Creating a Helm Chart Repository - Part 3</title>
-    <meta name="generator" content="Hugo 0.56.3" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://tech.paulcz.net/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    <title>Creating a Helm Chart Repository - Part 3 | Paul Czarkowski</title>
+    <meta name="description" content="Introduction Welcome to a three part blog series on Creating a Helm Chart Repository. In part 1 of this series I demonstrated creating a Helm chart repository using GitHub and GitHub Pages. In part 2 I will add Automation to automatically update the repository, and in part 3 I will add testing for changes to the charts themselves.
+If you&rsquo;re into Videos, I walked JJ through starting with Helm from scratch all the way to creating a Helm Repo and CI/CD.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    
+    <link rel="preload stylesheet" href="/css/main.min.css" as="style">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old">
     
     <!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
-
+  
     
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-35638296-2', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
+      
+    
+  
+
 
   </head>
-
   <body>
-    <div id="wrap">
-
-      
-      <nav class="navbar navbar-default">
+    <div id="content">
+  
+  <nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
       <a class="navbar-brand" href="https://tech.paulcz.net/"><i class="fa fa-home"></i></a>
@@ -62,29 +53,21 @@ if (!doNotTrack) {
   </div>
 </nav>
 
-      
-      <div class="container">
-        <div class="blog-post">
-          <h3>
-            <strong><a href="https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-3/">Creating a Helm Chart Repository - Part 3</a></strong>
-          </h3>
-        </div>
-        <div class="blog-title">
-          <h4>
-          July 3, 2019
-            &nbsp;&nbsp;
-            
-          </h4>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="blogpost">
-              
 
-<h2 id="introduction">Introduction</h2>
-
+  <div class="container">
+    <h3 class="mt-3"><b><a href="https://tech.paulcz.net/blog/creating-a-helm-chart-monorepo-part-3/">Creating a Helm Chart Repository - Part 3</a></b></h3>
+    <div class="blog-title my-4">
+      <h6>
+        July 3, 2019
+        &nbsp;&nbsp;
+        
+      </h6>
+    </div>
+    <div class="panel">
+      <div class="panel-body">
+        <div class="blogpost">
+          <h2 id="introduction">Introduction</h2>
 <p>Welcome to a three part blog series on Creating a <a href="https://helm.sh">Helm</a> Chart Repository. In <a href="/blog/creating-a-helm-chart-monorepo-part-1">part 1</a> of this series I demonstrated creating a <a href="https://helm.sh">Helm</a> chart repository using <a href="https://github.com">GitHub</a> and <a href="https://github.com">GitHub</a> Pages. In <a href="/blog/creating-a-helm-chart-monorepo-part-2">part 2</a> I will add Automation to automatically update the repository, and in <strong>part 3</strong> I will add testing for changes to the charts themselves.</p>
-
 <blockquote>
 <p>If you&rsquo;re into Videos, I walked JJ through starting with Helm from scratch all the way to creating a Helm Repo and CI/CD.  <div class="embed video-player">
 <iframe class="youtube-player" type="text/html" width="640" height="385" src="http://www.youtube.com/embed/xn63krHJNKI" allowfullscreen frameborder="0">
@@ -92,368 +75,261 @@ if (!doNotTrack) {
 </div>
 </p>
 </blockquote>
-
-<h2 id="use-circle-ci-to-test-helm-https-helm-sh-charts">Use Circle CI to test <a href="https://helm.sh">Helm</a> Charts</h2>
-
+<h2 id="use-circle-ci-to-test-helmhttpshelmsh-charts">Use Circle CI to test <a href="https://helm.sh">Helm</a> Charts</h2>
 <blockquote>
 <p>Note - You could use any other CI system here, I chose Circle as it is easy to integrate with <a href="https://github.com">GitHub</a> and has a free tier. If you do use a different CI system the scripts should still work, but you&rsquo;ll need to rewrite a config file suitable for your CI choice.</p>
 </blockquote>
-
 <h3 id="introducing-chart-testing">Introducing Chart Testing</h3>
-
 <p>The <a href="https://helm.sh">Helm</a> community has built a tool very imaginitively named [Chart Testing]((<a href="https://github.com/helm/chart-testing">https://github.com/helm/chart-testing</a>) specifically for testing <a href="https://helm.sh">Helm</a> charts. Not only is it capable of linting and performing test installs of a <a href="https://helm.sh">Helm</a> chart, but its also designed to work within a monorepo and only test those charts that have changed.</p>
-
 <p>You can download and use <a href="https://github.com/helm/chart-testing/releases">Chart Testing</a> locally, but really the power of it is using it in CI, so lets go straight to that.</p>
-
 <h3 id="creat-a-chart-testing-script-and-update-circle-ci-config">Creat a Chart Testing script and update Circle CI config</h3>
-
 <blockquote>
 <p>Note: While I would usually use <a href="https://concourse-ci.org/">Concourse CI</a> for my CI workflows, I wanted to <em>only</em> use managed services and I chose Circle as that is already commonly used in the Helm community.</p>
 </blockquote>
-
 <p>We need to add a new script, a chart-testing config file, and update the Circle CI config file.</p>
-
-<h4 id="circleci-config-yaml-https-github-com-paulczar-my-helm-charts-blob-part-2-circleci-config-yaml"><a href="https://github.com/paulczar/my-helm-charts/blob/part-2/.circleci/config.yaml">./circleci/config.yaml</a></h4>
-
+<h4 id="circleciconfigyamlhttpsgithubcompaulczarmy-helm-chartsblobpart-2circleciconfigyaml"><a href="https://github.com/paulczar/my-helm-charts/blob/part-2/.circleci/config.yaml">./circleci/config.yaml</a></h4>
 <p>Create two new jobs:</p>
-
 <blockquote>
 <p>These scripts and configs were heavily borrowed from <a href="https://twitter.com/unguiculus">Reinhard Nägele</a> who is a primary maintainer of both <a href="https://github.com/helm/chart-testing">chart-testing</a> and <a href="https://github.com/helm/chart-releaser">chart-releaser</a>.</p>
 </blockquote>
-
 <p>The first job tells Chart Testing to lint the charts according to the <a href="https://helm.sh">Helm</a> Community <a href="https://helm.sh/docs/chart_best_practices/">Best Practices Guide</a>.</p>
-
 <p>The second job tells Chart Testing to actually install and test the charts using KIND (Kubernetes IN Docker).</p>
-
-<pre><code class="language-yaml">  lint-charts:
-    docker:
-      - image: gcr.io/kubernetes-charts-ci/test-image:v3.3.2
-    steps:
-      - checkout
-      - run:
-          name: lint
-          command: |
-            git remote add upstream https://github.com/paulczar/percona-helm-charts
-            git fetch upstream master
-            ct lint --config .circleci/ct.yaml
-
-  install-charts:
-    machine: true
-    steps:
-      - checkout
-      - run:
-          no_output_timeout: 12m
-          command: .circleci/install_charts.sh
-</code></pre>
-
-<p>Add a new workflow telling Circle to lint and test any changes.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>  <span style="color:#f92672">lint-charts</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">docker</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">image</span>: <span style="color:#ae81ff">gcr.io/kubernetes-charts-ci/test-image:v3.3.2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">steps</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">checkout</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">run</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">name</span>: <span style="color:#ae81ff">lint</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">command</span>: |<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            git remote add upstream https://github.com/paulczar/percona-helm-charts
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            git fetch upstream master
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            ct lint --config .circleci/ct.yaml</span>            
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">install-charts</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">machine</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">steps</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">checkout</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">run</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">no_output_timeout</span>: <span style="color:#ae81ff">12m</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">command</span>: <span style="color:#ae81ff">.circleci/install_charts.sh</span>
+</span></span></code></pre></div><p>Add a new workflow telling Circle to lint and test any changes.</p>
 <blockquote>
 <p>Note: it excludes the <code>master</code> branch as we don&rsquo;t want to try to retest charts as they&rsquo;re merged in after successfully testing the new commit.:</p>
 </blockquote>
-
-<pre><code class="language-yaml">  lint-and-install:
-    jobs:
-      - lint-scripts
-      - lint-charts:
-          filters:
-            branches:
-              ignore: master
-            tags:
-              ignore: /.*/
-      - install-charts:
-          requires:
-            - lint-charts
-</code></pre>
-
-<h4 id="circleci-ct-yaml-https-github-com-paulczar-my-helm-charts-blob-part-3-circleci-ct-yaml"><a href="https://github.com/paulczar/my-helm-charts/blob/part-3/.circleci/ct.yaml">./circleci/ct.yaml</a></h4>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>  <span style="color:#f92672">lint-and-install</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">jobs</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">lint-scripts</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">lint-charts</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">filters</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">branches</span>:
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">ignore</span>: <span style="color:#ae81ff">master</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">tags</span>:
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">ignore</span>: <span style="color:#ae81ff">/.*/</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">install-charts</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">requires</span>:
+</span></span><span style="display:flex;"><span>            - <span style="color:#ae81ff">lint-charts</span>
+</span></span></code></pre></div><h4 id="circlecictyamlhttpsgithubcompaulczarmy-helm-chartsblobpart-3circlecictyaml"><a href="https://github.com/paulczar/my-helm-charts/blob/part-3/.circleci/ct.yaml">./circleci/ct.yaml</a></h4>
 <p>This file provides configuration for Chart Testing. For now all we need is to tell it to provide <a href="https://helm.sh">Helm</a> with a longer timeout:</p>
-
-<pre><code class="language-yaml">helm-extra-args: --timeout 600
-</code></pre>
-
-<h4 id="circleci-kind-config-yaml-https-github-com-paulczar-my-helm-charts-blob-part-3-circleci-kind-config-yaml"><a href="https://github.com/paulczar/my-helm-charts/blob/part-3/.circleci/kind-config.yaml">./circleci/kind-config.yaml</a></h4>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">helm-extra-args</span>: --<span style="color:#ae81ff">timeout 600</span>
+</span></span></code></pre></div><h4 id="circlecikind-configyamlhttpsgithubcompaulczarmy-helm-chartsblobpart-3circlecikind-configyaml"><a href="https://github.com/paulczar/my-helm-charts/blob/part-3/.circleci/kind-config.yaml">./circleci/kind-config.yaml</a></h4>
 <p>This file provides a configuration for KIND to use:</p>
-
-<pre><code class="language-yaml">kind: Cluster
-apiVersion: kind.sigs.k8s.io/v1alpha3
-nodes:
-  - role: control-plane
-  - role: worker
-  - role: worker
-</code></pre>
-
-<h4 id="circleci-install-charts-sh-https-github-com-paulczar-my-helm-charts-blob-part-3-circleci-install-charts-sh"><a href="https://github.com/paulczar/my-helm-charts/blob/part-3/.circleci/install_charts.sh">./circleci/install_charts.sh</a></h4>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Cluster</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">kind.sigs.k8s.io/v1alpha3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">nodes</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">role</span>: <span style="color:#ae81ff">control-plane</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">role</span>: <span style="color:#ae81ff">worker</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">role</span>: <span style="color:#ae81ff">worker</span>
+</span></span></code></pre></div><h4 id="circleciinstall_chartsshhttpsgithubcompaulczarmy-helm-chartsblobpart-3circleciinstall_chartssh"><a href="https://github.com/paulczar/my-helm-charts/blob/part-3/.circleci/install_charts.sh">./circleci/install_charts.sh</a></h4>
 <p>Finally this script will install KIND and will perform test installations for any changed <a href="https://helm.sh">Helm</a> Charts:</p>
-
-<pre><code class="language-bash">#!/usr/bin/env bash
-
-set -o errexit
-set -o nounset
-set -o pipefail
-
-readonly CT_VERSION=v2.3.3
-readonly KIND_VERSION=0.2.1
-readonly CLUSTER_NAME=chart-testing
-readonly K8S_VERSION=v1.14.0
-
-run_ct_container() {
-    echo 'Running ct container...'
-    docker run --rm --interactive --detach --network host --name ct \
-        --volume &quot;$(pwd)/.circleci/ct.yaml:/etc/ct/ct.yaml&quot; \
-        --volume &quot;$(pwd):/workdir&quot; \
-        --workdir /workdir \
-        &quot;quay.io/helmpack/chart-testing:$CT_VERSION&quot; \
-        cat
-    echo
-}
-
-cleanup() {
-    echo 'Removing ct container...'
-    docker kill ct &gt; /dev/null 2&gt;&amp;1
-
-    echo 'Done!'
-}
-
-docker_exec() {
-    docker exec --interactive ct &quot;$@&quot;
-}
-
-create_kind_cluster() {
-    echo 'Installing kind...'
-
-    curl -sSLo kind &quot;https://github.com/kubernetes-sigs/kind/releases/download/$KIND_VERSION/kind-linux-amd64&quot;
-    chmod +x kind
-    sudo mv kind /usr/local/bin/kind
-
-    kind create cluster --name &quot;$CLUSTER_NAME&quot; --config .circleci/kind-config.yaml --image &quot;kindest/node:$K8S_VERSION&quot; --wait 60s
-
-    docker_exec mkdir -p /root/.kube
-
-    echo 'Copying kubeconfig to container...'
-    local kubeconfig
-    kubeconfig=&quot;$(kind get kubeconfig-path --name &quot;$CLUSTER_NAME&quot;)&quot;
-    docker cp &quot;$kubeconfig&quot; ct:/root/.kube/config
-
-    docker_exec kubectl cluster-info
-    echo
-
-    docker_exec kubectl get nodes
-    echo
-}
-
-install_local_path_provisioner() {
-    docker_exec kubectl delete storageclass standard
-    docker_exec kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
-}
-
-install_tiller() {
-    echo 'Installing Tiller...'
-    docker_exec kubectl --namespace kube-system create sa tiller
-    docker_exec kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
-    docker_exec helm init --service-account tiller --upgrade --wait
-    echo
-}
-
-install_charts() {
-    docker_exec ct install
-    echo
-}
-
-main() {
-    run_ct_container
-    trap cleanup EXIT
-
-    changed=$(docker_exec ct list-changed)
-    if [[ -z &quot;$changed&quot; ]]; then
-        echo 'No chart changes detected.'
-        return
-    fi
-
-    echo 'Chart changes detected.'
-    create_kind_cluster
-    install_local_path_provisioner
-    install_tiller
-    install_charts
-}
-
-main
-</code></pre>
-
-<h3 id="commit-the-changes">Commit the changes</h3>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>set -o errexit
+</span></span><span style="display:flex;"><span>set -o nounset
+</span></span><span style="display:flex;"><span>set -o pipefail
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>readonly CT_VERSION<span style="color:#f92672">=</span>v2.3.3
+</span></span><span style="display:flex;"><span>readonly KIND_VERSION<span style="color:#f92672">=</span>0.2.1
+</span></span><span style="display:flex;"><span>readonly CLUSTER_NAME<span style="color:#f92672">=</span>chart-testing
+</span></span><span style="display:flex;"><span>readonly K8S_VERSION<span style="color:#f92672">=</span>v1.14.0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>run_ct_container<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#39;Running ct container...&#39;</span>
+</span></span><span style="display:flex;"><span>    docker run --rm --interactive --detach --network host --name ct <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        --volume <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>pwd<span style="color:#66d9ef">)</span><span style="color:#e6db74">/.circleci/ct.yaml:/etc/ct/ct.yaml&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        --volume <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>pwd<span style="color:#66d9ef">)</span><span style="color:#e6db74">:/workdir&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        --workdir /workdir <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        <span style="color:#e6db74">&#34;quay.io/helmpack/chart-testing:</span>$CT_VERSION<span style="color:#e6db74">&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        cat
+</span></span><span style="display:flex;"><span>    echo
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cleanup<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#39;Removing ct container...&#39;</span>
+</span></span><span style="display:flex;"><span>    docker kill ct &gt; /dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#39;Done!&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>docker_exec<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    docker exec --interactive ct <span style="color:#e6db74">&#34;</span>$@<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>create_kind_cluster<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#39;Installing kind...&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    curl -sSLo kind <span style="color:#e6db74">&#34;https://github.com/kubernetes-sigs/kind/releases/download/</span>$KIND_VERSION<span style="color:#e6db74">/kind-linux-amd64&#34;</span>
+</span></span><span style="display:flex;"><span>    chmod +x kind
+</span></span><span style="display:flex;"><span>    sudo mv kind /usr/local/bin/kind
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    kind create cluster --name <span style="color:#e6db74">&#34;</span>$CLUSTER_NAME<span style="color:#e6db74">&#34;</span> --config .circleci/kind-config.yaml --image <span style="color:#e6db74">&#34;kindest/node:</span>$K8S_VERSION<span style="color:#e6db74">&#34;</span> --wait 60s
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    docker_exec mkdir -p /root/.kube
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#39;Copying kubeconfig to container...&#39;</span>
+</span></span><span style="display:flex;"><span>    local kubeconfig
+</span></span><span style="display:flex;"><span>    kubeconfig<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>kind get kubeconfig-path --name <span style="color:#e6db74">&#34;</span>$CLUSTER_NAME<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    docker cp <span style="color:#e6db74">&#34;</span>$kubeconfig<span style="color:#e6db74">&#34;</span> ct:/root/.kube/config
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    docker_exec kubectl cluster-info
+</span></span><span style="display:flex;"><span>    echo
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    docker_exec kubectl get nodes
+</span></span><span style="display:flex;"><span>    echo
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>install_local_path_provisioner<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    docker_exec kubectl delete storageclass standard
+</span></span><span style="display:flex;"><span>    docker_exec kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>install_tiller<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#39;Installing Tiller...&#39;</span>
+</span></span><span style="display:flex;"><span>    docker_exec kubectl --namespace kube-system create sa tiller
+</span></span><span style="display:flex;"><span>    docker_exec kubectl create clusterrolebinding tiller-cluster-rule --clusterrole<span style="color:#f92672">=</span>cluster-admin --serviceaccount<span style="color:#f92672">=</span>kube-system:tiller
+</span></span><span style="display:flex;"><span>    docker_exec helm init --service-account tiller --upgrade --wait
+</span></span><span style="display:flex;"><span>    echo
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>install_charts<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    docker_exec ct install
+</span></span><span style="display:flex;"><span>    echo
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>main<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    run_ct_container
+</span></span><span style="display:flex;"><span>    trap cleanup EXIT
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    changed<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>docker_exec ct list-changed<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> -z <span style="color:#e6db74">&#34;</span>$changed<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>        echo <span style="color:#e6db74">&#39;No chart changes detected.&#39;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#39;Chart changes detected.&#39;</span>
+</span></span><span style="display:flex;"><span>    create_kind_cluster
+</span></span><span style="display:flex;"><span>    install_local_path_provisioner
+</span></span><span style="display:flex;"><span>    install_tiller
+</span></span><span style="display:flex;"><span>    install_charts
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>main
+</span></span></code></pre></div><h3 id="commit-the-changes">Commit the changes</h3>
 <p>Next up commit these new changes to your master branch:</p>
-
-<pre><code class="language-bash">$ git add .
-$ git commit -m 'add chart testing on PRs'
-$ git push origin master
-</code></pre>
-
-<h2 id="test-the-new-automation">Test the new Automation</h2>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git add .
+</span></span><span style="display:flex;"><span>$ git commit -m <span style="color:#e6db74">&#39;add chart testing on PRs&#39;</span>
+</span></span><span style="display:flex;"><span>$ git push origin master
+</span></span></code></pre></div><h2 id="test-the-new-automation">Test the new Automation</h2>
 <p>Create a new branch:</p>
-
-<pre><code class="language-bash">$ git checkout -b update-app2-chart
-</code></pre>
-
-<p>Modify the app2 <code>Chart.yaml</code> to be a new version number:</p>
-
-<pre><code class="language-yaml">apiVersion: v1
-appVersion: &quot;1.0&quot;
-description: A Helm chart for Kubernetes
-name: app2
-version: 0.1.1
-</code></pre>
-
-<p>Commit and Push the changes:</p>
-
-<pre><code class="language-bash">$ git add charts/app2/Chart.yaml
-$ git commit -m 'bump chart2 version'
-$ git push origin update-app2-chart
-</code></pre>
-
-<p>Circle CI should run tests and should fail:</p>
-
-<p><img src="circle-test-fail.png" alt="circle fail test" /></p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git checkout -b update-app2-chart
+</span></span></code></pre></div><p>Modify the app2 <code>Chart.yaml</code> to be a new version number:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">appVersion</span>: <span style="color:#e6db74">&#34;1.0&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">description</span>: <span style="color:#ae81ff">A Helm chart for Kubernetes</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">name</span>: <span style="color:#ae81ff">app2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">version</span>: <span style="color:#ae81ff">0.1.1</span>
+</span></span></code></pre></div><p>Commit and Push the changes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git add charts/app2/Chart.yaml
+</span></span><span style="display:flex;"><span>$ git commit -m <span style="color:#e6db74">&#39;bump chart2 version&#39;</span>
+</span></span><span style="display:flex;"><span>$ git push origin update-app2-chart
+</span></span></code></pre></div><p>Circle CI should run tests and should fail:</p>
+<p><img src="circle-test-fail.png" alt="circle fail test"></p>
 <p>This failure is because when <code>helm create</code> creates your chart, it doesn&rsquo;t implement all of our best practices. If you check in the Circle CI job log you&rsquo;ll see:</p>
-
-<pre><code class="language-text">Error validating data /root/project/charts/app2/Chart.yaml with schema /etc/ct/chart_schema.yaml
-  home: Required field missing
-</code></pre>
-
-<p>The error is quite clear, we should have a field <code>home</code> in our <code>Chart.yaml</code>. In fact there should also be a <code>maintainers</code> field. Let&rsquo;s add those into both chart&rsquo;s <code>Chart.yaml</code> files:</p>
-
-<pre><code class="language-yaml">home: http://github.com/paulczar/my-helm-charts
-maintainers:
-  - name: paulczar
-    email: username.taken@gmail.com
-</code></pre>
-
-<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Error validating data /root/project/charts/app2/Chart.yaml with schema /etc/ct/chart_schema.yaml
+</span></span><span style="display:flex;"><span>  home: Required field missing
+</span></span></code></pre></div><p>The error is quite clear, we should have a field <code>home</code> in our <code>Chart.yaml</code>. In fact there should also be a <code>maintainers</code> field. Let&rsquo;s add those into both chart&rsquo;s <code>Chart.yaml</code> files:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">home</span>: <span style="color:#ae81ff">http://github.com/paulczar/my-helm-charts</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">maintainers</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">paulczar</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">email</span>: <span style="color:#ae81ff">username.taken@gmail.com</span>
+</span></span></code></pre></div><blockquote>
 <p>Note: Since you&rsquo;re also changing App1, you should bump its version a patch level to <code>0.1.2</code>, all changes to a Chart, even non functional one should bump the chart version.</p>
-
+</blockquote>
+<blockquote>
 <p>Note: Ensure you leave a blank line at the end of the <code>Chart.yaml</code> file. I forgot to and had to resubmit.</p>
 </blockquote>
-
 <p>Push these new changes:</p>
-
-<pre><code class="language-bash">$ git add .
-$ git commit -m 'comply to chart best practices'
-$ git push origin update-app2-chart
-</code></pre>
-
-<p>After a few seconds you should see the new jobs start in CircleCI and this time all three tasks should complete successfully:</p>
-
-<p><img src="circle-lint-and-install.png" alt="circle ci lint and install" /></p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git add .
+</span></span><span style="display:flex;"><span>$ git commit -m <span style="color:#e6db74">&#39;comply to chart best practices&#39;</span>
+</span></span><span style="display:flex;"><span>$ git push origin update-app2-chart
+</span></span></code></pre></div><p>After a few seconds you should see the new jobs start in CircleCI and this time all three tasks should complete successfully:</p>
+<p><img src="circle-lint-and-install.png" alt="circle ci lint and install"></p>
 <p>It took about 6 minutes to run, because it did a full install of both Charts (as we changed them both) to a disposable KIND cluster.</p>
-
 <blockquote>
 <p>Note: Since this was a branch, the charts were not released to the Chart Repository as that job is only triggered on the <code>master branch</code>.</p>
 </blockquote>
-
 <p>Next you&rsquo;ll want to create a pull request for this change, you can do that via the <a href="https://github.com">GitHub</a> web ui:</p>
-
-<p><img src="github-pull-request.png" alt="github pull request" /></p>
-
+<p><img src="github-pull-request.png" alt="github pull request"></p>
 <blockquote>
 <p>Note: Since Circle CI has already tested the commits in this PR (Pull Request) it shows handy little test pass/fail marks against the commits.</p>
 </blockquote>
-
 <p>Since the PR is showing as passing tests, you can go ahead and Merge it by clicking that green <code>Merge</code> button (although I like to use <code>Squash and Merge</code>).</p>
-
 <p>This Merge into the <code>master</code> branch will kick off the <code>release-charts</code> workflow and after a few seconds we&rsquo;ll have an updated <a href="https://helm.sh">Helm</a> Repository:</p>
-
-<pre><code class="language-bash">$ curl http://tech.paulcz.net/my-helm-charts/index.yaml
-apiVersion: v1
-entries:
-...
-...
-  app1:
-    name: app1
-    version: 0.1.2
-...
-...
-  app2:
-    name: app2
-    version: 0.1.1
-...
-...
-</code></pre>
-
-<h2 id="testing-pull-requests">Testing Pull Requests</h2>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ curl http://tech.paulcz.net/my-helm-charts/index.yaml
+</span></span><span style="display:flex;"><span>apiVersion: v1
+</span></span><span style="display:flex;"><span>entries:
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>  app1:
+</span></span><span style="display:flex;"><span>    name: app1
+</span></span><span style="display:flex;"><span>    version: 0.1.2
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>  app2:
+</span></span><span style="display:flex;"><span>    name: app2
+</span></span><span style="display:flex;"><span>    version: 0.1.1
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>...
+</span></span></code></pre></div><h2 id="testing-pull-requests">Testing Pull Requests</h2>
 <p>In the advanced settings of Circle CI you can tell it to automatically test Pull Requests that come from forks of your <a href="https://github.com">GitHub</a> repository. Adding this is a great feature if you want others to work on your code with you. However you do need to protect your secrets.</p>
-
 <p>For example a bad actor could add &ldquo;echo $CH_TOKEN&rdquo; to one of the scripts and steal my <a href="https://github.com">GitHub</a> token which they could then use to mess with my Repositories.</p>
-
 <p>For that reason I&rsquo;ve opted not to include that in this example.</p>
-
 <h2 id="conclusion">Conclusion</h2>
-
 <p>In <a href="/blog/creating-a-helm-chart-monorepo-part-1">Part 1</a> we created set of <a href="https://helm.sh">Helm</a> Charts managed in source control (GitHub).</p>
-
 <p>In <a href="/blog/creating-a-helm-chart-monorepo-part-2">Part 2</a> we added automation via CircleCI to automate building and deploying Chart packages to a <a href="https://helm.sh">Helm</a> Chart Repository hosted in <a href="https://github.com">GitHub</a> Pages and <a href="https://github.com">GitHub</a> Releases.</p>
-
 <p>In <strong>Part 3</strong> we added further automation to test changes in those <a href="https://helm.sh">Helm</a> charts and to pass them through rigorous testing before allowing them to be merged into the <code>master</code> branch.</p>
 
-              <hr>
-              <div class="related-posts">
-                <h5>Related Posts</h5>
-                
-              </div>
-            </div>
-          </div>
-          <hr>
-        <div class="disqus">
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-
-    (function() {
-      
-      
-      if (window.location.hostname == "localhost")
-        return;
-
-      var disqus_shortname = '';
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-</div>
+          
+          
         </div>
-      
+      </div>
+      <div class="disqus">
+        
       </div>
     </div>
+  </div>
 
-    
-    <footer>
-  <div id="footer">
-    <div class="container">
-      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
-      <a href="http://www.github.com/sumaxime/hugo-sustain/">sustain</a> with ♥</p>
     </div>
+    
+    <footer class="footer">
+  <div class="container">
+    <div class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+    <a href="http://www.github.com/nurlansu/hugo-sustain/">sustain</a> with ♥</div>
   </div>
 </footer>
-<div class="footer"></div>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://tech.paulcz.net/js/docs.min.js"></script>
-<script src="https://tech.paulcz.net/js/main.js"></script>
-
-<script src="https://tech.paulcz.net/js/ie10-viewport-bug-workaround.js"></script>
-
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
 
   </body>
 </html>
