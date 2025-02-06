@@ -44,13 +44,6 @@
       <description>Welcome to 2020. Creating self signed TLS certificates is still hard. Five (5) years ago I created a project on github called omgwtfssl which is a fairly simple bash script wrapping a bunch of openssl commands to create certificates.&#xA;I&amp;rsquo;ve been using it ever since and kind of forgot about the pain of creating certificates.&#xA;Skip the words and jump to the examples [Creating self signed certificates with cert-manager] (#creating-self-signed-certificates-with-cert-manager), Creating multiple certificates from the same self signed CA with cert-manager.</description>
     </item>
     <item>
-      <title>Resume for Paul Czarkowski</title>
-      <link>https://tech.paulcz.net/page/resume/</link>
-      <pubDate>Sun, 09 Feb 2020 09:04:08 -0600</pubDate>
-      <guid>https://tech.paulcz.net/page/resume/</guid>
-      <description>Paul Czarkowski Senior Principal, Cloud Services Black Belts @ Red Hat&#xA;username.taken@gmail.com&#xA;http://tech.paulcz.net&#xA;https://github.com/paulczar&#xA;Work Permits : USA, Australia, UK/Europe.&#xA;Overview I am an experienced hands-on Technology Professional with extensive expertise in many technology related job functions. With a long history in Operations and Infrastructure Automation, I possess a comprehensive understanding of IT and Operations, and have a strong background in using and promoting DevOps tools and methodologies.&#xA;I have a proven track record of success in leadership, and have a strong ability to communicate and work with all levels of an organization.</description>
-    </item>
-    <item>
       <title>Introduction to GitHub Actions</title>
       <link>https://tech.paulcz.net/blog/intro-to-github-actions/</link>
       <pubDate>Thu, 29 Aug 2019 00:00:00 +0000</pubDate>
@@ -280,6 +273,13 @@
       <pubDate>Sun, 21 Oct 2012 00:00:00 +0000</pubDate>
       <guid>https://tech.paulcz.net/blog/moving-from-a-self-hosted-wordpress-blog-to-blogger/</guid>
       <description>&lt;p&gt;I have a self hosted &lt;a href=&#34;http://xesla.ro&#34;&gt;wordpress food blog&lt;/a&gt; hosted on an old silly domain that I&amp;rsquo;ve wanted to move away from for a while.   I also want to stop paying hosting fees some time soon.   Since I&amp;rsquo;m already looking at moving a lot of my day-to-day activities to the &amp;lsquo;cloud&amp;rsquo;  it made sense to pick a blogging platform that ties into a major cloud hub.   Google&amp;rsquo;s Blogger was the obvious choice as I&amp;rsquo;m already using the Google Apps platform for my new domain &lt;code&gt;paulcz.net&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Creating a blog on blogger is dead simple.   I went ahead and created two: &lt;a href=&#34;http://food.paulcz.net&#34;&gt;food.paulcz.net&lt;/a&gt; for the new food blog and &lt;a href=&#34;http://tech.paulcz.net&#34;&gt;tech.paulcz.net&lt;/a&gt; to start journalling random tech things.     Transfering the blog content itself  is quite simple,  however, doing it in a way as to preserve links between posts, from other sites, and teaching the search engines how to find your new site requires a little more trickery.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Resume for Paul Czarkowski</title>
+      <link>https://tech.paulcz.net/page/resume/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://tech.paulcz.net/page/resume/</guid>
+      <description>Paul Czarkowski Senior Principal, Cloud Services Black Belts @ Red Hat&#xA;📧 username.taken@gmail.com 🌍 tech.paulcz.net | 🛠 github.com/paulczar 🛂 Citizenships: Australia, UK, USA&#xA;Overview Senior Cloud &amp;amp; DevOps Leader | Kubernetes | Open Source Advocate | Infrastructure Automation&#xA;Innovative and results-driven Senior Principal Engineer with 20+ years of experience in cloud platforms (AWS, GCP, Azure), Kubernetes, DevOps, infrastructure automation, and Open Source. A recognized leader in the Kubernetes and Helm communities, I have successfully built and scaled engineering teams, driven enterprise cloud adoption, and architected large-scale, resilient infrastructure solutions.</description>
     </item>
   </channel>
 </rss>

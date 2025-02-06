@@ -6,15 +6,8 @@
     <description>Recent content in Pages on Paul Czarkowski</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 09 Feb 2020 09:04:08 -0600</lastBuildDate>
+    <lastBuildDate>Fri, 16 Dec 2016 09:04:08 -0600</lastBuildDate>
     <atom:link href="https://tech.paulcz.net/page/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Resume for Paul Czarkowski</title>
-      <link>https://tech.paulcz.net/page/resume/</link>
-      <pubDate>Sun, 09 Feb 2020 09:04:08 -0600</pubDate>
-      <guid>https://tech.paulcz.net/page/resume/</guid>
-      <description>Paul Czarkowski Senior Principal, Cloud Services Black Belts @ Red Hat&#xA;username.taken@gmail.com&#xA;http://tech.paulcz.net&#xA;https://github.com/paulczar&#xA;Work Permits : USA, Australia, UK/Europe.&#xA;Overview I am an experienced hands-on Technology Professional with extensive expertise in many technology related job functions. With a long history in Operations and Infrastructure Automation, I possess a comprehensive understanding of IT and Operations, and have a strong background in using and promoting DevOps tools and methodologies.&#xA;I have a proven track record of success in leadership, and have a strong ability to communicate and work with all levels of an organization.</description>
-    </item>
     <item>
       <title>About Me</title>
       <link>https://tech.paulcz.net/page/about/</link>
@@ -28,6 +21,13 @@
       <pubDate>Fri, 16 Dec 2016 09:04:08 -0600</pubDate>
       <guid>https://tech.paulcz.net/page/speaker/</guid>
       <description>An incomplete list of events that I&amp;rsquo;ve spoken at&#xA;2018 Date Event Title Location Feb Cloud Foundry Meetup Singapore A DevOps guide to Kubernetes Singapore Feb Devopsdays Charlotte A DevOps Guide to Kubernetes Charlotte NC March NYC Devops Meetup A DevOps guide to Kubernetes New York, New York April Devops Madison Devops is dead, servers are dying, and I don&amp;rsquo;t feel too great myself Madison WI April CodeCamp Wellington Compliance as Code, Transform your security team with DevOps Wellington NZ April Longhorn PHP A PHP Developers Intro to Kubernetes Austin TX April Devopsdays Seattle Compliance as Code Seattle WA May Spring One Tour - Denver Emcee, Intro to Kubernetes Denver CO May Miami Kubernetes meetup Intro to Kubernetes Miami FL May VMWare PKS Roadshow Minneapolis Application Modernization and Replatforming with PKS/Kubernetes Minneapolis MN May VMWare PKS Roadshow Reston Application Modernization and Replatforming with PKS/Kubernetes Minneapolis MN May Spring One Tour - St Louis Emcee, Intro to Kubernetes St Louis MO June VMWare PKS Roadshow Chicago Application Modernization and Replatforming with PKS/Kubernetes Chicago IL June Cloud Foundry Meetup Tokyo Intro to Kubernetes Tokyo, Japan June Opensource Summit Tokyo Kubernetes Day 2 Operations Tokyo, Japan June Linuxcon Beijing Successful Patterns for running Platforms Beijing, China 2017 Sensu Summit Sensu @ Bluebox - Video | Slides 2016 All Day DevOps Serverfull computing - Video OpenStack Summit Barcelona InterOp Panel - Video OpenStack Compliance the DevOps way - Video OpenStack Day Seattle 99 OpenStack clouds on the wall - Video OpenStack Summit Austin A PaaS for Continuous Delivery - Video 2015 OpenStack Summit Tokyo Chef vs Ansible vs Puppet vs Salt - Video DevOps Days Austin Scout-A-Park a story of pragmatic dockerization - Video OpenStack Day Seattle Just enough OpenStack for Docker - Video OpenStack Summit Vancouver Docker Docker Docker Openstack - Video Docker Austin meetup Factorish - Video 2014 DockerCon14 Automated Chef cookbook testing with Drone.</description>
+    </item>
+    <item>
+      <title>Resume for Paul Czarkowski</title>
+      <link>https://tech.paulcz.net/page/resume/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://tech.paulcz.net/page/resume/</guid>
+      <description>Paul Czarkowski Senior Principal, Cloud Services Black Belts @ Red Hat&#xA;📧 username.taken@gmail.com 🌍 tech.paulcz.net | 🛠 github.com/paulczar 🛂 Citizenships: Australia, UK, USA&#xA;Overview Senior Cloud &amp;amp; DevOps Leader | Kubernetes | Open Source Advocate | Infrastructure Automation&#xA;Innovative and results-driven Senior Principal Engineer with 20+ years of experience in cloud platforms (AWS, GCP, Azure), Kubernetes, DevOps, infrastructure automation, and Open Source. A recognized leader in the Kubernetes and Helm communities, I have successfully built and scaled engineering teams, driven enterprise cloud adoption, and architected large-scale, resilient infrastructure solutions.</description>
     </item>
   </channel>
 </rss>

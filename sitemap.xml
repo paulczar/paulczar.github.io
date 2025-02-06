@@ -77,12 +77,6 @@
     <loc>https://tech.paulcz.net/categories/tls/</loc>
     <lastmod>2020-02-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://tech.paulcz.net/page/</loc>
-    <lastmod>2020-02-09T09:04:08-06:00</lastmod>
-  </url><url>
-    <loc>https://tech.paulcz.net/page/resume/</loc>
-    <lastmod>2020-02-09T09:04:08-06:00</lastmod>
-  </url><url>
     <loc>https://tech.paulcz.net/categories/actions/</loc>
     <lastmod>2019-08-29T00:00:00+00:00</lastmod>
   </url><url>
@@ -150,6 +144,9 @@
     <lastmod>2017-10-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://tech.paulcz.net/page/about/</loc>
+    <lastmod>2016-12-16T09:04:08-06:00</lastmod>
+  </url><url>
+    <loc>https://tech.paulcz.net/page/</loc>
     <lastmod>2016-12-16T09:04:08-06:00</lastmod>
   </url><url>
     <loc>https://tech.paulcz.net/page/speaker/</loc>
@@ -304,6 +301,8 @@
   </url><url>
     <loc>https://tech.paulcz.net/categories/wordpress/</loc>
     <lastmod>2012-10-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tech.paulcz.net/page/resume/</loc>
   </url><url>
     <loc>https://tech.paulcz.net/tags/</loc>
   </url>
