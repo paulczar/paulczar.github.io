@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://tech.paulcz.net/page/about/</loc>
+    <lastmod>2025-02-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tech.paulcz.net/page/</loc>
+    <lastmod>2025-02-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://tech.paulcz.net/</loc>
+    <lastmod>2025-02-27T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://tech.paulcz.net/blog/</loc>
     <lastmod>2021-03-31T00:00:00+00:00</lastmod>
   </url><url>
@@ -18,9 +27,6 @@
     <lastmod>2021-03-31T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://tech.paulcz.net/categories/obs/</loc>
-    <lastmod>2021-03-31T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://tech.paulcz.net/</loc>
     <lastmod>2021-03-31T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://tech.paulcz.net/categories/streaming/</loc>
@@ -142,12 +148,6 @@
   </url><url>
     <loc>https://tech.paulcz.net/blog/getting-started-with-helm/</loc>
     <lastmod>2017-10-03T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://tech.paulcz.net/page/about/</loc>
-    <lastmod>2016-12-16T09:04:08-06:00</lastmod>
-  </url><url>
-    <loc>https://tech.paulcz.net/page/</loc>
-    <lastmod>2016-12-16T09:04:08-06:00</lastmod>
   </url><url>
     <loc>https://tech.paulcz.net/page/speaker/</loc>
     <lastmod>2016-12-16T09:04:08-06:00</lastmod>
